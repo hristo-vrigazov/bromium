@@ -41,7 +41,6 @@ public class JavascriptInjector {
                 .append("</script>");
 
         this.injectionCode = stringBuilder.toString();
-        System.out.println(injectionCode);
     }
 
     public String getInjectionCode() {
