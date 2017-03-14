@@ -32,18 +32,20 @@ public class RecordBrowser {
     private DesiredCapabilities capabilities;
     private Proxy seleniumProxy;
     private String pathToChromeDriver;
+    private String pathToJsInjectonFile;
     private String baseUrl;
     private JavascriptInjector javascriptInjector;
     private List<Map<String, String>> domainSpecificActionList;
 
-    public RecordBrowser(String pathToChromeDriver) {
+    public RecordBrowser(String pathToChromeDriver, String pathToJsInjectionFile) {
         this.pathToChromeDriver = pathToChromeDriver;
+        this.pathToJsInjectonFile = pathToJsInjectionFile;
         this.domainSpecificActionList = new ArrayList<>();
     }
 
     public void record(String baseUrl) throws IOException, InterruptedException {
         this.baseUrl = baseUrl;
-        this.javascriptInjector = new JavascriptInjector();
+        this.javascriptInjector = new JavascriptInjector(pathToJsInjectonFile);
         init();
         initializeWebDriver();
         maximize();

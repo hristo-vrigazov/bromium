@@ -39,9 +39,12 @@ public class Main {
         @Option(name = "-d", description = "Path to chrome driver executable", required = true)
         public String pathToChromedriver;
 
+        @Option(name = "-j", description = "Path to js file to be injected into every response", required = true)
+        public String pathToJSInjectionFile;
+
         @Override
         public void run() {
-            RecordBrowser recordBrowser = new RecordBrowser(pathToChromedriver);
+            RecordBrowser recordBrowser = new RecordBrowser(pathToChromedriver, pathToJSInjectionFile);
             try {
                 recordBrowser.record("http://www.tenniskafe.com/");
                 System.out.println("Press Enter when finished recording");
