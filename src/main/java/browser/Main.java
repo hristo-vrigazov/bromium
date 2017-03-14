@@ -1,12 +1,12 @@
 package browser;
 
-import io.airlift.airline.Cli;
-import io.airlift.airline.Command;
-import io.airlift.airline.Help;
-import io.airlift.airline.Option;
+import io.airlift.airline.*;
+import io.airlift.airline.model.CommandMetadata;
 import record.RecordBrowser;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by hvrigazov on 14.03.17.
@@ -18,8 +18,19 @@ public class Main {
                 .withDefaultCommand(Help.class)
                 .withCommands(Help.class, Record.class);
 
-        Cli<Runnable> gitParser = builder.build();
-        gitParser.parse(args).run();
+        Cli<Runnable> parser = builder.build();
+
+        try {
+            parser.parse(args).run();
+        } catch (ParseOptionMissingException | ParseArgumentsUnexpectedException e) {
+
+            final List<String> commandNames =
+                    parser.getMetadata().getCommandGroups().stream()
+                            .flatMap(cg -> cg.getCommands().stream().map(CommandMetadata::getName))
+                            .collect(Collectors.toList());
+
+            Help.help(parser.getMetadata(), commandNames);
+        }
     }
 
     @Command(name = "record", description = "Opens up the browser and listens for application specific events")
