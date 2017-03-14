@@ -82,7 +82,6 @@ public class RecordBrowser {
     }
 
     private void initializeProxyFilters() {
-        // enable more detailed HAR capture, if desired (see CaptureType for the complete list)
         proxy.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
 
         proxy.addRequestFilter((httpRequest, httpMessageContents, httpMessageInfo) -> {
@@ -103,8 +102,7 @@ public class RecordBrowser {
             }
         });
 
-        // create a new HAR with the label "yahoo.com"
-        proxy.newHar("record");
+        proxy.newHar(baseUrl);
     }
 
     private boolean isUrlChangingRequest(HttpRequest httpRequest) {
