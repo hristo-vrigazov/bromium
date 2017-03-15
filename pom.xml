@@ -46,6 +46,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.beryx</groupId>
+            <artifactId>text-io</artifactId>
+            <version>1.9.0</version>
+        </dependency>
+        <dependency>
             <groupId>io.airlift</groupId>
             <artifactId>airline</artifactId>
             <version>0.7</version>

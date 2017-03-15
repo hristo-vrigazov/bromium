@@ -2,6 +2,8 @@ package browser;
 
 import io.airlift.airline.*;
 import io.airlift.airline.model.CommandMetadata;
+import org.beryx.textio.TextIO;
+import org.beryx.textio.TextIoFactory;
 import record.RecordBrowser;
 
 import java.io.IOException;
@@ -16,7 +18,7 @@ public class Main {
         Cli.CliBuilder<Runnable> builder = Cli.<Runnable>builder("bot")
                 .withDescription("Selenium record and replay bot for applications")
                 .withDefaultCommand(Help.class)
-                .withCommands(Help.class, Record.class);
+                .withCommands(Help.class, Record.class, Init.class);
 
         Cli<Runnable> parser = builder.build();
 
@@ -58,5 +60,35 @@ public class Main {
 
             System.exit(0);
         }
+    }
+
+    @Command(name = "init", description = "Guides you through creating an automation layer for your application!")
+    public static class Init implements Runnable {
+
+        MainMenuChoice mainMenuChoice;
+
+        @Override
+        public void run() {
+            System.out.println("Welcome! I will guide you through creating an automation layer for you application");
+            TextIO textIO = TextIoFactory.getTextIO();
+            String applicationName = textIO.newStringInputReader()
+                    .read("What is the name of your application?");
+
+            System.out.println("Let's now define some actions and assertions!");
+            do {
+                mainMenuChoice = textIO.newEnumInputReader(MainMenuChoice.class)
+                        .read("Let's add another one! Choose from below");
+            } while (!(mainMenuChoice == MainMenuChoice.SAVE_AND_EXIT));
+
+            System.out.println(applicationName);
+            System.out.println(mainMenuChoice);
+            System.exit(0);
+        }
+    }
+
+    public enum MainMenuChoice {
+        ASSERTION,
+        ACTION,
+        SAVE_AND_EXIT
     }
 }
