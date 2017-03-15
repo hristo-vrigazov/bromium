@@ -18,6 +18,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +35,7 @@ public class RecordBrowser {
     private Proxy seleniumProxy;
     private String pathToChromeDriver;
     private String pathToJsInjectonFile;
-    private String baseUrl;
+    private URI baseURI;
     private JavascriptInjector javascriptInjector;
     private List<Map<String, String>> domainSpecificActionList;
 
@@ -43,8 +45,8 @@ public class RecordBrowser {
         this.domainSpecificActionList = new ArrayList<>();
     }
 
-    public void record(String baseUrl) throws IOException, InterruptedException {
-        this.baseUrl = baseUrl;
+    public void record(String baseUrl) throws IOException, InterruptedException, URISyntaxException {
+        this.baseURI = new URI(baseUrl);
         this.javascriptInjector = new JavascriptInjector(pathToJsInjectonFile);
         init();
         initializeWebDriver();
@@ -104,12 +106,12 @@ public class RecordBrowser {
             }
         });
 
-        proxy.newHar(baseUrl);
+        proxy.newHar(baseURI.getHost());
     }
 
     private boolean isUrlChangingRequest(HttpRequest httpRequest) {
         boolean expectsHtmlContent = httpRequest.headers().get("Accept").contains("html");
-        boolean isFromCurrentBaseUrl = httpRequest.getUri().contains(baseUrl);
+        boolean isFromCurrentBaseUrl = httpRequest.getUri().contains(baseURI.getHost());
         return expectsHtmlContent && isFromCurrentBaseUrl;
     }
 

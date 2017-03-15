@@ -7,6 +7,7 @@ import org.beryx.textio.TextIoFactory;
 import record.RecordBrowser;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,13 @@ public class Main {
         Cli.CliBuilder<Runnable> builder = Cli.<Runnable>builder("bot")
                 .withDescription("Selenium record and replay bot for applications")
                 .withDefaultCommand(Help.class)
-                .withCommands(Help.class, Record.class, Init.class);
+                .withCommands(Help.class, Init.class);
+
+        builder
+                .withGroup("test")
+                .withDescription("Commands related to test cases")
+                .withDefaultCommand(Record.class)
+                .withCommands(Record.class);
 
         Cli<Runnable> parser = builder.build();
 
@@ -44,15 +51,18 @@ public class Main {
         @Option(name = "-j", description = "Path to js file to be injected into every response", required = true)
         public String pathToJSInjectionFile;
 
+        @Option(name = "-u", description = "Base url of your application", required = true)
+        public String baseUrl;
+
         @Override
         public void run() {
             RecordBrowser recordBrowser = new RecordBrowser(pathToChromedriver, pathToJSInjectionFile);
             try {
-                recordBrowser.record("http://www.tenniskafe.com/");
+                recordBrowser.record(baseUrl);
                 System.out.println("Press Enter when finished recording");
                 System.in.read();
                 recordBrowser.dumpActions("output.json");
-            } catch (IOException | InterruptedException e) {
+            } catch (IOException | InterruptedException | URISyntaxException e) {
                 e.printStackTrace();
             }
 
