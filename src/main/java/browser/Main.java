@@ -1,12 +1,17 @@
 package browser;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import config.ApplicationConfiguration;
 import io.airlift.airline.*;
 import io.airlift.airline.model.CommandMetadata;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 import record.RecordBrowser;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -79,28 +84,75 @@ public class Main {
     public static class Init implements Runnable {
 
         MainMenuChoice mainMenuChoice;
+        ApplicationConfiguration applicationConfiguration;
+        TextIO textIO;
 
         @Override
         public void run() {
-            System.out.println("Welcome! I will guide you through creating an automation layer for you application");
-            TextIO textIO = TextIoFactory.getTextIO();
-            String applicationName = textIO.newStringInputReader()
-                    .read("What is the name of your application?");
+            textIO = TextIoFactory.getTextIO();
+            textIO.getTextTerminal().println("Welcome! I will guide you through creating an automation layer for you application");
+            applicationConfiguration = new ApplicationConfiguration();
 
-            System.out.println("Let's now define some actions and assertions!");
+            applicationConfiguration.setApplicationName(textIO
+                    .newStringInputReader()
+                    .read("What is the name of your application?"));
+
+            applicationConfiguration.setVersion(textIO
+                    .newStringInputReader()
+                    .withDefaultValue("0.0.1")
+                    .read("What is the version of your application?"));
+
+            textIO.getTextTerminal().println("Let's now define some actions and assertions!");
+            textIO.getTextTerminal().println("The initial page loading is added by default");
+
+            showAssertionActionChoice();
+
+            try {
+                String outputFilename = textIO
+                        .newStringInputReader()
+                        .read("Where should I save the configuration");
+                Writer writer = new FileWriter(outputFilename);
+                Gson gson = new GsonBuilder().create();
+                gson.toJson(applicationConfiguration, writer);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            System.exit(0);
+        }
+
+        private void showAssertionActionChoice() {
             do {
                 mainMenuChoice = textIO.newEnumInputReader(MainMenuChoice.class)
                         .read("Let's add another one! Choose from below");
-            } while (!(mainMenuChoice == MainMenuChoice.SAVE_AND_EXIT));
 
-            System.out.println(applicationName);
-            System.out.println(mainMenuChoice);
-            System.exit(0);
+                switch (mainMenuChoice) {
+                    case ASSERTION:
+                        textIO.getTextTerminal().println("Let's add an assertion!");
+                        break;
+                    case CONDITION_FOR_EXECUTION:
+                        textIO.getTextTerminal().println("Let's add a condition for execution!");
+                        break;
+                    case ACTION:
+                        textIO.getTextTerminal().println("Let's add an action!");
+                        showAddActionMenu();
+                        break;
+                    default:
+                        break;
+                }
+            } while (!(mainMenuChoice == MainMenuChoice.SAVE_AND_EXIT));
+        }
+
+        private void showAddActionMenu() {
+            String actionName = textIO.newStringInputReader().read("Action name: ");
+            textIO.getTextTerminal().println(actionName);
         }
     }
 
     public enum MainMenuChoice {
         ASSERTION,
+        CONDITION_FOR_EXECUTION,
         ACTION,
         SAVE_AND_EXIT
     }
