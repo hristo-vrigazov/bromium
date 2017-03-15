@@ -1,11 +1,19 @@
 package config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by hvrigazov on 15.03.17.
  */
 public class ApplicationConfiguration {
     private String applicationName;
     private String version;
+    private List<ApplicationActionConfiguration> applicationActionConfigurationList;
+
+    public ApplicationConfiguration() {
+        this.applicationActionConfigurationList = new ArrayList<>();
+    }
 
     public String getApplicationName() {
         return applicationName;
@@ -21,5 +29,13 @@ public class ApplicationConfiguration {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public List<ApplicationActionConfiguration> getApplicationActionConfigurationList() {
+        return applicationActionConfigurationList;
+    }
+
+    public void addApplicationAction(ApplicationActionConfiguration applicationActionConfiguration) {
+        this.applicationActionConfigurationList.add(applicationActionConfiguration);
     }
 }

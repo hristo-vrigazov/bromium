@@ -2,6 +2,7 @@ package browser;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import config.ApplicationActionConfiguration;
 import config.ApplicationConfiguration;
 import io.airlift.airline.*;
 import io.airlift.airline.model.CommandMetadata;
@@ -146,7 +147,11 @@ public class Main {
 
         private void showAddActionMenu() {
             String actionName = textIO.newStringInputReader().read("Action name: ");
-            textIO.getTextTerminal().println(actionName);
+            ApplicationActionConfiguration applicationActionConfiguration = new ApplicationActionConfiguration();
+            applicationActionConfiguration.setName(actionName);
+            applicationConfiguration.addApplicationAction(applicationActionConfiguration);
+            textIO.getTextTerminal().println("Done!");
+            textIO.getTextTerminal().println();
         }
     }
 
