@@ -55,11 +55,12 @@ public class RecordBrowser {
     }
 
     public void dumpActions(String outputFile) throws IOException {
+        System.out.println("Dumping the test case to " + outputFile);
         Writer writer = new FileWriter(outputFile);
-
         Gson gson = new GsonBuilder().create();
         gson.toJson(domainSpecificActionList, writer);
         writer.close();
+        System.out.println("Done");
     }
 
     public void quit() {

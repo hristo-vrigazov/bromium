@@ -54,6 +54,9 @@ public class Main {
         @Option(name = "-u", description = "Base url of your application", required = true)
         public String baseUrl;
 
+        @Option(name = "-o", description = "The output file, which will contain the test cases as JSON", required = true)
+        public String outputFile;
+
         @Override
         public void run() {
             RecordBrowser recordBrowser = new RecordBrowser(pathToChromedriver, pathToJSInjectionFile);
@@ -61,7 +64,7 @@ public class Main {
                 recordBrowser.record(baseUrl);
                 System.out.println("Press Enter when finished recording");
                 System.in.read();
-                recordBrowser.dumpActions("output.json");
+                recordBrowser.dumpActions(outputFile);
             } catch (IOException | InterruptedException | URISyntaxException e) {
                 e.printStackTrace();
             }
