@@ -1,10 +1,10 @@
 package execution;
 
-import actions.ClickClassByText;
 import config.ApplicationActionConfiguration;
 import config.ParameterConfiguration;
 import config.WebdriverActionConfiguration;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -14,6 +14,13 @@ import static config.WebdriverActionType.NOTHING;
  * Created by hvrigazov on 18.03.17.
  */
 public class TestCaseToApplicationActionConverter {
+
+    private WebdriverActionFactory webdriverActionFactory;
+
+    public TestCaseToApplicationActionConverter(WebdriverActionFactory webdriverActionFactory) {
+        this.webdriverActionFactory = webdriverActionFactory;
+    }
+
     public ApplicationAction convert(ApplicationActionConfiguration applicationActionConfiguration,
                                      Map<String, String> testCaseStep) {
         Optional<WebdriverAction> precondition =
@@ -40,20 +47,29 @@ public class TestCaseToApplicationActionConverter {
             return Optional.empty();
         }
 
-        if (webdriverActionType.equals("CLICK_CLASS_BY_TEXT")) {
-            ParameterConfiguration parameterConfiguration = webdriverActionConfiguration
-                    .getParametersConfiguration().get("initialCollectorClass");
-            String initialCollectorClass = parameterConfiguration.getValue();
-            String text = testCaseStep.get("text");
-            String eventName = testCaseStep.get("event");
+        Map<String, ParameterConfiguration> parametersConfigurations = webdriverActionConfiguration
+                .getParametersConfiguration();
+        Map<String, Object> parameters = new HashMap<>();
 
-            WebdriverAction webdriverAction =
-                    new ClickClassByText(initialCollectorClass, text, eventName, expectHttpRequest);
+        parameters.put("event", testCaseStep.get("event"));
+        parameters.put("expectsHttp", expectHttpRequest);
 
-            return Optional.of(webdriverAction);
+        for (String parameterName: parametersConfigurations.keySet()) {
+            ParameterConfiguration parameterConfiguration = parametersConfigurations.get(parameterName);
+
+            if (parameterConfiguration.isExposed()) {
+                String alias = parameterConfiguration.getAlias();
+                String value = testCaseStep.get(alias);
+                parameters.put(alias, value);
+            } else {
+                String name = parameterConfiguration.getParameterName();
+                String value = parameterConfiguration.getValue();
+                parameters.put(name, value);
+            }
         }
 
-        return Optional.empty();
+        WebdriverAction webdriverAction = webdriverActionFactory.create(webdriverActionType, parameters);
+        return Optional.of(webdriverAction);
     }
 
     private class ConvertedApplicationAction implements ApplicationAction {

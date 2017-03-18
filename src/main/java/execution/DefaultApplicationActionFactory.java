@@ -1,10 +1,7 @@
-package examples;
+package execution;
 
 import config.ApplicationActionConfiguration;
 import config.ApplicationConfiguration;
-import execution.ApplicationAction;
-import execution.ApplicationActionFactory;
-import execution.TestCaseToApplicationActionConverter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,13 +9,14 @@ import java.util.Map;
 /**
  * Created by hvrigazov on 17.03.17.
  */
-public class TennisKafeFactory implements ApplicationActionFactory {
+public class DefaultApplicationActionFactory implements ApplicationActionFactory {
 
     private String url;
+    private String initialPageLoadingEventName;
     private Map<String, ApplicationActionConfiguration> nameToConfiguration;
     private TestCaseToApplicationActionConverter testCaseToApplicationActionConverter;
 
-    public TennisKafeFactory(String url, ApplicationConfiguration applicationConfiguration) {
+    public DefaultApplicationActionFactory(String url, ApplicationConfiguration applicationConfiguration, WebdriverActionFactory webdriverActionFactory) {
         this.nameToConfiguration = new HashMap<>();
         this.url = url;
 
@@ -26,18 +24,18 @@ public class TennisKafeFactory implements ApplicationActionFactory {
             nameToConfiguration.put(applicationActionConfiguration.getName(), applicationActionConfiguration);
         }
 
-        this.testCaseToApplicationActionConverter = new TestCaseToApplicationActionConverter();
+        this.initialPageLoadingEventName = "INITIAL_PAGE_LOAD_" + applicationConfiguration.getApplicationName() +
+                        "_" + applicationConfiguration.getVersion();
+        this.testCaseToApplicationActionConverter = new TestCaseToApplicationActionConverter(webdriverActionFactory);
     }
 
     @Override
     public ApplicationAction getInitialPageLoading() {
-        return new TennisKafeHomePageLoading(url);
+        return new ApplicationPageLoading(url, initialPageLoadingEventName);
     }
 
     @Override
     public ApplicationAction create(Map<String, String> testCaseStep) {
-//        String text = testCaseStep.get("text");
-//        return new ClickMegaMenu(text);
         String name = testCaseStep.get("event");
         ApplicationActionConfiguration applicationActionConfiguration = nameToConfiguration.get(name);
         return testCaseToApplicationActionConverter.convert(applicationActionConfiguration, testCaseStep);

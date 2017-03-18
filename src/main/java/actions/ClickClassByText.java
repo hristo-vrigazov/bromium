@@ -16,8 +16,8 @@ public class ClickClassByText implements WebdriverAction {
 
     private final String initialCollectorClass;
     private final String text;
-    private String eventName;
-    private boolean expectsHttpRequest;
+    private final String eventName;
+    private final boolean expectsHttpRequest;
 
     public ClickClassByText(String initialCollectorClass, String text, String eventName, boolean expectsHttpRequest) {
         this.initialCollectorClass = initialCollectorClass;

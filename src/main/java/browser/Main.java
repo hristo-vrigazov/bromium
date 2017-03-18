@@ -3,10 +3,8 @@ package browser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import config.*;
-import examples.TennisKafeFactory;
-import execution.ApplicationActionFactory;
-import execution.ChromeDriverActionExecutor;
-import execution.WebdriverActionExecutor;
+import execution.DefaultApplicationActionFactory;
+import execution.*;
 import io.airlift.airline.*;
 import io.airlift.airline.model.CommandMetadata;
 import org.beryx.textio.TextIO;
@@ -107,8 +105,9 @@ public class Main {
                         Utils.parseApplicationConfiguration(pathToApplicationConfiguration);
                 WebdriverActionExecutor chromeDriverActionExecutor =
                         new ChromeDriverActionExecutor(pathToChromedriver, false, 15, 50);
+                WebdriverActionFactory predefinedWebdriverActionFactory = new PredefinedWebdriverActionFactory();
                 ApplicationActionFactory applicationActionFactory =
-                        new TennisKafeFactory("http://www.tenniskafe.com/", applicationConfiguration);
+                        new DefaultApplicationActionFactory("http://www.tenniskafe.com/", applicationConfiguration, predefinedWebdriverActionFactory);
                 ReplayBrowser replayBrowser =
                         new ReplayBrowser(chromeDriverActionExecutor, applicationConfiguration, applicationActionFactory);
 

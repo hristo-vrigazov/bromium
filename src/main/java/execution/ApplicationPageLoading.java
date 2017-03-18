@@ -1,22 +1,20 @@
-package examples;
+package execution;
 
 import actions.PageLoading;
-import execution.ApplicationAction;
-import execution.WebdriverAction;
 
 import java.util.Optional;
 
 /**
  * Created by hvrigazov on 17.03.17.
  */
-public class TennisKafeHomePageLoading implements ApplicationAction {
+public class ApplicationPageLoading implements ApplicationAction {
 
     private String url;
     private String eventName;
 
-    public TennisKafeHomePageLoading(String url) {
+    public ApplicationPageLoading(String url, String eventName) {
         this.url = url;
-        this.eventName = "TENNIS_KAFE_INITIAL_PAGE_LOADING";
+        this.eventName = eventName;
     }
 
     @Override
