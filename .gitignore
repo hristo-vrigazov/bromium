@@ -10,4 +10,7 @@ buildNumber.properties
 *.iml
 .idea/
 chromedriver
-output.json
+*.json
+*.csv
+*.out
+*.har

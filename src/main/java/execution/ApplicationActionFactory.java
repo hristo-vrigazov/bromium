@@ -1,7 +1,5 @@
 package execution;
 
-import config.ApplicationConfiguration;
-
 import java.util.Map;
 
 /**
@@ -10,6 +8,5 @@ import java.util.Map;
 public interface ApplicationActionFactory {
     ApplicationAction getInitialPageLoading();
 
-    ApplicationAction create(ApplicationConfiguration applicationConfiguration,
-                                    Map<String, String> testCaseStep);
+    ApplicationAction create(Map<String, String> testCaseStep);
 }

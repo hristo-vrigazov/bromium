@@ -5,8 +5,10 @@ package config;
  */
 public class ApplicationActionConfiguration {
     private String name;
-    private ConditionForExecutionConfiguration conditionBeforeExecution;
-    private ConditionForExecutionConfiguration conditionAfterExecution;
+    private WebdriverActionConfiguration conditionBeforeExecution;
+    private WebdriverActionConfiguration webdriverAction;
+    private WebdriverActionConfiguration conditionAfterExecution;
+    private boolean expectsHttpRequest;
 
     public String getName() {
         return name;
@@ -16,19 +18,35 @@ public class ApplicationActionConfiguration {
         this.name = name;
     }
 
-    public ConditionForExecutionConfiguration getConditionBeforeExecution() {
+    public WebdriverActionConfiguration getConditionBeforeExecution() {
         return conditionBeforeExecution;
     }
 
-    public void setConditionBeforeExecution(ConditionForExecutionConfiguration conditionBeforeExecution) {
+    public void setConditionBeforeExecution(WebdriverActionConfiguration conditionBeforeExecution) {
         this.conditionBeforeExecution = conditionBeforeExecution;
     }
 
-    public ConditionForExecutionConfiguration getConditionAfterExecution() {
+    public WebdriverActionConfiguration getConditionAfterExecution() {
         return conditionAfterExecution;
     }
 
-    public void setConditionAfterExecution(ConditionForExecutionConfiguration conditionAfterExecution) {
+    public void setConditionAfterExecution(WebdriverActionConfiguration conditionAfterExecution) {
         this.conditionAfterExecution = conditionAfterExecution;
+    }
+
+    public WebdriverActionConfiguration getWebdriverAction() {
+        return webdriverAction;
+    }
+
+    public void setWebdriverAction(WebdriverActionConfiguration webdriverAction) {
+        this.webdriverAction = webdriverAction;
+    }
+
+    public boolean isExpectsHttpRequest() {
+        return expectsHttpRequest;
+    }
+
+    public void setExpectsHttpRequest(boolean expectsHttpRequest) {
+        this.expectsHttpRequest = expectsHttpRequest;
     }
 }

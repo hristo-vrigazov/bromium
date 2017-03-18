@@ -2,19 +2,26 @@ package browser;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import config.ApplicationActionConfiguration;
-import config.ApplicationConfiguration;
+import config.*;
+import examples.TennisKafeFactory;
+import execution.ApplicationActionFactory;
+import execution.ChromeDriverActionExecutor;
+import execution.WebdriverActionExecutor;
 import io.airlift.airline.*;
 import io.airlift.airline.model.CommandMetadata;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 import record.RecordBrowser;
+import replay.ReplayBrowser;
+import utils.Utils;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -31,7 +38,7 @@ public class Main {
                 .withGroup("test")
                 .withDescription("Commands related to test cases")
                 .withDefaultCommand(Record.class)
-                .withCommands(Record.class);
+                .withCommands(Record.class, Replay.class);
 
         Cli<Runnable> parser = builder.build();
 
@@ -81,6 +88,40 @@ public class Main {
         }
     }
 
+    @Command(name = "replay", description = "Replays a test case")
+    public static class Replay implements Runnable {
+
+        @Option(name = "-d", description = "Path to chrome driver executable", required = true)
+        public String pathToChromedriver;
+
+        @Option(name = "-c", description = "Path to application configuration", required = true)
+        public String pathToApplicationConfiguration;
+
+        @Option(name = "-t", description = "Path to serialized test", required = true)
+        public String pathToSerializedTest;
+
+        @Override
+        public void run() {
+            try {
+                ApplicationConfiguration applicationConfiguration =
+                        Utils.parseApplicationConfiguration(pathToApplicationConfiguration);
+                WebdriverActionExecutor chromeDriverActionExecutor =
+                        new ChromeDriverActionExecutor(pathToChromedriver, false, 15, 50);
+                ApplicationActionFactory applicationActionFactory =
+                        new TennisKafeFactory("http://www.tenniskafe.com/", applicationConfiguration);
+                ReplayBrowser replayBrowser =
+                        new ReplayBrowser(chromeDriverActionExecutor, applicationConfiguration, applicationActionFactory);
+
+                replayBrowser.replay(pathToSerializedTest);
+                replayBrowser.dumpAllMetrics("metrics.har", "metrics.csv");
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            System.exit(0);
+        }
+    }
+
     @Command(name = "init", description = "Guides you through creating an automation layer for your application!")
     public static class Init implements Runnable {
 
@@ -94,6 +135,7 @@ public class Main {
             textIO.getTextTerminal().println("Welcome! I will guide you through creating an automation layer for you application");
             applicationConfiguration = new ApplicationConfiguration();
 
+            textIO.getTextTerminal().println();
             applicationConfiguration.setApplicationName(textIO
                     .newStringInputReader()
                     .read("What is the name of your application?"));
@@ -103,7 +145,9 @@ public class Main {
                     .withDefaultValue("0.0.1")
                     .read("What is the version of your application?"));
 
+            textIO.getTextTerminal().println();
             textIO.getTextTerminal().println("Let's now define some actions and assertions!");
+            textIO.getTextTerminal().println();
             textIO.getTextTerminal().println("The initial page loading is added by default");
 
             showAssertionActionChoice();
@@ -127,13 +171,10 @@ public class Main {
             do {
                 mainMenuChoice = textIO.newEnumInputReader(MainMenuChoice.class)
                         .read("Let's add another one! Choose from below");
-
+                textIO.getTextTerminal().println();
                 switch (mainMenuChoice) {
                     case ASSERTION:
                         textIO.getTextTerminal().println("Let's add an assertion!");
-                        break;
-                    case CONDITION_FOR_EXECUTION:
-                        textIO.getTextTerminal().println("Let's add a condition for execution!");
                         break;
                     case ACTION:
                         textIO.getTextTerminal().println("Let's add an action!");
@@ -149,15 +190,123 @@ public class Main {
             String actionName = textIO.newStringInputReader().read("Action name: ");
             ApplicationActionConfiguration applicationActionConfiguration = new ApplicationActionConfiguration();
             applicationActionConfiguration.setName(actionName);
-            applicationConfiguration.addApplicationAction(applicationActionConfiguration);
-            textIO.getTextTerminal().println("Done!");
+
+            WebdriverActionConfiguration preconditionConfiguration =
+                    promptForActionConfigurationType("Precondition: ");
+            applicationActionConfiguration.setConditionBeforeExecution(preconditionConfiguration);
             textIO.getTextTerminal().println();
+
+            WebdriverActionConfiguration webdriverActionConfiguration =
+                    promptForActionConfigurationType("Action: ");
+            applicationActionConfiguration.setWebdriverAction(webdriverActionConfiguration);
+            textIO.getTextTerminal().println();
+
+            WebdriverActionConfiguration postconditionConfiguration =
+                    promptForActionConfigurationType("Postaction: ");
+            applicationActionConfiguration.setConditionAfterExecution(postconditionConfiguration);
+            textIO.getTextTerminal().println();
+
+            boolean expectsHttpRequest = textIO
+                    .newBooleanInputReader()
+                    .read("Expect HTTP request after the action?");
+
+            applicationActionConfiguration.setExpectsHttpRequest(expectsHttpRequest);
+
+            applicationConfiguration.addApplicationActionConfiguration(applicationActionConfiguration);
+
+            textIO.getTextTerminal().println("Done! Awesome!");
+            textIO.getTextTerminal().println();
+        }
+
+        private WebdriverActionConfiguration promptForActionConfigurationType(String prompt) {
+            textIO.getTextTerminal().println(prompt);
+            WebdriverActionConfiguration webdriverActionConfiguration = new WebdriverActionConfiguration();
+            WebdriverActionType webdriverActionType = textIO
+                    .newEnumInputReader(WebdriverActionType.class)
+                    .read("Type: ");
+
+            String webdriverAction = getWebdriverAction(webdriverActionType);
+
+            Map<String, ParameterConfiguration> parameterConfigurations =
+                    collectParametersConfiguration(webdriverActionType);
+            webdriverActionConfiguration.setParametersConfiguration(parameterConfigurations);
+            webdriverActionConfiguration.setWebdriverActionType(webdriverAction);
+
+            return webdriverActionConfiguration;
+        }
+
+        private String getWebdriverAction(WebdriverActionType webdriverActionType) {
+            if (webdriverActionType == WebdriverActionType.CUSTOM) {
+                return textIO.newStringInputReader().read("Enter the custom type name: ");
+            }
+
+            return webdriverActionType.toString();
+        }
+
+        private Map<String, ParameterConfiguration> collectParametersConfiguration(WebdriverActionType webdriverActionType) {
+            if (webdriverActionType == WebdriverActionType.NOTHING) {
+                return new HashMap<>();
+            }
+
+            Map<String, ParameterConfiguration> parametersConfiguration = new HashMap<>();
+
+            while (promptForAddParameters()) {
+                ParameterConfiguration parameterConfiguration = promptForParameterConfiguration(webdriverActionType);
+                parametersConfiguration.put(parameterConfiguration.getParameterName(), parameterConfiguration);
+            }
+
+            return parametersConfiguration;
+        }
+
+        private ParameterConfiguration promptForParameterConfiguration(WebdriverActionType webdriverActionType) {
+            return getParameterConfigurationForCustom();
+        }
+
+        private ParameterConfiguration getParameterConfigurationForCustom() {
+            textIO.getTextTerminal().println();
+            ParameterConfiguration parameterConfiguration = new ParameterConfiguration();
+            parameterConfiguration.setParameterName(promptForParameterName());
+            return getParameterConfigurationForName(parameterConfiguration);
+        }
+
+        private ParameterConfiguration getParameterConfigurationForName(ParameterConfiguration parameterConfiguration) {
+            parameterConfiguration.setExpose(
+                    promptForParameterExposing(parameterConfiguration.getParameterName()));
+
+            if (parameterConfiguration.isExposed()) {
+                parameterConfiguration.setAlias(
+                        promptForAlias(parameterConfiguration.getParameterName()));
+                return parameterConfiguration;
+            }
+
+            parameterConfiguration.setValue(promptForValue(parameterConfiguration.getParameterName()));
+            return parameterConfiguration;
+        }
+
+        private String promptForValue(String parameterName) {
+            return textIO.newStringInputReader().read("Value of " + parameterName);
+        }
+
+        private String promptForAlias(String parameterName) {
+            return textIO.newStringInputReader().read("Alias for " + parameterName);
+        }
+
+        private boolean promptForAddParameters() {
+            textIO.getTextTerminal().println();
+            return textIO.newBooleanInputReader().read("Add a parameter?");
+        }
+
+        private String promptForParameterName() {
+            return textIO.newStringInputReader().read("Parameter name: ");
+        }
+
+        private boolean promptForParameterExposing(String parameterName) {
+            return textIO.newBooleanInputReader().read("Should I expose " + parameterName);
         }
     }
 
     public enum MainMenuChoice {
         ASSERTION,
-        CONDITION_FOR_EXECUTION,
         ACTION,
         SAVE_AND_EXIT
     }

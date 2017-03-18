@@ -35,7 +35,7 @@ public class ApplicationConfiguration {
         return applicationActionConfigurationList;
     }
 
-    public void addApplicationAction(ApplicationActionConfiguration applicationActionConfiguration) {
+    public void addApplicationActionConfiguration(ApplicationActionConfiguration applicationActionConfiguration) {
         this.applicationActionConfigurationList.add(applicationActionConfiguration);
     }
 }
