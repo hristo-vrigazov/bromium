@@ -10,14 +10,14 @@ import java.io.IOException;
 /**
  * Created by hvrigazov on 19.03.17.
  */
-public class TestScenarioRunner {
+public class ReplayBrowserConfiguration {
     private ReplayBrowser replayBrowser;
 
     public static Builder builder() {
-        return new TestScenarioRunner.Builder();
+        return new ReplayBrowserConfiguration.Builder();
     }
 
-    public TestScenarioRunner(Builder builder) throws IOException {
+    public ReplayBrowserConfiguration(Builder builder) throws IOException {
         ApplicationConfiguration applicationConfiguration = Utils.parseApplicationConfiguration(builder.pathToApplicationConfiguration);
         WebdriverActionExecutor webdriverActionExecutor = builder.webdriverActionExecutor;
         WebdriverActionFactory webdriverActionFactory = builder.webdriverActionFactory;
@@ -55,8 +55,8 @@ public class TestScenarioRunner {
             return this;
         }
 
-        public TestScenarioRunner build() throws IOException {
-            return new TestScenarioRunner(this);
+        public ReplayBrowserConfiguration build() throws IOException {
+            return new ReplayBrowserConfiguration(this);
         }
     }
 

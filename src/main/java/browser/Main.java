@@ -101,12 +101,12 @@ public class Main {
             try {
                 WebdriverActionExecutor executor = ChromeDriverActionExecutor
                         .builder()
-                        .pathToChromedriver(pathToChromedriver)
+                        .pathToDriverExecutable(pathToChromedriver)
                         .timeoutInSeconds(20)
                         .measurementsPrecisionInMilliseconds(50)
-                        .build();
+                        .buildChromedriver();
 
-                TestScenarioRunner testScenarioRunner = TestScenarioRunner
+                ReplayBrowserConfiguration replayBrowserConfiguration = ReplayBrowserConfiguration
                         .builder()
                         .pathToApplicationConfiguration(pathToApplicationConfiguration)
                         .url("http://www.tenniskafe.com/")
@@ -114,7 +114,7 @@ public class Main {
                         .executor(executor)
                         .build();
 
-                ReplayBrowser replayBrowser = testScenarioRunner.getReplayBrowser();
+                ReplayBrowser replayBrowser = replayBrowserConfiguration.getReplayBrowser();
                 replayBrowser.replay(pathToSerializedTest);
                 replayBrowser.dumpAllMetrics("metrics.har", "metrics.csv");
             } catch (IOException | InterruptedException e) {

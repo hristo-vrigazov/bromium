@@ -67,12 +67,12 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
 
     private String screenToUse;
 
-    private ChromeDriverActionExecutor(Builder builder) throws IOException {
-        this(builder.pathToChromedriver, builder.timeout, builder.measurementsPrecisionMilli);
+    public ChromeDriverActionExecutor(WebdriverActionExecutorBuilder webdriverActionExecutorBuilder) throws IOException {
+        this(webdriverActionExecutorBuilder.getPathToDriverExecutable(), webdriverActionExecutorBuilder.getTimeout(), webdriverActionExecutorBuilder.getMeasurementsPrecisionMilli());
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public static WebdriverActionExecutorBuilder builder() {
+        return new WebdriverActionExecutorBuilder();
     }
 
     public ChromeDriverActionExecutor(String pathToChromeDriver, int timeout, int measurementsPrecisionMilli) throws IOException {
@@ -299,28 +299,4 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
         return this.automationResult;
     }
 
-    public static class Builder {
-        private String pathToChromedriver;
-        private int timeout;
-        private int measurementsPrecisionMilli;
-
-        public Builder pathToChromedriver(String pathToChromedriver) {
-            this.pathToChromedriver = pathToChromedriver;
-            return this;
-        }
-
-        public Builder timeoutInSeconds(int timeout) {
-            this.timeout = timeout;
-            return this;
-        }
-
-        public Builder measurementsPrecisionInMilliseconds(int measurementsPrecisionMilli) {
-            this.measurementsPrecisionMilli = measurementsPrecisionMilli;
-            return this;
-        }
-
-        public ChromeDriverActionExecutor build() throws IOException {
-            return new ChromeDriverActionExecutor(this);
-        }
-    }
 }

@@ -4,7 +4,6 @@ import execution.AutomationResult;
 import execution.WebdriverActionExecutor;
 import utils.Utils;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +28,7 @@ public class AutomationManager {
         harFileNames = new ArrayList<>();
     }
 
-    public void addFasAutomation(WebdriverActionExecutor automationScenario, String fileNameToDumpMeasurements, String fileNameToDumpHar) {
+    public void addTestScenario(WebdriverActionExecutor automationScenario, String fileNameToDumpMeasurements, String fileNameToDumpHar) {
         automationScenarios.add(automationScenario);
         fileNames.add(fileNameToDumpMeasurements);
         harFileNames.add(fileNameToDumpHar);

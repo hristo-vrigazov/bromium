@@ -1,10 +1,7 @@
 package parallel;
 
-import browser.TestScenarioRunner;
-import execution.AutomationResult;
-import execution.ChromeDriverActionExecutor;
-import execution.PredefinedWebdriverActionFactory;
-import execution.WebdriverActionExecutor;
+import browser.ReplayBrowserConfiguration;
+import execution.*;
 import org.junit.Test;
 import suite.AutomationManager;
 
@@ -22,13 +19,13 @@ public class AutomationManagerExamples {
         String pathToChromedriver = "/home/hvrigazov/github/selenium-record-replay/chromedriver";
         String pathToTestScenario = "/home/hvrigazov/github/selenium-record-replay/output.json";
 
-        ChromeDriverActionExecutor.Builder executorBuilder = ChromeDriverActionExecutor
+        WebdriverActionExecutorBuilder executorWebdriverActionExecutorBuilder = ChromeDriverActionExecutor
                 .builder()
-                .pathToChromedriver(pathToChromedriver)
+                .pathToDriverExecutable(pathToChromedriver)
                 .timeoutInSeconds(30)
                 .measurementsPrecisionInMilliseconds(50);
 
-        TestScenarioRunner.Builder testScenarioRunnerBuilder = TestScenarioRunner
+        ReplayBrowserConfiguration.Builder testScenarioRunnerBuilder = ReplayBrowserConfiguration
                 .builder()
                 .pathToApplicationConfiguration(pathToApplicationConfiguration)
                 .url("http://www.tenniskafe.com/")
@@ -36,12 +33,12 @@ public class AutomationManagerExamples {
 
         AutomationManager automationManager = new AutomationManager();
 
-        getScenario(pathToTestScenario, executorBuilder, testScenarioRunnerBuilder);
-        automationManager.addFasAutomation(getScenario(pathToTestScenario, executorBuilder, testScenarioRunnerBuilder),
+        getScenario(pathToTestScenario, executorWebdriverActionExecutorBuilder, testScenarioRunnerBuilder);
+        automationManager.addTestScenario(getScenario(pathToTestScenario, executorWebdriverActionExecutorBuilder, testScenarioRunnerBuilder),
                 "0.csv", "0.har");
-        automationManager.addFasAutomation(getScenario(pathToTestScenario, executorBuilder, testScenarioRunnerBuilder),
+        automationManager.addTestScenario(getScenario(pathToTestScenario, executorWebdriverActionExecutorBuilder, testScenarioRunnerBuilder),
                 "1.csv", "1.har");
-        automationManager.addFasAutomation(getScenario(pathToTestScenario, executorBuilder, testScenarioRunnerBuilder),
+        automationManager.addTestScenario(getScenario(pathToTestScenario, executorWebdriverActionExecutorBuilder, testScenarioRunnerBuilder),
                 "2.csv", "2.har");
 
         List<AutomationResult> automationResultList = automationManager.runSequentially();
@@ -49,7 +46,7 @@ public class AutomationManagerExamples {
         System.out.println(automationResultList);
     }
 
-    private WebdriverActionExecutor getScenario(String pathToTestScenario, ChromeDriverActionExecutor.Builder executor, TestScenarioRunner.Builder testScenarioRunner) throws IOException {
-        return testScenarioRunner.executor(executor.build()).build().getReplayBrowser().getTestScenario(pathToTestScenario);
+    private WebdriverActionExecutor getScenario(String pathToTestScenario, WebdriverActionExecutorBuilder executor, ReplayBrowserConfiguration.Builder testScenarioRunner) throws IOException {
+        return testScenarioRunner.executor(executor.buildChromedriver()).build().getReplayBrowser().getTestScenario(pathToTestScenario);
     }
 }
