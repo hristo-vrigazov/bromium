@@ -170,6 +170,7 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
             this.automationResult = AutomationResult.SUCCESS;
         } catch (AssertionError e) {
             e.printStackTrace();
+            cleanUp();
             this.automationResult = AutomationResult.ASSERTION_ERROR;
         }
     }
@@ -262,13 +263,18 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
 
     @Override
     public void quit() {
-        driver.quit();
-        chromeDriverService.stop();
+        cleanUp();
 
         for (int i = 1; i < waitingTimes.size(); i++) {
             double seconds = toSeconds(waitingTimes.get(i));
             System.out.println("After I did " + actions.get(i - 1) + ", I had to wait for " + seconds + "s until the next action");
         }
+    }
+
+    private void cleanUp() {
+        driver.quit();
+        proxy.stop();
+        chromeDriverService.stop();
     }
 
     @Override
