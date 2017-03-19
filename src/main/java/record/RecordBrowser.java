@@ -1,6 +1,5 @@
 package record;
 
-import com.google.common.base.Splitter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.netty.handler.codec.http.HttpRequest;
@@ -14,12 +13,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import utils.Utils;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -91,8 +94,12 @@ public class RecordBrowser {
 
         proxy.addRequestFilter((httpRequest, httpMessageContents, httpMessageInfo) -> {
             if (httpRequest.getUri().contains("http://working-selenium.com/submit-event")) {
-                String query = httpRequest.getUri().split("\\?")[1];
-                Map<String, String> map = Splitter.on('&').trimResults().withKeyValueSeparator("=").split(query);
+                Map<String, String> map = null;
+                try {
+                    map = Utils.splitQuery(new URL(httpRequest.getUri()));
+                } catch (UnsupportedEncodingException | MalformedURLException e) {
+                    e.printStackTrace();
+                }
                 System.out.println(map);
                 domainSpecificActionList.add(map);
             }

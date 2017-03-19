@@ -38,7 +38,9 @@ public class ClickClassByText implements WebdriverAction {
         }
 
         Optional<WebElement> webElementOptional = webElements.stream()
-                .filter(webElement -> webElement.getText().equals(text))
+                .filter(webElement ->
+                        webElement.getAttribute("innerHTML").trim().equals(text) &&
+                        webElement.isDisplayed())
                 .findFirst();
 
         if (!webElementOptional.isPresent()) {

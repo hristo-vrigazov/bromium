@@ -17,4 +17,5 @@ public interface WebdriverActionExecutor {
     void dumpHarMetrics(String fileNameToDump) throws IOException;
     void dumpLoadingTimes(String fileNameToDump) throws UnsupportedEncodingException, FileNotFoundException;
     LoadingTimes getLoadingTimes();
+    AutomationResult getAutomationResult();
 }

@@ -67,9 +67,17 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
 
     private String screenToUse;
 
-    public ChromeDriverActionExecutor(String pathToChromeDriver, boolean useVirtualScreen, int timeout, int measurementsPrecisionMilli) throws IOException {
+    private ChromeDriverActionExecutor(Builder builder) throws IOException {
+        this(builder.pathToChromedriver, builder.timeout, builder.measurementsPrecisionMilli);
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public ChromeDriverActionExecutor(String pathToChromeDriver, int timeout, int measurementsPrecisionMilli) throws IOException {
         this.pathToChromeDriver = pathToChromeDriver;
-        this.useVirtualScreen = useVirtualScreen;
+        this.useVirtualScreen = false;
         this.timeout = timeout;
         this.measurementsPrecisionMilli = measurementsPrecisionMilli;
         this.initializeQueues();
@@ -278,5 +286,35 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
     @Override
     public LoadingTimes getLoadingTimes() {
         return new LoadingTimes(waitingTimes, actions);
+    }
+
+    @Override
+    public AutomationResult getAutomationResult() {
+        return this.automationResult;
+    }
+
+    public static class Builder {
+        private String pathToChromedriver;
+        private int timeout;
+        private int measurementsPrecisionMilli;
+
+        public Builder pathToChromedriver(String pathToChromedriver) {
+            this.pathToChromedriver = pathToChromedriver;
+            return this;
+        }
+
+        public Builder timeoutInSeconds(int timeout) {
+            this.timeout = timeout;
+            return this;
+        }
+
+        public Builder measurementsPrecisionInMilliseconds(int measurementsPrecisionMilli) {
+            this.measurementsPrecisionMilli = measurementsPrecisionMilli;
+            return this;
+        }
+
+        public ChromeDriverActionExecutor build() throws IOException {
+            return new ChromeDriverActionExecutor(this);
+        }
     }
 }

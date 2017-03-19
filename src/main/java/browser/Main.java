@@ -3,7 +3,6 @@ package browser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import config.*;
-import execution.DefaultApplicationActionFactory;
 import execution.*;
 import io.airlift.airline.*;
 import io.airlift.airline.model.CommandMetadata;
@@ -11,7 +10,6 @@ import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 import record.RecordBrowser;
 import replay.ReplayBrowser;
-import utils.Utils;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -101,16 +99,22 @@ public class Main {
         @Override
         public void run() {
             try {
-                ApplicationConfiguration applicationConfiguration =
-                        Utils.parseApplicationConfiguration(pathToApplicationConfiguration);
-                WebdriverActionExecutor chromeDriverActionExecutor =
-                        new ChromeDriverActionExecutor(pathToChromedriver, false, 15, 50);
-                WebdriverActionFactory predefinedWebdriverActionFactory = new PredefinedWebdriverActionFactory();
-                ApplicationActionFactory applicationActionFactory =
-                        new DefaultApplicationActionFactory("http://www.tenniskafe.com/", applicationConfiguration, predefinedWebdriverActionFactory);
-                ReplayBrowser replayBrowser =
-                        new ReplayBrowser(chromeDriverActionExecutor, applicationConfiguration, applicationActionFactory);
+                WebdriverActionExecutor executor = ChromeDriverActionExecutor
+                        .builder()
+                        .pathToChromedriver(pathToChromedriver)
+                        .timeoutInSeconds(20)
+                        .measurementsPrecisionInMilliseconds(50)
+                        .build();
 
+                TestScenarioRunner testScenarioRunner = TestScenarioRunner
+                        .builder()
+                        .pathToApplicationConfiguration(pathToApplicationConfiguration)
+                        .url("http://www.tenniskafe.com/")
+                        .webdriverActionFactory(new PredefinedWebdriverActionFactory())
+                        .executor(executor)
+                        .build();
+
+                ReplayBrowser replayBrowser = testScenarioRunner.getReplayBrowser();
                 replayBrowser.replay(pathToSerializedTest);
                 replayBrowser.dumpAllMetrics("metrics.har", "metrics.csv");
             } catch (IOException | InterruptedException e) {
