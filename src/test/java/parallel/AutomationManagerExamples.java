@@ -41,7 +41,7 @@ public class AutomationManagerExamples {
         automationManager.addTestScenario(getScenario(pathToTestScenario, executorWebdriverActionExecutorBuilder, testScenarioRunnerBuilder),
                 "2.csv", "2.har");
 
-        List<AutomationResult> automationResultList = automationManager.runSequentially();
+        List<AutomationResult> automationResultList = automationManager.runInParallel();
 
         System.out.println(automationResultList);
     }

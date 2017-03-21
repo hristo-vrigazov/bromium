@@ -11,7 +11,7 @@ public class ChromeDriverActionExecutor extends WebDriverActionExecutorBase {
     }
 
     @Override
-    protected ChromeExecutionSettings createExecutionSettings() {
+    protected ExecutionSettings createExecutionSettings() {
         return new ChromeExecutionSettings(this::filterRequest, this::filterResponse);
     }
 }

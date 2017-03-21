@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by hvrigazov on 21.03.17.
  */
-public class ChromeExecutionSettings {
+public class ChromeExecutionSettings implements ExecutionSettings {
     private WebDriver driver;
     private BrowserMobProxy proxy;
     private ChromeDriverService chromeDriverService;
@@ -37,6 +37,7 @@ public class ChromeExecutionSettings {
         this.responseFilter = responseFilter;
     }
 
+    @Override
     public void initializeProxyServer(int timeout) {
         this.proxy = new BrowserMobProxyServer();
         this.proxy.setIdleConnectionTimeout(timeout, TimeUnit.SECONDS);
@@ -44,6 +45,7 @@ public class ChromeExecutionSettings {
         this.proxy.start(0);
     }
 
+    @Override
     public void initializeChromeDriverService(String pathToChromeDriver, String screenToUse) throws IOException {
         this.chromeDriverService = new ChromeDriverService.Builder()
                 .usingDriverExecutable(new File(pathToChromeDriver))
@@ -51,10 +53,12 @@ public class ChromeExecutionSettings {
         this.chromeDriverService.start();
     }
 
+    @Override
     public void initializeSeleniumProxy() {
         seleniumProxy = ClientUtil.createSeleniumProxy(proxy);
     }
 
+    @Override
     public void initializeDesiredCapabilities() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("disable-popup-blocking");
@@ -64,6 +68,7 @@ public class ChromeExecutionSettings {
         capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
     }
 
+    @Override
     public void initializeWebDriver(boolean useVirtualScreen) {
         if (useVirtualScreen) {
             this.driver = new ChromeDriver(chromeDriverService, capabilities);
@@ -72,24 +77,29 @@ public class ChromeExecutionSettings {
         }
     }
 
+    @Override
     public void maximizeDriver() {
         driver.manage().window().maximize();
     }
 
+    @Override
     public void cleanUp() {
         driver.quit();
         proxy.stop();
         chromeDriverService.stop();
     }
 
+    @Override
     public WebDriver getWebDriver() {
         return driver;
     }
 
+    @Override
     public Har getHar() {
         return proxy.getHar();
     }
 
+    @Override
     public void initializeHar() {
         proxy.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
         proxy.newHar("measurements");
@@ -97,6 +107,7 @@ public class ChromeExecutionSettings {
         proxy.addResponseFilter(responseFilter);
     }
 
+    @Override
     public void init(String pathToChromeDriver, String screenToUse, int timeout, boolean useVirtualScreen)
             throws IOException {
         initializeProxyServer(timeout);

@@ -22,7 +22,7 @@ import static utils.Utils.toSeconds;
  */
 public abstract class WebDriverActionExecutorBase implements WebDriverActionExecutor {
 
-    private ChromeExecutionSettings executionSettings;
+    private ExecutionSettings executionSettings;
     private AutomationResult automationResult;
     private Queue<WebdriverAction> webdriverActionQueue;
     private List<Long> waitingTimes;
@@ -55,7 +55,7 @@ public abstract class WebDriverActionExecutorBase implements WebDriverActionExec
         this.executionSettings = createExecutionSettings();
     }
 
-    protected abstract ChromeExecutionSettings createExecutionSettings();
+    protected abstract ExecutionSettings createExecutionSettings();
 
     protected HttpResponse filterRequest(HttpRequest request, HttpMessageContents contents, HttpMessageInfo messageInfo) {
         addHttpRequestToQueue(messageInfo.getOriginalRequest());
