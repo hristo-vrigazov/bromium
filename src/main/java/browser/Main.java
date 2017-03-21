@@ -106,6 +106,7 @@ public class Main {
                         .measurementsPrecisionInMilliseconds(50)
                         .buildChromedriver();
 
+
                 ReplayBrowserConfiguration replayBrowserConfiguration = ReplayBrowserConfiguration
                         .builder()
                         .pathToApplicationConfiguration(pathToApplicationConfiguration)

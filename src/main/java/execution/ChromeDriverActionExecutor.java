@@ -99,7 +99,8 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
         whiteListHttp.add("localhost");
     }
 
-    private void addToWhiteList(String nameToBeWhiteListed) {
+    @Override
+    public void addToWhiteList(String nameToBeWhiteListed) {
         whiteListHttp.add(nameToBeWhiteListed);
     }
 
@@ -123,7 +124,8 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
                     this.automationResult = AutomationResult.TIMEOUT;
                     throw new TimeoutException("Could not execute the action! Waited "
                             + String.valueOf(System.nanoTime() - elapsedTime)
-                            + " to do " + webdriverActionQueue.peek().getName());
+                            + " to do " + webdriverActionQueue.peek().getName()
+                            + " http queries in queue: " + httpRequestQueue.size());
                 }
                 if (httpRequestQueue.isEmpty() && !lock) {
                     waitingTimes.add(System.nanoTime() - elapsedTime);
@@ -168,6 +170,7 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
         if (!inWhiteList(httpRequest.getUri())) {
             return;
         }
+        System.out.println("Add request " + httpRequest.getUri());
         this.httpRequestQueue.add(httpRequest);
     }
 
@@ -175,6 +178,7 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
         if (!inWhiteList(httpRequest.getUri())) {
             return;
         }
+        System.out.println("Remove request " + httpRequest.getUri());
         this.httpRequestQueue.remove(httpRequest);
     }
 

@@ -18,4 +18,5 @@ public interface WebdriverActionExecutor {
     void dumpLoadingTimes(String fileNameToDump) throws UnsupportedEncodingException, FileNotFoundException;
     LoadingTimes getLoadingTimes();
     AutomationResult getAutomationResult();
+    void addToWhiteList(String urlToBeWhiteListed);
 }

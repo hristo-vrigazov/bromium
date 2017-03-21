@@ -1,11 +1,14 @@
 package browser;
 
 import config.ApplicationConfiguration;
-import execution.*;
+import execution.DefaultApplicationActionFactory;
+import execution.WebdriverActionExecutor;
+import execution.WebdriverActionFactory;
 import replay.ReplayBrowser;
 import utils.Utils;
 
 import java.io.IOException;
+import java.net.URL;
 
 /**
  * Created by hvrigazov on 19.03.17.
@@ -20,6 +23,8 @@ public class ReplayBrowserConfiguration {
     public ReplayBrowserConfiguration(Builder builder) throws IOException {
         ApplicationConfiguration applicationConfiguration = Utils.parseApplicationConfiguration(builder.pathToApplicationConfiguration);
         WebdriverActionExecutor webdriverActionExecutor = builder.webdriverActionExecutor;
+        URL url = new URL(builder.url);
+        webdriverActionExecutor.addToWhiteList(url.getHost());
         WebdriverActionFactory webdriverActionFactory = builder.webdriverActionFactory;
         DefaultApplicationActionFactory applicationActionFactory = new DefaultApplicationActionFactory(builder.url, applicationConfiguration, webdriverActionFactory);
         replayBrowser = new ReplayBrowser(webdriverActionExecutor, applicationActionFactory);
