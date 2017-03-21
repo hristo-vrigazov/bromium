@@ -1,11 +1,14 @@
 package execution;
 
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Created by hvrigazov on 19.03.17.
  */
 public class WebdriverActionExecutorBuilder {
+    private static final String DRIVER_EXECUTABLE = "DRIVER_EXECUTABLE";
+
     public String getPathToDriverExecutable() {
         return pathToDriverExecutable;
     }
@@ -19,8 +22,8 @@ public class WebdriverActionExecutorBuilder {
     }
 
     private String pathToDriverExecutable;
-    private int timeout;
-    private int measurementsPrecisionMilli;
+    private Integer timeout;
+    private Integer measurementsPrecisionMilli;
 
     public WebdriverActionExecutorBuilder pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
@@ -38,6 +41,15 @@ public class WebdriverActionExecutorBuilder {
     }
 
     public ChromeDriverActionExecutor buildChromedriver() throws IOException {
+        pathToDriverExecutable = Optional.ofNullable(pathToDriverExecutable).orElse(System.getenv(DRIVER_EXECUTABLE));
+        if (pathToDriverExecutable == null) {
+            throw new IOException("Path to driver executable not set. Please either set it using" +
+                    " pathToDriverExecutable method or by setting the environment variable" +
+                    " DRIVER_EXECUTABLE");
+        }
+
+        timeout = Optional.ofNullable(timeout).orElse(20);
+        measurementsPrecisionMilli = Optional.ofNullable(measurementsPrecisionMilli).orElse(50);
         return new ChromeDriverActionExecutor(this);
     }
 }

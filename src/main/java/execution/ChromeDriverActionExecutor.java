@@ -66,7 +66,7 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
         return new WebdriverActionExecutorBuilder();
     }
 
-    public ChromeDriverActionExecutor(String pathToChromeDriver, int timeout, int measurementsPrecisionMilli) throws IOException {
+    private ChromeDriverActionExecutor(String pathToChromeDriver, int timeout, int measurementsPrecisionMilli) throws IOException {
         this.pathToChromeDriver = pathToChromeDriver;
         this.useVirtualScreen = false;
         this.timeout = timeout;

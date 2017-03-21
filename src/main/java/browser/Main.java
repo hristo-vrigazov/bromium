@@ -101,9 +101,7 @@ public class Main {
             try {
                 WebdriverActionExecutor executor = ChromeDriverActionExecutor
                         .builder()
-                        .pathToDriverExecutable(pathToChromedriver)
-                        .timeoutInSeconds(20)
-                        .measurementsPrecisionInMilliseconds(50)
+                        .pathToDriverExecutable("chromedriver")
                         .buildChromedriver();
 
 
