@@ -140,8 +140,9 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
             this.automationResult = AutomationResult.SUCCESS;
         } catch (AssertionError e) {
             e.printStackTrace();
-            cleanUp();
             this.automationResult = AutomationResult.ASSERTION_ERROR;
+        } finally {
+            executionSettings.cleanUp();
         }
     }
 
@@ -157,9 +158,9 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
 
         this.maxRetries = 100;
         this.lock = false;
-        this.screenToUse = ":1";
         this.automationResult = AutomationResult.NOT_STARTED;
 
+        screenToUse = Optional.ofNullable(screenToUse).orElse(":1");
         executionSettings.init(pathToChromeDriver, screenToUse, timeout, useVirtualScreen);
     }
 
@@ -212,16 +213,10 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
 
     @Override
     public void quit() {
-        cleanUp();
-
         for (int i = 1; i < waitingTimes.size(); i++) {
             double seconds = toSeconds(waitingTimes.get(i));
             System.out.println("After I did " + actions.get(i - 1) + ", I had to wait for " + seconds + "s until the next action");
         }
-    }
-
-    private void cleanUp() {
-        executionSettings.cleanUp();
     }
 
     @Override
