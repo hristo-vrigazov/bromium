@@ -20,7 +20,7 @@ import static utils.Utils.toSeconds;
 /**
  * Created by hvrigazov on 16.03.17.
  */
-public class WebDriverActionExecutorBase implements WebDriverActionExecutor {
+public abstract class WebDriverActionExecutorBase implements WebDriverActionExecutor {
 
     private ChromeExecutionSettings executionSettings;
     private AutomationResult automationResult;
@@ -52,19 +52,21 @@ public class WebDriverActionExecutorBase implements WebDriverActionExecutor {
         this.measurementsPrecisionMilli = measurementsPrecisionMilli;
         this.initializeQueues();
         this.initializeWhitelist();
-        this.executionSettings = new ChromeExecutionSettings(this::filterRequest, this::filterResponse);
+        this.executionSettings = createExecutionSettings();
     }
 
-    private HttpResponse filterRequest(HttpRequest request, HttpMessageContents contents, HttpMessageInfo messageInfo) {
+    protected abstract ChromeExecutionSettings createExecutionSettings();
+
+    protected HttpResponse filterRequest(HttpRequest request, HttpMessageContents contents, HttpMessageInfo messageInfo) {
         addHttpRequestToQueue(messageInfo.getOriginalRequest());
         lock = false;
         return null;
     }
 
-    private void filterResponse(HttpResponse response, HttpMessageContents contents, HttpMessageInfo messageInfo) {
+    protected void filterResponse(HttpResponse response, HttpMessageContents contents, HttpMessageInfo messageInfo) {
         removeHttpRequestToQueue(messageInfo.getOriginalRequest());
     }
-    
+
     private void initializeQueues() {
         this.webdriverActionQueue = new LinkedList<>();
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());

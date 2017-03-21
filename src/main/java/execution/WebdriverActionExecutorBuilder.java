@@ -40,7 +40,7 @@ public class WebdriverActionExecutorBuilder {
         return this;
     }
 
-    public WebDriverActionExecutorBase buildChromedriver() throws IOException {
+    public WebDriverActionExecutor buildChromedriver() throws IOException {
         pathToDriverExecutable = Optional.ofNullable(pathToDriverExecutable).orElse(System.getenv(DRIVER_EXECUTABLE));
         if (pathToDriverExecutable == null) {
             throw new IOException("Path to driver executable not set. Please either set it using" +
@@ -50,6 +50,6 @@ public class WebdriverActionExecutorBuilder {
 
         timeout = Optional.ofNullable(timeout).orElse(20);
         measurementsPrecisionMilli = Optional.ofNullable(measurementsPrecisionMilli).orElse(50);
-        return new WebDriverActionExecutorBase(this);
+        return new ChromeDriverActionExecutor(this);
     }
 }
