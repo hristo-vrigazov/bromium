@@ -106,7 +106,6 @@ public class Main {
                         .pathToDriverExecutable("chromedriver")
                         .buildChromedriver();
 
-
                 ReplayBrowserConfiguration replayBrowserConfiguration = ReplayBrowserConfiguration
                         .builder()
                         .pathToApplicationConfiguration(pathToApplicationConfiguration)
