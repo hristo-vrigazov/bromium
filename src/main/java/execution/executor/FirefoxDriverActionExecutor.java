@@ -14,7 +14,7 @@ public class FirefoxDriverActionExecutor extends WebDriverActionExecutorBase {
 
     @Override
     protected ExecutionSettings createExecutionSettings() {
-        return null;
+        return new FirefoxDriverExecutionSettings(this::filterRequest, this::filterResponse);
     }
 
     @Override

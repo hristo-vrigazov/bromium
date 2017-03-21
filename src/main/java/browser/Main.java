@@ -3,8 +3,8 @@ package browser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import config.*;
+import execution.executor.ChromeDriverActionExecutor;
 import execution.executor.WebDriverActionExecutor;
-import execution.executor.WebDriverActionExecutorBase;
 import execution.webdriver.PredefinedWebdriverActionFactory;
 import io.airlift.airline.*;
 import io.airlift.airline.model.CommandMetadata;
@@ -101,7 +101,7 @@ public class Main {
         @Override
         public void run() {
             try {
-                WebDriverActionExecutor executor = WebDriverActionExecutorBase
+                WebDriverActionExecutor executor = ChromeDriverActionExecutor
                         .builder()
                         .pathToDriverExecutable("chromedriver")
                         .buildChromedriver();
