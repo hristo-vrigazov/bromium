@@ -17,4 +17,9 @@ public class ChromeDriverActionExecutor extends WebDriverActionExecutorBase {
     protected ExecutionSettings createExecutionSettings() {
         return new ChromeExecutionSettings(this::filterRequest, this::filterResponse);
     }
+
+    @Override
+    protected String getSystemProperty() {
+        return "webdriver.chrome.driver";
+    }
 }

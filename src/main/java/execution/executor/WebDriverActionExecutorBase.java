@@ -58,6 +58,7 @@ public abstract class WebDriverActionExecutorBase implements WebDriverActionExec
     }
 
     protected abstract ExecutionSettings createExecutionSettings();
+    protected abstract String getSystemProperty();
 
     protected HttpResponse filterRequest(HttpRequest request, HttpMessageContents contents, HttpMessageInfo messageInfo) {
         addHttpRequestToQueue(messageInfo.getOriginalRequest());
@@ -138,7 +139,7 @@ public abstract class WebDriverActionExecutorBase implements WebDriverActionExec
     }
 
     private void init() throws IOException {
-        System.setProperty("webdriver.chrome.driver", pathToChromeDriver);
+        System.setProperty(getSystemProperty(), pathToChromeDriver);
 
         this.maxRetries = 100;
         this.lock = false;
