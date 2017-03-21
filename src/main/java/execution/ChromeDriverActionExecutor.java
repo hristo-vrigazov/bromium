@@ -1,21 +1,11 @@
 package execution;
 
-import com.google.common.collect.ImmutableMap;
 import io.netty.handler.codec.http.HttpRequest;
-import net.lightbody.bmp.BrowserMobProxy;
-import net.lightbody.bmp.BrowserMobProxyServer;
-import net.lightbody.bmp.client.ClientUtil;
 import net.lightbody.bmp.core.har.Har;
-import net.lightbody.bmp.proxy.CaptureType;
-import org.openqa.selenium.Proxy;
+import net.lightbody.bmp.filters.RequestFilter;
+import net.lightbody.bmp.filters.ResponseFilter;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import utils.LoadingTimes;
 
 import java.io.File;
@@ -23,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 import static utils.Utils.toSeconds;
 
@@ -32,11 +21,14 @@ import static utils.Utils.toSeconds;
  */
 public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
 
-    private WebDriver driver;
-    private BrowserMobProxy proxy;
-    private ChromeDriverService chromeDriverService;
-    private DesiredCapabilities capabilities;
-    private Proxy seleniumProxy;
+    // start
+    private ChromeExecutionSettings executionSettings;
+//    private WebDriver driver;
+//    private BrowserMobProxy proxy;
+//    private ChromeDriverService chromeDriverService;
+//    private DesiredCapabilities capabilities;
+//    private Proxy seleniumProxy;
+    // end
 
     private AutomationResult automationResult;
 
@@ -81,41 +73,38 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
         this.measurementsPrecisionMilli = measurementsPrecisionMilli;
         this.initializeQueues();
         this.initializeWhitelist();
+
+        RequestFilter requestFilter = (httpRequest, httpMessageContents, httpMessageInfo) -> {
+            addHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
+            lock = false;
+            return null;
+        };
+
+        ResponseFilter responseFilter = (httpResponse, httpMessageContents, httpMessageInfo) -> {
+            removeHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
+        };
+
+        this.executionSettings = new ChromeExecutionSettings(requestFilter, responseFilter);
     }
 
     private void initializeProxyServer() {
-        this.proxy = new BrowserMobProxyServer();
-        this.proxy.setIdleConnectionTimeout(timeout, TimeUnit.SECONDS);
-        this.proxy.setRequestTimeout(timeout, TimeUnit.SECONDS);
-        this.proxy.start(0);
+        executionSettings.initializeProxyServer(timeout);
     }
 
     private void initializeChromeDriverService() throws IOException {
-        this.chromeDriverService = new ChromeDriverService.Builder()
-                .usingDriverExecutable(new File(pathToChromeDriver))
-                .usingAnyFreePort().withEnvironment(ImmutableMap.of("DISPLAY", screenToUse)).build();
-        this.chromeDriverService.start();
+        executionSettings.initializeChromeDriverService(pathToChromeDriver, screenToUse);
     }
 
     private void initializeSeleniumProxy() {
-        seleniumProxy = ClientUtil.createSeleniumProxy(proxy);
+        executionSettings.initializeSeleniumProxy();
     }
 
     private void initializeDesiredCapabilities() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("disable-popup-blocking");
-
-        capabilities = new DesiredCapabilities();
-        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-        capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
+        executionSettings.initializeDesiredCapabilities();
     }
 
     private void initializeWebDriver() {
-        if (useVirtualScreen) {
-            this.driver = new ChromeDriver(chromeDriverService, capabilities);
-        } else {
-            this.driver = new ChromeDriver(capabilities);
-        }
+        executionSettings.initializeWebDriver(useVirtualScreen);
     }
 
     private void initializeQueues() {
@@ -145,7 +134,7 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
         init();
         initializeChromeDriverService();
         initializeWebDriver();
-        driver.manage().window().maximize();
+        executionSettings.maximizeDriver();
 
         long elapsedTime = System.nanoTime();
 
@@ -201,30 +190,17 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
     }
 
     private void initializeHar() {
-        proxy.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
-
-        proxy.newHar("measurements");
-
-        proxy.addRequestFilter((httpRequest, httpMessageContents, httpMessageInfo) -> {
-            addHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
-            lock = false;
-            return null;
-        });
-
-        proxy.addResponseFilter((httpResponse, httpMessageContents, httpMessageInfo) -> {
-            removeHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
-        });
-
+        executionSettings.initializeHar();
     }
 
-    private void addHttpRequestToQueue(HttpRequest httpRequest) {
+    public void addHttpRequestToQueue(HttpRequest httpRequest) {
         if (!inWhiteList(httpRequest.getUri())) {
             return;
         }
         this.httpRequestQueue.add(httpRequest);
     }
 
-    private void removeHttpRequestToQueue(HttpRequest httpRequest) {
+    public void removeHttpRequestToQueue(HttpRequest httpRequest) {
         if (!inWhiteList(httpRequest.getUri())) {
             return;
         }
@@ -248,7 +224,7 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
         while (i < maxRetries && (toSeconds(System.nanoTime() - startTime) < timeout)) {
             try {
                 Thread.sleep(measurementsPrecisionMilli);
-                webdriverAction.execute(driver);
+                webdriverAction.execute(executionSettings.getWebDriver());
                 return;
             } catch (WebDriverException ex) {
                 System.out.println(ex.toString());
@@ -275,14 +251,12 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
     }
 
     private void cleanUp() {
-        driver.quit();
-        proxy.stop();
-        chromeDriverService.stop();
+        executionSettings.cleanUp();
     }
 
     @Override
     public void dumpHarMetrics(String fileNameToDump) throws IOException {
-        Har har = proxy.getHar();
+        Har har = executionSettings.getHar();
         File harFile = new File(fileNameToDump);
         har.writeTo(harFile);
     }
