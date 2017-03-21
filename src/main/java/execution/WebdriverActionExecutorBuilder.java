@@ -41,6 +41,19 @@ public class WebdriverActionExecutorBuilder {
     }
 
     public WebDriverActionExecutor buildChromedriver() throws IOException {
+        return buildDriver(this::createChromeDriverActionExecutor);
+    }
+
+    private WebDriverActionExecutor createChromeDriverActionExecutor() throws IOException {
+        return new ChromeDriverActionExecutor(this);
+    }
+
+    private WebDriverActionExecutor buildDriver(WebDriverActionSupplier creatingFunction) throws IOException {
+        setDefaultValues();
+        return creatingFunction.get();
+    }
+
+    private void setDefaultValues() throws IOException {
         pathToDriverExecutable = Optional.ofNullable(pathToDriverExecutable).orElse(System.getenv(DRIVER_EXECUTABLE));
         if (pathToDriverExecutable == null) {
             throw new IOException("Path to driver executable not set. Please either set it using" +
@@ -50,6 +63,5 @@ public class WebdriverActionExecutorBuilder {
 
         timeout = Optional.ofNullable(timeout).orElse(20);
         measurementsPrecisionMilli = Optional.ofNullable(measurementsPrecisionMilli).orElse(50);
-        return new ChromeDriverActionExecutor(this);
     }
 }
