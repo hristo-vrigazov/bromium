@@ -87,26 +87,6 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
         this.executionSettings = new ChromeExecutionSettings(requestFilter, responseFilter);
     }
 
-    private void initializeProxyServer() {
-        executionSettings.initializeProxyServer(timeout);
-    }
-
-    private void initializeChromeDriverService() throws IOException {
-        executionSettings.initializeChromeDriverService(pathToChromeDriver, screenToUse);
-    }
-
-    private void initializeSeleniumProxy() {
-        executionSettings.initializeSeleniumProxy();
-    }
-
-    private void initializeDesiredCapabilities() {
-        executionSettings.initializeDesiredCapabilities();
-    }
-
-    private void initializeWebDriver() {
-        executionSettings.initializeWebDriver(useVirtualScreen);
-    }
-
     private void initializeQueues() {
         this.webdriverActionQueue = new LinkedList<>();
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
@@ -132,8 +112,6 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
     @Override
     public void execute() throws InterruptedException, IOException {
         init();
-        initializeChromeDriverService();
-        initializeWebDriver();
         executionSettings.maximizeDriver();
 
         long elapsedTime = System.nanoTime();
@@ -174,7 +152,7 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
         execute();
     }
 
-    private void init() {
+    private void init() throws IOException {
         System.setProperty("webdriver.chrome.driver", pathToChromeDriver);
 
         this.maxRetries = 100;
@@ -182,15 +160,7 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
         this.screenToUse = ":1";
         this.automationResult = AutomationResult.NOT_STARTED;
 
-
-        initializeProxyServer();
-        initializeSeleniumProxy();
-        initializeHar();
-        initializeDesiredCapabilities();
-    }
-
-    private void initializeHar() {
-        executionSettings.initializeHar();
+        executionSettings.init(pathToChromeDriver, screenToUse, timeout, useVirtualScreen);
     }
 
     public void addHttpRequestToQueue(HttpRequest httpRequest) {

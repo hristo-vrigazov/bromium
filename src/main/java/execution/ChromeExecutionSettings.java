@@ -96,4 +96,14 @@ public class ChromeExecutionSettings {
         proxy.addRequestFilter(requestFilter);
         proxy.addResponseFilter(responseFilter);
     }
+
+    public void init(String pathToChromeDriver, String screenToUse, int timeout, boolean useVirtualScreen)
+            throws IOException {
+        initializeProxyServer(timeout);
+        initializeSeleniumProxy();
+        initializeHar();
+        initializeDesiredCapabilities();
+        initializeChromeDriverService(pathToChromeDriver, screenToUse);
+        initializeWebDriver(useVirtualScreen);
+    }
 }
