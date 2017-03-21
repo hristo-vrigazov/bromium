@@ -10,6 +10,7 @@ buildNumber.properties
 *.iml
 .idea/
 chromedriver
+geckodriver
 *.json
 *.csv
 *.out
