@@ -11,7 +11,7 @@ import java.io.IOException;
 public interface ExecutionSettings {
     void initializeProxyServer(int timeout);
 
-    void initializeChromeDriverService(String pathToChromeDriver, String screenToUse) throws IOException;
+    void initializeDriverService(String pathToChromeDriver, String screenToUse) throws IOException;
 
     void initializeSeleniumProxy();
 

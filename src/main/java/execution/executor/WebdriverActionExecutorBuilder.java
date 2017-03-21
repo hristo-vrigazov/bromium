@@ -46,6 +46,14 @@ public class WebdriverActionExecutorBuilder {
         return buildDriver(this::createChromeDriverActionExecutor);
     }
 
+    public WebDriverActionExecutor buildFirefoxdriver() throws IOException {
+        return buildDriver(this::createFirefoxDriverActionExecutor);
+    }
+
+    private WebDriverActionExecutor createFirefoxDriverActionExecutor() throws IOException {
+        return new FirefoxDriverActionExecutor(this);
+    }
+
     private WebDriverActionExecutor createChromeDriverActionExecutor() throws IOException {
         return new ChromeDriverActionExecutor(this);
     }

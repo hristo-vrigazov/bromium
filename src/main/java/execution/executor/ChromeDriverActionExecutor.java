@@ -1,6 +1,6 @@
 package execution.executor;
 
-import execution.settings.ChromeExecutionSettings;
+import execution.settings.ExecutionSettingsBase;
 import execution.settings.ExecutionSettings;
 
 import java.io.IOException;
@@ -15,7 +15,7 @@ public class ChromeDriverActionExecutor extends WebDriverActionExecutorBase {
 
     @Override
     protected ExecutionSettings createExecutionSettings() {
-        return new ChromeExecutionSettings(this::filterRequest, this::filterResponse);
+        return new ChromeDriverExecutionSettings(this::filterRequest, this::filterResponse);
     }
 
     @Override
