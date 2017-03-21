@@ -37,7 +37,6 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
     private ChromeDriverService chromeDriverService;
     private DesiredCapabilities capabilities;
     private Proxy seleniumProxy;
-    private File harFile;
 
     private AutomationResult automationResult;
 
@@ -129,6 +128,10 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
     private void initializeWhitelist() {
         whiteListHttp = new ArrayList<>();
         whiteListHttp.add("localhost");
+    }
+
+    private void addToWhiteList(String nameToBeWhiteListed) {
+        whiteListHttp.add(nameToBeWhiteListed);
     }
 
     @Override
@@ -280,7 +283,7 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
     @Override
     public void dumpHarMetrics(String fileNameToDump) throws IOException {
         Har har = proxy.getHar();
-        harFile = new File(fileNameToDump);
+        File harFile = new File(fileNameToDump);
         har.writeTo(harFile);
     }
 
