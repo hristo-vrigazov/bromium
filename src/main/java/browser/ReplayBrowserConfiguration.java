@@ -1,9 +1,9 @@
 package browser;
 
 import config.ApplicationConfiguration;
-import execution.DefaultApplicationActionFactory;
-import execution.WebDriverActionExecutor;
-import execution.WebdriverActionFactory;
+import execution.application.DefaultApplicationActionFactory;
+import execution.executor.WebDriverActionExecutor;
+import execution.webdriver.WebdriverActionFactory;
 import replay.ReplayBrowser;
 import utils.Utils;
 

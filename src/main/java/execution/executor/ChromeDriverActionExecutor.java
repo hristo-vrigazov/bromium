@@ -1,4 +1,7 @@
-package execution;
+package execution.executor;
+
+import execution.settings.ChromeExecutionSettings;
+import execution.settings.ExecutionSettings;
 
 import java.io.IOException;
 

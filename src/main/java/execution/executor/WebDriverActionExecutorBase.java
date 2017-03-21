@@ -1,5 +1,7 @@
-package execution;
+package execution.executor;
 
+import execution.settings.ExecutionSettings;
+import execution.webdriver.WebdriverAction;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.core.har.Har;

@@ -1,6 +1,6 @@
 package actions;
 
-import execution.WebdriverAction;
+import execution.webdriver.WebdriverAction;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotSelectableException;
 import org.openqa.selenium.WebDriver;

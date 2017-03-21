@@ -1,6 +1,10 @@
 package replay;
 
-import execution.*;
+import execution.application.ApplicationAction;
+import execution.application.ApplicationActionFactory;
+import execution.executor.AutomationResult;
+import execution.executor.WebDriverActionExecutor;
+import execution.webdriver.WebdriverAction;
 import utils.Utils;
 
 import java.io.FileNotFoundException;

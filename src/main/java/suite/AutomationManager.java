@@ -1,7 +1,7 @@
 package suite;
 
-import execution.AutomationResult;
-import execution.WebDriverActionExecutor;
+import execution.executor.AutomationResult;
+import execution.executor.WebDriverActionExecutor;
 import utils.Utils;
 
 import java.io.IOException;

@@ -1,7 +1,11 @@
 package parallel;
 
 import browser.ReplayBrowserConfiguration;
-import execution.*;
+import execution.executor.AutomationResult;
+import execution.executor.WebDriverActionExecutor;
+import execution.executor.WebDriverActionExecutorBase;
+import execution.executor.WebdriverActionExecutorBuilder;
+import execution.webdriver.PredefinedWebdriverActionFactory;
 import org.junit.Test;
 import suite.AutomationManager;
 

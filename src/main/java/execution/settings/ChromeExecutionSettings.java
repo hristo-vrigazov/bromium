@@ -1,4 +1,4 @@
-package execution;
+package execution.settings;
 
 import com.google.common.collect.ImmutableMap;
 import net.lightbody.bmp.BrowserMobProxy;

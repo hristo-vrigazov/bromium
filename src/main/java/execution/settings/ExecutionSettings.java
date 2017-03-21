@@ -1,4 +1,4 @@
-package execution;
+package execution.settings;
 
 import net.lightbody.bmp.core.har.Har;
 import org.openqa.selenium.WebDriver;
