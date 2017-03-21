@@ -19,7 +19,7 @@ public class AutomationManagerExamples {
         String pathToChromedriver = "/home/hvrigazov/github/selenium-record-replay/chromedriver";
         String pathToTestScenario = "/home/hvrigazov/github/selenium-record-replay/output.json";
 
-        WebdriverActionExecutorBuilder executorWebdriverActionExecutorBuilder = ChromeDriverActionExecutor
+        WebdriverActionExecutorBuilder executorWebdriverActionExecutorBuilder = WebDriverActionExecutorBase
                 .builder()
                 .pathToDriverExecutable(pathToChromedriver)
                 .timeoutInSeconds(30)
@@ -46,7 +46,7 @@ public class AutomationManagerExamples {
         System.out.println(automationResultList);
     }
 
-    private WebdriverActionExecutor getScenario(String pathToTestScenario, WebdriverActionExecutorBuilder executor, ReplayBrowserConfiguration.Builder testScenarioRunner) throws IOException {
+    private WebDriverActionExecutor getScenario(String pathToTestScenario, WebdriverActionExecutorBuilder executor, ReplayBrowserConfiguration.Builder testScenarioRunner) throws IOException {
         return testScenarioRunner.executor(executor.buildChromedriver()).build().getReplayBrowser().getTestScenario(pathToTestScenario);
     }
 }

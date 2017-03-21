@@ -1,7 +1,7 @@
 package suite;
 
 import execution.AutomationResult;
-import execution.WebdriverActionExecutor;
+import execution.WebDriverActionExecutor;
 import utils.Utils;
 
 import java.io.IOException;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  */
 public class AutomationManager {
 
-    private List<WebdriverActionExecutor> automationScenarios;
+    private List<WebDriverActionExecutor> automationScenarios;
     private List<String> fileNames;
     private List<String> harFileNames;
 
@@ -28,7 +28,7 @@ public class AutomationManager {
         harFileNames = new ArrayList<>();
     }
 
-    public void addTestScenario(WebdriverActionExecutor automationScenario, String fileNameToDumpMeasurements, String fileNameToDumpHar) {
+    public void addTestScenario(WebDriverActionExecutor automationScenario, String fileNameToDumpMeasurements, String fileNameToDumpHar) {
         automationScenarios.add(automationScenario);
         fileNames.add(fileNameToDumpMeasurements);
         harFileNames.add(fileNameToDumpHar);
@@ -103,7 +103,7 @@ public class AutomationManager {
         }
 
         try {
-            WebdriverActionExecutor executor = automationScenarios.get(i);
+            WebDriverActionExecutor executor = automationScenarios.get(i);
             executor.executeOnScreen(screen);
             executor.quit();
             executor.getLoadingTimes().dump(fileNames.get(i));

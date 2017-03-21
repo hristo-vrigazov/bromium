@@ -1,9 +1,10 @@
 package execution;
 
 import io.netty.handler.codec.http.HttpRequest;
+import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.core.har.Har;
-import net.lightbody.bmp.filters.RequestFilter;
-import net.lightbody.bmp.filters.ResponseFilter;
+import net.lightbody.bmp.util.HttpMessageContents;
+import net.lightbody.bmp.util.HttpMessageInfo;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriverException;
 import utils.LoadingTimes;
@@ -19,46 +20,24 @@ import static utils.Utils.toSeconds;
 /**
  * Created by hvrigazov on 16.03.17.
  */
-public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
+public class WebDriverActionExecutorBase implements WebDriverActionExecutor {
 
-    // start
     private ChromeExecutionSettings executionSettings;
-//    private WebDriver driver;
-//    private BrowserMobProxy proxy;
-//    private ChromeDriverService chromeDriverService;
-//    private DesiredCapabilities capabilities;
-//    private Proxy seleniumProxy;
-    // end
-
     private AutomationResult automationResult;
-
     private Queue<WebdriverAction> webdriverActionQueue;
-
     private List<Long> waitingTimes;
     private List<String> actions;
-
     private Set<HttpRequest> httpRequestQueue;
-    /**
-     * Download from Chromedriver's official site and then
-     * set this to the local path to the executable
-     */
     private String pathToChromeDriver;
-
     private boolean useVirtualScreen;
-
     private boolean lock;
-
     private int timeout;
-
     private int maxRetries;
-
     private int measurementsPrecisionMilli;
-
     private List<String> whiteListHttp;
-
     private String screenToUse;
 
-    public ChromeDriverActionExecutor(WebdriverActionExecutorBuilder webdriverActionExecutorBuilder) throws IOException {
+    public WebDriverActionExecutorBase(WebdriverActionExecutorBuilder webdriverActionExecutorBuilder) throws IOException {
         this(webdriverActionExecutorBuilder.getPathToDriverExecutable(), webdriverActionExecutorBuilder.getTimeout(), webdriverActionExecutorBuilder.getMeasurementsPrecisionMilli());
     }
 
@@ -66,27 +45,26 @@ public class ChromeDriverActionExecutor implements WebdriverActionExecutor {
         return new WebdriverActionExecutorBuilder();
     }
 
-    private ChromeDriverActionExecutor(String pathToChromeDriver, int timeout, int measurementsPrecisionMilli) throws IOException {
+    private WebDriverActionExecutorBase(String pathToChromeDriver, int timeout, int measurementsPrecisionMilli) throws IOException {
         this.pathToChromeDriver = pathToChromeDriver;
         this.useVirtualScreen = false;
         this.timeout = timeout;
         this.measurementsPrecisionMilli = measurementsPrecisionMilli;
         this.initializeQueues();
         this.initializeWhitelist();
-
-        RequestFilter requestFilter = (httpRequest, httpMessageContents, httpMessageInfo) -> {
-            addHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
-            lock = false;
-            return null;
-        };
-
-        ResponseFilter responseFilter = (httpResponse, httpMessageContents, httpMessageInfo) -> {
-            removeHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
-        };
-
-        this.executionSettings = new ChromeExecutionSettings(requestFilter, responseFilter);
+        this.executionSettings = new ChromeExecutionSettings(this::filterRequest, this::filterResponse);
     }
 
+    private HttpResponse filterRequest(HttpRequest request, HttpMessageContents contents, HttpMessageInfo messageInfo) {
+        addHttpRequestToQueue(messageInfo.getOriginalRequest());
+        lock = false;
+        return null;
+    }
+
+    private void filterResponse(HttpResponse response, HttpMessageContents contents, HttpMessageInfo messageInfo) {
+        removeHttpRequestToQueue(messageInfo.getOriginalRequest());
+    }
+    
     private void initializeQueues() {
         this.webdriverActionQueue = new LinkedList<>();
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());

@@ -15,35 +15,35 @@ import java.util.Optional;
  */
 public class ReplayBrowser {
 
-    private WebdriverActionExecutor executor;
+    private WebDriverActionExecutor executor;
     private ApplicationActionFactory applicationActionFactory;
 
-    public ReplayBrowser(WebdriverActionExecutor executor,
+    public ReplayBrowser(WebDriverActionExecutor executor,
                          ApplicationActionFactory applicationActionFactory) {
         this.executor = executor;
         this.applicationActionFactory = applicationActionFactory;
     }
 
     public AutomationResult replay(String pathToSerializedTest) throws IOException, InterruptedException {
-        WebdriverActionExecutor executor = getTestScenario(pathToSerializedTest);
+        WebDriverActionExecutor executor = getTestScenario(pathToSerializedTest);
         executor.execute();
         executor.quit();
         return executor.getAutomationResult();
     }
 
     public AutomationResult replayOnScreen(String pathToSerializedTest, String screen) throws IOException, InterruptedException {
-        WebdriverActionExecutor executor = getTestScenario(pathToSerializedTest);
+        WebDriverActionExecutor executor = getTestScenario(pathToSerializedTest);
         executor.executeOnScreen(screen);
         executor.quit();
         return executor.getAutomationResult();
     }
 
-    public WebdriverActionExecutor getTestScenario(String pathToTestScenario) throws IOException {
+    public WebDriverActionExecutor getTestScenario(String pathToTestScenario) throws IOException {
         List<Map<String, String>> testCaseSteps = Utils.readSteps(pathToTestScenario);
         return getTestScenario(testCaseSteps);
     }
 
-    public WebdriverActionExecutor getTestScenario(List<Map<String, String>> testCaseSteps) {
+    public WebDriverActionExecutor getTestScenario(List<Map<String, String>> testCaseSteps) {
         Optional<WebdriverAction> initialPageLoading = applicationActionFactory.getInitialPageLoading().getWebdriverAction();
         addWebdriverAction(initialPageLoading);
 

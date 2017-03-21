@@ -2,7 +2,7 @@ package browser;
 
 import config.ApplicationConfiguration;
 import execution.DefaultApplicationActionFactory;
-import execution.WebdriverActionExecutor;
+import execution.WebDriverActionExecutor;
 import execution.WebdriverActionFactory;
 import replay.ReplayBrowser;
 import utils.Utils;
@@ -22,12 +22,12 @@ public class ReplayBrowserConfiguration {
 
     public ReplayBrowserConfiguration(Builder builder) throws IOException {
         ApplicationConfiguration applicationConfiguration = Utils.parseApplicationConfiguration(builder.pathToApplicationConfiguration);
-        WebdriverActionExecutor webdriverActionExecutor = builder.webdriverActionExecutor;
+        WebDriverActionExecutor webDriverActionExecutor = builder.webDriverActionExecutor;
         URL url = new URL(builder.url);
-        webdriverActionExecutor.addToWhiteList(url.getHost());
+        webDriverActionExecutor.addToWhiteList(url.getHost());
         WebdriverActionFactory webdriverActionFactory = builder.webdriverActionFactory;
         DefaultApplicationActionFactory applicationActionFactory = new DefaultApplicationActionFactory(builder.url, applicationConfiguration, webdriverActionFactory);
-        replayBrowser = new ReplayBrowser(webdriverActionExecutor, applicationActionFactory);
+        replayBrowser = new ReplayBrowser(webDriverActionExecutor, applicationActionFactory);
     }
 
     public ReplayBrowser getReplayBrowser() {
@@ -36,7 +36,7 @@ public class ReplayBrowserConfiguration {
 
     public static class Builder {
         private String pathToApplicationConfiguration;
-        private WebdriverActionExecutor webdriverActionExecutor;
+        private WebDriverActionExecutor webDriverActionExecutor;
         private WebdriverActionFactory webdriverActionFactory;
         private String url;
 
@@ -45,8 +45,8 @@ public class ReplayBrowserConfiguration {
             return this;
         }
 
-        public Builder executor(WebdriverActionExecutor executor) {
-            this.webdriverActionExecutor = executor;
+        public Builder executor(WebDriverActionExecutor executor) {
+            this.webDriverActionExecutor = executor;
             return this;
         }
 

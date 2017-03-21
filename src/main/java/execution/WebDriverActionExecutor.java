@@ -9,7 +9,7 @@ import java.io.UnsupportedEncodingException;
 /**
  * Created by hvrigazov on 15.03.17.
  */
-public interface WebdriverActionExecutor {
+public interface WebDriverActionExecutor {
     void addWebdriverAction(WebdriverAction webdriverAction);
     void execute() throws InterruptedException, IOException;
     void executeOnScreen(String screenToUse) throws InterruptedException, IOException;

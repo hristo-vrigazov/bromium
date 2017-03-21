@@ -99,7 +99,7 @@ public class Main {
         @Override
         public void run() {
             try {
-                WebdriverActionExecutor executor = ChromeDriverActionExecutor
+                WebDriverActionExecutor executor = WebDriverActionExecutorBase
                         .builder()
                         .pathToDriverExecutable("chromedriver")
                         .buildChromedriver();
