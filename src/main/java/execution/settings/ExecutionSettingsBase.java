@@ -20,15 +20,18 @@ import java.util.concurrent.TimeUnit;
  * Created by hvrigazov on 21.03.17.
  */
 public abstract class ExecutionSettingsBase implements ExecutionSettings {
-    protected WebDriver driver;
     private BrowserMobProxy proxy;
-    protected DriverService driverService;
-    protected DesiredCapabilities capabilities;
     private Proxy seleniumProxy;
     private RequestFilter requestFilter;
     private ResponseFilter responseFilter;
 
-    public ExecutionSettingsBase(RequestFilter requestFilter, ResponseFilter responseFilter) {
+    protected WebDriver driver;
+    protected DriverService driverService;
+    protected DesiredCapabilities capabilities;
+    protected String baseURI;
+
+    public ExecutionSettingsBase(String baseURI, RequestFilter requestFilter, ResponseFilter responseFilter) {
+        this.baseURI = baseURI;
         this.requestFilter = requestFilter;
         this.responseFilter = responseFilter;
     }
@@ -54,16 +57,31 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
     }
 
     @Override
-    public void maximizeDriver() {
+    public void initializeWebDriver(boolean useVirtualScreen) {
+        if (useVirtualScreen) {
+            initializeWebDriverHeadless();
+        } else {
+            initializeWebDriver();
+        }
+    }
+
+    private void maximizeDriver() {
         driver.manage().window().maximize();
     }
 
     @Override
-    public void cleanUp() {
+    public void cleanUpReplay() {
         driver.quit();
         proxy.stop();
         driverService.stop();
     }
+
+    @Override
+    public void cleanUpRecord() {
+        driver.quit();
+        proxy.stop();
+    }
+
 
     @Override
     public WebDriver getWebDriver() {
@@ -76,7 +94,7 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
     }
 
     @Override
-    public void initializeHar() {
+    public void initializeProxyFilters() {
         proxy.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
         proxy.newHar("measurements");
         proxy.addRequestFilter(requestFilter);
@@ -84,13 +102,31 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
     }
 
     @Override
-    public void init(String pathToChromeDriver, String screenToUse, int timeout, boolean useVirtualScreen)
+    public void initReplay(String pathToChromeDriver, String screenToUse, int timeout, boolean useVirtualScreen)
             throws IOException {
         initializeProxyServer(timeout);
         initializeSeleniumProxy();
-        initializeHar();
+        initializeProxyFilters();
         initializeDesiredCapabilities();
         initializeDriverService(pathToChromeDriver, screenToUse);
         initializeWebDriver(useVirtualScreen);
+        maximizeDriver();
     }
+
+    @Override
+    public void initRecord(int timeout) throws IOException {
+        initializeProxyServer(timeout);
+        initializeSeleniumProxy();
+        initializeProxyFilters();
+        initializeDesiredCapabilities();
+        initializeWebDriver();
+        maximizeDriver();
+    }
+
+
+    @Override
+    public void openBaseUrl() {
+        driver.get(baseURI);
+    }
+
 }

@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 
 import static utils.Utils.toSeconds;
@@ -38,22 +40,26 @@ public abstract class WebDriverActionExecutorBase implements WebDriverActionExec
     private int measurementsPrecisionMilli;
     private List<String> whiteListHttp;
     private String screenToUse;
+    protected String baseURI;
 
-    public WebDriverActionExecutorBase(WebdriverActionExecutorBuilder webdriverActionExecutorBuilder) throws IOException {
-        this(webdriverActionExecutorBuilder.getPathToDriverExecutable(), webdriverActionExecutorBuilder.getTimeout(), webdriverActionExecutorBuilder.getMeasurementsPrecisionMilli());
+    public WebDriverActionExecutorBase(WebdriverActionExecutorBuilder webdriverActionExecutorBuilder) throws IOException, URISyntaxException {
+        this(webdriverActionExecutorBuilder.getBaseURI(),
+                webdriverActionExecutorBuilder.getPathToDriverExecutable(),
+                webdriverActionExecutorBuilder.getTimeout(),
+                webdriverActionExecutorBuilder.getMeasurementsPrecisionMilli());
     }
 
     public static WebdriverActionExecutorBuilder builder() {
         return new WebdriverActionExecutorBuilder();
     }
 
-    private WebDriverActionExecutorBase(String pathToChromeDriver, int timeout, int measurementsPrecisionMilli) throws IOException {
+    private WebDriverActionExecutorBase(String baseURI, String pathToChromeDriver, int timeout, int measurementsPrecisionMilli) throws IOException, URISyntaxException {
         this.pathToChromeDriver = pathToChromeDriver;
         this.useVirtualScreen = false;
         this.timeout = timeout;
+        this.baseURI = baseURI;
         this.measurementsPrecisionMilli = measurementsPrecisionMilli;
         this.initializeQueues();
-        this.initializeWhitelist();
         this.executionSettings = createExecutionSettings();
     }
 
@@ -77,14 +83,11 @@ public abstract class WebDriverActionExecutorBase implements WebDriverActionExec
         this.actions = new ArrayList<>();
     }
 
-    private void initializeWhitelist() {
+    private void initializeWhitelist() throws URISyntaxException {
         whiteListHttp = new ArrayList<>();
         whiteListHttp.add("localhost");
-    }
-
-    @Override
-    public void addToWhiteList(String nameToBeWhiteListed) {
-        whiteListHttp.add(nameToBeWhiteListed);
+        URI uri = new URI(baseURI);
+        whiteListHttp.add(uri.getHost());
     }
 
     @Override
@@ -94,9 +97,8 @@ public abstract class WebDriverActionExecutorBase implements WebDriverActionExec
     }
 
     @Override
-    public void execute() throws InterruptedException, IOException {
+    public void execute() throws InterruptedException, IOException, URISyntaxException {
         init();
-        executionSettings.maximizeDriver();
 
         long elapsedTime = System.nanoTime();
 
@@ -127,18 +129,18 @@ public abstract class WebDriverActionExecutorBase implements WebDriverActionExec
             e.printStackTrace();
             this.automationResult = AutomationResult.ASSERTION_ERROR;
         } finally {
-            executionSettings.cleanUp();
+            executionSettings.cleanUpReplay();
         }
     }
 
     @Override
-    public void executeOnScreen(String screenToUse) throws InterruptedException, IOException {
+    public void executeOnScreen(String screenToUse) throws InterruptedException, IOException, URISyntaxException {
         this.screenToUse = screenToUse;
         this.useVirtualScreen = true;
         execute();
     }
 
-    private void init() throws IOException {
+    private void init() throws IOException, URISyntaxException {
         System.setProperty(getSystemProperty(), pathToChromeDriver);
 
         this.maxRetries = 100;
@@ -146,7 +148,8 @@ public abstract class WebDriverActionExecutorBase implements WebDriverActionExec
         this.automationResult = AutomationResult.NOT_STARTED;
 
         screenToUse = Optional.ofNullable(screenToUse).orElse(":1");
-        executionSettings.init(pathToChromeDriver, screenToUse, timeout, useVirtualScreen);
+        executionSettings.initReplay(pathToChromeDriver, screenToUse, timeout, useVirtualScreen);
+        this.initializeWhitelist();
     }
 
     public void addHttpRequestToQueue(HttpRequest httpRequest) {

@@ -14,8 +14,9 @@ import java.io.IOException;
  * Created by hvrigazov on 21.03.17.
  */
 public class ChromeDriverExecutionSettings extends ExecutionSettingsBase {
-    public ChromeDriverExecutionSettings(RequestFilter requestFilter, ResponseFilter responseFilter) {
-        super(requestFilter, responseFilter);
+
+    public ChromeDriverExecutionSettings(String baseURI, RequestFilter requestFilter, ResponseFilter responseFilter) {
+        super(baseURI, requestFilter, responseFilter);
     }
 
     @Override
@@ -26,11 +27,14 @@ public class ChromeDriverExecutionSettings extends ExecutionSettingsBase {
     }
 
     @Override
-    public void initializeWebDriver(boolean useVirtualScreen) {
-        if (useVirtualScreen) {
-            this.driver = new ChromeDriver((ChromeDriverService) driverService, capabilities);
-        } else {
-            this.driver = new ChromeDriver(capabilities);
-        }
+    public void initializeWebDriverHeadless() {
+        this.driver = new ChromeDriver((ChromeDriverService) driverService, capabilities);
     }
+
+    @Override
+    public void initializeWebDriver() {
+        this.driver = new ChromeDriver(capabilities);
+    }
+
+
 }

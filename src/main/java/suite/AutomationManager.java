@@ -5,6 +5,7 @@ import execution.executor.WebDriverActionExecutor;
 import utils.Utils;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -110,10 +111,11 @@ public class AutomationManager {
             executor.dumpHarMetrics(harFileNames.get(i));
             process.destroy();
             return executor.getAutomationResult();
-        } catch (InterruptedException | IOException e) {
+        } catch (InterruptedException | IOException | URISyntaxException e) {
             e.printStackTrace();
-            process.destroy();
             return AutomationResult.FAILED;
+        } finally {
+            process.destroy();
         }
 
     }

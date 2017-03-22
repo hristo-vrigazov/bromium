@@ -3,6 +3,7 @@ package execution.executor;
 import execution.webdriver.WebDriverActionSupplier;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Optional;
 
 /**
@@ -26,6 +27,7 @@ public class WebdriverActionExecutorBuilder {
     private String pathToDriverExecutable;
     private Integer timeout;
     private Integer measurementsPrecisionMilli;
+    private String baseURI;
 
     public WebdriverActionExecutorBuilder pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
@@ -42,23 +44,28 @@ public class WebdriverActionExecutorBuilder {
         return this;
     }
 
-    public WebDriverActionExecutor buildChromedriver() throws IOException {
+    public WebdriverActionExecutorBuilder baseURI(String baseURI) {
+        this.baseURI = baseURI;
+        return this;
+    }
+
+    public WebDriverActionExecutor buildChromedriver() throws IOException, URISyntaxException {
         return buildDriver(this::createChromeDriverActionExecutor);
     }
 
-    public WebDriverActionExecutor buildFirefoxdriver() throws IOException {
+    public WebDriverActionExecutor buildFirefoxdriver() throws IOException, URISyntaxException {
         return buildDriver(this::createFirefoxDriverActionExecutor);
     }
 
-    private WebDriverActionExecutor createFirefoxDriverActionExecutor() throws IOException {
+    private WebDriverActionExecutor createFirefoxDriverActionExecutor() throws IOException, URISyntaxException {
         return new FirefoxDriverActionExecutor(this);
     }
 
-    private WebDriverActionExecutor createChromeDriverActionExecutor() throws IOException {
+    private WebDriverActionExecutor createChromeDriverActionExecutor() throws IOException, URISyntaxException {
         return new ChromeDriverActionExecutor(this);
     }
 
-    private WebDriverActionExecutor buildDriver(WebDriverActionSupplier creatingFunction) throws IOException {
+    private WebDriverActionExecutor buildDriver(WebDriverActionSupplier creatingFunction) throws IOException, URISyntaxException {
         setDefaultValues();
         return creatingFunction.get();
     }
@@ -71,7 +78,15 @@ public class WebdriverActionExecutorBuilder {
                     " DRIVER_EXECUTABLE");
         }
 
+        if (baseURI == null) {
+            throw new IOException("Base URI is not set. Please use the baseURI method");
+        }
+
         timeout = Optional.ofNullable(timeout).orElse(20);
         measurementsPrecisionMilli = Optional.ofNullable(measurementsPrecisionMilli).orElse(50);
+    }
+
+    public String getBaseURI() {
+        return baseURI;
     }
 }

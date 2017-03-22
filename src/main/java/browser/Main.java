@@ -3,14 +3,15 @@ package browser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import config.*;
-import execution.executor.ChromeDriverActionExecutor;
 import execution.executor.WebDriverActionExecutor;
+import execution.executor.WebdriverActionExecutorBuilder;
 import execution.webdriver.PredefinedWebdriverActionFactory;
 import io.airlift.airline.*;
 import io.airlift.airline.model.CommandMetadata;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
-import record.RecordBrowser;
+import record.ChromeRecordBrowser;
+import record.RecordBrowserBase;
 import replay.ReplayBrowser;
 
 import java.io.FileWriter;
@@ -70,17 +71,17 @@ public class Main {
 
         @Override
         public void run() {
-            RecordBrowser recordBrowser = new RecordBrowser(pathToChromedriver, pathToJSInjectionFile);
+            RecordBrowserBase recordBrowserBase = new ChromeRecordBrowser(pathToChromedriver, pathToJSInjectionFile);
             try {
-                recordBrowser.record(baseUrl);
+                recordBrowserBase.record(baseUrl);
                 System.out.println("Press Enter when finished recording");
                 System.in.read();
-                recordBrowser.dumpActions(outputFile);
+                recordBrowserBase.dumpActions(outputFile);
             } catch (IOException | InterruptedException | URISyntaxException e) {
                 e.printStackTrace();
             }
 
-            recordBrowser.quit();
+            recordBrowserBase.cleanUp();
 
             System.exit(0);
         }
@@ -101,9 +102,9 @@ public class Main {
         @Override
         public void run() {
             try {
-                WebDriverActionExecutor executor = ChromeDriverActionExecutor
-                        .builder()
+                WebDriverActionExecutor executor = new WebdriverActionExecutorBuilder()
                         .pathToDriverExecutable("chromedriver")
+                        .baseURI("http://www.tenniskafe.com/")
                         .buildChromedriver();
 
                 ReplayBrowserConfiguration replayBrowserConfiguration = ReplayBrowserConfiguration
@@ -117,7 +118,7 @@ public class Main {
                 ReplayBrowser replayBrowser = replayBrowserConfiguration.getReplayBrowser();
                 replayBrowser.replay(pathToSerializedTest);
                 replayBrowser.dumpAllMetrics("metrics.har", "metrics.csv");
-            } catch (IOException | InterruptedException e) {
+            } catch (IOException | InterruptedException | URISyntaxException e) {
                 e.printStackTrace();
             }
 
@@ -125,7 +126,7 @@ public class Main {
         }
     }
 
-    @Command(name = "init", description = "Guides you through creating an automation layer for your application!")
+    @Command(name = "initReplay", description = "Guides you through creating an automation layer for your application!")
     public static class Init implements Runnable {
 
         MainMenuChoice mainMenuChoice;

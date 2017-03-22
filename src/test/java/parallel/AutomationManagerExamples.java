@@ -10,6 +10,7 @@ import org.junit.Test;
 import suite.AutomationManager;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ import java.util.List;
 public class AutomationManagerExamples {
 
     @Test
-    public void sequentialExample() throws IOException {
+    public void sequentialExample() throws IOException, URISyntaxException {
         String pathToApplicationConfiguration = "/home/hvrigazov/github/selenium-record-replay/tennisKafe.json";
         String pathToChromedriver = "/home/hvrigazov/github/selenium-record-replay/chromedriver";
         String pathToTestScenario = "/home/hvrigazov/github/selenium-record-replay/output.json";
@@ -27,7 +28,8 @@ public class AutomationManagerExamples {
                 .builder()
                 .pathToDriverExecutable(pathToChromedriver)
                 .timeoutInSeconds(30)
-                .measurementsPrecisionInMilliseconds(50);
+                .measurementsPrecisionInMilliseconds(50)
+                .baseURI("http://www.tenniskafe.com/");
 
         ReplayBrowserConfiguration.Builder testScenarioRunnerBuilder = ReplayBrowserConfiguration
                 .builder()
@@ -50,7 +52,7 @@ public class AutomationManagerExamples {
         System.out.println(automationResultList);
     }
 
-    private WebDriverActionExecutor getScenario(String pathToTestScenario, WebdriverActionExecutorBuilder executor, ReplayBrowserConfiguration.Builder testScenarioRunner) throws IOException {
+    private WebDriverActionExecutor getScenario(String pathToTestScenario, WebdriverActionExecutorBuilder executor, ReplayBrowserConfiguration.Builder testScenarioRunner) throws IOException, URISyntaxException {
         return testScenarioRunner.executor(executor.buildChromedriver()).build().getReplayBrowser().getTestScenario(pathToTestScenario);
     }
 }

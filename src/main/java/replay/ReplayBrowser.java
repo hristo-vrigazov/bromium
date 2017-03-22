@@ -10,6 +10,7 @@ import utils.Utils;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -28,14 +29,14 @@ public class ReplayBrowser {
         this.applicationActionFactory = applicationActionFactory;
     }
 
-    public AutomationResult replay(String pathToSerializedTest) throws IOException, InterruptedException {
+    public AutomationResult replay(String pathToSerializedTest) throws IOException, InterruptedException, URISyntaxException {
         WebDriverActionExecutor executor = getTestScenario(pathToSerializedTest);
         executor.execute();
         executor.quit();
         return executor.getAutomationResult();
     }
 
-    public AutomationResult replayOnScreen(String pathToSerializedTest, String screen) throws IOException, InterruptedException {
+    public AutomationResult replayOnScreen(String pathToSerializedTest, String screen) throws IOException, InterruptedException, URISyntaxException {
         WebDriverActionExecutor executor = getTestScenario(pathToSerializedTest);
         executor.executeOnScreen(screen);
         executor.quit();

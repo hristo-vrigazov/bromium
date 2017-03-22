@@ -19,15 +19,23 @@ public interface ExecutionSettings {
 
     void initializeWebDriver(boolean useVirtualScreen);
 
-    void maximizeDriver();
+    void initializeWebDriverHeadless();
 
-    void cleanUp();
+    void initializeWebDriver();
+
+    void cleanUpReplay();
+
+    void cleanUpRecord();
 
     WebDriver getWebDriver();
 
     Har getHar();
 
-    void initializeHar();
+    void initializeProxyFilters();
 
-    void init(String pathToChromeDriver, String screenToUse, int timeout, boolean useVirtualScreen) throws IOException;
+    void initReplay(String pathToChromeDriver, String screenToUse, int timeout, boolean useVirtualScreen) throws IOException;
+
+    void initRecord(int timeout) throws IOException;
+
+    void openBaseUrl();
 }

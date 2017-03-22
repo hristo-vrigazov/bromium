@@ -1,21 +1,21 @@
 package execution.executor;
 
-import execution.settings.ExecutionSettingsBase;
 import execution.settings.ExecutionSettings;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 /**
  * Created by hvrigazov on 21.03.17.
  */
 public class ChromeDriverActionExecutor extends WebDriverActionExecutorBase {
-    public ChromeDriverActionExecutor(WebdriverActionExecutorBuilder webdriverActionExecutorBuilder) throws IOException {
+    public ChromeDriverActionExecutor(WebdriverActionExecutorBuilder webdriverActionExecutorBuilder) throws IOException, URISyntaxException {
         super(webdriverActionExecutorBuilder);
     }
 
     @Override
     protected ExecutionSettings createExecutionSettings() {
-        return new ChromeDriverExecutionSettings(this::filterRequest, this::filterResponse);
+        return new ChromeDriverExecutionSettings(this.baseURI, this::filterRequest, this::filterResponse);
     }
 
     @Override

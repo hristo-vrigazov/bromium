@@ -23,8 +23,6 @@ public class ReplayBrowserConfiguration {
     public ReplayBrowserConfiguration(Builder builder) throws IOException {
         ApplicationConfiguration applicationConfiguration = Utils.parseApplicationConfiguration(builder.pathToApplicationConfiguration);
         WebDriverActionExecutor webDriverActionExecutor = builder.webDriverActionExecutor;
-        URL url = new URL(builder.url);
-        webDriverActionExecutor.addToWhiteList(url.getHost());
         WebdriverActionFactory webdriverActionFactory = builder.webdriverActionFactory;
         DefaultApplicationActionFactory applicationActionFactory = new DefaultApplicationActionFactory(builder.url, applicationConfiguration, webdriverActionFactory);
         replayBrowser = new ReplayBrowser(webDriverActionExecutor, applicationActionFactory);
