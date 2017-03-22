@@ -202,14 +202,6 @@ public abstract class WebDriverActionExecutorBase implements WebDriverActionExec
     }
 
     @Override
-    public void quit() {
-        for (int i = 1; i < waitingTimes.size(); i++) {
-            double seconds = toSeconds(waitingTimes.get(i));
-            System.out.println("After I did " + actions.get(i - 1) + ", I had to wait for " + seconds + "s until the next action");
-        }
-    }
-
-    @Override
     public void dumpHarMetrics(String fileNameToDump) throws IOException {
         Har har = executionSettings.getHar();
         File harFile = new File(fileNameToDump);

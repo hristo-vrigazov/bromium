@@ -106,7 +106,6 @@ public class AutomationManager {
         try {
             WebDriverActionExecutor executor = automationScenarios.get(i);
             executor.executeOnScreen(screen);
-            executor.quit();
             executor.getLoadingTimes().dump(fileNames.get(i));
             executor.dumpHarMetrics(harFileNames.get(i));
             process.destroy();

@@ -15,7 +15,6 @@ public interface WebDriverActionExecutor {
     void addWebdriverAction(WebdriverAction webdriverAction);
     void execute() throws InterruptedException, IOException, URISyntaxException;
     void executeOnScreen(String screenToUse) throws InterruptedException, IOException, URISyntaxException;
-    void quit();
     void dumpHarMetrics(String fileNameToDump) throws IOException;
     void dumpLoadingTimes(String fileNameToDump) throws UnsupportedEncodingException, FileNotFoundException;
     LoadingTimes getLoadingTimes();

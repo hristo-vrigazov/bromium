@@ -27,7 +27,7 @@ import java.util.Map;
 public abstract class RecordBrowserBase {
 
     private ExecutionSettings executionSettings;
-    private String pathToChromeDriver;
+    private String pathToDriverExecutable;
     private String pathToJsInjectonFile;
     private JavascriptInjector javascriptInjector;
     private List<Map<String, String>> domainSpecificActionList;
@@ -35,8 +35,8 @@ public abstract class RecordBrowserBase {
 
     protected URI baseURI;
 
-    public RecordBrowserBase(String pathToChromeDriver, String pathToJsInjectionFile) {
-        this.pathToChromeDriver = pathToChromeDriver;
+    public RecordBrowserBase(String pathToDriverExecutable, String pathToJsInjectionFile) {
+        this.pathToDriverExecutable = pathToDriverExecutable;
         this.pathToJsInjectonFile = pathToJsInjectionFile;
         this.domainSpecificActionList = new ArrayList<>();
     }
@@ -67,7 +67,7 @@ public abstract class RecordBrowserBase {
     }
 
     private void init() throws IOException {
-        System.setProperty(getSystemProperty(), pathToChromeDriver);
+        System.setProperty(getSystemProperty(), pathToDriverExecutable);
 
         executionSettings.initRecord(timeout);
     }

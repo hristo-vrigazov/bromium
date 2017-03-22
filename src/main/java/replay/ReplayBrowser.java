@@ -32,14 +32,12 @@ public class ReplayBrowser {
     public AutomationResult replay(String pathToSerializedTest) throws IOException, InterruptedException, URISyntaxException {
         WebDriverActionExecutor executor = getTestScenario(pathToSerializedTest);
         executor.execute();
-        executor.quit();
         return executor.getAutomationResult();
     }
 
     public AutomationResult replayOnScreen(String pathToSerializedTest, String screen) throws IOException, InterruptedException, URISyntaxException {
         WebDriverActionExecutor executor = getTestScenario(pathToSerializedTest);
         executor.executeOnScreen(screen);
-        executor.quit();
         return executor.getAutomationResult();
     }
 
