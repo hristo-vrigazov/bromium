@@ -103,7 +103,7 @@ public class Main {
         public void run() {
             try {
                 WebDriverActionExecutor executor = new WebdriverActionExecutorBuilder()
-                        .pathToDriverExecutable("chromedriver")
+                        .pathToDriverExecutable(pathToChromedriver)
                         .baseURI("http://www.tenniskafe.com/")
                         .buildChromedriver();
 
