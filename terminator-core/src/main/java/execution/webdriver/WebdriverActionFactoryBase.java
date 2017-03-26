@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public abstract class WebdriverActionFactoryBase implements WebdriverActionFactory {
 
-    protected Map<String, WebdriverActionCreator> typeToCreatorMap;
+    protected Map<String, WebdriverActionParameterParser> typeToCreatorMap;
 
     public WebdriverActionFactoryBase() {
         typeToCreatorMap = new HashMap<>();

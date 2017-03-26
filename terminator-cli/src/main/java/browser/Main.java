@@ -127,7 +127,7 @@ public class Main {
         }
     }
 
-    @Command(name = "initReplay", description = "Guides you through creating an automation layer for your application!")
+    @Command(name = "init", description = "Guides you through creating an automation layer for your application!")
     public static class Init implements Runnable {
 
         MainMenuChoice mainMenuChoice;
