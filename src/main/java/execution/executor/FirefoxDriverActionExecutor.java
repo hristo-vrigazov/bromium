@@ -1,6 +1,7 @@
 package execution.executor;
 
 import execution.settings.ExecutionSettings;
+import execution.settings.FirefoxDriverExecutionSettings;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

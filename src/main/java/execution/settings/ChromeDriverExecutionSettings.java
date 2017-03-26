@@ -1,7 +1,6 @@
-package execution.executor;
+package execution.settings;
 
 import com.google.common.collect.ImmutableMap;
-import execution.settings.ExecutionSettingsBase;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
 import org.openqa.selenium.chrome.ChromeDriver;

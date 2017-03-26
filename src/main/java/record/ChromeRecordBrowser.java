@@ -1,6 +1,6 @@
 package record;
 
-import execution.executor.ChromeDriverExecutionSettings;
+import execution.settings.ChromeDriverExecutionSettings;
 import execution.settings.ExecutionSettings;
 
 /**
