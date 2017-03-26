@@ -13,6 +13,7 @@ import org.beryx.textio.TextIoFactory;
 import record.ChromeRecordBrowser;
 import record.RecordBrowserBase;
 import replay.ReplayBrowser;
+import replay.ReplayBrowserConfiguration;
 
 import java.io.FileWriter;
 import java.io.IOException;

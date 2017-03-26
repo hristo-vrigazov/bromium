@@ -1,6 +1,6 @@
 package parallel;
 
-import browser.ReplayBrowserConfiguration;
+import replay.ReplayBrowserConfiguration;
 import execution.executor.AutomationResult;
 import execution.executor.WebDriverActionExecutor;
 import execution.executor.WebDriverActionExecutorBase;

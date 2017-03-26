@@ -1,14 +1,12 @@
-package browser;
+package replay;
 
 import config.ApplicationConfiguration;
 import execution.application.DefaultApplicationActionFactory;
 import execution.executor.WebDriverActionExecutor;
 import execution.webdriver.WebdriverActionFactory;
-import replay.ReplayBrowser;
 import utils.Utils;
 
 import java.io.IOException;
-import java.net.URL;
 
 /**
  * Created by hvrigazov on 19.03.17.
