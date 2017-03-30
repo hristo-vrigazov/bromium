@@ -11,22 +11,22 @@ import java.util.Map;
  */
 public abstract class WebdriverActionFactoryBase implements WebdriverActionFactory {
 
-    protected Map<String, WebDriverActionParameterParser> typeToCreatorMap;
+    protected Map<String, WebDriverActionParameterParser> parsersRegistry;
 
     public WebdriverActionFactoryBase() {
-        typeToCreatorMap = new HashMap<>();
+        parsersRegistry = new HashMap<>();
         addPredefined();
         addCustom();
     }
 
     private void addPredefined() {
-        typeToCreatorMap.put("CLICK_CLASS_BY_TEXT", new ClickClassByTextParser());
+        parsersRegistry.put("CLICK_CLASS_BY_TEXT", new ClickClassByTextParser());
     }
 
     protected abstract void addCustom();
 
     @Override
     public WebdriverAction create(String webdriverActionType, Map<String, Object> parameters) {
-        return typeToCreatorMap.get(webdriverActionType).create(parameters);
+        return parsersRegistry.get(webdriverActionType).create(parameters);
     }
 }
