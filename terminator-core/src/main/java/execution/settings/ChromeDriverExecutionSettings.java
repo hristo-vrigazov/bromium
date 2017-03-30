@@ -22,7 +22,9 @@ public class ChromeDriverExecutionSettings extends ExecutionSettingsBase {
     public void initializeDriverService(String pathToDriverExecutable, String screenToUse) throws IOException {
         this.driverService = new ChromeDriverService.Builder()
                 .usingDriverExecutable(new File(pathToDriverExecutable))
-                .usingAnyFreePort().withEnvironment(ImmutableMap.of("DISPLAY", screenToUse)).build();
+                .usingAnyFreePort()
+                .withEnvironment(ImmutableMap.of("DISPLAY", screenToUse))
+                .build();
     }
 
     @Override

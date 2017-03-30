@@ -23,7 +23,8 @@ public class FirefoxDriverExecutionSettings extends ExecutionSettingsBase {
         this.driverService = new GeckoDriverService.Builder()
                 .usingDriverExecutable(new File(pathToDriverExecutable))
                 .usingAnyFreePort()
-                .withEnvironment(ImmutableMap.of("DISPLAY", screenToUse)).build();
+                .withEnvironment(ImmutableMap.of("DISPLAY", screenToUse))
+                .build();
     }
 
     @Override
