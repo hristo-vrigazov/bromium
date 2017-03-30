@@ -41,7 +41,7 @@ public class Main {
                 .withDescription("Commands related to application - creating configuration, " +
                         "updating configuration, adding a new version")
                 .withDefaultCommand(Init.class)
-                .withCommands(Init.class, Update.class);
+                .withCommands(Init.class, Update.class, Version.class);
 
         Cli<Runnable> parser = builder.build();
 
@@ -59,7 +59,6 @@ public class Main {
     }
 
     static TextIO textIO;
-
 
     @Command(name = "record", description = "Opens up the browser and listens for application specific events")
     public static class Record implements Runnable {
@@ -150,10 +149,7 @@ public class Main {
                     .newStringInputReader()
                     .read("What is the name of your application?"));
 
-            applicationConfiguration.setVersion(textIO
-                    .newStringInputReader()
-                    .withDefaultValue("0.0.1")
-                    .read("What is the version of your application?"));
+            applicationConfiguration.setVersion(promptForVersion());
 
             textIO.getTextTerminal().println();
             textIO.getTextTerminal().println("Let's now define some actions and assertions!");
@@ -195,6 +191,13 @@ public class Main {
 
     }
 
+    private static String promptForVersion() {
+        return textIO
+                .newStringInputReader()
+                .withDefaultValue("0.0.1")
+                .read("What is the version of your application?");
+    }
+
     @Command(name = "update", description = "Update existing application configuration")
     public static class Update implements Runnable {
 
@@ -208,8 +211,9 @@ public class Main {
                 textIO = TextIoFactory.getTextIO();
                 textIO.getTextTerminal().println("Let's update the configuration!");
 
+                promptForApplicationName(applicationConfiguration);
                 updateApplicationConfiguration(applicationConfiguration);
-                
+
                 String outputFilename = textIO
                         .newStringInputReader()
                         .read("Where should I save the configuration");
@@ -220,83 +224,112 @@ public class Main {
             }
         }
 
-        private void updateApplicationConfiguration(ApplicationConfiguration applicationConfiguration) {
-            promptForApplicationName(applicationConfiguration);
+    }
 
-            List<ApplicationActionConfiguration> applicationActionConfigurations =
-                    applicationConfiguration.getApplicationActionConfigurationList();
-            Map<String, ApplicationActionConfiguration> nameToActionMap =
-                    Maps.uniqueIndex(applicationActionConfigurations, ApplicationActionConfiguration::getName);
+    @Command(name = "version", description = "Create a new version of the same app")
+    public static class Version implements Runnable {
 
-            do {
-                String choice = textIO.newStringInputReader()
-                        .withPossibleValues(new ArrayList<>(nameToActionMap.keySet()))
-                        .read("Select action: ");
+        @Option(name = "-c", description = "Path to base application configuration", required = true)
+        public String pathToApplicationConfiguration;
 
-                ApplicationActionConfiguration applicationActionConfiguration = nameToActionMap.get(choice);
-                promptExpectsHttpRequest(applicationActionConfiguration);
+        @Override
+        public void run() {
+            try {
+                ApplicationConfiguration applicationConfiguration = Utils.parseApplicationConfiguration(pathToApplicationConfiguration);
+                textIO = TextIoFactory.getTextIO();
+                textIO.getTextTerminal().println("Let's create a new version");
 
-                Optional<WebdriverActionConfiguration> optionalConfiguration = promptForChangeAction(applicationActionConfiguration, "precondition");
-                if (optionalConfiguration.isPresent()) {
-                    applicationActionConfiguration.setConditionBeforeExecution(optionalConfiguration.get());
-                }
+                applicationConfiguration.setVersion(promptForVersion());
 
-                optionalConfiguration = promptForChangeAction(applicationActionConfiguration, "action");
-                if (optionalConfiguration.isPresent()) {
-                    applicationActionConfiguration.setWebdriverAction(optionalConfiguration.get());
-                }
+                textIO.getTextTerminal().println("Let's update the actions that have to be different");
+                updateApplicationConfiguration(applicationConfiguration);
 
-                optionalConfiguration = promptForChangeAction(applicationActionConfiguration, "postcondition");
-                if (optionalConfiguration.isPresent()) {
-                    applicationActionConfiguration.setConditionAfterExecution(optionalConfiguration.get());
-                }
+                String outputFilename = textIO
+                        .newStringInputReader()
+                        .read("Where should I save the configuration");
+                Utils.dumpApplicationConfiguration(applicationConfiguration, outputFilename);
 
-            } while (userWantsToEditApplicationAction());
-        }
-
-        private Optional<WebdriverActionConfiguration> promptForChangeAction(ApplicationActionConfiguration applicationActionConfiguration,
-                                               String prompt) {
-            boolean userWantsToChangePrecondition =
-                    shouldChangePrompt(prompt, applicationActionConfiguration.getConditionBeforeExecution().getWebdriverActionType());
-
-            if (userWantsToChangePrecondition) {
-                WebdriverActionConfiguration configuration = promptForActionConfigurationType(prompt + ": ");
-                return Optional.of(configuration);
-            }
-
-            return Optional.empty();
-        }
-
-        private void promptExpectsHttpRequest(ApplicationActionConfiguration applicationActionConfiguration) {
-            boolean changeExpectHttp = shouldChangePrompt("expect http request",
-                    applicationActionConfiguration.expectsHttpRequest().toString());
-
-            if (changeExpectHttp) {
-                applicationActionConfiguration.setExpectsHttpRequest(promptForExpectHttpRequest());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
 
-        private boolean userWantsToEditApplicationAction() {
-            return textIO.newBooleanInputReader()
-                    .read("Edit another action?");
-        }
+    }
 
-        private void promptForApplicationName(ApplicationConfiguration applicationConfiguration) {
-            Boolean shouldEditName = shouldChangePrompt("application name", applicationConfiguration.getApplicationName());
+    private static void updateApplicationConfiguration(ApplicationConfiguration applicationConfiguration) {
+        List<ApplicationActionConfiguration> applicationActionConfigurations =
+                applicationConfiguration.getApplicationActionConfigurationList();
+        Map<String, ApplicationActionConfiguration> nameToActionMap =
+                Maps.uniqueIndex(applicationActionConfigurations, ApplicationActionConfiguration::getName);
 
-            if (shouldEditName) {
-                String newName = textIO.newStringInputReader()
-                        .read("Application name: ");
-                applicationConfiguration.setApplicationName(newName);
+        do {
+            String choice = textIO.newStringInputReader()
+                    .withPossibleValues(new ArrayList<>(nameToActionMap.keySet()))
+                    .read("Select action: ");
+
+            ApplicationActionConfiguration applicationActionConfiguration = nameToActionMap.get(choice);
+            promptExpectsHttpRequest(applicationActionConfiguration);
+
+            Optional<WebdriverActionConfiguration> optionalConfiguration = promptForChangeAction(applicationActionConfiguration, "precondition");
+            if (optionalConfiguration.isPresent()) {
+                applicationActionConfiguration.setConditionBeforeExecution(optionalConfiguration.get());
             }
+
+            optionalConfiguration = promptForChangeAction(applicationActionConfiguration, "action");
+            if (optionalConfiguration.isPresent()) {
+                applicationActionConfiguration.setWebdriverAction(optionalConfiguration.get());
+            }
+
+            optionalConfiguration = promptForChangeAction(applicationActionConfiguration, "postcondition");
+            if (optionalConfiguration.isPresent()) {
+                applicationActionConfiguration.setConditionAfterExecution(optionalConfiguration.get());
+            }
+
+        } while (userWantsToEditApplicationAction());
+    }
+
+    private static Optional<WebdriverActionConfiguration> promptForChangeAction(ApplicationActionConfiguration applicationActionConfiguration,
+                                                                         String prompt) {
+        boolean userWantsToChangePrecondition =
+                shouldChangePrompt(prompt, applicationActionConfiguration.getConditionBeforeExecution().getWebdriverActionType());
+
+        if (userWantsToChangePrecondition) {
+            WebdriverActionConfiguration configuration = promptForActionConfigurationType(prompt + ": ");
+            return Optional.of(configuration);
         }
 
-        private Boolean shouldChangePrompt(String propertyToBeChanged, String defaultValue) {
-            return textIO.newBooleanInputReader()
-                    .read("Update the " + propertyToBeChanged + " ("
-                            + defaultValue
-                            + ") ? ");
+        return Optional.empty();
+    }
+
+    private static void promptExpectsHttpRequest(ApplicationActionConfiguration applicationActionConfiguration) {
+        boolean changeExpectHttp = shouldChangePrompt("expect http request",
+                applicationActionConfiguration.expectsHttpRequest().toString());
+
+        if (changeExpectHttp) {
+            applicationActionConfiguration.setExpectsHttpRequest(promptForExpectHttpRequest());
         }
+    }
+
+    private static boolean userWantsToEditApplicationAction() {
+        return textIO.newBooleanInputReader()
+                .read("Edit another action?");
+    }
+
+    private static void promptForApplicationName(ApplicationConfiguration applicationConfiguration) {
+        Boolean shouldEditName = shouldChangePrompt("application name", applicationConfiguration.getApplicationName());
+
+        if (shouldEditName) {
+            String newName = textIO.newStringInputReader()
+                    .read("Application name: ");
+            applicationConfiguration.setApplicationName(newName);
+        }
+    }
+
+    private static Boolean shouldChangePrompt(String propertyToBeChanged, String defaultValue) {
+        return textIO.newBooleanInputReader()
+                .read("Update the " + propertyToBeChanged + " ("
+                        + defaultValue
+                        + ") ? ");
     }
 
     private static ApplicationActionConfiguration showAddActionMenu() {
