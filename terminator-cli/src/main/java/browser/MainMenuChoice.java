@@ -3,5 +3,8 @@ package browser;
 /**
  * Created by hvrigazov on 17.03.17.
  */
-public class MainMenuChoice {
+public enum MainMenuChoice {
+    ASSERTION,
+    ACTION,
+    SAVE_AND_EXIT
 }

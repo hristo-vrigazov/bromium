@@ -32,13 +32,20 @@ public class Main {
         Cli.CliBuilder<Runnable> builder = Cli.<Runnable>builder("bot")
                 .withDescription("Selenium record and replay bot for applications")
                 .withDefaultCommand(Help.class)
-                .withCommands(Help.class, Init.class);
+                .withCommands(Help.class);
 
         builder
                 .withGroup("test")
-                .withDescription("Commands related to test cases")
+                .withDescription("Commands related to test cases - record, replay, etc.")
                 .withDefaultCommand(Record.class)
                 .withCommands(Record.class, Replay.class);
+
+        builder
+                .withGroup("app")
+                .withDescription("Commands related to application - creating configuration, " +
+                        "updating configuration, adding a new version")
+                .withDefaultCommand(Init.class)
+                .withCommands(Init.class);
 
         Cli<Runnable> parser = builder.build();
 
@@ -310,9 +317,4 @@ public class Main {
         }
     }
 
-    public enum MainMenuChoice {
-        ASSERTION,
-        ACTION,
-        SAVE_AND_EXIT
-    }
 }
