@@ -6,6 +6,5 @@ package execution.webdriver;
 public class PredefinedWebdriverActionFactory extends WebdriverActionFactoryBase {
     @Override
     protected void addCustom() {
-
     }
 }

@@ -1,6 +1,7 @@
 package execution.webdriver;
 
-import actions.ClickClassByText;
+import execution.webdriver.parsers.ClickClassByTextParser;
+import execution.webdriver.parsers.WebDriverActionParameterParser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,7 @@ import java.util.Map;
  */
 public abstract class WebdriverActionFactoryBase implements WebdriverActionFactory {
 
-    protected Map<String, WebdriverActionParameterParser> typeToCreatorMap;
+    protected Map<String, WebDriverActionParameterParser> typeToCreatorMap;
 
     public WebdriverActionFactoryBase() {
         typeToCreatorMap = new HashMap<>();
@@ -19,7 +20,7 @@ public abstract class WebdriverActionFactoryBase implements WebdriverActionFacto
     }
 
     private void addPredefined() {
-        typeToCreatorMap.put("CLICK_CLASS_BY_TEXT", this::clickClassByText);
+        typeToCreatorMap.put("CLICK_CLASS_BY_TEXT", new ClickClassByTextParser());
     }
 
     protected abstract void addCustom();
@@ -27,13 +28,5 @@ public abstract class WebdriverActionFactoryBase implements WebdriverActionFacto
     @Override
     public WebdriverAction create(String webdriverActionType, Map<String, Object> parameters) {
         return typeToCreatorMap.get(webdriverActionType).create(parameters);
-    }
-
-    private WebdriverAction clickClassByText(Map<String, Object> parameters) {
-        String initialCollectorClass = (String) parameters.get("initialCollectorClass");
-        String text = (String) parameters.get("text");
-        String eventName = (String) parameters.get("event");
-        boolean expectsHttpRequest = (boolean) parameters.get("expectsHttp");
-        return new ClickClassByText(initialCollectorClass, text, eventName, expectsHttpRequest);
     }
 }
