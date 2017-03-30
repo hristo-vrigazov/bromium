@@ -6,9 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import config.ApplicationConfiguration;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.LinkedHashMap;
@@ -32,6 +30,13 @@ public class Utils {
 
     public static ApplicationConfiguration parseApplicationConfiguration(String filename) throws IOException {
         return parseApplicationConfiguration(new File(filename));
+    }
+
+    public static void dumpApplicationConfiguration(ApplicationConfiguration applicationConfiguration, String outputFilename) throws IOException {
+        Writer writer = new FileWriter(outputFilename);
+        Gson gson = new GsonBuilder().create();
+        gson.toJson(applicationConfiguration, writer);
+        writer.close();
     }
 
     public static List<Map<String, String>> readSteps(String pathToSerializedTest) throws IOException {

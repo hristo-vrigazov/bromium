@@ -30,7 +30,7 @@ public class TestCaseToApplicationActionConverter {
         Optional<WebdriverAction> webdriverAction =
                 convertAction(applicationActionConfiguration.getWebdriverAction(),
                         testCaseStep,
-                        applicationActionConfiguration.isExpectsHttpRequest());
+                        applicationActionConfiguration.expectsHttpRequest());
         Optional<WebdriverAction> postCondition =
                 convertAction(applicationActionConfiguration.getConditionAfterExecution(), testCaseStep);
         return new ConvertedApplicationAction(precondition, webdriverAction, postCondition);

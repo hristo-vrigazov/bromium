@@ -1,8 +1,6 @@
 package browser;
 
 import com.google.common.collect.Maps;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import config.*;
 import execution.executor.WebDriverActionExecutor;
 import execution.executor.WebdriverActionExecutorBuilder;
@@ -17,14 +15,9 @@ import replay.ReplayBrowser;
 import replay.ReplayBrowserConfiguration;
 import utils.Utils;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -173,10 +166,7 @@ public class Main {
                 String outputFilename = textIO
                         .newStringInputReader()
                         .read("Where should I save the configuration");
-                Writer writer = new FileWriter(outputFilename);
-                Gson gson = new GsonBuilder().create();
-                gson.toJson(applicationConfiguration, writer);
-                writer.close();
+                Utils.dumpApplicationConfiguration(applicationConfiguration, outputFilename);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -218,24 +208,71 @@ public class Main {
                 textIO = TextIoFactory.getTextIO();
                 textIO.getTextTerminal().println("Let's update the configuration!");
 
-                promptForApplicationName(applicationConfiguration);
-
-                List<ApplicationActionConfiguration> applicationActionConfigurations =
-                        applicationConfiguration.getApplicationActionConfigurationList();
-                Map<String, ApplicationActionConfiguration> nameToActionMap =
-                        Maps.uniqueIndex(applicationActionConfigurations, ApplicationActionConfiguration::getName);
-
-                do {
-                    String choice = textIO.newStringInputReader()
-                            .withPossibleValues(new ArrayList<>(nameToActionMap.keySet()))
-                            .read("Select action: ");
-
-                    ApplicationActionConfiguration applicationActionConfiguration = nameToActionMap.get(choice);
-
-                } while (userWantsToEditApplicationAction());
+                updateApplicationConfiguration(applicationConfiguration);
+                
+                String outputFilename = textIO
+                        .newStringInputReader()
+                        .read("Where should I save the configuration");
+                Utils.dumpApplicationConfiguration(applicationConfiguration, outputFilename);
 
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+
+        private void updateApplicationConfiguration(ApplicationConfiguration applicationConfiguration) {
+            promptForApplicationName(applicationConfiguration);
+
+            List<ApplicationActionConfiguration> applicationActionConfigurations =
+                    applicationConfiguration.getApplicationActionConfigurationList();
+            Map<String, ApplicationActionConfiguration> nameToActionMap =
+                    Maps.uniqueIndex(applicationActionConfigurations, ApplicationActionConfiguration::getName);
+
+            do {
+                String choice = textIO.newStringInputReader()
+                        .withPossibleValues(new ArrayList<>(nameToActionMap.keySet()))
+                        .read("Select action: ");
+
+                ApplicationActionConfiguration applicationActionConfiguration = nameToActionMap.get(choice);
+                promptExpectsHttpRequest(applicationActionConfiguration);
+
+                Optional<WebdriverActionConfiguration> optionalConfiguration = promptForChangeAction(applicationActionConfiguration, "precondition");
+                if (optionalConfiguration.isPresent()) {
+                    applicationActionConfiguration.setConditionBeforeExecution(optionalConfiguration.get());
+                }
+
+                optionalConfiguration = promptForChangeAction(applicationActionConfiguration, "action");
+                if (optionalConfiguration.isPresent()) {
+                    applicationActionConfiguration.setWebdriverAction(optionalConfiguration.get());
+                }
+
+                optionalConfiguration = promptForChangeAction(applicationActionConfiguration, "postcondition");
+                if (optionalConfiguration.isPresent()) {
+                    applicationActionConfiguration.setConditionAfterExecution(optionalConfiguration.get());
+                }
+
+            } while (userWantsToEditApplicationAction());
+        }
+
+        private Optional<WebdriverActionConfiguration> promptForChangeAction(ApplicationActionConfiguration applicationActionConfiguration,
+                                               String prompt) {
+            boolean userWantsToChangePrecondition =
+                    shouldChangePrompt(prompt, applicationActionConfiguration.getConditionBeforeExecution().getWebdriverActionType());
+
+            if (userWantsToChangePrecondition) {
+                WebdriverActionConfiguration configuration = promptForActionConfigurationType(prompt + ": ");
+                return Optional.of(configuration);
+            }
+
+            return Optional.empty();
+        }
+
+        private void promptExpectsHttpRequest(ApplicationActionConfiguration applicationActionConfiguration) {
+            boolean changeExpectHttp = shouldChangePrompt("expect http request",
+                    applicationActionConfiguration.expectsHttpRequest().toString());
+
+            if (changeExpectHttp) {
+                applicationActionConfiguration.setExpectsHttpRequest(promptForExpectHttpRequest());
             }
         }
 
@@ -282,9 +319,7 @@ public class Main {
         applicationActionConfiguration.setConditionAfterExecution(postconditionConfiguration);
         textIO.getTextTerminal().println();
 
-        boolean expectsHttpRequest = textIO
-                .newBooleanInputReader()
-                .read("Expect HTTP request after the action?");
+        boolean expectsHttpRequest = promptForExpectHttpRequest();
 
         applicationActionConfiguration.setExpectsHttpRequest(expectsHttpRequest);
 
@@ -292,6 +327,12 @@ public class Main {
         textIO.getTextTerminal().println();
 
         return applicationActionConfiguration;
+    }
+
+    private static Boolean promptForExpectHttpRequest() {
+        return textIO
+                .newBooleanInputReader()
+                .read("Expect HTTP request after the action?");
     }
 
     private static WebdriverActionConfiguration promptForActionConfigurationType(String prompt) {

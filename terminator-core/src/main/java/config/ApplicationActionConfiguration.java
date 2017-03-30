@@ -42,7 +42,7 @@ public class ApplicationActionConfiguration {
         this.webdriverAction = webdriverAction;
     }
 
-    public boolean isExpectsHttpRequest() {
+    public Boolean expectsHttpRequest() {
         return expectsHttpRequest;
     }
 
