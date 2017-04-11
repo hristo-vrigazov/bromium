@@ -4,7 +4,7 @@ import config.ApplicationConfiguration;
 import execution.application.DefaultApplicationActionFactory;
 import execution.executor.WebDriverActionExecutor;
 import execution.webdriver.WebdriverActionFactory;
-import utils.Utils;
+import utils.ConfigurationUtils;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ public class ReplayBrowserConfiguration {
     }
 
     public ReplayBrowserConfiguration(Builder builder) throws IOException {
-        ApplicationConfiguration applicationConfiguration = Utils.parseApplicationConfiguration(builder.pathToApplicationConfiguration);
+        ApplicationConfiguration applicationConfiguration = ConfigurationUtils.parseApplicationConfiguration(builder.pathToApplicationConfiguration);
         WebDriverActionExecutor webDriverActionExecutor = builder.webDriverActionExecutor;
         WebdriverActionFactory webdriverActionFactory = builder.webdriverActionFactory;
         DefaultApplicationActionFactory applicationActionFactory = new DefaultApplicationActionFactory(builder.url, applicationConfiguration, webdriverActionFactory);

@@ -2,7 +2,7 @@ package suite;
 
 import execution.executor.AutomationResult;
 import execution.executor.WebDriverActionExecutor;
-import utils.Utils;
+import utils.ConfigurationUtils;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -44,7 +44,7 @@ public class AutomationManager {
             automationResults.add(executeScenario(i));
         }
 
-        System.out.println("Elapsed time in seconds: " + Utils.toSeconds(System.nanoTime() - startTime));
+        System.out.println("Elapsed time in seconds: " + ConfigurationUtils.toSeconds(System.nanoTime() - startTime));
         return automationResults;
     }
 
@@ -74,7 +74,7 @@ public class AutomationManager {
                 })
                 .collect(Collectors.toList());
 
-        System.out.println("Elapsed time in seconds: " + Utils.toSeconds(System.nanoTime() - startTime));
+        System.out.println("Elapsed time in seconds: " + ConfigurationUtils.toSeconds(System.nanoTime() - startTime));
         return automationResults;
     }
 

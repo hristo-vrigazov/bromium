@@ -21,7 +21,7 @@ public class LoadingTimes {
         PrintWriter writer = new PrintWriter(fileName, "UTF-8");
 
         for (int i = 1; i < loadingTimes.size(); i++) {
-            double seconds = Utils.toSeconds(loadingTimes.get(i));
+            double seconds = ConfigurationUtils.toSeconds(loadingTimes.get(i));
             String action = actions.get(i - 1);
             writer.println(action + "," + seconds);
         }

@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * Created by hvrigazov on 16.03.17.
  */
-public class Utils {
+public class ConfigurationUtils {
     public static double toSeconds(long nanoseconds) {
         return nanoseconds / 1000000000.0;
     }

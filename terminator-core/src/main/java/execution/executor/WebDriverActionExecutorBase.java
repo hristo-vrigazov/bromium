@@ -19,7 +19,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
 
-import static utils.Utils.toSeconds;
+import static utils.ConfigurationUtils.toSeconds;
 
 /**
  * Created by hvrigazov on 16.03.17.

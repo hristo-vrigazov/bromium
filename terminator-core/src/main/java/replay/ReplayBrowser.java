@@ -5,7 +5,7 @@ import execution.application.ApplicationActionFactory;
 import execution.executor.AutomationResult;
 import execution.executor.WebDriverActionExecutor;
 import execution.webdriver.WebdriverAction;
-import utils.Utils;
+import utils.ConfigurationUtils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -42,7 +42,7 @@ public class ReplayBrowser {
     }
 
     public WebDriverActionExecutor getTestScenario(String pathToTestScenario) throws IOException {
-        List<Map<String, String>> testCaseSteps = Utils.readSteps(pathToTestScenario);
+        List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(pathToTestScenario);
         return getTestScenario(testCaseSteps);
     }
 

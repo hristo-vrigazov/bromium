@@ -7,7 +7,7 @@ import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
-import utils.Utils;
+import utils.ConfigurationUtils;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -76,7 +76,7 @@ public abstract class RecordBrowserBase {
         if (request.getUri().contains("http://working-selenium.com/submit-event")) {
             Map<String, String> map = null;
             try {
-                map = Utils.splitQuery(new URL(request.getUri()));
+                map = ConfigurationUtils.splitQuery(new URL(request.getUri()));
             } catch (UnsupportedEncodingException | MalformedURLException e) {
                 e.printStackTrace();
             }
