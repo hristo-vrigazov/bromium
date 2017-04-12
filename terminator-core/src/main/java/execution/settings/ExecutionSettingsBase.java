@@ -37,33 +37,30 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
     }
 
     @Override
-    public void initializeProxyServer(int timeout) {
-        this.proxy = new BrowserMobProxyServer();
-        this.proxy.setIdleConnectionTimeout(timeout, TimeUnit.SECONDS);
-        this.proxy.setRequestTimeout(timeout, TimeUnit.SECONDS);
-        this.proxy.start(0);
-    }
-
-
-    @Override
-    public void initializeSeleniumProxy() {
-        seleniumProxy = ClientUtil.createSeleniumProxy(proxy);
+    public BrowserMobProxy getBrowserMobProxy(int timeout) {
+        BrowserMobProxyServer proxy = new BrowserMobProxyServer();
+        proxy.setIdleConnectionTimeout(timeout, TimeUnit.SECONDS);
+        proxy.setRequestTimeout(timeout, TimeUnit.SECONDS);
+        proxy.start(0);
+        return proxy;
     }
 
     @Override
-    public void initializeDesiredCapabilities() {
-        capabilities = new DesiredCapabilities();
+    public DesiredCapabilities getDesiredCapabilities() {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
+        return capabilities;
     }
 
     @Override
-    public void initializeWebDriver(boolean useVirtualScreen) {
+    public WebDriver buildWebDriver(boolean useVirtualScreen) {
         if (useVirtualScreen) {
-            initializeWebDriverHeadless();
+            return buildWebDriverHeadless();
         } else {
-            initializeWebDriver();
+            return buildWebDriverVisible();
         }
     }
+
 
     private void maximizeDriver() {
         driver.manage().window().maximize();
@@ -81,7 +78,6 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
         driver.quit();
         proxy.stop();
     }
-
 
     @Override
     public WebDriver getWebDriver() {
@@ -104,25 +100,30 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
     @Override
     public void initReplay(String pathToChromeDriver, String screenToUse, int timeout, boolean useVirtualScreen)
             throws IOException {
-        initializeProxyServer(timeout);
-        initializeSeleniumProxy();
+        this.proxy = getBrowserMobProxy(timeout);
+        this.seleniumProxy = getSeleniumProxy();
         initializeProxyFilters();
-        initializeDesiredCapabilities();
-        initializeDriverService(pathToChromeDriver, screenToUse);
-        initializeWebDriver(useVirtualScreen);
+        this.capabilities = getDesiredCapabilities();
+        this.driverService = getDriverService(pathToChromeDriver, screenToUse);
+        this.driver = buildWebDriver(useVirtualScreen);
         maximizeDriver();
     }
 
     @Override
-    public void initRecord(int timeout) throws IOException {
-        initializeProxyServer(timeout);
-        initializeSeleniumProxy();
-        initializeProxyFilters();
-        initializeDesiredCapabilities();
-        initializeWebDriver();
-        maximizeDriver();
+    public Proxy getSeleniumProxy() {
+        return ClientUtil.createSeleniumProxy(proxy);
     }
 
+
+    @Override
+    public void initRecord(int timeout) throws IOException {
+        this.proxy = getBrowserMobProxy(timeout);
+        this.seleniumProxy = getSeleniumProxy();
+        initializeProxyFilters();
+        this.capabilities = getDesiredCapabilities();
+        this.driver = buildWebDriverVisible();
+        maximizeDriver();
+    }
 
     @Override
     public void openBaseUrl() {

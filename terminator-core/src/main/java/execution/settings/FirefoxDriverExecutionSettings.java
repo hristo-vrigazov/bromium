@@ -3,8 +3,10 @@ package execution.settings;
 import com.google.common.collect.ImmutableMap;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.GeckoDriverService;
+import org.openqa.selenium.remote.service.DriverService;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,8 +21,8 @@ public class FirefoxDriverExecutionSettings extends ExecutionSettingsBase {
     }
 
     @Override
-    public void initializeDriverService(String pathToDriverExecutable, String screenToUse) throws IOException {
-        this.driverService = new GeckoDriverService.Builder()
+    public DriverService getDriverService(String pathToDriverExecutable, String screenToUse) throws IOException {
+        return new GeckoDriverService.Builder()
                 .usingDriverExecutable(new File(pathToDriverExecutable))
                 .usingAnyFreePort()
                 .withEnvironment(ImmutableMap.of("DISPLAY", screenToUse))
@@ -28,14 +30,13 @@ public class FirefoxDriverExecutionSettings extends ExecutionSettingsBase {
     }
 
     @Override
-    public void initializeWebDriverHeadless() {
-        this.driver = new FirefoxDriver((GeckoDriverService) driverService, capabilities);
+    public WebDriver buildWebDriverHeadless() {
+        return new FirefoxDriver((GeckoDriverService) driverService, capabilities);
     }
 
     @Override
-    public void initializeWebDriver() {
-        this.driver = new FirefoxDriver(capabilities);
+    public WebDriver buildWebDriverVisible() {
+        return new FirefoxDriver(capabilities);
     }
-
 
 }

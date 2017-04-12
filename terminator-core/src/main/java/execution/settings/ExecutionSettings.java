@@ -1,7 +1,11 @@
 package execution.settings;
 
+import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.core.har.Har;
+import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.service.DriverService;
 
 import java.io.IOException;
 
@@ -9,19 +13,19 @@ import java.io.IOException;
  * Created by hvrigazov on 21.03.17.
  */
 public interface ExecutionSettings {
-    void initializeProxyServer(int timeout);
+    BrowserMobProxy getBrowserMobProxy(int timeout);
 
-    void initializeDriverService(String pathToDriverExecutable, String screenToUse) throws IOException;
+    DriverService getDriverService(String pathToDriverExecutable, String screenToUse) throws IOException;
 
-    void initializeSeleniumProxy();
+    Proxy getSeleniumProxy();
 
-    void initializeDesiredCapabilities();
+    DesiredCapabilities getDesiredCapabilities();
 
-    void initializeWebDriver(boolean useVirtualScreen);
+    WebDriver buildWebDriver(boolean useVirtualScreen);
 
-    void initializeWebDriverHeadless();
+    WebDriver buildWebDriverHeadless();
 
-    void initializeWebDriver();
+    WebDriver buildWebDriverVisible();
 
     void cleanUpReplay();
 
