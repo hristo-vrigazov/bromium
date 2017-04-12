@@ -28,7 +28,6 @@
         <guava.version>21.0</guava.version>
     </properties>
 
-
     <build>
         <plugins>
             <plugin>
