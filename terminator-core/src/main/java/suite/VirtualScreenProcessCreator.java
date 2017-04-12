@@ -5,7 +5,7 @@ import java.io.IOException;
 /**
  * Created by hvrigazov on 12.04.17.
  */
-public class VirtualScreenProcessFactory {
+public class VirtualScreenProcessCreator {
 
     public Process createXvfbProcess(int i) throws IOException {
         // 0 is the main screen

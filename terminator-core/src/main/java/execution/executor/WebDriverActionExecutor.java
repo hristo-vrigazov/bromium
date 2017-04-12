@@ -1,6 +1,7 @@
 package execution.executor;
 
 import execution.webdriver.WebdriverAction;
+import suite.VirtualScreenProcessCreator;
 import utils.LoadingTimes;
 
 import java.io.FileNotFoundException;
@@ -19,4 +20,8 @@ public interface WebDriverActionExecutor {
     void dumpLoadingTimes(String fileNameToDump) throws UnsupportedEncodingException, FileNotFoundException;
     LoadingTimes getLoadingTimes();
     AutomationResult getAutomationResult();
+    AutomationResult executeOnScreen(int i,
+                                     VirtualScreenProcessCreator virtualScreenProcessCreator,
+                                     String loadingTimesFileName,
+                                     String harTimesFileName);
 }

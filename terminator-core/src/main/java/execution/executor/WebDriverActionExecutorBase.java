@@ -9,6 +9,7 @@ import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriverException;
+import suite.VirtualScreenProcessCreator;
 import utils.LoadingTimes;
 
 import java.io.File;
@@ -222,5 +223,33 @@ public abstract class WebDriverActionExecutorBase implements WebDriverActionExec
     public AutomationResult getAutomationResult() {
         return this.automationResult;
     }
+
+    @Override
+    public AutomationResult executeOnScreen(int i,
+                                            VirtualScreenProcessCreator virtualScreenProcessCreator,
+                                            String loadingTimesFileName,
+                                            String harTimesFileName) {
+        Process process;
+        String screen = virtualScreenProcessCreator.getScreen(i);
+        try {
+            process = virtualScreenProcessCreator.createXvfbProcess(i);
+        } catch (IOException e) {
+            return AutomationResult.NO_VIRTUAL_SCREEN;
+        }
+
+        try {
+            this.executeOnScreen(screen);
+            this.getLoadingTimes().dump(loadingTimesFileName);
+            this.dumpHarMetrics(harTimesFileName);
+            process.destroy();
+            return this.getAutomationResult();
+        } catch (InterruptedException | IOException | URISyntaxException e) {
+            e.printStackTrace();
+            return AutomationResult.FAILED;
+        } finally {
+            process.destroy();
+        }
+    }
+
 
 }

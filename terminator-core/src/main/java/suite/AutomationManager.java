@@ -4,8 +4,6 @@ import execution.executor.AutomationResult;
 import execution.executor.WebDriverActionExecutor;
 import utils.ConfigurationUtils;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -22,13 +20,13 @@ public class AutomationManager {
     private List<WebDriverActionExecutor> automationScenarios;
     private List<String> fileNames;
     private List<String> harFileNames;
-    private VirtualScreenProcessFactory virtualScreenProcessFactory;
+    private VirtualScreenProcessCreator virtualScreenProcessCreator;
 
     public AutomationManager() {
         automationScenarios = new ArrayList<>();
         fileNames = new ArrayList<>();
         harFileNames = new ArrayList<>();
-        virtualScreenProcessFactory = new VirtualScreenProcessFactory();
+        virtualScreenProcessCreator = new VirtualScreenProcessCreator();
     }
 
     public void addTestScenario(WebDriverActionExecutor automationScenario, String fileNameToDumpMeasurements, String fileNameToDumpHar) {
@@ -56,7 +54,7 @@ public class AutomationManager {
         List<Future<AutomationResult>> automationResultsFutures = new ArrayList<>();
 
         long startTime = System.nanoTime();
-
+        
         for (int i = 0; i < automationScenarios.size(); i++) {
             final int index = i;
             automationResultsFutures.add(executor.submit(() -> executeScenario(index)));
@@ -81,27 +79,6 @@ public class AutomationManager {
     }
 
     private AutomationResult executeScenario(int i) {
-        Process process;
-        String screen = virtualScreenProcessFactory.getScreen(i);
-        try {
-            process = virtualScreenProcessFactory.createXvfbProcess(i);
-        } catch (IOException e) {
-            return AutomationResult.NO_VIRTUAL_SCREEN;
-        }
-
-        try {
-            WebDriverActionExecutor executor = automationScenarios.get(i);
-            executor.executeOnScreen(screen);
-            executor.getLoadingTimes().dump(fileNames.get(i));
-            executor.dumpHarMetrics(harFileNames.get(i));
-            process.destroy();
-            return executor.getAutomationResult();
-        } catch (InterruptedException | IOException | URISyntaxException e) {
-            e.printStackTrace();
-            return AutomationResult.FAILED;
-        } finally {
-            process.destroy();
-        }
-
+        return automationScenarios.get(i).executeOnScreen(i, virtualScreenProcessCreator, fileNames.get(i), harFileNames.get(i));
     }
 }
