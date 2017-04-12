@@ -13,20 +13,20 @@ import java.util.*;
  */
 public class PromptUtils {
 
-    private static TextIO textIO = TextIoFactory.getTextIO();
+    private TextIO textIO = TextIoFactory.getTextIO();
 
-    public static TextIO getTextIO() {
+    public TextIO getTextIO() {
         return textIO;
     }
 
-    public static String promptForVersion() {
+    public String promptForVersion() {
         return textIO
                 .newStringInputReader()
                 .withDefaultValue("0.0.1")
                 .read("What is the version of your application?");
     }
 
-    public static void showAssertionActionChoice(ApplicationConfiguration applicationConfiguration) {
+    public void showAssertionActionChoice(ApplicationConfiguration applicationConfiguration) {
         MainMenuChoice mainMenuChoice;
         do {
             mainMenuChoice = textIO.newEnumInputReader(MainMenuChoice.class)
@@ -46,7 +46,7 @@ public class PromptUtils {
         } while (!(mainMenuChoice == MainMenuChoice.SAVE_AND_EXIT));
     }
 
-    public static ApplicationActionConfiguration showAddActionMenu() {
+    public ApplicationActionConfiguration showAddActionMenu() {
         String actionName = textIO.newStringInputReader().read("Action name: ");
         ApplicationActionConfiguration applicationActionConfiguration = new ApplicationActionConfiguration();
         applicationActionConfiguration.setName(actionName);
@@ -76,13 +76,13 @@ public class PromptUtils {
         return applicationActionConfiguration;
     }
 
-    public static boolean promptForExpectHttpRequest() {
+    public boolean promptForExpectHttpRequest() {
         return textIO
                 .newBooleanInputReader()
                 .read("Expect HTTP request after the action?");
     }
 
-    public static WebdriverActionConfiguration promptForActionConfigurationType(String prompt) {
+    public WebdriverActionConfiguration promptForActionConfigurationType(String prompt) {
         textIO.getTextTerminal().println(prompt);
         WebdriverActionConfiguration webdriverActionConfiguration = new WebdriverActionConfiguration();
         WebdriverActionType webdriverActionType = textIO
@@ -99,7 +99,7 @@ public class PromptUtils {
         return webdriverActionConfiguration;
     }
 
-    public static Map<String, ParameterConfiguration> collectParametersConfiguration(WebdriverActionType webdriverActionType) {
+    public Map<String, ParameterConfiguration> collectParametersConfiguration(WebdriverActionType webdriverActionType) {
         if (webdriverActionType == WebdriverActionType.NOTHING) {
             return new HashMap<>();
         }
@@ -114,16 +114,16 @@ public class PromptUtils {
         return parametersConfiguration;
     }
 
-    public static ParameterConfiguration promptForParameterConfiguration(WebdriverActionType webdriverActionType) {
+    public ParameterConfiguration promptForParameterConfiguration(WebdriverActionType webdriverActionType) {
         return getParameterConfigurationForCustom();
     }
 
-    public static boolean promptForAddParameters() {
+    public boolean promptForAddParameters() {
         textIO.getTextTerminal().println();
         return textIO.newBooleanInputReader().read("Add a parameter?");
     }
 
-    public static String getWebdriverAction(WebdriverActionType webdriverActionType) {
+    public String getWebdriverAction(WebdriverActionType webdriverActionType) {
         if (webdriverActionType == WebdriverActionType.CUSTOM) {
             return textIO.newStringInputReader().read("Enter the custom type name: ");
         }
@@ -131,14 +131,14 @@ public class PromptUtils {
         return webdriverActionType.toString();
     }
 
-    public static ParameterConfiguration getParameterConfigurationForCustom() {
+    public ParameterConfiguration getParameterConfigurationForCustom() {
         textIO.getTextTerminal().println();
         ParameterConfiguration parameterConfiguration = new ParameterConfiguration();
         parameterConfiguration.setParameterName(promptForParameterName());
         return getParameterConfigurationForName(parameterConfiguration);
     }
 
-    public static ParameterConfiguration getParameterConfigurationForName(ParameterConfiguration parameterConfiguration) {
+    public ParameterConfiguration getParameterConfigurationForName(ParameterConfiguration parameterConfiguration) {
         parameterConfiguration.setExpose(
                 promptForParameterExposing(parameterConfiguration.getParameterName()));
 
@@ -152,23 +152,23 @@ public class PromptUtils {
         return parameterConfiguration;
     }
 
-    public static String promptForValue(String parameterName) {
+    public String promptForValue(String parameterName) {
         return textIO.newStringInputReader().read("Value of " + parameterName);
     }
 
-    public static String promptForAlias(String parameterName) {
+    public String promptForAlias(String parameterName) {
         return textIO.newStringInputReader().read("Alias for " + parameterName);
     }
 
-    public static boolean promptForParameterExposing(String parameterName) {
+    public boolean promptForParameterExposing(String parameterName) {
         return textIO.newBooleanInputReader().read("Should I expose " + parameterName);
     }
 
-    public static String promptForParameterName() {
+    public String promptForParameterName() {
         return textIO.newStringInputReader().read("Parameter name: ");
     }
 
-    public static void promptForApplicationName(ApplicationConfiguration applicationConfiguration) {
+    public void promptForApplicationName(ApplicationConfiguration applicationConfiguration) {
         Boolean shouldEditName = shouldChangePrompt("application name", applicationConfiguration.getApplicationName());
 
         if (shouldEditName) {
@@ -178,14 +178,14 @@ public class PromptUtils {
         }
     }
 
-    public static Boolean shouldChangePrompt(String propertyToBeChanged, String defaultValue) {
+    public Boolean shouldChangePrompt(String propertyToBeChanged, String defaultValue) {
         return textIO.newBooleanInputReader()
                 .read("Update the " + propertyToBeChanged + " ("
                         + defaultValue
                         + ") ? ");
     }
 
-    public static void updateApplicationConfiguration(ApplicationConfiguration applicationConfiguration) {
+    public void updateApplicationConfiguration(ApplicationConfiguration applicationConfiguration) {
         List<ApplicationActionConfiguration> applicationActionConfigurations =
                 applicationConfiguration.getApplicationActionConfigurationList();
         Map<String, ApplicationActionConfiguration> nameToActionMap =
@@ -219,12 +219,12 @@ public class PromptUtils {
         } while (userWantsToEditApplicationAction());
     }
 
-    public static boolean userWantsToEditApplicationAction() {
+    public boolean userWantsToEditApplicationAction() {
         return textIO.newBooleanInputReader()
                 .read("Edit another action?");
     }
 
-    public static Optional<WebdriverActionConfiguration> promptForChangeAction(ApplicationActionConfiguration applicationActionConfiguration,
+    public Optional<WebdriverActionConfiguration> promptForChangeAction(ApplicationActionConfiguration applicationActionConfiguration,
                                                                                 String prompt) {
         boolean userWantsToChangePrecondition =
                 shouldChangePrompt(prompt, applicationActionConfiguration.getConditionBeforeExecution().getWebdriverActionType());
@@ -237,7 +237,7 @@ public class PromptUtils {
         return Optional.empty();
     }
 
-    public static void promptExpectsHttpRequest(ApplicationActionConfiguration applicationActionConfiguration) {
+    public void promptExpectsHttpRequest(ApplicationActionConfiguration applicationActionConfiguration) {
         boolean changeExpectHttp = shouldChangePrompt("expect http request",
                 applicationActionConfiguration.expectsHttpRequest().toString());
 

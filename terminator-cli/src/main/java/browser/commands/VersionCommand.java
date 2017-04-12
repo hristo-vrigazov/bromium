@@ -6,15 +6,13 @@ import utils.ConfigurationUtils;
 
 import java.io.IOException;
 
-import static browser.commands.PromptUtils.promptForVersion;
-import static browser.commands.PromptUtils.updateApplicationConfiguration;
-
 /**
  * Created by hvrigazov on 12.04.17.
  */
 public class VersionCommand implements Command {
     private TextIO textIO;
     private String pathToApplicationConfiguration;
+    private PromptUtils promptUtils = new PromptUtils();
 
     public VersionCommand(String pathToApplicationConfiguration) {
         this.pathToApplicationConfiguration = pathToApplicationConfiguration;
@@ -24,13 +22,13 @@ public class VersionCommand implements Command {
     public void run() {
         try {
             ApplicationConfiguration applicationConfiguration = ConfigurationUtils.parseApplicationConfiguration(pathToApplicationConfiguration);
-            textIO = PromptUtils.getTextIO();
+            textIO = promptUtils.getTextIO();
             textIO.getTextTerminal().println("Let's create a new version");
 
-            applicationConfiguration.setVersion(promptForVersion());
+            applicationConfiguration.setVersion(promptUtils.promptForVersion());
 
             textIO.getTextTerminal().println("Let's update the actions that have to be different");
-            updateApplicationConfiguration(applicationConfiguration);
+            promptUtils.updateApplicationConfiguration(applicationConfiguration);
 
             String outputFilename = textIO
                     .newStringInputReader()

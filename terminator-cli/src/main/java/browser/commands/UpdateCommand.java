@@ -12,6 +12,7 @@ import java.io.IOException;
 public class UpdateCommand implements Command {
     private TextIO textIO;
     private String pathToApplicationConfiguration;
+    private PromptUtils promptUtils = new PromptUtils();
 
     public UpdateCommand(String pathToApplicationConfiguration) {
         this.pathToApplicationConfiguration = pathToApplicationConfiguration;
@@ -21,11 +22,11 @@ public class UpdateCommand implements Command {
     public void run() {
         try {
             ApplicationConfiguration applicationConfiguration = ConfigurationUtils.parseApplicationConfiguration(pathToApplicationConfiguration);
-            textIO = PromptUtils.getTextIO();
+            textIO = promptUtils.getTextIO();
             textIO.getTextTerminal().println("Let's update the configuration!");
 
-            PromptUtils.promptForApplicationName(applicationConfiguration);
-            PromptUtils.updateApplicationConfiguration(applicationConfiguration);
+            promptUtils.promptForApplicationName(applicationConfiguration);
+            promptUtils.updateApplicationConfiguration(applicationConfiguration);
 
             String outputFilename = textIO
                     .newStringInputReader()
