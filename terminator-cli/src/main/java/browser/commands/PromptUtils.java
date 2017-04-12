@@ -191,7 +191,7 @@ public class PromptUtils {
         Map<String, ApplicationActionConfiguration> nameToActionMap =
                 Maps.uniqueIndex
                         (applicationActionConfigurations.iterator(),
-                        applicationActionConfiguration -> applicationActionConfiguration.getName());
+                                ApplicationActionConfiguration::getName);
 
         do {
             String choice = textIO.newStringInputReader()
