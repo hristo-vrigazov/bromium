@@ -54,13 +54,8 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
 
     @Override
     public WebDriver buildWebDriver(boolean useVirtualScreen) {
-        if (useVirtualScreen) {
-            return buildWebDriverHeadless();
-        } else {
-            return buildWebDriverVisible();
-        }
+        return useVirtualScreen ? buildWebDriverHeadless() : buildWebDriverVisible();
     }
-
 
     private void maximizeDriver() {
         driver.manage().window().maximize();
@@ -68,13 +63,16 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
 
     @Override
     public void cleanUpReplay() {
-        driver.quit();
-        proxy.stop();
+        quitDriverAndStopProxy();
         driverService.stop();
     }
 
     @Override
     public void cleanUpRecord() {
+        quitDriverAndStopProxy();
+    }
+
+    private void quitDriverAndStopProxy() {
         driver.quit();
         proxy.stop();
     }
@@ -113,7 +111,6 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
     public Proxy getSeleniumProxy() {
         return ClientUtil.createSeleniumProxy(proxy);
     }
-
 
     @Override
     public void initRecord(int timeout) throws IOException {
