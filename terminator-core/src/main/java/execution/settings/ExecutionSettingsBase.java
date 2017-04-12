@@ -25,7 +25,7 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
     private RequestFilter requestFilter;
     private ResponseFilter responseFilter;
 
-    protected WebDriver driver;
+    private WebDriver driver;
     protected DriverService driverService;
     protected DesiredCapabilities capabilities;
     protected String baseURI;

@@ -20,9 +20,9 @@ public class AutomationManagerExamples {
 
     @Test
     public void sequentialExample() throws IOException, URISyntaxException {
-        String pathToApplicationConfiguration = "/home/hvrigazov/github/selenium-record-replay/tennisKafe.json";
+        String pathToApplicationConfiguration = "/home/hvrigazov/github/selenium-record-replay/tenniskafe.json";
         String pathToChromedriver = "/home/hvrigazov/github/selenium-record-replay/chromedriver";
-        String pathToTestScenario = "/home/hvrigazov/github/selenium-record-replay/output.json";
+        String pathToTestScenario = "/home/hvrigazov/github/selenium-record-replay/testCase.json";
 
         WebdriverActionExecutorBuilder executorWebdriverActionExecutorBuilder = WebDriverActionExecutorBase
                 .builder()

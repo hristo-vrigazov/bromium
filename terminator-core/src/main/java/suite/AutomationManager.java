@@ -22,11 +22,13 @@ public class AutomationManager {
     private List<WebDriverActionExecutor> automationScenarios;
     private List<String> fileNames;
     private List<String> harFileNames;
+    private VirtualScreenProcessFactory virtualScreenProcessFactory;
 
     public AutomationManager() {
         automationScenarios = new ArrayList<>();
         fileNames = new ArrayList<>();
         harFileNames = new ArrayList<>();
+        virtualScreenProcessFactory = new VirtualScreenProcessFactory();
     }
 
     public void addTestScenario(WebDriverActionExecutor automationScenario, String fileNameToDumpMeasurements, String fileNameToDumpHar) {
@@ -78,27 +80,11 @@ public class AutomationManager {
         return automationResults;
     }
 
-    private Process createXvfbProcess(int i) throws IOException {
-        // 0 is the main screen
-        String screen = getScreen(i);
-
-        String[] command = {
-                "Xvfb", screen, "-screen", "0", "1360x1024x24 &"
-        };
-
-        Process process = new ProcessBuilder(command).start();
-        return process;
-    }
-
-    private String getScreen(int i) {
-        return ":" + (i + 1);
-    }
-
     private AutomationResult executeScenario(int i) {
         Process process;
-        String screen = getScreen(i);
+        String screen = virtualScreenProcessFactory.getScreen(i);
         try {
-            process = createXvfbProcess(i);
+            process = virtualScreenProcessFactory.createXvfbProcess(i);
         } catch (IOException e) {
             return AutomationResult.NO_VIRTUAL_SCREEN;
         }
