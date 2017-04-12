@@ -189,7 +189,9 @@ public class PromptUtils {
         List<ApplicationActionConfiguration> applicationActionConfigurations =
                 applicationConfiguration.getApplicationActionConfigurationList();
         Map<String, ApplicationActionConfiguration> nameToActionMap =
-                Maps.uniqueIndex(applicationActionConfigurations, ApplicationActionConfiguration::getName);
+                Maps.uniqueIndex
+                        (applicationActionConfigurations.iterator(),
+                        applicationActionConfiguration -> applicationActionConfiguration.getName());
 
         do {
             String choice = textIO.newStringInputReader()
@@ -221,7 +223,6 @@ public class PromptUtils {
         return textIO.newBooleanInputReader()
                 .read("Edit another action?");
     }
-
 
     public static Optional<WebdriverActionConfiguration> promptForChangeAction(ApplicationActionConfiguration applicationActionConfiguration,
                                                                                 String prompt) {
