@@ -188,10 +188,10 @@ public class PromptUtils {
     public void updateApplicationConfiguration(ApplicationConfiguration applicationConfiguration) {
         List<ApplicationActionConfiguration> applicationActionConfigurations =
                 applicationConfiguration.getApplicationActionConfigurationList();
-        Map<String, ApplicationActionConfiguration> nameToActionMap =
-                Maps.uniqueIndex
-                        (applicationActionConfigurations.iterator(),
-                                ApplicationActionConfiguration::getName);
+        Map<String, ApplicationActionConfiguration> nameToActionMap = new HashMap<>();
+        for (ApplicationActionConfiguration applicationActionConfiguration: applicationActionConfigurations) {
+            nameToActionMap.put(applicationActionConfiguration.getName(), applicationActionConfiguration);
+        }
 
         do {
             String choice = textIO.newStringInputReader()
