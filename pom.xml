@@ -4,15 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>edu.skynet.bot</groupId>
-    <artifactId>terminator</artifactId>
+    <groupId>edu.hvrigazov.spiderman</groupId>
+    <artifactId>spiderman</artifactId>
     <version>0.1</version>
 
     <packaging>pom</packaging>
 
     <modules>
-        <module>terminator-core</module>
-        <module>terminator-cli</module>
+        <module>spiderman-core</module>
+        <module>spiderman-cli</module>
     </modules>
 
     <properties>
@@ -38,7 +38,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>browser.Main</mainClass>
+                            <mainClass>Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
