@@ -54,7 +54,7 @@ public class AutomationManager {
         List<Future<AutomationResult>> automationResultsFutures = new ArrayList<>();
 
         long startTime = System.nanoTime();
-        
+
         for (int i = 0; i < automationScenarios.size(); i++) {
             final int index = i;
             automationResultsFutures.add(executor.submit(() -> executeScenario(index)));

@@ -68,9 +68,7 @@ public class ReplayBrowser {
     }
 
     private void addWebdriverAction(Optional<WebdriverAction> postcondition) {
-        if (postcondition.isPresent()) {
-            executor.addWebdriverAction(postcondition.get());
-        }
+        postcondition.ifPresent(webdriverAction -> executor.addWebdriverAction(webdriverAction));
     }
 
     public void dumpAllMetrics(String harFile, String csvFile) throws IOException {

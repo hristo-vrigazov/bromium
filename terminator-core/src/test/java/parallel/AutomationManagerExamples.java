@@ -53,6 +53,10 @@ public class AutomationManagerExamples {
     }
 
     private WebDriverActionExecutor getScenario(String pathToTestScenario, WebdriverActionExecutorBuilder executor, ReplayBrowserConfiguration.Builder testScenarioRunner) throws IOException, URISyntaxException {
-        return testScenarioRunner.executor(executor.buildChromedriver()).build().getReplayBrowser().getTestScenario(pathToTestScenario);
+        return testScenarioRunner
+                .executor(executor.buildChromedriver())
+                .build()
+                .getReplayBrowser()
+                .getTestScenario(pathToTestScenario);
     }
 }

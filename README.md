@@ -1,7 +1,7 @@
 # Selenium Record Replay
 
 [![Build Status](https://travis-ci.org/hristo-vrigazov/selenium-record-replay.svg?branch=master)](https://travis-ci.org/hristo-vrigazov/selenium-record-replay)
-
+[![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
 A framework on top of selenium which allows you to define a set of actions specific
 for your application using selenium webdriver actions, and then record test cases 
 using any driver.
