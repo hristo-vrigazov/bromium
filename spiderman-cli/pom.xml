@@ -6,9 +6,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>edu.hvrigazov.spiderman</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>spiderman-core</artifactId>
-            <version>0.1</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.beryx</groupId>
@@ -17,7 +17,7 @@
     </dependencies>
 
     <parent>
-        <groupId>edu.hvrigazov.spiderman</groupId>
+        <groupId>com.hribol.spiderman</groupId>
         <artifactId>spiderman</artifactId>
         <version>0.1</version>
     </parent>
