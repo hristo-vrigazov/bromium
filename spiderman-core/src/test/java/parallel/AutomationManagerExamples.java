@@ -1,13 +1,13 @@
 package parallel;
 
-import edu.hvrigazov.automation.replay.ReplayBrowserConfiguration;
-import edu.hvrigazov.automation.execution.executor.AutomationResult;
-import edu.hvrigazov.automation.execution.executor.WebDriverActionExecutor;
-import edu.hvrigazov.automation.execution.executor.WebDriverActionExecutorBase;
-import edu.hvrigazov.automation.execution.executor.WebdriverActionExecutorBuilder;
-import edu.hvrigazov.automation.execution.webdriver.PredefinedWebdriverActionFactory;
+import com.hribol.automation.replay.ReplayBrowserConfiguration;
+import com.hribol.automation.execution.executor.AutomationResult;
+import com.hribol.automation.execution.executor.WebDriverActionExecutor;
+import com.hribol.automation.execution.executor.WebDriverActionExecutorBase;
+import com.hribol.automation.execution.executor.WebdriverActionExecutorBuilder;
+import com.hribol.automation.execution.webdriver.PredefinedWebdriverActionFactory;
 import org.junit.Test;
-import edu.hvrigazov.automation.suite.AutomationManager;
+import com.hribol.automation.suite.AutomationManager;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

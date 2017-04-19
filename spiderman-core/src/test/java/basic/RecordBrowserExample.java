@@ -1,8 +1,8 @@
 package basic;
 
 import org.junit.Test;
-import edu.hvrigazov.automation.record.ChromeRecordBrowser;
-import edu.hvrigazov.automation.record.RecordBrowserBase;
+import com.hribol.automation.record.ChromeRecordBrowser;
+import com.hribol.automation.record.RecordBrowserBase;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
