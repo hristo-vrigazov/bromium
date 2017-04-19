@@ -1,6 +1,6 @@
 # Selenium Record Replay
 
-[![Build Status](https://travis-ci.org/hristo-vrigazov/https://travis-ci.org/hristo-vrigazov/spiderman.svg?branch=master)](https://travis-ci.org/hristo-vrigazov/spiderman.svg?branch=master)
+[![Build Status](https://travis-ci.org/hristo-vrigazov/spiderman.svg?branch=master)](https://travis-ci.org/hristo-vrigazov/spiderman)
 [![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
 
 
