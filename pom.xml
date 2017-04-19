@@ -10,6 +10,29 @@
 
     <packaging>pom</packaging>
 
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Hristo Vrigazovr</name>
+            <email>hvrigazov@gmail.com</email>
+            <organization>Hribol</organization>
+            <organizationUrl>https://github.com/hristo-vrigazov</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/hristo-vrigazov/spiderman.git</connection>
+        <developerConnection>scm:git:ssh://github.com/hristo-vrigazov/spiderman.git</developerConnection>
+        <url>https://github.com/hristo-vrigazov/spiderman</url>
+    </scm>
+
     <modules>
         <module>spiderman-core</module>
         <module>spiderman-cli</module>
