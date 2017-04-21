@@ -25,9 +25,14 @@ public class LoadingTimesTest {
         loadingMeasurements.add(750434651L);
 
         LoadingTimes loadingTimes = new LoadingTimes(loadingMeasurements, actions);
-        File file = new File("loadingTimes.csv");
-        loadingTimes.dump(file);
+        String pathname = "loadingTimes.csv";
+        File file = new File(pathname);
 
+        loadingTimes.dump(file);
+        Assert.assertTrue(file.exists());
+        Assert.assertTrue(file.delete());
+
+        loadingTimes.dump(pathname);
         Assert.assertTrue(file.exists());
         Assert.assertTrue(file.delete());
     }
