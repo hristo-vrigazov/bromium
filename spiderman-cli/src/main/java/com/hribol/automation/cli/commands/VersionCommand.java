@@ -1,8 +1,8 @@
 package com.hribol.automation.cli.commands;
 
-import com.hribol.automation.config.ApplicationConfiguration;
+import com.hribol.automation.core.config.ApplicationConfiguration;
+import com.hribol.automation.core.utils.ConfigurationUtils;
 import org.beryx.textio.TextIO;
-import com.hribol.automation.utils.ConfigurationUtils;
 
 import java.io.IOException;
 

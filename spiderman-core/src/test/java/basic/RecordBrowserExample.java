@@ -1,8 +1,12 @@
 package basic;
 
+import com.hribol.automation.core.actions.ClickClassByText;
+import com.hribol.automation.core.execution.executor.ChromeDriverActionExecution;
+import com.hribol.automation.core.execution.executor.TestScenario;
+import com.hribol.automation.core.execution.executor.WebDriverActionExecution;
+import com.hribol.automation.core.execution.executor.WebDriverActionExecutor;
+import com.hribol.automation.core.execution.webdriver.WebDriverAction;
 import org.junit.Test;
-import com.hribol.automation.record.ChromeRecordBrowser;
-import com.hribol.automation.record.RecordBrowserBase;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -14,10 +18,23 @@ public class RecordBrowserExample {
 
     @Test
     public void record() throws InterruptedException, IOException, URISyntaxException {
-        String pathToChromedriver = "/home/hvrigazov/github/selenium-edu.hvrigazov.automation.record-edu.hvrigazov.automation.replay/chromedriver";
-        String pathToJsInjection = "/home/hvrigazov/github/selenium-edu.hvrigazov.automation.record-edu.hvrigazov.automation.replay/terminator-core/src/main/resources/javascriptInjection/eventsRecorder.js";
-        RecordBrowserBase recordBrowserBase = new ChromeRecordBrowser(pathToChromedriver, pathToJsInjection);
-        recordBrowserBase.record("http://tenniskafe.com");
-        System.in.read();
+        WebDriverAction clickClassByText =
+                new ClickClassByText("a",
+                        "a",
+                        "a",
+                        false);
+
+        TestScenario testScenario = new TestScenario();
+        testScenario.addWebDriverAction(clickClassByText);
+
+        WebDriverActionExecutor webDriverActionExecutor =
+                new WebDriverActionExecutor()
+                .baseURI("http://someurl")
+                .timeoutInSeconds(20)
+                .pathToDriverExecutable("asd");
+
+        WebDriverActionExecution execution = new ChromeDriverActionExecution(webDriverActionExecutor);
+
+        execution.execute(testScenario);
     }
 }

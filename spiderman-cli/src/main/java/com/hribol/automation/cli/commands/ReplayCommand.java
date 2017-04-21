@@ -1,10 +1,10 @@
 package com.hribol.automation.cli.commands;
 
-import com.hribol.automation.execution.executor.WebDriverActionExecutor;
-import com.hribol.automation.execution.executor.WebdriverActionExecutorBuilder;
-import com.hribol.automation.execution.webdriver.PredefinedWebdriverActionFactory;
-import com.hribol.automation.replay.ReplayBrowser;
-import com.hribol.automation.replay.ReplayBrowserConfiguration;
+import com.hribol.automation.core.execution.executor.WebDriverActionExecution;
+import com.hribol.automation.core.execution.webdriver.PredefinedWebdriverActionFactory;
+import com.hribol.automation.core.replay.ReplayBrowserConfiguration;
+import com.hribol.automation.core.execution.executor.WebDriverActionExecutor;
+import com.hribol.automation.core.replay.ReplayBrowser;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -26,10 +26,11 @@ public class ReplayCommand implements Command {
     @Override
     public void run() {
         try {
-            WebDriverActionExecutor executor = new WebdriverActionExecutorBuilder()
+            WebDriverActionExecutor executor = new WebDriverActionExecutor()
                     .pathToDriverExecutable(pathToChromedriver)
                     .baseURI("http://www.tenniskafe.com/")
-                    .buildChromedriver();
+                    .timeoutInSeconds(20)
+                    .measurementsPrecisionInMilliseconds(500);
 
             ReplayBrowserConfiguration replayBrowserConfiguration = ReplayBrowserConfiguration
                     .builder()
@@ -41,7 +42,6 @@ public class ReplayCommand implements Command {
 
             ReplayBrowser replayBrowser = replayBrowserConfiguration.getReplayBrowser();
             replayBrowser.replay(pathToSerializedTest);
-            replayBrowser.dumpAllMetrics("metrics.har", "metrics.csv");
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
         }

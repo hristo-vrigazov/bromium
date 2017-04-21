@@ -1,7 +1,7 @@
 package com.hribol.automation.cli.commands;
 
 import com.hribol.automation.cli.MainMenuChoice;
-import com.hribol.automation.config.*;
+import com.hribol.automation.core.config.*;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 
