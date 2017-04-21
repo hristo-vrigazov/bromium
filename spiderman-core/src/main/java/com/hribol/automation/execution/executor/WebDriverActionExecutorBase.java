@@ -30,8 +30,8 @@ public abstract class WebDriverActionExecutorBase implements WebDriverActionExec
     private ExecutionSettings executionSettings;
     private AutomationResult automationResult;
     private Queue<WebdriverAction> webdriverActionQueue;
-    private List<Long> waitingTimes;
     private List<String> actions;
+    private List<Long> waitingTimes;
     private Set<HttpRequest> httpRequestQueue;
     private String pathToChromeDriver;
     private boolean useVirtualScreen;
