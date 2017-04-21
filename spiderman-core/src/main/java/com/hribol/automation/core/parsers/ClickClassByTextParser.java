@@ -1,4 +1,4 @@
-package com.hribol.automation.core.execution.webdriver.parsers;
+package com.hribol.automation.core.parsers;
 
 import com.hribol.automation.core.actions.ClickClassByText;
 import com.hribol.automation.core.execution.webdriver.WebDriverAction;

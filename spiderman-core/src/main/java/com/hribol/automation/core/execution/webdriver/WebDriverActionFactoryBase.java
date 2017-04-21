@@ -1,7 +1,7 @@
 package com.hribol.automation.core.execution.webdriver;
 
-import com.hribol.automation.core.execution.webdriver.parsers.ClickClassByTextParser;
-import com.hribol.automation.core.execution.webdriver.parsers.WebDriverActionParameterParser;
+import com.hribol.automation.core.parsers.ClickClassByTextParser;
+import com.hribol.automation.core.parsers.WebDriverActionParameterParser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,11 +9,11 @@ import java.util.Map;
 /**
  * Created by hvrigazov on 18.03.17.
  */
-public abstract class WebdriverActionFactoryBase implements WebdriverActionFactory {
+public abstract class WebDriverActionFactoryBase implements WebdriverActionFactory {
 
     protected Map<String, WebDriverActionParameterParser> parsersRegistry;
 
-    public WebdriverActionFactoryBase() {
+    public WebDriverActionFactoryBase() {
         parsersRegistry = new HashMap<>();
         addPredefined();
         addCustom();

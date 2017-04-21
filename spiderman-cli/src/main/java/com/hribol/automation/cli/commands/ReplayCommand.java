@@ -1,7 +1,6 @@
 package com.hribol.automation.cli.commands;
 
-import com.hribol.automation.core.execution.executor.WebDriverActionExecution;
-import com.hribol.automation.core.execution.webdriver.PredefinedWebdriverActionFactory;
+import com.hribol.automation.core.execution.webdriver.PredefinedWebDriverActionFactory;
 import com.hribol.automation.core.replay.ReplayBrowserConfiguration;
 import com.hribol.automation.core.execution.executor.WebDriverActionExecutor;
 import com.hribol.automation.core.replay.ReplayBrowser;
@@ -36,7 +35,7 @@ public class ReplayCommand implements Command {
                     .builder()
                     .pathToApplicationConfiguration(pathToApplicationConfiguration)
                     .url("http://www.tenniskafe.com/")
-                    .webdriverActionFactory(new PredefinedWebdriverActionFactory())
+                    .webdriverActionFactory(new PredefinedWebDriverActionFactory())
                     .executor(executor)
                     .build();
 

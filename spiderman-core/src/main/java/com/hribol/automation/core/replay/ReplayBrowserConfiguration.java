@@ -1,7 +1,6 @@
 package com.hribol.automation.core.replay;
 
 import com.hribol.automation.core.config.ApplicationConfiguration;
-import com.hribol.automation.core.execution.executor.WebDriverActionExecution;
 import com.hribol.automation.core.execution.application.DefaultApplicationActionFactory;
 import com.hribol.automation.core.execution.executor.WebDriverActionExecutor;
 import com.hribol.automation.core.utils.ConfigurationUtils;

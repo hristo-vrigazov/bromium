@@ -83,6 +83,7 @@ public class ConfigurationUtilsTest {
     @Test
     public void canSplitQueryUrl() throws MalformedURLException, UnsupportedEncodingException {
         URL url = new URL("http://www.tenniskafe.com/query?key1=value1&key2=value2");
+        ConfigurationUtils configurationUtils = new ConfigurationUtils();
         Map<String, String> parameters = ConfigurationUtils.splitQuery(url);
 
         assertTrue(parameters.containsKey("key1"));
