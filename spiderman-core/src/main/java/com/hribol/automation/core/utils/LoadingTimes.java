@@ -1,5 +1,6 @@
 package com.hribol.automation.core.utils;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -17,14 +18,22 @@ public class LoadingTimes {
         this.actions = actions;
     }
 
-    public void dump(String fileName) throws UnsupportedEncodingException, FileNotFoundException {
-        PrintWriter writer = new PrintWriter(fileName, "UTF-8");
+    public void dump(File file) throws FileNotFoundException, UnsupportedEncodingException {
+        PrintWriter writer = new PrintWriter(file, "UTF-8");
+        dump(writer);
+    }
 
-        for (int i = 1; i < loadingTimes.size(); i++) {
+    private void dump(PrintWriter writer) {
+        for (int i = 0; i < loadingTimes.size(); i++) {
             double seconds = ConfigurationUtils.toSeconds(loadingTimes.get(i));
-            String action = actions.get(i - 1);
+            String action = actions.get(i);
             writer.println(action + "," + seconds);
         }
         writer.close();
+    }
+
+    public void dump(String fileName) throws UnsupportedEncodingException, FileNotFoundException {
+        PrintWriter writer = new PrintWriter(fileName, "UTF-8");
+        dump(writer);
     }
 }

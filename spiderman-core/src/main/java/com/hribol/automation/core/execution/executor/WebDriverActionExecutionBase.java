@@ -106,15 +106,14 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                             + " http queries in queue: " + httpRequestQueue.size());
                 }
                 if (httpRequestQueue.isEmpty() && !lock) {
-                    waitingTimes.add(System.nanoTime() - elapsedTime);
-                    elapsedTime = System.nanoTime();
                     lock = testScenario.nextActionExpectsHttpRequest();
                     WebDriverAction webDriverAction = testScenario.pollWebdriverAction();
                     executeIgnoringExceptions(webDriverAction);
+                    waitingTimes.add(System.nanoTime() - elapsedTime);
+                    elapsedTime = System.nanoTime();
                 }
             }
 
-            waitingTimes.add(System.nanoTime() - elapsedTime);
             this.automationResult = AutomationResult.SUCCESS;
         } catch (AssertionError e) {
             e.printStackTrace();

@@ -24,6 +24,7 @@ public class ReplayBrowser {
         TestScenario testScenario = TestScenario.createFromFile(applicationActionFactory, pathToSerializedTest);
         ChromeDriverActionExecution chromeDriverActionExecution = new ChromeDriverActionExecution(executor);
         chromeDriverActionExecution.execute(testScenario);
+        chromeDriverActionExecution.getLoadingTimes().dump("example.csv");
         return chromeDriverActionExecution.getAutomationResult();
     }
 
