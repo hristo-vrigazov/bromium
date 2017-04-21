@@ -13,13 +13,13 @@ public class Main {
     public static void main(String[] args) {
         String pathToChromeDriver = "/home/hvrigazov/github/spiderman/chromedriver";
         String pathToJSInjectionFile = "/home/hvrigazov/github/spiderman/spiderman-core/src/main/resources/javascriptInjection/eventsRecorder.js";
-        String pathToApplicationConfiguration = "/home/hvrigazov/github/spiderman/tenniskafe.json";
+        String pathToApplicationConfiguration = "/home/hvrigazov/github/spiderman/src/test/resources/tenniskafe.json";
         String baseUrl = "http://tenniskafe.com";
-        String testCaseFile = "testCase.json";
-        Command command = new ReplayCommand(pathToChromeDriver, pathToApplicationConfiguration, testCaseFile);
-        command.run();
-//        Command command = new RecordCommand(pathToChromeDriver, pathToJSInjectionFile, baseUrl, testCaseFile);
+        String testCaseFile = "/home/hvrigazov/github/spiderman/spiderman-core/src/test/resources/testCase.json";
+//        Command command = new ReplayCommand(pathToChromeDriver, pathToApplicationConfiguration, testCaseFile);
 //        command.run();
+        Command command = new RecordCommand(pathToChromeDriver, pathToJSInjectionFile, baseUrl, testCaseFile);
+        command.run();
         System.exit(0);
     }
 }

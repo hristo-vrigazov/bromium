@@ -1,0 +1,33 @@
+{
+    "applicationActionConfigurationList": [
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webdriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webdriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": false,
+            "name": "clickMegaMenu",
+            "webdriverAction": {
+                "parametersConfiguration": {
+                    "initialCollectorClass": {
+                        "expose": false,
+                        "parameterName": "initialCollectorClass",
+                        "value": "mega-menu-link"
+                    },
+                    "text": {
+                        "alias": "text",
+                        "expose": true,
+                        "parameterName": "text"
+                    }
+                },
+                "webdriverActionType": "CLICK_CLASS_BY_TEXT"
+            }
+        }
+    ],
+    "applicationName": "tenniskafe",
+    "version": "0.0.1"
+}
