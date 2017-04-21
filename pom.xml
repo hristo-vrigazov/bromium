@@ -61,7 +61,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>Main</mainClass>
+                            <mainClass>com.hribol.automation.cli.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

@@ -10,8 +10,8 @@ import com.hribol.automation.cli.commands.RecordCommand;
 public class Main {
 
     public static void main(String[] args) {
-        String pathToChromeDriver = "/home/hvrigazov/github/selenium-record-replay/chromedriver";
-        String pathToJSInjectionFile = "/home/hvrigazov/github/selenium-record-replay/spiderman-core/src/main/resources/javascriptInjection/eventsRecorder.js";
+        String pathToChromeDriver = "/home/hvrigazov/github/spiderman/chromedriver";
+        String pathToJSInjectionFile = "/home/hvrigazov/github/spiderman/spiderman-core/src/main/resources/javascriptInjection/eventsRecorder.js";
         String baseUrl = "http://tenniskafe.com";
         String testCaseFile = "testCase.json";
         Command command = new RecordCommand(pathToChromeDriver, pathToJSInjectionFile, baseUrl, testCaseFile);
