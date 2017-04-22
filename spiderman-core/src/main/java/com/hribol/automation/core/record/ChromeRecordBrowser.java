@@ -4,6 +4,7 @@ import com.hribol.automation.core.filters.RecordRequestFilter;
 import com.hribol.automation.core.filters.RecordResponseFilter;
 import com.hribol.automation.core.record.settings.ChromeRecordSettings;
 import com.hribol.automation.core.record.settings.RecordSettings;
+import org.openqa.selenium.chrome.ChromeDriverService;
 
 import java.net.URI;
 import java.util.function.Supplier;
@@ -18,14 +19,11 @@ public class ChromeRecordBrowser extends RecordBrowserBase {
 
     @Override
     protected RecordSettings createRecordSettings(URI baseURI) {
-        Supplier<String> injectionCodeSupplier = () -> javascriptInjector.getInjectionCode();
-        RecordResponseFilter recordResponseFilter = new RecordResponseFilter(baseURI, injectionCodeSupplier);
-        RecordRequestFilter recordRequestFilter = new RecordRequestFilter(domainSpecificActionList);
         return new ChromeRecordSettings(baseURI.toString(), recordRequestFilter, recordResponseFilter);
     }
 
     @Override
     protected String getSystemProperty() {
-        return "webdriver.chrome.driver";
+        return ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY;
     }
 }

@@ -20,7 +20,7 @@ public abstract class ReplaySettingsBase<T extends DriverService> implements Rep
     private Proxy seleniumProxy;
     private RequestFilter requestFilter;
     private ResponseFilter responseFilter;
-    private InvisibleWebDriverSupplier<T> invisibleChromeDriverSupplier;
+    private InvisibleWebDriverSupplier<T> invisibleWebDriverSupplier;
     private VisibleWebDriverSupplier visibleWebDriverSupplier;
 
     private WebDriver driver;
@@ -31,12 +31,12 @@ public abstract class ReplaySettingsBase<T extends DriverService> implements Rep
     public ReplaySettingsBase(String baseURI,
                               RequestFilter requestFilter,
                               ResponseFilter responseFilter,
-                              InvisibleWebDriverSupplier<T> invisibleChromeDriverSupplier,
+                              InvisibleWebDriverSupplier<T> invisibleWebDriverSupplier,
                               VisibleWebDriverSupplier visibleWebDriverSupplier) {
         this.baseURI = baseURI;
         this.requestFilter = requestFilter;
         this.responseFilter = responseFilter;
-        this.invisibleChromeDriverSupplier = invisibleChromeDriverSupplier;
+        this.invisibleWebDriverSupplier = invisibleWebDriverSupplier;
         this.visibleWebDriverSupplier = visibleWebDriverSupplier;
     }
 
@@ -66,7 +66,7 @@ public abstract class ReplaySettingsBase<T extends DriverService> implements Rep
         this.capabilities = new DesiredCapabilitiesSupplier(seleniumProxy).get();
         this.driverService = getDriverService(pathToChromeDriver, screenToUse);
         this.driver = useVirtualScreen ?
-                invisibleChromeDriverSupplier.get(driverService, capabilities) :
+                invisibleWebDriverSupplier.get(driverService, capabilities) :
                 visibleWebDriverSupplier.get(capabilities);
         driver.manage().window().maximize();
     }

@@ -1,8 +1,9 @@
 package com.hribol.automation.core.execution.executor;
 
+import com.hribol.automation.core.filters.ReplayRequestFilter;
+import com.hribol.automation.core.filters.ReplayResponseFilter;
 import com.hribol.automation.core.replay.settings.ReplaySettings;
 import com.hribol.automation.core.actions.WebDriverAction;
-import com.hribol.automation.core.suite.UbuntuVirtualScreenProcessCreator;
 import com.hribol.automation.core.suite.VirtualScreenProcessCreator;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
@@ -32,17 +33,18 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     private AutomationResult automationResult;
 
     private List<Long> waitingTimes;
-    private Set<HttpRequest> httpRequestQueue;
+    protected Set<HttpRequest> httpRequestQueue;
     private String pathToChromeDriver;
-    private boolean useVirtualScreen;
-    private boolean lock;
+    private Boolean lock;
     private int timeout;
     private int maxRetries;
     private int measurementsPrecisionMilli;
-    private List<String> whiteListHttp;
     private String screenToUse;
     protected String baseURI;
     private LoadingTimes loadingTimes;
+
+    protected ReplayRequestFilter replayRequestFilter;
+    protected ReplayResponseFilter replayResponseFilter;
 
     public WebDriverActionExecutionBase(WebDriverActionExecutor webDriverActionExecutor) throws IOException, URISyntaxException {
         this(webDriverActionExecutor.getBaseURI(),
@@ -60,38 +62,23 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         this.timeout = timeout;
         this.baseURI = baseURI;
         this.measurementsPrecisionMilli = measurementsPrecisionMilli;
-        this.initializeQueues();
+        this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
+        this.waitingTimes = new ArrayList<>();
         this.replaySettings = createExecutionSettings();
+        replayRequestFilter = new ReplayRequestFilter(this::setLock, baseURI, httpRequestQueue);
+        replayResponseFilter = new ReplayResponseFilter(baseURI, httpRequestQueue);
     }
 
     protected abstract ReplaySettings createExecutionSettings();
     protected abstract String getSystemProperty();
 
-    protected HttpResponse filterRequest(HttpRequest request, HttpMessageContents contents, HttpMessageInfo messageInfo) {
-        addHttpRequestToQueue(messageInfo.getOriginalRequest());
-        lock = false;
-        return null;
-    }
-
-    protected void filterResponse(HttpResponse response, HttpMessageContents contents, HttpMessageInfo messageInfo) {
-        removeHttpRequestToQueue(messageInfo.getOriginalRequest());
-    }
-
-    private void initializeQueues() {
-        this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
-        this.waitingTimes = new ArrayList<>();
-    }
-
-    private void initializeWhitelist() throws URISyntaxException {
-        whiteListHttp = new ArrayList<>();
-        whiteListHttp.add("localhost");
-        URI uri = new URI(baseURI);
-        whiteListHttp.add(uri.getHost());
+    protected void setLock(Boolean value) {
+        this.lock = value;
     }
 
     @Override
     public void execute(TestScenario testScenario) throws InterruptedException, IOException, URISyntaxException {
-        init();
+        prepare();
 
         long elapsedTime = System.nanoTime();
 
@@ -131,7 +118,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         execute(testScenario);
     }
 
-    private void init() throws IOException, URISyntaxException {
+    private void prepare() throws IOException, URISyntaxException {
         System.setProperty(getSystemProperty(), pathToChromeDriver);
 
         this.maxRetries = 100;
@@ -140,34 +127,17 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
         screenToUse = Optional.ofNullable(screenToUse).orElse(":0");
         replaySettings.prepareReplay(pathToChromeDriver, screenToUse, timeout);
-        this.initializeWhitelist();
     }
 
-    private void addHttpRequestToQueue(HttpRequest httpRequest) {
-        if (!inWhiteList(httpRequest.getUri())) {
-            return;
-        }
-        System.out.println("Add request " + httpRequest.getUri());
-        this.httpRequestQueue.add(httpRequest);
-    }
 
-    private void removeHttpRequestToQueue(HttpRequest httpRequest) {
-        if (!inWhiteList(httpRequest.getUri())) {
-            return;
-        }
-        System.out.println("Remove request " + httpRequest.getUri());
-        this.httpRequestQueue.remove(httpRequest);
-    }
+//    private void removeHttpRequestToQueue(HttpRequest httpRequest) {
+//        if (!inWhiteList(httpRequest.getUri())) {
+//            return;
+//        }
+//        System.out.println("Remove request " + httpRequest.getUri());
+//        this.httpRequestQueue.remove(httpRequest);
+//    }
 
-    private boolean inWhiteList(String url) {
-        for (String whiteListedString: whiteListHttp) {
-            if (url.contains(whiteListedString)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 
     private void executeIgnoringExceptions(WebDriverAction webDriverAction) throws InterruptedException {
         int i = 0;

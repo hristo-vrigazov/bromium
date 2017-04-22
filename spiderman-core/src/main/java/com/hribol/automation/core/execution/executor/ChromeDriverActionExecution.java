@@ -11,13 +11,14 @@ import java.net.URISyntaxException;
  * Created by hvrigazov on 21.03.17.
  */
 public class ChromeDriverActionExecution extends WebDriverActionExecutionBase {
+
     public ChromeDriverActionExecution(WebDriverActionExecutor webDriverActionExecutor) throws IOException, URISyntaxException {
         super(webDriverActionExecutor);
     }
 
     @Override
     protected ReplaySettings createExecutionSettings() {
-        return new ChromeDriverReplaySettings(this.baseURI, this::filterRequest, this::filterResponse);
+        return new ChromeDriverReplaySettings(this.baseURI, replayRequestFilter, replayResponseFilter);
     }
 
     @Override

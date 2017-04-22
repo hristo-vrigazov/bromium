@@ -2,6 +2,8 @@ package com.hribol.automation.core.record;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.hribol.automation.core.filters.RecordRequestFilter;
+import com.hribol.automation.core.filters.RecordResponseFilter;
 import com.hribol.automation.core.record.settings.RecordSettings;
 
 import java.io.FileWriter;
@@ -12,6 +14,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * Created by hvrigazov on 09.03.17.
@@ -35,12 +38,19 @@ public abstract class RecordBrowserBase {
     protected abstract RecordSettings createRecordSettings(URI baseURI);
     protected abstract String getSystemProperty();
 
+    protected RecordResponseFilter recordResponseFilter;
+    protected RecordRequestFilter recordRequestFilter;
+
     public void record(String baseURI) throws IOException, InterruptedException, URISyntaxException {
         URI uri = new URI(baseURI);
         this.javascriptInjector = new JavascriptInjector(pathToJsInjectonFile);
         this.timeout = 15;
+        Supplier<String> injectionCodeSupplier = () -> javascriptInjector.getInjectionCode();
+        recordResponseFilter = new RecordResponseFilter(uri, injectionCodeSupplier);
+        recordRequestFilter = new RecordRequestFilter(domainSpecificActionList);
         this.recordSettings = createRecordSettings(uri);
-        init();
+        System.setProperty(getSystemProperty(), pathToDriverExecutable);
+        recordSettings.prepareRecord(timeout);
         recordSettings.openBaseUrl();
     }
 
@@ -53,11 +63,5 @@ public abstract class RecordBrowserBase {
 
     public void cleanUp() {
         recordSettings.cleanUpRecord();
-    }
-
-    private void init() throws IOException {
-        System.setProperty(getSystemProperty(), pathToDriverExecutable);
-
-        recordSettings.prepareRecord(timeout);
     }
 }
