@@ -1,6 +1,11 @@
 package com.hribol.automation.cli.commands;
 
+import com.hribol.automation.core.execution.application.DefaultApplicationActionFactory;
+import com.hribol.automation.core.execution.executor.ChromeDriverActionExecution;
+import com.hribol.automation.core.execution.executor.TestScenario;
+import com.hribol.automation.core.execution.executor.WebDriverActionExecution;
 import com.hribol.automation.core.execution.webdriver.PredefinedWebDriverActionFactory;
+import com.hribol.automation.core.execution.webdriver.WebDriverActionFactory;
 import com.hribol.automation.core.replay.ReplayBrowserConfiguration;
 import com.hribol.automation.core.execution.executor.WebDriverActionExecutor;
 import com.hribol.automation.core.replay.ReplayBrowser;
@@ -25,6 +30,8 @@ public class ReplayCommand implements Command {
     @Override
     public void run() {
         try {
+            WebDriverActionFactory factory = new PredefinedWebDriverActionFactory();
+
             WebDriverActionExecutor executor = new WebDriverActionExecutor()
                     .pathToDriverExecutable(pathToChromedriver)
                     .baseURI("http://www.tenniskafe.com/")
@@ -35,12 +42,14 @@ public class ReplayCommand implements Command {
                     .builder()
                     .pathToApplicationConfiguration(pathToApplicationConfiguration)
                     .url("http://www.tenniskafe.com/")
-                    .webdriverActionFactory(new PredefinedWebDriverActionFactory())
-                    .executor(executor)
+                    .webdriverActionFactory(factory)
                     .build();
 
+
+            WebDriverActionExecution execution = new ChromeDriverActionExecution(executor);
+
             ReplayBrowser replayBrowser = replayBrowserConfiguration.getReplayBrowser();
-            replayBrowser.replay(pathToSerializedTest);
+            replayBrowser.replay(pathToSerializedTest, execution);
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
         }

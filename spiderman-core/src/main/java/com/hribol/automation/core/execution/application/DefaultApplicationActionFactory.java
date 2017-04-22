@@ -27,8 +27,7 @@ public class DefaultApplicationActionFactory implements ApplicationActionFactory
             nameToConfiguration.put(applicationActionConfiguration.getName(), applicationActionConfiguration);
         }
 
-        this.initialPageLoadingEventName = "INITIAL_PAGE_LOAD_" + applicationConfiguration.getApplicationName() +
-                        "_" + applicationConfiguration.getVersion();
+        this.initialPageLoadingEventName = "INITIAL_PAGE_LOAD_" + applicationConfiguration.getApplicationName();
         this.testCaseToApplicationActionConverter = new TestCaseToApplicationActionConverter(webDriverActionFactory);
     }
 

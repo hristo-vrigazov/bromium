@@ -29,7 +29,6 @@ public class ReplayBrowserConfigurationTest {
         ReplayBrowserConfiguration replayBrowserConfiguration = ReplayBrowserConfiguration
                 .builder()
                 .url(url)
-                .executor(new WebDriverActionExecutor())
                 .pathToApplicationConfiguration(filename)
                 .webdriverActionFactory(webDriverActionFactory)
                 .build();
