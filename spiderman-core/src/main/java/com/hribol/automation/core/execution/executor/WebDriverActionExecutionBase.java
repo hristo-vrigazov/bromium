@@ -3,6 +3,7 @@ package com.hribol.automation.core.execution.executor;
 import com.hribol.automation.core.replay.settings.ReplaySettings;
 import com.hribol.automation.core.actions.WebDriverAction;
 import com.hribol.automation.core.suite.UbuntuVirtualScreenProcessCreator;
+import com.hribol.automation.core.suite.VirtualScreenProcessCreator;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.core.har.Har;
@@ -56,7 +57,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     private WebDriverActionExecutionBase(String baseURI, String pathToDriverExecutable, int timeout, int measurementsPrecisionMilli) throws IOException, URISyntaxException {
         this.pathToChromeDriver = pathToDriverExecutable;
-        this.useVirtualScreen = false;
         this.timeout = timeout;
         this.baseURI = baseURI;
         this.measurementsPrecisionMilli = measurementsPrecisionMilli;
@@ -128,7 +128,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     @Override
     public void executeOnScreen(TestScenario testScenario, String screenToUse) throws InterruptedException, IOException, URISyntaxException {
         this.screenToUse = screenToUse;
-        this.useVirtualScreen = true;
         execute(testScenario);
     }
 
@@ -139,7 +138,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         this.lock = false;
         this.automationResult = AutomationResult.NOT_STARTED;
 
-        screenToUse = Optional.ofNullable(screenToUse).orElse(":1");
+        screenToUse = Optional.ofNullable(screenToUse).orElse(":0");
         replaySettings.prepareReplay(pathToChromeDriver, screenToUse, timeout);
         this.initializeWhitelist();
     }
@@ -218,7 +217,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     @Override
     public AutomationResult executeOnScreen(TestScenario testScenario,
                                             int i,
-                                            UbuntuVirtualScreenProcessCreator virtualScreenProcessCreator,
+                                            VirtualScreenProcessCreator virtualScreenProcessCreator,
                                             String loadingTimesFileName,
                                             String harTimesFileName) {
         Process process;
