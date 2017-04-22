@@ -45,8 +45,7 @@ public abstract class RecordBrowserBase {
         URI uri = new URI(baseURI);
         this.javascriptInjector = new JavascriptInjector(pathToJsInjectonFile);
         this.timeout = 15;
-        Supplier<String> injectionCodeSupplier = () -> javascriptInjector.getInjectionCode();
-        recordResponseFilter = new RecordResponseFilter(uri, injectionCodeSupplier);
+        recordResponseFilter = new RecordResponseFilter(uri, javascriptInjector.getInjectionCode());
         recordRequestFilter = new RecordRequestFilter(domainSpecificActionList);
         this.recordSettings = createRecordSettings(uri);
         System.setProperty(getSystemProperty(), pathToDriverExecutable);

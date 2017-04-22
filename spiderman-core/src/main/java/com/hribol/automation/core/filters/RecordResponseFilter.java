@@ -16,20 +16,18 @@ import static com.hribol.automation.core.record.RecordUtils.isUrlChangingRequest
 public class RecordResponseFilter implements ResponseFilter {
 
     private URI baseURI;
-    private Supplier<String> injectionCodeSupplier;
+    private String injectionCode;
 
-    public RecordResponseFilter(URI baseURI, Supplier<String> injectionCodeSupplier) {
+    public RecordResponseFilter(URI baseURI, String injectionCode) {
         this.baseURI = baseURI;
-        this.injectionCodeSupplier = injectionCodeSupplier;
+        this.injectionCode = injectionCode;
     }
-
 
     @Override
     public void filterResponse(HttpResponse httpResponse, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
         if (isUrlChangingRequest(baseURI, httpMessageInfo.getOriginalRequest())) {
-            String baseContent = injectionCodeSupplier.get();
-            baseContent += httpMessageContents.getTextContents();
-            httpMessageContents.setTextContents(baseContent);
+            injectionCode += httpMessageContents.getTextContents();
+            httpMessageContents.setTextContents(injectionCode);
         }
     }
 }
