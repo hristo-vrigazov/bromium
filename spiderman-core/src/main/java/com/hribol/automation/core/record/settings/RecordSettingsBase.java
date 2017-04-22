@@ -1,14 +1,15 @@
 package com.hribol.automation.core.record.settings;
 
-import com.hribol.automation.core.suppliers.*;
+import com.hribol.automation.core.suppliers.BrowserMobProxySupplier;
+import com.hribol.automation.core.suppliers.DesiredCapabilitiesSupplier;
+import com.hribol.automation.core.suppliers.SeleniumProxySupplier;
+import com.hribol.automation.core.suppliers.VisibleWebDriverSupplier;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.util.function.Supplier;
 
 /**
  * Created by hvrigazov on 22.04.17.

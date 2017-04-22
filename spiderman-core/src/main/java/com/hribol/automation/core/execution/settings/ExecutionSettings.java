@@ -13,8 +13,6 @@ import java.io.IOException;
  * Created by hvrigazov on 21.03.17.
  */
 public interface ExecutionSettings {
-    BrowserMobProxy getBrowserMobProxy(int timeout);
-
     DriverService getDriverService(String pathToDriverExecutable, String screenToUse) throws IOException;
 
     Proxy getSeleniumProxy();
@@ -29,17 +27,10 @@ public interface ExecutionSettings {
 
     void cleanUpReplay();
 
-    void cleanUpRecord();
-
     WebDriver getWebDriver();
 
     Har getHar();
 
-    void prepareProxyFilters();
-
     void prepareReplay(String pathToChromeDriver, String screenToUse, int timeout) throws IOException;
 
-    void prepareRecord(int timeout) throws IOException;
-
-    void openBaseUrl();
 }

@@ -7,7 +7,6 @@ import net.lightbody.bmp.client.ClientUtil;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
-import net.lightbody.bmp.proxy.CaptureType;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -36,11 +35,6 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
     }
 
     @Override
-    public BrowserMobProxy getBrowserMobProxy(int timeout) {
-        return new BrowserMobProxySupplier(timeout, requestFilter, responseFilter).get();
-    }
-
-    @Override
     public DesiredCapabilities getDesiredCapabilities() {
         return new DesiredCapabilitiesSupplier(seleniumProxy).get();
     }
@@ -60,11 +54,6 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
         driverService.stop();
     }
 
-    @Override
-    public void cleanUpRecord() {
-        quitDriverAndStopProxy();
-    }
-
     private void quitDriverAndStopProxy() {
         driver.quit();
         proxy.stop();
@@ -78,14 +67,6 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
     @Override
     public Har getHar() {
         return proxy.getHar();
-    }
-
-    @Override
-    public void prepareProxyFilters() {
-        proxy.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
-        proxy.newHar("measurements");
-        proxy.addRequestFilter(requestFilter);
-        proxy.addResponseFilter(responseFilter);
     }
 
     @Override
@@ -103,21 +84,6 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
     @Override
     public Proxy getSeleniumProxy() {
         return ClientUtil.createSeleniumProxy(proxy);
-    }
-
-    @Override
-    public void prepareRecord(int timeout) throws IOException {
-        this.proxy = getBrowserMobProxy(timeout);
-        this.seleniumProxy = getSeleniumProxy();
-        prepareProxyFilters();
-        this.capabilities = getDesiredCapabilities();
-        this.driver = buildWebDriverVisible();
-        maximizeDriver();
-    }
-
-    @Override
-    public void openBaseUrl() {
-        driver.get(baseURI);
     }
 
 }
