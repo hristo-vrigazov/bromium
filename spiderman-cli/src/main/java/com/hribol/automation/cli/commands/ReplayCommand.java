@@ -1,12 +1,8 @@
 package com.hribol.automation.cli.commands;
 
-import com.hribol.automation.core.execution.executor.ChromeDriverActionExecution;
-import com.hribol.automation.core.execution.executor.WebDriverActionExecution;
 import com.hribol.automation.core.execution.factory.PredefinedWebDriverActionFactory;
 import com.hribol.automation.core.execution.factory.WebDriverActionFactory;
-import com.hribol.automation.core.replay.ReplayBrowserConfiguration;
-import com.hribol.automation.core.execution.executor.WebDriverActionExecutor;
-import com.hribol.automation.core.replay.ReplayBrowser;
+import com.hribol.automation.replay.*;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

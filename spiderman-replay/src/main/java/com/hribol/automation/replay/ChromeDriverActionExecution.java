@@ -1,7 +1,7 @@
-package com.hribol.automation.core.execution.executor;
+package com.hribol.automation.replay;
 
-import com.hribol.automation.core.replay.settings.ChromeDriverReplaySettings;
-import com.hribol.automation.core.replay.settings.ReplaySettings;
+import com.hribol.automation.replay.settings.ChromeDriverReplaySettings;
+import com.hribol.automation.replay.settings.ReplaySettings;
 import org.openqa.selenium.chrome.ChromeDriverService;
 
 import java.io.IOException;

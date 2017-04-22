@@ -1,4 +1,4 @@
-package com.hribol.automation.core.replay;
+package com.hribol.automation.replay;
 
 import com.hribol.automation.core.config.ApplicationConfiguration;
 import com.hribol.automation.core.execution.application.DefaultApplicationActionFactory;

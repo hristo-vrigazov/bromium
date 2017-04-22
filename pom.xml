@@ -37,6 +37,7 @@
         <module>spiderman-core</module>
         <module>spiderman-cli</module>
         <module>spiderman-record</module>
+        <module>spiderman-replay</module>
     </modules>
 
     <properties>

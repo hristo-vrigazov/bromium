@@ -1,28 +1,25 @@
-package com.hribol.automation.core.execution.executor;
-
+package com.hribol.automation.replay;
+import com.hribol.automation.core.actions.WebDriverAction;
+import com.hribol.automation.core.execution.executor.AutomationResult;
+import com.hribol.automation.core.execution.executor.TestScenario;
 import com.hribol.automation.core.filters.ReplayRequestFilter;
 import com.hribol.automation.core.filters.ReplayResponseFilter;
-import com.hribol.automation.core.replay.settings.ReplaySettings;
-import com.hribol.automation.core.actions.WebDriverAction;
 import com.hribol.automation.core.suite.VirtualScreenProcessCreator;
+import com.hribol.automation.core.utils.ConfigurationUtils;
+import com.hribol.automation.core.utils.LoadingTimes;
+import com.hribol.automation.replay.settings.ReplaySettings;
 import io.netty.handler.codec.http.HttpRequest;
-import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.core.har.Har;
-import net.lightbody.bmp.util.HttpMessageContents;
-import net.lightbody.bmp.util.HttpMessageInfo;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriverException;
-import com.hribol.automation.core.utils.LoadingTimes;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
 
-import static com.hribol.automation.core.utils.ConfigurationUtils.toSeconds;
 
 /**
  * Created by hvrigazov on 16.03.17.
@@ -49,7 +46,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         try {
             this.automationResult = AutomationResult.EXECUTING;
             while (testScenario.hasMoreSteps()) {
-                if (toSeconds(System.nanoTime() - elapsedTime) > timeout) {
+                if (ConfigurationUtils.toSeconds(System.nanoTime() - elapsedTime) > timeout) {
                     this.automationResult = AutomationResult.TIMEOUT;
                     throw new TimeoutException("Could not execute the action! Waited "
                             + String.valueOf(System.nanoTime() - elapsedTime)
@@ -183,7 +180,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         int i = 0;
 
         long startTime = System.nanoTime();
-        while (i < maxRetries && (toSeconds(System.nanoTime() - startTime) < timeout)) {
+        while (i < maxRetries && (ConfigurationUtils.toSeconds(System.nanoTime() - startTime) < timeout)) {
             try {
                 Thread.sleep(measurementsPrecisionMilli);
                 webDriverAction.execute(replaySettings.getWebDriver());

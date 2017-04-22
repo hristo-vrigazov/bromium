@@ -2,7 +2,7 @@ package replay;
 
 import com.hribol.automation.core.execution.factory.PredefinedWebDriverActionFactory;
 import com.hribol.automation.core.execution.factory.WebDriverActionFactory;
-import com.hribol.automation.core.replay.ReplayBrowserConfiguration;
+import com.hribol.automation.replay.ReplayBrowserConfiguration;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

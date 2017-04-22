@@ -1,4 +1,4 @@
-package com.hribol.automation.core.replay.settings;
+package com.hribol.automation.replay.settings;
 
 import com.google.common.collect.ImmutableMap;
 import com.hribol.automation.core.suppliers.InvisibleChromeDriverSupplier;
