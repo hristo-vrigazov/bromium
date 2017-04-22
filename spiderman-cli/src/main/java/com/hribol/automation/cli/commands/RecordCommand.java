@@ -1,7 +1,7 @@
 package com.hribol.automation.cli.commands;
 
-import com.hribol.automation.core.record.ChromeRecordBrowser;
-import com.hribol.automation.core.record.RecordBrowserBase;
+import com.hribol.automation.record.ChromeRecordBrowser;
+import com.hribol.automation.record.RecordBrowserBase;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

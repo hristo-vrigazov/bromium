@@ -1,7 +1,7 @@
-package com.hribol.automation.core.record;
+package com.hribol.automation.record;
 
-import com.hribol.automation.core.record.settings.ChromeRecordSettings;
-import com.hribol.automation.core.record.settings.RecordSettings;
+import com.hribol.automation.record.settings.ChromeRecordSettings;
+import com.hribol.automation.record.settings.RecordSettings;
 import org.openqa.selenium.chrome.ChromeDriverService;
 
 import java.net.URI;

@@ -36,6 +36,7 @@
     <modules>
         <module>spiderman-core</module>
         <module>spiderman-cli</module>
+        <module>spiderman-record</module>
     </modules>
 
     <properties>

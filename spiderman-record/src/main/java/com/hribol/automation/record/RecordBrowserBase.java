@@ -1,10 +1,10 @@
-package com.hribol.automation.core.record;
+package com.hribol.automation.record;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hribol.automation.core.filters.RecordRequestFilter;
 import com.hribol.automation.core.filters.RecordResponseFilter;
-import com.hribol.automation.core.record.settings.RecordSettings;
+import com.hribol.automation.record.settings.RecordSettings;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,7 +14,6 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
 /**
  * Created by hvrigazov on 09.03.17.

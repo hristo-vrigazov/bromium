@@ -1,4 +1,4 @@
-package com.hribol.automation.core.record.settings;
+package com.hribol.automation.record.settings;
 
 /**
  * Created by hvrigazov on 22.04.17.

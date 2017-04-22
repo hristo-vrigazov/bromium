@@ -6,9 +6,8 @@ import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
 
 import java.net.URI;
-import java.util.function.Supplier;
 
-import static com.hribol.automation.core.record.RecordUtils.isUrlChangingRequest;
+import static com.hribol.automation.core.utils.RecordUtils.isUrlChangingRequest;
 
 /**
  * Created by hvrigazov on 22.04.17.

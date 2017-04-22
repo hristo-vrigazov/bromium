@@ -1,4 +1,4 @@
-package com.hribol.automation.core.record.settings;
+package com.hribol.automation.record.settings;
 
 import com.hribol.automation.core.suppliers.VisibleChromeDriverSupplier;
 import net.lightbody.bmp.filters.RequestFilter;
