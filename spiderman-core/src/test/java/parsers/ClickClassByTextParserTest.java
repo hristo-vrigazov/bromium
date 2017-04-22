@@ -1,6 +1,6 @@
 package parsers;
 
-import com.hribol.automation.core.execution.webdriver.WebDriverAction;
+import com.hribol.automation.core.actions.WebDriverAction;
 import com.hribol.automation.core.parsers.ClickClassByTextParser;
 import org.junit.Test;
 

@@ -6,7 +6,7 @@ import com.hribol.automation.core.execution.application.ApplicationAction;
 import com.hribol.automation.core.execution.application.ApplicationActionFactory;
 import com.hribol.automation.core.execution.application.DefaultApplicationActionFactory;
 import com.hribol.automation.core.execution.application.TestCaseToApplicationActionConverter;
-import com.hribol.automation.core.execution.webdriver.WebDriverActionFactory;
+import com.hribol.automation.core.execution.factory.WebDriverActionFactory;
 import org.junit.Test;
 
 import java.util.ArrayList;

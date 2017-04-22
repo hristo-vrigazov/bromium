@@ -1,7 +1,7 @@
 package com.hribol.automation.core.execution.executor;
 
-import com.hribol.automation.core.execution.settings.ReplaySettings;
-import com.hribol.automation.core.execution.webdriver.WebDriverAction;
+import com.hribol.automation.core.replay.settings.ReplaySettings;
+import com.hribol.automation.core.actions.WebDriverAction;
 import com.hribol.automation.core.suite.UbuntuVirtualScreenProcessCreator;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;

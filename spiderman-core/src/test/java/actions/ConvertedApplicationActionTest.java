@@ -2,7 +2,7 @@ package actions;
 
 import com.hribol.automation.core.actions.ConvertedApplicationAction;
 import com.hribol.automation.core.execution.application.ApplicationAction;
-import com.hribol.automation.core.execution.webdriver.WebDriverAction;
+import com.hribol.automation.core.actions.WebDriverAction;
 import org.junit.Test;
 
 import java.util.Optional;

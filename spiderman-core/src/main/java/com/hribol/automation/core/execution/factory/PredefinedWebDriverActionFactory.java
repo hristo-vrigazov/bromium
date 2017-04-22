@@ -1,4 +1,4 @@
-package com.hribol.automation.core.execution.webdriver;
+package com.hribol.automation.core.execution.factory;
 
 /**
  * Created by hvrigazov on 19.03.17.

@@ -1,11 +1,9 @@
 package com.hribol.automation.cli.commands;
 
-import com.hribol.automation.core.execution.application.DefaultApplicationActionFactory;
 import com.hribol.automation.core.execution.executor.ChromeDriverActionExecution;
-import com.hribol.automation.core.execution.executor.TestScenario;
 import com.hribol.automation.core.execution.executor.WebDriverActionExecution;
-import com.hribol.automation.core.execution.webdriver.PredefinedWebDriverActionFactory;
-import com.hribol.automation.core.execution.webdriver.WebDriverActionFactory;
+import com.hribol.automation.core.execution.factory.PredefinedWebDriverActionFactory;
+import com.hribol.automation.core.execution.factory.WebDriverActionFactory;
 import com.hribol.automation.core.replay.ReplayBrowserConfiguration;
 import com.hribol.automation.core.execution.executor.WebDriverActionExecutor;
 import com.hribol.automation.core.replay.ReplayBrowser;

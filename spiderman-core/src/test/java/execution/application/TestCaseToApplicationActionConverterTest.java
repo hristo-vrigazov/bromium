@@ -5,8 +5,8 @@ import com.hribol.automation.core.config.ParameterConfiguration;
 import com.hribol.automation.core.config.WebDriverActionConfiguration;
 import com.hribol.automation.core.execution.application.ApplicationAction;
 import com.hribol.automation.core.execution.application.TestCaseToApplicationActionConverter;
-import com.hribol.automation.core.execution.webdriver.WebDriverAction;
-import com.hribol.automation.core.execution.webdriver.WebDriverActionFactory;
+import com.hribol.automation.core.actions.WebDriverAction;
+import com.hribol.automation.core.execution.factory.WebDriverActionFactory;
 import org.junit.Test;
 
 import java.util.HashMap;

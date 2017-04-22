@@ -4,8 +4,8 @@ import com.hribol.automation.core.actions.ConvertedApplicationAction;
 import com.hribol.automation.core.config.ApplicationActionConfiguration;
 import com.hribol.automation.core.config.ParameterConfiguration;
 import com.hribol.automation.core.config.WebDriverActionConfiguration;
-import com.hribol.automation.core.execution.webdriver.WebDriverAction;
-import com.hribol.automation.core.execution.webdriver.WebDriverActionFactory;
+import com.hribol.automation.core.actions.WebDriverAction;
+import com.hribol.automation.core.execution.factory.WebDriverActionFactory;
 
 import java.util.HashMap;
 import java.util.Map;

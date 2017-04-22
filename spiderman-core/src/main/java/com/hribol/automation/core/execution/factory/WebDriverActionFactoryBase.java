@@ -1,5 +1,6 @@
-package com.hribol.automation.core.execution.webdriver;
+package com.hribol.automation.core.execution.factory;
 
+import com.hribol.automation.core.actions.WebDriverAction;
 import com.hribol.automation.core.parsers.ClickClassByTextParser;
 import com.hribol.automation.core.parsers.WebDriverActionParameterParser;
 

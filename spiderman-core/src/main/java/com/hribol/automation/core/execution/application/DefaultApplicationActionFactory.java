@@ -2,7 +2,7 @@ package com.hribol.automation.core.execution.application;
 
 import com.hribol.automation.core.config.ApplicationActionConfiguration;
 import com.hribol.automation.core.config.ApplicationConfiguration;
-import com.hribol.automation.core.execution.webdriver.WebDriverActionFactory;
+import com.hribol.automation.core.execution.factory.WebDriverActionFactory;
 
 import java.util.HashMap;
 import java.util.Map;

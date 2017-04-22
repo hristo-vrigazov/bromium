@@ -1,6 +1,5 @@
 package com.hribol.automation.core.actions;
 
-import com.hribol.automation.core.execution.webdriver.WebDriverAction;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotSelectableException;
 import org.openqa.selenium.WebDriver;

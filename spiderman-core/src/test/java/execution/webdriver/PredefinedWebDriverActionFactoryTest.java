@@ -1,8 +1,8 @@
 package execution.webdriver;
 
-import com.hribol.automation.core.execution.webdriver.PredefinedWebDriverActionFactory;
-import com.hribol.automation.core.execution.webdriver.WebDriverAction;
-import com.hribol.automation.core.execution.webdriver.WebDriverActionFactory;
+import com.hribol.automation.core.execution.factory.PredefinedWebDriverActionFactory;
+import com.hribol.automation.core.actions.WebDriverAction;
+import com.hribol.automation.core.execution.factory.WebDriverActionFactory;
 import org.junit.Test;
 
 import java.util.HashMap;

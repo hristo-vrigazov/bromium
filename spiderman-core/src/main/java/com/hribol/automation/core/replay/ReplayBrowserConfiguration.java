@@ -3,9 +3,8 @@ package com.hribol.automation.core.replay;
 import com.hribol.automation.core.config.ApplicationConfiguration;
 import com.hribol.automation.core.execution.application.DefaultApplicationActionFactory;
 import com.hribol.automation.core.execution.executor.TestScenarioFactoryImpl;
-import com.hribol.automation.core.execution.executor.WebDriverActionExecutor;
 import com.hribol.automation.core.utils.ConfigurationUtils;
-import com.hribol.automation.core.execution.webdriver.WebDriverActionFactory;
+import com.hribol.automation.core.execution.factory.WebDriverActionFactory;
 
 import java.io.IOException;
 

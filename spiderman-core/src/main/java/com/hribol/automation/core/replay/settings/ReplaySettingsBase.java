@@ -1,4 +1,4 @@
-package com.hribol.automation.core.execution.settings;
+package com.hribol.automation.core.replay.settings;
 
 import com.hribol.automation.core.suppliers.*;
 import net.lightbody.bmp.BrowserMobProxy;

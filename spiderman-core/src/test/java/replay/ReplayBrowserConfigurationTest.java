@@ -1,8 +1,7 @@
 package replay;
 
-import com.hribol.automation.core.execution.executor.WebDriverActionExecutor;
-import com.hribol.automation.core.execution.webdriver.PredefinedWebDriverActionFactory;
-import com.hribol.automation.core.execution.webdriver.WebDriverActionFactory;
+import com.hribol.automation.core.execution.factory.PredefinedWebDriverActionFactory;
+import com.hribol.automation.core.execution.factory.WebDriverActionFactory;
 import com.hribol.automation.core.replay.ReplayBrowserConfiguration;
 import org.junit.Rule;
 import org.junit.Test;

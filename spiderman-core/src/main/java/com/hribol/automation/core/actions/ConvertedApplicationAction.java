@@ -1,7 +1,6 @@
 package com.hribol.automation.core.actions;
 
 import com.hribol.automation.core.execution.application.ApplicationAction;
-import com.hribol.automation.core.execution.webdriver.WebDriverAction;
 
 import java.util.Optional;
 

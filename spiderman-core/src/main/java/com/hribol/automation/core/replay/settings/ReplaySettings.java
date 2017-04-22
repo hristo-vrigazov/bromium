@@ -1,4 +1,4 @@
-package com.hribol.automation.core.execution.settings;
+package com.hribol.automation.core.replay.settings;
 
 import net.lightbody.bmp.core.har.Har;
 import org.openqa.selenium.WebDriver;
