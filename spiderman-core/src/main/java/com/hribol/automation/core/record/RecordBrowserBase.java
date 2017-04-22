@@ -69,7 +69,7 @@ public abstract class RecordBrowserBase {
     private void init() throws IOException {
         System.setProperty(getSystemProperty(), pathToDriverExecutable);
 
-        executionSettings.initRecord(timeout);
+        executionSettings.prepareRecord(timeout);
     }
 
     protected HttpResponse filterRequest(HttpRequest request, HttpMessageContents contents, HttpMessageInfo messageInfo) {

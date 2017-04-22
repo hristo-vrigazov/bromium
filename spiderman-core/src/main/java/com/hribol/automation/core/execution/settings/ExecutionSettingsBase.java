@@ -88,7 +88,7 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
     }
 
     @Override
-    public void initializeProxyFilters() {
+    public void prepareProxyFilters() {
         proxy.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
         proxy.newHar("measurements");
         proxy.addRequestFilter(requestFilter);
@@ -96,11 +96,11 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
     }
 
     @Override
-    public void initReplay(String pathToChromeDriver, String screenToUse, int timeout, boolean useVirtualScreen)
+    public void prepareReplay(String pathToChromeDriver, String screenToUse, int timeout, boolean useVirtualScreen)
             throws IOException {
         this.proxy = getBrowserMobProxy(timeout);
         this.seleniumProxy = getSeleniumProxy();
-        initializeProxyFilters();
+        prepareProxyFilters();
         this.capabilities = getDesiredCapabilities();
         this.driverService = getDriverService(pathToChromeDriver, screenToUse);
         this.driver = buildWebDriver(useVirtualScreen);
@@ -113,10 +113,10 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
     }
 
     @Override
-    public void initRecord(int timeout) throws IOException {
+    public void prepareRecord(int timeout) throws IOException {
         this.proxy = getBrowserMobProxy(timeout);
         this.seleniumProxy = getSeleniumProxy();
-        initializeProxyFilters();
+        prepareProxyFilters();
         this.capabilities = getDesiredCapabilities();
         this.driver = buildWebDriverVisible();
         maximizeDriver();

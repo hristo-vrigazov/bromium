@@ -35,11 +35,11 @@ public interface ExecutionSettings {
 
     Har getHar();
 
-    void initializeProxyFilters();
+    void prepareProxyFilters();
 
-    void initReplay(String pathToChromeDriver, String screenToUse, int timeout, boolean useVirtualScreen) throws IOException;
+    void prepareReplay(String pathToChromeDriver, String screenToUse, int timeout, boolean useVirtualScreen) throws IOException;
 
-    void initRecord(int timeout) throws IOException;
+    void prepareRecord(int timeout) throws IOException;
 
     void openBaseUrl();
 }

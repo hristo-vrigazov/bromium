@@ -140,7 +140,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         this.automationResult = AutomationResult.NOT_STARTED;
 
         screenToUse = Optional.ofNullable(screenToUse).orElse(":1");
-        executionSettings.initReplay(pathToChromeDriver, screenToUse, timeout, useVirtualScreen);
+        executionSettings.prepareReplay(pathToChromeDriver, screenToUse, timeout, useVirtualScreen);
         this.initializeWhitelist();
     }
 
