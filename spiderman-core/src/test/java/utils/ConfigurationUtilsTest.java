@@ -3,7 +3,7 @@ package utils;
 import com.hribol.automation.core.config.ApplicationActionConfiguration;
 import com.hribol.automation.core.config.ApplicationConfiguration;
 import com.hribol.automation.core.config.ParameterConfiguration;
-import com.hribol.automation.core.config.WebdriverActionConfiguration;
+import com.hribol.automation.core.config.WebDriverActionConfiguration;
 import com.hribol.automation.core.utils.ConfigurationUtils;
 import org.junit.Test;
 
@@ -52,14 +52,14 @@ public class ConfigurationUtilsTest {
         Map<String, ParameterConfiguration> parameterConfigurationMap = new HashMap<>();
         parameterConfigurationMap.put(parameterConfiguration.getParameterName(), parameterConfiguration);
 
-        WebdriverActionConfiguration webdriverActionConfiguration = new WebdriverActionConfiguration();
-        webdriverActionConfiguration.setWebdriverActionType("CLICK_CLASS_BY_TEXT");
-        webdriverActionConfiguration.setParametersConfiguration(parameterConfigurationMap);
+        WebDriverActionConfiguration webDriverActionConfiguration = new WebDriverActionConfiguration();
+        webDriverActionConfiguration.setWebDriverActionType("CLICK_CLASS_BY_TEXT");
+        webDriverActionConfiguration.setParametersConfiguration(parameterConfigurationMap);
 
         ApplicationActionConfiguration applicationActionConfiguration = new ApplicationActionConfiguration();
         applicationActionConfiguration.setName("applicationAction");
         applicationActionConfiguration.setExpectsHttpRequest(false);
-        applicationActionConfiguration.setWebdriverAction(webdriverActionConfiguration);
+        applicationActionConfiguration.setWebdriverAction(webDriverActionConfiguration);
 
         String outputFileName = "tmp.json";
         ConfigurationUtils.dumpApplicationConfiguration(applicationConfiguration, outputFileName);

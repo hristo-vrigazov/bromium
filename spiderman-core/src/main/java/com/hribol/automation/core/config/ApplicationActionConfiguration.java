@@ -5,9 +5,9 @@ package com.hribol.automation.core.config;
  */
 public class ApplicationActionConfiguration {
     private String name;
-    private WebdriverActionConfiguration conditionBeforeExecution;
-    private WebdriverActionConfiguration webdriverAction;
-    private WebdriverActionConfiguration conditionAfterExecution;
+    private WebDriverActionConfiguration conditionBeforeExecution;
+    private WebDriverActionConfiguration webdriverAction;
+    private WebDriverActionConfiguration conditionAfterExecution;
     private boolean expectsHttpRequest;
 
     public String getName() {
@@ -18,27 +18,27 @@ public class ApplicationActionConfiguration {
         this.name = name;
     }
 
-    public WebdriverActionConfiguration getConditionBeforeExecution() {
+    public WebDriverActionConfiguration getConditionBeforeExecution() {
         return conditionBeforeExecution;
     }
 
-    public void setConditionBeforeExecution(WebdriverActionConfiguration conditionBeforeExecution) {
+    public void setConditionBeforeExecution(WebDriverActionConfiguration conditionBeforeExecution) {
         this.conditionBeforeExecution = conditionBeforeExecution;
     }
 
-    public WebdriverActionConfiguration getConditionAfterExecution() {
+    public WebDriverActionConfiguration getConditionAfterExecution() {
         return conditionAfterExecution;
     }
 
-    public void setConditionAfterExecution(WebdriverActionConfiguration conditionAfterExecution) {
+    public void setConditionAfterExecution(WebDriverActionConfiguration conditionAfterExecution) {
         this.conditionAfterExecution = conditionAfterExecution;
     }
 
-    public WebdriverActionConfiguration getWebdriverAction() {
+    public WebDriverActionConfiguration getWebdriverAction() {
         return webdriverAction;
     }
 
-    public void setWebdriverAction(WebdriverActionConfiguration webdriverAction) {
+    public void setWebdriverAction(WebDriverActionConfiguration webdriverAction) {
         this.webdriverAction = webdriverAction;
     }
 

@@ -15,6 +15,10 @@ public class ReplayBrowser {
     private ApplicationActionFactory applicationActionFactory;
     private TestScenarioFactory testScenarioFactory;
 
+    public ReplayBrowser(ApplicationActionFactory applicationActionFactory) {
+        this(applicationActionFactory, new TestScenarioFactoryImpl());
+    }
+
     public ReplayBrowser(ApplicationActionFactory applicationActionFactory, TestScenarioFactory testScenarioFactory) {
         this.applicationActionFactory = applicationActionFactory;
         this.testScenarioFactory = testScenarioFactory;

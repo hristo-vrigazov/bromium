@@ -27,7 +27,7 @@ public class ReplayBrowserTest {
         LoadingTimes loadingTimes = mock(LoadingTimes.class);
         when(webDriverActionExecution.getLoadingTimes()).thenReturn(loadingTimes);
 
-        ReplayBrowser replayBrowser = new ReplayBrowser(applicationActionFactory, new TestScenarioFactoryImpl());
+        ReplayBrowser replayBrowser = new ReplayBrowser(applicationActionFactory);
         replayBrowser.replay(testScenario, webDriverActionExecution);
 
         verify(webDriverActionExecution).execute(testScenario);
@@ -43,7 +43,7 @@ public class ReplayBrowserTest {
 
         String screen = ":1";
 
-        ReplayBrowser replayBrowser = new ReplayBrowser(applicationActionFactory, new TestScenarioFactoryImpl());
+        ReplayBrowser replayBrowser = new ReplayBrowser(applicationActionFactory);
         replayBrowser.replayOnScreen(testScenario, webDriverActionExecution, screen);
 
         verify(webDriverActionExecution).executeOnScreen(testScenario, screen);

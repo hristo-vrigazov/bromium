@@ -5,16 +5,16 @@ import java.util.Map;
 /**
  * Created by hvrigazov on 17.03.17.
  */
-public class WebdriverActionConfiguration {
-    private String webdriverActionType;
+public class WebDriverActionConfiguration {
+    private String webDriverActionType;
     private Map<String, ParameterConfiguration> parametersConfiguration;
 
-    public String getWebdriverActionType() {
-        return webdriverActionType;
+    public String getWebDriverActionType() {
+        return webDriverActionType;
     }
 
-    public void setWebdriverActionType(String webdriverActionType) {
-        this.webdriverActionType = webdriverActionType;
+    public void setWebDriverActionType(String webDriverActionType) {
+        this.webDriverActionType = webDriverActionType;
     }
 
     public Map<String, ParameterConfiguration> getParametersConfiguration() {

@@ -2,7 +2,7 @@ package com.hribol.automation.core.execution.application;
 
 import com.hribol.automation.core.config.ParameterConfiguration;
 import com.hribol.automation.core.config.ApplicationActionConfiguration;
-import com.hribol.automation.core.config.WebdriverActionConfiguration;
+import com.hribol.automation.core.config.WebDriverActionConfiguration;
 import com.hribol.automation.core.config.WebdriverActionType;
 import com.hribol.automation.core.execution.webdriver.WebDriverAction;
 import com.hribol.automation.core.execution.webdriver.WebDriverActionFactory;
@@ -35,20 +35,20 @@ public class TestCaseToApplicationActionConverter {
         return new ConvertedApplicationAction(precondition, webdriverAction, postCondition);
     }
 
-    private Optional<WebDriverAction> convertAction(WebdriverActionConfiguration webdriverActionConfiguration,
+    private Optional<WebDriverAction> convertAction(WebDriverActionConfiguration webDriverActionConfiguration,
                                                     Map<String, String> testCaseStep) {
-        return convertAction(webdriverActionConfiguration, testCaseStep, false);
+        return convertAction(webDriverActionConfiguration, testCaseStep, false);
     }
 
-    private Optional<WebDriverAction> convertAction(WebdriverActionConfiguration webdriverActionConfiguration,
+    private Optional<WebDriverAction> convertAction(WebDriverActionConfiguration webDriverActionConfiguration,
                                                     Map<String, String> testCaseStep,
                                                     boolean expectHttpRequest) {
-        String webdriverActionType = webdriverActionConfiguration.getWebdriverActionType();
+        String webdriverActionType = webDriverActionConfiguration.getWebDriverActionType();
         if (webdriverActionType.equals(WebdriverActionType.NOTHING.toString())) {
             return Optional.empty();
         }
 
-        Map<String, ParameterConfiguration> parametersConfigurations = webdriverActionConfiguration
+        Map<String, ParameterConfiguration> parametersConfigurations = webDriverActionConfiguration
                 .getParametersConfiguration();
         Map<String, Object> parameters = new HashMap<>();
 

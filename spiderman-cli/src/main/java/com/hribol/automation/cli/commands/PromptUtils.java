@@ -50,17 +50,17 @@ public class PromptUtils {
         ApplicationActionConfiguration applicationActionConfiguration = new ApplicationActionConfiguration();
         applicationActionConfiguration.setName(actionName);
 
-        WebdriverActionConfiguration preconditionConfiguration =
+        WebDriverActionConfiguration preconditionConfiguration =
                 promptForActionConfigurationType("Precondition: ");
         applicationActionConfiguration.setConditionBeforeExecution(preconditionConfiguration);
         textIO.getTextTerminal().println();
 
-        WebdriverActionConfiguration webdriverActionConfiguration =
+        WebDriverActionConfiguration webDriverActionConfiguration =
                 promptForActionConfigurationType("Action: ");
-        applicationActionConfiguration.setWebdriverAction(webdriverActionConfiguration);
+        applicationActionConfiguration.setWebdriverAction(webDriverActionConfiguration);
         textIO.getTextTerminal().println();
 
-        WebdriverActionConfiguration postconditionConfiguration =
+        WebDriverActionConfiguration postconditionConfiguration =
                 promptForActionConfigurationType("Postaction: ");
         applicationActionConfiguration.setConditionAfterExecution(postconditionConfiguration);
         textIO.getTextTerminal().println();
@@ -81,9 +81,9 @@ public class PromptUtils {
                 .read("Expect HTTP request after the action?");
     }
 
-    public WebdriverActionConfiguration promptForActionConfigurationType(String prompt) {
+    public WebDriverActionConfiguration promptForActionConfigurationType(String prompt) {
         textIO.getTextTerminal().println(prompt);
-        WebdriverActionConfiguration webdriverActionConfiguration = new WebdriverActionConfiguration();
+        WebDriverActionConfiguration webDriverActionConfiguration = new WebDriverActionConfiguration();
         WebdriverActionType webdriverActionType = textIO
                 .newEnumInputReader(WebdriverActionType.class)
                 .read("Type: ");
@@ -92,10 +92,10 @@ public class PromptUtils {
 
         Map<String, ParameterConfiguration> parameterConfigurations =
                 collectParametersConfiguration(webdriverActionType);
-        webdriverActionConfiguration.setParametersConfiguration(parameterConfigurations);
-        webdriverActionConfiguration.setWebdriverActionType(webdriverAction);
+        webDriverActionConfiguration.setParametersConfiguration(parameterConfigurations);
+        webDriverActionConfiguration.setWebDriverActionType(webdriverAction);
 
-        return webdriverActionConfiguration;
+        return webDriverActionConfiguration;
     }
 
     public Map<String, ParameterConfiguration> collectParametersConfiguration(WebdriverActionType webdriverActionType) {
@@ -200,7 +200,7 @@ public class PromptUtils {
             ApplicationActionConfiguration applicationActionConfiguration = nameToActionMap.get(choice);
             promptExpectsHttpRequest(applicationActionConfiguration);
 
-            Optional<WebdriverActionConfiguration> optionalConfiguration = promptForChangeAction(applicationActionConfiguration, "precondition");
+            Optional<WebDriverActionConfiguration> optionalConfiguration = promptForChangeAction(applicationActionConfiguration, "precondition");
             if (optionalConfiguration.isPresent()) {
                 applicationActionConfiguration.setConditionBeforeExecution(optionalConfiguration.get());
             }
@@ -223,13 +223,13 @@ public class PromptUtils {
                 .read("Edit another action?");
     }
 
-    public Optional<WebdriverActionConfiguration> promptForChangeAction(ApplicationActionConfiguration applicationActionConfiguration,
-                                                                                String prompt) {
+    public Optional<WebDriverActionConfiguration> promptForChangeAction(ApplicationActionConfiguration applicationActionConfiguration,
+                                                                        String prompt) {
         boolean userWantsToChangePrecondition =
-                shouldChangePrompt(prompt, applicationActionConfiguration.getConditionBeforeExecution().getWebdriverActionType());
+                shouldChangePrompt(prompt, applicationActionConfiguration.getConditionBeforeExecution().getWebDriverActionType());
 
         if (userWantsToChangePrecondition) {
-            WebdriverActionConfiguration configuration = promptForActionConfigurationType(prompt + ": ");
+            WebDriverActionConfiguration configuration = promptForActionConfigurationType(prompt + ": ");
             return Optional.of(configuration);
         }
 
