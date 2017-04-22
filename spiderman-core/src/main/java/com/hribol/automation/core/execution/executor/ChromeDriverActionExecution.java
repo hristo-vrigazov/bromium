@@ -2,6 +2,7 @@ package com.hribol.automation.core.execution.executor;
 
 import com.hribol.automation.core.execution.settings.ChromeDriverReplaySettings;
 import com.hribol.automation.core.execution.settings.ReplaySettings;
+import org.openqa.selenium.chrome.ChromeDriverService;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -21,6 +22,6 @@ public class ChromeDriverActionExecution extends WebDriverActionExecutionBase {
 
     @Override
     protected String getSystemProperty() {
-        return "webdriver.chrome.driver";
+        return ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY;
     }
 }

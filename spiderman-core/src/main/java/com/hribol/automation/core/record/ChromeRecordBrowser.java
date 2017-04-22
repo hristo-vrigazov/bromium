@@ -1,7 +1,7 @@
 package com.hribol.automation.core.record;
 
-import com.hribol.automation.core.record.filters.RecordRequestFilter;
-import com.hribol.automation.core.record.filters.RecordResponseFilter;
+import com.hribol.automation.core.filters.RecordRequestFilter;
+import com.hribol.automation.core.filters.RecordResponseFilter;
 import com.hribol.automation.core.record.settings.ChromeRecordSettings;
 import com.hribol.automation.core.record.settings.RecordSettings;
 
