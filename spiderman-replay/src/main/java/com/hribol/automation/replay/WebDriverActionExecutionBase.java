@@ -2,8 +2,6 @@ package com.hribol.automation.replay;
 import com.hribol.automation.core.actions.WebDriverAction;
 import com.hribol.automation.core.execution.executor.AutomationResult;
 import com.hribol.automation.core.execution.executor.TestScenario;
-import com.hribol.automation.core.filters.ReplayRequestFilter;
-import com.hribol.automation.core.filters.ReplayResponseFilter;
 import com.hribol.automation.core.suite.VirtualScreenProcessCreator;
 import com.hribol.automation.core.utils.ConfigurationUtils;
 import com.hribol.automation.core.utils.LoadingTimes;

@@ -20,15 +20,7 @@ public class DefaultApplicationActionFactory implements ApplicationActionFactory
     public DefaultApplicationActionFactory(String url,
                                            ApplicationConfiguration applicationConfiguration,
                                            WebDriverActionFactory webDriverActionFactory) {
-        this.nameToConfiguration = new HashMap<>();
-        this.url = url;
-
-        for (ApplicationActionConfiguration applicationActionConfiguration: applicationConfiguration.getApplicationActionConfigurationList()) {
-            nameToConfiguration.put(applicationActionConfiguration.getName(), applicationActionConfiguration);
-        }
-
-        this.initialPageLoadingEventName = "INITIAL_PAGE_LOAD_" + applicationConfiguration.getApplicationName();
-        this.testCaseToApplicationActionConverter = new TestCaseToApplicationActionConverter(webDriverActionFactory);
+        this(url, applicationConfiguration, new TestCaseToApplicationActionConverter(webDriverActionFactory));
     }
 
     public DefaultApplicationActionFactory(String url,

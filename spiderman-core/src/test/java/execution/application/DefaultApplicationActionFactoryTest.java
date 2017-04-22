@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
  * Created by hvrigazov on 22.04.17.
  */
 public class DefaultApplicationActionFactoryTest {
+
     @Test
     public void canCreatePageLoadingAndOtherActions() {
         String url = "http://tenniskafe.com";
@@ -35,7 +36,6 @@ public class DefaultApplicationActionFactoryTest {
 
         ApplicationConfiguration applicationConfiguration = mock(ApplicationConfiguration.class);
         when(applicationConfiguration.getApplicationActionConfigurationList()).thenReturn(applicationActionConfigurationList);
-        WebDriverActionFactory webDriverActionFactory = mock(WebDriverActionFactory.class);
 
         TestCaseToApplicationActionConverter testCaseToApplicationActionConverter =
                 mock(TestCaseToApplicationActionConverter.class);
@@ -55,5 +55,20 @@ public class DefaultApplicationActionFactoryTest {
 
         assertFalse(initialPageLoading.getPrecondition().isPresent());
         assertEquals(applicationAction, applicationActionFactory.create(testCaseStep));
+    }
+
+    @Test
+    public void canCreatePageLoading() {
+        String url = "http://tenniskafe.com";
+        String applicationName = "tenniskafe";
+        ApplicationConfiguration applicationConfiguration = mock(ApplicationConfiguration.class);
+        when(applicationConfiguration.getApplicationName()).thenReturn(applicationName);
+        WebDriverActionFactory webDriverActionFactory = mock(WebDriverActionFactory.class);
+
+        ApplicationActionFactory applicationActionFactory =
+                new DefaultApplicationActionFactory(url, applicationConfiguration, webDriverActionFactory);
+
+        assertFalse(applicationActionFactory.getInitialPageLoading().getPrecondition().isPresent());
+        assertFalse(applicationActionFactory.getInitialPageLoading().getPostcondition().isPresent());
     }
 }

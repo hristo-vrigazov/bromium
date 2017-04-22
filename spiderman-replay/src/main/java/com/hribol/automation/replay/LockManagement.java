@@ -1,4 +1,4 @@
-package com.hribol.automation.core.filters;
+package com.hribol.automation.replay;
 
 /**
  * Created by hvrigazov on 22.04.17.
