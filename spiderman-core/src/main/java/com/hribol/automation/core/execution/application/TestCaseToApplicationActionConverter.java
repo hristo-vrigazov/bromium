@@ -11,6 +11,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import static com.hribol.automation.core.utils.Constants.EVENT;
+import static com.hribol.automation.core.utils.Constants.EXPECTS_HTTP;
+import static com.hribol.automation.core.utils.Constants.NOTHING;
+
 /**
  * Created by hvrigazov on 18.03.17.
  */
@@ -44,7 +48,7 @@ public class TestCaseToApplicationActionConverter {
                                                     Map<String, String> testCaseStep,
                                                     boolean expectHttpRequest) {
         String webdriverActionType = webDriverActionConfiguration.getWebDriverActionType();
-        if (webdriverActionType.equals("NOTHING")) {
+        if (webdriverActionType.equals(NOTHING)) {
             return Optional.empty();
         }
 
@@ -52,8 +56,8 @@ public class TestCaseToApplicationActionConverter {
                 .getParametersConfiguration();
         Map<String, Object> parameters = new HashMap<>();
 
-        parameters.put("event", testCaseStep.get("event"));
-        parameters.put("expectsHttp", expectHttpRequest);
+        parameters.put(EVENT, testCaseStep.get(EVENT));
+        parameters.put(EXPECTS_HTTP, expectHttpRequest);
 
         for (String parameterName: parametersConfigurations.keySet()) {
             ParameterConfiguration parameterConfiguration = parametersConfigurations.get(parameterName);
