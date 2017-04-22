@@ -37,7 +37,7 @@ public interface ExecutionSettings {
 
     void prepareProxyFilters();
 
-    void prepareReplay(String pathToChromeDriver, String screenToUse, int timeout, boolean useVirtualScreen) throws IOException;
+    void prepareReplay(String pathToChromeDriver, String screenToUse, int timeout) throws IOException;
 
     void prepareRecord(int timeout) throws IOException;
 

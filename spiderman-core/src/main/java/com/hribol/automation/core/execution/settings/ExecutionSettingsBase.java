@@ -96,8 +96,9 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
     }
 
     @Override
-    public void prepareReplay(String pathToChromeDriver, String screenToUse, int timeout, boolean useVirtualScreen)
+    public void prepareReplay(String pathToChromeDriver, String screenToUse, int timeout)
             throws IOException {
+        boolean useVirtualScreen = screenToUse.equals(":0");
         this.proxy = getBrowserMobProxy(timeout);
         this.seleniumProxy = getSeleniumProxy();
         prepareProxyFilters();
