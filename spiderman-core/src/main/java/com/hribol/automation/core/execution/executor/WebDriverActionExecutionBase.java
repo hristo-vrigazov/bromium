@@ -29,23 +29,6 @@ import static com.hribol.automation.core.utils.ConfigurationUtils.toSeconds;
  */
 public abstract class WebDriverActionExecutionBase implements WebDriverActionExecution {
 
-    private ReplaySettings replaySettings;
-    private AutomationResult automationResult;
-
-    private List<Long> waitingTimes;
-    protected Set<HttpRequest> httpRequestQueue;
-    private String pathToChromeDriver;
-    private Boolean lock;
-    private int timeout;
-    private int maxRetries;
-    private int measurementsPrecisionMilli;
-    private String screenToUse;
-    protected String baseURI;
-    private LoadingTimes loadingTimes;
-
-    protected ReplayRequestFilter replayRequestFilter;
-    protected ReplayResponseFilter replayResponseFilter;
-
     public WebDriverActionExecutionBase(WebDriverActionExecutor webDriverActionExecutor) throws IOException, URISyntaxException {
         this(webDriverActionExecutor.getBaseURI(),
                 webDriverActionExecutor.getPathToDriverExecutable(),
@@ -55,25 +38,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     public static WebDriverActionExecutor builder() {
         return new WebDriverActionExecutor();
-    }
-
-    private WebDriverActionExecutionBase(String baseURI, String pathToDriverExecutable, int timeout, int measurementsPrecisionMilli) throws IOException, URISyntaxException {
-        this.pathToChromeDriver = pathToDriverExecutable;
-        this.timeout = timeout;
-        this.baseURI = baseURI;
-        this.measurementsPrecisionMilli = measurementsPrecisionMilli;
-        this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
-        this.waitingTimes = new ArrayList<>();
-        this.replaySettings = createExecutionSettings();
-        replayRequestFilter = new ReplayRequestFilter(this::setLock, baseURI, httpRequestQueue);
-        replayResponseFilter = new ReplayResponseFilter(baseURI, httpRequestQueue);
-    }
-
-    protected abstract ReplaySettings createExecutionSettings();
-    protected abstract String getSystemProperty();
-
-    protected void setLock(Boolean value) {
-        this.lock = value;
     }
 
     @Override
@@ -112,55 +76,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         this.loadingTimes = new LoadingTimes(waitingTimes, testScenario.getActions());
     }
 
-    @Override
-    public void executeOnScreen(TestScenario testScenario, String screenToUse) throws InterruptedException, IOException, URISyntaxException {
-        this.screenToUse = screenToUse;
-        execute(testScenario);
-    }
-
-    private void prepare() throws IOException, URISyntaxException {
-        System.setProperty(getSystemProperty(), pathToChromeDriver);
-
-        this.maxRetries = 100;
-        this.lock = false;
-        this.automationResult = AutomationResult.NOT_STARTED;
-
-        screenToUse = Optional.ofNullable(screenToUse).orElse(":0");
-        replaySettings.prepareReplay(pathToChromeDriver, screenToUse, timeout);
-    }
-
-
-//    private void removeHttpRequestToQueue(HttpRequest httpRequest) {
-//        if (!inWhiteList(httpRequest.getUri())) {
-//            return;
-//        }
-//        System.out.println("Remove request " + httpRequest.getUri());
-//        this.httpRequestQueue.remove(httpRequest);
-//    }
-
-
-    private void executeIgnoringExceptions(WebDriverAction webDriverAction) throws InterruptedException {
-        int i = 0;
-
-        long startTime = System.nanoTime();
-        while (i < maxRetries && (toSeconds(System.nanoTime() - startTime) < timeout)) {
-            try {
-                Thread.sleep(measurementsPrecisionMilli);
-                webDriverAction.execute(replaySettings.getWebDriver());
-                return;
-            } catch (WebDriverException ex) {
-                System.out.println(ex.toString());
-                Thread.sleep(measurementsPrecisionMilli);
-                System.out.println("Could not make it from first try");
-                i++;
-            } catch (AssertionError assertionError) {
-                this.automationResult = AutomationResult.ASSERTION_ERROR;
-                throw new AssertionError(assertionError);
-            }
-        }
-
-        throw new TimeoutException("Could not execute the action! " + webDriverAction.getName());
-    }
 
     @Override
     public void dumpHarMetrics(String fileNameToDump) throws IOException {
@@ -182,6 +97,12 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     @Override
     public AutomationResult getAutomationResult() {
         return automationResult;
+    }
+
+    @Override
+    public void executeOnScreen(TestScenario testScenario, String screenToUse) throws InterruptedException, IOException, URISyntaxException {
+        this.screenToUse = screenToUse;
+        execute(testScenario);
     }
 
     @Override
@@ -212,5 +133,73 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         }
     }
 
+    protected ReplayRequestFilter replayRequestFilter;
+    protected ReplayResponseFilter replayResponseFilter;
+    protected String baseURI;
+    protected abstract ReplaySettings createExecutionSettings();
+    protected abstract String getSystemProperty();
+
+    private ReplaySettings replaySettings;
+    private AutomationResult automationResult;
+
+    private List<Long> waitingTimes;
+    private String pathToChromeDriver;
+    private Boolean lock;
+    private int timeout;
+    private int maxRetries;
+    private int measurementsPrecisionMilli;
+    private String screenToUse;
+    private LoadingTimes loadingTimes;
+    private Set<HttpRequest> httpRequestQueue;
+
+    private WebDriverActionExecutionBase(String baseURI, String pathToDriverExecutable, int timeout, int measurementsPrecisionMilli) throws IOException, URISyntaxException {
+        this.pathToChromeDriver = pathToDriverExecutable;
+        this.timeout = timeout;
+        this.baseURI = baseURI;
+        this.measurementsPrecisionMilli = measurementsPrecisionMilli;
+        this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
+        this.waitingTimes = new ArrayList<>();
+        this.replaySettings = createExecutionSettings();
+        replayRequestFilter = new ReplayRequestFilter(this::setLock, baseURI, httpRequestQueue);
+        replayResponseFilter = new ReplayResponseFilter(baseURI, httpRequestQueue);
+    }
+
+    private void setLock(Boolean value) {
+        this.lock = value;
+    }
+
+    private void prepare() throws IOException, URISyntaxException {
+        System.setProperty(getSystemProperty(), pathToChromeDriver);
+
+        this.maxRetries = 100;
+        this.lock = false;
+        this.automationResult = AutomationResult.NOT_STARTED;
+
+        screenToUse = Optional.ofNullable(screenToUse).orElse(":0");
+        replaySettings.prepareReplay(pathToChromeDriver, screenToUse, timeout);
+    }
+
+    private void executeIgnoringExceptions(WebDriverAction webDriverAction) throws InterruptedException {
+        int i = 0;
+
+        long startTime = System.nanoTime();
+        while (i < maxRetries && (toSeconds(System.nanoTime() - startTime) < timeout)) {
+            try {
+                Thread.sleep(measurementsPrecisionMilli);
+                webDriverAction.execute(replaySettings.getWebDriver());
+                return;
+            } catch (WebDriverException ex) {
+                System.out.println(ex.toString());
+                Thread.sleep(measurementsPrecisionMilli);
+                System.out.println("Could not make it from first try");
+                i++;
+            } catch (AssertionError assertionError) {
+                this.automationResult = AutomationResult.ASSERTION_ERROR;
+                throw new AssertionError(assertionError);
+            }
+        }
+
+        throw new TimeoutException("Could not execute the action! " + webDriverAction.getName());
+    }
 
 }
