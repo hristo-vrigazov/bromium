@@ -1,6 +1,5 @@
 package com.hribol.automation.core.execution.application;
 
-import com.hribol.automation.core.actions.TestCaseToApplicationActionConverter;
 import com.hribol.automation.core.config.ApplicationActionConfiguration;
 import com.hribol.automation.core.config.ApplicationConfiguration;
 import com.hribol.automation.core.execution.webdriver.WebDriverActionFactory;

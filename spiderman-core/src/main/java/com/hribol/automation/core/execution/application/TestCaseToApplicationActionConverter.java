@@ -1,9 +1,9 @@
-package com.hribol.automation.core.actions;
+package com.hribol.automation.core.execution.application;
 
-import com.hribol.automation.core.config.ParameterConfiguration;
+import com.hribol.automation.core.actions.ConvertedApplicationAction;
 import com.hribol.automation.core.config.ApplicationActionConfiguration;
+import com.hribol.automation.core.config.ParameterConfiguration;
 import com.hribol.automation.core.config.WebDriverActionConfiguration;
-import com.hribol.automation.core.execution.application.ApplicationAction;
 import com.hribol.automation.core.execution.webdriver.WebDriverAction;
 import com.hribol.automation.core.execution.webdriver.WebDriverActionFactory;
 
