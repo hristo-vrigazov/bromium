@@ -1,6 +1,6 @@
 package suite;
 
-import com.hribol.automation.core.suite.VirtualScreenProcessCreator;
+import com.hribol.automation.core.suite.UbuntuVirtualScreenProcessCreator;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -14,7 +14,7 @@ public class VirtualScreenProcessCreatorTest {
 
     @Test
     public void xvfbIsInstalledAndProcessIsCreated() throws IOException {
-        VirtualScreenProcessCreator virtualScreenProcessCreator = new VirtualScreenProcessCreator();
+        UbuntuVirtualScreenProcessCreator virtualScreenProcessCreator = new UbuntuVirtualScreenProcessCreator();
         Process process = virtualScreenProcessCreator.createXvfbProcess(0);
 
         assertTrue(process.isAlive());

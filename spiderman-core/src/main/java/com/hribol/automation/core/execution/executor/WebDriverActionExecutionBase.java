@@ -1,7 +1,8 @@
 package com.hribol.automation.core.execution.executor;
 
-import com.hribol.automation.core.execution.settings.ExecutionSettings;
+import com.hribol.automation.core.execution.settings.ReplaySettings;
 import com.hribol.automation.core.execution.webdriver.WebDriverAction;
+import com.hribol.automation.core.suite.UbuntuVirtualScreenProcessCreator;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.core.har.Har;
@@ -9,7 +10,6 @@ import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriverException;
-import com.hribol.automation.core.suite.VirtualScreenProcessCreator;
 import com.hribol.automation.core.utils.LoadingTimes;
 
 import java.io.File;
@@ -27,7 +27,7 @@ import static com.hribol.automation.core.utils.ConfigurationUtils.toSeconds;
  */
 public abstract class WebDriverActionExecutionBase implements WebDriverActionExecution {
 
-    private ExecutionSettings executionSettings;
+    private ReplaySettings replaySettings;
     private AutomationResult automationResult;
 
     private List<Long> waitingTimes;
@@ -61,10 +61,10 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         this.baseURI = baseURI;
         this.measurementsPrecisionMilli = measurementsPrecisionMilli;
         this.initializeQueues();
-        this.executionSettings = createExecutionSettings();
+        this.replaySettings = createExecutionSettings();
     }
 
-    protected abstract ExecutionSettings createExecutionSettings();
+    protected abstract ReplaySettings createExecutionSettings();
     protected abstract String getSystemProperty();
 
     protected HttpResponse filterRequest(HttpRequest request, HttpMessageContents contents, HttpMessageInfo messageInfo) {
@@ -119,7 +119,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             e.printStackTrace();
             this.automationResult = AutomationResult.ASSERTION_ERROR;
         } finally {
-            executionSettings.cleanUpReplay();
+            replaySettings.cleanUpReplay();
         }
 
         this.loadingTimes = new LoadingTimes(waitingTimes, testScenario.getActions());
@@ -140,7 +140,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         this.automationResult = AutomationResult.NOT_STARTED;
 
         screenToUse = Optional.ofNullable(screenToUse).orElse(":1");
-        executionSettings.prepareReplay(pathToChromeDriver, screenToUse, timeout);
+        replaySettings.prepareReplay(pathToChromeDriver, screenToUse, timeout);
         this.initializeWhitelist();
     }
 
@@ -177,7 +177,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         while (i < maxRetries && (toSeconds(System.nanoTime() - startTime) < timeout)) {
             try {
                 Thread.sleep(measurementsPrecisionMilli);
-                webDriverAction.execute(executionSettings.getWebDriver());
+                webDriverAction.execute(replaySettings.getWebDriver());
                 return;
             } catch (WebDriverException ex) {
                 System.out.println(ex.toString());
@@ -195,7 +195,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     @Override
     public void dumpHarMetrics(String fileNameToDump) throws IOException {
-        Har har = executionSettings.getHar();
+        Har har = replaySettings.getHar();
         File harFile = new File(fileNameToDump);
         har.writeTo(harFile);
     }
@@ -218,7 +218,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     @Override
     public AutomationResult executeOnScreen(TestScenario testScenario,
                                             int i,
-                                            VirtualScreenProcessCreator virtualScreenProcessCreator,
+                                            UbuntuVirtualScreenProcessCreator virtualScreenProcessCreator,
                                             String loadingTimesFileName,
                                             String harTimesFileName) {
         Process process;

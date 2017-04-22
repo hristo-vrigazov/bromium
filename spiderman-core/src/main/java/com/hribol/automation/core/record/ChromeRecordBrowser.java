@@ -5,6 +5,7 @@ import com.hribol.automation.core.record.filters.RecordResponseFilter;
 import com.hribol.automation.core.record.settings.ChromeRecordSettings;
 import com.hribol.automation.core.record.settings.RecordSettings;
 
+import java.net.URI;
 import java.util.function.Supplier;
 
 /**
@@ -16,11 +17,11 @@ public class ChromeRecordBrowser extends RecordBrowserBase {
     }
 
     @Override
-    protected RecordSettings createExecutionSettings() {
+    protected RecordSettings createRecordSettings(URI baseURI) {
         Supplier<String> injectionCodeSupplier = () -> javascriptInjector.getInjectionCode();
         RecordResponseFilter recordResponseFilter = new RecordResponseFilter(baseURI, injectionCodeSupplier);
         RecordRequestFilter recordRequestFilter = new RecordRequestFilter(domainSpecificActionList);
-        return new ChromeRecordSettings(this.baseURI.toString(), recordRequestFilter, recordResponseFilter);
+        return new ChromeRecordSettings(baseURI.toString(), recordRequestFilter, recordResponseFilter);
     }
 
     @Override

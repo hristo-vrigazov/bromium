@@ -25,7 +25,6 @@ public abstract class RecordBrowserBase {
 
     protected JavascriptInjector javascriptInjector;
     protected List<Map<String, String>> domainSpecificActionList;
-    protected URI baseURI;
 
     public RecordBrowserBase(String pathToDriverExecutable, String pathToJsInjectionFile) {
         this.pathToDriverExecutable = pathToDriverExecutable;
@@ -33,14 +32,14 @@ public abstract class RecordBrowserBase {
         this.domainSpecificActionList = new ArrayList<>();
     }
 
-    protected abstract RecordSettings createExecutionSettings();
+    protected abstract RecordSettings createRecordSettings(URI baseURI);
     protected abstract String getSystemProperty();
 
     public void record(String baseURI) throws IOException, InterruptedException, URISyntaxException {
-        this.baseURI = new URI(baseURI);
+        URI uri = new URI(baseURI);
         this.javascriptInjector = new JavascriptInjector(pathToJsInjectonFile);
         this.timeout = 15;
-        this.recordSettings = createExecutionSettings();
+        this.recordSettings = createRecordSettings(uri);
         init();
         recordSettings.openBaseUrl();
     }

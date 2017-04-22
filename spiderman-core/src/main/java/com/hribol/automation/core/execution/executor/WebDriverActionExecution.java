@@ -1,6 +1,6 @@
 package com.hribol.automation.core.execution.executor;
 
-import com.hribol.automation.core.suite.VirtualScreenProcessCreator;
+import com.hribol.automation.core.suite.UbuntuVirtualScreenProcessCreator;
 import com.hribol.automation.core.utils.LoadingTimes;
 
 import java.io.FileNotFoundException;
@@ -20,7 +20,7 @@ public interface WebDriverActionExecution {
     AutomationResult getAutomationResult();
     AutomationResult executeOnScreen(TestScenario testScenario,
                                      int i,
-                                     VirtualScreenProcessCreator virtualScreenProcessCreator,
+                                     UbuntuVirtualScreenProcessCreator virtualScreenProcessCreator,
                                      String loadingTimesFileName,
                                      String harTimesFileName);
 }

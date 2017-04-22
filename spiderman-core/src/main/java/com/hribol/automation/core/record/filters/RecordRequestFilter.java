@@ -29,6 +29,7 @@ public class RecordRequestFilter implements RequestFilter {
             try {
                 Map<String, String> map = ConfigurationUtils.splitQuery(new URL(httpRequest.getUri()));
                 domainSpecificActionList.add(map);
+                System.out.println(map);
             } catch (UnsupportedEncodingException | MalformedURLException e) {
                 e.printStackTrace();
             }

@@ -1,7 +1,7 @@
 package com.hribol.automation.core.execution.executor;
 
-import com.hribol.automation.core.execution.settings.ChromeDriverExecutionSettings;
-import com.hribol.automation.core.execution.settings.ExecutionSettings;
+import com.hribol.automation.core.execution.settings.ChromeDriverReplaySettings;
+import com.hribol.automation.core.execution.settings.ReplaySettings;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -15,8 +15,8 @@ public class ChromeDriverActionExecution extends WebDriverActionExecutionBase {
     }
 
     @Override
-    protected ExecutionSettings createExecutionSettings() {
-        return new ChromeDriverExecutionSettings(this.baseURI, this::filterRequest, this::filterResponse);
+    protected ReplaySettings createExecutionSettings() {
+        return new ChromeDriverReplaySettings(this.baseURI, this::filterRequest, this::filterResponse);
     }
 
     @Override
