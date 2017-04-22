@@ -1,5 +1,6 @@
 package com.hribol.automation.core.execution.application;
 
+import com.hribol.automation.core.actions.TestCaseToApplicationActionConverter;
 import com.hribol.automation.core.config.ApplicationActionConfiguration;
 import com.hribol.automation.core.config.ApplicationConfiguration;
 import com.hribol.automation.core.execution.webdriver.WebDriverActionFactory;
@@ -29,6 +30,20 @@ public class DefaultApplicationActionFactory implements ApplicationActionFactory
 
         this.initialPageLoadingEventName = "INITIAL_PAGE_LOAD_" + applicationConfiguration.getApplicationName();
         this.testCaseToApplicationActionConverter = new TestCaseToApplicationActionConverter(webDriverActionFactory);
+    }
+
+    public DefaultApplicationActionFactory(String url,
+                                           ApplicationConfiguration applicationConfiguration,
+                                           TestCaseToApplicationActionConverter testCaseToApplicationActionConverter) {
+        this.nameToConfiguration = new HashMap<>();
+        this.url = url;
+
+        for (ApplicationActionConfiguration applicationActionConfiguration: applicationConfiguration.getApplicationActionConfigurationList()) {
+            nameToConfiguration.put(applicationActionConfiguration.getName(), applicationActionConfiguration);
+        }
+
+        this.initialPageLoadingEventName = "INITIAL_PAGE_LOAD_" + applicationConfiguration.getApplicationName();
+        this.testCaseToApplicationActionConverter = testCaseToApplicationActionConverter;
     }
 
     @Override

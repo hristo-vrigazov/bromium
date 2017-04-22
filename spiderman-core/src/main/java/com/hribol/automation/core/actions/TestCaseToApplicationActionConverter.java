@@ -1,9 +1,9 @@
-package com.hribol.automation.core.execution.application;
+package com.hribol.automation.core.actions;
 
 import com.hribol.automation.core.config.ParameterConfiguration;
 import com.hribol.automation.core.config.ApplicationActionConfiguration;
 import com.hribol.automation.core.config.WebDriverActionConfiguration;
-import com.hribol.automation.core.config.WebdriverActionType;
+import com.hribol.automation.core.execution.application.ApplicationAction;
 import com.hribol.automation.core.execution.webdriver.WebDriverAction;
 import com.hribol.automation.core.execution.webdriver.WebDriverActionFactory;
 
@@ -27,7 +27,7 @@ public class TestCaseToApplicationActionConverter {
         Optional<WebDriverAction> precondition =
                 convertAction(applicationActionConfiguration.getConditionBeforeExecution(), testCaseStep);
         Optional<WebDriverAction> webdriverAction =
-                convertAction(applicationActionConfiguration.getWebdriverAction(),
+                convertAction(applicationActionConfiguration.getWebDriverAction(),
                         testCaseStep,
                         applicationActionConfiguration.expectsHttpRequest());
         Optional<WebDriverAction> postCondition =
@@ -44,7 +44,7 @@ public class TestCaseToApplicationActionConverter {
                                                     Map<String, String> testCaseStep,
                                                     boolean expectHttpRequest) {
         String webdriverActionType = webDriverActionConfiguration.getWebDriverActionType();
-        if (webdriverActionType.equals(WebdriverActionType.NOTHING.toString())) {
+        if (webdriverActionType.equals("NOTHING")) {
             return Optional.empty();
         }
 
@@ -73,32 +73,4 @@ public class TestCaseToApplicationActionConverter {
         return Optional.of(webDriverAction);
     }
 
-    private class ConvertedApplicationAction implements ApplicationAction {
-        private Optional<WebDriverAction> precondition;
-        private Optional<WebDriverAction> webdriverAction;
-        private Optional<WebDriverAction> postcondition;
-
-        private ConvertedApplicationAction(Optional<WebDriverAction> precondition,
-                                           Optional<WebDriverAction> webdriverAction,
-                                           Optional<WebDriverAction> postcondition) {
-            this.precondition = precondition;
-            this.webdriverAction = webdriverAction;
-            this.postcondition = postcondition;
-        }
-
-        @Override
-        public Optional<WebDriverAction> getPrecondition() {
-            return precondition;
-        }
-
-        @Override
-        public Optional<WebDriverAction> getWebdriverAction() {
-            return webdriverAction;
-        }
-
-        @Override
-        public Optional<WebDriverAction> getPostcondition() {
-            return postcondition;
-        }
-    }
 }

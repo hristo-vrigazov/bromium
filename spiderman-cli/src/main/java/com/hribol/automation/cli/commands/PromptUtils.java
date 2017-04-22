@@ -57,7 +57,7 @@ public class PromptUtils {
 
         WebDriverActionConfiguration webDriverActionConfiguration =
                 promptForActionConfigurationType("Action: ");
-        applicationActionConfiguration.setWebdriverAction(webDriverActionConfiguration);
+        applicationActionConfiguration.setWebDriverAction(webDriverActionConfiguration);
         textIO.getTextTerminal().println();
 
         WebDriverActionConfiguration postconditionConfiguration =
@@ -84,36 +84,37 @@ public class PromptUtils {
     public WebDriverActionConfiguration promptForActionConfigurationType(String prompt) {
         textIO.getTextTerminal().println(prompt);
         WebDriverActionConfiguration webDriverActionConfiguration = new WebDriverActionConfiguration();
-        WebdriverActionType webdriverActionType = textIO
-                .newEnumInputReader(WebdriverActionType.class)
+        String webDriverActionType = textIO
+                .newStringInputReader()
+                .withPossibleValues("CUSTOM", "NOTHING")
                 .read("Type: ");
 
-        String webdriverAction = getWebdriverAction(webdriverActionType);
+        String webDriverAction = getWebDriverAction(webDriverActionType);
 
         Map<String, ParameterConfiguration> parameterConfigurations =
-                collectParametersConfiguration(webdriverActionType);
+                collectParametersConfiguration(webDriverActionType);
         webDriverActionConfiguration.setParametersConfiguration(parameterConfigurations);
-        webDriverActionConfiguration.setWebDriverActionType(webdriverAction);
+        webDriverActionConfiguration.setWebDriverActionType(webDriverAction);
 
         return webDriverActionConfiguration;
     }
 
-    public Map<String, ParameterConfiguration> collectParametersConfiguration(WebdriverActionType webdriverActionType) {
-        if (webdriverActionType == WebdriverActionType.NOTHING) {
+    public Map<String, ParameterConfiguration> collectParametersConfiguration(String webDriverActionType) {
+        if (Objects.equals(webDriverActionType, "NOTHING")) {
             return new HashMap<>();
         }
 
         Map<String, ParameterConfiguration> parametersConfiguration = new HashMap<>();
 
         while (promptForAddParameters()) {
-            ParameterConfiguration parameterConfiguration = promptForParameterConfiguration(webdriverActionType);
+            ParameterConfiguration parameterConfiguration = promptForParameterConfiguration();
             parametersConfiguration.put(parameterConfiguration.getParameterName(), parameterConfiguration);
         }
 
         return parametersConfiguration;
     }
 
-    public ParameterConfiguration promptForParameterConfiguration(WebdriverActionType webdriverActionType) {
+    public ParameterConfiguration promptForParameterConfiguration() {
         return getParameterConfigurationForCustom();
     }
 
@@ -122,12 +123,12 @@ public class PromptUtils {
         return textIO.newBooleanInputReader().read("Add a parameter?");
     }
 
-    public String getWebdriverAction(WebdriverActionType webdriverActionType) {
-        if (webdriverActionType == WebdriverActionType.CUSTOM) {
+    public String getWebDriverAction(String webdriverActionType) {
+        if (webdriverActionType == "CUSTOM") {
             return textIO.newStringInputReader().read("Enter the custom type name: ");
         }
 
-        return webdriverActionType.toString();
+        return webdriverActionType;
     }
 
     public ParameterConfiguration getParameterConfigurationForCustom() {
@@ -207,7 +208,7 @@ public class PromptUtils {
 
             optionalConfiguration = promptForChangeAction(applicationActionConfiguration, "action");
             if (optionalConfiguration.isPresent()) {
-                applicationActionConfiguration.setWebdriverAction(optionalConfiguration.get());
+                applicationActionConfiguration.setWebDriverAction(optionalConfiguration.get());
             }
 
             optionalConfiguration = promptForChangeAction(applicationActionConfiguration, "postcondition");

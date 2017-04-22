@@ -59,7 +59,7 @@ public class ConfigurationUtilsTest {
         ApplicationActionConfiguration applicationActionConfiguration = new ApplicationActionConfiguration();
         applicationActionConfiguration.setName("applicationAction");
         applicationActionConfiguration.setExpectsHttpRequest(false);
-        applicationActionConfiguration.setWebdriverAction(webDriverActionConfiguration);
+        applicationActionConfiguration.setWebDriverAction(webDriverActionConfiguration);
 
         String outputFileName = "tmp.json";
         ConfigurationUtils.dumpApplicationConfiguration(applicationConfiguration, outputFileName);

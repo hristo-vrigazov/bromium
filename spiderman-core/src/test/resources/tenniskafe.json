@@ -3,15 +3,15 @@
         {
             "conditionAfterExecution": {
                 "parametersConfiguration": {},
-                "webdriverActionType": "NOTHING"
+                "webDriverActionType": "NOTHING"
             },
             "conditionBeforeExecution": {
                 "parametersConfiguration": {},
-                "webdriverActionType": "NOTHING"
+                "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": false,
             "name": "clickMegaMenu",
-            "webdriverAction": {
+            "webDriverAction": {
                 "parametersConfiguration": {
                     "initialCollectorClass": {
                         "expose": false,
@@ -24,7 +24,7 @@
                         "parameterName": "text"
                     }
                 },
-                "webdriverActionType": "CLICK_CLASS_BY_TEXT"
+                "webDriverActionType": "CLICK_CLASS_BY_TEXT"
             }
         }
     ],

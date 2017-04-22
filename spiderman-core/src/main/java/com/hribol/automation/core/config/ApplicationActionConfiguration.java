@@ -6,7 +6,7 @@ package com.hribol.automation.core.config;
 public class ApplicationActionConfiguration {
     private String name;
     private WebDriverActionConfiguration conditionBeforeExecution;
-    private WebDriverActionConfiguration webdriverAction;
+    private WebDriverActionConfiguration webDriverAction;
     private WebDriverActionConfiguration conditionAfterExecution;
     private boolean expectsHttpRequest;
 
@@ -34,12 +34,12 @@ public class ApplicationActionConfiguration {
         this.conditionAfterExecution = conditionAfterExecution;
     }
 
-    public WebDriverActionConfiguration getWebdriverAction() {
-        return webdriverAction;
+    public WebDriverActionConfiguration getWebDriverAction() {
+        return webDriverAction;
     }
 
-    public void setWebdriverAction(WebDriverActionConfiguration webdriverAction) {
-        this.webdriverAction = webdriverAction;
+    public void setWebDriverAction(WebDriverActionConfiguration webDriverAction) {
+        this.webDriverAction = webDriverAction;
     }
 
     public Boolean expectsHttpRequest() {

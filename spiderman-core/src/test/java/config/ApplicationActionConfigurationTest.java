@@ -24,13 +24,13 @@ public class ApplicationActionConfigurationTest {
 
         applicationActionConfiguration.setName(name);
         applicationActionConfiguration.setConditionBeforeExecution(conditionBeforeExecution);
-        applicationActionConfiguration.setWebdriverAction(webdriverAction);
+        applicationActionConfiguration.setWebDriverAction(webdriverAction);
         applicationActionConfiguration.setConditionAfterExecution(conditionAfterExecution);
         applicationActionConfiguration.setExpectsHttpRequest(expectsHttp);
 
         assertEquals(name, applicationActionConfiguration.getName());
         assertEquals(conditionBeforeExecution, applicationActionConfiguration.getConditionBeforeExecution());
-        assertEquals(webdriverAction, applicationActionConfiguration.getWebdriverAction());
+        assertEquals(webdriverAction, applicationActionConfiguration.getWebDriverAction());
         assertEquals(conditionAfterExecution, applicationActionConfiguration.getConditionAfterExecution());
         assertEquals(expectsHttp, applicationActionConfiguration.expectsHttpRequest());
     }
