@@ -1,11 +1,7 @@
 package com.hribol.automation.core.execution.executor;
 
-import com.hribol.automation.core.execution.application.ApplicationActionFactory;
-import com.hribol.automation.core.execution.application.ApplicationAction;
 import com.hribol.automation.core.execution.webdriver.WebDriverAction;
-import com.hribol.automation.core.utils.ConfigurationUtils;
 
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -38,10 +34,7 @@ public class TestScenario {
     }
 
     public WebDriverAction pollWebdriverAction() {
-        WebDriverAction webDriverAction = webDriverActionQueue.poll();
-        System.out.println(webDriverAction.getName());
-        System.out.println("Action queue size: " + webDriverActionQueue.size());
-        return webDriverAction;
+        return webDriverActionQueue.poll();
     }
 
     public List<String> getActions() {

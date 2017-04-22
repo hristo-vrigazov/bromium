@@ -9,11 +9,11 @@ import java.io.IOException;
 /**
  * Created by hvrigazov on 10.03.17.
  */
-class JavascriptInjector {
+public class JavascriptInjector {
 
     private String injectionCode;
 
-    JavascriptInjector(String pathToJsInjectionFile) throws IOException {
+    public JavascriptInjector(String pathToJsInjectionFile) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("<script>");
         stringBuilder.append("(function() {").append(System.lineSeparator());
@@ -25,7 +25,7 @@ class JavascriptInjector {
         this.injectionCode = stringBuilder.toString();
     }
 
-    String getInjectionCode() {
+    public String getInjectionCode() {
         return injectionCode;
     }
 }
