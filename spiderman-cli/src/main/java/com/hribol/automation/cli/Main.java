@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
         String pathToChromeDriver = "/home/hvrigazov/github/spiderman/chromedriver";
-        String pathToJSInjectionFile = "/home/hvrigazov/github/spiderman/spiderman-core/src/test/resources/javascriptInjection/eventsRecorder.js";
+        String pathToJSInjectionFile = "/home/hvrigazov/github/spiderman/spiderman-core/src/test/resources/eventsRecorder.js";
         String pathToApplicationConfiguration = "/home/hvrigazov/github/spiderman/spiderman-core/src/test/resources/tenniskafe.json";
         String baseUrl = "http://tenniskafe.com";
         String testCaseFile = "/home/hvrigazov/github/spiderman/spiderman-core/src/test/resources/testCase.json";

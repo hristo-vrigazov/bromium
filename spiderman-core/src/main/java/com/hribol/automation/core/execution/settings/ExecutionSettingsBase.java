@@ -1,7 +1,8 @@
 package com.hribol.automation.core.execution.settings;
 
+import com.hribol.automation.core.suppliers.BrowserMobProxySupplier;
+import com.hribol.automation.core.suppliers.DesiredCapabilitiesSupplier;
 import net.lightbody.bmp.BrowserMobProxy;
-import net.lightbody.bmp.BrowserMobProxyServer;
 import net.lightbody.bmp.client.ClientUtil;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.filters.RequestFilter;
@@ -9,12 +10,10 @@ import net.lightbody.bmp.filters.ResponseFilter;
 import net.lightbody.bmp.proxy.CaptureType;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.service.DriverService;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by hvrigazov on 21.03.17.
@@ -38,18 +37,12 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
 
     @Override
     public BrowserMobProxy getBrowserMobProxy(int timeout) {
-        BrowserMobProxyServer proxy = new BrowserMobProxyServer();
-        proxy.setIdleConnectionTimeout(timeout, TimeUnit.SECONDS);
-        proxy.setRequestTimeout(timeout, TimeUnit.SECONDS);
-        proxy.start(0);
-        return proxy;
+        return new BrowserMobProxySupplier(timeout, requestFilter, responseFilter).get();
     }
 
     @Override
     public DesiredCapabilities getDesiredCapabilities() {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
-        return capabilities;
+        return new DesiredCapabilitiesSupplier(seleniumProxy).get();
     }
 
     @Override
@@ -99,9 +92,8 @@ public abstract class ExecutionSettingsBase implements ExecutionSettings {
     public void prepareReplay(String pathToChromeDriver, String screenToUse, int timeout)
             throws IOException {
         boolean useVirtualScreen = screenToUse.equals(":0");
-        this.proxy = getBrowserMobProxy(timeout);
+        this.proxy = new BrowserMobProxySupplier(timeout, requestFilter, responseFilter).get();
         this.seleniumProxy = getSeleniumProxy();
-        prepareProxyFilters();
         this.capabilities = getDesiredCapabilities();
         this.driverService = getDriverService(pathToChromeDriver, screenToUse);
         this.driver = buildWebDriver(useVirtualScreen);

@@ -3,6 +3,7 @@ package com.hribol.automation.core.record;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hribol.automation.core.execution.settings.ExecutionSettings;
+import com.hribol.automation.core.record.settings.RecordSettings;
 import com.hribol.automation.core.utils.ConfigurationUtils;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
@@ -26,13 +27,13 @@ import java.util.Map;
  */
 public abstract class RecordBrowserBase {
 
-    private ExecutionSettings executionSettings;
+    private RecordSettings executionSettings;
     private String pathToDriverExecutable;
     private String pathToJsInjectonFile;
-    private JavascriptInjector javascriptInjector;
-    private List<Map<String, String>> domainSpecificActionList;
     private int timeout;
 
+    protected JavascriptInjector javascriptInjector;
+    protected List<Map<String, String>> domainSpecificActionList;
     protected URI baseURI;
 
     public RecordBrowserBase(String pathToDriverExecutable, String pathToJsInjectionFile) {
@@ -41,7 +42,7 @@ public abstract class RecordBrowserBase {
         this.domainSpecificActionList = new ArrayList<>();
     }
 
-    protected abstract ExecutionSettings createExecutionSettings();
+    protected abstract RecordSettings createExecutionSettings();
     protected abstract String getSystemProperty();
 
     public void record(String baseURI) throws IOException, InterruptedException, URISyntaxException {
@@ -70,33 +71,5 @@ public abstract class RecordBrowserBase {
         System.setProperty(getSystemProperty(), pathToDriverExecutable);
 
         executionSettings.prepareRecord(timeout);
-    }
-
-    protected HttpResponse filterRequest(HttpRequest request, HttpMessageContents contents, HttpMessageInfo messageInfo) {
-        if (request.getUri().contains("http://working-selenium.com/submit-event")) {
-            Map<String, String> map = null;
-            try {
-                map = ConfigurationUtils.splitQuery(new URL(request.getUri()));
-            } catch (UnsupportedEncodingException | MalformedURLException e) {
-                e.printStackTrace();
-            }
-            System.out.println(map);
-            domainSpecificActionList.add(map);
-        }
-        return null;
-    }
-
-    protected void filterResponse(HttpResponse response, HttpMessageContents contents, HttpMessageInfo messageInfo) {
-        if (isUrlChangingRequest(messageInfo.getOriginalRequest())) {
-            String baseContent = javascriptInjector.getInjectionCode();
-            baseContent += contents.getTextContents();
-            contents.setTextContents(baseContent);
-        }
-    }
-
-    private boolean isUrlChangingRequest(HttpRequest httpRequest) {
-        boolean expectsHtmlContent = httpRequest.headers().get("Accept").contains("html");
-        boolean isFromCurrentBaseUrl = httpRequest.getUri().contains(baseURI.getHost());
-        return expectsHtmlContent && isFromCurrentBaseUrl;
     }
 }

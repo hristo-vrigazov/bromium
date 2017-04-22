@@ -1,7 +1,11 @@
 package com.hribol.automation.core.record;
 
-import com.hribol.automation.core.execution.settings.ChromeDriverExecutionSettings;
-import com.hribol.automation.core.execution.settings.ExecutionSettings;
+import com.hribol.automation.core.record.filters.RecordRequestFilter;
+import com.hribol.automation.core.record.filters.RecordResponseFilter;
+import com.hribol.automation.core.record.settings.ChromeRecordSettings;
+import com.hribol.automation.core.record.settings.RecordSettings;
+
+import java.util.function.Supplier;
 
 /**
  * Created by hvrigazov on 22.03.17.
@@ -12,8 +16,11 @@ public class ChromeRecordBrowser extends RecordBrowserBase {
     }
 
     @Override
-    protected ExecutionSettings createExecutionSettings() {
-        return new ChromeDriverExecutionSettings(this.baseURI.toString(), this::filterRequest, this::filterResponse);
+    protected RecordSettings createExecutionSettings() {
+        Supplier<String> injectionCodeSupplier = () -> javascriptInjector.getInjectionCode();
+        RecordResponseFilter recordResponseFilter = new RecordResponseFilter(baseURI, injectionCodeSupplier);
+        RecordRequestFilter recordRequestFilter = new RecordRequestFilter(domainSpecificActionList);
+        return new ChromeRecordSettings(this.baseURI.toString(), recordRequestFilter, recordResponseFilter);
     }
 
     @Override
