@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.Optional;
 
+import static com.hribol.automation.core.utils.Constants.INNER_HTML;
+
 /**
  * Created by hvrigazov on 17.03.17.
  */
@@ -31,15 +33,9 @@ public class ClickClassByText implements WebDriverAction {
         By elementsLocator = By.className(initialCollectorClass);
         List<WebElement> webElements = driver.findElements(elementsLocator);
 
-        if (webElements.isEmpty()) {
-            throw new ElementNotSelectableException("Element with class "
-                    + initialCollectorClass
-                    + " and text " + text + " was not found" );
-        }
-
         Optional<WebElement> webElementOptional = webElements.stream()
                 .filter(webElement ->
-                        webElement.getAttribute("innerHTML").trim().equals(text) &&
+                        webElement.getAttribute(INNER_HTML).trim().equals(text) &&
                         webElement.isDisplayed())
                 .findFirst();
 

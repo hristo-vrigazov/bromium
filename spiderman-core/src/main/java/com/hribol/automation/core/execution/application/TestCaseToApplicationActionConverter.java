@@ -5,7 +5,7 @@ import com.hribol.automation.core.config.ApplicationActionConfiguration;
 import com.hribol.automation.core.config.WebdriverActionConfiguration;
 import com.hribol.automation.core.config.WebdriverActionType;
 import com.hribol.automation.core.execution.webdriver.WebDriverAction;
-import com.hribol.automation.core.execution.webdriver.WebdriverActionFactory;
+import com.hribol.automation.core.execution.webdriver.WebDriverActionFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,10 +16,10 @@ import java.util.Optional;
  */
 public class TestCaseToApplicationActionConverter {
 
-    private WebdriverActionFactory webdriverActionFactory;
+    private WebDriverActionFactory webDriverActionFactory;
 
-    public TestCaseToApplicationActionConverter(WebdriverActionFactory webdriverActionFactory) {
-        this.webdriverActionFactory = webdriverActionFactory;
+    public TestCaseToApplicationActionConverter(WebDriverActionFactory webDriverActionFactory) {
+        this.webDriverActionFactory = webDriverActionFactory;
     }
 
     public ApplicationAction convert(ApplicationActionConfiguration applicationActionConfiguration,
@@ -69,7 +69,7 @@ public class TestCaseToApplicationActionConverter {
             }
         }
 
-        WebDriverAction webDriverAction = webdriverActionFactory.create(webdriverActionType, parameters);
+        WebDriverAction webDriverAction = webDriverActionFactory.create(webdriverActionType, parameters);
         return Optional.of(webDriverAction);
     }
 

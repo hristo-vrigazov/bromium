@@ -5,6 +5,6 @@ import java.util.Map;
 /**
  * Created by hvrigazov on 18.03.17.
  */
-public interface WebdriverActionFactory {
+public interface WebDriverActionFactory {
     WebDriverAction create(String webdriverActionType, Map<String, Object> parameters);
 }

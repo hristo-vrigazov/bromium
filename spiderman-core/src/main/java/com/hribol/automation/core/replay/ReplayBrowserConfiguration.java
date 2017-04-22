@@ -4,9 +4,11 @@ import com.hribol.automation.core.config.ApplicationConfiguration;
 import com.hribol.automation.core.execution.application.DefaultApplicationActionFactory;
 import com.hribol.automation.core.execution.executor.WebDriverActionExecutor;
 import com.hribol.automation.core.utils.ConfigurationUtils;
-import com.hribol.automation.core.execution.webdriver.WebdriverActionFactory;
+import com.hribol.automation.core.execution.webdriver.WebDriverActionFactory;
 
 import java.io.IOException;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Created by hvrigazov on 19.03.17.
@@ -20,9 +22,9 @@ public class ReplayBrowserConfiguration {
 
     public ReplayBrowserConfiguration(Builder builder) throws IOException {
         ApplicationConfiguration applicationConfiguration = ConfigurationUtils.parseApplicationConfiguration(builder.pathToApplicationConfiguration);
-        WebDriverActionExecutor webDriverActionExecution = builder.webDriverActionExecution;
-        WebdriverActionFactory webdriverActionFactory = builder.webdriverActionFactory;
-        DefaultApplicationActionFactory applicationActionFactory = new DefaultApplicationActionFactory(builder.url, applicationConfiguration, webdriverActionFactory);
+        WebDriverActionExecutor webDriverActionExecution = builder.webDriverActionExecutor;
+        WebDriverActionFactory webDriverActionFactory = builder.webDriverActionFactory;
+        DefaultApplicationActionFactory applicationActionFactory = new DefaultApplicationActionFactory(builder.url, applicationConfiguration, webDriverActionFactory);
         replayBrowser = new ReplayBrowser(webDriverActionExecution, applicationActionFactory);
     }
 
@@ -32,8 +34,8 @@ public class ReplayBrowserConfiguration {
 
     public static class Builder {
         private String pathToApplicationConfiguration;
-        private WebDriverActionExecutor webDriverActionExecution;
-        private WebdriverActionFactory webdriverActionFactory;
+        private WebDriverActionExecutor webDriverActionExecutor;
+        private WebDriverActionFactory webDriverActionFactory;
         private String url;
 
         public Builder pathToApplicationConfiguration(String pathToApplicationConfiguration) {
@@ -42,7 +44,7 @@ public class ReplayBrowserConfiguration {
         }
 
         public Builder executor(WebDriverActionExecutor executor) {
-            this.webDriverActionExecution = executor;
+            this.webDriverActionExecutor = executor;
             return this;
         }
 
@@ -51,14 +53,20 @@ public class ReplayBrowserConfiguration {
             return this;
         }
 
-        public Builder webdriverActionFactory(WebdriverActionFactory webdriverActionFactory) {
-            this.webdriverActionFactory = webdriverActionFactory;
+        public Builder webdriverActionFactory(WebDriverActionFactory webDriverActionFactory) {
+            this.webDriverActionFactory = webDriverActionFactory;
             return this;
         }
 
         public ReplayBrowserConfiguration build() throws IOException {
+            requireNonNull(pathToApplicationConfiguration, "pathToApplicationConfiguration is a required parameter");
+            requireNonNull(webDriverActionExecutor, "webDriverActionExecutor is a required parameter");
+            requireNonNull(webDriverActionFactory, "webDriverActionFactory is a required parameter");
+            requireNonNull(url, "url is a required parameter");
+
             return new ReplayBrowserConfiguration(this);
         }
+
     }
 
 }

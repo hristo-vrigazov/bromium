@@ -2,7 +2,7 @@ package execution.webdriver;
 
 import com.hribol.automation.core.execution.webdriver.PredefinedWebDriverActionFactory;
 import com.hribol.automation.core.execution.webdriver.WebDriverAction;
-import com.hribol.automation.core.execution.webdriver.WebdriverActionFactory;
+import com.hribol.automation.core.execution.webdriver.WebDriverActionFactory;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -17,7 +17,7 @@ public class PredefinedWebDriverActionFactoryTest {
 
     @Test
     public void canCreateClickByText() {
-        WebdriverActionFactory factory = new PredefinedWebDriverActionFactory();
+        WebDriverActionFactory factory = new PredefinedWebDriverActionFactory();
 
         Map<String, Object> map = new HashMap<>();
 

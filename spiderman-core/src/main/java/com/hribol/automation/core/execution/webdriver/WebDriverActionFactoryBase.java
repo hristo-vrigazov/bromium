@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by hvrigazov on 18.03.17.
  */
-public abstract class WebDriverActionFactoryBase implements WebdriverActionFactory {
+public abstract class WebDriverActionFactoryBase implements WebDriverActionFactory {
 
     protected Map<String, WebDriverActionParameterParser> parsersRegistry;
 

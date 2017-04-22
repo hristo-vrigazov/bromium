@@ -2,7 +2,7 @@ package com.hribol.automation.core.execution.application;
 
 import com.hribol.automation.core.config.ApplicationActionConfiguration;
 import com.hribol.automation.core.config.ApplicationConfiguration;
-import com.hribol.automation.core.execution.webdriver.WebdriverActionFactory;
+import com.hribol.automation.core.execution.webdriver.WebDriverActionFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +19,7 @@ public class DefaultApplicationActionFactory implements ApplicationActionFactory
 
     public DefaultApplicationActionFactory(String url,
                                            ApplicationConfiguration applicationConfiguration,
-                                           WebdriverActionFactory webdriverActionFactory) {
+                                           WebDriverActionFactory webDriverActionFactory) {
         this.nameToConfiguration = new HashMap<>();
         this.url = url;
 
@@ -29,7 +29,7 @@ public class DefaultApplicationActionFactory implements ApplicationActionFactory
 
         this.initialPageLoadingEventName = "INITIAL_PAGE_LOAD_" + applicationConfiguration.getApplicationName() +
                         "_" + applicationConfiguration.getVersion();
-        this.testCaseToApplicationActionConverter = new TestCaseToApplicationActionConverter(webdriverActionFactory);
+        this.testCaseToApplicationActionConverter = new TestCaseToApplicationActionConverter(webDriverActionFactory);
     }
 
     @Override
