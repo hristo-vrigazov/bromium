@@ -1,4 +1,4 @@
-package com.hribol.automation.core.filters;
+package com.hribol.automation.record;
 
 import com.hribol.automation.core.utils.ConfigurationUtils;
 import io.netty.handler.codec.http.HttpRequest;

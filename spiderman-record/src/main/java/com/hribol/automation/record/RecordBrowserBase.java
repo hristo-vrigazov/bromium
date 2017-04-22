@@ -2,8 +2,6 @@ package com.hribol.automation.record;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hribol.automation.core.filters.RecordRequestFilter;
-import com.hribol.automation.core.filters.RecordResponseFilter;
 import com.hribol.automation.record.settings.RecordSettings;
 
 import java.io.FileWriter;

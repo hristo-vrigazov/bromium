@@ -1,4 +1,4 @@
-package com.hribol.automation.core.filters;
+package com.hribol.automation.record;
 
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.filters.ResponseFilter;
@@ -7,7 +7,7 @@ import net.lightbody.bmp.util.HttpMessageInfo;
 
 import java.net.URI;
 
-import static com.hribol.automation.core.utils.RecordUtils.isUrlChangingRequest;
+import static com.hribol.automation.core.utils.Utils.isUrlChangingRequest;
 
 /**
  * Created by hvrigazov on 22.04.17.
