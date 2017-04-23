@@ -1,7 +1,7 @@
 package com.hribol.spiderman.browsers.chrome.replay;
 
-import com.hribol.spiderman.replay.WebDriverActionExecutionBase;
-import com.hribol.spiderman.replay.WebDriverActionExecutor;
+import com.hribol.spiderman.replay.execution.WebDriverActionExecutionBase;
+import com.hribol.spiderman.replay.execution.WebDriverActionExecutor;
 import com.hribol.spiderman.replay.settings.ReplaySettings;
 import org.openqa.selenium.chrome.ChromeDriverService;
 

@@ -4,6 +4,8 @@ import com.hribol.spiderman.browsers.chrome.replay.ChromeDriverActionExecution;
 import com.hribol.spiderman.core.execution.factory.PredefinedWebDriverActionFactory;
 import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;
 import com.hribol.spiderman.replay.*;
+import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
+import com.hribol.spiderman.replay.execution.WebDriverActionExecutor;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

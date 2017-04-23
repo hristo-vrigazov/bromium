@@ -26,7 +26,7 @@ public abstract class ReplaySettingsBase<T extends DriverService> implements Rep
     private WebDriver driver;
     private T driverService;
     private DesiredCapabilities capabilities;
-    protected String baseURI;
+    private String baseURI;
 
     public ReplaySettingsBase(String baseURI,
                               RequestFilter requestFilter,

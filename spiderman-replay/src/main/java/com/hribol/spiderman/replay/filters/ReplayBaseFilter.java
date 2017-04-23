@@ -1,4 +1,4 @@
-package com.hribol.spiderman.replay;
+package com.hribol.spiderman.replay.filters;
 
 import io.netty.handler.codec.http.HttpRequest;
 

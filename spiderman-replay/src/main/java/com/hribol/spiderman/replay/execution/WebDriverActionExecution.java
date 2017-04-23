@@ -1,8 +1,9 @@
-package com.hribol.spiderman.replay;
+package com.hribol.spiderman.replay.execution;
 
 import com.hribol.spiderman.core.execution.scenario.TestScenario;
 import com.hribol.spiderman.core.suite.VirtualScreenProcessCreator;
 import com.hribol.spiderman.core.utils.LoadingTimes;
+import com.hribol.spiderman.replay.AutomationResult;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

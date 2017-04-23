@@ -10,7 +10,5 @@ public enum AutomationResult {
     EXECUTING,
     SUCCESS,
     ASSERTION_ERROR,
-    TIMEOUT,
-    EXECUTION_ERROR,
-    INTERRUPTED_ERROR
+    TIMEOUT
 }

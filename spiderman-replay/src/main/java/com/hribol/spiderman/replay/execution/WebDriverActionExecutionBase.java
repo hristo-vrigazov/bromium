@@ -1,9 +1,12 @@
-package com.hribol.spiderman.replay;
+package com.hribol.spiderman.replay.execution;
 import com.hribol.spiderman.core.actions.WebDriverAction;
 import com.hribol.spiderman.core.execution.scenario.TestScenario;
 import com.hribol.spiderman.core.suite.VirtualScreenProcessCreator;
 import com.hribol.spiderman.core.utils.ConfigurationUtils;
 import com.hribol.spiderman.core.utils.LoadingTimes;
+import com.hribol.spiderman.replay.AutomationResult;
+import com.hribol.spiderman.replay.filters.ReplayRequestFilter;
+import com.hribol.spiderman.replay.filters.ReplayResponseFilter;
 import com.hribol.spiderman.replay.settings.ReplaySettings;
 import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.core.har.Har;

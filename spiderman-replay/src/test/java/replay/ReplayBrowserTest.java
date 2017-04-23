@@ -4,7 +4,7 @@ import com.hribol.spiderman.core.execution.application.ApplicationActionFactory;
 import com.hribol.spiderman.core.execution.scenario.TestScenario;
 import com.hribol.spiderman.core.execution.scenario.TestScenarioFactory;
 import com.hribol.spiderman.replay.ReplayBrowser;
-import com.hribol.spiderman.replay.WebDriverActionExecution;
+import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
 import org.mockito.Mockito;
 import com.hribol.spiderman.core.utils.LoadingTimes;
 import org.junit.Test;

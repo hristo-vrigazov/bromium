@@ -5,6 +5,7 @@ import com.hribol.spiderman.core.execution.scenario.TestScenario;
 import com.hribol.spiderman.core.execution.scenario.TestScenarioFactory;
 import com.hribol.spiderman.core.execution.scenario.TestScenarioFactoryImpl;
 import com.hribol.spiderman.core.utils.LoadingTimes;
+import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

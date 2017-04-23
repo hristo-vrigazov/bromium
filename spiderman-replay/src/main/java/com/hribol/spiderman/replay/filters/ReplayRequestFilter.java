@@ -1,5 +1,6 @@
-package com.hribol.spiderman.replay;
+package com.hribol.spiderman.replay.filters;
 
+import com.hribol.spiderman.replay.LockManagement;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.filters.RequestFilter;
