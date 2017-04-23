@@ -31,10 +31,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                 webDriverActionExecutor.getMeasurementsPrecisionMilli());
     }
 
-    public static WebDriverActionExecutor builder() {
-        return new WebDriverActionExecutor();
-    }
-
     @Override
     public void execute(TestScenario testScenario) throws InterruptedException, IOException, URISyntaxException {
         prepare();
@@ -133,7 +129,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     private AutomationResult automationResult;
 
     private List<Long> waitingTimes;
-    private String pathToChromeDriver;
+    private String pathToWebDriver;
     private Boolean lock;
     private int timeout;
     private int maxRetries;
@@ -142,16 +138,19 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     private LoadingTimes loadingTimes;
     private Set<HttpRequest> httpRequestQueue;
 
-    private WebDriverActionExecutionBase(String baseURI, String pathToDriverExecutable, int timeout, int measurementsPrecisionMilli) throws IOException, URISyntaxException {
-        this.pathToChromeDriver = pathToDriverExecutable;
+    private WebDriverActionExecutionBase(String baseURI,
+                                         String pathToDriverExecutable,
+                                         int timeout,
+                                         int measurementsPrecisionMilli) throws IOException, URISyntaxException {
+        this.pathToWebDriver = pathToDriverExecutable;
         this.timeout = timeout;
         this.baseURI = baseURI;
         this.measurementsPrecisionMilli = measurementsPrecisionMilli;
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
         this.waitingTimes = new ArrayList<>();
         this.replaySettings = createExecutionSettings();
-        replayRequestFilter = new ReplayRequestFilter(this::setLock, baseURI, httpRequestQueue);
-        replayResponseFilter = new ReplayResponseFilter(baseURI, httpRequestQueue);
+        this.replayRequestFilter = new ReplayRequestFilter(this::setLock, baseURI, httpRequestQueue);
+        this.replayResponseFilter = new ReplayResponseFilter(baseURI, httpRequestQueue);
     }
 
     private void setLock(Boolean value) {
@@ -159,14 +158,14 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     }
 
     private void prepare() throws IOException, URISyntaxException {
-        System.setProperty(getSystemProperty(), pathToChromeDriver);
+        System.setProperty(getSystemProperty(), pathToWebDriver);
 
         this.maxRetries = 100;
         this.lock = false;
         this.automationResult = AutomationResult.NOT_STARTED;
 
         screenToUse = Optional.ofNullable(screenToUse).orElse(":0");
-        replaySettings.prepareReplay(pathToChromeDriver, screenToUse, timeout);
+        replaySettings.prepareReplay(pathToWebDriver, screenToUse, timeout);
     }
 
     private void executeIgnoringExceptions(WebDriverAction webDriverAction) throws InterruptedException {
