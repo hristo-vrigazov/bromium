@@ -14,9 +14,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriverException;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.util.*;
 
@@ -79,11 +77,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         Har har = replaySettings.getHar();
         File harFile = new File(fileNameToDump);
         har.writeTo(harFile);
-    }
-
-    @Override
-    public void dumpLoadingTimes(String fileNameToDump) throws UnsupportedEncodingException, FileNotFoundException {
-        getLoadingTimes().dump(fileNameToDump);
     }
 
     @Override

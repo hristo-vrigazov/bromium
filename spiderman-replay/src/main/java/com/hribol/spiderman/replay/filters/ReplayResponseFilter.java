@@ -20,13 +20,6 @@ public class ReplayResponseFilter extends ReplayBaseFilter implements ResponseFi
 
     @Override
     public void filterResponse(HttpResponse httpResponse, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
-        HttpRequest httpRequest = httpMessageInfo.getOriginalRequest();
-
-        if (!inWhiteList(httpRequest.getUri())) {
-            return;
-        }
-
-        System.out.println("Remove request " + httpRequest.getUri());
-        this.httpRequestQueue.remove(httpMessageInfo.getOriginalRequest());
+        removeHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
     }
 }

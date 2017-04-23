@@ -1,4 +1,4 @@
-package replay;
+package test.replay.replay;
 
 import com.hribol.spiderman.core.execution.factory.PredefinedWebDriverActionFactory;
 import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;

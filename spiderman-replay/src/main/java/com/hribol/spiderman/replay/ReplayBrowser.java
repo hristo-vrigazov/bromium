@@ -27,24 +27,33 @@ public class ReplayBrowser {
         this.testScenarioFactory = testScenarioFactory;
     }
 
-    public AutomationResult replay(TestScenario testScenario, WebDriverActionExecution webDriverActionExecution) throws IOException, InterruptedException, URISyntaxException {
+    public AutomationResult replay(TestScenario testScenario, WebDriverActionExecution webDriverActionExecution, String fileName) throws IOException, InterruptedException, URISyntaxException {
         webDriverActionExecution.execute(testScenario);
         LoadingTimes loadingTimes = webDriverActionExecution.getLoadingTimes();
-        loadingTimes.dump("example.csv");
+        loadingTimes.dump(fileName);
         return webDriverActionExecution.getAutomationResult();
     }
 
-    public AutomationResult replayOnScreen(TestScenario testScenario, WebDriverActionExecution webDriverActionExecution, String screen) throws IOException, InterruptedException, URISyntaxException {
+    public AutomationResult replayOnScreen(TestScenario testScenario,
+                                           WebDriverActionExecution webDriverActionExecution,
+                                           String screen)
+            throws IOException, InterruptedException, URISyntaxException {
         webDriverActionExecution.executeOnScreen(testScenario, screen);
         return webDriverActionExecution.getAutomationResult();
     }
 
-    public AutomationResult replay(String pathToSerializedTest, WebDriverActionExecution webDriverActionExecution) throws InterruptedException, IOException, URISyntaxException {
+    public AutomationResult replay(String pathToSerializedTest,
+                                   WebDriverActionExecution webDriverActionExecution,
+                                   String fileName)
+            throws InterruptedException, IOException, URISyntaxException {
         TestScenario testScenario = testScenarioFactory.createFromFile(applicationActionFactory, pathToSerializedTest);
-        return replay(testScenario, webDriverActionExecution);
+        return replay(testScenario, webDriverActionExecution, fileName);
     }
 
-    public AutomationResult replayOnScreen(String pathToSerializedTest, WebDriverActionExecution webDriverActionExecution, String screen) throws IOException, URISyntaxException, InterruptedException {
+    public AutomationResult replayOnScreen(String pathToSerializedTest,
+                                           WebDriverActionExecution webDriverActionExecution,
+                                           String screen)
+            throws IOException, URISyntaxException, InterruptedException {
         TestScenario testScenario = testScenarioFactory.createFromFile(applicationActionFactory, pathToSerializedTest);
         return replayOnScreen(testScenario, webDriverActionExecution, screen);
     }

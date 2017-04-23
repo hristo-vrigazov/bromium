@@ -29,11 +29,4 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
         return null;
     }
 
-    private void addHttpRequestToQueue(HttpRequest httpRequest) {
-        if (!inWhiteList(httpRequest.getUri())) {
-            return;
-        }
-        System.out.println("Add request " + httpRequest.getUri());
-        this.httpRequestQueue.add(httpRequest);
-    }
 }

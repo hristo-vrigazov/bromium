@@ -46,7 +46,7 @@ public class ReplayCommand implements Command {
             WebDriverActionExecution execution = new ChromeDriverActionExecution(executor);
 
             ReplayBrowser replayBrowser = replayBrowserConfiguration.getReplayBrowser();
-            replayBrowser.replay(pathToSerializedTest, execution);
+            replayBrowser.replay(pathToSerializedTest, execution, "example.csv");
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
         }
