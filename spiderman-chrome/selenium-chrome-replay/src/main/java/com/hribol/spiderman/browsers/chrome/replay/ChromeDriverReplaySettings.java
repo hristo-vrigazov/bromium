@@ -1,8 +1,9 @@
-package com.hribol.spiderman.replay.settings;
+package com.hribol.spiderman.browsers.chrome.replay;
 
 import com.google.common.collect.ImmutableMap;
-import com.hribol.spiderman.core.suppliers.InvisibleChromeDriverSupplier;
-import com.hribol.spiderman.core.suppliers.VisibleChromeDriverSupplier;
+import com.hribol.spiderman.browsers.chrome.base.InvisibleChromeDriverSupplier;
+import com.hribol.spiderman.browsers.chrome.base.VisibleChromeDriverSupplier;
+import com.hribol.spiderman.replay.settings.ReplaySettingsBase;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
 import org.openqa.selenium.chrome.ChromeDriverService;

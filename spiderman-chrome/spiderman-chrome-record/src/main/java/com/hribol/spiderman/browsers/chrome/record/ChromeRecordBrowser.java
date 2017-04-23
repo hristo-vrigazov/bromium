@@ -1,6 +1,6 @@
-package com.hribol.spiderman.record;
+package com.hribol.spiderman.browsers.chrome.record;
 
-import com.hribol.spiderman.record.settings.ChromeRecordSettings;
+import com.hribol.spiderman.record.RecordBrowserBase;
 import com.hribol.spiderman.record.settings.RecordSettings;
 import org.openqa.selenium.chrome.ChromeDriverService;
 

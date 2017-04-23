@@ -1,5 +1,6 @@
-package com.hribol.spiderman.core.suppliers;
+package com.hribol.spiderman.browsers.chrome.base;
 
+import com.hribol.spiderman.core.suppliers.InvisibleWebDriverSupplier;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;

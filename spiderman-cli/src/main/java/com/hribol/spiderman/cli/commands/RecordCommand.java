@@ -1,6 +1,6 @@
 package com.hribol.spiderman.cli.commands;
 
-import com.hribol.spiderman.record.ChromeRecordBrowser;
+import com.hribol.spiderman.browsers.chrome.record.ChromeRecordBrowser;
 import com.hribol.spiderman.record.RecordBrowserBase;
 
 import java.io.IOException;

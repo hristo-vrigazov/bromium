@@ -38,6 +38,7 @@
         <module>spiderman-cli</module>
         <module>spiderman-record</module>
         <module>spiderman-replay</module>
+        <module>spiderman-chrome</module>
     </modules>
 
     <properties>
