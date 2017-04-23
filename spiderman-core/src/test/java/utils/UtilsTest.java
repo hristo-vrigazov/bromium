@@ -51,4 +51,15 @@ public class UtilsTest {
         when(httpRequest.headers()).thenReturn(httpHeaders);
         assertFalse(Utils.isUrlChangingRequest(uri, httpRequest));
     }
+
+    @Test
+    public void whenHostIsDifferentAndContentTypeIsNotHTPNotChangingURLRequest() throws URISyntaxException {
+        URI uri = new URI("http://tenniskafe.com");
+        HttpHeaders httpHeaders = mock(HttpHeaders.class);
+        when(httpHeaders.get("Accept")).thenReturn("application/html");
+        HttpRequest httpRequest = mock(HttpRequest.class);
+        when(httpRequest.getUri()).thenReturn("http://tenniskafe.com");
+        when(httpRequest.headers()).thenReturn(httpHeaders);
+        assertFalse(Utils.isUrlChangingRequest(uri, httpRequest));
+    }
 }

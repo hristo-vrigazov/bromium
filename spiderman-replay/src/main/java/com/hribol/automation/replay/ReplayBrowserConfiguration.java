@@ -2,7 +2,7 @@ package com.hribol.automation.replay;
 
 import com.hribol.automation.core.config.ApplicationConfiguration;
 import com.hribol.automation.core.execution.application.DefaultApplicationActionFactory;
-import com.hribol.automation.core.execution.executor.TestScenarioFactoryImpl;
+import com.hribol.automation.core.execution.scenario.TestScenarioFactoryImpl;
 import com.hribol.automation.core.utils.ConfigurationUtils;
 import com.hribol.automation.core.execution.factory.WebDriverActionFactory;
 

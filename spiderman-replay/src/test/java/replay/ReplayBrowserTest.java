@@ -1,8 +1,8 @@
 package replay;
 
 import com.hribol.automation.core.execution.application.ApplicationActionFactory;
-import com.hribol.automation.core.execution.executor.TestScenario;
-import com.hribol.automation.core.execution.executor.TestScenarioFactory;
+import com.hribol.automation.core.execution.scenario.TestScenario;
+import com.hribol.automation.core.execution.scenario.TestScenarioFactory;
 import com.hribol.automation.replay.ReplayBrowser;
 import com.hribol.automation.replay.WebDriverActionExecution;
 import org.mockito.Mockito;
@@ -11,8 +11,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-
-import static org.mockito.Mockito.*;
 
 /**
  * Created by hvrigazov on 22.04.17.

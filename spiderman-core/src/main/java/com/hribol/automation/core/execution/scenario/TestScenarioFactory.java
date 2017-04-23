@@ -1,4 +1,4 @@
-package com.hribol.automation.core.execution.executor;
+package com.hribol.automation.core.execution.scenario;
 
 import com.hribol.automation.core.execution.application.ApplicationActionFactory;
 

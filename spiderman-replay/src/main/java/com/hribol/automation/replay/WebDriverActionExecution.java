@@ -1,7 +1,6 @@
 package com.hribol.automation.replay;
 
-import com.hribol.automation.core.execution.executor.AutomationResult;
-import com.hribol.automation.core.execution.executor.TestScenario;
+import com.hribol.automation.core.execution.scenario.TestScenario;
 import com.hribol.automation.core.suite.VirtualScreenProcessCreator;
 import com.hribol.automation.core.utils.LoadingTimes;
 

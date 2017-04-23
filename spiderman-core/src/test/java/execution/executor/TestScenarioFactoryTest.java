@@ -2,9 +2,9 @@ package execution.executor;
 
 import com.hribol.automation.core.execution.application.ApplicationAction;
 import com.hribol.automation.core.execution.application.ApplicationActionFactory;
-import com.hribol.automation.core.execution.executor.TestScenario;
-import com.hribol.automation.core.execution.executor.TestScenarioFactory;
-import com.hribol.automation.core.execution.executor.TestScenarioFactoryImpl;
+import com.hribol.automation.core.execution.scenario.TestScenario;
+import com.hribol.automation.core.execution.scenario.TestScenarioFactory;
+import com.hribol.automation.core.execution.scenario.TestScenarioFactoryImpl;
 import com.hribol.automation.core.actions.WebDriverAction;
 import com.hribol.automation.core.utils.ConfigurationUtils;
 import org.junit.Test;

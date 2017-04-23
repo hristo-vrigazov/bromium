@@ -56,7 +56,8 @@ public class ClickClassByText implements WebDriverAction {
     }
 
     private boolean elementContainsTextAndIsDisplayed(WebElement webElement) {
-        return webElement.getAttribute(INNER_HTML).trim().equals(text) &&
-                webElement.isDisplayed();
+        boolean textIsCorrect = webElement.getAttribute(INNER_HTML).trim().equals(text);
+        boolean elementIsDisplayed = webElement.isDisplayed();
+        return textIsCorrect && elementIsDisplayed;
     }
 }
