@@ -48,7 +48,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                             + " http queries in queue: " + httpRequestQueue.size());
                 }
                 if (httpRequestQueue.isEmpty() && !lock) {
-                    lock = testScenario.nextActionExpectsHttpRequest();
+                    setLock(testScenario.nextActionExpectsHttpRequest());
                     WebDriverAction webDriverAction = testScenario.pollWebdriverAction();
                     executeIgnoringExceptions(webDriverAction);
                     waitingTimes.add(System.nanoTime() - elapsedTime);
@@ -57,9 +57,12 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             }
 
             this.automationResult = AutomationResult.SUCCESS;
-        } catch (AssertionError e) {
-            e.printStackTrace();
+        } catch (AssertionError assertionError) {
+            assertionError.printStackTrace();
             this.automationResult = AutomationResult.ASSERTION_ERROR;
+        } catch (TimeoutException timeoutException) {
+            timeoutException.printStackTrace();
+            this.automationResult = AutomationResult.TIMEOUT;
         } finally {
             replaySettings.cleanUpReplay();
         }
@@ -161,7 +164,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         System.setProperty(getSystemProperty(), pathToWebDriver);
 
         this.maxRetries = 100;
-        this.lock = false;
+        setLock(false);
         this.automationResult = AutomationResult.NOT_STARTED;
 
         screenToUse = Optional.ofNullable(screenToUse).orElse(":0");

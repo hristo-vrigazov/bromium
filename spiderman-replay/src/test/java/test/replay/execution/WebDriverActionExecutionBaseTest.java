@@ -10,6 +10,8 @@ import net.lightbody.bmp.core.har.Har;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import java.io.File;
 import java.io.IOException;
@@ -53,6 +55,23 @@ public class WebDriverActionExecutionBaseTest {
         when(testScenario.pollWebdriverAction()).thenReturn(firstAction);
         webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.ASSERTION_ERROR, webDriverActionExecutionBase.getAutomationResult());
+    }
+
+    @Test
+    public void timesoOutIfActionTakesTooLong() throws IOException, URISyntaxException, InterruptedException {
+        this.timeout = 1;
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase();
+        TestScenario testScenario = mock(TestScenario.class);
+        when(testScenario.hasMoreSteps()).thenReturn(true);
+        when(testScenario.nextActionExpectsHttpRequest()).thenReturn(true);
+        WebDriverAction firstAction = mock(WebDriverAction.class);
+        doAnswer(invocationOnMock -> {
+            Thread.sleep(1500);
+            return null;
+        }).when(firstAction).execute(any());
+        when(testScenario.pollWebdriverAction()).thenReturn(firstAction);
+        webDriverActionExecutionBase.execute(testScenario);
+        assertEquals(AutomationResult.TIMEOUT, webDriverActionExecutionBase.getAutomationResult());
     }
 
     @Test
