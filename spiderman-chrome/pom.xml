@@ -7,6 +7,9 @@
         <groupId>com.hribol.spiderman</groupId>
         <version>0.1</version>
     </parent>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>spiderman-chrome</artifactId>

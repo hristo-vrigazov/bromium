@@ -11,6 +11,8 @@
 
     <artifactId>spiderman-chrome-record</artifactId>
 
+    <name>${project.groupId}:${project.artifactId}</name>
+
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
