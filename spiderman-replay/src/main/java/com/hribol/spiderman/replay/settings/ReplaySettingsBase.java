@@ -26,14 +26,11 @@ public abstract class ReplaySettingsBase<T extends DriverService> implements Rep
     private WebDriver driver;
     private T driverService;
     private DesiredCapabilities capabilities;
-    private String baseURI;
 
-    public ReplaySettingsBase(String baseURI,
-                              RequestFilter requestFilter,
+    public ReplaySettingsBase(RequestFilter requestFilter,
                               ResponseFilter responseFilter,
                               InvisibleWebDriverSupplier<T> invisibleWebDriverSupplier,
                               VisibleWebDriverSupplier visibleWebDriverSupplier) {
-        this.baseURI = baseURI;
         this.requestFilter = requestFilter;
         this.responseFilter = responseFilter;
         this.invisibleWebDriverSupplier = invisibleWebDriverSupplier;

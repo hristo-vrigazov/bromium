@@ -16,9 +16,8 @@ import java.io.IOException;
  */
 public class ChromeDriverReplaySettings extends ReplaySettingsBase<ChromeDriverService> {
 
-    public ChromeDriverReplaySettings(String baseURI, RequestFilter requestFilter, ResponseFilter responseFilter) {
-        super(baseURI,
-                requestFilter,
+    public ChromeDriverReplaySettings(RequestFilter requestFilter, ResponseFilter responseFilter) {
+        super(requestFilter,
                 responseFilter,
                 new InvisibleChromeDriverSupplier(),
                 new VisibleChromeDriverSupplier());

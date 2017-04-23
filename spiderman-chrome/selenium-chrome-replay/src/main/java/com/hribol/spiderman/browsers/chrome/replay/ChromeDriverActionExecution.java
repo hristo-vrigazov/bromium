@@ -19,7 +19,7 @@ public class ChromeDriverActionExecution extends WebDriverActionExecutionBase {
 
     @Override
     protected ReplaySettings createExecutionSettings() {
-        return new ChromeDriverReplaySettings(this.baseURI, replayRequestFilter, replayResponseFilter);
+        return new ChromeDriverReplaySettings(replayRequestFilter, replayResponseFilter);
     }
 
     @Override
