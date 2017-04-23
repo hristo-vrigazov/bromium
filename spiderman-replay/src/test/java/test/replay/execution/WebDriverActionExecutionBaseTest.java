@@ -25,85 +25,33 @@ import static org.mockito.Mockito.*;
  */
 public class WebDriverActionExecutionBaseTest {
 
+    String systemProperty = "property";
+    String baseURI = "http://tenniskafe.com";
+    int precision = 500;
+    int timeout = 10;
+    String pathToDriverExecutable = "file:///somepath";
+
     @Test
     public void oneActionWithNoProblems() throws IOException, URISyntaxException, InterruptedException {
-        ReplaySettings replaySettings = mock(ReplaySettings.class);
-        String systemProperty = "property";
-        String baseURI = "http://tenniskafe.com";
-        int precision = 500;
-        int timeout = 10;
-        String pathToDriverExecutable = "file:///somepath";
-
-        WebDriverActionExecutor webDriverActionExecutor = mock(WebDriverActionExecutor.class);
-        when(webDriverActionExecutor.getBaseURI()).thenReturn(baseURI);
-        when(webDriverActionExecutor.getMeasurementsPrecisionMilli()).thenReturn(precision);
-        when(webDriverActionExecutor.getTimeout()).thenReturn(timeout);
-        when(webDriverActionExecutor.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
-
-        WebDriverActionExecutionBase webDriverActionExecutionBase =
-                new WebDriverActionExecutionBase(webDriverActionExecutor) {
-            @Override
-            protected ReplaySettings createExecutionSettings() {
-                return replaySettings;
-            }
-
-            @Override
-            protected String getSystemProperty() {
-                return systemProperty;
-            }
-        };
-
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase();
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.hasMoreSteps()).thenReturn(true, false);
-
         WebDriverAction firstAction = mock(WebDriverAction.class);
-
         when(testScenario.pollWebdriverAction()).thenReturn(firstAction);
-
         webDriverActionExecutionBase.execute(testScenario);
-
         assertNotNull(webDriverActionExecutionBase.getLoadingTimes());
         assertEquals(AutomationResult.SUCCESS, webDriverActionExecutionBase.getAutomationResult());
     }
 
     @Test
     public void actionWhichThrowsAssertionError() throws IOException, URISyntaxException, InterruptedException {
-        ReplaySettings replaySettings = mock(ReplaySettings.class);
-        String systemProperty = "property";
-        String baseURI = "http://tenniskafe.com";
-        int precision = 500;
-        int timeout = 10;
-        String pathToDriverExecutable = "file:///somepath";
-
-        WebDriverActionExecutor webDriverActionExecutor = mock(WebDriverActionExecutor.class);
-        when(webDriverActionExecutor.getBaseURI()).thenReturn(baseURI);
-        when(webDriverActionExecutor.getMeasurementsPrecisionMilli()).thenReturn(precision);
-        when(webDriverActionExecutor.getTimeout()).thenReturn(timeout);
-        when(webDriverActionExecutor.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
-
-        WebDriverActionExecutionBase webDriverActionExecutionBase =
-                new WebDriverActionExecutionBase(webDriverActionExecutor) {
-                    @Override
-                    protected ReplaySettings createExecutionSettings() {
-                        return replaySettings;
-                    }
-
-                    @Override
-                    protected String getSystemProperty() {
-                        return systemProperty;
-                    }
-                };
-
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase();
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.hasMoreSteps()).thenReturn(true, false);
-
         WebDriverAction firstAction = mock(WebDriverAction.class);
         doThrow(AssertionError.class).when(firstAction).execute(any());
-
         when(testScenario.pollWebdriverAction()).thenReturn(firstAction);
-
         webDriverActionExecutionBase.execute(testScenario);
-
         assertEquals(AutomationResult.ASSERTION_ERROR, webDriverActionExecutionBase.getAutomationResult());
     }
 
@@ -142,5 +90,26 @@ public class WebDriverActionExecutionBaseTest {
         webDriverActionExecutionBase.dumpHarMetrics(filename);
 
         verify(har).writeTo((File) any());
+    }
+
+    private WebDriverActionExecutionBase getWebDriverActionExecutionBase() throws IOException, URISyntaxException {
+        ReplaySettings replaySettings = mock(ReplaySettings.class);
+        WebDriverActionExecutor webDriverActionExecutor = mock(WebDriverActionExecutor.class);
+        when(webDriverActionExecutor.getBaseURI()).thenReturn(baseURI);
+        when(webDriverActionExecutor.getMeasurementsPrecisionMilli()).thenReturn(precision);
+        when(webDriverActionExecutor.getTimeout()).thenReturn(timeout);
+        when(webDriverActionExecutor.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
+
+        return new WebDriverActionExecutionBase(webDriverActionExecutor) {
+            @Override
+            protected ReplaySettings createExecutionSettings() {
+                return replaySettings;
+            }
+
+            @Override
+            protected String getSystemProperty() {
+                return systemProperty;
+            }
+        };
     }
 }
