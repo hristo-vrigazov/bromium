@@ -1,7 +1,7 @@
 package execution.executor;
 
-import com.hribol.automation.core.execution.scenario.TestScenario;
-import com.hribol.automation.core.actions.WebDriverAction;
+import com.hribol.spiderman.core.execution.scenario.TestScenario;
+import com.hribol.spiderman.core.actions.WebDriverAction;
 import org.junit.Test;
 
 import java.util.ArrayList;

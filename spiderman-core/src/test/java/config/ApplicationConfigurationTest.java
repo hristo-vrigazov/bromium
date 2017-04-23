@@ -1,7 +1,7 @@
 package config;
 
-import com.hribol.automation.core.config.ApplicationActionConfiguration;
-import com.hribol.automation.core.config.ApplicationConfiguration;
+import com.hribol.spiderman.core.config.ApplicationActionConfiguration;
+import com.hribol.spiderman.core.config.ApplicationConfiguration;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

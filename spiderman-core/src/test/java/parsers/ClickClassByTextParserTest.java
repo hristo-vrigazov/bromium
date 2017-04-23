@@ -1,7 +1,7 @@
 package parsers;
 
-import com.hribol.automation.core.actions.WebDriverAction;
-import com.hribol.automation.core.parsers.ClickClassByTextParser;
+import com.hribol.spiderman.core.actions.WebDriverAction;
+import com.hribol.spiderman.core.parsers.ClickClassByTextParser;
 import org.junit.Test;
 
 import java.util.HashMap;

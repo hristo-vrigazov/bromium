@@ -1,6 +1,6 @@
 package actions;
 
-import com.hribol.automation.core.actions.ClickClassByText;
+import com.hribol.spiderman.core.actions.ClickClassByText;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.hribol.automation.core.utils.Constants.INNER_HTML;
+import static com.hribol.spiderman.core.utils.Constants.INNER_HTML;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

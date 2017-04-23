@@ -1,7 +1,7 @@
 package execution.application;
 
-import com.hribol.automation.core.execution.application.ApplicationAction;
-import com.hribol.automation.core.execution.application.ApplicationPageLoading;
+import com.hribol.spiderman.core.execution.application.ApplicationAction;
+import com.hribol.spiderman.core.execution.application.ApplicationPageLoading;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;

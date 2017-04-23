@@ -1,6 +1,6 @@
 package record;
 
-import com.hribol.automation.record.JavascriptInjector;
+import com.hribol.spiderman.record.JavascriptInjector;
 import org.junit.Test;
 
 import java.io.IOException;

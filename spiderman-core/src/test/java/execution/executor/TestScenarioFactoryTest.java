@@ -1,12 +1,12 @@
 package execution.executor;
 
-import com.hribol.automation.core.execution.application.ApplicationAction;
-import com.hribol.automation.core.execution.application.ApplicationActionFactory;
-import com.hribol.automation.core.execution.scenario.TestScenario;
-import com.hribol.automation.core.execution.scenario.TestScenarioFactory;
-import com.hribol.automation.core.execution.scenario.TestScenarioFactoryImpl;
-import com.hribol.automation.core.actions.WebDriverAction;
-import com.hribol.automation.core.utils.ConfigurationUtils;
+import com.hribol.spiderman.core.execution.application.ApplicationAction;
+import com.hribol.spiderman.core.execution.application.ApplicationActionFactory;
+import com.hribol.spiderman.core.execution.scenario.TestScenario;
+import com.hribol.spiderman.core.execution.scenario.TestScenarioFactory;
+import com.hribol.spiderman.core.execution.scenario.TestScenarioFactoryImpl;
+import com.hribol.spiderman.core.actions.WebDriverAction;
+import com.hribol.spiderman.core.utils.ConfigurationUtils;
 import org.junit.Test;
 
 import java.io.IOException;

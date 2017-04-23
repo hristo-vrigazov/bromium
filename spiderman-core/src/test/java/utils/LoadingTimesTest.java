@@ -1,6 +1,6 @@
 package utils;
 
-import com.hribol.automation.core.utils.LoadingTimes;
+import com.hribol.spiderman.core.utils.LoadingTimes;
 import org.junit.Assert;
 import org.junit.Test;
 

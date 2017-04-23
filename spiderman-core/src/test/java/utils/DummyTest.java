@@ -1,7 +1,7 @@
 package utils;
 
-import com.hribol.automation.core.utils.Constants;
-import com.hribol.automation.core.utils.Utils;
+import com.hribol.spiderman.core.utils.Constants;
+import com.hribol.spiderman.core.utils.Utils;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;

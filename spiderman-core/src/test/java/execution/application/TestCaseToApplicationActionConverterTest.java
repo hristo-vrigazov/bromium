@@ -1,18 +1,20 @@
 package execution.application;
 
-import com.hribol.automation.core.config.ApplicationActionConfiguration;
-import com.hribol.automation.core.config.ParameterConfiguration;
-import com.hribol.automation.core.config.WebDriverActionConfiguration;
-import com.hribol.automation.core.execution.application.ApplicationAction;
-import com.hribol.automation.core.execution.application.TestCaseToApplicationActionConverter;
-import com.hribol.automation.core.actions.WebDriverAction;
-import com.hribol.automation.core.execution.factory.WebDriverActionFactory;
+import com.hribol.spiderman.core.config.ApplicationActionConfiguration;
+import com.hribol.spiderman.core.config.ParameterConfiguration;
+import com.hribol.spiderman.core.config.WebDriverActionConfiguration;
+import com.hribol.spiderman.core.execution.application.ApplicationAction;
+import com.hribol.spiderman.core.execution.application.TestCaseToApplicationActionConverter;
+import com.hribol.spiderman.core.actions.WebDriverAction;
+import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;
 import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.hribol.automation.core.utils.Constants.*;
+import static com.hribol.spiderman.core.utils.Constants.EVENT;
+import static com.hribol.spiderman.core.utils.Constants.EXPECTS_HTTP;
+import static com.hribol.spiderman.core.utils.Constants.NOTHING;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

@@ -38,6 +38,7 @@
         <module>spiderman-cli</module>
         <module>spiderman-record</module>
         <module>spiderman-replay</module>
+        <module>spiderman-chrome</module>
     </modules>
 
     <properties>
@@ -64,7 +65,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>com.hribol.automation.cli.Main</mainClass>
+                            <mainClass>com.hribol.spiderman.cli.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

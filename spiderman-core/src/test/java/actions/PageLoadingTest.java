@@ -1,6 +1,6 @@
 package actions;
 
-import com.hribol.automation.core.actions.PageLoading;
+import com.hribol.spiderman.core.actions.PageLoading;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 

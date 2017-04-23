@@ -1,6 +1,6 @@
 package utils;
 
-import com.hribol.automation.core.utils.Utils;
+import com.hribol.spiderman.core.utils.Utils;
 import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.codec.http.HttpRequest;
 import org.junit.Test;

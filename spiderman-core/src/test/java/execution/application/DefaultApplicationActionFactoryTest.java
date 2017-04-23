@@ -1,12 +1,12 @@
 package execution.application;
 
-import com.hribol.automation.core.config.ApplicationActionConfiguration;
-import com.hribol.automation.core.config.ApplicationConfiguration;
-import com.hribol.automation.core.execution.application.ApplicationAction;
-import com.hribol.automation.core.execution.application.ApplicationActionFactory;
-import com.hribol.automation.core.execution.application.DefaultApplicationActionFactory;
-import com.hribol.automation.core.execution.application.TestCaseToApplicationActionConverter;
-import com.hribol.automation.core.execution.factory.WebDriverActionFactory;
+import com.hribol.spiderman.core.config.ApplicationActionConfiguration;
+import com.hribol.spiderman.core.config.ApplicationConfiguration;
+import com.hribol.spiderman.core.execution.application.ApplicationAction;
+import com.hribol.spiderman.core.execution.application.ApplicationActionFactory;
+import com.hribol.spiderman.core.execution.application.DefaultApplicationActionFactory;
+import com.hribol.spiderman.core.execution.application.TestCaseToApplicationActionConverter;
+import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;
 import org.junit.Test;
 
 import java.util.ArrayList;

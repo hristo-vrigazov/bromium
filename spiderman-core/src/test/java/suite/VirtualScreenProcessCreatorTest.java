@@ -1,6 +1,6 @@
 package suite;
 
-import com.hribol.automation.core.suite.UbuntuVirtualScreenProcessCreator;
+import com.hribol.spiderman.core.suite.UbuntuVirtualScreenProcessCreator;
 import org.junit.Test;
 
 import java.io.IOException;

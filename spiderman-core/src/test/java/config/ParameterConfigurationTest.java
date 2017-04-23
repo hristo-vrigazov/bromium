@@ -1,6 +1,6 @@
 package config;
 
-import com.hribol.automation.core.config.ParameterConfiguration;
+import com.hribol.spiderman.core.config.ParameterConfiguration;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

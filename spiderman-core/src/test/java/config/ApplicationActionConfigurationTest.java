@@ -1,7 +1,7 @@
 package config;
 
-import com.hribol.automation.core.config.ApplicationActionConfiguration;
-import com.hribol.automation.core.config.WebDriverActionConfiguration;
+import com.hribol.spiderman.core.config.ApplicationActionConfiguration;
+import com.hribol.spiderman.core.config.WebDriverActionConfiguration;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

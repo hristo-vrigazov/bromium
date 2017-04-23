@@ -1,12 +1,12 @@
 package replay;
 
-import com.hribol.automation.core.execution.application.ApplicationActionFactory;
-import com.hribol.automation.core.execution.scenario.TestScenario;
-import com.hribol.automation.core.execution.scenario.TestScenarioFactory;
-import com.hribol.automation.replay.ReplayBrowser;
-import com.hribol.automation.replay.WebDriverActionExecution;
+import com.hribol.spiderman.core.execution.application.ApplicationActionFactory;
+import com.hribol.spiderman.core.execution.scenario.TestScenario;
+import com.hribol.spiderman.core.execution.scenario.TestScenarioFactory;
+import com.hribol.spiderman.replay.ReplayBrowser;
+import com.hribol.spiderman.replay.WebDriverActionExecution;
 import org.mockito.Mockito;
-import com.hribol.automation.core.utils.LoadingTimes;
+import com.hribol.spiderman.core.utils.LoadingTimes;
 import org.junit.Test;
 
 import java.io.IOException;
