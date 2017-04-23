@@ -20,14 +20,5 @@
         <module>selenium-chrome-replay</module>
     </modules>
 
-    <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>spiderman-core</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
-
-
 
 </project>

@@ -24,11 +24,6 @@
             <artifactId>spiderman-record</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>spiderman-core</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
 
 </project>
