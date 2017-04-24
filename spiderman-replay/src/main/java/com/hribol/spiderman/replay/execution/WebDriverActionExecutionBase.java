@@ -116,7 +116,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     }
 
     @Override
-    public AutomationResult executeOnScreen(TestScenario testScenario,
+    public void executeOnScreen(TestScenario testScenario,
                                             int i,
                                             VirtualScreenProcessCreator virtualScreenProcessCreator) {
         Process process;
@@ -124,13 +124,13 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         try {
             process = virtualScreenProcessCreator.createXvfbProcess(i);
         } catch (IOException e) {
-            return AutomationResult.NO_VIRTUAL_SCREEN;
+            this.automationResult = AutomationResult.NO_VIRTUAL_SCREEN;
+            return;
         }
 
         this.screenToUse = screen;
         this.execute(testScenario);
         process.destroy();
-        return this.getAutomationResult();
     }
 
     protected RequestFilter replayRequestFilter;
@@ -216,9 +216,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                 Thread.sleep(measurementsPrecisionMilli);
                 System.out.println("Could not make it from first try");
                 i++;
-            } catch (AssertionError assertionError) {
-                this.automationResult = AutomationResult.ASSERTION_ERROR;
-                throw new AssertionError(assertionError);
             }
         }
 

@@ -131,6 +131,20 @@ public class WebDriverActionExecutionBaseTest {
     }
 
     @Test
+    public void correctAutomationResultIsSetIfVirtualScreenIsNotCreated() throws IOException, URISyntaxException {
+        int screen = 1;
+        VirtualScreenProcessCreator virtualScreenProcessCreator = mock(VirtualScreenProcessCreator.class);
+        when(virtualScreenProcessCreator.getScreen(screen)).thenReturn(":1");
+        when(virtualScreenProcessCreator.createXvfbProcess(screen)).thenThrow(new IOException());
+        TestScenario testScenario = mock(TestScenario.class);
+
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase();
+        webDriverActionExecutionBase.executeOnScreen(testScenario, screen, virtualScreenProcessCreator);
+
+        assertEquals(AutomationResult.NO_VIRTUAL_SCREEN, webDriverActionExecutionBase.getAutomationResult());
+    }
+
+    @Test
     public void executeOnScreenExecutes() throws IOException, URISyntaxException {
         WebDriverActionExecutionBase webDriverActionExecutionBase = spy(getWebDriverActionExecutionBase());
         TestScenario testScenario = mock(TestScenario.class);

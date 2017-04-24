@@ -20,7 +20,7 @@ public interface WebDriverActionExecution {
 
     LoadingTimes getLoadingTimes();
     AutomationResult getAutomationResult();
-    AutomationResult executeOnScreen(TestScenario testScenario,
+    void executeOnScreen(TestScenario testScenario,
                                      int i,
                                      VirtualScreenProcessCreator virtualScreenProcessCreator);
 }
