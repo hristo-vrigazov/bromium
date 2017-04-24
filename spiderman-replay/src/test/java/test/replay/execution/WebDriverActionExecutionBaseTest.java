@@ -11,8 +11,11 @@ import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
 import org.junit.Test;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.remote.service.DriverService;
 
 import java.io.File;
 import java.io.IOException;
@@ -143,6 +146,7 @@ public class WebDriverActionExecutionBaseTest {
 
         assertEquals(AutomationResult.NO_VIRTUAL_SCREEN, webDriverActionExecutionBase.getAutomationResult());
     }
+    
 
     @Test
     public void executeOnScreenExecutes() throws IOException, URISyntaxException {
@@ -186,12 +190,19 @@ public class WebDriverActionExecutionBaseTest {
     }
 
     private WebDriverActionExecutionBase getWebDriverActionExecutionBase() throws IOException, URISyntaxException {
-        return getWebDriverActionExecutionBase(10);
+        return getWebDriverActionExecutionBase(10,  mock(ReplaySettings.class));
     }
 
     private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout) throws IOException, URISyntaxException {
+        return getWebDriverActionExecutionBase(timeout,  mock(ReplaySettings.class));
+    }
+
+    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(ReplaySettings replaySettings) throws IOException, URISyntaxException {
+        return getWebDriverActionExecutionBase(10,  replaySettings);
+    }
+
+    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, ReplaySettings replaySettings) throws IOException, URISyntaxException {
         WebDriver webDriver = mock(WebDriver.class);
-        ReplaySettings replaySettings = mock(ReplaySettings.class);
         when(replaySettings.getHar()).thenReturn(har);
         when(replaySettings.getWebDriver()).thenReturn(webDriver);
         WebDriverActionExecutor webDriverActionExecutor = getWebDriverActionExecutor(timeout);

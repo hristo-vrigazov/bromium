@@ -18,6 +18,6 @@ public interface ReplaySettings<T extends DriverService> {
 
     Har getHar();
 
-    void prepareReplay(String pathToChromeDriver, String screenToUse, int timeout) throws IOException;
+    void prepareReplay(String pathToDriver, String screenToUse, int timeout) throws IOException;
 
 }

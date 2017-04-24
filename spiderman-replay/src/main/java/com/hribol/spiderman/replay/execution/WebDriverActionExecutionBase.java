@@ -51,6 +51,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             prepare();
         } catch (IOException e) {
             this.automationResult = AutomationResult.COULD_NOT_CREATE_DRIVER;
+            return;
         }
 
         long elapsedTime = System.nanoTime();

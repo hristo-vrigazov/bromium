@@ -55,13 +55,13 @@ public abstract class ReplaySettingsBase<T extends DriverService> implements Rep
     }
 
     @Override
-    public void prepareReplay(String pathToChromeDriver, String screenToUse, int timeout)
+    public void prepareReplay(String pathToDriver, String screenToUse, int timeout)
             throws IOException {
         boolean useVirtualScreen = !screenToUse.equals(":0");
         this.proxy = new BrowserMobProxySupplier(timeout, requestFilter, responseFilter).get();
         this.seleniumProxy = new SeleniumProxySupplier(proxy).get();
         this.capabilities = new DesiredCapabilitiesSupplier(seleniumProxy).get();
-        this.driverService = getDriverService(pathToChromeDriver, screenToUse);
+        this.driverService = getDriverService(pathToDriver, screenToUse);
         this.driver = useVirtualScreen ?
                 invisibleWebDriverSupplier.get(driverService, capabilities) :
                 visibleWebDriverSupplier.get(capabilities);
