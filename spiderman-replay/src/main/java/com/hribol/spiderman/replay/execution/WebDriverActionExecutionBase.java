@@ -114,9 +114,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     @Override
     public AutomationResult executeOnScreen(TestScenario testScenario,
                                             int i,
-                                            VirtualScreenProcessCreator virtualScreenProcessCreator,
-                                            String loadingTimesFileName,
-                                            String harTimesFileName) {
+                                            VirtualScreenProcessCreator virtualScreenProcessCreator) {
         Process process;
         String screen = virtualScreenProcessCreator.getScreen(i);
         try {

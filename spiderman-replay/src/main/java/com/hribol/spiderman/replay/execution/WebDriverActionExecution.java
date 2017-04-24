@@ -22,7 +22,5 @@ public interface WebDriverActionExecution {
     AutomationResult getAutomationResult();
     AutomationResult executeOnScreen(TestScenario testScenario,
                                      int i,
-                                     VirtualScreenProcessCreator virtualScreenProcessCreator,
-                                     String loadingTimesFileName,
-                                     String harTimesFileName);
+                                     VirtualScreenProcessCreator virtualScreenProcessCreator);
 }

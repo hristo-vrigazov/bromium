@@ -113,6 +113,11 @@ public class WebDriverActionExecutionBaseTest {
     }
 
     @Test
+    public void executingOnVirtualScreenKillsProcess() {
+
+    }
+
+    @Test
     public void executeOnScreenExecutes() throws IOException, URISyntaxException {
         WebDriverActionExecutionBase webDriverActionExecutionBase = spy(getWebDriverActionExecutionBase());
         TestScenario testScenario = mock(TestScenario.class);
