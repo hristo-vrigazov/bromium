@@ -46,8 +46,12 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     }
 
     @Override
-    public void execute(TestScenario testScenario) throws IOException {
-        prepare();
+    public void execute(TestScenario testScenario) {
+        try {
+            prepare();
+        } catch (IOException e) {
+            this.automationResult = AutomationResult.COULD_NOT_CREATE_DRIVER;
+        }
 
         long elapsedTime = System.nanoTime();
 
@@ -106,7 +110,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     }
 
     @Override
-    public void executeOnScreen(TestScenario testScenario, String screenToUse) throws IOException, URISyntaxException {
+    public void executeOnScreen(TestScenario testScenario, String screenToUse) {
         this.screenToUse = screenToUse;
         execute(testScenario);
     }
@@ -123,16 +127,10 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             return AutomationResult.NO_VIRTUAL_SCREEN;
         }
 
-        try {
-            this.screenToUse = screen;
-            this.execute(testScenario);
-            return this.getAutomationResult();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return AutomationResult.FAILED;
-        } finally {
-            process.destroy();
-        }
+        this.screenToUse = screen;
+        this.execute(testScenario);
+        process.destroy();
+        return this.getAutomationResult();
     }
 
     protected RequestFilter replayRequestFilter;

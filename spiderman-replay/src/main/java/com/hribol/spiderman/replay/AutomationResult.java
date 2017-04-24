@@ -5,6 +5,7 @@ package com.hribol.spiderman.replay;
  */
 public enum AutomationResult {
     NO_VIRTUAL_SCREEN,
+    COULD_NOT_CREATE_DRIVER,
     FAILED,
     NOT_STARTED,
     EXECUTING,
