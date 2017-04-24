@@ -7,11 +7,7 @@ import com.hribol.spiderman.replay.execution.WebDriverActionExecutionBase;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecutor;
 import com.hribol.spiderman.replay.settings.ReplaySettings;
 import net.lightbody.bmp.core.har.Har;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import java.io.File;
 import java.io.IOException;

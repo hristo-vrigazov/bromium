@@ -1,37 +1,19 @@
 package com.hribol.spiderman.replay.execution;
 
+import com.hribol.spiderman.core.suppliers.InvisibleWebDriverSupplier;
+import com.hribol.spiderman.core.suppliers.VisibleWebDriverSupplier;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
 import java.io.IOException;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 /**
  * Created by hvrigazov on 19.03.17.
  */
 public class WebDriverActionExecutor {
     private static final String DRIVER_EXECUTABLE = "DRIVER_EXECUTABLE";
-
-    public String getPathToDriverExecutable() throws IOException {
-        pathToDriverExecutable = Optional.ofNullable(pathToDriverExecutable).orElse(System.getenv(DRIVER_EXECUTABLE));
-        if (pathToDriverExecutable == null) {
-            throw new IOException("Path to driver executable not set. Please either set it using" +
-                    " pathToDriverExecutable method or by setting the environment variable" +
-                    " DRIVER_EXECUTABLE");
-        }
-
-        return pathToDriverExecutable;
-    }
-
-    public int getTimeout() {
-        return Optional.ofNullable(timeout).orElse(20);
-    }
-
-    public int getMeasurementsPrecisionMilli() {
-        return Optional.ofNullable(measurementsPrecisionMilli).orElse(50);
-    }
-
-    private String pathToDriverExecutable;
-    private Integer timeout;
-    private Integer measurementsPrecisionMilli;
-    private String baseURI;
 
     public WebDriverActionExecutor pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
@@ -60,4 +42,28 @@ public class WebDriverActionExecutor {
 
         return baseURI;
     }
+
+    public String getPathToDriverExecutable() throws IOException {
+        pathToDriverExecutable = Optional.ofNullable(pathToDriverExecutable).orElse(System.getenv(DRIVER_EXECUTABLE));
+        if (pathToDriverExecutable == null) {
+            throw new IOException("Path to driver executable not set. Please either set it using" +
+                    " pathToDriverExecutable method or by setting the environment variable" +
+                    " DRIVER_EXECUTABLE");
+        }
+
+        return pathToDriverExecutable;
+    }
+
+    public int getTimeout() {
+        return Optional.ofNullable(timeout).orElse(20);
+    }
+
+    public int getMeasurementsPrecisionMilli() {
+        return Optional.ofNullable(measurementsPrecisionMilli).orElse(50);
+    }
+
+    private String pathToDriverExecutable;
+    private Integer timeout;
+    private Integer measurementsPrecisionMilli;
+    private String baseURI;
 }

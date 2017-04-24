@@ -10,6 +10,8 @@ import com.hribol.spiderman.replay.filters.ReplayResponseFilter;
 import com.hribol.spiderman.replay.settings.ReplaySettings;
 import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.core.har.Har;
+import net.lightbody.bmp.filters.RequestFilter;
+import net.lightbody.bmp.filters.ResponseFilter;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriverException;
 
@@ -17,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
+import java.util.function.Supplier;
 
 
 /**
@@ -32,7 +35,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     }
 
     @Override
-    public void execute(TestScenario testScenario) throws InterruptedException, IOException, URISyntaxException {
+    public void execute(TestScenario testScenario) throws IOException, URISyntaxException {
         prepare();
 
         long elapsedTime = System.nanoTime();
@@ -63,6 +66,9 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         } catch (TimeoutException timeoutException) {
             timeoutException.printStackTrace();
             this.automationResult = AutomationResult.TIMEOUT;
+        } catch (InterruptedException interruptedException) {
+            interruptedException.printStackTrace();
+            this.automationResult = AutomationResult.INTERRUPTED;
         } finally {
             replaySettings.cleanUpReplay();
         }
@@ -89,7 +95,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     }
 
     @Override
-    public void executeOnScreen(TestScenario testScenario, String screenToUse) throws InterruptedException, IOException, URISyntaxException {
+    public void executeOnScreen(TestScenario testScenario, String screenToUse) throws IOException, URISyntaxException {
         this.screenToUse = screenToUse;
         execute(testScenario);
     }
@@ -110,11 +116,8 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
         try {
             this.executeOnScreen(testScenario, screen);
-            this.getLoadingTimes().dump(loadingTimesFileName);
-            this.dumpHarMetrics(harTimesFileName);
-            process.destroy();
             return this.getAutomationResult();
-        } catch (InterruptedException | IOException | URISyntaxException e) {
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
             return AutomationResult.FAILED;
         } finally {
@@ -122,8 +125,8 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         }
     }
 
-    protected ReplayRequestFilter replayRequestFilter;
-    protected ReplayResponseFilter replayResponseFilter;
+    protected RequestFilter replayRequestFilter;
+    protected ResponseFilter replayResponseFilter;
     protected String baseURI;
     protected abstract ReplaySettings createExecutionSettings();
     protected abstract String getSystemProperty();
@@ -152,8 +155,8 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
         this.waitingTimes = new ArrayList<>();
         this.replaySettings = createExecutionSettings();
-        this.replayRequestFilter = new ReplayRequestFilter(this::setLock, baseURI, httpRequestQueue);
-        this.replayResponseFilter = new ReplayResponseFilter(baseURI, httpRequestQueue);
+        this.replayRequestFilter = new ReplayRequestFilter(this::setLock, baseURI, httpRequestQueue);;
+        this.replayResponseFilter = new ReplayResponseFilter(baseURI, httpRequestQueue);;
     }
 
     private void setLock(Boolean value) {
