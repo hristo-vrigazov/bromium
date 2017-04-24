@@ -2,6 +2,7 @@ package test.replay.execution;
 
 import com.hribol.spiderman.core.actions.WebDriverAction;
 import com.hribol.spiderman.core.execution.scenario.TestScenario;
+import com.hribol.spiderman.core.suite.VirtualScreenProcessCreator;
 import com.hribol.spiderman.replay.AutomationResult;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecutionBase;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecutor;
@@ -113,8 +114,20 @@ public class WebDriverActionExecutionBaseTest {
     }
 
     @Test
-    public void executingOnVirtualScreenKillsProcess() {
+    public void executingOnVirtualScreenKillsProcess() throws IOException, URISyntaxException {
+        int screen = 1;
+        Process process = mock(Process.class);
+        VirtualScreenProcessCreator virtualScreenProcessCreator = mock(VirtualScreenProcessCreator.class);
+        when(virtualScreenProcessCreator.getScreen(screen)).thenReturn(":1");
+        when(virtualScreenProcessCreator.createXvfbProcess(screen)).thenReturn(process);
+        TestScenario testScenario = mock(TestScenario.class);
 
+        WebDriverActionExecutionBase webDriverActionExecutionBase = spy(getWebDriverActionExecutionBase());
+        doNothing().when(webDriverActionExecutionBase).execute(testScenario);
+        webDriverActionExecutionBase.executeOnScreen(testScenario, screen, virtualScreenProcessCreator);
+
+        verify(webDriverActionExecutionBase).execute(testScenario);
+        verify(process).destroy();
     }
 
     @Test

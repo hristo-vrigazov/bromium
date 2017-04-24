@@ -46,7 +46,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     }
 
     @Override
-    public void execute(TestScenario testScenario) throws IOException, URISyntaxException {
+    public void execute(TestScenario testScenario) throws IOException {
         prepare();
 
         long elapsedTime = System.nanoTime();
@@ -127,7 +127,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             this.screenToUse = screen;
             this.execute(testScenario);
             return this.getAutomationResult();
-        } catch (IOException | URISyntaxException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return AutomationResult.FAILED;
         } finally {
@@ -193,7 +193,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         this.lock = value;
     }
 
-    private void prepare() throws IOException, URISyntaxException {
+    private void prepare() throws IOException {
         System.setProperty(getSystemProperty(), pathToWebDriver);
 
         this.maxRetries = 100;
