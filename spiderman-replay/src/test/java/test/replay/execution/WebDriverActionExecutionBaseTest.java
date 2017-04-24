@@ -101,6 +101,18 @@ public class WebDriverActionExecutionBaseTest {
     }
 
     @Test
+    public void ifTooManyAttemtpsActionTimesOut() throws IOException, URISyntaxException {
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(2);
+        TestScenario testScenario = mock(TestScenario.class);
+        when(testScenario.hasMoreSteps()).thenReturn(true, false);
+        WebDriverAction firstAction = mock(WebDriverAction.class);
+        doThrow(new WebDriverException("Exception occured!")).when(firstAction).execute(any());
+        when(testScenario.pollWebdriverAction()).thenReturn(firstAction);
+        webDriverActionExecutionBase.execute(testScenario);
+        assertEquals(AutomationResult.TIMEOUT, webDriverActionExecutionBase.getAutomationResult());
+    }
+
+    @Test
     public void executeOnScreenExecutes() throws IOException, URISyntaxException {
         WebDriverActionExecutionBase webDriverActionExecutionBase = spy(getWebDriverActionExecutionBase());
         TestScenario testScenario = mock(TestScenario.class);
