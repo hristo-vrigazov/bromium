@@ -1,13 +1,7 @@
 package com.hribol.spiderman.replay.execution;
 
-import com.hribol.spiderman.core.suppliers.InvisibleWebDriverSupplier;
-import com.hribol.spiderman.core.suppliers.VisibleWebDriverSupplier;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
 import java.io.IOException;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 /**
  * Created by hvrigazov on 19.03.17.

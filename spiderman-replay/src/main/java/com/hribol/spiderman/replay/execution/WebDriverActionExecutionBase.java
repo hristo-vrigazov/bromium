@@ -34,6 +34,17 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                 webDriverActionExecutor.getMeasurementsPrecisionMilli());
     }
 
+    public WebDriverActionExecutionBase(WebDriverActionExecutor webDriverActionExecutor,
+                                        RequestFilter requestFilter,
+                                        ResponseFilter responseFilter) throws IOException, URISyntaxException {
+        this(webDriverActionExecutor.getBaseURI(),
+                webDriverActionExecutor.getPathToDriverExecutable(),
+                webDriverActionExecutor.getTimeout(),
+                webDriverActionExecutor.getMeasurementsPrecisionMilli(),
+                requestFilter,
+                responseFilter);
+    }
+
     @Override
     public void execute(TestScenario testScenario) throws IOException, URISyntaxException {
         prepare();
@@ -115,7 +126,8 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         }
 
         try {
-            this.executeOnScreen(testScenario, screen);
+            this.screenToUse = screen;
+            this.execute(testScenario);
             return this.getAutomationResult();
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
@@ -145,9 +157,29 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     private Set<HttpRequest> httpRequestQueue;
 
     private WebDriverActionExecutionBase(String baseURI,
+                                        String pathToDriverExecutable,
+                                        int timeout,
+                                        int measurementsPrecisionMilli,
+                                        RequestFilter requestFilter,
+                                        ResponseFilter responseFilter) {
+        initialize(baseURI, pathToDriverExecutable, timeout, measurementsPrecisionMilli, requestFilter, responseFilter);
+    }
+
+    private WebDriverActionExecutionBase(String baseURI,
                                          String pathToDriverExecutable,
                                          int timeout,
                                          int measurementsPrecisionMilli) throws IOException, URISyntaxException {
+        initialize(baseURI, pathToDriverExecutable, timeout, measurementsPrecisionMilli,
+                new ReplayRequestFilter(this::setLock, baseURI, httpRequestQueue),
+                new ReplayResponseFilter(baseURI, httpRequestQueue));
+    }
+
+    private void initialize(String baseURI,
+                            String pathToDriverExecutable,
+                            int timeout,
+                            int measurementsPrecisionMilli,
+                            RequestFilter replayRequestFilter,
+                            ResponseFilter replayResponseFilter) {
         this.pathToWebDriver = pathToDriverExecutable;
         this.timeout = timeout;
         this.baseURI = baseURI;
@@ -155,8 +187,8 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
         this.waitingTimes = new ArrayList<>();
         this.replaySettings = createExecutionSettings();
-        this.replayRequestFilter = new ReplayRequestFilter(this::setLock, baseURI, httpRequestQueue);;
-        this.replayResponseFilter = new ReplayResponseFilter(baseURI, httpRequestQueue);;
+        this.replayRequestFilter = replayRequestFilter;
+        this.replayResponseFilter = replayResponseFilter;
     }
 
     private void setLock(Boolean value) {

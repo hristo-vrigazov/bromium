@@ -7,7 +7,11 @@ import com.hribol.spiderman.replay.execution.WebDriverActionExecutionBase;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecutor;
 import com.hribol.spiderman.replay.settings.ReplaySettings;
 import net.lightbody.bmp.core.har.Har;
+import net.lightbody.bmp.filters.RequestFilter;
+import net.lightbody.bmp.filters.ResponseFilter;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,8 +30,10 @@ public class WebDriverActionExecutionBaseTest {
     String systemProperty = "property";
     String baseURI = "http://tenniskafe.com";
     int precision = 500;
-    int timeout = 10;
     String pathToDriverExecutable = "file:///somepath";
+
+    Har har = mock(Har.class);
+
 
     @Test
     public void oneActionWithNoProblems() throws IOException, URISyntaxException, InterruptedException {
@@ -55,8 +61,7 @@ public class WebDriverActionExecutionBaseTest {
 
     @Test
     public void timesoOutIfActionTakesTooLong() throws IOException, URISyntaxException, InterruptedException {
-        this.timeout = 1;
-        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase();
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(1);
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.hasMoreSteps()).thenReturn(true);
         when(testScenario.nextActionExpectsHttpRequest()).thenReturn(true);
@@ -71,51 +76,86 @@ public class WebDriverActionExecutionBaseTest {
     }
 
     @Test
+    public void properlyHandlesInterruptedException() throws IOException, URISyntaxException {
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(10);
+        TestScenario testScenario = mock(TestScenario.class);
+        when(testScenario.hasMoreSteps()).thenReturn(true);
+        when(testScenario.nextActionExpectsHttpRequest()).thenReturn(true);
+        WebDriverAction firstAction = mock(WebDriverAction.class);
+        doThrow(InterruptedException.class).when(firstAction).execute(any());
+        when(testScenario.pollWebdriverAction()).thenReturn(firstAction);
+        webDriverActionExecutionBase.execute(testScenario);
+        assertEquals(AutomationResult.INTERRUPTED, webDriverActionExecutionBase.getAutomationResult());
+    }
+
+    @Test
+    public void retriesIfCannotMakeItFromFirstTime() throws IOException, URISyntaxException {
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase();
+        TestScenario testScenario = mock(TestScenario.class);
+        when(testScenario.hasMoreSteps()).thenReturn(true, false);
+        WebDriverAction firstAction = mock(WebDriverAction.class);
+        doThrow(new WebDriverException("Exception occured!")).doNothing().when(firstAction).execute(any());
+        when(testScenario.pollWebdriverAction()).thenReturn(firstAction);
+        webDriverActionExecutionBase.execute(testScenario);
+        assertEquals(AutomationResult.SUCCESS, webDriverActionExecutionBase.getAutomationResult());
+    }
+
+    @Test
+    public void executeOnScreenExecutes() throws IOException, URISyntaxException {
+        WebDriverActionExecutionBase webDriverActionExecutionBase = spy(getWebDriverActionExecutionBase());
+        TestScenario testScenario = mock(TestScenario.class);
+        doNothing().when(webDriverActionExecutionBase).execute(testScenario);
+        String screen = ":1";
+        webDriverActionExecutionBase.executeOnScreen(testScenario, screen);
+
+        verify(webDriverActionExecutionBase).execute(testScenario);
+    }
+
+    @Test
     public void canDumpHar() throws IOException, URISyntaxException {
-        Har har = mock(Har.class);
-        ReplaySettings replaySettings = mock(ReplaySettings.class);
-        when(replaySettings.getHar()).thenReturn(har);
-
-        String filename = "filename";
-        String systemProperty = "property";
-        String baseURI = "http://tenniskafe.com";
-        int precision = 500;
-        int timeout = 10;
-        String pathToDriverExecutable = "file:///somepath";
-
-        WebDriverActionExecutor webDriverActionExecutor = mock(WebDriverActionExecutor.class);
-        when(webDriverActionExecutor.getBaseURI()).thenReturn(baseURI);
-        when(webDriverActionExecutor.getMeasurementsPrecisionMilli()).thenReturn(precision);
-        when(webDriverActionExecutor.getTimeout()).thenReturn(timeout);
-        when(webDriverActionExecutor.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
-
-        WebDriverActionExecutionBase webDriverActionExecutionBase =
-                new WebDriverActionExecutionBase(webDriverActionExecutor) {
-                    @Override
-                    protected ReplaySettings createExecutionSettings() {
-                        return replaySettings;
-                    }
-
-                    @Override
-                    protected String getSystemProperty() {
-                        return systemProperty;
-                    }
-                };
-
-        webDriverActionExecutionBase.dumpHarMetrics(filename);
-
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase();
+        webDriverActionExecutionBase.dumpHarMetrics("filename");
         verify(har).writeTo((File) any());
     }
 
-    private WebDriverActionExecutionBase getWebDriverActionExecutionBase() throws IOException, URISyntaxException {
-        ReplaySettings replaySettings = mock(ReplaySettings.class);
-        WebDriverActionExecutor webDriverActionExecutor = mock(WebDriverActionExecutor.class);
-        when(webDriverActionExecutor.getBaseURI()).thenReturn(baseURI);
-        when(webDriverActionExecutor.getMeasurementsPrecisionMilli()).thenReturn(precision);
-        when(webDriverActionExecutor.getTimeout()).thenReturn(timeout);
-        when(webDriverActionExecutor.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
+    @Test
+    public void canInstantiateWithDefault() throws IOException, URISyntaxException {
+        WebDriverActionExecutor webDriverActionExecutor = getWebDriverActionExecutor();
+        WebDriverActionExecutionBase webDriverActionExecutionBase =
+                new WebDriverActionExecutionBase(webDriverActionExecutor) {
+            @Override
+            protected ReplaySettings createExecutionSettings() {
+                return null;
+            }
 
-        return new WebDriverActionExecutionBase(webDriverActionExecutor) {
+            @Override
+            protected String getSystemProperty() {
+                return null;
+            }
+        };
+
+        assertNotNull(webDriverActionExecutionBase);
+    }
+
+    private WebDriverActionExecutor getWebDriverActionExecutor() throws IOException {
+        return getWebDriverActionExecutor(10);
+    }
+
+    private WebDriverActionExecutionBase getWebDriverActionExecutionBase() throws IOException, URISyntaxException {
+        return getWebDriverActionExecutionBase(10);
+    }
+
+    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout) throws IOException, URISyntaxException {
+        WebDriver webDriver = mock(WebDriver.class);
+        ReplaySettings replaySettings = mock(ReplaySettings.class);
+        when(replaySettings.getHar()).thenReturn(har);
+        when(replaySettings.getWebDriver()).thenReturn(webDriver);
+        WebDriverActionExecutor webDriverActionExecutor = getWebDriverActionExecutor(timeout);
+
+        RequestFilter requestFilter = mock(RequestFilter.class);
+        ResponseFilter responseFilter = mock(ResponseFilter.class);
+
+        return new WebDriverActionExecutionBase(webDriverActionExecutor, requestFilter, responseFilter) {
             @Override
             protected ReplaySettings createExecutionSettings() {
                 return replaySettings;
@@ -126,5 +166,14 @@ public class WebDriverActionExecutionBaseTest {
                 return systemProperty;
             }
         };
+    }
+
+    private WebDriverActionExecutor getWebDriverActionExecutor(int timeout) throws IOException {
+        WebDriverActionExecutor webDriverActionExecutor = mock(WebDriverActionExecutor.class);
+        when(webDriverActionExecutor.getBaseURI()).thenReturn(baseURI);
+        when(webDriverActionExecutor.getMeasurementsPrecisionMilli()).thenReturn(precision);
+        when(webDriverActionExecutor.getTimeout()).thenReturn(timeout);
+        when(webDriverActionExecutor.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
+        return webDriverActionExecutor;
     }
 }
