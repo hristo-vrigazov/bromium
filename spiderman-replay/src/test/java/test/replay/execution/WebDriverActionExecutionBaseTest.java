@@ -14,8 +14,6 @@ import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
 import org.junit.Test;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.service.DriverService;
@@ -175,30 +173,12 @@ public class WebDriverActionExecutionBaseTest {
         assertEquals(AutomationResult.TIMEOUT, webDriverActionExecutionBase.getAutomationResult());
     }
 
-    private ReplaySettingsBase<DriverService> getReplaySettingsBase() {
-        return new ReplaySettingsBase<DriverService>(
-                mock(RequestFilter.class),
-                mock(ResponseFilter.class),
-                mock(InvisibleWebDriverSupplier.class),
-                mock(VisibleWebDriverSupplier.class)) {
-            @Override
-            public DriverService getDriverService(String pathToDriverExecutable, String screenToUse) throws IOException {
-                return null;
-            }
-
-            @Override
-            public void prepareReplay(String pathToDriver, String screenToUse, int timeout) throws IOException {
-                throw new IOException("No webdriver");
-            }
-
-            @Override
-            public Har getHar() {
-                return mock(Har.class);
-            }
-
-        };
+    @Test
+    public void whenHttpRequestsAreInQueueDoesNotAct() throws IOException, URISyntaxException {
+        RequestFilter requestFilter = (httpRequest, httpMessageContents, httpMessageInfo) -> null;
+        ResponseFilter responseFilter = (httpResponse, httpMessageContents, httpMessageInfo) -> {};
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(requestFilter, responseFilter);
     }
-
 
     @Test
     public void executeOnScreenExecutes() throws IOException, URISyntaxException {
@@ -284,6 +264,24 @@ public class WebDriverActionExecutionBaseTest {
         };
     }
 
+    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(RequestFilter requestFilter,
+                                                                         ResponseFilter responseFilter) throws IOException, URISyntaxException {
+        WebDriverActionExecutor webDriverActionExecutor = getWebDriverActionExecutor(10, 10);
+
+        return new WebDriverActionExecutionBase(webDriverActionExecutor, requestFilter, responseFilter) {
+            @Override
+            protected ReplaySettings createExecutionSettings() {
+                return mock(ReplaySettings.class);
+            }
+
+            @Override
+            protected String getSystemProperty() {
+                return systemProperty;
+            }
+        };
+    }
+
+
     private WebDriverActionExecutor getWebDriverActionExecutor(int timeout) throws IOException {
         return getWebDriverActionExecutor(timeout, 10);
     }
@@ -296,5 +294,30 @@ public class WebDriverActionExecutionBaseTest {
         when(webDriverActionExecutor.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
         when(webDriverActionExecutor.getMaxRetries()).thenReturn(maxRetries);
         return webDriverActionExecutor;
+    }
+
+
+    private ReplaySettingsBase<DriverService> getReplaySettingsBase() {
+        return new ReplaySettingsBase<DriverService>(
+                mock(RequestFilter.class),
+                mock(ResponseFilter.class),
+                mock(InvisibleWebDriverSupplier.class),
+                mock(VisibleWebDriverSupplier.class)) {
+            @Override
+            public DriverService getDriverService(String pathToDriverExecutable, String screenToUse) throws IOException {
+                return null;
+            }
+
+            @Override
+            public void prepareReplay(String pathToDriver, String screenToUse, int timeout) throws IOException {
+                throw new IOException("No webdriver");
+            }
+
+            @Override
+            public Har getHar() {
+                return mock(Har.class);
+            }
+
+        };
     }
 }
