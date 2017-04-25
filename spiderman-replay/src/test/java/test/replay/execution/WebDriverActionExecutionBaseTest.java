@@ -3,10 +3,13 @@ package test.replay.execution;
 import com.hribol.spiderman.core.actions.WebDriverAction;
 import com.hribol.spiderman.core.execution.scenario.TestScenario;
 import com.hribol.spiderman.core.suite.VirtualScreenProcessCreator;
+import com.hribol.spiderman.core.suppliers.InvisibleWebDriverSupplier;
+import com.hribol.spiderman.core.suppliers.VisibleWebDriverSupplier;
 import com.hribol.spiderman.replay.AutomationResult;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecutionBase;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecutor;
 import com.hribol.spiderman.replay.settings.ReplaySettings;
+import com.hribol.spiderman.replay.settings.ReplaySettingsBase;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
@@ -146,7 +149,39 @@ public class WebDriverActionExecutionBaseTest {
 
         assertEquals(AutomationResult.NO_VIRTUAL_SCREEN, webDriverActionExecutionBase.getAutomationResult());
     }
-    
+
+    @Test
+    public void correctAutomationResultIfNoDriverIsFound() throws IOException, URISyntaxException {
+        ReplaySettings<DriverService> replaySettingsMock = getReplaySettingsBase();
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(replaySettingsMock);
+        webDriverActionExecutionBase.execute(mock(TestScenario.class));
+        assertEquals(AutomationResult.COULD_NOT_CREATE_DRIVER, webDriverActionExecutionBase.getAutomationResult());
+    }
+
+    private ReplaySettingsBase<DriverService> getReplaySettingsBase() {
+        return new ReplaySettingsBase<DriverService>(
+                mock(RequestFilter.class),
+                mock(ResponseFilter.class),
+                mock(InvisibleWebDriverSupplier.class),
+                mock(VisibleWebDriverSupplier.class)) {
+            @Override
+            public DriverService getDriverService(String pathToDriverExecutable, String screenToUse) throws IOException {
+                return null;
+            }
+
+            @Override
+            public void prepareReplay(String pathToDriver, String screenToUse, int timeout) throws IOException {
+                throw new IOException("No webdriver");
+            }
+
+            @Override
+            public Har getHar() {
+                return mock(Har.class);
+            }
+
+        };
+    }
+
 
     @Test
     public void executeOnScreenExecutes() throws IOException, URISyntaxException {
@@ -190,21 +225,27 @@ public class WebDriverActionExecutionBaseTest {
     }
 
     private WebDriverActionExecutionBase getWebDriverActionExecutionBase() throws IOException, URISyntaxException {
-        return getWebDriverActionExecutionBase(10,  mock(ReplaySettings.class));
+        return getWebDriverActionExecutionBase(10,  getDefaultReplaySettings());
     }
 
     private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout) throws IOException, URISyntaxException {
-        return getWebDriverActionExecutionBase(timeout,  mock(ReplaySettings.class));
+        return getWebDriverActionExecutionBase(timeout,  getDefaultReplaySettings());
     }
 
     private WebDriverActionExecutionBase getWebDriverActionExecutionBase(ReplaySettings replaySettings) throws IOException, URISyntaxException {
         return getWebDriverActionExecutionBase(10,  replaySettings);
     }
 
-    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, ReplaySettings replaySettings) throws IOException, URISyntaxException {
+    private ReplaySettings getDefaultReplaySettings() {
+        ReplaySettings replaySettings =  mock(ReplaySettings.class);
         WebDriver webDriver = mock(WebDriver.class);
         when(replaySettings.getHar()).thenReturn(har);
         when(replaySettings.getWebDriver()).thenReturn(webDriver);
+        return replaySettings;
+    }
+
+    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, ReplaySettings replaySettings) throws IOException, URISyntaxException {
+
         WebDriverActionExecutor webDriverActionExecutor = getWebDriverActionExecutor(timeout);
 
         RequestFilter requestFilter = mock(RequestFilter.class);
