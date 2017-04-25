@@ -41,6 +41,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                 webDriverActionExecutor.getPathToDriverExecutable(),
                 webDriverActionExecutor.getTimeout(),
                 webDriverActionExecutor.getMeasurementsPrecisionMilli(),
+                webDriverActionExecutor.getMaxRetries(),
                 requestFilter,
                 responseFilter);
     }
@@ -157,9 +158,10 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                                         String pathToDriverExecutable,
                                         int timeout,
                                         int measurementsPrecisionMilli,
+                                        int maxRetries,
                                         RequestFilter requestFilter,
                                         ResponseFilter responseFilter) {
-        initialize(baseURI, pathToDriverExecutable, timeout, measurementsPrecisionMilli, requestFilter, responseFilter);
+        initialize(baseURI, pathToDriverExecutable, timeout, measurementsPrecisionMilli, maxRetries, requestFilter, responseFilter);
     }
 
     private WebDriverActionExecutionBase(String baseURI,
@@ -167,6 +169,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                                          int timeout,
                                          int measurementsPrecisionMilli) throws IOException, URISyntaxException {
         initialize(baseURI, pathToDriverExecutable, timeout, measurementsPrecisionMilli,
+        100,
                 new ReplayRequestFilter(this::setLock, baseURI, httpRequestQueue),
                 new ReplayResponseFilter(baseURI, httpRequestQueue));
     }
@@ -175,12 +178,14 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                             String pathToDriverExecutable,
                             int timeout,
                             int measurementsPrecisionMilli,
+                            int maxRetries,
                             RequestFilter replayRequestFilter,
                             ResponseFilter replayResponseFilter) {
         this.pathToWebDriver = pathToDriverExecutable;
         this.timeout = timeout;
         this.baseURI = baseURI;
         this.measurementsPrecisionMilli = measurementsPrecisionMilli;
+        this.maxRetries = maxRetries;
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
         this.waitingTimes = new ArrayList<>();
         this.replaySettings = createExecutionSettings();
@@ -194,11 +199,8 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     private void prepare() throws IOException {
         System.setProperty(getSystemProperty(), pathToWebDriver);
-
-        this.maxRetries = 100;
         setLock(false);
         this.automationResult = AutomationResult.NOT_STARTED;
-
         screenToUse = Optional.ofNullable(screenToUse).orElse(":0");
         replaySettings.prepareReplay(pathToWebDriver, screenToUse, timeout);
     }

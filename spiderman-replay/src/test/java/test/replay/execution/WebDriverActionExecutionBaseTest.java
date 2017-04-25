@@ -158,6 +158,23 @@ public class WebDriverActionExecutionBaseTest {
         assertEquals(AutomationResult.COULD_NOT_CREATE_DRIVER, webDriverActionExecutionBase.getAutomationResult());
     }
 
+    @Test
+    public void throwsExceptionAfterMaxRetriesIsExceeded() throws IOException, URISyntaxException {
+        WebDriverAction webDriverAction = mock(WebDriverAction.class);
+        doThrow(new WebDriverException("Action cannot be executed")).when(webDriverAction).execute(any());
+
+        TestScenario testScenario = mock(TestScenario.class);
+        when(testScenario.hasMoreSteps()).thenReturn(true);
+        when(testScenario.pollWebdriverAction()).thenReturn(webDriverAction);
+
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(10,
+                2, getDefaultReplaySettings());
+
+        webDriverActionExecutionBase.execute(testScenario);
+
+        assertEquals(AutomationResult.TIMEOUT, webDriverActionExecutionBase.getAutomationResult());
+    }
+
     private ReplaySettingsBase<DriverService> getReplaySettingsBase() {
         return new ReplaySettingsBase<DriverService>(
                 mock(RequestFilter.class),
@@ -245,8 +262,11 @@ public class WebDriverActionExecutionBaseTest {
     }
 
     private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, ReplaySettings replaySettings) throws IOException, URISyntaxException {
+        return getWebDriverActionExecutionBase(timeout, 10, replaySettings);
+    }
 
-        WebDriverActionExecutor webDriverActionExecutor = getWebDriverActionExecutor(timeout);
+    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, int maxRetries, ReplaySettings replaySettings) throws IOException, URISyntaxException {
+        WebDriverActionExecutor webDriverActionExecutor = getWebDriverActionExecutor(timeout, maxRetries);
 
         RequestFilter requestFilter = mock(RequestFilter.class);
         ResponseFilter responseFilter = mock(ResponseFilter.class);
@@ -265,11 +285,16 @@ public class WebDriverActionExecutionBaseTest {
     }
 
     private WebDriverActionExecutor getWebDriverActionExecutor(int timeout) throws IOException {
+        return getWebDriverActionExecutor(timeout, 10);
+    }
+
+    private WebDriverActionExecutor getWebDriverActionExecutor(int timeout, int maxRetries) throws IOException {
         WebDriverActionExecutor webDriverActionExecutor = mock(WebDriverActionExecutor.class);
         when(webDriverActionExecutor.getBaseURI()).thenReturn(baseURI);
         when(webDriverActionExecutor.getMeasurementsPrecisionMilli()).thenReturn(precision);
         when(webDriverActionExecutor.getTimeout()).thenReturn(timeout);
         when(webDriverActionExecutor.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
+        when(webDriverActionExecutor.getMaxRetries()).thenReturn(maxRetries);
         return webDriverActionExecutor;
     }
 }

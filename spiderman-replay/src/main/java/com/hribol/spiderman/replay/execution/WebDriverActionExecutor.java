@@ -8,6 +8,7 @@ import java.util.Optional;
  */
 public class WebDriverActionExecutor {
     private static final String DRIVER_EXECUTABLE = "DRIVER_EXECUTABLE";
+    private int maxRetries;
 
     public WebDriverActionExecutor pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
@@ -21,6 +22,11 @@ public class WebDriverActionExecutor {
 
     public WebDriverActionExecutor measurementsPrecisionInMilliseconds(int measurementsPrecisionMilli) {
         this.measurementsPrecisionMilli = measurementsPrecisionMilli;
+        return this;
+    }
+
+    public WebDriverActionExecutor maxRetries(int maxRetries) {
+        this.maxRetries = maxRetries;
         return this;
     }
 
@@ -60,4 +66,8 @@ public class WebDriverActionExecutor {
     private Integer timeout;
     private Integer measurementsPrecisionMilli;
     private String baseURI;
+
+    public int getMaxRetries() {
+        return maxRetries;
+    }
 }
