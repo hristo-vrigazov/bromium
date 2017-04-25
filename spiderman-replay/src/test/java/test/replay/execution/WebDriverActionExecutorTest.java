@@ -20,17 +20,20 @@ public class WebDriverActionExecutorTest {
         String baseURI = "http://tennikafe.com";
         int precision = 500;
         int timeout = 10;
+        int maxRetries = 10;
 
         WebDriverActionExecutor webDriverActionExecutor = new WebDriverActionExecutor()
                 .pathToDriverExecutable(pathToDriverExecutable)
                 .baseURI(baseURI)
                 .measurementsPrecisionInMilliseconds(precision)
-                .timeoutInSeconds(timeout);
+                .timeoutInSeconds(timeout)
+                .maxRetries(10);
 
         assertEquals(pathToDriverExecutable, webDriverActionExecutor.getPathToDriverExecutable());
         assertEquals(baseURI, webDriverActionExecutor.getBaseURI());
         assertEquals(precision, webDriverActionExecutor.getMeasurementsPrecisionMilli());
         assertEquals(timeout, webDriverActionExecutor.getTimeout());
+        assertEquals(maxRetries, webDriverActionExecutor.getMaxRetries());
     }
 
     @Rule
