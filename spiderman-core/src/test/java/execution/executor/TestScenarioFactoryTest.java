@@ -40,7 +40,9 @@ public class TestScenarioFactoryTest {
             String something = "something";
             WebDriverAction webDriverAction = mock(WebDriverAction.class);
             when(webDriverAction.getName()).thenReturn(something);
+            when(domainSpecificAction.getPrecondition()).thenReturn(Optional.empty());
             when(domainSpecificAction.getWebdriverAction()).thenReturn(Optional.of(webDriverAction));
+            when(domainSpecificAction.getPostcondition()).thenReturn(Optional.empty());
             when(applicationActionFactory.create(testCaseStep)).thenReturn(domainSpecificAction);
         }
 
