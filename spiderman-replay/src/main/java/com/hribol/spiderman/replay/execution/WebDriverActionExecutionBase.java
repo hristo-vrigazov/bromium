@@ -79,10 +79,9 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         } catch (InterruptedException interruptedException) {
             interruptedException.printStackTrace();
             this.automationResult = AutomationResult.INTERRUPTED;
-        } finally {
-            replaySettings.cleanUpReplay();
         }
-
+        
+        this.replaySettings.cleanUpReplay();
         this.loadingTimes = new LoadingTimes(waitingTimes, testScenario.getActions());
     }
 
