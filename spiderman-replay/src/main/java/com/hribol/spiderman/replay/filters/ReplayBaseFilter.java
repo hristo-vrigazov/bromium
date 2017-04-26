@@ -39,7 +39,7 @@ public class ReplayBaseFilter {
         this.httpRequestQueue.remove(httpRequest);
     }
 
-    protected boolean inWhiteList(String url) {
+    private boolean inWhiteList(String url) {
         for (String whiteListedString: whiteListHttp) {
             if (url.contains(whiteListedString)) {
                 return true;

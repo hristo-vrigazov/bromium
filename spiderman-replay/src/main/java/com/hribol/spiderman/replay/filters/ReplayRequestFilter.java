@@ -1,6 +1,6 @@
 package com.hribol.spiderman.replay.filters;
 
-import com.hribol.spiderman.replay.LockManagement;
+import com.hribol.spiderman.replay.LockCallback;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.filters.RequestFilter;
@@ -14,18 +14,18 @@ import java.util.Set;
  * Created by hvrigazov on 22.04.17.
  */
 public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilter {
-    private LockManagement lockManagement;
+    private LockCallback lockCallback;
 
-    public ReplayRequestFilter(LockManagement lockManagement, String baseURI, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
+    public ReplayRequestFilter(LockCallback lockCallback, String baseURI, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
         super(baseURI, httpRequestQueue);
-        this.lockManagement = lockManagement;
+        this.lockCallback = lockCallback;
     }
 
 
     @Override
     public HttpResponse filterRequest(HttpRequest httpRequest, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
         addHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
-        lockManagement.setLock(false);
+        lockCallback.setLock(false);
         return null;
     }
 

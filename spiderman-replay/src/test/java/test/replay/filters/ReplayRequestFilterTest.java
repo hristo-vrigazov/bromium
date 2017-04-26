@@ -1,6 +1,6 @@
 package test.replay.filters;
 
-import com.hribol.spiderman.replay.LockManagement;
+import com.hribol.spiderman.replay.LockCallback;
 import com.hribol.spiderman.replay.filters.ReplayRequestFilter;
 import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.util.HttpMessageContents;
@@ -22,11 +22,11 @@ public class ReplayRequestFilterTest {
 
     @Test
     public void replayRequestFilterAddsToQueueIfWhiteListedAndUnlocks() throws URISyntaxException {
-        LockManagement lockManagement = spy(LockManagement.class);
+        LockCallback lockCallback = spy(LockCallback.class);
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
 
-        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(lockManagement, baseURI, httpRequestSet);
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(lockCallback, baseURI, httpRequestSet);
 
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn("http://tenniskafe.com/static/some.css");
@@ -39,16 +39,16 @@ public class ReplayRequestFilterTest {
         replayRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
 
         assertTrue(httpRequestSet.contains(httpRequest));
-        verify(lockManagement).setLock(false);
+        verify(lockCallback).setLock(false);
     }
 
     @Test
     public void replayRequestFilterDoesNotAddToQueueIfNotWhiteListedAndUnlocks() throws URISyntaxException {
-        LockManagement lockManagement = spy(LockManagement.class);
+        LockCallback lockCallback = spy(LockCallback.class);
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
 
-        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(lockManagement, baseURI, httpRequestSet);
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(lockCallback, baseURI, httpRequestSet);
 
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn("http://google.com/static/some.css");
@@ -61,6 +61,6 @@ public class ReplayRequestFilterTest {
         replayRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
 
         assertFalse(httpRequestSet.contains(httpRequest));
-        verify(lockManagement).setLock(false);
+        verify(lockCallback).setLock(false);
     }
 }

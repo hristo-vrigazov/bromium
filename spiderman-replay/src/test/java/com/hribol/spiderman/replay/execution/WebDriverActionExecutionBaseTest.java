@@ -1,4 +1,4 @@
-package test.replay.execution;
+package com.hribol.spiderman.replay.execution;
 
 import com.hribol.spiderman.core.actions.WebDriverAction;
 import com.hribol.spiderman.core.execution.scenario.TestScenario;
@@ -6,13 +6,13 @@ import com.hribol.spiderman.core.suite.VirtualScreenProcessCreator;
 import com.hribol.spiderman.core.suppliers.InvisibleWebDriverSupplier;
 import com.hribol.spiderman.core.suppliers.VisibleWebDriverSupplier;
 import com.hribol.spiderman.replay.AutomationResult;
-import com.hribol.spiderman.replay.execution.WebDriverActionExecutionBase;
-import com.hribol.spiderman.replay.execution.WebDriverActionExecutor;
 import com.hribol.spiderman.replay.settings.ReplaySettings;
 import com.hribol.spiderman.replay.settings.ReplaySettingsBase;
+import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
+import net.lightbody.bmp.util.HttpMessageContents;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -175,9 +175,27 @@ public class WebDriverActionExecutionBaseTest {
 
     @Test
     public void whenHttpRequestsAreInQueueDoesNotAct() throws IOException, URISyntaxException {
-        RequestFilter requestFilter = (httpRequest, httpMessageContents, httpMessageInfo) -> null;
-        ResponseFilter responseFilter = (httpResponse, httpMessageContents, httpMessageInfo) -> {};
-        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(requestFilter, responseFilter);
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase();
+
+        WebDriverAction webDriverAction = new WebDriverAction() {
+            @Override
+            public void execute(WebDriver driver) {
+            }
+
+            @Override
+            public String getName() {
+                return "name";
+            }
+
+            @Override
+            public boolean expectsHttpRequest() {
+                return true;
+            }
+        };
+        TestScenario testScenario = mock(TestScenario.class);
+        when(testScenario.hasMoreSteps()).thenReturn(true, false);
+        when(testScenario.nextActionExpectsHttpRequest()).thenReturn(true);
+        when(testScenario.pollWebdriverAction()).thenReturn(webDriverAction);
     }
 
     @Test
@@ -187,7 +205,6 @@ public class WebDriverActionExecutionBaseTest {
         doNothing().when(webDriverActionExecutionBase).execute(testScenario);
         String screen = ":1";
         webDriverActionExecutionBase.executeOnScreen(testScenario, screen);
-
         verify(webDriverActionExecutionBase).execute(testScenario);
     }
 
@@ -204,7 +221,7 @@ public class WebDriverActionExecutionBaseTest {
         WebDriverActionExecutionBase webDriverActionExecutionBase =
                 new WebDriverActionExecutionBase(webDriverActionExecutor) {
             @Override
-            protected ReplaySettings createExecutionSettings() {
+            protected ReplaySettings createReplaySettings() {
                 return null;
             }
 
@@ -248,12 +265,9 @@ public class WebDriverActionExecutionBaseTest {
     private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, int maxRetries, ReplaySettings replaySettings) throws IOException, URISyntaxException {
         WebDriverActionExecutor webDriverActionExecutor = getWebDriverActionExecutor(timeout, maxRetries);
 
-        RequestFilter requestFilter = mock(RequestFilter.class);
-        ResponseFilter responseFilter = mock(ResponseFilter.class);
-
-        return new WebDriverActionExecutionBase(webDriverActionExecutor, requestFilter, responseFilter) {
+        return new WebDriverActionExecutionBase(webDriverActionExecutor) {
             @Override
-            protected ReplaySettings createExecutionSettings() {
+            protected ReplaySettings createReplaySettings() {
                 return replaySettings;
             }
 
@@ -263,24 +277,6 @@ public class WebDriverActionExecutionBaseTest {
             }
         };
     }
-
-    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(RequestFilter requestFilter,
-                                                                         ResponseFilter responseFilter) throws IOException, URISyntaxException {
-        WebDriverActionExecutor webDriverActionExecutor = getWebDriverActionExecutor(10, 10);
-
-        return new WebDriverActionExecutionBase(webDriverActionExecutor, requestFilter, responseFilter) {
-            @Override
-            protected ReplaySettings createExecutionSettings() {
-                return mock(ReplaySettings.class);
-            }
-
-            @Override
-            protected String getSystemProperty() {
-                return systemProperty;
-            }
-        };
-    }
-
 
     private WebDriverActionExecutor getWebDriverActionExecutor(int timeout) throws IOException {
         return getWebDriverActionExecutor(timeout, 10);

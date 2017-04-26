@@ -1,4 +1,4 @@
-package test.replay.execution;
+package com.hribol.spiderman.replay.execution;
 
 import com.hribol.spiderman.replay.execution.WebDriverActionExecutor;
 import org.junit.Rule;
