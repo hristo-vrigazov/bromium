@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import java.net.URISyntaxException;
 
+import static org.junit.Assert.assertNotNull;
+
 /**
  * Created by hvrigazov on 26.04.17.
  */
@@ -15,5 +17,7 @@ public class ProxyFacadeTest {
         String baseURI = "http://tenniskafe.com";
         ProxyFacade proxyFacade = new ProxyFacade(baseURI);
 
+        assertNotNull(proxyFacade.getRequestFilter());
+        assertNotNull(proxyFacade.getResponseFilter());
     }
 }
