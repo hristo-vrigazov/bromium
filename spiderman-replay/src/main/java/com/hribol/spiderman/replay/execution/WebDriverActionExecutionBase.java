@@ -5,6 +5,7 @@ import com.hribol.spiderman.core.suite.VirtualScreenProcessCreator;
 import com.hribol.spiderman.core.utils.ConfigurationUtils;
 import com.hribol.spiderman.core.utils.LoadingTimes;
 import com.hribol.spiderman.replay.AutomationResult;
+import com.hribol.spiderman.replay.filters.ProxyFacade;
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
 import com.hribol.spiderman.replay.settings.ReplaySettings;
 import net.lightbody.bmp.core.har.Har;
@@ -26,11 +27,17 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     public WebDriverActionExecutionBase(WebDriverActionExecutor executor) throws IOException, URISyntaxException {
         this.executor = executor;
-        this.replayFiltersFacade = new ReplayFiltersFacade(executor.getBaseURI());
+        this.proxyFacade = new ProxyFacade(executor.getBaseURI());
         this.replaySettings = createReplaySettings();
         this.waitingTimes = new ArrayList<>();
     }
 
+    WebDriverActionExecutionBase(WebDriverActionExecutor executor, ReplayFiltersFacade proxyFacade) throws IOException, URISyntaxException {
+        this.executor = executor;
+        this.proxyFacade = proxyFacade;
+        this.replaySettings = createReplaySettings();
+        this.waitingTimes = new ArrayList<>();
+    }
 
     @Override
     public void execute(TestScenario testScenario) {
@@ -51,10 +58,10 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                     throw new TimeoutException("Could not execute the action! Waited "
                             + String.valueOf(System.nanoTime() - elapsedTime)
                             + " to do " + testScenario.nextActionName()
-                            + " http queries in queue: " + replayFiltersFacade.getNumberOfRequestsInQueue());
+                            + " http queries in queue: " + proxyFacade.getNumberOfRequestsInQueue());
                 }
-                if (replayFiltersFacade.hasNoHttpQueriesInQueue() && !replayFiltersFacade.isLocked()) {
-                    replayFiltersFacade.setLock(testScenario.nextActionExpectsHttpRequest());
+                if (proxyFacade.httpQueueIsEmpty() && !proxyFacade.isLocked()) {
+                    proxyFacade.setLock(testScenario.nextActionExpectsHttpRequest());
                     WebDriverAction webDriverAction = testScenario.pollWebdriverAction();
                     executeIgnoringExceptions(webDriverAction);
                     waitingTimes.add(System.nanoTime() - elapsedTime);
@@ -121,7 +128,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         process.destroy();
     }
 
-    protected ReplayFiltersFacade replayFiltersFacade;
+    protected ReplayFiltersFacade proxyFacade;
     protected String baseURI;
     protected abstract ReplaySettings createReplaySettings();
     protected abstract String getSystemProperty();
@@ -136,7 +143,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     private void prepare() throws IOException {
         System.setProperty(getSystemProperty(), executor.getPathToDriverExecutable());
-        replayFiltersFacade.setLock(false);
+        proxyFacade.setLock(false);
         this.automationResult = AutomationResult.NOT_STARTED;
         screenToUse = Optional.ofNullable(screenToUse).orElse(":0");
         replaySettings.prepareReplay(executor.getPathToDriverExecutable(), screenToUse, executor.getTimeout());

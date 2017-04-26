@@ -21,8 +21,8 @@ public class ChromeDriverActionExecution extends WebDriverActionExecutionBase {
 
     @Override
     protected ReplaySettings createReplaySettings() {
-        RequestFilter requestFilter = replayFiltersFacade.getRequestFilter();
-        ResponseFilter responseFilter = replayFiltersFacade.getResponseFilter();
+        RequestFilter requestFilter = proxyFacade.getRequestFilter();
+        ResponseFilter responseFilter = proxyFacade.getResponseFilter();
         return new ChromeDriverReplaySettings(requestFilter, responseFilter);
     }
 

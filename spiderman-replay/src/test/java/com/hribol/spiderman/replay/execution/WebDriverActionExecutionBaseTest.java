@@ -6,6 +6,8 @@ import com.hribol.spiderman.core.suite.VirtualScreenProcessCreator;
 import com.hribol.spiderman.core.suppliers.InvisibleWebDriverSupplier;
 import com.hribol.spiderman.core.suppliers.VisibleWebDriverSupplier;
 import com.hribol.spiderman.replay.AutomationResult;
+import com.hribol.spiderman.replay.filters.ProxyFacade;
+import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
 import com.hribol.spiderman.replay.settings.ReplaySettings;
 import com.hribol.spiderman.replay.settings.ReplaySettingsBase;
 import io.netty.handler.codec.http.HttpRequest;
@@ -175,27 +177,30 @@ public class WebDriverActionExecutionBaseTest {
 
     @Test
     public void whenHttpRequestsAreInQueueDoesNotAct() throws IOException, URISyntaxException {
-        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase();
-
-        WebDriverAction webDriverAction = new WebDriverAction() {
+        ReplaySettings replaySettings = getDefaultReplaySettings();
+        WebDriverActionExecutor executor = getWebDriverActionExecutor(1);
+        ReplayFiltersFacade proxyFacade = mock(ReplayFiltersFacade.class);
+        when(proxyFacade.httpQueueIsEmpty()).thenReturn(true, false);
+        when(proxyFacade.isLocked()).thenReturn(false);
+        WebDriverActionExecutionBase webDriverActionExecutionBase = new WebDriverActionExecutionBase(executor, proxyFacade) {
             @Override
-            public void execute(WebDriver driver) {
+            protected ReplaySettings createReplaySettings() {
+                return replaySettings;
             }
 
             @Override
-            public String getName() {
-                return "name";
-            }
-
-            @Override
-            public boolean expectsHttpRequest() {
-                return true;
+            protected String getSystemProperty() {
+                return systemProperty;
             }
         };
+
+        WebDriverAction webDriverAction = mock(WebDriverAction.class);
+        when(webDriverAction.getName()).thenReturn("actionName");
         TestScenario testScenario = mock(TestScenario.class);
-        when(testScenario.hasMoreSteps()).thenReturn(true, false);
-        when(testScenario.nextActionExpectsHttpRequest()).thenReturn(true);
+        when(testScenario.hasMoreSteps()).thenReturn(true);
         when(testScenario.pollWebdriverAction()).thenReturn(webDriverAction);
+
+        webDriverActionExecutionBase.execute(testScenario);
     }
 
     @Test
