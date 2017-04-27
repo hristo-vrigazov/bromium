@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.hribol.spiderman.core.utils.Constants.JS_CALLBACK_URL;
+
 /**
  * Created by hvrigazov on 22.04.17.
  */
@@ -26,7 +28,7 @@ public class RecordRequestFilter implements RequestFilter {
 
     @Override
     public HttpResponse filterRequest(HttpRequest httpRequest, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
-        if (httpRequest.getUri().contains("http://working-selenium.com/submit-event")) {
+        if (httpRequest.getUri().contains(JS_CALLBACK_URL)) {
             try {
                 Map<String, String> map = ConfigurationUtils.splitQuery(new URL(httpRequest.getUri()));
                 domainSpecificActionList.add(map);
