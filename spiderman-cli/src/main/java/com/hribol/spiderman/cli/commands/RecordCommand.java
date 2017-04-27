@@ -27,16 +27,16 @@ public class RecordCommand implements Command {
 
     @Override
     public void run() {
-        RecordBrowserBase recordBrowserBase = new ChromeRecordBrowser(pathToChromedriver, pathToJSInjectionFile);
         try {
+            RecordBrowserBase recordBrowserBase = new ChromeRecordBrowser(pathToChromedriver, pathToJSInjectionFile);
             recordBrowserBase.record(baseUrl, 10);
             System.out.println("Press Enter when finished recording");
             System.in.read();
             recordBrowserBase.dumpActions(this.ouputFile);
+            recordBrowserBase.cleanUp();
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
         }
 
-        recordBrowserBase.cleanUp();
     }
 }

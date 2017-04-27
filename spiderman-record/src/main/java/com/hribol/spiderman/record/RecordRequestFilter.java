@@ -38,7 +38,7 @@ public class RecordRequestFilter implements RequestFilter {
         return null;
     }
 
-    public List<Map<String, String>> getDomainSpecificActionList() {
+    public List<Map<String, String>> getApplicationSpecificActionList() {
         return domainSpecificActionList;
     }
 }

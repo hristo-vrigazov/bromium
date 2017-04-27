@@ -35,7 +35,4 @@ public class RecordManagerTest {
         verify(driver).get(baseURI);
     }
 
-    @Test
-    public void createsItsOwnSuppliersdoesNotThrowExceptions() throws IOException {
-    }
 }

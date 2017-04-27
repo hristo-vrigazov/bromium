@@ -6,6 +6,7 @@ import com.hribol.spiderman.core.suppliers.VisibleWebDriverSupplier;
 import com.hribol.spiderman.record.settings.ProxyDriverIntegrator;
 import com.hribol.spiderman.record.settings.RecordManager;
 import net.lightbody.bmp.BrowserMobProxy;
+import net.lightbody.bmp.filters.ResponseFilter;
 import org.openqa.selenium.WebDriver;
 
 import java.io.FileWriter;
@@ -21,30 +22,26 @@ public abstract class RecordBrowserBase {
 
     private RecordManager recordManager;
     private String pathToDriverExecutable;
-    private String pathToJsInjectonFile;
+    private String jsInjectionCode;
 
-    protected JavascriptInjector javascriptInjector;
-
-    public RecordBrowserBase(String pathToDriverExecutable, String pathToJsInjectionFile) {
+    public RecordBrowserBase(String pathToDriverExecutable, String pathToJsInjectionFile) throws IOException {
         this.pathToDriverExecutable = pathToDriverExecutable;
-        this.pathToJsInjectonFile = pathToJsInjectionFile;
+        JavascriptInjector javascriptInjector = new JavascriptInjector(pathToJsInjectionFile);
+        this.jsInjectionCode = javascriptInjector.getInjectionCode();
     }
 
     protected abstract String getSystemProperty();
     protected abstract VisibleWebDriverSupplier getVisibleWebDriverSupplier();
 
-    protected RecordResponseFilter recordResponseFilter;
-    protected RecordRequestFilter recordRequestFilter;
+    private ResponseFilter responseFilter;
+    private RecordRequestFilter recordRequestFilter;
+    private ProxyDriverIntegrator proxyDriverIntegrator;
 
     public void record(String baseURI, int timeout) throws IOException, InterruptedException, URISyntaxException {
         URI uri = new URI(baseURI);
-        this.javascriptInjector = new JavascriptInjector(pathToJsInjectonFile);
-        this.recordResponseFilter = new RecordResponseFilter(uri, javascriptInjector.getInjectionCode());
+        this.responseFilter = new RecordResponseFilter(uri, jsInjectionCode);
         this.recordRequestFilter = new RecordRequestFilter();
-        ProxyDriverIntegrator proxyDriverIntegrator = new ProxyDriverIntegrator(recordRequestFilter,
-                recordResponseFilter,
-                getVisibleWebDriverSupplier(),
-                timeout);
+        this.proxyDriverIntegrator = new ProxyDriverIntegrator(recordRequestFilter, responseFilter, getVisibleWebDriverSupplier(), timeout);
         WebDriver driver = proxyDriverIntegrator.getDriver();
         BrowserMobProxy proxy = proxyDriverIntegrator.getProxy();
         this.recordManager = new RecordManager(driver, proxy);
@@ -56,7 +53,7 @@ public abstract class RecordBrowserBase {
     public void dumpActions(String outputFile) throws IOException {
         Writer writer = new FileWriter(outputFile);
         Gson gson = new GsonBuilder().create();
-        gson.toJson(recordRequestFilter.getDomainSpecificActionList(), writer);
+        gson.toJson(recordRequestFilter.getApplicationSpecificActionList(), writer);
         writer.close();
     }
 
