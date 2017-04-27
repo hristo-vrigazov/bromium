@@ -27,7 +27,7 @@ public class UtilsTest {
         when(httpRequest.getUri()).thenReturn("http://google.com");
         when(httpRequest.headers()).thenReturn(httpHeaders);
 
-        assertTrue(Utils.isUrlChangingRequest(uri, httpRequest));
+        assertFalse(Utils.isFromCurrentHostAndAcceptsHTML(uri, httpRequest));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class UtilsTest {
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn("http://google.com");
         when(httpRequest.headers()).thenReturn(httpHeaders);
-        assertFalse(Utils.isUrlChangingRequest(uri, httpRequest));
+        assertFalse(Utils.isFromCurrentHostAndAcceptsHTML(uri, httpRequest));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class UtilsTest {
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn("http://tenniskafe.com/atp");
         when(httpRequest.headers()).thenReturn(httpHeaders);
-        assertFalse(Utils.isUrlChangingRequest(uri, httpRequest));
+        assertFalse(Utils.isFromCurrentHostAndAcceptsHTML(uri, httpRequest));
     }
 
     @Test
@@ -60,6 +60,6 @@ public class UtilsTest {
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn("http://tenniskafe.com");
         when(httpRequest.headers()).thenReturn(httpHeaders);
-        assertFalse(Utils.isUrlChangingRequest(uri, httpRequest));
+        assertTrue(Utils.isFromCurrentHostAndAcceptsHTML(uri, httpRequest));
     }
 }

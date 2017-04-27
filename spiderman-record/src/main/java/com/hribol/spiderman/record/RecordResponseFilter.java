@@ -7,7 +7,7 @@ import net.lightbody.bmp.util.HttpMessageInfo;
 
 import java.net.URI;
 
-import static com.hribol.spiderman.core.utils.Utils.isUrlChangingRequest;
+import static com.hribol.spiderman.core.utils.Utils.isFromCurrentHostAndAcceptsHTML;
 
 /**
  * Created by hvrigazov on 22.04.17.
@@ -24,9 +24,8 @@ public class RecordResponseFilter implements ResponseFilter {
 
     @Override
     public void filterResponse(HttpResponse httpResponse, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
-        if (isUrlChangingRequest(baseURI, httpMessageInfo.getOriginalRequest())) {
-            injectionCode += httpMessageContents.getTextContents();
-            httpMessageContents.setTextContents(injectionCode);
+        if (isFromCurrentHostAndAcceptsHTML(baseURI, httpMessageInfo.getOriginalRequest())) {
+            httpMessageContents.setTextContents(injectionCode + httpMessageContents.getTextContents());
         }
     }
 }
