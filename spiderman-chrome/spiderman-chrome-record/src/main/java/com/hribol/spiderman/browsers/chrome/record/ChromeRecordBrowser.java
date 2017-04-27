@@ -1,10 +1,10 @@
 package com.hribol.spiderman.browsers.chrome.record;
 
+import com.hribol.spiderman.browsers.chrome.base.VisibleChromeDriverSupplier;
+import com.hribol.spiderman.core.suppliers.VisibleWebDriverSupplier;
 import com.hribol.spiderman.record.RecordBrowserBase;
-import com.hribol.spiderman.record.settings.RecordSettings;
+import com.hribol.spiderman.record.settings.RecordManager;
 import org.openqa.selenium.chrome.ChromeDriverService;
-
-import java.net.URI;
 
 /**
  * Created by hvrigazov on 22.03.17.
@@ -15,12 +15,12 @@ public class ChromeRecordBrowser extends RecordBrowserBase {
     }
 
     @Override
-    protected RecordSettings createRecordSettings(URI baseURI) {
-        return new ChromeRecordSettings(baseURI.toString(), recordRequestFilter, recordResponseFilter);
+    protected String getSystemProperty() {
+        return ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY;
     }
 
     @Override
-    protected String getSystemProperty() {
-        return ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY;
+    protected VisibleWebDriverSupplier getVisibleWebDriverSupplier() {
+        return new VisibleChromeDriverSupplier();
     }
 }

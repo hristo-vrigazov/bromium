@@ -10,6 +10,7 @@ import net.lightbody.bmp.util.HttpMessageInfo;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +20,8 @@ import java.util.Map;
 public class RecordRequestFilter implements RequestFilter {
     private List<Map<String, String>> domainSpecificActionList;
 
-    public RecordRequestFilter(List<Map<String, String>> domainSpecificActionList) {
-        this.domainSpecificActionList = domainSpecificActionList;
+    public RecordRequestFilter() {
+        this.domainSpecificActionList = new ArrayList<>();
     }
 
     @Override
@@ -35,5 +36,9 @@ public class RecordRequestFilter implements RequestFilter {
             }
         }
         return null;
+    }
+
+    public List<Map<String, String>> getDomainSpecificActionList() {
+        return domainSpecificActionList;
     }
 }

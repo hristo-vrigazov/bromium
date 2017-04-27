@@ -29,7 +29,7 @@ public class RecordCommand implements Command {
     public void run() {
         RecordBrowserBase recordBrowserBase = new ChromeRecordBrowser(pathToChromedriver, pathToJSInjectionFile);
         try {
-            recordBrowserBase.record(baseUrl);
+            recordBrowserBase.record(baseUrl, 10);
             System.out.println("Press Enter when finished recording");
             System.in.read();
             recordBrowserBase.dumpActions(this.ouputFile);

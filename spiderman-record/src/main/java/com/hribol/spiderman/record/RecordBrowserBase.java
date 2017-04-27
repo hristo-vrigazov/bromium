@@ -2,62 +2,65 @@ package com.hribol.spiderman.record;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hribol.spiderman.record.settings.RecordSettings;
+import com.hribol.spiderman.core.suppliers.VisibleWebDriverSupplier;
+import com.hribol.spiderman.record.settings.ProxyDriverIntegrator;
+import com.hribol.spiderman.record.settings.RecordManager;
+import net.lightbody.bmp.BrowserMobProxy;
+import org.openqa.selenium.WebDriver;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by hvrigazov on 09.03.17.
  */
 public abstract class RecordBrowserBase {
 
-    private RecordSettings recordSettings;
+    private RecordManager recordManager;
     private String pathToDriverExecutable;
     private String pathToJsInjectonFile;
-    private int timeout;
 
     protected JavascriptInjector javascriptInjector;
-    protected List<Map<String, String>> domainSpecificActionList;
 
     public RecordBrowserBase(String pathToDriverExecutable, String pathToJsInjectionFile) {
         this.pathToDriverExecutable = pathToDriverExecutable;
         this.pathToJsInjectonFile = pathToJsInjectionFile;
-        this.domainSpecificActionList = new ArrayList<>();
     }
 
-    protected abstract RecordSettings createRecordSettings(URI baseURI);
     protected abstract String getSystemProperty();
+    protected abstract VisibleWebDriverSupplier getVisibleWebDriverSupplier();
 
     protected RecordResponseFilter recordResponseFilter;
     protected RecordRequestFilter recordRequestFilter;
 
-    public void record(String baseURI) throws IOException, InterruptedException, URISyntaxException {
+    public void record(String baseURI, int timeout) throws IOException, InterruptedException, URISyntaxException {
         URI uri = new URI(baseURI);
         this.javascriptInjector = new JavascriptInjector(pathToJsInjectonFile);
-        this.timeout = 15;
         this.recordResponseFilter = new RecordResponseFilter(uri, javascriptInjector.getInjectionCode());
-        this.recordRequestFilter = new RecordRequestFilter(domainSpecificActionList);
-        this.recordSettings = createRecordSettings(uri);
+        this.recordRequestFilter = new RecordRequestFilter();
+        ProxyDriverIntegrator proxyDriverIntegrator = new ProxyDriverIntegrator(recordRequestFilter,
+                recordResponseFilter,
+                getVisibleWebDriverSupplier(),
+                timeout);
+        WebDriver driver = proxyDriverIntegrator.getDriver();
+        BrowserMobProxy proxy = proxyDriverIntegrator.getProxy();
+        this.recordManager = new RecordManager(driver, proxy);
         System.setProperty(getSystemProperty(), pathToDriverExecutable);
-        recordSettings.prepareRecord(timeout);
-        recordSettings.openBaseUrl();
+        recordManager.prepareRecord();
+        recordManager.open(baseURI);
     }
 
     public void dumpActions(String outputFile) throws IOException {
         Writer writer = new FileWriter(outputFile);
         Gson gson = new GsonBuilder().create();
-        gson.toJson(domainSpecificActionList, writer);
+        gson.toJson(recordRequestFilter.getDomainSpecificActionList(), writer);
         writer.close();
     }
 
     public void cleanUp() {
-        recordSettings.cleanUpRecord();
+        recordManager.cleanUpRecord();
     }
 }
