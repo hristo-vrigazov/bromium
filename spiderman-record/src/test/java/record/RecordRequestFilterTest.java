@@ -46,6 +46,16 @@ public class RecordRequestFilterTest {
         assertTrue(applicationSpecificActionList.isEmpty());
     }
 
+    @Test
+    public void doesNotAddToQueueIfURLIsMalformed() {
+        HttpRequest httpRequest = mock(HttpRequest.class);
+        when(httpRequest.getUri()).thenReturn("blabla" + JS_CALLBACK_URL);
+        RecordRequestFilter requestFilter = new RecordRequestFilter();
+        requestFilter.filterRequest(httpRequest, mock(HttpMessageContents.class), mock(HttpMessageInfo.class));
+        List<Map<String, String>> applicationSpecificActionList = requestFilter.getApplicationSpecificActionList();
+        assertTrue(applicationSpecificActionList.isEmpty());
+    }
+
     private Map<String, String> getEvent() {
         Map<String, String> event = new HashMap<>();
         event.put("event", "mockEvent");
