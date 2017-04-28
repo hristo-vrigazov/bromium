@@ -13,5 +13,6 @@ public class PromptUtilsTest {
     public void promptUtilsCanGetTextIO() {
         PromptUtils promptUtils = new PromptUtils();
         assertNotNull(promptUtils.getTextIO());
+
     }
 }

@@ -13,7 +13,11 @@ import java.io.IOException;
 public class InitCommand implements Command {
     private TextIO textIO;
     private ApplicationConfiguration applicationConfiguration;
-    private PromptUtils promptUtils = new PromptUtils();
+    private PromptUtils promptUtils;
+
+    public InitCommand(PromptUtils promptUtils) {
+        this.promptUtils = promptUtils;
+    }
 
     @Override
     public void run() {
@@ -29,7 +33,7 @@ public class InitCommand implements Command {
         applicationConfiguration.setVersion(promptUtils.promptForVersion());
 
         textIO.getTextTerminal().println();
-        textIO.getTextTerminal().println("Let's now define some edu.hvrigazov.automation.actions and assertions!");
+        textIO.getTextTerminal().println("Let's now define some actions and assertions!");
         textIO.getTextTerminal().println();
         textIO.getTextTerminal().println("The initial page loading is added by default");
 
