@@ -12,10 +12,11 @@ import java.io.IOException;
 public class VersionCommand implements Command {
     private TextIO textIO;
     private String pathToApplicationConfiguration;
-    private PromptUtils promptUtils = new PromptUtils();
+    private PromptUtils promptUtils;
 
-    public VersionCommand(String pathToApplicationConfiguration) {
+    public VersionCommand(String pathToApplicationConfiguration, PromptUtils promptUtils) {
         this.pathToApplicationConfiguration = pathToApplicationConfiguration;
+        this.promptUtils = promptUtils;
     }
 
     @Override
@@ -27,7 +28,7 @@ public class VersionCommand implements Command {
 
             applicationConfiguration.setVersion(promptUtils.promptForVersion());
 
-            textIO.getTextTerminal().println("Let's update the edu.hvrigazov.automation.actions that have to be different");
+            textIO.getTextTerminal().println("Let's update the actions that have to be different");
             promptUtils.updateApplicationConfiguration(applicationConfiguration);
 
             String outputFilename = textIO
