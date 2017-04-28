@@ -1,6 +1,7 @@
 package com.hribol.spiderman.cli;
 
 import com.hribol.spiderman.cli.commands.Command;
+import com.hribol.spiderman.cli.commands.PromptUtils;
 import com.hribol.spiderman.cli.commands.RecordCommand;
 import com.hribol.spiderman.cli.commands.ReplayCommand;
 
@@ -17,7 +18,7 @@ public class Main {
         String testCaseFile = "/home/hvrigazov/github/spiderman/spiderman-core/src/test/resources/testCase.json";
 //        Command command = new ReplayCommand(pathToChromeDriver, pathToApplicationConfiguration, testCaseFile);
 //        command.run();
-        Command command = new RecordCommand(pathToChromeDriver, pathToJSInjectionFile, baseUrl, testCaseFile);
+        Command command = new RecordCommand(pathToChromeDriver, pathToJSInjectionFile, baseUrl, testCaseFile, new PromptUtils());
         command.run();
         System.exit(0);
     }

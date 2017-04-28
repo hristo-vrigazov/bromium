@@ -9,6 +9,7 @@ import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 
 import javax.xml.soap.Text;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -248,6 +249,11 @@ public class PromptUtils {
         if (changeExpectHttp) {
             applicationActionConfiguration.setExpectsHttpRequest(promptForExpectHttpRequest());
         }
+    }
+
+    public void promptForRecording() throws IOException {
+        System.out.println("Press Enter when finished recording");
+        System.in.read();
     }
 
 
