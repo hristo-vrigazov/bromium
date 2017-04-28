@@ -14,12 +14,12 @@ import java.net.URISyntaxException;
  * Created by hvrigazov on 11.04.17.
  */
 public class ReplayCommand implements Command {
-    private String pathToChromedriver;
+    private String pathToDriver;
     private String pathToApplicationConfiguration;
     private String pathToSerializedTest;
 
-    public ReplayCommand(String pathToChromedriver, String pathToApplicationConfiguration, String pathToSerializedTest) {
-        this.pathToChromedriver = pathToChromedriver;
+    public ReplayCommand(String pathToDriver, String pathToApplicationConfiguration, String pathToSerializedTest) {
+        this.pathToDriver = pathToDriver;
         this.pathToApplicationConfiguration = pathToApplicationConfiguration;
         this.pathToSerializedTest = pathToSerializedTest;
     }
@@ -30,7 +30,7 @@ public class ReplayCommand implements Command {
             WebDriverActionFactory factory = new PredefinedWebDriverActionFactory();
 
             WebDriverActionExecutor executor = new WebDriverActionExecutor()
-                    .pathToDriverExecutable(pathToChromedriver)
+                    .pathToDriverExecutable(pathToDriver)
                     .baseURI("http://www.tenniskafe.com/")
                     .timeoutInSeconds(20)
                     .measurementsPrecisionInMilliseconds(500);

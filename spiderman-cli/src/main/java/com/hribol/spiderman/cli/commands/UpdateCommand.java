@@ -12,10 +12,11 @@ import java.io.IOException;
 public class UpdateCommand implements Command {
     private TextIO textIO;
     private String pathToApplicationConfiguration;
-    private PromptUtils promptUtils = new PromptUtils();
+    private PromptUtils promptUtils;
 
-    public UpdateCommand(String pathToApplicationConfiguration) {
+    public UpdateCommand(String pathToApplicationConfiguration, PromptUtils promptUtils) {
         this.pathToApplicationConfiguration = pathToApplicationConfiguration;
+        this.promptUtils = promptUtils;
     }
 
     @Override
