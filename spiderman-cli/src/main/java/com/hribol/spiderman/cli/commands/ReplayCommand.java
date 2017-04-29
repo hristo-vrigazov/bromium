@@ -17,11 +17,21 @@ public class ReplayCommand implements Command {
     private String pathToDriver;
     private String pathToApplicationConfiguration;
     private String pathToSerializedTest;
+    private String csvMeasurementsFileName;
+    private int timeout;
+    private int measurementsPrecisionMilli;
+    private String baseURI;
 
-    public ReplayCommand(String pathToDriver, String pathToApplicationConfiguration, String pathToSerializedTest) {
+    public ReplayCommand(String pathToDriver, String pathToApplicationConfiguration, String pathToSerializedTest,
+                         String csvMeasurementsFileName, int timeout, int measurementsPrecisionMilli,
+                         String baseURI) {
         this.pathToDriver = pathToDriver;
         this.pathToApplicationConfiguration = pathToApplicationConfiguration;
         this.pathToSerializedTest = pathToSerializedTest;
+        this.csvMeasurementsFileName = csvMeasurementsFileName;
+        this.timeout = timeout;
+        this.measurementsPrecisionMilli = measurementsPrecisionMilli;
+        this.baseURI = baseURI;
     }
 
     @Override
@@ -31,22 +41,21 @@ public class ReplayCommand implements Command {
 
             WebDriverActionExecutor executor = new WebDriverActionExecutor()
                     .pathToDriverExecutable(pathToDriver)
-                    .baseURI("http://www.tenniskafe.com/")
-                    .timeoutInSeconds(20)
-                    .measurementsPrecisionInMilliseconds(500);
+                    .baseURI(baseURI)
+                    .timeoutInSeconds(timeout)
+                    .measurementsPrecisionInMilliseconds(measurementsPrecisionMilli);
 
             ReplayBrowserConfiguration replayBrowserConfiguration = ReplayBrowserConfiguration
                     .builder()
                     .pathToApplicationConfiguration(pathToApplicationConfiguration)
-                    .url("http://www.tenniskafe.com/")
+                    .url(baseURI)
                     .webdriverActionFactory(factory)
                     .build();
-
 
             WebDriverActionExecution execution = new ChromeDriverActionExecution(executor);
 
             ReplayBrowser replayBrowser = replayBrowserConfiguration.getReplayBrowser();
-            replayBrowser.replay(pathToSerializedTest, execution, "example.csv");
+            replayBrowser.replay(pathToSerializedTest, execution, csvMeasurementsFileName);
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
         }
