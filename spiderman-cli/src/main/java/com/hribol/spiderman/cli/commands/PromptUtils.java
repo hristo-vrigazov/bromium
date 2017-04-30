@@ -21,7 +21,11 @@ public class PromptUtils {
         return textIO;
     }
 
-    private TextIO textIO = TextIoFactory.getTextIO();
+    public PromptUtils() {
+        this.textIO = TextIoFactory.getTextIO();
+    }
+
+    private TextIO textIO;
 
     public String promptForVersion() {
         return getTextIO()
