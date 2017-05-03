@@ -24,6 +24,6 @@ public class PageLoadingTest {
 
         verify(webDriver).get(url);
         assertEquals(pageLoadingEventName, pageLoading.getName());
-        assertEquals(false, pageLoading.expectsHttpRequest());
+        assertEquals(true, pageLoading.expectsHttpRequest());
     }
 }

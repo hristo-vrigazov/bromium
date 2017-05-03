@@ -16,7 +16,9 @@ public class Main {
         String pathToApplicationConfiguration = "/home/hvrigazov/github/spiderman/spiderman-core/src/test/resources/tenniskafe.json";
         String baseUrl = "http://tenniskafe.com";
         String testCaseFile = "/home/hvrigazov/github/spiderman/spiderman-core/src/test/resources/testCase.json";
-        Command command = new InitCommand(new PromptUtils());
+        Command command = new ReplayCommand(pathToChromeDriver, pathToApplicationConfiguration, testCaseFile,
+                "measurements.csv", 10, 500,
+                "http://tenniskafe.com");
         command.run();
         System.exit(0);
     }

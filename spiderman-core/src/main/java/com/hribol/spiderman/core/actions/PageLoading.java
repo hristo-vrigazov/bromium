@@ -3,7 +3,7 @@ package com.hribol.spiderman.core.actions;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Created by hvrigazov on 17.03.17.
+ * Action of loading a page using webdriver
  */
 public class PageLoading implements WebDriverAction {
 
@@ -15,18 +15,31 @@ public class PageLoading implements WebDriverAction {
         this.eventName = eventName;
     }
 
+    /**
+     * Loads a given url through a given instance of {@link org.openqa.selenium.WebDriver}
+     * @param driver the instance of driver through which the action will be executed
+     */
     @Override
     public void execute(WebDriver driver) {
         driver.get(url);
     }
 
+    /**
+     * The name of page loding, which can be injected through the constructor
+     * @return the name of the action
+     */
     @Override
     public String getName() {
         return eventName;
     }
 
+    /**
+     * We DO expect an HTTP request after this action, because we are requesting
+     * a URL
+     * @return true
+     */
     @Override
     public boolean expectsHttpRequest() {
-        return false;
+        return true;
     }
 }
