@@ -1,6 +1,6 @@
-package com.hribol.spiderman.core.actions;
+package com.hribol.spiderman.core.execution.application;
 
-import com.hribol.spiderman.core.execution.application.ApplicationAction;
+import com.hribol.spiderman.core.actions.WebDriverAction;
 
 import java.util.Optional;
 

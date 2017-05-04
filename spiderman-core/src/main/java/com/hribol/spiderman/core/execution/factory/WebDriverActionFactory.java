@@ -8,5 +8,5 @@ import java.util.Map;
  * Created by hvrigazov on 18.03.17.
  */
 public interface WebDriverActionFactory {
-    WebDriverAction create(String webdriverActionType, Map<String, Object> parameters);
+    WebDriverAction create(String webdriverActionType, Map<String, String> parameters, boolean expectsHttpRequest);
 }

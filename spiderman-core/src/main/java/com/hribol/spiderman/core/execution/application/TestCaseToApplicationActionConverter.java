@@ -1,6 +1,5 @@
 package com.hribol.spiderman.core.execution.application;
 
-import com.hribol.spiderman.core.actions.ConvertedApplicationAction;
 import com.hribol.spiderman.core.config.ApplicationActionConfiguration;
 import com.hribol.spiderman.core.config.ParameterConfiguration;
 import com.hribol.spiderman.core.config.WebDriverActionConfiguration;
@@ -54,10 +53,9 @@ public class TestCaseToApplicationActionConverter {
 
         Map<String, ParameterConfiguration> parametersConfigurations = webDriverActionConfiguration
                 .getParametersConfiguration();
-        Map<String, Object> parameters = new HashMap<>();
+        Map<String, String> parameters = new HashMap<>();
 
         parameters.put(EVENT, testCaseStep.get(EVENT));
-        parameters.put(EXPECTS_HTTP, expectHttpRequest);
 
         for (String parameterName: parametersConfigurations.keySet()) {
             ParameterConfiguration parameterConfiguration = parametersConfigurations.get(parameterName);
@@ -73,7 +71,7 @@ public class TestCaseToApplicationActionConverter {
             }
         }
 
-        WebDriverAction webDriverAction = webDriverActionFactory.create(webdriverActionType, parameters);
+        WebDriverAction webDriverAction = webDriverActionFactory.create(webdriverActionType, parameters, expectHttpRequest);
         return Optional.of(webDriverAction);
     }
 

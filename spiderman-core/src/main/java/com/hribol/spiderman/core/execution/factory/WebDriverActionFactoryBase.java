@@ -27,7 +27,7 @@ public abstract class WebDriverActionFactoryBase implements WebDriverActionFacto
     protected abstract void addCustom();
 
     @Override
-    public WebDriverAction create(String webdriverActionType, Map<String, Object> parameters) {
-        return parsersRegistry.get(webdriverActionType).create(parameters);
+    public WebDriverAction create(String webdriverActionType, Map<String, String> parameters, boolean expectsHttpRequest) {
+        return parsersRegistry.get(webdriverActionType).create(parameters, expectsHttpRequest);
     }
 }

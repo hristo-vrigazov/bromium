@@ -19,14 +19,13 @@ public class PredefinedWebDriverActionFactoryTest {
     public void canCreateClickByText() {
         WebDriverActionFactory factory = new PredefinedWebDriverActionFactory();
 
-        Map<String, Object> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
 
         map.put("initialCollectorClass", "mega-menu-click");
         map.put("text", "ATP");
         map.put("event", "clickMegaMenu");
-        map.put("expectsHttp", true);
 
-        WebDriverAction webDriverAction = factory.create("CLICK_CLASS_BY_TEXT", map);
+        WebDriverAction webDriverAction = factory.create("CLICK_CLASS_BY_TEXT", map, true);
 
         assertEquals("clickMegaMenu", webDriverAction.getName());
     }

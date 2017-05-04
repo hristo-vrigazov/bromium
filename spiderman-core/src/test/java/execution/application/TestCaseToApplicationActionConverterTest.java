@@ -39,10 +39,9 @@ public class TestCaseToApplicationActionConverterTest {
         testCaseStep.put(text, ATP);
         testCaseStep.put(EVENT, clickMegaMenu);
 
-        Map<String, Object> tempMap = new HashMap<>();
+        Map<String, String> tempMap = new HashMap<>();
         tempMap.put(EVENT, clickMegaMenu);
         tempMap.put(initialCollectorClass, megaMenuLink);
-        tempMap.put(EXPECTS_HTTP, false);
         tempMap.put(text, ATP);
 
         ParameterConfiguration initialCollectorClassParameterConfiguration = mock(ParameterConfiguration.class);
@@ -59,7 +58,7 @@ public class TestCaseToApplicationActionConverterTest {
         WebDriverAction webDriverAction = mock(WebDriverAction.class);
         WebDriverActionFactory webDriverActionFactory = mock(WebDriverActionFactory.class);
 
-        when(webDriverActionFactory.create(actionType, tempMap)).thenReturn(webDriverAction);
+        when(webDriverActionFactory.create(actionType, tempMap, false)).thenReturn(webDriverAction);
 
         WebDriverActionConfiguration preconditionActionConfiguration = mock(WebDriverActionConfiguration.class);
         when(preconditionActionConfiguration.getWebDriverActionType()).thenReturn(NOTHING);

@@ -11,7 +11,8 @@ import java.util.Optional;
 import static com.hribol.spiderman.core.utils.Constants.INNER_HTML;
 
 /**
- * Created by hvrigazov on 17.03.17.
+ * Finds all elements with a given class, and then clicks on
+ * the element that contains a given text and is displayed
  */
 public class ClickClassByText implements WebDriverAction {
 

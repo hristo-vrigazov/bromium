@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
  * has to tell whether it expects an HTTP query after it, so that it is known
  * whether we should block the execution and wait until resources are loaded
  * through HTTP requests, or not block the execution. This is achieved using the
- * {@link #expectsHttpRequest()}
+ * {@link #expectsHttpRequest()}.
  */
 public interface WebDriverAction {
     /**

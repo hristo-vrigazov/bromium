@@ -1,6 +1,6 @@
 package actions;
 
-import com.hribol.spiderman.core.actions.ConvertedApplicationAction;
+import com.hribol.spiderman.core.execution.application.ConvertedApplicationAction;
 import com.hribol.spiderman.core.execution.application.ApplicationAction;
 import com.hribol.spiderman.core.actions.WebDriverAction;
 import org.junit.Test;

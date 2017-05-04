@@ -16,7 +16,7 @@ public class ClickClassByTextParserTest {
 
     @Test
     public void canParseCorrectMap() {
-        Map<String, Object> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
 
         String initialCollectorClass = "mega-menu-click";
         String text = "ATP";
@@ -26,9 +26,8 @@ public class ClickClassByTextParserTest {
         map.put("initialCollectorClass", initialCollectorClass);
         map.put("text", text);
         map.put("event", eventName);
-        map.put("expectsHttp", expectsHttp);
         ClickClassByTextParser clickClassByTextParser = new ClickClassByTextParser();
-        WebDriverAction webDriverAction = clickClassByTextParser.create(map);
+        WebDriverAction webDriverAction = clickClassByTextParser.create(map, expectsHttp);
 
         assertEquals(eventName, webDriverAction.getName());
         assertEquals(expectsHttp, webDriverAction.expectsHttpRequest());
