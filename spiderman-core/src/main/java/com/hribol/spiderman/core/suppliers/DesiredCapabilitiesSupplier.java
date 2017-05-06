@@ -7,7 +7,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.util.function.Supplier;
 
 /**
- * Created by hvrigazov on 22.04.17.
+ * Supplies an instance of {@link DesiredCapabilities} by a given {@link Proxy}
  */
 public class DesiredCapabilitiesSupplier implements Supplier<DesiredCapabilities> {
 

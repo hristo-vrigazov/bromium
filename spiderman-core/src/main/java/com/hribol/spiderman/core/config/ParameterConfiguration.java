@@ -49,7 +49,7 @@ public class ParameterConfiguration {
      * The "text" parameter would be exposed, e.g under the alias "tab", because
      * CLICK_NAV_BAR("News"), CLICK_NAV_BAR("Sports") are the same application action, only
      * for a different tab(text).
-     * @param expose
+     * @param expose the new value
      */
     public void setExpose(boolean expose) {
         this.expose = expose;

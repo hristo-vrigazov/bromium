@@ -14,18 +14,20 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by hvrigazov on 16.03.17.
+ * Utilities for reading {@link ApplicationConfiguration}
  */
 public class ConfigurationUtils {
-    public static double toSeconds(long nanoseconds) {
-        return nanoseconds / 1000000000.0;
-    }
 
+    /**
+     * Creates an {@link ApplicationConfiguration} by a given file
+     * @param file the file in which the configuration is written
+     * @return the {@link ApplicationConfiguration}
+     * @throws IOException if there is a problem when reading from file
+     */
     public static ApplicationConfiguration parseApplicationConfiguration(File file) throws IOException {
         Gson gson = new GsonBuilder().create();
         String configuration = Files.toString(file, Charsets.UTF_8);
-        ApplicationConfiguration applicationConfiguration = gson.fromJson(configuration, ApplicationConfiguration.class);
-        return applicationConfiguration;
+        return gson.fromJson(configuration, ApplicationConfiguration.class);
     }
 
     public static ApplicationConfiguration parseApplicationConfiguration(String filename) throws IOException {

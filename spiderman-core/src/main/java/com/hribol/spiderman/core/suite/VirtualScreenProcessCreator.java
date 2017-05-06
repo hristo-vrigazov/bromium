@@ -12,7 +12,7 @@ public interface VirtualScreenProcessCreator {
      * Creates a Xvfb process on a given screen number
      * @param i the number of the screen
      * @return the created process
-     * @throws IOException
+     * @throws IOException if there is a problem with the creation of the process
      */
     Process createXvfbProcess(int i) throws IOException;
 

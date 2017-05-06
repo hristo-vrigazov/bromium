@@ -5,7 +5,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.service.DriverService;
 
 /**
- * Created by hvrigazov on 22.04.17.
+ * Supplies an instance of {@link WebDriver} for headless run by given
+ * {@link DriverService} and {@link DesiredCapabilities}
  */
 public interface InvisibleWebDriverSupplier<T extends DriverService> {
     WebDriver get(T driverService, DesiredCapabilities desiredCapabilities);

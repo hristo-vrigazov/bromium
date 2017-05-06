@@ -8,8 +8,17 @@ import java.util.List;
  * are related to selenium actions. It is usually been read/written to a JSON file
  */
 public class ApplicationConfiguration {
+    /**
+     * The name of the application
+     */
     private String applicationName;
+    /**
+     * The version of the application
+     */
     private String version;
+    /**
+     * A list of configurations of application actions.
+     */
     private List<ApplicationActionConfiguration> applicationActionConfigurationList;
 
     public ApplicationConfiguration() {

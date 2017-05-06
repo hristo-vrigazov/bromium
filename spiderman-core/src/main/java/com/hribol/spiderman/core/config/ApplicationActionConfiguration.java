@@ -21,7 +21,7 @@ public class ApplicationActionConfiguration {
 
     /**
      * Sets the name of the application action
-     * @param name
+     * @param name the new name of the application
      */
     public void setName(String name) {
         this.name = name;

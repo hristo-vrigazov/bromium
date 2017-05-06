@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
- * Created by hvrigazov on 22.04.17.
+ * Supplies an instance of {@link WebDriver} for run in a visible mode
  */
 public interface VisibleWebDriverSupplier {
     WebDriver get(DesiredCapabilities desiredCapabilities);

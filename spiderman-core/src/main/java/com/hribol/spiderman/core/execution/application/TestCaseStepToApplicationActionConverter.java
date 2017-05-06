@@ -33,8 +33,8 @@ public class TestCaseStepToApplicationActionConverter {
     /**
      * Creates an {@link ApplicationAction} by a given {@link ApplicationActionConfiguration}
      * and a test case step.
-     * @param applicationActionConfiguration
-     * @param testCaseStep
+     * @param applicationActionConfiguration the application action configuration
+     * @param testCaseStep the test case step
      * @return the created application action
      */
     public ApplicationAction convert(ApplicationActionConfiguration applicationActionConfiguration,

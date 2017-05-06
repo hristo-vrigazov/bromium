@@ -54,7 +54,7 @@ public class TestScenario {
 
     /**
      * Polls the next webDriverAction
-     * @return
+     * @return the next {@link WebDriverAction}
      */
     public WebDriverAction pollWebDriverAction() {
         return webDriverActionQueue.poll();
@@ -71,7 +71,8 @@ public class TestScenario {
     /**
      * Adds a precondition or postcondition of an action, represented by
      * an {@link Optional}.
-     * @param webDriverActionOptional
+     * @param webDriverActionOptional an option of the action which should be added
+     *                                if present
      */
     public void addWebDriverAction(Optional<WebDriverAction> webDriverActionOptional) {
         webDriverActionOptional.ifPresent(this::addWebDriverAction);

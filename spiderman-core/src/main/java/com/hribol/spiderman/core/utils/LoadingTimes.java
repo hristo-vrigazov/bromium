@@ -7,7 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
- * Created by hvrigazov on 17.03.17.
+ * A class for loading times of an execution
  */
 public class LoadingTimes {
     private List<Long> loadingTimes;
@@ -18,6 +18,12 @@ public class LoadingTimes {
         this.actions = actions;
     }
 
+    /**
+     * Writes a csv file with actions and measurements
+     * @param file the file in which the data is written
+     * @throws FileNotFoundException if the path to file is not valid
+     * @throws UnsupportedEncodingException if an unsupported exception is specified
+     */
     public void dump(File file) throws FileNotFoundException, UnsupportedEncodingException {
         PrintWriter writer = new PrintWriter(file, "UTF-8");
         dump(writer);
@@ -25,13 +31,19 @@ public class LoadingTimes {
 
     private void dump(PrintWriter writer) {
         for (int i = 0; i < loadingTimes.size(); i++) {
-            double seconds = ConfigurationUtils.toSeconds(loadingTimes.get(i));
+            double seconds = Utils.toSeconds(loadingTimes.get(i));
             String action = actions.get(i);
             writer.println(action + "," + seconds);
         }
         writer.close();
     }
 
+    /**
+     * Writes a csv file with actions and measurements
+     * @param fileName the filename in which the data is written
+     * @throws FileNotFoundException if the path to file is not valid
+     * @throws UnsupportedEncodingException if an unsupported exception is specified
+     */
     public void dump(String fileName) throws UnsupportedEncodingException, FileNotFoundException {
         PrintWriter writer = new PrintWriter(fileName, "UTF-8");
         dump(writer);

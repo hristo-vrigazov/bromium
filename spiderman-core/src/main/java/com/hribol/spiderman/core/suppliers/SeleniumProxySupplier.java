@@ -7,7 +7,7 @@ import org.openqa.selenium.Proxy;
 import java.util.function.Supplier;
 
 /**
- * Created by hvrigazov on 22.04.17.
+ * Supplies as an instance of {@link Proxy} by a given {@link BrowserMobProxy}
  */
 public class SeleniumProxySupplier implements Supplier<Proxy> {
 

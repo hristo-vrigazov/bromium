@@ -2,8 +2,8 @@ package com.hribol.spiderman.replay.execution;
 import com.hribol.spiderman.core.actions.WebDriverAction;
 import com.hribol.spiderman.core.execution.scenario.TestScenario;
 import com.hribol.spiderman.core.suite.VirtualScreenProcessCreator;
-import com.hribol.spiderman.core.utils.ConfigurationUtils;
 import com.hribol.spiderman.core.utils.LoadingTimes;
+import com.hribol.spiderman.core.utils.Utils;
 import com.hribol.spiderman.replay.AutomationResult;
 import com.hribol.spiderman.replay.filters.ProxyFacade;
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
@@ -53,7 +53,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         try {
             this.automationResult = AutomationResult.EXECUTING;
             while (testScenario.hasMoreSteps()) {
-                if (ConfigurationUtils.toSeconds(System.nanoTime() - elapsedTime) > executor.getTimeout()) {
+                if (Utils.toSeconds(System.nanoTime() - elapsedTime) > executor.getTimeout()) {
                     this.automationResult = AutomationResult.TIMEOUT;
                     throw new TimeoutException("Could not execute the action! Waited "
                             + String.valueOf(System.nanoTime() - elapsedTime)
@@ -153,7 +153,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
         long startTime = System.nanoTime();
         while (i < executor.getMaxRetries() &&
-                (ConfigurationUtils.toSeconds(System.nanoTime() - startTime) < executor.getTimeout())) {
+                (Utils.toSeconds(System.nanoTime() - startTime) < executor.getTimeout())) {
             try {
                 Thread.sleep(executor.getMeasurementsPrecisionMilli());
                 webDriverAction.execute(replaySettings.getWebDriver());
