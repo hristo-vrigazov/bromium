@@ -5,7 +5,7 @@ import com.hribol.spiderman.core.actions.WebDriverAction;
 import java.util.Map;
 
 /**
- * Created by hvrigazov on 18.03.17.
+ * A factory for creating {@link WebDriverAction}
  */
 public interface WebDriverActionFactory {
     WebDriverAction create(String webdriverActionType, Map<String, String> parameters, boolean expectsHttpRequest);

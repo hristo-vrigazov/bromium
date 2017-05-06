@@ -5,7 +5,8 @@ import com.hribol.spiderman.core.actions.WebDriverAction;
 import java.util.Map;
 
 /**
- * Created by hvrigazov on 18.03.17.
+ * By given test case step and whether the action expects http request,
+ * parses the step and creates a {@link WebDriverAction}.
  */
 public interface WebDriverActionParameterParser {
     WebDriverAction create(Map<String, String> parameters, boolean expectHttpRequest);

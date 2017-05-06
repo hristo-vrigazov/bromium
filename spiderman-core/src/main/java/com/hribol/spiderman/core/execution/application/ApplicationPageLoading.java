@@ -6,7 +6,7 @@ import com.hribol.spiderman.core.actions.PageLoading;
 import java.util.Optional;
 
 /**
- * Created by hvrigazov on 17.03.17.
+ * Loading a page in an application
  */
 public class ApplicationPageLoading implements ApplicationAction {
 

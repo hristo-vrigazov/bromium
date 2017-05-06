@@ -1,7 +1,7 @@
 package com.hribol.spiderman.core.execution.factory;
 
 /**
- * Created by hvrigazov on 19.03.17.
+ * A {@link WebDriverActionFactory} which uses only the predefined actions
  */
 public class PredefinedWebDriverActionFactory extends WebDriverActionFactoryBase {
     @Override

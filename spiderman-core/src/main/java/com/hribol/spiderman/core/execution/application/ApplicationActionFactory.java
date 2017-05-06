@@ -3,7 +3,7 @@ package com.hribol.spiderman.core.execution.application;
 import java.util.Map;
 
 /**
- * Created by hvrigazov on 15.03.17.
+ * A factory for creating {@link ApplicationAction}
  */
 public interface ApplicationActionFactory {
     ApplicationAction getInitialPageLoading();

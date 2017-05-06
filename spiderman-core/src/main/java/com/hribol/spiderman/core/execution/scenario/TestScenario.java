@@ -5,7 +5,8 @@ import com.hribol.spiderman.core.actions.WebDriverAction;
 import java.util.*;
 
 /**
- * Created by hvrigazov on 21.04.17.
+ * Represents a test scenarion, which is just a list of {@link WebDriverAction} and
+ * their appropriate names.
  */
 public class TestScenario {
     private Queue<WebDriverAction> webDriverActionQueue;
@@ -16,31 +17,62 @@ public class TestScenario {
         actions = new ArrayList<>();
     }
 
+    /**
+     * Adds an action to the queue
+     * @param webDriverAction the action to add
+     */
     public void addWebDriverAction(WebDriverAction webDriverAction) {
         webDriverActionQueue.add(webDriverAction);
         actions.add(webDriverAction.getName());
     }
 
+    /**
+     * Indicates whether the scenario has more steps
+     * @return whether the scenario has more steps
+     */
     public boolean hasMoreSteps() {
         return !webDriverActionQueue.isEmpty();
     }
 
+    /**
+     * Indicates whether the next action expects HTTP request after
+     * it is executed.
+     * @return whether the next action expects HTTP request after
+     * it is executed.
+     */
     public boolean nextActionExpectsHttpRequest() {
         return webDriverActionQueue.peek().expectsHttpRequest();
     }
 
+    /**
+     * Gets the name of the next action
+     * @return the name of the next action
+     */
     public String nextActionName() {
         return webDriverActionQueue.peek().getName();
     }
 
-    public WebDriverAction pollWebdriverAction() {
+    /**
+     * Polls the next webDriverAction
+     * @return
+     */
+    public WebDriverAction pollWebDriverAction() {
         return webDriverActionQueue.poll();
     }
 
+    /**
+     * Gets a list of the names of all actions
+     * @return a list of the names of all actions
+     */
     public List<String> getActions() {
         return actions;
     }
 
+    /**
+     * Adds a precondition or postcondition of an action, represented by
+     * an {@link Optional}.
+     * @param webDriverActionOptional
+     */
     public void addWebDriverAction(Optional<WebDriverAction> webDriverActionOptional) {
         webDriverActionOptional.ifPresent(this::addWebDriverAction);
     }

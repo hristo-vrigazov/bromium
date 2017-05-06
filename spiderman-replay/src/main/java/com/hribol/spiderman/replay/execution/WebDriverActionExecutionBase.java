@@ -62,7 +62,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                 }
                 if (proxyFacade.httpQueueIsEmpty() && !proxyFacade.isLocked()) {
                     proxyFacade.setLock(testScenario.nextActionExpectsHttpRequest());
-                    WebDriverAction webDriverAction = testScenario.pollWebdriverAction();
+                    WebDriverAction webDriverAction = testScenario.pollWebDriverAction();
                     executeIgnoringExceptions(webDriverAction);
                     waitingTimes.add(System.nanoTime() - elapsedTime);
                     elapsedTime = System.nanoTime();

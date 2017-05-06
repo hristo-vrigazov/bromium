@@ -6,15 +6,12 @@ import com.hribol.spiderman.core.suite.VirtualScreenProcessCreator;
 import com.hribol.spiderman.core.suppliers.InvisibleWebDriverSupplier;
 import com.hribol.spiderman.core.suppliers.VisibleWebDriverSupplier;
 import com.hribol.spiderman.replay.AutomationResult;
-import com.hribol.spiderman.replay.filters.ProxyFacade;
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
 import com.hribol.spiderman.replay.settings.ReplaySettings;
 import com.hribol.spiderman.replay.settings.ReplaySettingsBase;
-import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
-import net.lightbody.bmp.util.HttpMessageContents;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -48,7 +45,7 @@ public class WebDriverActionExecutionBaseTest {
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.hasMoreSteps()).thenReturn(true, false);
         WebDriverAction firstAction = mock(WebDriverAction.class);
-        when(testScenario.pollWebdriverAction()).thenReturn(firstAction);
+        when(testScenario.pollWebDriverAction()).thenReturn(firstAction);
         webDriverActionExecutionBase.execute(testScenario);
         assertNotNull(webDriverActionExecutionBase.getLoadingTimes());
         assertEquals(AutomationResult.SUCCESS, webDriverActionExecutionBase.getAutomationResult());
@@ -61,7 +58,7 @@ public class WebDriverActionExecutionBaseTest {
         when(testScenario.hasMoreSteps()).thenReturn(true, false);
         WebDriverAction firstAction = mock(WebDriverAction.class);
         doThrow(AssertionError.class).when(firstAction).execute(any());
-        when(testScenario.pollWebdriverAction()).thenReturn(firstAction);
+        when(testScenario.pollWebDriverAction()).thenReturn(firstAction);
         webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.ASSERTION_ERROR, webDriverActionExecutionBase.getAutomationResult());
     }
@@ -77,7 +74,7 @@ public class WebDriverActionExecutionBaseTest {
             Thread.sleep(1500);
             return null;
         }).when(firstAction).execute(any());
-        when(testScenario.pollWebdriverAction()).thenReturn(firstAction);
+        when(testScenario.pollWebDriverAction()).thenReturn(firstAction);
         webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.TIMEOUT, webDriverActionExecutionBase.getAutomationResult());
     }
@@ -90,7 +87,7 @@ public class WebDriverActionExecutionBaseTest {
         when(testScenario.nextActionExpectsHttpRequest()).thenReturn(true);
         WebDriverAction firstAction = mock(WebDriverAction.class);
         doThrow(InterruptedException.class).when(firstAction).execute(any());
-        when(testScenario.pollWebdriverAction()).thenReturn(firstAction);
+        when(testScenario.pollWebDriverAction()).thenReturn(firstAction);
         webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.INTERRUPTED, webDriverActionExecutionBase.getAutomationResult());
     }
@@ -102,7 +99,7 @@ public class WebDriverActionExecutionBaseTest {
         when(testScenario.hasMoreSteps()).thenReturn(true, false);
         WebDriverAction firstAction = mock(WebDriverAction.class);
         doThrow(new WebDriverException("Exception occured!")).doNothing().when(firstAction).execute(any());
-        when(testScenario.pollWebdriverAction()).thenReturn(firstAction);
+        when(testScenario.pollWebDriverAction()).thenReturn(firstAction);
         webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.SUCCESS, webDriverActionExecutionBase.getAutomationResult());
     }
@@ -114,7 +111,7 @@ public class WebDriverActionExecutionBaseTest {
         when(testScenario.hasMoreSteps()).thenReturn(true, false);
         WebDriverAction firstAction = mock(WebDriverAction.class);
         doThrow(new WebDriverException("Exception occured!")).when(firstAction).execute(any());
-        when(testScenario.pollWebdriverAction()).thenReturn(firstAction);
+        when(testScenario.pollWebDriverAction()).thenReturn(firstAction);
         webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.TIMEOUT, webDriverActionExecutionBase.getAutomationResult());
     }
@@ -165,7 +162,7 @@ public class WebDriverActionExecutionBaseTest {
 
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.hasMoreSteps()).thenReturn(true);
-        when(testScenario.pollWebdriverAction()).thenReturn(webDriverAction);
+        when(testScenario.pollWebDriverAction()).thenReturn(webDriverAction);
 
         WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(10,
                 2, getDefaultReplaySettings());
@@ -198,7 +195,7 @@ public class WebDriverActionExecutionBaseTest {
         when(webDriverAction.getName()).thenReturn("actionName");
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.hasMoreSteps()).thenReturn(true);
-        when(testScenario.pollWebdriverAction()).thenReturn(webDriverAction);
+        when(testScenario.pollWebDriverAction()).thenReturn(webDriverAction);
 
         webDriverActionExecutionBase.execute(testScenario);
     }

@@ -5,7 +5,8 @@ import com.hribol.spiderman.core.actions.WebDriverAction;
 import java.util.Optional;
 
 /**
- * Created by hvrigazov on 15.03.17.
+ * An action specific for an application, which consists of precondition,
+ * webdriver action and a postcondition.
  */
 public interface ApplicationAction {
     Optional<WebDriverAction> getPrecondition();

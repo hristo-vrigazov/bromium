@@ -5,7 +5,7 @@ import java.io.IOException;
 /**
  * Created by hvrigazov on 12.04.17.
  */
-public class UbuntuVirtualScreenProcessCreator implements VirtualScreenProcessCreator {
+public class UbuntuVirtualScreenProcessCreator extends VirtualScreenProcessCreatorBase {
 
     @Override
     public Process createXvfbProcess(int i) throws IOException {
@@ -19,8 +19,4 @@ public class UbuntuVirtualScreenProcessCreator implements VirtualScreenProcessCr
         return new ProcessBuilder(command).start();
     }
 
-    @Override
-    public String getScreen(int i) {
-        return ":" + (i + 1);
-    }
 }
