@@ -3,7 +3,8 @@ package com.hribol.spiderman.core.suite;
 import java.io.IOException;
 
 /**
- * Created by hvrigazov on 12.04.17.
+ * A {@link VirtualScreenProcessCreator} which creates virtual screen process
+ * on Ubuntu
  */
 public class UbuntuVirtualScreenProcessCreator extends VirtualScreenProcessCreatorBase {
 

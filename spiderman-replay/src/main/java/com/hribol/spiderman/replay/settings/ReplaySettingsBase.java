@@ -59,6 +59,7 @@ public abstract class ReplaySettingsBase<T extends DriverService> implements Rep
             throws IOException {
         boolean useVirtualScreen = !screenToUse.equals(":0");
         this.proxy = new BrowserMobProxySupplier(timeout, requestFilter, responseFilter).get();
+        this.proxy.start(0);
         this.seleniumProxy = new SeleniumProxySupplier(proxy).get();
         this.capabilities = new DesiredCapabilitiesSupplier(seleniumProxy).get();
         this.driverService = getDriverService(pathToDriver, screenToUse);

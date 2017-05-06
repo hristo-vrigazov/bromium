@@ -10,7 +10,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 /**
- * Created by hvrigazov on 22.04.17.
+ * A class which is responsible to supply a {@link BrowserMobProxy} by given
+ * {@link RequestFilter}, {@link ResponseFilter} and {@link #timeout}
  */
 public class BrowserMobProxySupplier implements Supplier<BrowserMobProxy> {
     private int timeout;
@@ -32,7 +33,6 @@ public class BrowserMobProxySupplier implements Supplier<BrowserMobProxy> {
         proxy.addResponseFilter(responseFilter);
         proxy.setIdleConnectionTimeout(timeout, TimeUnit.SECONDS);
         proxy.setRequestTimeout(timeout, TimeUnit.SECONDS);
-        proxy.start(0);
         return proxy;
     }
 }

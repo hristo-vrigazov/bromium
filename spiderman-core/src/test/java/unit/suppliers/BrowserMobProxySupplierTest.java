@@ -22,6 +22,8 @@ public class BrowserMobProxySupplierTest {
         ResponseFilter responseFilter = mock(ResponseFilter.class);
         BrowserMobProxySupplier supplier = new BrowserMobProxySupplier(timeout, requestFilter, responseFilter);
         BrowserMobProxy browserMobProxy = supplier.get();
+        assertFalse(browserMobProxy.isStarted());
+        browserMobProxy.start();
         assertTrue(browserMobProxy.isStarted());
         browserMobProxy.stop();
     }

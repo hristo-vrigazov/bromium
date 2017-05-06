@@ -31,6 +31,7 @@ public class ProxyDriverIntegrator {
                                  VisibleWebDriverSupplier webDriverSupplier,
                                  int timeout) {
         this.proxy = new BrowserMobProxySupplier(timeout, requestFilter, responseFilter).get();
+        proxy.start(0);
         Proxy seleniumProxy = new SeleniumProxySupplier(proxy).get();
         DesiredCapabilities desiredCapabilities = new DesiredCapabilitiesSupplier(seleniumProxy).get();
         this.driver = webDriverSupplier.get(desiredCapabilities);
