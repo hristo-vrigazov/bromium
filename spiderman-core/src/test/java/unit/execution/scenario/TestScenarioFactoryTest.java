@@ -1,4 +1,4 @@
-package unit.execution.executor;
+package unit.execution.scenario;
 
 import com.hribol.spiderman.core.execution.application.ApplicationAction;
 import com.hribol.spiderman.core.execution.application.ApplicationActionFactory;

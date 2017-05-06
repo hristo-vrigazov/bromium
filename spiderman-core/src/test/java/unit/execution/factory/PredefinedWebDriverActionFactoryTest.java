@@ -1,4 +1,4 @@
-package unit.execution.webdriver;
+package unit.execution.factory;
 
 import com.hribol.spiderman.core.execution.factory.PredefinedWebDriverActionFactory;
 import com.hribol.spiderman.core.actions.WebDriverAction;

@@ -1,4 +1,4 @@
-package unit.execution.executor;
+package unit.execution.scenario;
 
 import com.hribol.spiderman.core.execution.scenario.TestScenario;
 import com.hribol.spiderman.core.actions.WebDriverAction;
