@@ -3,7 +3,10 @@ package com.hribol.spiderman.cli.commands;
 import com.hribol.spiderman.cli.MainMenuChoice;
 import com.hribol.spiderman.core.config.ApplicationActionConfiguration;
 import com.hribol.spiderman.core.config.ApplicationConfiguration;
+import com.hribol.spiderman.core.config.WebDriverActionConfiguration;
+import com.hribol.spiderman.core.execution.application.ApplicationAction;
 import com.hribol.spiderman.replay.ReplayBrowserConfiguration;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.beryx.textio.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +14,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.hribol.spiderman.cli.MainMenuChoice.ACTION;
@@ -23,9 +27,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 /**
@@ -42,11 +44,13 @@ public class PromptUtilsTest {
     public static final String CLICK_MEGA_MENU = "clickMegaMenu";
     public static final String ATP = "ATP";
     public static final String ELEMENT_TEXT_TO_BE = "ELEMENT_TEXT_TO_BE";
-    private static final String ELEMENT_TO_BE_CLICKABLE = "ELEMENT_TO_BE_CLICKABLE";
     public static final String CLICK_CLASS_BY_TEXT = "CLICK_CLASS_BY_TEXT";
     public static final String INITIAL_COLLECTOR_CLASS = "INITIAL_COLLECTOR_CLASS";
     public static final String MEGA_MENU_LINK = "mega-menu-link";
     public static final String TITLE_TEXT = "TITLE_TEXT";
+    public static final String FALSE = "FALSE";
+    public static final String FIRST_ACTION = "FIRST_ACTION";
+    public static final String SECOND_ACTION = "SECOND_ACTION";
 
     @Test
     public void promptUtilsCanGetVersion() {
@@ -76,7 +80,101 @@ public class PromptUtilsTest {
     }
 
     @Test
-    public void mainMenuDispatchesCorrectly() {
+    public void canChangeExpectHttpIfUserWants() {
+        ApplicationActionConfiguration applicationActionConfiguration = mock(ApplicationActionConfiguration.class);
+        when(applicationActionConfiguration.expectsHttpRequest()).thenReturn(Boolean.FALSE);
+
+        BooleanInputReader booleanInputReader = mock(BooleanInputReader.class);
+        when(booleanInputReader.read(UPDATE_THE + EXPECT_HTTP_REQUEST + OPENING_BRACKET + Boolean.FALSE + CLOSING_BRACKET))
+                .thenReturn(true);
+        when(booleanInputReader.read(EXPECT_HTTP_REQUEST_AFTER_THE_ACTION)).thenReturn(true);
+
+        TextIO textIO = mock(TextIO.class);
+        when(textIO.newBooleanInputReader()).thenReturn(booleanInputReader);
+
+        mockStatic(TextIoFactory.class);
+        when(TextIoFactory.getTextIO()).thenReturn(textIO);
+
+        PromptUtils promptUtils = new PromptUtils();
+        promptUtils.promptExpectsHttpRequest(applicationActionConfiguration);
+
+        verify(applicationActionConfiguration).setExpectsHttpRequest(true);
+    }
+
+    @Test
+    public void ifTheUserDoesNotWantToChangeExpectHttpItIsNot() {
+        ApplicationActionConfiguration applicationActionConfiguration = mock(ApplicationActionConfiguration.class);
+        when(applicationActionConfiguration.expectsHttpRequest()).thenReturn(Boolean.FALSE);
+
+        BooleanInputReader booleanInputReader = mock(BooleanInputReader.class);
+        when(booleanInputReader.read(UPDATE_THE + EXPECT_HTTP_REQUEST + OPENING_BRACKET + Boolean.FALSE + CLOSING_BRACKET))
+                .thenReturn(false);
+        when(booleanInputReader.read(EXPECT_HTTP_REQUEST_AFTER_THE_ACTION)).thenReturn(true);
+
+        TextIO textIO = mock(TextIO.class);
+        when(textIO.newBooleanInputReader()).thenReturn(booleanInputReader);
+
+        mockStatic(TextIoFactory.class);
+        when(TextIoFactory.getTextIO()).thenReturn(textIO);
+
+        PromptUtils promptUtils = new PromptUtils();
+        promptUtils.promptExpectsHttpRequest(applicationActionConfiguration);
+
+        verify(applicationActionConfiguration, never()).setExpectsHttpRequest(true);
+    }
+
+    @Test
+    public void userCanUpdateNewConfiguration() {
+        WebDriverActionConfiguration nothingConfiguration = mock(WebDriverActionConfiguration.class);
+        when(nothingConfiguration.getWebDriverActionType()).thenReturn(NOTHING);
+
+        ApplicationActionConfiguration firstApplicationActionConfiguration = mock(ApplicationActionConfiguration.class);
+        when(firstApplicationActionConfiguration.getName()).thenReturn(FIRST_ACTION);
+        when(firstApplicationActionConfiguration.expectsHttpRequest()).thenReturn(false);
+        when(firstApplicationActionConfiguration.getConditionBeforeExecution()).thenReturn(nothingConfiguration);
+        when(firstApplicationActionConfiguration.getWebDriverAction()).thenReturn(nothingConfiguration);
+        when(firstApplicationActionConfiguration.getConditionAfterExecution()).thenReturn(nothingConfiguration);
+
+        ApplicationActionConfiguration secondApplicationActionConfiguration = mock(ApplicationActionConfiguration.class);
+        when(secondApplicationActionConfiguration.getName()).thenReturn(SECOND_ACTION);
+
+        List<ApplicationActionConfiguration> applicationActionConfigurationList = new ArrayList<>();
+        applicationActionConfigurationList.add(firstApplicationActionConfiguration);
+        applicationActionConfigurationList.add(secondApplicationActionConfiguration);
+
+        ApplicationConfiguration applicationConfiguration = mock(ApplicationConfiguration.class);
+        when(applicationConfiguration.getApplicationActionConfigurationList()).thenReturn(applicationActionConfigurationList);
+
+        StringInputReader possibleValuesInputReader = mock(StringInputReader.class);
+        when(possibleValuesInputReader.read(SELECT_ACTION)).thenReturn(FIRST_ACTION);
+
+        StringInputReader stringInputReader = mock(StringInputReader.class);
+        when(stringInputReader.withPossibleValues(anyList())).thenReturn(possibleValuesInputReader);
+
+        BooleanInputReader booleanInputReader = mock(BooleanInputReader.class);
+        when(booleanInputReader.read(UPDATE_THE + EXPECT_HTTP_REQUEST + OPENING_BRACKET + Boolean.FALSE + CLOSING_BRACKET))
+                .thenReturn(false);
+        when(booleanInputReader.read(UPDATE_THE + PRECONDITION_WORD + OPENING_BRACKET + Boolean.FALSE + CLOSING_BRACKET))
+                .thenReturn(false);
+        when(booleanInputReader.read(UPDATE_THE + ACTION_WORD + OPENING_BRACKET + Boolean.FALSE + CLOSING_BRACKET))
+                .thenReturn(false);
+        when(booleanInputReader.read(UPDATE_THE + POSTCONDITION_WORD + OPENING_BRACKET + Boolean.FALSE + CLOSING_BRACKET))
+                .thenReturn(false);
+        when(booleanInputReader.read(EDIT_ANOTHER_ACTION)).thenReturn(false);
+
+        TextIO textIO = mock(TextIO.class);
+        when(textIO.newStringInputReader()).thenReturn(stringInputReader);
+        when(textIO.newBooleanInputReader()).thenReturn(booleanInputReader);
+
+        mockStatic(TextIoFactory.class);
+        when(TextIoFactory.getTextIO()).thenReturn(textIO);
+
+        PromptUtils promptUtils = new PromptUtils();
+        promptUtils.updateApplicationConfiguration(applicationConfiguration);
+    }
+
+    @Test
+    public void creatingNewConfigurationIsPossible() {
         TextTerminal textTerminal = mock(TextTerminal.class);
         TextIO textIO = mock(TextIO.class);
         when(textIO.getTextTerminal()).thenReturn(textTerminal);
