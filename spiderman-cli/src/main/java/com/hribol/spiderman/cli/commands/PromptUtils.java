@@ -8,7 +8,6 @@ import com.hribol.spiderman.core.config.WebDriverActionConfiguration;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 
-import javax.xml.soap.Text;
 import java.io.IOException;
 import java.util.*;
 
@@ -33,6 +32,8 @@ public class PromptUtils {
     public static final String PARAMETER_NAME = "Parameter name: ";
     public static final String SHOULD_I_EXPOSE = "Should I expose ";
     public static final String VALUE_OF = "Value of ";
+    public static final String PRESS_ANY_KEY_WHEN_FINISHED_RECORDING = "Press any key when finished recording";
+    public static final String ALIAS_FOR = "Alias for ";
 
     public TextIO getTextIO() {
         return textIO;
@@ -129,12 +130,10 @@ public class PromptUtils {
                 .withPossibleValues(possibleValues)
                 .read(TYPE);
 
-        String webDriverAction = getWebDriverAction(webDriverActionType);
-
         Map<String, ParameterConfiguration> parameterConfigurations =
                 collectParametersConfiguration(webDriverActionType);
         webDriverActionConfiguration.setParametersConfiguration(parameterConfigurations);
-        webDriverActionConfiguration.setWebDriverActionType(webDriverAction);
+        webDriverActionConfiguration.setWebDriverActionType(webDriverActionType);
 
         return webDriverActionConfiguration;
     }
@@ -163,14 +162,6 @@ public class PromptUtils {
         return getTextIO().newBooleanInputReader().read(ADD_A_PARAMETER);
     }
 
-    public String getWebDriverAction(String webdriverActionType) {
-        if (webdriverActionType.equals(CUSTOM)) {
-            return getTextIO().newStringInputReader().read("Enter the custom type name: ");
-        }
-
-        return webdriverActionType;
-    }
-
     public ParameterConfiguration getParameterConfigurationForCustom() {
         getTextIO().getTextTerminal().println();
         ParameterConfiguration parameterConfiguration = new ParameterConfiguration();
@@ -197,7 +188,7 @@ public class PromptUtils {
     }
 
     public String promptForAlias(String parameterName) {
-        return getTextIO().newStringInputReader().read("Alias for " + parameterName);
+        return getTextIO().newStringInputReader().read(ALIAS_FOR + parameterName);
     }
 
     public boolean promptForParameterExposing(String parameterName) {
@@ -286,9 +277,8 @@ public class PromptUtils {
         }
     }
 
-    public void promptForRecording() throws IOException {
-        System.out.println("Press Enter when finished recording");
-        System.in.read();
+    public void promptForRecording() {
+        textIO.newCharInputReader().read(PRESS_ANY_KEY_WHEN_FINISHED_RECORDING);
     }
 
 
