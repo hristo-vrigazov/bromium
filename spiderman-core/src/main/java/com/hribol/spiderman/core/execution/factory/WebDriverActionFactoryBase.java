@@ -2,6 +2,7 @@ package com.hribol.spiderman.core.execution.factory;
 
 import com.hribol.spiderman.core.actions.WebDriverAction;
 import com.hribol.spiderman.core.parsers.ClickClassByTextParser;
+import com.hribol.spiderman.core.parsers.ClickCssSelectorParser;
 import com.hribol.spiderman.core.parsers.WebDriverActionParameterParser;
 
 import java.util.HashMap;
@@ -19,7 +20,10 @@ public abstract class WebDriverActionFactoryBase implements WebDriverActionFacto
      * The registry which by given webdriverActionType gets the
      * appropriate {@link WebDriverActionParameterParser}.
      */
+
     private Map<String, WebDriverActionParameterParser> parsersRegistry;
+
+    private final String CLICK_CSS_SELECTOR = "CLICK_CSS_SELECTOR";
     private final String CLICK_CLASS_BY_TEXT = "CLICK_CLASS_BY_TEXT";
 
     public WebDriverActionFactoryBase() {
@@ -29,7 +33,8 @@ public abstract class WebDriverActionFactoryBase implements WebDriverActionFacto
     }
 
     private void addPredefined() {
-        parsersRegistry.put(CLICK_CLASS_BY_TEXT, new ClickClassByTextParser());
+        add(CLICK_CLASS_BY_TEXT, new ClickClassByTextParser());
+        add(CLICK_CSS_SELECTOR, new ClickCssSelectorParser());
     }
 
     /**
