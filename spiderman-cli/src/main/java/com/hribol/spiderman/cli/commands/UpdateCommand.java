@@ -26,7 +26,6 @@ public class UpdateCommand implements Command {
             textIO = promptUtils.getTextIO();
             textIO.getTextTerminal().println("Let's update the configuration!");
 
-            promptUtils.promptForApplicationName(applicationConfiguration);
             promptUtils.updateApplicationConfiguration(applicationConfiguration);
 
             String outputFilename = textIO

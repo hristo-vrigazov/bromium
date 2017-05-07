@@ -147,6 +147,7 @@ public class PromptUtilsTest {
 
         StringInputReader possibleValuesInputReader = mock(StringInputReader.class);
         when(possibleValuesInputReader.read(SELECT_ACTION)).thenReturn(FIRST_ACTION);
+        when(possibleValuesInputReader.read(TYPE)).thenReturn(NOTHING);
 
         StringInputReader stringInputReader = mock(StringInputReader.class);
         when(stringInputReader.withPossibleValues(anyList())).thenReturn(possibleValuesInputReader);
@@ -157,12 +158,14 @@ public class PromptUtilsTest {
         when(booleanInputReader.read(UPDATE_THE + PRECONDITION_WORD + OPENING_BRACKET + Boolean.FALSE + CLOSING_BRACKET))
                 .thenReturn(false);
         when(booleanInputReader.read(UPDATE_THE + ACTION_WORD + OPENING_BRACKET + Boolean.FALSE + CLOSING_BRACKET))
-                .thenReturn(false);
+                .thenReturn(true);
         when(booleanInputReader.read(UPDATE_THE + POSTCONDITION_WORD + OPENING_BRACKET + Boolean.FALSE + CLOSING_BRACKET))
                 .thenReturn(false);
-        when(booleanInputReader.read(EDIT_ANOTHER_ACTION)).thenReturn(false);
+        when(booleanInputReader.read(EDIT_ANOTHER_ACTION)).thenReturn(true, false);
 
+        TextTerminal textTerminal = mock(TextTerminal.class);
         TextIO textIO = mock(TextIO.class);
+        when(textIO.getTextTerminal()).thenReturn(textTerminal);
         when(textIO.newStringInputReader()).thenReturn(stringInputReader);
         when(textIO.newBooleanInputReader()).thenReturn(booleanInputReader);
 

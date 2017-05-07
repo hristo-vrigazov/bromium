@@ -77,8 +77,6 @@ public class PromptUtils {
                     getTextIO().getTextTerminal().println(LET_S_ADD_AN_ACTION);
                     applicationConfiguration.addApplicationActionConfiguration(showAddActionMenu());
                     break;
-                default:
-                    break;
             }
         } while (!(mainMenuChoice == MainMenuChoice.SAVE_AND_EXIT));
     }
@@ -207,16 +205,6 @@ public class PromptUtils {
 
     public String promptForParameterName() {
         return getTextIO().newStringInputReader().read(PARAMETER_NAME);
-    }
-
-    public void promptForApplicationName(ApplicationConfiguration applicationConfiguration) {
-        Boolean shouldEditName = shouldChangePrompt("application name", applicationConfiguration.getApplicationName());
-
-        if (shouldEditName) {
-            String newName = getTextIO().newStringInputReader()
-                    .read("Application name: ");
-            applicationConfiguration.setApplicationName(newName);
-        }
     }
 
     public Boolean shouldChangePrompt(String propertyToBeChanged, String defaultValue) {
