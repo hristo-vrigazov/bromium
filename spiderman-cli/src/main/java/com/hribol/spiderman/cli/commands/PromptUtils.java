@@ -29,6 +29,10 @@ public class PromptUtils {
     public static final String NOTHING = "NOTHING";
     public static final String TYPE = "Type: ";
     public static final String EXPECT_HTTP_REQUEST_AFTER_THE_ACTION = "Expect HTTP request after the action?";
+    public static final String ADD_A_PARAMETER = "Add a parameter?";
+    public static final String PARAMETER_NAME = "Parameter name: ";
+    public static final String SHOULD_I_EXPOSE = "Should I expose ";
+    public static final String VALUE_OF = "Value of ";
 
     public TextIO getTextIO() {
         return textIO;
@@ -136,7 +140,7 @@ public class PromptUtils {
     }
 
     public Map<String, ParameterConfiguration> collectParametersConfiguration(String webDriverActionType) {
-        if (Objects.equals(webDriverActionType, "NOTHING")) {
+        if (Objects.equals(webDriverActionType, NOTHING)) {
             return new HashMap<>();
         }
 
@@ -156,7 +160,7 @@ public class PromptUtils {
 
     public boolean promptForAddParameters() {
         getTextIO().getTextTerminal().println();
-        return getTextIO().newBooleanInputReader().read("Add a parameter?");
+        return getTextIO().newBooleanInputReader().read(ADD_A_PARAMETER);
     }
 
     public String getWebDriverAction(String webdriverActionType) {
@@ -189,7 +193,7 @@ public class PromptUtils {
     }
 
     public String promptForValue(String parameterName) {
-        return getTextIO().newStringInputReader().read("Value of " + parameterName);
+        return getTextIO().newStringInputReader().read(VALUE_OF + parameterName);
     }
 
     public String promptForAlias(String parameterName) {
@@ -197,11 +201,11 @@ public class PromptUtils {
     }
 
     public boolean promptForParameterExposing(String parameterName) {
-        return getTextIO().newBooleanInputReader().read("Should I expose " + parameterName);
+        return getTextIO().newBooleanInputReader().read(SHOULD_I_EXPOSE + parameterName);
     }
 
     public String promptForParameterName() {
-        return getTextIO().newStringInputReader().read("Parameter name: ");
+        return getTextIO().newStringInputReader().read(PARAMETER_NAME);
     }
 
     public void promptForApplicationName(ApplicationConfiguration applicationConfiguration) {
