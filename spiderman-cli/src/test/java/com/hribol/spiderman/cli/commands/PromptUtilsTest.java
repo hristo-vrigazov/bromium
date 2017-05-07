@@ -10,7 +10,10 @@ import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import static com.hribol.spiderman.cli.MainMenuChoice.ACTION;
+import static com.hribol.spiderman.cli.MainMenuChoice.ASSERTION;
 import static com.hribol.spiderman.cli.MainMenuChoice.SAVE_AND_EXIT;
+import static com.hribol.spiderman.cli.commands.PromptUtils.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
@@ -58,8 +61,22 @@ public class PromptUtilsTest {
         when(TextIoFactory.getTextIO()).thenReturn(textIO);
 
         EnumInputReader enumInputReader = mock(EnumInputReader.class);
-        when(enumInputReader.read(anyString())).thenReturn(SAVE_AND_EXIT);
+        when(enumInputReader.read(LET_S_ADD_ANOTHER_ONE_CHOOSE_FROM_BELOW))
+                .thenReturn(ACTION, SAVE_AND_EXIT);
+
+        StringInputReader webDriverActionTypeReader = mock(StringInputReader.class);
+        when(webDriverActionTypeReader.read(TYPE)).thenReturn(NOTHING);
+
+        StringInputReader stringInputReader = mock(StringInputReader.class);
+        when(stringInputReader.read(ACTION_NAME)).thenReturn("clickMegaMenu");
+        when(stringInputReader.withPossibleValues(CUSTOM, NOTHING)).thenReturn(webDriverActionTypeReader);
+
+        BooleanInputReader booleanInputReader = mock(BooleanInputReader.class);
+        when(booleanInputReader.read(EXPECT_HTTP_REQUEST_AFTER_THE_ACTION)).thenReturn(true);
+
         when(textIO.newEnumInputReader(MainMenuChoice.class)).thenReturn(enumInputReader);
+        when(textIO.newStringInputReader()).thenReturn(stringInputReader);
+        when(textIO.newBooleanInputReader()).thenReturn(booleanInputReader);
 
         PromptUtils promptUtils = new PromptUtils();
 

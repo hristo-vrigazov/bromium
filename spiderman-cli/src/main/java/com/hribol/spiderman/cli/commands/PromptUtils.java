@@ -17,6 +17,19 @@ import java.util.*;
  */
 public class PromptUtils {
 
+    public static final String LET_S_ADD_ANOTHER_ONE_CHOOSE_FROM_BELOW = "Let's add another one! Choose from below";
+    public static final String LET_S_ADD_AN_ASSERTION = "Let's add an assertion!";
+    public static final String LET_S_ADD_AN_ACTION = "Let's add an action!";
+    public static final String ACTION_NAME = "Action name: ";
+    public static final String ASSERTION_NAME = "Assertion name: ";
+    public static final String PRECONDITION = "Precondition: ";
+    public static final String ACTION = "Action: ";
+    public static final String POSTACTION = "Postaction: ";
+    public static final String CUSTOM = "CUSTOM";
+    public static final String NOTHING = "NOTHING";
+    public static final String TYPE = "Type: ";
+    public static final String EXPECT_HTTP_REQUEST_AFTER_THE_ACTION = "Expect HTTP request after the action?";
+
     public TextIO getTextIO() {
         return textIO;
     }
@@ -38,14 +51,15 @@ public class PromptUtils {
         MainMenuChoice mainMenuChoice;
         do {
             mainMenuChoice = getTextIO().newEnumInputReader(MainMenuChoice.class)
-                    .read("Let's add another one! Choose from below");
+                    .read(LET_S_ADD_ANOTHER_ONE_CHOOSE_FROM_BELOW);
             getTextIO().getTextTerminal().println();
             switch (mainMenuChoice) {
                 case ASSERTION:
-                    getTextIO().getTextTerminal().println("Let's add an assertion!");
+                    getTextIO().getTextTerminal().println(LET_S_ADD_AN_ASSERTION);
+                    applicationConfiguration.addApplicationActionConfiguration(showAddAssertionMenu());
                     break;
                 case ACTION:
-                    getTextIO().getTextTerminal().println("Let's add an action!");
+                    getTextIO().getTextTerminal().println(LET_S_ADD_AN_ACTION);
                     applicationConfiguration.addApplicationActionConfiguration(showAddActionMenu());
                     break;
                 default:
@@ -54,23 +68,23 @@ public class PromptUtils {
         } while (!(mainMenuChoice == MainMenuChoice.SAVE_AND_EXIT));
     }
 
-    public ApplicationActionConfiguration showAddActionMenu() {
-        String actionName = getTextIO().newStringInputReader().read("Action name: ");
+    public ApplicationActionConfiguration showAddBaseMenu(String prompt) {
+        String actionName = getTextIO().newStringInputReader().read(prompt);
         ApplicationActionConfiguration applicationActionConfiguration = new ApplicationActionConfiguration();
         applicationActionConfiguration.setName(actionName);
 
         WebDriverActionConfiguration preconditionConfiguration =
-                promptForActionConfigurationType("Precondition: ");
+                promptForActionConfigurationType(PRECONDITION);
         applicationActionConfiguration.setConditionBeforeExecution(preconditionConfiguration);
         getTextIO().getTextTerminal().println();
 
         WebDriverActionConfiguration webDriverActionConfiguration =
-                promptForActionConfigurationType("Action: ");
+                promptForActionConfigurationType(ACTION);
         applicationActionConfiguration.setWebDriverAction(webDriverActionConfiguration);
         getTextIO().getTextTerminal().println();
 
         WebDriverActionConfiguration postconditionConfiguration =
-                promptForActionConfigurationType("Postaction: ");
+                promptForActionConfigurationType(POSTACTION);
         applicationActionConfiguration.setConditionAfterExecution(postconditionConfiguration);
         getTextIO().getTextTerminal().println();
 
@@ -84,10 +98,18 @@ public class PromptUtils {
         return applicationActionConfiguration;
     }
 
+    public ApplicationActionConfiguration showAddActionMenu() {
+        return showAddBaseMenu(ACTION_NAME);
+    }
+
+    public ApplicationActionConfiguration showAddAssertionMenu() {
+        return showAddBaseMenu(ASSERTION_NAME);
+    }
+
     public boolean promptForExpectHttpRequest() {
         return getTextIO()
                 .newBooleanInputReader()
-                .read("Expect HTTP request after the action?");
+                .read(EXPECT_HTTP_REQUEST_AFTER_THE_ACTION);
     }
 
     public WebDriverActionConfiguration promptForActionConfigurationType(String prompt) {
@@ -95,8 +117,8 @@ public class PromptUtils {
         WebDriverActionConfiguration webDriverActionConfiguration = new WebDriverActionConfiguration();
         String webDriverActionType = getTextIO()
                 .newStringInputReader()
-                .withPossibleValues("CUSTOM", "NOTHING")
-                .read("Type: ");
+                .withPossibleValues(CUSTOM, NOTHING)
+                .read(TYPE);
 
         String webDriverAction = getWebDriverAction(webDriverActionType);
 
@@ -133,7 +155,7 @@ public class PromptUtils {
     }
 
     public String getWebDriverAction(String webdriverActionType) {
-        if (webdriverActionType == "CUSTOM") {
+        if (webdriverActionType.equals(CUSTOM)) {
             return getTextIO().newStringInputReader().read("Enter the custom type name: ");
         }
 
