@@ -40,13 +40,7 @@ public class ReplayBaseFilter {
     }
 
     private boolean inWhiteList(String url) {
-        for (String whiteListedString: whiteListHttp) {
-            if (url.contains(whiteListedString)) {
-                return true;
-            }
-        }
-
-        return false;
+        return whiteListHttp.stream().anyMatch(url::contains);
     }
 
     private List<String> buildWhitelist() throws URISyntaxException {
