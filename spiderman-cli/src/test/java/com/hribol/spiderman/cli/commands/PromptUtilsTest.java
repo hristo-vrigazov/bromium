@@ -17,6 +17,7 @@ import static com.hribol.spiderman.cli.commands.PromptUtils.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -69,7 +70,7 @@ public class PromptUtilsTest {
 
         StringInputReader stringInputReader = mock(StringInputReader.class);
         when(stringInputReader.read(ACTION_NAME)).thenReturn("clickMegaMenu");
-        when(stringInputReader.withPossibleValues(CUSTOM, NOTHING)).thenReturn(webDriverActionTypeReader);
+        when(stringInputReader.withPossibleValues(anyList())).thenReturn(webDriverActionTypeReader);
 
         BooleanInputReader booleanInputReader = mock(BooleanInputReader.class);
         when(booleanInputReader.read(EXPECT_HTTP_REQUEST_AFTER_THE_ACTION)).thenReturn(true);
