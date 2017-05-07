@@ -13,10 +13,10 @@
             "name": "clickMegaMenu",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "initialCollectorClass": {
+                    "cssSelector": {
                         "expose": false,
-                        "parameterName": "initialCollectorClass",
-                        "value": "mega-menu-link"
+                        "parameterName": "cssSelector",
+                        "value": ".mega-menu-link"
                     },
                     "text": {
                         "alias": "text",
@@ -24,7 +24,7 @@
                         "parameterName": "text"
                     }
                 },
-                "webDriverActionType": "CLICK_CLASS_BY_TEXT"
+                "webDriverActionType": "CLICK_CSS_SELECTOR"
             }
         }
     ],
