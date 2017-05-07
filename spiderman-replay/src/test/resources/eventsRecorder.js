@@ -6,7 +6,7 @@ window.eventsRecorder.convertParametersToQueryString = function(data) {
 window.eventsRecorder.notifyJavaCode = function(parameters) {
     var queryString = eventsRecorder.convertParametersToQueryString(parameters);
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://working-selenium.com/submit-event?" + queryString);
+    xhr.open("GET", "http://spiderman-submit-event.com/?" + queryString);
     xhr.send();
 };
 

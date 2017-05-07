@@ -9,6 +9,6 @@ public class Constants {
     public final static String EXPECTS_HTTP = "expectsHttp";
     public final static String NOTHING = "NOTHING";
     public final static String CUSTOM = "CUSTOM";
-    public final static String SUBMIT_EVENT_URL = "http://working-selenium.com/submit-event";
+    public final static String SUBMIT_EVENT_URL = "http://spiderman-submit-event.com/";
     public final static String HTML = "html";
 }
