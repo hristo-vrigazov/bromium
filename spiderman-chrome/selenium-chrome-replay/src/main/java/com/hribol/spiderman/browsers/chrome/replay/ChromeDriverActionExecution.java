@@ -27,7 +27,7 @@ public class ChromeDriverActionExecution extends WebDriverActionExecutionBase {
     }
 
     @Override
-    protected String getSystemProperty() {
+    public String getSystemProperty() {
         return ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY;
     }
 }
