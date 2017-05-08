@@ -30,8 +30,8 @@ public abstract class RecordBrowserBase {
         this.jsInjectionCode = javascriptInjector.getInjectionCode();
     }
 
-    protected abstract String getSystemProperty();
-    protected abstract VisibleWebDriverSupplier getVisibleWebDriverSupplier();
+    public abstract String getSystemProperty();
+    public abstract VisibleWebDriverSupplier getVisibleWebDriverSupplier();
 
     private ResponseFilter responseFilter;
     private RecordRequestFilter recordRequestFilter;

@@ -16,12 +16,12 @@ public class ChromeRecordBrowser extends RecordBrowserBase {
     }
 
     @Override
-    protected String getSystemProperty() {
+    public String getSystemProperty() {
         return ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY;
     }
 
     @Override
-    protected VisibleWebDriverSupplier getVisibleWebDriverSupplier() {
+    public VisibleWebDriverSupplier getVisibleWebDriverSupplier() {
         return new VisibleChromeDriverSupplier();
     }
 }
