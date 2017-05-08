@@ -11,7 +11,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>selenium-chrome-replay</artifactId>
+            <artifactId>spiderman-chrome-replay</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
