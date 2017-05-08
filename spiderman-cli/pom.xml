@@ -8,6 +8,17 @@
     <description>A command line interface for spiderman</description>
     <url>https://github.com/hristo-vrigazov/spiderman</url>
 
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>cli-specification.txt</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -38,6 +49,10 @@
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.offbytwo</groupId>
+            <artifactId>docopt</artifactId>
         </dependency>
         <dependency>
             <groupId>org.jacoco</groupId>

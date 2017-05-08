@@ -1,6 +1,16 @@
 package com.hribol.spiderman.cli;
 
+import com.google.common.io.Files;
 import com.hribol.spiderman.cli.commands.*;
+import org.apache.commons.io.Charsets;
+import org.apache.commons.io.IOUtils;
+import org.docopt.Docopt;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.util.Map;
 
 /**
  * Created by hvrigazov on 14.03.17.
@@ -8,17 +18,15 @@ import com.hribol.spiderman.cli.commands.*;
 public class Main {
 
     public static void main(String[] args) {
-        String pathToChromeDriver = "/home/hvrigazov/github/spiderman/chromedriver";
-        String pathToJSInjectionFile = "/home/hvrigazov/github/spiderman/spiderman-core/src/test/resources/eventsRecorder.js";
-        String pathToApplicationConfiguration = "/home/hvrigazov/github/spiderman/spiderman-core/src/test/resources/tenniskafe.json";
-        String baseUrl = "http://tenniskafe.com";
-        String testCaseFile = "/home/hvrigazov/github/spiderman/spiderman-core/src/test/resources/testCase.json";
-        Command command = new ReplayCommand(pathToChromeDriver, pathToApplicationConfiguration, testCaseFile,
-                "measurements.csv", 10, 500,
-                "http://tenniskafe.com");
-//        Command command = new RecordCommand(pathToChromeDriver, pathToJSInjectionFile, baseUrl,
-//                testCaseFile, new PromptUtils());
-        command.run();
+        try {
+            InputStream inputStream = Main.class.getResourceAsStream("/cli-specification.txt");
+            String doc = IOUtils.toString(inputStream);
+            Map<String, Object> opts = new Docopt(doc).withVersion("Naval Fate 2.0").parse(args);
+            System.out.println(opts);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         System.exit(0);
     }
 }
