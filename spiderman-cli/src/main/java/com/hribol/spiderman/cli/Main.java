@@ -18,6 +18,12 @@ public class Main {
 
     public static final String INIT = "init";
     public static final String RECORD = "record";
+    public static final String DRIVER = "--driver";
+    public static final String JS = "--js";
+    public static final String URL = "--url";
+    public static final String BROWSER = "--browser";
+    public static final String OUTPUT = "--output";
+    public static final String TIMEOUT = "--timeout";
 
     public static void main(String[] args) {
         try {
@@ -36,12 +42,12 @@ public class Main {
             }
 
             if (opts.get(RECORD).equals(true)) {
-                String pathToDriver = (String) opts.get("--driver");
-                String pathToJsInjectionFile = (String) opts.get("--js");
-                String baseUrl = (String) opts.get("--url");
-                String outputFile = (String) opts.get("--output");
-                String browserType = (String) opts.get("--browser");
-                int timeout = Integer.valueOf((String) opts.get("--timeout"));
+                String pathToDriver = getPathToDriver(opts);
+                String pathToJsInjectionFile = getPathToJS(opts);
+                String baseUrl = getBaseUrl(opts);
+                String outputFile = getOutputFile(opts);
+                String browserType = getBrowserType(opts);
+                int timeout = getTimeout(opts);
                 Command command = new RecordCommand(pathToDriver, pathToJsInjectionFile, baseUrl, outputFile, browserType, promptUtils, timeout);
                 command.run();
             }
@@ -51,5 +57,37 @@ public class Main {
         }
 
         System.exit(0);
+    }
+
+    private static String getPathToDriver(Map<String, Object> opts) {
+        return getString(opts, DRIVER);
+    }
+
+    private static String getPathToJS(Map<String, Object> opts) {
+        return getString(opts, JS);
+    }
+
+    private static String getBaseUrl(Map<String, Object> opts) {
+        return getString(opts, URL);
+    }
+
+    private static String getBrowserType(Map<String, Object> opts) {
+        return getString(opts, BROWSER);
+    }
+
+    private static String getOutputFile(Map<String, Object> opts) {
+        return getString(opts, OUTPUT);
+    }
+
+    private static Integer getTimeout(Map<String, Object> opts) {
+        return getInt(opts, TIMEOUT);
+    }
+
+    private static Integer getInt(Map<String, Object> opts, String key) {
+        return Integer.valueOf(getString(opts, key));
+    }
+
+    private static String getString(Map<String, Object> opts, String key) {
+        return (String) opts.get(key);
     }
 }
