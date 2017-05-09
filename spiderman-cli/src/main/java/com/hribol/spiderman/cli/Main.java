@@ -20,6 +20,7 @@ public class Main {
         static final String RECORD = "record";
         static final String REPLAY = "replay";
         static final String UPDATE = "update";
+        static final String VERSION = "version";
     }
 
 
@@ -55,6 +56,7 @@ public class Main {
         map.put(Commands.RECORD, new RecordCommandHandler());
         map.put(Commands.REPLAY, new ReplayCommandHandler());
         map.put(Commands.UPDATE, new UpdateCommandHandler());
+        map.put(Commands.VERSION, new VersionCommandHandler());
         return map;
     }
 }
