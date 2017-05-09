@@ -1,9 +1,6 @@
 package com.hribol.spiderman.cli;
 
-import com.hribol.spiderman.cli.handlers.CommandHandler;
-import com.hribol.spiderman.cli.handlers.InitCommandHandler;
-import com.hribol.spiderman.cli.handlers.RecordCommandHandler;
-import com.hribol.spiderman.cli.handlers.ReplayCommandHandler;
+import com.hribol.spiderman.cli.handlers.*;
 import org.apache.commons.io.IOUtils;
 import org.docopt.Docopt;
 
@@ -22,6 +19,7 @@ public class Main {
         static final String INIT = "init";
         static final String RECORD = "record";
         static final String REPLAY = "replay";
+        static final String UPDATE = "update";
     }
 
 
@@ -56,6 +54,7 @@ public class Main {
         map.put(Commands.INIT, new InitCommandHandler());
         map.put(Commands.RECORD, new RecordCommandHandler());
         map.put(Commands.REPLAY, new ReplayCommandHandler());
+        map.put(Commands.UPDATE, new UpdateCommandHandler());
         return map;
     }
 }
