@@ -47,7 +47,6 @@ public class Main {
             e.printStackTrace();
         }
 
-        System.exit(0);
     }
 
     private static Map<String, CommandHandler> getCommands() {
