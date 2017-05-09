@@ -3,16 +3,21 @@ Spiderman.
     Usage:
       spiderman init
       spiderman record -d <pathToDriver> -j <jsFile> -u <url> -o <output> [-b <browserType>] [-t <timeout>]
+      spiderman replay -d <pathToDriver> -a <configuration> -c <case> -p <precision> -m <measurements> -u <url> [-b <browserType>] [-t <timeout>]
       spiderman (-h | --help)
       spiderman --version
 
     Options:
-      -h --help                     Show this screen.
-      -v --version                     Show version.
-      -u --url <url>                   Base url to use.
-      -d --driver <pathToDriver>       Path to the driver
-      -j --js <pathToJsInjectionFile>  Path to the js injection file
-      -o --output <outputFile>         Path to the output file
-      -b --browser <browserType>          Type browser to use [default: chrome]
-      -t --timeout <timeout>           Timeout [default: 10]
+      -h --help                             Show this screen.
+      -v --version                          Show version.
+      -a --application <configuration>      Path to the application configuration
+      -c --case <case>                      Path to the test case
+      -m --measurements <measurements>      Where to output the measurements
+      -u --url <url>                        Base url to use.
+      -d --driver <pathToDriver>            Path to the driver
+      -j --js <pathToJsInjectionFile>       Path to the js injection file
+      -o --output <outputFile>              Path to the output file
+      -p --precision <precision>            Precision in milliseconds [default: 500]
+      -b --browser <browserType>            Type browser to use [default: chrome]
+      -t --timeout <timeout>                Timeout [default: 10]
 

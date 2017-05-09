@@ -1,6 +1,6 @@
 package com.hribol.spiderman.cli.commands;
 
-import com.hribol.spiderman.browsers.chrome.replay.ChromeDriverActionExecution;
+import com.hribol.spiderman.cli.factory.ExecutionFactory;
 import com.hribol.spiderman.core.execution.factory.PredefinedWebDriverActionFactory;
 import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;
 import com.hribol.spiderman.replay.*;
@@ -21,10 +21,18 @@ public class ReplayCommand implements Command {
     private int timeout;
     private int measurementsPrecisionMilli;
     private String baseURI;
+    private String browserType;
+    private ExecutionFactory executionFactory;
 
-    public ReplayCommand(String pathToDriver, String pathToApplicationConfiguration, String pathToSerializedTest,
-                         String csvMeasurementsFileName, int timeout, int measurementsPrecisionMilli,
-                         String baseURI) {
+    public ReplayCommand(String pathToDriver,
+                         String pathToApplicationConfiguration,
+                         String pathToSerializedTest,
+                         String csvMeasurementsFileName,
+                         int timeout,
+                         int measurementsPrecisionMilli,
+                         String baseURI,
+                         String browserType,
+                         ExecutionFactory executionFactory) {
         this.pathToDriver = pathToDriver;
         this.pathToApplicationConfiguration = pathToApplicationConfiguration;
         this.pathToSerializedTest = pathToSerializedTest;
@@ -32,6 +40,8 @@ public class ReplayCommand implements Command {
         this.timeout = timeout;
         this.measurementsPrecisionMilli = measurementsPrecisionMilli;
         this.baseURI = baseURI;
+        this.browserType = browserType;
+        this.executionFactory = executionFactory;
     }
 
     @Override
@@ -52,7 +62,7 @@ public class ReplayCommand implements Command {
                     .webdriverActionFactory(factory)
                     .build();
 
-            WebDriverActionExecution execution = new ChromeDriverActionExecution(executor);
+            WebDriverActionExecution execution = this.executionFactory.create(browserType, executor);
 
             ReplayBrowser replayBrowser = replayBrowserConfiguration.getReplayBrowser();
             replayBrowser.replay(pathToSerializedTest, execution, csvMeasurementsFileName);

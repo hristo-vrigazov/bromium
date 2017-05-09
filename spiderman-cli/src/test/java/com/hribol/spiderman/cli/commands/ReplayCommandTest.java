@@ -1,5 +1,6 @@
 package com.hribol.spiderman.cli.commands;
 
+import com.hribol.spiderman.cli.factory.ExecutionFactory;
 import com.hribol.spiderman.replay.ReplayBrowser;
 import com.hribol.spiderman.replay.ReplayBrowserConfiguration;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
+import static org.openqa.selenium.remote.BrowserType.CHROME;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 /**
@@ -56,7 +58,8 @@ public class ReplayCommandTest {
         baseURI = "http://tenniskafe.com";
 
         ReplayCommand replayCommand = new ReplayCommand(pathToDriver, pathToApplicationConfiguration,
-                pathToSerializedTest, csvMeasurementsFileName, timeout, measurementsPrecisionMilli, baseURI);
+                pathToSerializedTest, csvMeasurementsFileName, timeout, measurementsPrecisionMilli, baseURI,
+                CHROME, new ExecutionFactory());
 
         ReplayBrowserConfiguration replayBrowserConfiguration = mock(ReplayBrowserConfiguration.class);
         when(replayBrowserConfiguration.getReplayBrowser()).thenReturn(replayBrowser);
