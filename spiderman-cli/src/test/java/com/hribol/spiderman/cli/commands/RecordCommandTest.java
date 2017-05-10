@@ -19,6 +19,8 @@ public class RecordCommandTest {
     private final String pathToJSInjectionFile = "some.js";
     private final String baseUrl = "tenniskafe.com";
     private final String ouputFile = "tmp-record.json";
+    private final String browserType = CHROME;
+    private final int timeout = 10;
     private RecordBrowserBase recordBrowserBase = mock(RecordBrowserBase.class);
     private RecordBrowserFactory recordBrowserFactory = mock(RecordBrowserFactory.class);
     private PromptUtils promptUtils = mock(PromptUtils.class);
@@ -28,7 +30,8 @@ public class RecordCommandTest {
     public void recordDumpsFile() throws IOException {
         RecordBrowserFactory recordBrowserFactory = mock(RecordBrowserFactory.class);
         when(recordBrowserFactory.create(CHROME, pathToDriver, pathToJSInjectionFile)).thenReturn(recordBrowserBase);
-        RecordCommand recordCommand = new RecordCommand(pathToDriver, pathToJSInjectionFile, baseUrl, ouputFile, recordBrowserFactory, promptUtils);
+        RecordCommand recordCommand = new RecordCommand(pathToDriver, pathToJSInjectionFile, baseUrl, ouputFile, timeout,
+                browserType, recordBrowserFactory, promptUtils);
         recordCommand.run();
 
         verify(recordBrowserBase).dumpActions(ouputFile);
@@ -36,7 +39,8 @@ public class RecordCommandTest {
 
     @Test
     public void canBeInstantiatedViaDefaultFactoryConstructor() {
-        RecordCommand recordCommand = new RecordCommand(pathToDriver, pathToJSInjectionFile, baseUrl, ouputFile, promptUtils);
+        RecordCommand recordCommand = new RecordCommand(pathToDriver, pathToJSInjectionFile, baseUrl, ouputFile,
+                browserType, promptUtils, timeout);
         assertNotNull(recordCommand);
     }
 
@@ -45,7 +49,8 @@ public class RecordCommandTest {
         RecordBrowserFactory recordBrowserFactory = mock(RecordBrowserFactory.class);
         when(recordBrowserFactory.create(CHROME, pathToDriver, pathToJSInjectionFile)).thenThrow(new IOException());
 
-        RecordCommand recordCommand = new RecordCommand(pathToDriver, pathToJSInjectionFile, baseUrl, ouputFile, recordBrowserFactory, promptUtils);
+        RecordCommand recordCommand = new RecordCommand(pathToDriver, pathToJSInjectionFile, baseUrl, ouputFile,
+                timeout, browserType, recordBrowserFactory, promptUtils);
         recordCommand.run();
 
         verify(recordBrowserBase, never()).dumpActions(ouputFile);

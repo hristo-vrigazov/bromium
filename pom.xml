@@ -249,6 +249,13 @@
                 <version>${jacoco.version}</version>
                 <scope>test</scope>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/com.offbytwo/docopt -->
+            <dependency>
+                <groupId>com.offbytwo</groupId>
+                <artifactId>docopt</artifactId>
+                <version>0.6.0.20150202</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

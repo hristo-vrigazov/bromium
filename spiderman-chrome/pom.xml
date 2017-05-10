@@ -17,7 +17,7 @@
     <modules>
         <module>spiderman-chrome-base</module>
         <module>spiderman-chrome-record</module>
-        <module>selenium-chrome-replay</module>
+        <module>spiderman-chrome-replay</module>
     </modules>
 
 

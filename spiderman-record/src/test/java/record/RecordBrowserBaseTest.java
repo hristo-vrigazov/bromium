@@ -36,12 +36,12 @@ public class RecordBrowserBaseTest {
 
         RecordBrowserBase recordBrowserBase = new RecordBrowserBase(pathToChromeDriver, pathToJSInjectionFile) {
             @Override
-            protected String getSystemProperty() {
+            public String getSystemProperty() {
                 return "webdriver.executable.path";
             }
 
             @Override
-            protected VisibleWebDriverSupplier getVisibleWebDriverSupplier() {
+            public VisibleWebDriverSupplier getVisibleWebDriverSupplier() {
                 return visibleWebDriverSupplier;
             }
         };

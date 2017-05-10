@@ -1,24 +1,61 @@
 package com.hribol.spiderman.cli;
 
-import com.hribol.spiderman.cli.commands.*;
+import com.hribol.spiderman.cli.handlers.*;
+import org.apache.commons.io.IOUtils;
+import org.docopt.Docopt;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by hvrigazov on 14.03.17.
  */
 public class Main {
 
+    static class Commands {
+        static final String INIT = "init";
+        static final String RECORD = "record";
+        static final String REPLAY = "replay";
+        static final String UPDATE = "update";
+        static final String VERSION = "version";
+    }
+
+
     public static void main(String[] args) {
-        String pathToChromeDriver = "/home/hvrigazov/github/spiderman/chromedriver";
-        String pathToJSInjectionFile = "/home/hvrigazov/github/spiderman/spiderman-core/src/test/resources/eventsRecorder.js";
-        String pathToApplicationConfiguration = "/home/hvrigazov/github/spiderman/spiderman-core/src/test/resources/tenniskafe.json";
-        String baseUrl = "http://tenniskafe.com";
-        String testCaseFile = "/home/hvrigazov/github/spiderman/spiderman-core/src/test/resources/testCase.json";
-        Command command = new ReplayCommand(pathToChromeDriver, pathToApplicationConfiguration, testCaseFile,
-                "measurements.csv", 10, 500,
-                "http://tenniskafe.com");
-//        Command command = new RecordCommand(pathToChromeDriver, pathToJSInjectionFile, baseUrl,
-//                testCaseFile, new PromptUtils());
-        command.run();
-        System.exit(0);
+        try {
+            InputStream inputStream = Main.class.getResourceAsStream("/cli-specification.txt");
+            String doc = IOUtils.toString(inputStream);
+            Docopt docopt = new Docopt(doc);
+            Map<String, Object> opts = docopt.withVersion("Spiderman 0.1").parse(args);
+
+            System.out.println(opts);
+
+            Map<String, CommandHandler> commandToHandler = getCommands();
+            Optional<String> optionalSelectedCommand = commandToHandler
+                    .keySet()
+                    .stream()
+                    .filter(command -> opts.get(command)
+                    .equals(true))
+                    .findAny();
+
+            optionalSelectedCommand.ifPresent(command -> commandToHandler.get(command).handle(opts));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static Map<String, CommandHandler> getCommands() {
+        Map<String, CommandHandler> map = new HashMap<>();
+        map.put(Commands.INIT, new InitCommandHandler());
+        map.put(Commands.RECORD, new RecordCommandHandler());
+        map.put(Commands.REPLAY, new ReplayCommandHandler());
+        map.put(Commands.UPDATE, new UpdateCommandHandler());
+        map.put(Commands.VERSION, new VersionCommandHandler());
+        return map;
     }
 }

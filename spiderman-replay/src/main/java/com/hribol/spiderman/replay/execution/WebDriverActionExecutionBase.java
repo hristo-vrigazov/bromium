@@ -130,7 +130,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     protected ReplayFiltersFacade proxyFacade;
     protected String baseURI;
     protected abstract ReplaySettings createReplaySettings();
-    protected abstract String getSystemProperty();
+    public abstract String getSystemProperty();
 
     private ReplaySettings replaySettings;
     private AutomationResult automationResult;

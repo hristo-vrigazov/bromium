@@ -8,7 +8,6 @@ import com.hribol.spiderman.core.config.WebDriverActionConfiguration;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 
-import javax.xml.soap.Text;
 import java.io.IOException;
 import java.util.*;
 
@@ -29,6 +28,22 @@ public class PromptUtils {
     public static final String NOTHING = "NOTHING";
     public static final String TYPE = "Type: ";
     public static final String EXPECT_HTTP_REQUEST_AFTER_THE_ACTION = "Expect HTTP request after the action?";
+    public static final String ADD_A_PARAMETER = "Add a parameter?";
+    public static final String PARAMETER_NAME = "Parameter name: ";
+    public static final String SHOULD_I_EXPOSE = "Should I expose ";
+    public static final String VALUE_OF = "Value of ";
+    public static final String PRESS_ANY_KEY_WHEN_FINISHED_RECORDING = "Press any key when finished recording";
+    public static final String ALIAS_FOR = "Alias for ";
+    public static final String EXPECT_HTTP_REQUEST = "expect http request";
+    public static final String UPDATE_THE = "Update the ";
+    public static final String OPENING_BRACKET = " (";
+    public static final String CLOSING_BRACKET = ") ? ";
+    public static final String SELECT_ACTION = "Select action: ";
+    public static final String PRECONDITION_WORD = "precondition";
+    public static final String ACTION_WORD = "action";
+    public static final String POSTCONDITION_WORD = "postcondition";
+    public static final String EDIT_ANOTHER_ACTION = "Edit another action?";
+
 
     public TextIO getTextIO() {
         return textIO;
@@ -61,8 +76,6 @@ public class PromptUtils {
                 case ACTION:
                     getTextIO().getTextTerminal().println(LET_S_ADD_AN_ACTION);
                     applicationConfiguration.addApplicationActionConfiguration(showAddActionMenu());
-                    break;
-                default:
                     break;
             }
         } while (!(mainMenuChoice == MainMenuChoice.SAVE_AND_EXIT));
@@ -125,18 +138,16 @@ public class PromptUtils {
                 .withPossibleValues(possibleValues)
                 .read(TYPE);
 
-        String webDriverAction = getWebDriverAction(webDriverActionType);
-
         Map<String, ParameterConfiguration> parameterConfigurations =
                 collectParametersConfiguration(webDriverActionType);
         webDriverActionConfiguration.setParametersConfiguration(parameterConfigurations);
-        webDriverActionConfiguration.setWebDriverActionType(webDriverAction);
+        webDriverActionConfiguration.setWebDriverActionType(webDriverActionType);
 
         return webDriverActionConfiguration;
     }
 
     public Map<String, ParameterConfiguration> collectParametersConfiguration(String webDriverActionType) {
-        if (Objects.equals(webDriverActionType, "NOTHING")) {
+        if (Objects.equals(webDriverActionType, NOTHING)) {
             return new HashMap<>();
         }
 
@@ -156,15 +167,7 @@ public class PromptUtils {
 
     public boolean promptForAddParameters() {
         getTextIO().getTextTerminal().println();
-        return getTextIO().newBooleanInputReader().read("Add a parameter?");
-    }
-
-    public String getWebDriverAction(String webdriverActionType) {
-        if (webdriverActionType.equals(CUSTOM)) {
-            return getTextIO().newStringInputReader().read("Enter the custom type name: ");
-        }
-
-        return webdriverActionType;
+        return getTextIO().newBooleanInputReader().read(ADD_A_PARAMETER);
     }
 
     public ParameterConfiguration getParameterConfigurationForCustom() {
@@ -189,36 +192,24 @@ public class PromptUtils {
     }
 
     public String promptForValue(String parameterName) {
-        return getTextIO().newStringInputReader().read("Value of " + parameterName);
+        return getTextIO().newStringInputReader().read(VALUE_OF + parameterName);
     }
 
     public String promptForAlias(String parameterName) {
-        return getTextIO().newStringInputReader().read("Alias for " + parameterName);
+        return getTextIO().newStringInputReader().read(ALIAS_FOR + parameterName);
     }
 
     public boolean promptForParameterExposing(String parameterName) {
-        return getTextIO().newBooleanInputReader().read("Should I expose " + parameterName);
+        return getTextIO().newBooleanInputReader().read(SHOULD_I_EXPOSE + parameterName);
     }
 
     public String promptForParameterName() {
-        return getTextIO().newStringInputReader().read("Parameter name: ");
-    }
-
-    public void promptForApplicationName(ApplicationConfiguration applicationConfiguration) {
-        Boolean shouldEditName = shouldChangePrompt("application name", applicationConfiguration.getApplicationName());
-
-        if (shouldEditName) {
-            String newName = getTextIO().newStringInputReader()
-                    .read("Application name: ");
-            applicationConfiguration.setApplicationName(newName);
-        }
+        return getTextIO().newStringInputReader().read(PARAMETER_NAME);
     }
 
     public Boolean shouldChangePrompt(String propertyToBeChanged, String defaultValue) {
         return getTextIO().newBooleanInputReader()
-                .read("Update the " + propertyToBeChanged + " ("
-                        + defaultValue
-                        + ") ? ");
+                .read(UPDATE_THE + propertyToBeChanged + OPENING_BRACKET + defaultValue + CLOSING_BRACKET);
     }
 
     public void updateApplicationConfiguration(ApplicationConfiguration applicationConfiguration) {
@@ -230,51 +221,47 @@ public class PromptUtils {
         }
 
         do {
-            String choice = getTextIO().newStringInputReader()
+            String choice = getTextIO()
+                    .newStringInputReader()
                     .withPossibleValues(new ArrayList<>(nameToActionMap.keySet()))
-                    .read("Select action: ");
+                    .read(SELECT_ACTION);
 
             ApplicationActionConfiguration applicationActionConfiguration = nameToActionMap.get(choice);
             promptExpectsHttpRequest(applicationActionConfiguration);
 
-            Optional<WebDriverActionConfiguration> optionalConfiguration = promptForChangeAction(applicationActionConfiguration, "precondition");
-            if (optionalConfiguration.isPresent()) {
-                applicationActionConfiguration.setConditionBeforeExecution(optionalConfiguration.get());
-            }
+            WebDriverActionConfiguration preconditionConfiguration = applicationActionConfiguration.getConditionBeforeExecution();
+            preconditionConfiguration = promptForChangeAction(preconditionConfiguration, PRECONDITION_WORD);
+            applicationActionConfiguration.setConditionBeforeExecution(preconditionConfiguration);
 
-            optionalConfiguration = promptForChangeAction(applicationActionConfiguration, "action");
-            if (optionalConfiguration.isPresent()) {
-                applicationActionConfiguration.setWebDriverAction(optionalConfiguration.get());
-            }
+            WebDriverActionConfiguration actionConfiguration = applicationActionConfiguration.getWebDriverAction();
+            actionConfiguration = promptForChangeAction(actionConfiguration, ACTION_WORD);
+            applicationActionConfiguration.setWebDriverAction(actionConfiguration);
 
-            optionalConfiguration = promptForChangeAction(applicationActionConfiguration, "postcondition");
-            if (optionalConfiguration.isPresent()) {
-                applicationActionConfiguration.setConditionAfterExecution(optionalConfiguration.get());
-            }
+            WebDriverActionConfiguration postconditionConfiguration = applicationActionConfiguration.getConditionAfterExecution();
+            postconditionConfiguration = promptForChangeAction(postconditionConfiguration, POSTCONDITION_WORD);
+            applicationActionConfiguration.setConditionBeforeExecution(postconditionConfiguration);
 
         } while (userWantsToEditApplicationAction());
     }
 
     public boolean userWantsToEditApplicationAction() {
         return getTextIO().newBooleanInputReader()
-                .read("Edit another action?");
+                .read(EDIT_ANOTHER_ACTION);
     }
 
-    public Optional<WebDriverActionConfiguration> promptForChangeAction(ApplicationActionConfiguration applicationActionConfiguration,
+    public WebDriverActionConfiguration promptForChangeAction(WebDriverActionConfiguration webDriverActionConfiguration,
                                                                         String prompt) {
-        boolean userWantsToChangePrecondition =
-                shouldChangePrompt(prompt, applicationActionConfiguration.getConditionBeforeExecution().getWebDriverActionType());
+        boolean userWantsToChangeAction = shouldChangePrompt(prompt, Boolean.FALSE.toString());
 
-        if (userWantsToChangePrecondition) {
-            WebDriverActionConfiguration configuration = promptForActionConfigurationType(prompt + ": ");
-            return Optional.of(configuration);
+        if (userWantsToChangeAction) {
+            return promptForActionConfigurationType(prompt + ": ");
         }
 
-        return Optional.empty();
+        return webDriverActionConfiguration;
     }
 
     public void promptExpectsHttpRequest(ApplicationActionConfiguration applicationActionConfiguration) {
-        boolean changeExpectHttp = shouldChangePrompt("expect http request",
+        boolean changeExpectHttp = shouldChangePrompt(EXPECT_HTTP_REQUEST,
                 applicationActionConfiguration.expectsHttpRequest().toString());
 
         if (changeExpectHttp) {
@@ -282,9 +269,8 @@ public class PromptUtils {
         }
     }
 
-    public void promptForRecording() throws IOException {
-        System.out.println("Press Enter when finished recording");
-        System.in.read();
+    public void promptForRecording() {
+        textIO.newCharInputReader().read(PRESS_ANY_KEY_WHEN_FINISHED_RECORDING);
     }
 
 

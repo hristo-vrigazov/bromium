@@ -186,7 +186,7 @@ public class WebDriverActionExecutionBaseTest {
             }
 
             @Override
-            protected String getSystemProperty() {
+            public String getSystemProperty() {
                 return systemProperty;
             }
         };
@@ -228,7 +228,7 @@ public class WebDriverActionExecutionBaseTest {
             }
 
             @Override
-            protected String getSystemProperty() {
+            public String getSystemProperty() {
                 return null;
             }
         };
@@ -274,7 +274,7 @@ public class WebDriverActionExecutionBaseTest {
             }
 
             @Override
-            protected String getSystemProperty() {
+            public String getSystemProperty() {
                 return systemProperty;
             }
         };
