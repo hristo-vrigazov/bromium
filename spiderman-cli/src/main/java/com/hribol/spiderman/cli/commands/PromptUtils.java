@@ -129,13 +129,8 @@ public class PromptUtils {
         getTextIO().getTextTerminal().println(prompt);
         WebDriverActionConfiguration webDriverActionConfiguration = new WebDriverActionConfiguration();
 
-        List<String> possibleValues = new ArrayList<>();
-        possibleValues.add(CUSTOM);
-        possibleValues.add(NOTHING);
-
         String webDriverActionType = getTextIO()
                 .newStringInputReader()
-                .withPossibleValues(possibleValues)
                 .read(TYPE);
 
         Map<String, ParameterConfiguration> parameterConfigurations =

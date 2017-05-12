@@ -74,8 +74,9 @@ public class TestCaseStepToApplicationActionConverter {
 
             if (parameterConfiguration.isExposed()) {
                 String alias = parameterConfiguration.getAlias();
+                String name = parameterConfiguration.getParameterName();
                 String value = testCaseStep.get(alias);
-                parameters.put(alias, value);
+                parameters.put(name, value);
             } else {
                 String name = parameterConfiguration.getParameterName();
                 String value = parameterConfiguration.getValue();

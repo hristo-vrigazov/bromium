@@ -151,6 +151,8 @@ public class PromptUtilsTest {
 
         StringInputReader stringInputReader = mock(StringInputReader.class);
         when(stringInputReader.withPossibleValues(anyList())).thenReturn(possibleValuesInputReader);
+        when(stringInputReader.read(TYPE)).thenReturn(NOTHING);
+
 
         BooleanInputReader booleanInputReader = mock(BooleanInputReader.class);
         when(booleanInputReader.read(UPDATE_THE + EXPECT_HTTP_REQUEST + OPENING_BRACKET + Boolean.FALSE + CLOSING_BRACKET))
@@ -203,6 +205,9 @@ public class PromptUtilsTest {
         when(stringInputReader.read(VALUE_OF + INITIAL_COLLECTOR_CLASS)).thenReturn(MEGA_MENU_LINK);
         when(stringInputReader.read(VALUE_OF + TEXT)).thenReturn(ATP);
         when(stringInputReader.read(ALIAS_FOR + TITLE_TEXT)).thenReturn(TEXT);
+        when(stringInputReader.read(TYPE)).thenReturn(
+                NOTHING, CLICK_CLASS_BY_TEXT, NOTHING,
+                NOTHING, ELEMENT_TEXT_TO_BE, NOTHING);
 
         BooleanInputReader booleanInputReader = mock(BooleanInputReader.class);
         when(booleanInputReader.read(EXPECT_HTTP_REQUEST_AFTER_THE_ACTION)).thenReturn(
