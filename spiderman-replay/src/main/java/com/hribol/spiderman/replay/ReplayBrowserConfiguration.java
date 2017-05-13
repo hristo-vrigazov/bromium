@@ -25,7 +25,7 @@ public class ReplayBrowserConfiguration {
     public ReplayBrowserConfiguration(Builder builder) throws IOException {
         ApplicationConfiguration applicationConfiguration = ConfigurationUtils.parseApplicationConfiguration(builder.pathToApplicationConfiguration);
         WebDriverActionFactory webDriverActionFactory = builder.webDriverActionFactory;
-        DefaultApplicationActionFactory applicationActionFactory = new DefaultApplicationActionFactory(builder.url, applicationConfiguration, webDriverActionFactory);
+        DefaultApplicationActionFactory applicationActionFactory = new DefaultApplicationActionFactory(applicationConfiguration, webDriverActionFactory);
         replayBrowser = new ReplayBrowser(applicationActionFactory);
     }
 
@@ -36,7 +36,6 @@ public class ReplayBrowserConfiguration {
     public static class Builder {
         private InputStream pathToApplicationConfiguration;
         private WebDriverActionFactory webDriverActionFactory;
-        private String url;
 
         public Builder pathToApplicationConfiguration(String pathToApplicationConfiguration) throws FileNotFoundException {
             return configurationStream(new FileInputStream(pathToApplicationConfiguration));
@@ -44,11 +43,6 @@ public class ReplayBrowserConfiguration {
 
         public Builder configurationStream(InputStream pathToApplicationConfiguration) {
             this.pathToApplicationConfiguration = pathToApplicationConfiguration;
-            return this;
-        }
-
-        public Builder url(String url) {
-            this.url = url;
             return this;
         }
 
@@ -60,7 +54,6 @@ public class ReplayBrowserConfiguration {
         public ReplayBrowserConfiguration build() throws IOException {
             requireNonNull(pathToApplicationConfiguration, "pathToApplicationConfiguration is a required parameter");
             requireNonNull(webDriverActionFactory, "webDriverActionFactory is a required parameter");
-            requireNonNull(url, "url is a required parameter");
 
             return new ReplayBrowserConfiguration(this);
         }

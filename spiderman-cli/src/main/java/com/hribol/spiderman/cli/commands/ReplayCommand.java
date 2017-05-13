@@ -75,7 +75,6 @@ public class ReplayCommand implements Command {
             ReplayBrowserConfiguration replayBrowserConfiguration = ReplayBrowserConfiguration
                     .builder()
                     .configurationStream(applicationConfigurationInputStream)
-                    .url(baseURI)
                     .webdriverActionFactory(factory)
                     .build();
 
