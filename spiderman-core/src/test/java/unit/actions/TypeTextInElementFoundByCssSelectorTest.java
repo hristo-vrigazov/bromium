@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,5 +32,7 @@ public class TypeTextInElementFoundByCssSelectorTest {
         action.execute(driver);
 
         verify(textBox).sendKeys(text);
+        assertEquals(eventName, action.getName());
+        assertEquals(expectsHttp, action.expectsHttpRequest());
     }
 }
