@@ -70,6 +70,28 @@
                 },
                 "webDriverActionType": "CLICK_CLASS_BY_TEXT"
             }
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": true,
+            "name": "Load initial page",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "url": {
+                        "expose": true,
+                        "parameterName": "url",
+                        "alias": "url"
+                    }
+                },
+                "webDriverActionType": "PAGE_LOADING"
+            }
         }
     ],
     "applicationName": "tenniskafe",

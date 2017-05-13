@@ -72,9 +72,17 @@ public class ReplayCommandTest {
         ExecutionFactory executionFactory = mock(ExecutionFactory.class);
         when(executionFactory.create(eq(CHROME), any(WebDriverActionExecutor.class))).thenReturn(webDriverActionExecution);
 
-        ReplayCommand replayCommand = new ReplayCommand(pathToDriver, pathToApplicationConfiguration,
-                pathToSerializedTest, csvMeasurementsFileName, timeout, measurementsPrecisionMilli, baseURI,
-                CHROME, executionFactory);
+        ReplayCommand replayCommand = ReplayCommand.builder()
+                .pathToDriver(pathToDriver)
+                .applicationConfiguration(pathToApplicationConfiguration)
+                .testCase(pathToSerializedTest)
+                .measurementsFileName(csvMeasurementsFileName)
+                .timeout(timeout)
+                .measurementsPrecisionMilli(measurementsPrecisionMilli)
+                .baseURL(baseURI)
+                .browserType(CHROME)
+                .executionFactory(executionFactory)
+                .build();
 
         FileInputStream fileInputStream = mock(FileInputStream.class);
 

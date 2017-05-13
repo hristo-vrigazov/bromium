@@ -22,11 +22,22 @@ public class ReplayCommandHandler implements CommandHandler {
         String csvMeasurementsFileName = getMeasurementsFile(opts);
         int timeout = getTimeout(opts);
         int measurementsPrecisionMilli = getMeasurementsPrecisionMilli(opts);
-        String baseURI = getBaseUrl(opts);
+        String baseURL = getBaseUrl(opts);
         String browserType = getBrowserType(opts);
         ExecutionFactory executionFactory = new ExecutionFactory();
-        Command command = new ReplayCommand(pathToDriver, pathToApplicationConfiguration, pathToSerializedTest,
-                csvMeasurementsFileName, timeout, measurementsPrecisionMilli, baseURI, browserType, executionFactory);
-        command.run();
+
+        ReplayCommand.builder()
+                .pathToDriver(pathToDriver)
+                .applicationConfiguration(pathToApplicationConfiguration)
+                .testCase(pathToSerializedTest)
+                .measurementsFileName(csvMeasurementsFileName)
+                .timeout(timeout)
+                .measurementsPrecisionMilli(measurementsPrecisionMilli)
+                .baseURL(baseURL)
+                .browserType(browserType)
+                .executionFactory(executionFactory)
+                .build()
+                .run();
+
     }
 }
