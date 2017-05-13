@@ -47,14 +47,14 @@ public class ReplayCommandTest {
     public void ifDriverStartsSuccessfullyEverythingWorks() throws Exception {
         ReplayBrowser replayBrowser = mock(ReplayBrowser.class);
         baseTest(replayBrowser);
-        verify(replayBrowser).replay(any(InputStream.class), any(), anyString());
+        verify(replayBrowser).replay(any(InputStream.class), anyString());
 
     }
 
     @Test
     public void ifExceptionIsThrownThenItIsLogged() throws Exception {
         ReplayBrowser replayBrowser = mock(ReplayBrowser.class);
-        when(replayBrowser.replay(anyString(), any(), anyString())).thenThrow(new IOException("No driver found"));
+        when(replayBrowser.replay(anyString(), anyString())).thenThrow(new IOException("No driver found"));
         baseTest(replayBrowser);
     }
 

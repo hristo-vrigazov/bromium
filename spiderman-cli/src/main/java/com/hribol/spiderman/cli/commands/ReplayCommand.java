@@ -74,8 +74,8 @@ public class ReplayCommand implements Command {
 
             WebDriverActionExecution execution = this.executionFactory.create(browserType, executor);
 
-            ReplayBrowser replayBrowser = new ReplayBrowser(applicationConfigurationInputStream, factory);
-            replayBrowser.replay(testInputStream, execution, csvMeasurementsFileName);
+            ReplayBrowser replayBrowser = new ReplayBrowser(applicationConfigurationInputStream, factory, execution);
+            replayBrowser.replay(testInputStream, csvMeasurementsFileName);
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
         }

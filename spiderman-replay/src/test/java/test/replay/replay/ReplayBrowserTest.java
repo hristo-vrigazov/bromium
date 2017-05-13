@@ -32,8 +32,8 @@ public class ReplayBrowserTest {
         LoadingTimes loadingTimes = Mockito.mock(LoadingTimes.class);
         when(webDriverActionExecution.getLoadingTimes()).thenReturn(loadingTimes);
 
-        ReplayBrowser replayBrowser = new ReplayBrowser(applicationActionFactory);
-        replayBrowser.replay(testScenario, webDriverActionExecution, exampleMetricsFile);
+        ReplayBrowser replayBrowser = new ReplayBrowser(applicationActionFactory, webDriverActionExecution);
+        replayBrowser.replay(testScenario, exampleMetricsFile);
 
         Mockito.verify(webDriverActionExecution).execute(testScenario);
     }
@@ -48,8 +48,8 @@ public class ReplayBrowserTest {
 
         String screen = ":1";
 
-        ReplayBrowser replayBrowser = new ReplayBrowser(applicationActionFactory);
-        replayBrowser.replayOnScreen(testScenario, webDriverActionExecution, screen);
+        ReplayBrowser replayBrowser = new ReplayBrowser(applicationActionFactory, webDriverActionExecution);
+        replayBrowser.replayOnScreen(testScenario, screen);
 
         Mockito.verify(webDriverActionExecution).executeOnScreen(testScenario, screen);
     }
@@ -65,8 +65,8 @@ public class ReplayBrowserTest {
 
         when(testScenarioFactory.createFromFile(pathToSerializedTest)).thenReturn(testScenario);
 
-        ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory);
-        replayBrowser.replay(pathToSerializedTest, webDriverActionExecution, exampleMetricsFile);
+        ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, webDriverActionExecution);
+        replayBrowser.replay(pathToSerializedTest, exampleMetricsFile);
 
         Mockito.verify(webDriverActionExecution).execute(testScenario);
     }
@@ -83,8 +83,8 @@ public class ReplayBrowserTest {
 
         when(testScenarioFactory.createFromFile(pathToSerializedTest)).thenReturn(testScenario);
 
-        ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory);
-        replayBrowser.replayOnScreen(pathToSerializedTest, webDriverActionExecution, screen);
+        ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, webDriverActionExecution);
+        replayBrowser.replayOnScreen(pathToSerializedTest, screen);
 
         Mockito.verify(webDriverActionExecution).executeOnScreen(testScenario, screen);
     }
@@ -99,8 +99,8 @@ public class ReplayBrowserTest {
         LoadingTimes loadingTimes = Mockito.mock(LoadingTimes.class);
         when(webDriverActionExecution.getLoadingTimes()).thenReturn(loadingTimes);
 
-        ReplayBrowser replayBrowser = new ReplayBrowser(applicationActionFactory);
-        AutomationResult automationResult = replayBrowser.replay(testScenario, webDriverActionExecution, "example.csv");
+        ReplayBrowser replayBrowser = new ReplayBrowser(applicationActionFactory, webDriverActionExecution);
+        AutomationResult automationResult = replayBrowser.replay(testScenario, "example.csv");
 
         assertEquals(AutomationResult.SUCCESS, automationResult);
     }
