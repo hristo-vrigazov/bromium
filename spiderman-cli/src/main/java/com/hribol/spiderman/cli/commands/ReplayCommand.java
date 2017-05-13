@@ -72,12 +72,8 @@ public class ReplayCommand implements Command {
                     .timeoutInSeconds(timeout)
                     .measurementsPrecisionInMilliseconds(measurementsPrecisionMilli);
 
-            ReplayBrowserConfiguration replayBrowserConfiguration = ReplayBrowserConfiguration
-                    .builder()
-                    .configurationStream(applicationConfigurationInputStream)
-                    .webdriverActionFactory(factory)
-                    .build();
-
+            ReplayBrowserConfiguration replayBrowserConfiguration = new ReplayBrowserConfiguration(
+                    applicationConfigurationInputStream, factory);
             WebDriverActionExecution execution = this.executionFactory.create(browserType, executor);
 
             ReplayBrowser replayBrowser = replayBrowserConfiguration.getReplayBrowser();

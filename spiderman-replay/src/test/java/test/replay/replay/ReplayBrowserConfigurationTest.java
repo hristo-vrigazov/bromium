@@ -26,20 +26,8 @@ public class ReplayBrowserConfigurationTest {
         WebDriverActionFactory webDriverActionFactory = new PredefinedWebDriverActionFactory(url);
         String filename = getClass().getResource("/tenniskafe.json").getFile();
 
-        ReplayBrowserConfiguration replayBrowserConfiguration = ReplayBrowserConfiguration
-                .builder()
-                .pathToApplicationConfiguration(filename)
-                .webdriverActionFactory(webDriverActionFactory)
-                .build();
-
+        ReplayBrowserConfiguration replayBrowserConfiguration = new ReplayBrowserConfiguration(filename, webDriverActionFactory);
         assertNotNull(replayBrowserConfiguration.getReplayBrowser());
     }
 
-    @Test
-    public void throwsExceptionIfRequiredParameterIsMissing() throws IOException {
-        thrown.expect(NullPointerException.class);
-        ReplayBrowserConfiguration replayBrowserConfiguration = ReplayBrowserConfiguration
-                .builder()
-                .build();
-    }
 }
