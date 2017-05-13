@@ -3,11 +3,9 @@ package com.hribol.spiderman.replay;
 import com.hribol.spiderman.core.execution.application.ApplicationActionFactory;
 import com.hribol.spiderman.core.execution.scenario.TestScenario;
 import com.hribol.spiderman.core.execution.scenario.TestScenarioFactory;
-import com.hribol.spiderman.core.execution.scenario.TestScenarioFactoryImpl;
 import com.hribol.spiderman.core.utils.LoadingTimes;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -21,7 +19,7 @@ public class ReplayBrowser {
     private TestScenarioFactory testScenarioFactory;
 
     public ReplayBrowser(ApplicationActionFactory applicationActionFactory) {
-        this(applicationActionFactory, new TestScenarioFactoryImpl());
+        this(applicationActionFactory, new TestScenarioFactory());
     }
 
     public ReplayBrowser(ApplicationActionFactory applicationActionFactory, TestScenarioFactory testScenarioFactory) {

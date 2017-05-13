@@ -2,7 +2,7 @@ package com.hribol.spiderman.replay;
 
 import com.hribol.spiderman.core.config.ApplicationConfiguration;
 import com.hribol.spiderman.core.execution.application.DefaultApplicationActionFactory;
-import com.hribol.spiderman.core.execution.scenario.TestScenarioFactoryImpl;
+import com.hribol.spiderman.core.execution.scenario.TestScenarioFactory;
 import com.hribol.spiderman.core.utils.ConfigurationUtils;
 import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;
 
@@ -27,7 +27,7 @@ public class ReplayBrowserConfiguration {
         ApplicationConfiguration applicationConfiguration = ConfigurationUtils.parseApplicationConfiguration(builder.pathToApplicationConfiguration);
         WebDriverActionFactory webDriverActionFactory = builder.webDriverActionFactory;
         DefaultApplicationActionFactory applicationActionFactory = new DefaultApplicationActionFactory(builder.url, applicationConfiguration, webDriverActionFactory);
-        replayBrowser = new ReplayBrowser(applicationActionFactory, new TestScenarioFactoryImpl());
+        replayBrowser = new ReplayBrowser(applicationActionFactory, new TestScenarioFactory());
     }
 
     public ReplayBrowser getReplayBrowser() {

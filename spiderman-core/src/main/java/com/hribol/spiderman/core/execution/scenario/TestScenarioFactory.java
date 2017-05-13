@@ -1,44 +1,47 @@
 package com.hribol.spiderman.core.execution.scenario;
 
+import com.hribol.spiderman.core.execution.application.ApplicationAction;
 import com.hribol.spiderman.core.execution.application.ApplicationActionFactory;
+import com.hribol.spiderman.core.actions.WebDriverAction;
+import com.hribol.spiderman.core.utils.ConfigurationUtils;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
- * A factory for creating {@link TestScenario}s by a given {@link ApplicationActionFactory}
- * and either a path to serialized test or a list of test case steps.
+ * Created by hvrigazov on 22.04.17.
  */
-public interface TestScenarioFactory {
-    /**
-     * Creates a {@link TestScenario} by a given {@link ApplicationActionFactory} and
-     * path to serialized test.
-     * @param applicationActionFactory the factory for creating application actions
-     * @param pathToSerializedTest the path to the serialized test
-     * @return the created instance of {@link TestScenario}
-     * @throws IOException when trying to read from the file.
-     */
-    TestScenario createFromFile(ApplicationActionFactory applicationActionFactory,
-                                String pathToSerializedTest) throws IOException;
+public class TestScenarioFactory {
 
-    /**
-     * Creates a {@link TestScenario} by a given {@link ApplicationActionFactory} and
-     * list of the test steps
-     * @param applicationActionFactory the factory for creating application actions
-     * @param testCaseSteps the list of test case steps
-     * @return the created instance of {@link TestScenario}
-     */
-    TestScenario createFromTestCaseSteps(ApplicationActionFactory applicationActionFactory,
-                                                        List<Map<String, String>> testCaseSteps);
+    public TestScenario createFromFile(ApplicationActionFactory applicationActionFactory, String pathToSerializedTest) throws IOException {
+        List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(pathToSerializedTest);
+        return createFromTestCaseSteps(applicationActionFactory, testCaseSteps);
+    }
 
-    /**
-     * Creates a {@link TestScenario} by a given {@link ApplicationActionFactory} and an input
-     * stream from which to read the test case
-     * @param applicationActionFactory the factory for creating application actions
-     * @param inputStream the input stream from which to read
-     */
-    TestScenario createFromInputStream(ApplicationActionFactory applicationActionFactory,
-                                       InputStream inputStream) throws IOException;
+    public TestScenario createFromTestCaseSteps(ApplicationActionFactory applicationActionFactory, List<Map<String, String>> testCaseSteps) {
+        TestScenario testScenario = new TestScenario();
+
+        Optional<WebDriverAction> initialPageLoading = applicationActionFactory.getInitialPageLoading().getWebdriverAction();
+        testScenario.addWebDriverAction(initialPageLoading);
+
+        for (Map<String, String> testCaseStep: testCaseSteps) {
+            ApplicationAction domainSpecificAction =
+                    applicationActionFactory.create(testCaseStep);
+
+            testScenario.addWebDriverAction(domainSpecificAction.getPrecondition());
+            testScenario.addWebDriverAction(domainSpecificAction.getWebdriverAction());
+            testScenario.addWebDriverAction(domainSpecificAction.getPostcondition());
+        }
+
+        return testScenario;
+    }
+
+    public TestScenario createFromInputStream(ApplicationActionFactory applicationActionFactory, InputStream inputStream) throws IOException {
+        List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(inputStream);
+        return createFromTestCaseSteps(applicationActionFactory, testCaseSteps);
+    }
 }

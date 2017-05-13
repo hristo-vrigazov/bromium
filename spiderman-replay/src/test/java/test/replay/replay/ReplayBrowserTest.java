@@ -10,7 +10,6 @@ import org.mockito.Mockito;
 import com.hribol.spiderman.core.utils.LoadingTimes;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 

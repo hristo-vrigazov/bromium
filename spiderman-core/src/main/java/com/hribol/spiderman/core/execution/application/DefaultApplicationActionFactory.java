@@ -2,15 +2,18 @@ package com.hribol.spiderman.core.execution.application;
 
 import com.hribol.spiderman.core.config.ApplicationActionConfiguration;
 import com.hribol.spiderman.core.config.ApplicationConfiguration;
+import com.hribol.spiderman.core.execution.factory.PredefinedWebDriverActionFactory;
 import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.hribol.spiderman.core.utils.Constants.EVENT;
+
 /**
  * The {@link ApplicationActionFactory} that will be used most frequently.
  * It converts an {@link ApplicationConfiguration} by a given {@link WebDriverActionFactory} and
- * an initial url {@link url}. The url is separate from the other application actions, because
+ * an initial url {@link #url}. The url is separate from the other application actions, because
  * we may want to try to test the application running on a different host.
  */
 public class DefaultApplicationActionFactory implements ApplicationActionFactory {
@@ -19,6 +22,11 @@ public class DefaultApplicationActionFactory implements ApplicationActionFactory
     private String initialPageLoadingEventName;
     private Map<String, ApplicationActionConfiguration> nameToConfiguration;
     private TestCaseStepToApplicationActionConverter testCaseStepToApplicationActionConverter;
+
+    public DefaultApplicationActionFactory(String url,
+                                           ApplicationConfiguration applicationConfiguration) {
+        this(url, applicationConfiguration, new PredefinedWebDriverActionFactory());
+    }
 
     public DefaultApplicationActionFactory(String url,
                                            ApplicationConfiguration applicationConfiguration,
@@ -47,7 +55,7 @@ public class DefaultApplicationActionFactory implements ApplicationActionFactory
 
     @Override
     public ApplicationAction create(Map<String, String> testCaseStep) {
-        String name = testCaseStep.get("event");
+        String name = testCaseStep.get(EVENT);
         ApplicationActionConfiguration applicationActionConfiguration = nameToConfiguration.get(name);
         return testCaseStepToApplicationActionConverter.convert(applicationActionConfiguration, testCaseStep);
     }

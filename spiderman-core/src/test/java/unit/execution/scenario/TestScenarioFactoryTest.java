@@ -4,7 +4,6 @@ import com.hribol.spiderman.core.execution.application.ApplicationAction;
 import com.hribol.spiderman.core.execution.application.ApplicationActionFactory;
 import com.hribol.spiderman.core.execution.scenario.TestScenario;
 import com.hribol.spiderman.core.execution.scenario.TestScenarioFactory;
-import com.hribol.spiderman.core.execution.scenario.TestScenarioFactoryImpl;
 import com.hribol.spiderman.core.actions.WebDriverAction;
 import com.hribol.spiderman.core.utils.ConfigurationUtils;
 import org.junit.Test;
@@ -46,7 +45,7 @@ public class TestScenarioFactoryTest {
             when(applicationActionFactory.create(testCaseStep)).thenReturn(domainSpecificAction);
         }
 
-        TestScenarioFactory testScenarioFactory = new TestScenarioFactoryImpl();
+        TestScenarioFactory testScenarioFactory = new TestScenarioFactory();
         TestScenario testScenario = testScenarioFactory.createFromFile(applicationActionFactory, pathToTestCase);
 
         assertEquals(testCaseSteps.size() + 1, testScenario.getActions().size());

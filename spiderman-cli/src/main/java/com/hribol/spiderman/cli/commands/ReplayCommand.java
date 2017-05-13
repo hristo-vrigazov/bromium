@@ -89,7 +89,4 @@ public class ReplayCommand implements Command {
 
     }
 
-    class Builder {
-
-    }
 }
