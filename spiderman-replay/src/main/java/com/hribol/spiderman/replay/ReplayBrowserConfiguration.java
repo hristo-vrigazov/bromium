@@ -2,9 +2,8 @@ package com.hribol.spiderman.replay;
 
 import com.hribol.spiderman.core.config.ApplicationConfiguration;
 import com.hribol.spiderman.core.execution.application.DefaultApplicationActionFactory;
-import com.hribol.spiderman.core.execution.scenario.TestScenarioFactory;
-import com.hribol.spiderman.core.utils.ConfigurationUtils;
 import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;
+import com.hribol.spiderman.core.utils.ConfigurationUtils;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

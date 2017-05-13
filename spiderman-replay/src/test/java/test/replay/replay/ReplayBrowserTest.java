@@ -64,7 +64,7 @@ public class ReplayBrowserTest {
         TestScenarioFactory testScenarioFactory = Mockito.mock(TestScenarioFactory.class);
         String pathToSerializedTest = "testcase.json";
 
-        when(testScenarioFactory.createFromFile(applicationActionFactory, pathToSerializedTest)).thenReturn(testScenario);
+        when(testScenarioFactory.createFromFile(pathToSerializedTest)).thenReturn(testScenario);
 
         ReplayBrowser replayBrowser = new ReplayBrowser(applicationActionFactory, testScenarioFactory);
         replayBrowser.replay(pathToSerializedTest, webDriverActionExecution, exampleMetricsFile);
@@ -83,7 +83,7 @@ public class ReplayBrowserTest {
         String pathToSerializedTest = "testcase.json";
         String screen = ":1";
 
-        when(testScenarioFactory.createFromFile(applicationActionFactory, pathToSerializedTest)).thenReturn(testScenario);
+        when(testScenarioFactory.createFromFile(pathToSerializedTest)).thenReturn(testScenario);
 
         ReplayBrowser replayBrowser = new ReplayBrowser(applicationActionFactory, testScenarioFactory);
         replayBrowser.replayOnScreen(pathToSerializedTest, webDriverActionExecution, screen);

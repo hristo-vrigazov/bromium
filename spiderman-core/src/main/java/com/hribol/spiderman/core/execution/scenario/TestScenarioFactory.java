@@ -17,12 +17,19 @@ import java.util.Optional;
  */
 public class TestScenarioFactory {
 
-    public TestScenario createFromFile(ApplicationActionFactory applicationActionFactory, String pathToSerializedTest) throws IOException {
-        List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(pathToSerializedTest);
-        return createFromTestCaseSteps(applicationActionFactory, testCaseSteps);
+
+    private ApplicationActionFactory applicationActionFactory;
+
+    public TestScenarioFactory(ApplicationActionFactory applicationActionFactory) {
+        this.applicationActionFactory = applicationActionFactory;
     }
 
-    public TestScenario createFromTestCaseSteps(ApplicationActionFactory applicationActionFactory, List<Map<String, String>> testCaseSteps) {
+    public TestScenario createFromFile(String pathToSerializedTest) throws IOException {
+        List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(pathToSerializedTest);
+        return createFromTestCaseSteps(testCaseSteps);
+    }
+
+    public TestScenario createFromTestCaseSteps(List<Map<String, String>> testCaseSteps) {
         TestScenario testScenario = new TestScenario();
 
         Optional<WebDriverAction> initialPageLoading = applicationActionFactory.getInitialPageLoading().getWebdriverAction();
@@ -40,8 +47,8 @@ public class TestScenarioFactory {
         return testScenario;
     }
 
-    public TestScenario createFromInputStream(ApplicationActionFactory applicationActionFactory, InputStream inputStream) throws IOException {
+    public TestScenario createFromInputStream(InputStream inputStream) throws IOException {
         List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(inputStream);
-        return createFromTestCaseSteps(applicationActionFactory, testCaseSteps);
+        return createFromTestCaseSteps(testCaseSteps);
     }
 }

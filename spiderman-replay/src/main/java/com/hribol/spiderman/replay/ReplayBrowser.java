@@ -19,7 +19,7 @@ public class ReplayBrowser {
     private TestScenarioFactory testScenarioFactory;
 
     public ReplayBrowser(ApplicationActionFactory applicationActionFactory) {
-        this(applicationActionFactory, new TestScenarioFactory());
+        this(applicationActionFactory, new TestScenarioFactory(applicationActionFactory));
     }
 
     public ReplayBrowser(ApplicationActionFactory applicationActionFactory, TestScenarioFactory testScenarioFactory) {
@@ -46,14 +46,14 @@ public class ReplayBrowser {
                                    WebDriverActionExecution webDriverActionExecution,
                                    String fileName)
             throws InterruptedException, IOException, URISyntaxException {
-        TestScenario testScenario = testScenarioFactory.createFromFile(applicationActionFactory, pathToSerializedTest);
+        TestScenario testScenario = testScenarioFactory.createFromFile(pathToSerializedTest);
         return replay(testScenario, webDriverActionExecution, fileName);
     }
 
     public AutomationResult replay(InputStream inputStream,
                                    WebDriverActionExecution webDriverActionExecution,
                                    String fileName) throws IOException, URISyntaxException, InterruptedException {
-        TestScenario testScenario = testScenarioFactory.createFromInputStream(applicationActionFactory, inputStream);
+        TestScenario testScenario = testScenarioFactory.createFromInputStream(inputStream);
         return replay(testScenario, webDriverActionExecution, fileName);
     }
 
@@ -61,14 +61,14 @@ public class ReplayBrowser {
                                            WebDriverActionExecution webDriverActionExecution,
                                            String screen)
             throws IOException, URISyntaxException, InterruptedException {
-        TestScenario testScenario = testScenarioFactory.createFromFile(applicationActionFactory, pathToSerializedTest);
+        TestScenario testScenario = testScenarioFactory.createFromFile(pathToSerializedTest);
         return replayOnScreen(testScenario, webDriverActionExecution, screen);
     }
 
     public AutomationResult replayOnScreen(InputStream inputStream,
                                            WebDriverActionExecution webDriverActionExecution,
                                            String fileName) throws IOException, URISyntaxException, InterruptedException {
-        TestScenario testScenario = testScenarioFactory.createFromInputStream(applicationActionFactory, inputStream);
+        TestScenario testScenario = testScenarioFactory.createFromInputStream(inputStream);
         return replayOnScreen(testScenario, webDriverActionExecution, fileName);
     }
 }

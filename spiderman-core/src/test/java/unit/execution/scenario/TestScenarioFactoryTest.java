@@ -45,8 +45,8 @@ public class TestScenarioFactoryTest {
             when(applicationActionFactory.create(testCaseStep)).thenReturn(domainSpecificAction);
         }
 
-        TestScenarioFactory testScenarioFactory = new TestScenarioFactory();
-        TestScenario testScenario = testScenarioFactory.createFromFile(applicationActionFactory, pathToTestCase);
+        TestScenarioFactory testScenarioFactory = new TestScenarioFactory(applicationActionFactory);
+        TestScenario testScenario = testScenarioFactory.createFromFile(pathToTestCase);
 
         assertEquals(testCaseSteps.size() + 1, testScenario.getActions().size());
     }
