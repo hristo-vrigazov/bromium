@@ -56,7 +56,6 @@ public class ReplayBrowserTest {
 
     @Test
     public void replayFromFileInvokesExecutionExecuteMethod() throws InterruptedException, IOException, URISyntaxException {
-        ApplicationActionFactory applicationActionFactory = Mockito.mock(ApplicationActionFactory.class);
         TestScenario testScenario = Mockito.mock(TestScenario.class);
         WebDriverActionExecution webDriverActionExecution = Mockito.mock(WebDriverActionExecution.class);
         LoadingTimes loadingTimes = Mockito.mock(LoadingTimes.class);
@@ -66,7 +65,7 @@ public class ReplayBrowserTest {
 
         when(testScenarioFactory.createFromFile(pathToSerializedTest)).thenReturn(testScenario);
 
-        ReplayBrowser replayBrowser = new ReplayBrowser(applicationActionFactory, testScenarioFactory);
+        ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory);
         replayBrowser.replay(pathToSerializedTest, webDriverActionExecution, exampleMetricsFile);
 
         Mockito.verify(webDriverActionExecution).execute(testScenario);
@@ -74,7 +73,6 @@ public class ReplayBrowserTest {
 
     @Test
     public void replayFromFileOnScreenInvokesExecutionExecuteMethod() throws InterruptedException, IOException, URISyntaxException {
-        ApplicationActionFactory applicationActionFactory = Mockito.mock(ApplicationActionFactory.class);
         TestScenario testScenario = Mockito.mock(TestScenario.class);
         WebDriverActionExecution webDriverActionExecution = Mockito.mock(WebDriverActionExecution.class);
         LoadingTimes loadingTimes = Mockito.mock(LoadingTimes.class);
@@ -85,7 +83,7 @@ public class ReplayBrowserTest {
 
         when(testScenarioFactory.createFromFile(pathToSerializedTest)).thenReturn(testScenario);
 
-        ReplayBrowser replayBrowser = new ReplayBrowser(applicationActionFactory, testScenarioFactory);
+        ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory);
         replayBrowser.replayOnScreen(pathToSerializedTest, webDriverActionExecution, screen);
 
         Mockito.verify(webDriverActionExecution).executeOnScreen(testScenario, screen);

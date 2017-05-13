@@ -15,15 +15,13 @@ import java.net.URISyntaxException;
  */
 public class ReplayBrowser {
 
-    private ApplicationActionFactory applicationActionFactory;
     private TestScenarioFactory testScenarioFactory;
 
     public ReplayBrowser(ApplicationActionFactory applicationActionFactory) {
-        this(applicationActionFactory, new TestScenarioFactory(applicationActionFactory));
+        this(new TestScenarioFactory(applicationActionFactory));
     }
 
-    public ReplayBrowser(ApplicationActionFactory applicationActionFactory, TestScenarioFactory testScenarioFactory) {
-        this.applicationActionFactory = applicationActionFactory;
+    public ReplayBrowser(TestScenarioFactory testScenarioFactory) {
         this.testScenarioFactory = testScenarioFactory;
     }
 
