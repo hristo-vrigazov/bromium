@@ -9,14 +9,58 @@
                 "parametersConfiguration": {},
                 "webDriverActionType": "NOTHING"
             },
-            "expectsHttpRequest": false,
-            "name": "clickMegaMenu",
+            "expectsHttpRequest": true,
+            "name": "Click on the logo 1",
             "webDriverAction": {
                 "parametersConfiguration": {
                     "cssSelector": {
                         "expose": false,
                         "parameterName": "cssSelector",
-                        "value": ".mega-menu-link"
+                        "value": "img[title='Tenniskafe']"
+                    }
+                },
+                "webDriverActionType": "CLICK_CSS_SELECTOR"
+            }
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": true,
+            "name": "Click on the logo 2",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "cssSelector": {
+                        "expose": false,
+                        "parameterName": "cssSelector",
+                        "value": "img[title='TennisKafe']"
+                    }
+                },
+                "webDriverActionType": "CLICK_CSS_SELECTOR"
+            }
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": true,
+            "name": "Click mega menu",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "initialCollectorClass": {
+                        "expose": false,
+                        "parameterName": "initialCollectorClass",
+                        "value": "mega-menu-link"
                     },
                     "text": {
                         "alias": "text",
@@ -24,7 +68,7 @@
                         "parameterName": "text"
                     }
                 },
-                "webDriverActionType": "CLICK_CSS_SELECTOR"
+                "webDriverActionType": "CLICK_CLASS_BY_TEXT"
             }
         }
     ],
