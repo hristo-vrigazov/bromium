@@ -77,7 +77,7 @@ public class ConfigurationUtilsTest {
         Map<String, String> firstStep = testCaseSteps.get(0);
         String firstEvent = firstStep.get("event");
 
-        assertEquals("clickMegaMenu", firstEvent);
+        assertEquals("Click on the logo 1", firstEvent);
     }
 
     @Test
