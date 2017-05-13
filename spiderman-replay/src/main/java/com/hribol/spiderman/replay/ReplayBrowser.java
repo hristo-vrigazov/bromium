@@ -1,11 +1,17 @@
 package com.hribol.spiderman.replay;
 
+import com.hribol.spiderman.core.config.ApplicationConfiguration;
 import com.hribol.spiderman.core.execution.application.ApplicationActionFactory;
+import com.hribol.spiderman.core.execution.application.DefaultApplicationActionFactory;
+import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;
 import com.hribol.spiderman.core.execution.scenario.TestScenario;
 import com.hribol.spiderman.core.execution.scenario.TestScenarioFactory;
+import com.hribol.spiderman.core.utils.ConfigurationUtils;
 import com.hribol.spiderman.core.utils.LoadingTimes;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -16,6 +22,14 @@ import java.net.URISyntaxException;
 public class ReplayBrowser {
 
     private TestScenarioFactory testScenarioFactory;
+
+    public ReplayBrowser(String filename, WebDriverActionFactory webDriverActionFactory) throws IOException {
+        this(new FileInputStream(filename), webDriverActionFactory);
+    }
+
+    public ReplayBrowser(InputStream configurationInputStream, WebDriverActionFactory webDriverActionFactory) throws IOException {
+        this(new DefaultApplicationActionFactory(ConfigurationUtils.parseApplicationConfiguration(configurationInputStream), webDriverActionFactory));
+    }
 
     public ReplayBrowser(ApplicationActionFactory applicationActionFactory) {
         this(new TestScenarioFactory(applicationActionFactory));

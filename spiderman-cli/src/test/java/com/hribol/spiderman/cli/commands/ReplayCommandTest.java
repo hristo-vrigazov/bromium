@@ -1,8 +1,11 @@
 package com.hribol.spiderman.cli.commands;
 
 import com.hribol.spiderman.cli.factory.ExecutionFactory;
+import com.hribol.spiderman.core.execution.factory.PredefinedWebDriverActionFactory;
+import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;
 import com.hribol.spiderman.replay.ReplayBrowser;
-import com.hribol.spiderman.replay.ReplayBrowserConfiguration;
+import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
+import com.hribol.spiderman.replay.execution.WebDriverActionExecutor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -23,9 +26,12 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({
-        ReplayBrowserConfiguration.class,
-        ReplayBrowserConfiguration.Builder.class,
-        FileInputStream.class
+        WebDriverActionFactory.class,
+        InputStream.class,
+        PredefinedWebDriverActionFactory.class,
+        ReplayBrowser.class,
+        FileInputStream.class,
+        ReplayCommand.class
 })
 public class ReplayCommandTest {
 
@@ -61,15 +67,18 @@ public class ReplayCommandTest {
         measurementsPrecisionMilli = 500;
         baseURI = "http://tenniskafe.com";
 
+        WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
+
+        ExecutionFactory executionFactory = mock(ExecutionFactory.class);
+        when(executionFactory.create(eq(CHROME), any(WebDriverActionExecutor.class))).thenReturn(webDriverActionExecution);
+
         ReplayCommand replayCommand = new ReplayCommand(pathToDriver, pathToApplicationConfiguration,
                 pathToSerializedTest, csvMeasurementsFileName, timeout, measurementsPrecisionMilli, baseURI,
-                CHROME, new ExecutionFactory());
+                CHROME, executionFactory);
 
         FileInputStream fileInputStream = mock(FileInputStream.class);
 
-        ReplayBrowserConfiguration replayBrowserConfiguration = mock(ReplayBrowserConfiguration.class);
-        when(replayBrowserConfiguration.getReplayBrowser()).thenReturn(replayBrowser);
-        whenNew(ReplayBrowserConfiguration.class).withAnyArguments().thenReturn(replayBrowserConfiguration);
+        whenNew(ReplayBrowser.class).withAnyArguments().thenReturn(replayBrowser);
         whenNew(FileInputStream.class).withAnyArguments().thenReturn(fileInputStream);
         replayCommand.run();
     }

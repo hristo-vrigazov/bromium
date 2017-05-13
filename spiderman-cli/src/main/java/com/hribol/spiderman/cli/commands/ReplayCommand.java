@@ -72,11 +72,9 @@ public class ReplayCommand implements Command {
                     .timeoutInSeconds(timeout)
                     .measurementsPrecisionInMilliseconds(measurementsPrecisionMilli);
 
-            ReplayBrowserConfiguration replayBrowserConfiguration = new ReplayBrowserConfiguration(
-                    applicationConfigurationInputStream, factory);
             WebDriverActionExecution execution = this.executionFactory.create(browserType, executor);
 
-            ReplayBrowser replayBrowser = replayBrowserConfiguration.getReplayBrowser();
+            ReplayBrowser replayBrowser = new ReplayBrowser(applicationConfigurationInputStream, factory);
             replayBrowser.replay(testInputStream, execution, csvMeasurementsFileName);
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();

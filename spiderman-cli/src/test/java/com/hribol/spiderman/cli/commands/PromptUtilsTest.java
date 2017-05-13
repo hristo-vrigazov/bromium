@@ -4,27 +4,19 @@ import com.hribol.spiderman.cli.MainMenuChoice;
 import com.hribol.spiderman.core.config.ApplicationActionConfiguration;
 import com.hribol.spiderman.core.config.ApplicationConfiguration;
 import com.hribol.spiderman.core.config.WebDriverActionConfiguration;
-import com.hribol.spiderman.core.execution.application.ApplicationAction;
-import com.hribol.spiderman.replay.ReplayBrowserConfiguration;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.beryx.textio.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.hribol.spiderman.cli.MainMenuChoice.ACTION;
-import static com.hribol.spiderman.cli.MainMenuChoice.ASSERTION;
-import static com.hribol.spiderman.cli.MainMenuChoice.SAVE_AND_EXIT;
+import static com.hribol.spiderman.cli.MainMenuChoice.*;
 import static com.hribol.spiderman.cli.commands.PromptUtils.*;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
@@ -35,8 +27,8 @@ import static org.powermock.api.mockito.PowerMockito.mockStatic;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({
-        TextIoFactory.class,
-        ReplayBrowserConfiguration.Builder.class})
+        TextIoFactory.class
+})
 public class PromptUtilsTest {
 
     public static final String TEXT = "text";
