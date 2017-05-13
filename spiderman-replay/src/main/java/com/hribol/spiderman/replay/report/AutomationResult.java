@@ -1,4 +1,4 @@
-package com.hribol.spiderman.replay;
+package com.hribol.spiderman.replay.report;
 
 /**
  * Created by hvrigazov on 16.03.17.

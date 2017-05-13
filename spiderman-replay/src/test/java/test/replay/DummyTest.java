@@ -1,6 +1,6 @@
 package test.replay;
 
-import com.hribol.spiderman.replay.AutomationResult;
+import com.hribol.spiderman.replay.report.AutomationResult;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;

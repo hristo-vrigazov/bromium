@@ -6,8 +6,9 @@ import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;
 import com.hribol.spiderman.core.execution.scenario.TestScenario;
 import com.hribol.spiderman.core.execution.scenario.TestScenarioFactory;
 import com.hribol.spiderman.core.utils.ConfigurationUtils;
-import com.hribol.spiderman.core.utils.LoadingTimes;
+import com.hribol.spiderman.replay.report.LoadingTimes;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
+import com.hribol.spiderman.replay.report.AutomationResult;
 
 import java.io.FileInputStream;
 import java.io.IOException;

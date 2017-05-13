@@ -1,4 +1,6 @@
-package com.hribol.spiderman.core.utils;
+package com.hribol.spiderman.replay.report;
+
+import com.hribol.spiderman.core.utils.Utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;

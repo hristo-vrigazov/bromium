@@ -3,11 +3,11 @@ package test.replay.replay;
 import com.hribol.spiderman.core.execution.application.ApplicationActionFactory;
 import com.hribol.spiderman.core.execution.scenario.TestScenario;
 import com.hribol.spiderman.core.execution.scenario.TestScenarioFactory;
-import com.hribol.spiderman.replay.AutomationResult;
+import com.hribol.spiderman.replay.report.AutomationResult;
 import com.hribol.spiderman.replay.ReplayBrowser;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
 import org.mockito.Mockito;
-import com.hribol.spiderman.core.utils.LoadingTimes;
+import com.hribol.spiderman.replay.report.LoadingTimes;
 import org.junit.Test;
 
 import java.io.IOException;

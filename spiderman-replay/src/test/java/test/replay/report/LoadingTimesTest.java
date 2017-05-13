@@ -1,6 +1,6 @@
-package unit.utils;
+package test.replay.report;
 
-import com.hribol.spiderman.core.utils.LoadingTimes;
+import com.hribol.spiderman.replay.report.LoadingTimes;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,5 +1,7 @@
 package com.hribol.spiderman.replay.execution;
 
+import com.hribol.spiderman.core.execution.scenario.TestScenarioFactory;
+
 import java.io.IOException;
 import java.util.Optional;
 
@@ -9,6 +11,10 @@ import java.util.Optional;
 public class WebDriverActionExecutor {
     private static final String DRIVER_EXECUTABLE = "DRIVER_EXECUTABLE";
     private Integer maxRetries;
+    private String pathToDriverExecutable;
+    private Integer timeout;
+    private Integer measurementsPrecisionMilli;
+    private String baseURI;
 
     public WebDriverActionExecutor pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
@@ -65,11 +71,5 @@ public class WebDriverActionExecutor {
     public int getMaxRetries() {
         return Optional.ofNullable(maxRetries).orElse(100);
     }
-
-
-    private String pathToDriverExecutable;
-    private Integer timeout;
-    private Integer measurementsPrecisionMilli;
-    private String baseURI;
 
 }
