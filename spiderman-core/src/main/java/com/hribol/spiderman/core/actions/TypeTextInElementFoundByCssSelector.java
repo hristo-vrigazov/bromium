@@ -25,6 +25,7 @@ public class TypeTextInElementFoundByCssSelector implements WebDriverAction {
     public void execute(WebDriver driver) {
         By locator = By.cssSelector(cssSelector);
         WebElement element = driver.findElement(locator);
+        element.clear();
         element.sendKeys(text);
     }
 
