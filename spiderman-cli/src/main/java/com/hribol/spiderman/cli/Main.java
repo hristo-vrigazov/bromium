@@ -4,6 +4,7 @@ import com.hribol.spiderman.cli.handlers.*;
 import org.apache.commons.io.IOUtils;
 import org.docopt.Docopt;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -37,11 +38,16 @@ public class Main {
             Optional<String> optionalSelectedCommand = commandToHandler
                     .keySet()
                     .stream()
-                    .filter(command -> opts.get(command)
-                    .equals(true))
+                    .filter(command -> opts.get(command).equals(true))
                     .findAny();
 
-            optionalSelectedCommand.ifPresent(command -> commandToHandler.get(command).handle(opts));
+            optionalSelectedCommand.ifPresent(command -> {
+                try {
+                    commandToHandler.get(command).handle(opts);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            });
 
         } catch (IOException e) {
             e.printStackTrace();

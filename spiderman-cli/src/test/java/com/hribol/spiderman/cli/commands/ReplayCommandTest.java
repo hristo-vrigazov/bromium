@@ -8,7 +8,9 @@ import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
@@ -22,7 +24,9 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({
         ReplayBrowserConfiguration.class,
-        ReplayBrowserConfiguration.Builder.class})
+        ReplayBrowserConfiguration.Builder.class,
+        FileInputStream.class
+})
 public class ReplayCommandTest {
 
     private String pathToDriver;
@@ -37,7 +41,7 @@ public class ReplayCommandTest {
     public void ifDriverStartsSuccessfullyEverythingWorks() throws Exception {
         ReplayBrowser replayBrowser = mock(ReplayBrowser.class);
         baseTest(replayBrowser);
-        verify(replayBrowser).replay(anyString(), any(), anyString());
+        verify(replayBrowser).replay(any(InputStream.class), any(), anyString());
 
     }
 
@@ -61,9 +65,12 @@ public class ReplayCommandTest {
                 pathToSerializedTest, csvMeasurementsFileName, timeout, measurementsPrecisionMilli, baseURI,
                 CHROME, new ExecutionFactory());
 
+        FileInputStream fileInputStream = mock(FileInputStream.class);
+
         ReplayBrowserConfiguration replayBrowserConfiguration = mock(ReplayBrowserConfiguration.class);
         when(replayBrowserConfiguration.getReplayBrowser()).thenReturn(replayBrowser);
         whenNew(ReplayBrowserConfiguration.class).withAnyArguments().thenReturn(replayBrowserConfiguration);
+        whenNew(FileInputStream.class).withAnyArguments().thenReturn(fileInputStream);
         replayCommand.run();
     }
 

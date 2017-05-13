@@ -5,7 +5,9 @@ import com.hribol.spiderman.core.execution.application.ApplicationActionFactory;
 import com.hribol.spiderman.core.actions.WebDriverAction;
 import com.hribol.spiderman.core.utils.ConfigurationUtils;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -38,5 +40,11 @@ public class TestScenarioFactoryImpl implements TestScenarioFactory {
         }
 
         return testScenario;
+    }
+
+    @Override
+    public TestScenario createFromInputStream(ApplicationActionFactory applicationActionFactory, InputStream inputStream) throws IOException {
+        List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(inputStream);
+        return createFromTestCaseSteps(applicationActionFactory, testCaseSteps);
     }
 }

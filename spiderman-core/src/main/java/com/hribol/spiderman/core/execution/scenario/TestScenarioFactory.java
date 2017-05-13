@@ -3,6 +3,7 @@ package com.hribol.spiderman.core.execution.scenario;
 import com.hribol.spiderman.core.execution.application.ApplicationActionFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -31,4 +32,13 @@ public interface TestScenarioFactory {
      */
     TestScenario createFromTestCaseSteps(ApplicationActionFactory applicationActionFactory,
                                                         List<Map<String, String>> testCaseSteps);
+
+    /**
+     * Creates a {@link TestScenario} by a given {@link ApplicationActionFactory} and an input
+     * stream from which to read the test case
+     * @param applicationActionFactory the factory for creating application actions
+     * @param inputStream the input stream from which to read
+     */
+    TestScenario createFromInputStream(ApplicationActionFactory applicationActionFactory,
+                                       InputStream inputStream) throws IOException;
 }

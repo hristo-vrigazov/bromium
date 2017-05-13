@@ -7,7 +7,9 @@ import com.hribol.spiderman.core.execution.scenario.TestScenarioFactoryImpl;
 import com.hribol.spiderman.core.utils.LoadingTimes;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 
 /**
@@ -50,11 +52,25 @@ public class ReplayBrowser {
         return replay(testScenario, webDriverActionExecution, fileName);
     }
 
+    public AutomationResult replay(InputStream inputStream,
+                                   WebDriverActionExecution webDriverActionExecution,
+                                   String fileName) throws IOException, URISyntaxException, InterruptedException {
+        TestScenario testScenario = testScenarioFactory.createFromInputStream(applicationActionFactory, inputStream);
+        return replay(testScenario, webDriverActionExecution, fileName);
+    }
+
     public AutomationResult replayOnScreen(String pathToSerializedTest,
                                            WebDriverActionExecution webDriverActionExecution,
                                            String screen)
             throws IOException, URISyntaxException, InterruptedException {
         TestScenario testScenario = testScenarioFactory.createFromFile(applicationActionFactory, pathToSerializedTest);
         return replayOnScreen(testScenario, webDriverActionExecution, screen);
+    }
+
+    public AutomationResult replayOnScreen(InputStream inputStream,
+                                           WebDriverActionExecution webDriverActionExecution,
+                                           String fileName) throws IOException, URISyntaxException, InterruptedException {
+        TestScenario testScenario = testScenarioFactory.createFromInputStream(applicationActionFactory, inputStream);
+        return replayOnScreen(testScenario, webDriverActionExecution, fileName);
     }
 }

@@ -4,6 +4,7 @@ import com.hribol.spiderman.cli.commands.Command;
 import com.hribol.spiderman.cli.commands.ReplayCommand;
 import com.hribol.spiderman.cli.factory.ExecutionFactory;
 
+import java.io.FileNotFoundException;
 import java.util.Map;
 
 import static com.hribol.spiderman.cli.handlers.OptUtils.*;
@@ -14,7 +15,7 @@ import static com.hribol.spiderman.cli.handlers.OptUtils.*;
 public class ReplayCommandHandler implements CommandHandler {
 
     @Override
-    public void handle(Map<String, Object> opts) {
+    public void handle(Map<String, Object> opts) throws FileNotFoundException {
         String pathToDriver = getPathToDriver(opts);
         String pathToApplicationConfiguration = getPathToApplicationConfiguration(opts);
         String pathToSerializedTest = getPathToTestCase(opts);

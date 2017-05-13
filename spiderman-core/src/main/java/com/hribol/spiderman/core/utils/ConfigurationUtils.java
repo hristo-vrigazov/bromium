@@ -5,10 +5,12 @@ import com.google.common.io.Files;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hribol.spiderman.core.config.ApplicationConfiguration;
+import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,8 +27,13 @@ public class ConfigurationUtils {
      * @throws IOException if there is a problem when reading from file
      */
     public static ApplicationConfiguration parseApplicationConfiguration(File file) throws IOException {
+        FileInputStream fileInputStream = new FileInputStream(file);
+        return parseApplicationConfiguration(fileInputStream);
+    }
+
+    public static ApplicationConfiguration parseApplicationConfiguration(InputStream inputStream) throws IOException {
         Gson gson = new GsonBuilder().create();
-        String configuration = Files.toString(file, Charsets.UTF_8);
+        String configuration = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
         return gson.fromJson(configuration, ApplicationConfiguration.class);
     }
 
@@ -42,9 +49,14 @@ public class ConfigurationUtils {
     }
 
     public static List<Map<String, String>> readSteps(String pathToSerializedTest) throws IOException {
+        FileInputStream fileInputStream = new FileInputStream(pathToSerializedTest);
+        return readSteps(fileInputStream);
+    }
+
+    public static List<Map<String, String>> readSteps(InputStream inputStream) throws IOException {
+        String stepsRaw = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
         Gson gson = new GsonBuilder().create();
-        String testCase = Files.toString(new File(pathToSerializedTest), Charsets.UTF_8);
-        return gson.fromJson(testCase, List.class);
+        return gson.fromJson(stepsRaw, List.class);
     }
 
     public static Map<String, String> splitQuery(URL url) throws UnsupportedEncodingException {

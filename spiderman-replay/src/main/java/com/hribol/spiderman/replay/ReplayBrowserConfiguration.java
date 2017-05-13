@@ -6,7 +6,10 @@ import com.hribol.spiderman.core.execution.scenario.TestScenarioFactoryImpl;
 import com.hribol.spiderman.core.utils.ConfigurationUtils;
 import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import static java.util.Objects.requireNonNull;
 
@@ -32,11 +35,15 @@ public class ReplayBrowserConfiguration {
     }
 
     public static class Builder {
-        private String pathToApplicationConfiguration;
+        private InputStream pathToApplicationConfiguration;
         private WebDriverActionFactory webDriverActionFactory;
         private String url;
 
-        public Builder pathToApplicationConfiguration(String pathToApplicationConfiguration) {
+        public Builder pathToApplicationConfiguration(String pathToApplicationConfiguration) throws FileNotFoundException {
+            return configurationStream(new FileInputStream(pathToApplicationConfiguration));
+        }
+
+        public Builder configurationStream(InputStream pathToApplicationConfiguration) {
             this.pathToApplicationConfiguration = pathToApplicationConfiguration;
             return this;
         }
