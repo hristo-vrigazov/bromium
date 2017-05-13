@@ -32,9 +32,6 @@ public class TestScenarioFactory {
     public TestScenario createFromTestCaseSteps(List<Map<String, String>> testCaseSteps) {
         TestScenario testScenario = new TestScenario();
 
-        Optional<WebDriverAction> initialPageLoading = applicationActionFactory.getInitialPageLoading().getWebdriverAction();
-        testScenario.addWebDriverAction(initialPageLoading);
-
         for (Map<String, String> testCaseStep: testCaseSteps) {
             ApplicationAction domainSpecificAction =
                     applicationActionFactory.create(testCaseStep);

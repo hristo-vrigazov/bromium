@@ -13,44 +13,31 @@ import static com.hribol.spiderman.core.utils.Constants.EVENT;
 /**
  * The {@link ApplicationActionFactory} that will be used most frequently.
  * It converts an {@link ApplicationConfiguration} by a given {@link WebDriverActionFactory} and
- * an initial url {@link #url}. The url is separate from the other application actions, because
+ * a base url. The url is separate from the other application actions, because
  * we may want to try to test the application running on a different host.
  */
 public class DefaultApplicationActionFactory implements ApplicationActionFactory {
 
-    private String url;
-    private String initialPageLoadingEventName;
     private Map<String, ApplicationActionConfiguration> nameToConfiguration;
     private TestCaseStepToApplicationActionConverter testCaseStepToApplicationActionConverter;
 
-    public DefaultApplicationActionFactory(String url,
-                                           ApplicationConfiguration applicationConfiguration) {
-        this(url, applicationConfiguration, new PredefinedWebDriverActionFactory(url));
+    public DefaultApplicationActionFactory(ApplicationConfiguration applicationConfiguration, String url) {
+        this(applicationConfiguration, new PredefinedWebDriverActionFactory(url));
     }
 
-    public DefaultApplicationActionFactory(String url,
-                                           ApplicationConfiguration applicationConfiguration,
-                                           WebDriverActionFactory webDriverActionFactory) {
-        this(url, applicationConfiguration, new TestCaseStepToApplicationActionConverter(webDriverActionFactory));
+    public DefaultApplicationActionFactory(ApplicationConfiguration applicationConfiguration, WebDriverActionFactory webDriverActionFactory) {
+        this(applicationConfiguration, new TestCaseStepToApplicationActionConverter(webDriverActionFactory));
     }
 
-    public DefaultApplicationActionFactory(String url,
-                                           ApplicationConfiguration applicationConfiguration,
+    public DefaultApplicationActionFactory(ApplicationConfiguration applicationConfiguration,
                                            TestCaseStepToApplicationActionConverter testCaseStepToApplicationActionConverter) {
         this.nameToConfiguration = new HashMap<>();
-        this.url = url;
 
         for (ApplicationActionConfiguration applicationActionConfiguration: applicationConfiguration.getApplicationActionConfigurationList()) {
             nameToConfiguration.put(applicationActionConfiguration.getName(), applicationActionConfiguration);
         }
 
-        this.initialPageLoadingEventName = "INITIAL_PAGE_LOAD_" + applicationConfiguration.getApplicationName();
         this.testCaseStepToApplicationActionConverter = testCaseStepToApplicationActionConverter;
-    }
-
-    @Override
-    public ApplicationAction getInitialPageLoading() {
-        return new ApplicationPageLoading(url, initialPageLoadingEventName);
     }
 
     @Override

@@ -30,7 +30,6 @@ public class TestScenarioFactoryTest {
         ApplicationAction initialPageLoading = mock(ApplicationAction.class);
         when(initialPageLoading.getWebdriverAction()).thenReturn(Optional.of(pageLoadingWebDriverAction));
         ApplicationActionFactory applicationActionFactory = mock(ApplicationActionFactory.class);
-        when(applicationActionFactory.getInitialPageLoading()).thenReturn(initialPageLoading);
 
         List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(pathToTestCase);
 
@@ -48,6 +47,6 @@ public class TestScenarioFactoryTest {
         TestScenarioFactory testScenarioFactory = new TestScenarioFactory(applicationActionFactory);
         TestScenario testScenario = testScenarioFactory.createFromFile(pathToTestCase);
 
-        assertEquals(testCaseSteps.size() + 1, testScenario.getActions().size());
+        assertEquals(testCaseSteps.size(), testScenario.getActions().size());
     }
 }

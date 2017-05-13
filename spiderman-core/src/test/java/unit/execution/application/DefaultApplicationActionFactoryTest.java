@@ -49,26 +49,9 @@ public class DefaultApplicationActionFactoryTest {
                 .thenReturn(applicationAction);
 
         ApplicationActionFactory applicationActionFactory =
-                new DefaultApplicationActionFactory(url, applicationConfiguration, testCaseStepToApplicationActionConverter);
+                new DefaultApplicationActionFactory(applicationConfiguration, testCaseStepToApplicationActionConverter);
 
-        ApplicationAction initialPageLoading = applicationActionFactory.getInitialPageLoading();
-
-        assertFalse(initialPageLoading.getPrecondition().isPresent());
         assertEquals(applicationAction, applicationActionFactory.create(testCaseStep));
     }
 
-    @Test
-    public void canCreatePageLoading() {
-        String url = "http://tenniskafe.com";
-        String applicationName = "tenniskafe";
-        ApplicationConfiguration applicationConfiguration = mock(ApplicationConfiguration.class);
-        when(applicationConfiguration.getApplicationName()).thenReturn(applicationName);
-        WebDriverActionFactory webDriverActionFactory = mock(WebDriverActionFactory.class);
-
-        ApplicationActionFactory applicationActionFactory =
-                new DefaultApplicationActionFactory(url, applicationConfiguration, webDriverActionFactory);
-
-        assertFalse(applicationActionFactory.getInitialPageLoading().getPrecondition().isPresent());
-        assertFalse(applicationActionFactory.getInitialPageLoading().getPostcondition().isPresent());
-    }
 }
