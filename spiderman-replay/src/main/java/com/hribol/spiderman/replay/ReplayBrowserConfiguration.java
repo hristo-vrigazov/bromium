@@ -27,7 +27,7 @@ public class ReplayBrowserConfiguration {
         ApplicationConfiguration applicationConfiguration = ConfigurationUtils.parseApplicationConfiguration(builder.pathToApplicationConfiguration);
         WebDriverActionFactory webDriverActionFactory = builder.webDriverActionFactory;
         DefaultApplicationActionFactory applicationActionFactory = new DefaultApplicationActionFactory(builder.url, applicationConfiguration, webDriverActionFactory);
-        replayBrowser = new ReplayBrowser(applicationActionFactory, new TestScenarioFactory());
+        replayBrowser = new ReplayBrowser(applicationActionFactory);
     }
 
     public ReplayBrowser getReplayBrowser() {
