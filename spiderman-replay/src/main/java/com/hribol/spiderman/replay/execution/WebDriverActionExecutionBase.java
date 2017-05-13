@@ -33,13 +33,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         this.automationResult = AutomationResult.NOT_STARTED;
     }
 
-    WebDriverActionExecutionBase(WebDriverActionExecutor executor, ReplayFiltersFacade proxyFacade) throws IOException, URISyntaxException {
-        this.executor = executor;
-        this.proxyFacade = proxyFacade;
-        this.replaySettings = createReplaySettings();
-        this.waitingTimes = new ArrayList<>();
-    }
-
     @Override
     public void execute(TestScenario testScenario) {
         try {

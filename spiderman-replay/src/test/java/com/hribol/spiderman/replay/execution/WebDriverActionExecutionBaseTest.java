@@ -6,6 +6,7 @@ import com.hribol.spiderman.core.suite.VirtualScreenProcessCreator;
 import com.hribol.spiderman.core.suppliers.InvisibleWebDriverSupplier;
 import com.hribol.spiderman.core.suppliers.VisibleWebDriverSupplier;
 import com.hribol.spiderman.replay.AutomationResult;
+import com.hribol.spiderman.replay.filters.ProxyFacade;
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
 import com.hribol.spiderman.replay.settings.ReplaySettings;
 import com.hribol.spiderman.replay.settings.ReplaySettingsBase;
@@ -13,9 +14,12 @@ import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.service.DriverService;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,10 +29,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
+import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 /**
  * Created by hvrigazov on 23.04.17.
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({
+        ProxyFacade.class,
+        WebDriverActionExecutionBase.class
+})
 public class WebDriverActionExecutionBaseTest {
 
     String systemProperty = "property";
@@ -173,13 +183,15 @@ public class WebDriverActionExecutionBaseTest {
     }
 
     @Test
-    public void whenHttpRequestsAreInQueueDoesNotAct() throws IOException, URISyntaxException {
+    public void whenHttpRequestsAreInQueueDoesNotAct() throws Exception {
         ReplaySettings replaySettings = getDefaultReplaySettings();
         WebDriverActionExecutor executor = getWebDriverActionExecutor(1);
-        ReplayFiltersFacade proxyFacade = mock(ReplayFiltersFacade.class);
+        ProxyFacade proxyFacade = mock(ProxyFacade.class);
         when(proxyFacade.httpQueueIsEmpty()).thenReturn(true, false);
         when(proxyFacade.isLocked()).thenReturn(false);
-        WebDriverActionExecutionBase webDriverActionExecutionBase = new WebDriverActionExecutionBase(executor, proxyFacade) {
+
+        whenNew(ProxyFacade.class).withArguments(executor.getBaseURI()).thenReturn(proxyFacade);
+        WebDriverActionExecutionBase webDriverActionExecutionBase = new WebDriverActionExecutionBase(executor) {
             @Override
             protected ReplaySettings createReplaySettings() {
                 return replaySettings;
