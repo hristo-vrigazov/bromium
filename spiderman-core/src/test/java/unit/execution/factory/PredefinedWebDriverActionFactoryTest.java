@@ -17,7 +17,8 @@ public class PredefinedWebDriverActionFactoryTest {
 
     @Test
     public void canCreateClickByText() {
-        WebDriverActionFactory factory = new PredefinedWebDriverActionFactory();
+        String baseURL = "http://something.com";
+        WebDriverActionFactory factory = new PredefinedWebDriverActionFactory(baseURL);
 
         Map<String, String> map = new HashMap<>();
 

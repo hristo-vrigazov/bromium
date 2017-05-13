@@ -32,7 +32,8 @@ public class WebDriverActionFactoryBaseTest {
 
         String webDriverActionType = "SOME_ACTION_TYPE";
 
-        WebDriverActionFactoryBase webDriverActionFactoryBase = new WebDriverActionFactoryBase() {
+        String baseURL = "http://something.com";
+        WebDriverActionFactoryBase webDriverActionFactoryBase = new WebDriverActionFactoryBase(baseURL) {
             @Override
             protected void addCustom() {
                 add(webDriverActionType, parser);

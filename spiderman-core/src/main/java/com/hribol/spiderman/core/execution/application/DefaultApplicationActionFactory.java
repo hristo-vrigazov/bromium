@@ -25,7 +25,7 @@ public class DefaultApplicationActionFactory implements ApplicationActionFactory
 
     public DefaultApplicationActionFactory(String url,
                                            ApplicationConfiguration applicationConfiguration) {
-        this(url, applicationConfiguration, new PredefinedWebDriverActionFactory());
+        this(url, applicationConfiguration, new PredefinedWebDriverActionFactory(url));
     }
 
     public DefaultApplicationActionFactory(String url,

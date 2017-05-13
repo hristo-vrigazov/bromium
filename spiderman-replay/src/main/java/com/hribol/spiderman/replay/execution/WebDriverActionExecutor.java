@@ -59,11 +59,11 @@ public class WebDriverActionExecutor {
     }
 
     public int getMeasurementsPrecisionMilli() {
-        return Optional.ofNullable(measurementsPrecisionMilli).orElse(50);
+        return Optional.ofNullable(measurementsPrecisionMilli).orElse(500);
     }
 
     public int getMaxRetries() {
-        return Optional.ofNullable(maxRetries).orElse(10);
+        return Optional.ofNullable(maxRetries).orElse(100);
     }
 
 

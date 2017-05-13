@@ -1,10 +1,7 @@
 package com.hribol.spiderman.core.execution.factory;
 
 import com.hribol.spiderman.core.actions.WebDriverAction;
-import com.hribol.spiderman.core.parsers.ClickClassByTextParser;
-import com.hribol.spiderman.core.parsers.ClickCssSelectorParser;
-import com.hribol.spiderman.core.parsers.TypeTextInElementFoundByCssSelectorParser;
-import com.hribol.spiderman.core.parsers.WebDriverActionParameterParser;
+import com.hribol.spiderman.core.parsers.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,8 +24,11 @@ public abstract class WebDriverActionFactoryBase implements WebDriverActionFacto
     private final String CLICK_CSS_SELECTOR = "CLICK_CSS_SELECTOR";
     private final String CLICK_CLASS_BY_TEXT = "CLICK_CLASS_BY_TEXT";
     private final String TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR = "TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR";
+    private final String PAGE_LOADING = "PAGE_LOADING";
+    private final String baseURL;
 
-    public WebDriverActionFactoryBase() {
+    public WebDriverActionFactoryBase(String baseURL) {
+        this.baseURL = baseURL;
         parsersRegistry = new HashMap<>();
         addPredefined();
         addCustom();
@@ -38,6 +38,7 @@ public abstract class WebDriverActionFactoryBase implements WebDriverActionFacto
         add(CLICK_CLASS_BY_TEXT, new ClickClassByTextParser());
         add(CLICK_CSS_SELECTOR, new ClickCssSelectorParser());
         add(TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR, new TypeTextInElementFoundByCssSelectorParser());
+        add(PAGE_LOADING, new PageLoadingParser(baseURL));
     }
 
     /**

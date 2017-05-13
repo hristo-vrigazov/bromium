@@ -64,7 +64,7 @@ public class ReplayCommand implements Command {
     @Override
     public void run() {
         try {
-            WebDriverActionFactory factory = new PredefinedWebDriverActionFactory();
+            WebDriverActionFactory factory = new PredefinedWebDriverActionFactory(baseURI);
 
             WebDriverActionExecutor executor = new WebDriverActionExecutor()
                     .pathToDriverExecutable(pathToDriver)

@@ -13,4 +13,5 @@ public class Constants {
     public final static String HTML = "html";
     public final static String CSS_SELECTOR = "cssSelector";
     public final static String TEXT = "text";
+    public final static String URL = "url";
 }

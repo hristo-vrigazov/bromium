@@ -21,8 +21,9 @@ public class ReplayBrowserConfigurationTest {
 
     @Test
     public void canCreateConfigurationFromBuilder() throws IOException {
-        WebDriverActionFactory webDriverActionFactory = new PredefinedWebDriverActionFactory();
         String url = "http://tenniskafe.com";
+
+        WebDriverActionFactory webDriverActionFactory = new PredefinedWebDriverActionFactory(url);
         String filename = getClass().getResource("/tenniskafe.json").getFile();
 
         ReplayBrowserConfiguration replayBrowserConfiguration = ReplayBrowserConfiguration
