@@ -24,7 +24,7 @@ public class LoadingTimesTest {
         actions.add("CLICK_ON_BUTTON");
         loadingMeasurements.add(750434651L);
 
-        LoadingTimes loadingTimes = new LoadingTimes(loadingMeasurements, actions);
+        LoadingTimes loadingTimes = new LoadingTimes(actions, loadingMeasurements);
         String pathname = "loadingTimes.csv";
         File file = new File(pathname);
 

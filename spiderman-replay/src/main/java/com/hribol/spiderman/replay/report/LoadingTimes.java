@@ -12,11 +12,11 @@ import java.util.List;
  * A class for loading times of an execution
  */
 public class LoadingTimes {
-    private List<Long> loadingTimes;
+    private List<Long> waitingTimes;
     private List<String> actions;
 
-    public LoadingTimes(List<Long> loadingTimes, List<String> actions) {
-        this.loadingTimes = loadingTimes;
+    public LoadingTimes(List<String> actions, List<Long> waitingTimes) {
+        this.waitingTimes = waitingTimes;
         this.actions = actions;
     }
 
@@ -32,8 +32,8 @@ public class LoadingTimes {
     }
 
     private void dump(PrintWriter writer) {
-        for (int i = 0; i < loadingTimes.size(); i++) {
-            double seconds = Utils.toSeconds(loadingTimes.get(i));
+        for (int i = 0; i < waitingTimes.size(); i++) {
+            double seconds = Utils.toSeconds(waitingTimes.get(i));
             String action = actions.get(i);
             writer.println(action + "," + seconds);
         }

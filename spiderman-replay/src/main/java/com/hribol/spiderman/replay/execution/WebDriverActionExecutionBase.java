@@ -2,6 +2,7 @@ package com.hribol.spiderman.replay.execution;
 import com.hribol.spiderman.core.actions.WebDriverAction;
 import com.hribol.spiderman.core.execution.scenario.TestScenario;
 import com.hribol.spiderman.core.suite.VirtualScreenProcessCreator;
+import com.hribol.spiderman.replay.report.ExecutionReport;
 import com.hribol.spiderman.replay.report.LoadingTimes;
 import com.hribol.spiderman.core.utils.Utils;
 import com.hribol.spiderman.replay.report.AutomationResult;
@@ -9,8 +10,6 @@ import com.hribol.spiderman.replay.filters.ProxyFacade;
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
 import com.hribol.spiderman.replay.settings.ReplaySettings;
 import net.lightbody.bmp.core.har.Har;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriverException;
 
@@ -18,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,16 +32,17 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         this.proxyFacade = new ProxyFacade(executor.getBaseURI());
         this.replaySettings = createReplaySettings();
         this.waitingTimes = new ArrayList<>();
+        this.actionTimestamps = new ArrayList<>();
         this.automationResult = AutomationResult.NOT_STARTED;
     }
 
     @Override
-    public void execute(TestScenario testScenario) {
+    public ExecutionReport execute(TestScenario testScenario) {
         try {
             prepare();
         } catch (IOException e) {
             this.automationResult = AutomationResult.COULD_NOT_CREATE_DRIVER;
-            return;
+            return new ExecutionReport();
         }
 
         long elapsedTime = System.nanoTime();
@@ -61,6 +62,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                     WebDriverAction webDriverAction = testScenario.pollWebDriverAction();
                     executeIgnoringExceptions(webDriverAction);
                     waitingTimes.add(System.nanoTime() - elapsedTime);
+                    actionTimestamps.add(new Date());
                     elapsedTime = System.nanoTime();
                 }
             }
@@ -78,7 +80,8 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         }
         
         this.replaySettings.cleanUpReplay();
-        this.loadingTimes = new LoadingTimes(waitingTimes, testScenario.getActions());
+        this.loadingTimes = new LoadingTimes(testScenario.getActions(), waitingTimes);
+        return new ExecutionReport();
     }
 
 
@@ -100,13 +103,13 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     }
 
     @Override
-    public void executeOnScreen(TestScenario testScenario, String screenToUse) {
+    public ExecutionReport executeOnScreen(TestScenario testScenario, String screenToUse) {
         this.screenToUse = screenToUse;
-        execute(testScenario);
+        return execute(testScenario);
     }
 
     @Override
-    public void executeOnScreen(TestScenario testScenario,
+    public ExecutionReport executeOnScreen(TestScenario testScenario,
                                             int i,
                                             VirtualScreenProcessCreator virtualScreenProcessCreator) {
         Process process;
@@ -115,12 +118,15 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             process = virtualScreenProcessCreator.createXvfbProcess(i);
         } catch (IOException e) {
             this.automationResult = AutomationResult.NO_VIRTUAL_SCREEN;
-            return;
+            return new ExecutionReport();
         }
 
         this.screenToUse = screen;
-        this.execute(testScenario);
-        process.destroy();
+        try {
+            return this.execute(testScenario);
+        } finally {
+            process.destroy();
+        }
     }
 
     protected ReplayFiltersFacade proxyFacade;
@@ -132,6 +138,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     private AutomationResult automationResult;
 
     private List<Long> waitingTimes;
+    private List<Date> actionTimestamps;
     private String screenToUse;
     private LoadingTimes loadingTimes;
     private final WebDriverActionExecutor executor;

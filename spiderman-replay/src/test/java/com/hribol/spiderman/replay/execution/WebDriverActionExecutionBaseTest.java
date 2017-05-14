@@ -135,7 +135,6 @@ public class WebDriverActionExecutionBaseTest {
         TestScenario testScenario = mock(TestScenario.class);
 
         WebDriverActionExecutionBase webDriverActionExecutionBase = spy(getWebDriverActionExecutionBase());
-        doNothing().when(webDriverActionExecutionBase).execute(testScenario);
         webDriverActionExecutionBase.executeOnScreen(testScenario, screen, virtualScreenProcessCreator);
 
         verify(webDriverActionExecutionBase).execute(testScenario);
@@ -215,7 +214,6 @@ public class WebDriverActionExecutionBaseTest {
     public void executeOnScreenExecutes() throws IOException, URISyntaxException {
         WebDriverActionExecutionBase webDriverActionExecutionBase = spy(getWebDriverActionExecutionBase());
         TestScenario testScenario = mock(TestScenario.class);
-        doNothing().when(webDriverActionExecutionBase).execute(testScenario);
         String screen = ":1";
         webDriverActionExecutionBase.executeOnScreen(testScenario, screen);
         verify(webDriverActionExecutionBase).execute(testScenario);
