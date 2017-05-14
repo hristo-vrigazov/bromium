@@ -2,7 +2,7 @@ package com.hribol.spiderman.cli.factory;
 
 import com.hribol.spiderman.browsers.chrome.replay.ChromeDriverActionExecution;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
-import com.hribol.spiderman.replay.execution.WebDriverActionExecutor;
+import com.hribol.spiderman.replay.execution.ExecutorBuilder;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -22,11 +22,11 @@ public class ExecutionFactory {
         browserNameToSupplierMap.put(CHROME, this::getChrome);
     }
 
-    public WebDriverActionExecution create(String browserType, WebDriverActionExecutor executor) throws IOException, URISyntaxException {
+    public WebDriverActionExecution create(String browserType, ExecutorBuilder executor) throws IOException, URISyntaxException {
         return browserNameToSupplierMap.get(browserType).get(executor);
     }
 
-    private WebDriverActionExecution getChrome(WebDriverActionExecutor webDriverActionExecutor) throws IOException, URISyntaxException {
-        return new ChromeDriverActionExecution(webDriverActionExecutor);
+    private WebDriverActionExecution getChrome(ExecutorBuilder executorBuilder) throws IOException, URISyntaxException {
+        return new ChromeDriverActionExecution(executorBuilder);
     }
 }

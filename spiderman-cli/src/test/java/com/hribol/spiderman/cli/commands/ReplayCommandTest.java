@@ -5,7 +5,7 @@ import com.hribol.spiderman.core.execution.factory.PredefinedWebDriverActionFact
 import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;
 import com.hribol.spiderman.replay.ReplayBrowser;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
-import com.hribol.spiderman.replay.execution.WebDriverActionExecutor;
+import com.hribol.spiderman.replay.execution.ExecutorBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -68,7 +68,7 @@ public class ReplayCommandTest {
         WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
 
         ExecutionFactory executionFactory = mock(ExecutionFactory.class);
-        when(executionFactory.create(eq(CHROME), any(WebDriverActionExecutor.class))).thenReturn(webDriverActionExecution);
+        when(executionFactory.create(eq(CHROME), any(ExecutorBuilder.class))).thenReturn(webDriverActionExecution);
 
         ReplayCommand replayCommand = ReplayCommand.builder()
                 .pathToDriver(pathToDriver)

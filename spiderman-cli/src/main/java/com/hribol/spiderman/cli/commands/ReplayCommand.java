@@ -5,7 +5,7 @@ import com.hribol.spiderman.core.execution.factory.PredefinedWebDriverActionFact
 import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;
 import com.hribol.spiderman.replay.*;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
-import com.hribol.spiderman.replay.execution.WebDriverActionExecutor;
+import com.hribol.spiderman.replay.execution.ExecutorBuilder;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -30,7 +30,7 @@ public class ReplayCommand implements Command {
         try {
             WebDriverActionFactory factory = new PredefinedWebDriverActionFactory(builder.baseURL);
 
-            WebDriverActionExecutor executor = new WebDriverActionExecutor()
+            ExecutorBuilder executor = new ExecutorBuilder()
                     .pathToDriverExecutable(builder.pathToDriver)
                     .baseURL(builder.baseURL)
                     .timeoutInSeconds(builder.timeout)

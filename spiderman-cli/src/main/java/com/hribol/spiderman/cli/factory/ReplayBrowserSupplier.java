@@ -1,7 +1,7 @@
 package com.hribol.spiderman.cli.factory;
 
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
-import com.hribol.spiderman.replay.execution.WebDriverActionExecutor;
+import com.hribol.spiderman.replay.execution.ExecutorBuilder;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -10,5 +10,5 @@ import java.net.URISyntaxException;
  * Created by hvrigazov on 09.05.17.
  */
 public interface ReplayBrowserSupplier {
-    WebDriverActionExecution get(WebDriverActionExecutor webDriverActionExecutor) throws IOException, URISyntaxException;
+    WebDriverActionExecution get(ExecutorBuilder executorBuilder) throws IOException, URISyntaxException;
 }

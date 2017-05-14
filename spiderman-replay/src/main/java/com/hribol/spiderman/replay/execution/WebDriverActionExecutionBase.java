@@ -26,7 +26,7 @@ import java.util.Optional;
  */
 public abstract class WebDriverActionExecutionBase implements WebDriverActionExecution {
 
-    public WebDriverActionExecutionBase(WebDriverActionExecutor executor) throws IOException, URISyntaxException {
+    public WebDriverActionExecutionBase(ExecutorBuilder executor) throws IOException, URISyntaxException {
         this.executor = executor;
         this.proxyFacade = new ProxyFacade(executor.getBaseURL());
         this.replaySettings = createReplaySettings();
@@ -129,7 +129,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     private String screenToUse;
     private LoadingTimes loadingTimes;
-    private final WebDriverActionExecutor executor;
+    private final ExecutorBuilder executor;
 
     private void prepare() throws IOException {
         System.setProperty(getSystemProperty(), executor.getPathToDriverExecutable());

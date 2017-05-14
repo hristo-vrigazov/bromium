@@ -182,7 +182,7 @@ public class WebDriverActionExecutionBaseTest {
     @Test
     public void whenHttpRequestsAreInQueueDoesNotAct() throws Exception {
         ReplaySettings replaySettings = getDefaultReplaySettings();
-        WebDriverActionExecutor executor = getWebDriverActionExecutor(1);
+        ExecutorBuilder executor = getWebDriverActionExecutor(1);
         ProxyFacade proxyFacade = mock(ProxyFacade.class);
         when(proxyFacade.httpQueueIsEmpty()).thenReturn(true, false);
         when(proxyFacade.isLocked()).thenReturn(false);
@@ -220,9 +220,9 @@ public class WebDriverActionExecutionBaseTest {
 
     @Test
     public void canInstantiateWithDefault() throws IOException, URISyntaxException {
-        WebDriverActionExecutor webDriverActionExecutor = getWebDriverActionExecutor();
+        ExecutorBuilder executorBuilder = getWebDriverActionExecutor();
         WebDriverActionExecutionBase webDriverActionExecutionBase =
-                new WebDriverActionExecutionBase(webDriverActionExecutor) {
+                new WebDriverActionExecutionBase(executorBuilder) {
             @Override
             protected ReplaySettings createReplaySettings() {
                 return null;
@@ -237,7 +237,7 @@ public class WebDriverActionExecutionBaseTest {
         assertNotNull(webDriverActionExecutionBase);
     }
 
-    private WebDriverActionExecutor getWebDriverActionExecutor() throws IOException {
+    private ExecutorBuilder getWebDriverActionExecutor() throws IOException {
         return getWebDriverActionExecutor(10);
     }
 
@@ -266,9 +266,9 @@ public class WebDriverActionExecutionBaseTest {
     }
 
     private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, int maxRetries, ReplaySettings replaySettings) throws IOException, URISyntaxException {
-        WebDriverActionExecutor webDriverActionExecutor = getWebDriverActionExecutor(timeout, maxRetries);
+        ExecutorBuilder executorBuilder = getWebDriverActionExecutor(timeout, maxRetries);
 
-        return new WebDriverActionExecutionBase(webDriverActionExecutor) {
+        return new WebDriverActionExecutionBase(executorBuilder) {
             @Override
             protected ReplaySettings createReplaySettings() {
                 return replaySettings;
@@ -281,18 +281,18 @@ public class WebDriverActionExecutionBaseTest {
         };
     }
 
-    private WebDriverActionExecutor getWebDriverActionExecutor(int timeout) throws IOException {
+    private ExecutorBuilder getWebDriverActionExecutor(int timeout) throws IOException {
         return getWebDriverActionExecutor(timeout, 10);
     }
 
-    private WebDriverActionExecutor getWebDriverActionExecutor(int timeout, int maxRetries) throws IOException {
-        WebDriverActionExecutor webDriverActionExecutor = mock(WebDriverActionExecutor.class);
-        when(webDriverActionExecutor.getBaseURL()).thenReturn(baseURI);
-        when(webDriverActionExecutor.getMeasurementsPrecisionMilli()).thenReturn(precision);
-        when(webDriverActionExecutor.getTimeout()).thenReturn(timeout);
-        when(webDriverActionExecutor.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
-        when(webDriverActionExecutor.getMaxRetries()).thenReturn(maxRetries);
-        return webDriverActionExecutor;
+    private ExecutorBuilder getWebDriverActionExecutor(int timeout, int maxRetries) throws IOException {
+        ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
+        when(executorBuilder.getBaseURL()).thenReturn(baseURI);
+        when(executorBuilder.getMeasurementsPrecisionMilli()).thenReturn(precision);
+        when(executorBuilder.getTimeout()).thenReturn(timeout);
+        when(executorBuilder.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
+        when(executorBuilder.getMaxRetries()).thenReturn(maxRetries);
+        return executorBuilder;
     }
 
 

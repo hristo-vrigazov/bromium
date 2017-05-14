@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by hvrigazov on 23.04.17.
  */
-public class WebDriverActionExecutorTest {
+public class ExecutorBuilderTest {
 
     @Test
     public void correctlyBuildsConfiguration() throws IOException {
@@ -21,18 +21,18 @@ public class WebDriverActionExecutorTest {
         int timeout = 10;
         int maxRetries = 10;
 
-        WebDriverActionExecutor webDriverActionExecutor = new WebDriverActionExecutor()
+        ExecutorBuilder executorBuilder = new ExecutorBuilder()
                 .pathToDriverExecutable(pathToDriverExecutable)
                 .baseURL(baseURI)
                 .measurementsPrecisionInMilliseconds(precision)
                 .timeoutInSeconds(timeout)
                 .maxRetries(10);
 
-        assertEquals(pathToDriverExecutable, webDriverActionExecutor.getPathToDriverExecutable());
-        assertEquals(baseURI, webDriverActionExecutor.getBaseURL());
-        assertEquals(precision, webDriverActionExecutor.getMeasurementsPrecisionMilli());
-        assertEquals(timeout, webDriverActionExecutor.getTimeout());
-        assertEquals(maxRetries, webDriverActionExecutor.getMaxRetries());
+        assertEquals(pathToDriverExecutable, executorBuilder.getPathToDriverExecutable());
+        assertEquals(baseURI, executorBuilder.getBaseURL());
+        assertEquals(precision, executorBuilder.getMeasurementsPrecisionMilli());
+        assertEquals(timeout, executorBuilder.getTimeout());
+        assertEquals(maxRetries, executorBuilder.getMaxRetries());
     }
 
     @Rule
@@ -44,19 +44,19 @@ public class WebDriverActionExecutorTest {
         int precision = 500;
         int timeout = 10;
 
-        WebDriverActionExecutor webDriverActionExecutor = new WebDriverActionExecutor()
+        ExecutorBuilder executorBuilder = new ExecutorBuilder()
                 .pathToDriverExecutable(pathToDriverExecutable)
                 .measurementsPrecisionInMilliseconds(precision)
                 .timeoutInSeconds(timeout);
 
-        expectedException.expect(IOException.class);
-        webDriverActionExecutor.getBaseURL();
+        expectedException.expect(IllegalStateException.class);
+        executorBuilder.getBaseURL();
     }
 
     @Test
     public void throwsExceptionIfDriverIsNotSet() throws IOException {
-        WebDriverActionExecutor webDriverActionExecutor = new WebDriverActionExecutor();
+        ExecutorBuilder executorBuilder = new ExecutorBuilder();
         expectedException.expect(IOException.class);
-        webDriverActionExecutor.getPathToDriverExecutable();
+        executorBuilder.getPathToDriverExecutable();
     }
 }

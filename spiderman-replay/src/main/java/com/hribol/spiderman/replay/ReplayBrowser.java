@@ -8,12 +8,10 @@ import com.hribol.spiderman.core.execution.scenario.TestScenario;
 import com.hribol.spiderman.core.execution.scenario.TestScenarioFactory;
 import com.hribol.spiderman.core.suite.VirtualScreenProcessCreator;
 import com.hribol.spiderman.core.utils.ConfigurationUtils;
-import com.hribol.spiderman.replay.execution.WebDriverActionExecutor;
 import com.hribol.spiderman.replay.report.ExecutionReport;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;

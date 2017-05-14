@@ -1,7 +1,7 @@
 package com.hribol.spiderman.browsers.chrome.replay;
 
 import com.hribol.spiderman.replay.execution.WebDriverActionExecutionBase;
-import com.hribol.spiderman.replay.execution.WebDriverActionExecutor;
+import com.hribol.spiderman.replay.execution.ExecutorBuilder;
 import com.hribol.spiderman.replay.settings.ReplaySettings;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
@@ -15,8 +15,8 @@ import java.net.URISyntaxException;
  */
 public class ChromeDriverActionExecution extends WebDriverActionExecutionBase {
 
-    public ChromeDriverActionExecution(WebDriverActionExecutor webDriverActionExecutor) throws IOException, URISyntaxException {
-        super(webDriverActionExecutor);
+    public ChromeDriverActionExecution(ExecutorBuilder executorBuilder) throws IOException, URISyntaxException {
+        super(executorBuilder);
     }
 
     @Override

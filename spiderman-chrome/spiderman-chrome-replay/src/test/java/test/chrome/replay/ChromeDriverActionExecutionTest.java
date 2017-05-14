@@ -1,7 +1,7 @@
 package test.chrome.replay;
 
 import com.hribol.spiderman.browsers.chrome.replay.ChromeDriverActionExecution;
-import com.hribol.spiderman.replay.execution.WebDriverActionExecutor;
+import com.hribol.spiderman.replay.execution.ExecutorBuilder;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriverService;
 
@@ -20,10 +20,10 @@ public class ChromeDriverActionExecutionTest {
 
     @Test
     public void creatingExecution() throws IOException, URISyntaxException {
-        WebDriverActionExecutor webDriverActionExecutor = mock(WebDriverActionExecutor.class);
-        when(webDriverActionExecutor.getBaseURL()).thenReturn("http://tenniskafe.com");
+        ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
+        when(executorBuilder.getBaseURL()).thenReturn("http://tenniskafe.com");
 
-        ChromeDriverActionExecution chromeDriverActionExecution = new ChromeDriverActionExecution(webDriverActionExecutor);
+        ChromeDriverActionExecution chromeDriverActionExecution = new ChromeDriverActionExecution(executorBuilder);
         assertNotNull(chromeDriverActionExecution);
         assertEquals(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, chromeDriverActionExecution.getSystemProperty());
     }
