@@ -47,6 +47,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         }
 
         long elapsedTime = System.nanoTime();
+        actionTimestamps.add(new Date());
 
         try {
             this.automationResult = AutomationResult.EXECUTING;
@@ -81,7 +82,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         }
         
         this.replaySettings.cleanUpReplay();
-        this.loadingTimes = new LoadingTimes(testScenario.getActions(), waitingTimes);
+        this.loadingTimes = new LoadingTimes(testScenario.getActions(), waitingTimes, actionTimestamps);
         Har har = replaySettings.getHar();
         return new ExecutionReport(loadingTimes, har, automationResult);
     }

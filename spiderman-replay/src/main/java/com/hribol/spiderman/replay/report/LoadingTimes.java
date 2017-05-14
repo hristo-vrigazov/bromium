@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,11 +15,15 @@ import java.util.List;
  */
 public class LoadingTimes {
     private List<Long> waitingTimes;
+    private List<Date> actionTimestamps;
     private List<String> actions;
+    private SimpleDateFormat simpleDateFormat;
 
-    public LoadingTimes(List<String> actions, List<Long> waitingTimes) {
+    public LoadingTimes(List<String> actions, List<Long> waitingTimes, List<Date> actionTimestamps) {
         this.waitingTimes = waitingTimes;
         this.actions = actions;
+        this.actionTimestamps = actionTimestamps;
+        this.simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
     }
 
     /**
@@ -32,10 +38,14 @@ public class LoadingTimes {
     }
 
     private void dump(PrintWriter writer) {
+        writer.println(simpleDateFormat.format(actionTimestamps.get(0)) + ",START,0");
+
         for (int i = 0; i < waitingTimes.size(); i++) {
             double seconds = Utils.toSeconds(waitingTimes.get(i));
             String action = actions.get(i);
-            writer.println(action + "," + seconds);
+            Date date = actionTimestamps.get(i + 1);
+            String dateAsString = simpleDateFormat.format(date);
+            writer.println(dateAsString + "," + action + "," + seconds);
         }
         writer.close();
     }

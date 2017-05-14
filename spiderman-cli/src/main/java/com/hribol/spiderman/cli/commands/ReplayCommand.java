@@ -6,6 +6,7 @@ import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;
 import com.hribol.spiderman.replay.*;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
 import com.hribol.spiderman.replay.execution.ExecutorBuilder;
+import com.hribol.spiderman.replay.report.ExecutionReport;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -39,7 +40,7 @@ public class ReplayCommand implements Command {
             WebDriverActionExecution execution = builder.executionFactory.create(builder.browserType, executor);
 
             ReplayBrowser replayBrowser = new ReplayBrowser(builder.applicationConfigurationInputStream, factory, execution);
-            replayBrowser.replay(builder.testInputStream);
+            ExecutionReport report = replayBrowser.replay(builder.testInputStream);
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
         }
