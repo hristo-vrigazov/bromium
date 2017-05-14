@@ -27,6 +27,7 @@ public class LoadingTimesTest {
         loadingMeasurements.add(750434651L);
         actionTimestamps.add(new Date());
         actionTimestamps.add(new Date());
+        actionTimestamps.add(new Date());
 
         LoadingTimes loadingTimes = new LoadingTimes(actions, loadingMeasurements, actionTimestamps);
         String pathname = "loadingTimes.csv";
