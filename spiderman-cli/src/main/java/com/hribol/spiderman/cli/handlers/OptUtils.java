@@ -22,10 +22,6 @@ public class OptUtils {
         return getInt(opts, PRECISION);
     }
 
-    public static String getMeasurementsFile(Map<String, Object> opts) {
-        return getString(opts, MEASUREMENTS);
-    }
-
     public static String getPathToTestCase(Map<String, Object> opts) {
         return getString(opts, CASE);
     }

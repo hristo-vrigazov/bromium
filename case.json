@@ -1,0 +1,14 @@
+[
+{
+	"event": "clickAjaxDemoButton"
+},
+{
+	"event": "clickAjaxCreatedButton"
+},
+{
+	"event": "clickDynamicButton"
+},
+{
+	"event": "clickCreatedButton"
+}
+]

@@ -13,8 +13,8 @@ import java.io.IOException;
  */
 public interface WebDriverActionExecution {
     ExecutionReport execute(TestScenario testScenario);
-    ExecutionReport executeOnScreen(TestScenario testScenario, String screenToUse);
-    ExecutionReport executeOnScreen(TestScenario testScenario,
-                                     int i,
-                                     VirtualScreenProcessCreator virtualScreenProcessCreator);
+    ExecutionReport execute(TestScenario testScenario, String screenToUse);
+    ExecutionReport createVirtualScreenProcessAndExecute(TestScenario testScenario,
+                                                         int screenNumber,
+                                                         VirtualScreenProcessCreator virtualScreenProcessCreator);
 }

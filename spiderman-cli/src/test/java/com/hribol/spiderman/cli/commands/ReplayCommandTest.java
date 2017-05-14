@@ -38,7 +38,6 @@ public class ReplayCommandTest {
     private String pathToDriver;
     private String pathToApplicationConfiguration;
     private String pathToSerializedTest;
-    private String csvMeasurementsFileName;
     private int timeout;
     private int measurementsPrecisionMilli;
     private String baseURI;
@@ -47,7 +46,7 @@ public class ReplayCommandTest {
     public void ifDriverStartsSuccessfullyEverythingWorks() throws Exception {
         ReplayBrowser replayBrowser = mock(ReplayBrowser.class);
         baseTest(replayBrowser);
-        verify(replayBrowser).replay(any(InputStream.class), anyString());
+        verify(replayBrowser).replay(any(InputStream.class));
 
     }
 
@@ -62,7 +61,6 @@ public class ReplayCommandTest {
         pathToDriver = "chromedriver";
         pathToApplicationConfiguration = getClass().getResource("/tenniskafe.json").getFile();
         pathToSerializedTest = getClass().getResource("/testCase.json").getFile();
-        csvMeasurementsFileName = "measurements.csv";
         timeout = 10;
         measurementsPrecisionMilli = 500;
         baseURI = "http://tenniskafe.com";
@@ -76,7 +74,6 @@ public class ReplayCommandTest {
                 .pathToDriver(pathToDriver)
                 .applicationConfiguration(pathToApplicationConfiguration)
                 .testCase(pathToSerializedTest)
-                .measurementsFileName(csvMeasurementsFileName)
                 .timeout(timeout)
                 .measurementsPrecisionMilli(measurementsPrecisionMilli)
                 .baseURL(baseURI)

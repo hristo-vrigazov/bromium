@@ -5,11 +5,10 @@ import com.hribol.spiderman.core.execution.application.DefaultApplicationActionF
 import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;
 import com.hribol.spiderman.core.execution.scenario.TestScenario;
 import com.hribol.spiderman.core.execution.scenario.TestScenarioFactory;
+import com.hribol.spiderman.core.suite.VirtualScreenProcessCreator;
 import com.hribol.spiderman.core.utils.ConfigurationUtils;
 import com.hribol.spiderman.replay.report.ExecutionReport;
-import com.hribol.spiderman.replay.report.LoadingTimes;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
-import com.hribol.spiderman.replay.report.AutomationResult;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -53,16 +52,23 @@ public class ReplayBrowser {
         return webDriverActionExecution.execute(testScenario);
     }
 
-    public ExecutionReport replayOnScreen(String pathToSerializedTest,
-                                           String screen)
+    public ExecutionReport replay(String pathToSerializedTest,
+                                  String screen)
             throws IOException, URISyntaxException, InterruptedException {
         TestScenario testScenario = testScenarioFactory.createFromFile(pathToSerializedTest);
-        return webDriverActionExecution.executeOnScreen(testScenario, screen);
+        return webDriverActionExecution.execute(testScenario, screen);
     }
 
-    public ExecutionReport replayOnScreen(InputStream inputStream,
-                                           String screen) throws IOException, URISyntaxException, InterruptedException {
+    public ExecutionReport replay(InputStream inputStream,
+                                  String screen) throws IOException, URISyntaxException, InterruptedException {
         TestScenario testScenario = testScenarioFactory.createFromInputStream(inputStream);
-        return webDriverActionExecution.executeOnScreen(testScenario, screen);
+        return webDriverActionExecution.execute(testScenario, screen);
+    }
+
+    public ExecutionReport createVirtualScreenProcessAndExecute(InputStream inputStream,
+                                                                int screenNumber,
+                                                                VirtualScreenProcessCreator virtualScreenProcessCreator) throws IOException {
+        TestScenario testScenario = testScenarioFactory.createFromInputStream(inputStream);
+        return webDriverActionExecution.createVirtualScreenProcessAndExecute(testScenario, screenNumber, virtualScreenProcessCreator);
     }
 }

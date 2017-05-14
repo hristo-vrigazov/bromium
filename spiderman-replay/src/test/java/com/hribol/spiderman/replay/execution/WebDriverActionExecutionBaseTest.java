@@ -21,7 +21,6 @@ import org.openqa.selenium.remote.service.DriverService;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -135,7 +134,7 @@ public class WebDriverActionExecutionBaseTest {
         TestScenario testScenario = mock(TestScenario.class);
 
         WebDriverActionExecutionBase webDriverActionExecutionBase = spy(getWebDriverActionExecutionBase());
-        webDriverActionExecutionBase.executeOnScreen(testScenario, screen, virtualScreenProcessCreator);
+        webDriverActionExecutionBase.createVirtualScreenProcessAndExecute(testScenario, screen, virtualScreenProcessCreator);
 
         verify(webDriverActionExecutionBase).execute(testScenario);
         verify(process).destroy();
@@ -150,7 +149,7 @@ public class WebDriverActionExecutionBaseTest {
         TestScenario testScenario = mock(TestScenario.class);
 
         WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase();
-        ExecutionReport executionReport = webDriverActionExecutionBase.executeOnScreen(testScenario, screen, virtualScreenProcessCreator);
+        ExecutionReport executionReport = webDriverActionExecutionBase.createVirtualScreenProcessAndExecute(testScenario, screen, virtualScreenProcessCreator);
 
         assertEquals(AutomationResult.NO_VIRTUAL_SCREEN, executionReport.getAutomationResult());
     }
@@ -215,7 +214,7 @@ public class WebDriverActionExecutionBaseTest {
         WebDriverActionExecutionBase webDriverActionExecutionBase = spy(getWebDriverActionExecutionBase());
         TestScenario testScenario = mock(TestScenario.class);
         String screen = ":1";
-        webDriverActionExecutionBase.executeOnScreen(testScenario, screen);
+        webDriverActionExecutionBase.execute(testScenario, screen);
         verify(webDriverActionExecutionBase).execute(testScenario);
     }
 

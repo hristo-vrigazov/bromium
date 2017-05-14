@@ -88,19 +88,19 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     }
 
     @Override
-    public ExecutionReport executeOnScreen(TestScenario testScenario, String screenToUse) {
+    public ExecutionReport execute(TestScenario testScenario, String screenToUse) {
         this.screenToUse = screenToUse;
         return execute(testScenario);
     }
 
     @Override
-    public ExecutionReport executeOnScreen(TestScenario testScenario,
-                                            int i,
-                                            VirtualScreenProcessCreator virtualScreenProcessCreator) {
+    public ExecutionReport createVirtualScreenProcessAndExecute(TestScenario testScenario,
+                                                                int screenNumber,
+                                                                VirtualScreenProcessCreator virtualScreenProcessCreator) {
         Process process;
-        String screen = virtualScreenProcessCreator.getScreen(i);
+        String screen = virtualScreenProcessCreator.getScreen(screenNumber);
         try {
-            process = virtualScreenProcessCreator.createXvfbProcess(i);
+            process = virtualScreenProcessCreator.createXvfbProcess(screenNumber);
         } catch (IOException e) {
             this.automationResult = AutomationResult.NO_VIRTUAL_SCREEN;
             Har har = replaySettings.getHar();

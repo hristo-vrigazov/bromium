@@ -19,7 +19,6 @@ public class ReplayCommandHandler implements CommandHandler {
         String pathToDriver = getPathToDriver(opts);
         String pathToApplicationConfiguration = getPathToApplicationConfiguration(opts);
         String pathToSerializedTest = getPathToTestCase(opts);
-        String csvMeasurementsFileName = getMeasurementsFile(opts);
         int timeout = getTimeout(opts);
         int measurementsPrecisionMilli = getMeasurementsPrecisionMilli(opts);
         String baseURL = getBaseUrl(opts);
@@ -30,7 +29,6 @@ public class ReplayCommandHandler implements CommandHandler {
                 .pathToDriver(pathToDriver)
                 .applicationConfiguration(pathToApplicationConfiguration)
                 .testCase(pathToSerializedTest)
-                .measurementsFileName(csvMeasurementsFileName)
                 .timeout(timeout)
                 .measurementsPrecisionMilli(measurementsPrecisionMilli)
                 .baseURL(baseURL)

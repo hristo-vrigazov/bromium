@@ -6,6 +6,7 @@ import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;
 import com.hribol.spiderman.replay.*;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecutor;
+import com.hribol.spiderman.replay.report.ExecutionReport;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -39,7 +40,7 @@ public class ReplayCommand implements Command {
             WebDriverActionExecution execution = builder.executionFactory.create(builder.browserType, executor);
 
             ReplayBrowser replayBrowser = new ReplayBrowser(builder.applicationConfigurationInputStream, factory, execution);
-            replayBrowser.replay(builder.testInputStream, builder.measurementsFileName);
+            replayBrowser.replay(builder.testInputStream);
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
         }
@@ -50,7 +51,6 @@ public class ReplayCommand implements Command {
         private String pathToDriver;
         private InputStream applicationConfigurationInputStream;
         private InputStream testInputStream;
-        private String measurementsFileName;
         private Integer timeout;
         private Integer measurementsPrecisionMilli;
         private String baseURL;
@@ -86,11 +86,6 @@ public class ReplayCommand implements Command {
 
         public Builder testInputStream(InputStream inputStream) {
             this.testInputStream = inputStream;
-            return this;
-        }
-
-        public Builder measurementsFileName(String measurementsFile) {
-            this.measurementsFileName = measurementsFile;
             return this;
         }
 

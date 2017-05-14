@@ -1,9 +1,7 @@
 package test.replay.replay;
 
-import com.hribol.spiderman.core.execution.application.ApplicationActionFactory;
 import com.hribol.spiderman.core.execution.scenario.TestScenario;
 import com.hribol.spiderman.core.execution.scenario.TestScenarioFactory;
-import com.hribol.spiderman.replay.report.AutomationResult;
 import com.hribol.spiderman.replay.ReplayBrowser;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
 import org.mockito.Mockito;
@@ -50,9 +48,9 @@ public class ReplayBrowserTest {
         when(testScenarioFactory.createFromFile(pathToSerializedTest)).thenReturn(testScenario);
 
         ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, webDriverActionExecution);
-        replayBrowser.replayOnScreen(pathToSerializedTest, screen);
+        replayBrowser.replay(pathToSerializedTest, screen);
 
-        Mockito.verify(webDriverActionExecution).executeOnScreen(testScenario, screen);
+        Mockito.verify(webDriverActionExecution).execute(testScenario, screen);
     }
 
 }
