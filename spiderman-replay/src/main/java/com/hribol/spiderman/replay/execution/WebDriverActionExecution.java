@@ -14,10 +14,6 @@ import java.io.IOException;
 public interface WebDriverActionExecution {
     ExecutionReport execute(TestScenario testScenario);
     ExecutionReport executeOnScreen(TestScenario testScenario, String screenToUse);
-    void dumpHarMetrics(String fileNameToDump) throws IOException;
-
-    LoadingTimes getLoadingTimes();
-    AutomationResult getAutomationResult();
     ExecutionReport executeOnScreen(TestScenario testScenario,
                                      int i,
                                      VirtualScreenProcessCreator virtualScreenProcessCreator);

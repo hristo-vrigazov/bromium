@@ -31,18 +31,20 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         this.executor = executor;
         this.proxyFacade = new ProxyFacade(executor.getBaseURI());
         this.replaySettings = createReplaySettings();
-        this.waitingTimes = new ArrayList<>();
-        this.actionTimestamps = new ArrayList<>();
         this.automationResult = AutomationResult.NOT_STARTED;
     }
 
     @Override
     public ExecutionReport execute(TestScenario testScenario) {
+        List<Long> waitingTimes = new ArrayList<>();
+        List<Date> actionTimestamps = new ArrayList<>();
+
         try {
             prepare();
         } catch (IOException e) {
             this.automationResult = AutomationResult.COULD_NOT_CREATE_DRIVER;
-            return new ExecutionReport();
+            Har har = replaySettings.getHar();
+            return new ExecutionReport(loadingTimes, har, automationResult);
         }
 
         long elapsedTime = System.nanoTime();
@@ -81,25 +83,8 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         
         this.replaySettings.cleanUpReplay();
         this.loadingTimes = new LoadingTimes(testScenario.getActions(), waitingTimes);
-        return new ExecutionReport();
-    }
-
-
-    @Override
-    public void dumpHarMetrics(String fileNameToDump) throws IOException {
         Har har = replaySettings.getHar();
-        File harFile = new File(fileNameToDump);
-        har.writeTo(harFile);
-    }
-
-    @Override
-    public LoadingTimes getLoadingTimes() {
-        return loadingTimes;
-    }
-
-    @Override
-    public AutomationResult getAutomationResult() {
-        return automationResult;
+        return new ExecutionReport(loadingTimes, har, automationResult);
     }
 
     @Override
@@ -118,7 +103,8 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             process = virtualScreenProcessCreator.createXvfbProcess(i);
         } catch (IOException e) {
             this.automationResult = AutomationResult.NO_VIRTUAL_SCREEN;
-            return new ExecutionReport();
+            Har har = replaySettings.getHar();
+            return new ExecutionReport(loadingTimes, har, automationResult);
         }
 
         this.screenToUse = screen;
@@ -137,8 +123,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     private ReplaySettings replaySettings;
     private AutomationResult automationResult;
 
-    private List<Long> waitingTimes;
-    private List<Date> actionTimestamps;
     private String screenToUse;
     private LoadingTimes loadingTimes;
     private final WebDriverActionExecutor executor;
