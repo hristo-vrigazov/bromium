@@ -23,13 +23,13 @@ public class WebDriverActionExecutorTest {
 
         WebDriverActionExecutor webDriverActionExecutor = new WebDriverActionExecutor()
                 .pathToDriverExecutable(pathToDriverExecutable)
-                .baseURI(baseURI)
+                .baseURL(baseURI)
                 .measurementsPrecisionInMilliseconds(precision)
                 .timeoutInSeconds(timeout)
                 .maxRetries(10);
 
         assertEquals(pathToDriverExecutable, webDriverActionExecutor.getPathToDriverExecutable());
-        assertEquals(baseURI, webDriverActionExecutor.getBaseURI());
+        assertEquals(baseURI, webDriverActionExecutor.getBaseURL());
         assertEquals(precision, webDriverActionExecutor.getMeasurementsPrecisionMilli());
         assertEquals(timeout, webDriverActionExecutor.getTimeout());
         assertEquals(maxRetries, webDriverActionExecutor.getMaxRetries());
@@ -50,7 +50,7 @@ public class WebDriverActionExecutorTest {
                 .timeoutInSeconds(timeout);
 
         expectedException.expect(IOException.class);
-        webDriverActionExecutor.getBaseURI();
+        webDriverActionExecutor.getBaseURL();
     }
 
     @Test

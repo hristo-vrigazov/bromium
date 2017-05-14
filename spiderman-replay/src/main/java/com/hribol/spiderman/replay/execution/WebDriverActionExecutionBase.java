@@ -13,7 +13,6 @@ import net.lightbody.bmp.core.har.Har;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriverException;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     public WebDriverActionExecutionBase(WebDriverActionExecutor executor) throws IOException, URISyntaxException {
         this.executor = executor;
-        this.proxyFacade = new ProxyFacade(executor.getBaseURI());
+        this.proxyFacade = new ProxyFacade(executor.getBaseURL());
         this.replaySettings = createReplaySettings();
         this.automationResult = AutomationResult.NOT_STARTED;
     }
@@ -113,6 +112,11 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         } finally {
             process.destroy();
         }
+    }
+
+    @Override
+    public String getBaseURL() {
+        return executor.getBaseURL();
     }
 
     protected ReplayFiltersFacade proxyFacade;

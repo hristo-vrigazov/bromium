@@ -1,7 +1,5 @@
 package com.hribol.spiderman.replay.execution;
 
-import com.hribol.spiderman.core.execution.scenario.TestScenarioFactory;
-
 import java.io.IOException;
 import java.util.Optional;
 
@@ -14,7 +12,7 @@ public class WebDriverActionExecutor {
     private String pathToDriverExecutable;
     private Integer timeout;
     private Integer measurementsPrecisionMilli;
-    private String baseURI;
+    private String baseURL;
 
     public WebDriverActionExecutor pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
@@ -36,17 +34,17 @@ public class WebDriverActionExecutor {
         return this;
     }
 
-    public WebDriverActionExecutor baseURI(String baseURI) {
-        this.baseURI = baseURI;
+    public WebDriverActionExecutor baseURL(String baseURL) {
+        this.baseURL = baseURL;
         return this;
     }
 
-    public String getBaseURI() throws IOException {
-        if (baseURI == null) {
-            throw new IOException("Base URI is not set. Please use the baseURI method");
+    public String getBaseURL() {
+        if (baseURL == null) {
+            throw new IllegalStateException("Base URI is not set. Please use the baseURL method");
         }
 
-        return baseURI;
+        return baseURL;
     }
 
     public String getPathToDriverExecutable() throws IOException {

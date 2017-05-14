@@ -21,7 +21,7 @@ public class ChromeDriverActionExecutionTest {
     @Test
     public void creatingExecution() throws IOException, URISyntaxException {
         WebDriverActionExecutor webDriverActionExecutor = mock(WebDriverActionExecutor.class);
-        when(webDriverActionExecutor.getBaseURI()).thenReturn("http://tenniskafe.com");
+        when(webDriverActionExecutor.getBaseURL()).thenReturn("http://tenniskafe.com");
 
         ChromeDriverActionExecution chromeDriverActionExecution = new ChromeDriverActionExecution(webDriverActionExecutor);
         assertNotNull(chromeDriverActionExecution);

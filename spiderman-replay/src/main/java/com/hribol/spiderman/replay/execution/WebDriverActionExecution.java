@@ -17,4 +17,5 @@ public interface WebDriverActionExecution {
     ExecutionReport createVirtualScreenProcessAndExecute(TestScenario testScenario,
                                                          int screenNumber,
                                                          VirtualScreenProcessCreator virtualScreenProcessCreator);
+    String getBaseURL();
 }

@@ -187,7 +187,7 @@ public class WebDriverActionExecutionBaseTest {
         when(proxyFacade.httpQueueIsEmpty()).thenReturn(true, false);
         when(proxyFacade.isLocked()).thenReturn(false);
 
-        whenNew(ProxyFacade.class).withArguments(executor.getBaseURI()).thenReturn(proxyFacade);
+        whenNew(ProxyFacade.class).withArguments(executor.getBaseURL()).thenReturn(proxyFacade);
         WebDriverActionExecutionBase webDriverActionExecutionBase = new WebDriverActionExecutionBase(executor) {
             @Override
             protected ReplaySettings createReplaySettings() {
@@ -287,7 +287,7 @@ public class WebDriverActionExecutionBaseTest {
 
     private WebDriverActionExecutor getWebDriverActionExecutor(int timeout, int maxRetries) throws IOException {
         WebDriverActionExecutor webDriverActionExecutor = mock(WebDriverActionExecutor.class);
-        when(webDriverActionExecutor.getBaseURI()).thenReturn(baseURI);
+        when(webDriverActionExecutor.getBaseURL()).thenReturn(baseURI);
         when(webDriverActionExecutor.getMeasurementsPrecisionMilli()).thenReturn(precision);
         when(webDriverActionExecutor.getTimeout()).thenReturn(timeout);
         when(webDriverActionExecutor.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
