@@ -3,8 +3,10 @@ package test.replay.replay;
 import com.hribol.spiderman.core.config.ApplicationConfiguration;
 import com.hribol.spiderman.core.execution.application.DefaultApplicationActionFactory;
 import com.hribol.spiderman.core.execution.factory.PredefinedWebDriverActionFactory;
+import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;
 import com.hribol.spiderman.core.execution.scenario.TestScenario;
 import com.hribol.spiderman.core.execution.scenario.TestScenarioFactory;
+import com.hribol.spiderman.core.suite.VirtualScreenProcessCreator;
 import com.hribol.spiderman.core.utils.ConfigurationUtils;
 import com.hribol.spiderman.replay.ReplayBrowser;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
@@ -104,6 +106,37 @@ public class ReplayBrowserTest {
         ReplayBrowser replayBrowser = new ReplayBrowser(configurationFile, execution);
         ExecutionReport report = replayBrowser.replay(fileInputStream, screen);
         assertEquals(report, executionReport);
+    }
+
+    @Test
+    public void canInjectCustomWebDriverActionFactory() throws Exception {
+        String configurationFile = "config.json";
+        String baseURL = "http://something.com";
+
+        FileInputStream fileInputStream = mock(FileInputStream.class);
+        WebDriverActionFactory webDriverActionFactory = mock(WebDriverActionFactory.class);
+        WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
+        WebDriverActionExecution execution = mock(WebDriverActionExecution.class);
+        PredefinedWebDriverActionFactory predefinedWebDriverActionFactory = mock(PredefinedWebDriverActionFactory.class);
+        TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);
+
+        when(execution.getBaseURL()).thenReturn(baseURL);
+
+        whenNew(FileInputStream.class).withArguments(configurationFile).thenReturn(fileInputStream);
+
+        ApplicationConfiguration applicationConfiguration = mock(ApplicationConfiguration.class);
+
+        mockStatic(ConfigurationUtils.class);
+        when(ConfigurationUtils.parseApplicationConfiguration(fileInputStream)).thenReturn(applicationConfiguration);
+        whenNew(PredefinedWebDriverActionFactory.class).withArguments(execution.getBaseURL()).thenReturn(predefinedWebDriverActionFactory);
+        whenNew(TestScenarioFactory.class).withAnyArguments().thenReturn(testScenarioFactory);
+
+        ReplayBrowser replayBrowser = new ReplayBrowser(configurationFile, webDriverActionFactory, webDriverActionExecution);
+
+        VirtualScreenProcessCreator creator = mock(VirtualScreenProcessCreator.class);
+
+        replayBrowser.replay(fileInputStream);
+        replayBrowser.createVirtualScreenProcessAndExecute(fileInputStream, 1, creator);
     }
 
 }
