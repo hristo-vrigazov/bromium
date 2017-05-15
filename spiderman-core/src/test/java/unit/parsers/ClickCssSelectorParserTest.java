@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.hribol.spiderman.core.utils.Constants.EVENT;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -27,5 +28,7 @@ public class ClickCssSelectorParserTest {
         ClickCssSelectorParser clickCssSelectorParser = new ClickCssSelectorParser();
         WebDriverAction webDriverAction = clickCssSelectorParser.create(map, expectHttpRequest);
         assertNotNull(webDriverAction);
+        assertEquals(webDriverAction.getName(), eventName);
+        assertEquals(webDriverAction.expectsHttpRequest(), expectHttpRequest);
     }
 }
