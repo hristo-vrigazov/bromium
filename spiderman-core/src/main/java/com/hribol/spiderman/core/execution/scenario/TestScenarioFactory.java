@@ -35,7 +35,6 @@ public class TestScenarioFactory {
         for (Map<String, String> testCaseStep: testCaseSteps) {
             ApplicationAction domainSpecificAction =
                     applicationActionFactory.create(testCaseStep);
-
             testScenario.addWebDriverAction(domainSpecificAction.getPrecondition());
             testScenario.addWebDriverAction(domainSpecificAction.getWebdriverAction());
             testScenario.addWebDriverAction(domainSpecificAction.getPostcondition());
