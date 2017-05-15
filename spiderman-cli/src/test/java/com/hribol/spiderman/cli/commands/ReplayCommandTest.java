@@ -57,6 +57,13 @@ public class ReplayCommandTest {
         baseTest(replayBrowser);
     }
 
+    @Test
+    public void ifExceptionWhenReplayingFromInputStreamIsThrownThenItIsLogged() throws Exception {
+        ReplayBrowser replayBrowser = mock(ReplayBrowser.class);
+        when(replayBrowser.replay(any(InputStream.class))).thenThrow(new IOException("No driver found"));
+        baseTest(replayBrowser);
+    }
+
     private void baseTest(ReplayBrowser replayBrowser) throws Exception {
         pathToDriver = "chromedriver";
         pathToApplicationConfiguration = getClass().getResource("/tenniskafe.json").getFile();

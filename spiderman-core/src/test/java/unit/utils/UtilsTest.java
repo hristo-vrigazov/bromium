@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -61,5 +62,14 @@ public class UtilsTest {
         when(httpRequest.getUri()).thenReturn("http://tenniskafe.com");
         when(httpRequest.headers()).thenReturn(httpHeaders);
         assertTrue(Utils.isFromCurrentHostAndAcceptsHTML(uri, httpRequest));
+    }
+
+    @Test
+    public void correctlyConvertsNanoSecondsToSeconds() {
+        double expected = 0.123456789;
+        long nanoseconds = 123456789;
+
+        double actual = Utils.toSeconds(nanoseconds);
+        assertEquals(expected, actual);
     }
 }

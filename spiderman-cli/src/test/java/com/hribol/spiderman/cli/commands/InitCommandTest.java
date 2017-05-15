@@ -45,7 +45,7 @@ public class InitCommandTest {
     @Test
     public void ifExceptionIsThrownDoesNotWriteFile() {
         String applicationName = "tenniskafe";
-        String outputfileName = "/asdas/tmp.json";
+        String outputfileName = "/urlConstructor/tmp.json";
         TextTerminal textTerminal = mock(TextTerminal.class);
         StringInputReader stringInputReader = mock(StringInputReader.class);
         when(stringInputReader.read(anyString())).thenReturn(applicationName, outputfileName);
