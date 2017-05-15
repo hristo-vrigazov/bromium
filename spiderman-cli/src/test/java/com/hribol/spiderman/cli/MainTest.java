@@ -3,6 +3,7 @@ package com.hribol.spiderman.cli;
 import com.hribol.spiderman.cli.handlers.UpdateCommandHandler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.stubbing.OngoingStubbing;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -49,11 +50,10 @@ public class MainTest {
         };
 
         UpdateCommandHandler updateCommandHandler = mock(UpdateCommandHandler.class);
-        doNothing().when(updateCommandHandler).handle(anyMap());
-        whenNew(UpdateCommandHandler.class).withAnyArguments().thenThrow(new FileNotFoundException("File not found"));
+        doThrow(FileNotFoundException.class).when(updateCommandHandler).handle(anyMap());
+        whenNew(UpdateCommandHandler.class).withAnyArguments().thenReturn(updateCommandHandler);
 
         Main.main(args);
-        verify(updateCommandHandler, never()).handle(anyMap());
     }
 
     @Test

@@ -24,16 +24,16 @@ public class ReplayBrowser {
     private final WebDriverActionExecution webDriverActionExecution;
     private final TestScenarioFactory testScenarioFactory;
 
-    public ReplayBrowser(String filename, WebDriverActionExecution execution) throws IOException {
-        this(new FileInputStream(filename), execution);
+    public ReplayBrowser(String configurationFile, WebDriverActionExecution execution) throws IOException {
+        this(new FileInputStream(configurationFile), execution);
     }
 
     public ReplayBrowser(InputStream configurationInputStream, WebDriverActionExecution execution) throws IOException {
         this(configurationInputStream, new PredefinedWebDriverActionFactory(execution.getBaseURL()), execution);
     }
 
-    public ReplayBrowser(String filename, WebDriverActionFactory webDriverActionFactory, WebDriverActionExecution execution) throws IOException {
-        this(new FileInputStream(filename), webDriverActionFactory, execution);
+    public ReplayBrowser(String configurationFile, WebDriverActionFactory webDriverActionFactory, WebDriverActionExecution execution) throws IOException {
+        this(new FileInputStream(configurationFile), webDriverActionFactory, execution);
     }
 
     public ReplayBrowser(InputStream configurationInputStream, WebDriverActionFactory webDriverActionFactory, WebDriverActionExecution execution) throws IOException {
