@@ -237,6 +237,28 @@ public class WebDriverActionExecutionBaseTest {
         assertNotNull(webDriverActionExecutionBase);
     }
 
+    @Test
+    public void baseURLIsPassedCorrectly() throws IOException, URISyntaxException {
+        String baseURL = "http://tenniskafe.com";
+
+        ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
+        when(executorBuilder.getBaseURL()).thenReturn(baseURL);
+
+        WebDriverActionExecutionBase webDriverActionExecutionBase = new WebDriverActionExecutionBase(executorBuilder) {
+            @Override
+            protected ReplaySettings createReplaySettings() {
+                return null;
+            }
+
+            @Override
+            public String getSystemProperty() {
+                return null;
+            }
+        };
+
+        assertEquals(baseURL, webDriverActionExecutionBase.getBaseURL());
+    }
+
     private ExecutorBuilder getWebDriverActionExecutor() throws IOException {
         return getWebDriverActionExecutor(10);
     }
