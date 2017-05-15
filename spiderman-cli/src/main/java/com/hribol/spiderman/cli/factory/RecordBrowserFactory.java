@@ -1,6 +1,5 @@
 package com.hribol.spiderman.cli.factory;
 
-import com.hribol.spiderman.browsers.chrome.base.VisibleChromeDriverSupplier;
 import com.hribol.spiderman.browsers.chrome.record.ChromeRecordBrowser;
 import com.hribol.spiderman.record.RecordBrowserBase;
 

@@ -82,6 +82,7 @@ public class ReplayCommandTest {
                 .applicationConfiguration(pathToApplicationConfiguration)
                 .testCase(pathToSerializedTest)
                 .timeout(timeout)
+                .applicationConfigurationInputStream(new FileInputStream(pathToApplicationConfiguration))
                 .measurementsPrecisionMilli(measurementsPrecisionMilli)
                 .baseURL(baseURI)
                 .browserType(CHROME)
