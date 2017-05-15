@@ -53,12 +53,12 @@ public class TestScenarioFactoryTest {
         when(initialPageLoading.getWebdriverAction()).thenReturn(Optional.of(pageLoadingWebDriverAction));
         ApplicationActionFactory applicationActionFactory = mock(ApplicationActionFactory.class);
 
-        List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(fileInputStream);
+        List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(pathToTestCase);
 
         createMock(applicationActionFactory, testCaseSteps);
 
         TestScenarioFactory testScenarioFactory = new TestScenarioFactory(applicationActionFactory);
-        TestScenario testScenario = testScenarioFactory.createFromFile(pathToTestCase);
+        TestScenario testScenario = testScenarioFactory.createFromInputStream(fileInputStream);
 
         assertEquals(testCaseSteps.size(), testScenario.getActions().size());
     }
