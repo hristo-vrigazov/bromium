@@ -8,6 +8,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.apache.commons.io.IOUtils;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -39,6 +40,20 @@ public class MainTest {
 
         Main.main(args);
         verify(updateCommandHandler).handle(anyMap());
+    }
+
+    @Test
+    public void logsExceptionIfFileNotFound() throws Exception {
+        String[] args = {
+                "update", "-a", "blablablabla.json"
+        };
+
+        UpdateCommandHandler updateCommandHandler = mock(UpdateCommandHandler.class);
+        doNothing().when(updateCommandHandler).handle(anyMap());
+        whenNew(UpdateCommandHandler.class).withAnyArguments().thenThrow(new FileNotFoundException("File not found"));
+
+        Main.main(args);
+        verify(updateCommandHandler, never()).handle(anyMap());
     }
 
     @Test
