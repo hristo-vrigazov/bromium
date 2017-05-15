@@ -19,15 +19,15 @@ public class ExecutionReport {
         this.automationResult = automationResult;
     }
 
-    public void dumpHarMetrics(File outputFile) throws IOException {
-        this.har.writeTo(outputFile);
-    }
-
     public LoadingTimes getLoadingTimes() {
         return loadingTimes;
     }
 
     public AutomationResult getAutomationResult() {
         return automationResult;
+    }
+
+    public Har getHar() {
+        return har;
     }
 }
