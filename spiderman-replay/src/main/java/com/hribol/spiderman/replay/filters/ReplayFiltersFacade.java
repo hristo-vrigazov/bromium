@@ -18,4 +18,6 @@ public interface ReplayFiltersFacade {
     RequestFilter getRequestFilter();
 
     ResponseFilter getResponseFilter();
+
+    boolean waitsForPrecondition();
 }

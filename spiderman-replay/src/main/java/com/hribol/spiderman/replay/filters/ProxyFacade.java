@@ -54,4 +54,9 @@ public class ProxyFacade implements ReplayFiltersFacade {
     public ResponseFilter getResponseFilter() {
         return responseFilter;
     }
+
+    @Override
+    public boolean waitsForPrecondition() {
+        return false;
+    }
 }
