@@ -1,6 +1,7 @@
 package com.hribol.spiderman.cli.factory;
 
 import com.hribol.spiderman.browsers.chrome.record.ChromeRecordBrowser;
+import com.hribol.spiderman.record.JavascriptInjector;
 import com.hribol.spiderman.record.RecordBrowserBase;
 
 import java.io.IOException;
@@ -21,10 +22,11 @@ public class RecordBrowserFactory {
     }
 
     public RecordBrowserBase create(String browserName, String pathToDriver, String pathToJSInjectionFile) throws IOException {
-        return this.browserNameToSupplierMap.get(browserName).get(pathToDriver, pathToJSInjectionFile);
+        JavascriptInjector javascriptInjector = new JavascriptInjector(pathToJSInjectionFile);
+        return this.browserNameToSupplierMap.get(browserName).get(pathToDriver, javascriptInjector);
     }
 
-    private RecordBrowserBase getChrome(String pathToDriver, String pathToJSInjectionFile) throws IOException {
-        return new ChromeRecordBrowser(pathToDriver, pathToJSInjectionFile);
+    private RecordBrowserBase getChrome(String pathToDriver, JavascriptInjector javascriptInjector) throws IOException {
+        return new ChromeRecordBrowser(pathToDriver, javascriptInjector);
     }
 }

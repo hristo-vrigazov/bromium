@@ -24,9 +24,8 @@ public abstract class RecordBrowserBase {
     private String pathToDriverExecutable;
     private String jsInjectionCode;
 
-    public RecordBrowserBase(String pathToDriverExecutable, String pathToJsInjectionFile) throws IOException {
+    public RecordBrowserBase(String pathToDriverExecutable, JavascriptInjector javascriptInjector) throws IOException {
         this.pathToDriverExecutable = pathToDriverExecutable;
-        JavascriptInjector javascriptInjector = new JavascriptInjector(pathToJsInjectionFile);
         this.jsInjectionCode = javascriptInjector.getInjectionCode();
     }
 

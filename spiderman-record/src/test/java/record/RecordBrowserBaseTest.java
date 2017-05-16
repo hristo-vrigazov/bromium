@@ -1,6 +1,7 @@
 package record;
 
 import com.hribol.spiderman.core.suppliers.VisibleWebDriverSupplier;
+import com.hribol.spiderman.record.JavascriptInjector;
 import com.hribol.spiderman.record.RecordBrowserBase;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -30,11 +31,12 @@ public class RecordBrowserBaseTest {
         // does not matter, will mock the supplier anyway
         String pathToChromeDriver = "chromedriver";
         String pathToJSInjectionFile = getClass().getResource("/eventsRecorder.js").getFile();
+        JavascriptInjector javascriptInjector = new JavascriptInjector(pathToJSInjectionFile);
 
         VisibleWebDriverSupplier visibleWebDriverSupplier = mock(VisibleWebDriverSupplier.class);
         when(visibleWebDriverSupplier.get(any())).thenReturn(driver);
 
-        RecordBrowserBase recordBrowserBase = new RecordBrowserBase(pathToChromeDriver, pathToJSInjectionFile) {
+        RecordBrowserBase recordBrowserBase = new RecordBrowserBase(pathToChromeDriver, javascriptInjector) {
             @Override
             public String getSystemProperty() {
                 return "webdriver.executable.path";

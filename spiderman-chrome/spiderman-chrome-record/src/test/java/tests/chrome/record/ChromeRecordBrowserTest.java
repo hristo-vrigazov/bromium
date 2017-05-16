@@ -1,6 +1,7 @@
 package tests.chrome.record;
 
 import com.hribol.spiderman.browsers.chrome.record.ChromeRecordBrowser;
+import com.hribol.spiderman.record.JavascriptInjector;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriverService;
 
@@ -18,8 +19,9 @@ public class ChromeRecordBrowserTest {
     public void createsNotNullInstance() throws IOException {
         String pathToDriverExecutable = "chromedriver";
         String pathToJSInjectionFile = getClass().getResource("/eventsRecorder.js").getFile();
+        JavascriptInjector javascriptInjector = new JavascriptInjector(pathToJSInjectionFile);
 
-        ChromeRecordBrowser chromeRecordBrowser = new ChromeRecordBrowser(pathToDriverExecutable, pathToJSInjectionFile);
+        ChromeRecordBrowser chromeRecordBrowser = new ChromeRecordBrowser(pathToDriverExecutable, javascriptInjector);
 
         assertNotNull(chromeRecordBrowser);
         assertNotNull(chromeRecordBrowser.getVisibleWebDriverSupplier());
