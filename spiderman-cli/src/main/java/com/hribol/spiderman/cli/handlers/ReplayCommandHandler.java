@@ -1,6 +1,5 @@
 package com.hribol.spiderman.cli.handlers;
 
-import com.hribol.spiderman.cli.commands.Command;
 import com.hribol.spiderman.cli.commands.ReplayCommand;
 import com.hribol.spiderman.cli.factory.ExecutionFactory;
 

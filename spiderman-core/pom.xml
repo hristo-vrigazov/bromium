@@ -6,7 +6,7 @@
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>A browser automation package that allows you to record and replay browser
-        specific unit.actions.</description>
+        specific actions.</description>
     <url>https://github.com/hristo-vrigazov/spiderman</url>
 
     <parent>
@@ -62,6 +62,11 @@
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
+            <version>3.3.1</version>
         </dependency>
     </dependencies>
 

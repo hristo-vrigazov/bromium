@@ -1,10 +1,10 @@
 package unit.utils;
 
-import com.hribol.spiderman.core.config.ApplicationActionConfiguration;
-import com.hribol.spiderman.core.config.ApplicationConfiguration;
-import com.hribol.spiderman.core.config.ParameterConfiguration;
-import com.hribol.spiderman.core.config.WebDriverActionConfiguration;
-import com.hribol.spiderman.core.utils.ConfigurationUtils;
+import com.hribol.spiderman.replay.config.ApplicationActionConfiguration;
+import com.hribol.spiderman.replay.config.ApplicationConfiguration;
+import com.hribol.spiderman.replay.config.ParameterConfiguration;
+import com.hribol.spiderman.replay.config.WebDriverActionConfiguration;
+import com.hribol.spiderman.replay.config.utils.ConfigurationUtils;
 import org.junit.Test;
 
 import java.io.File;

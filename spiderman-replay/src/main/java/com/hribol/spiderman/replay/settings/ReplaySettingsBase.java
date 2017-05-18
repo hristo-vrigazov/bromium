@@ -1,6 +1,6 @@
 package com.hribol.spiderman.replay.settings;
 
-import com.hribol.spiderman.core.suppliers.*;
+import com.hribol.spiderman.replay.config.suppliers.*;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.filters.RequestFilter;

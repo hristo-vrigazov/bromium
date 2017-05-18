@@ -1,6 +1,6 @@
 package record.settings;
 
-import com.hribol.spiderman.core.suppliers.VisibleWebDriverSupplier;
+import com.hribol.spiderman.replay.config.suppliers.VisibleWebDriverSupplier;
 import com.hribol.spiderman.record.settings.ProxyDriverIntegrator;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;

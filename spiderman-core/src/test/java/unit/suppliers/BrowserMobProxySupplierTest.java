@@ -1,6 +1,6 @@
 package unit.suppliers;
 
-import com.hribol.spiderman.core.suppliers.BrowserMobProxySupplier;
+import com.hribol.spiderman.replay.config.suppliers.BrowserMobProxySupplier;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;

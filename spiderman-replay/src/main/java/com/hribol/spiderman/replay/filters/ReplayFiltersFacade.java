@@ -20,4 +20,8 @@ public interface ReplayFiltersFacade {
     ResponseFilter getResponseFilter();
 
     boolean waitsForPrecondition();
+
+    void setWaitingEvent(String event);
+
+    void signalizeEventIsDone();
 }

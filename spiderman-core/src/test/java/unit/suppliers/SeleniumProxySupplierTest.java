@@ -1,6 +1,6 @@
 package unit.suppliers;
 
-import com.hribol.spiderman.core.suppliers.SeleniumProxySupplier;
+import com.hribol.spiderman.replay.config.suppliers.SeleniumProxySupplier;
 import net.lightbody.bmp.BrowserMobProxy;
 import org.junit.Test;
 import org.openqa.selenium.Proxy;

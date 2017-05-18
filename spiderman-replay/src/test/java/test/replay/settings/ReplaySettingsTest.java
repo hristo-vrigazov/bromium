@@ -1,7 +1,7 @@
 package test.replay.settings;
 
-import com.hribol.spiderman.core.suppliers.InvisibleWebDriverSupplier;
-import com.hribol.spiderman.core.suppliers.VisibleWebDriverSupplier;
+import com.hribol.spiderman.replay.config.suppliers.InvisibleWebDriverSupplier;
+import com.hribol.spiderman.replay.config.suppliers.VisibleWebDriverSupplier;
 import com.hribol.spiderman.replay.settings.ReplaySettings;
 import com.hribol.spiderman.replay.settings.ReplaySettingsBase;
 import net.lightbody.bmp.core.har.Har;

@@ -1,10 +1,10 @@
 package com.hribol.spiderman.replay.execution;
-import com.hribol.spiderman.core.actions.WebDriverAction;
-import com.hribol.spiderman.core.execution.scenario.TestScenario;
-import com.hribol.spiderman.core.suite.VirtualScreenProcessCreator;
+import core.actions.WebDriverAction;
+import core.execution.scenario.TestScenario;
+import com.hribol.spiderman.replay.config.suite.VirtualScreenProcessCreator;
 import com.hribol.spiderman.replay.report.ExecutionReport;
 import com.hribol.spiderman.replay.report.LoadingTimes;
-import com.hribol.spiderman.core.utils.Utils;
+import com.hribol.spiderman.replay.config.utils.Utils;
 import com.hribol.spiderman.replay.report.AutomationResult;
 import com.hribol.spiderman.replay.filters.ProxyFacade;
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
@@ -148,7 +148,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                 (Utils.toSeconds(System.nanoTime() - startTime) < executor.getTimeout())) {
             try {
                 Thread.sleep(executor.getMeasurementsPrecisionMilli());
-                webDriverAction.execute(replaySettings.getWebDriver());
+                webDriverAction.execute(replaySettings.getWebDriver(), proxyFacade);
                 return;
             } catch (WebDriverException ex) {
                 System.out.println(ex.toString());

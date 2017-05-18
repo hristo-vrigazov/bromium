@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.hribol.spiderman.core.utils.Constants.SUBMIT_EVENT_URL;
+import static com.hribol.spiderman.replay.config.utils.Constants.SUBMIT_EVENT_URL;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;

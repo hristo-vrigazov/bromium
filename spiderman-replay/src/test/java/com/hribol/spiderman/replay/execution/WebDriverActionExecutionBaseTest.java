@@ -1,10 +1,10 @@
 package com.hribol.spiderman.replay.execution;
 
-import com.hribol.spiderman.core.actions.WebDriverAction;
-import com.hribol.spiderman.core.execution.scenario.TestScenario;
-import com.hribol.spiderman.core.suite.VirtualScreenProcessCreator;
-import com.hribol.spiderman.core.suppliers.InvisibleWebDriverSupplier;
-import com.hribol.spiderman.core.suppliers.VisibleWebDriverSupplier;
+import core.actions.WebDriverAction;
+import core.execution.scenario.TestScenario;
+import com.hribol.spiderman.replay.config.suite.VirtualScreenProcessCreator;
+import com.hribol.spiderman.replay.config.suppliers.InvisibleWebDriverSupplier;
+import com.hribol.spiderman.replay.config.suppliers.VisibleWebDriverSupplier;
 import com.hribol.spiderman.replay.report.AutomationResult;
 import com.hribol.spiderman.replay.filters.ProxyFacade;
 import com.hribol.spiderman.replay.report.ExecutionReport;
@@ -65,7 +65,7 @@ public class WebDriverActionExecutionBaseTest {
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.hasMoreSteps()).thenReturn(true, false);
         WebDriverAction firstAction = mock(WebDriverAction.class);
-        doThrow(AssertionError.class).when(firstAction).execute(any());
+        doThrow(AssertionError.class).when(firstAction).execute(any(), any());
         when(testScenario.pollWebDriverAction()).thenReturn(firstAction);
         ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.ASSERTION_ERROR, report.getAutomationResult());
@@ -81,7 +81,7 @@ public class WebDriverActionExecutionBaseTest {
         doAnswer(invocationOnMock -> {
             Thread.sleep(1500);
             return null;
-        }).when(firstAction).execute(any());
+        }).when(firstAction).execute(any(), any());
         when(testScenario.pollWebDriverAction()).thenReturn(firstAction);
         ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.TIMEOUT, report.getAutomationResult());
@@ -94,7 +94,7 @@ public class WebDriverActionExecutionBaseTest {
         when(testScenario.hasMoreSteps()).thenReturn(true);
         when(testScenario.nextActionExpectsHttpRequest()).thenReturn(true);
         WebDriverAction firstAction = mock(WebDriverAction.class);
-        doThrow(InterruptedException.class).when(firstAction).execute(any());
+        doThrow(InterruptedException.class).when(firstAction).execute(any(), any());
         when(testScenario.pollWebDriverAction()).thenReturn(firstAction);
         ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.INTERRUPTED, report.getAutomationResult());
@@ -106,7 +106,7 @@ public class WebDriverActionExecutionBaseTest {
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.hasMoreSteps()).thenReturn(true, false);
         WebDriverAction firstAction = mock(WebDriverAction.class);
-        doThrow(new WebDriverException("Exception occured!")).doNothing().when(firstAction).execute(any());
+        doThrow(new WebDriverException("Exception occured!")).doNothing().when(firstAction).execute(any(), any());
         when(testScenario.pollWebDriverAction()).thenReturn(firstAction);
         ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.SUCCESS, report.getAutomationResult());
@@ -118,7 +118,7 @@ public class WebDriverActionExecutionBaseTest {
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.hasMoreSteps()).thenReturn(true, false);
         WebDriverAction firstAction = mock(WebDriverAction.class);
-        doThrow(new WebDriverException("Exception occured!")).when(firstAction).execute(any());
+        doThrow(new WebDriverException("Exception occured!")).when(firstAction).execute(any(), any());
         when(testScenario.pollWebDriverAction()).thenReturn(firstAction);
         ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.TIMEOUT, report.getAutomationResult());
@@ -165,7 +165,7 @@ public class WebDriverActionExecutionBaseTest {
     @Test
     public void throwsExceptionAfterMaxRetriesIsExceeded() throws IOException, URISyntaxException {
         WebDriverAction webDriverAction = mock(WebDriverAction.class);
-        doThrow(new WebDriverException("Action cannot be executed")).when(webDriverAction).execute(any());
+        doThrow(new WebDriverException("Action cannot be executed")).when(webDriverAction).execute(any(), any());
 
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.hasMoreSteps()).thenReturn(true);

@@ -1,6 +1,6 @@
 package unit.suppliers;
 
-import com.hribol.spiderman.core.suppliers.DesiredCapabilitiesSupplier;
+import com.hribol.spiderman.replay.config.suppliers.DesiredCapabilitiesSupplier;
 import org.junit.Test;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.remote.CapabilityType;

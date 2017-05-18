@@ -1,7 +1,7 @@
 package unit.config;
 
-import com.hribol.spiderman.core.config.ApplicationActionConfiguration;
-import com.hribol.spiderman.core.config.WebDriverActionConfiguration;
+import com.hribol.spiderman.replay.config.ApplicationActionConfiguration;
+import com.hribol.spiderman.replay.config.WebDriverActionConfiguration;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

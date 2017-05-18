@@ -1,6 +1,6 @@
 package unit.suite;
 
-import com.hribol.spiderman.core.suite.UbuntuVirtualScreenProcessCreator;
+import com.hribol.spiderman.replay.config.suite.UbuntuVirtualScreenProcessCreator;
 import org.junit.Test;
 
 import java.io.IOException;

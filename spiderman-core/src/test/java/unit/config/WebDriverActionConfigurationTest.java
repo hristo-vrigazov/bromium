@@ -1,7 +1,7 @@
 package unit.config;
 
-import com.hribol.spiderman.core.config.ParameterConfiguration;
-import com.hribol.spiderman.core.config.WebDriverActionConfiguration;
+import com.hribol.spiderman.replay.config.ParameterConfiguration;
+import com.hribol.spiderman.replay.config.WebDriverActionConfiguration;
 import org.junit.Test;
 
 import java.util.HashMap;

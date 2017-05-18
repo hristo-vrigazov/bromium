@@ -1,7 +1,7 @@
 package unit.utils;
 
-import com.hribol.spiderman.core.utils.Constants;
-import com.hribol.spiderman.core.utils.Utils;
+import com.hribol.spiderman.replay.config.utils.Constants;
+import com.hribol.spiderman.replay.config.utils.Utils;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;

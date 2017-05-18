@@ -7,6 +7,7 @@ import net.lightbody.bmp.filters.ResponseFilter;
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -16,13 +17,15 @@ public class ProxyFacade implements ReplayFiltersFacade {
     private Boolean lock;
     private Set<HttpRequest> httpRequestQueue;
 
-    private RequestFilter requestFilter;
+    private ReplayRequestFilter requestFilter;
     private ResponseFilter responseFilter;
+    private Optional<String> optionalEvent;
 
     public ProxyFacade(String baseURI) throws URISyntaxException {
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
         this.requestFilter = new ReplayRequestFilter(this::setLock, baseURI, httpRequestQueue);
         this.responseFilter = new ReplayResponseFilter(baseURI, httpRequestQueue);
+        optionalEvent = Optional.empty();
     }
 
     @Override
@@ -57,6 +60,18 @@ public class ProxyFacade implements ReplayFiltersFacade {
 
     @Override
     public boolean waitsForPrecondition() {
-        return false;
+        return optionalEvent.isPresent() && !requestFilter.isSatisfied(optionalEvent.get());
     }
+
+    @Override
+    public void setWaitingEvent(String event) {
+        optionalEvent = Optional.of(event);
+    }
+
+    @Override
+    public void signalizeEventIsDone() {
+        optionalEvent = Optional.empty();
+    }
+
+
 }

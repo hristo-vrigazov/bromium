@@ -1,6 +1,6 @@
 package unit.config;
 
-import com.hribol.spiderman.core.config.ParameterConfiguration;
+import com.hribol.spiderman.replay.config.ParameterConfiguration;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
