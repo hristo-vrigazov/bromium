@@ -26,7 +26,6 @@ public class TextOfElementFoundByCssSelectorToBe implements WebDriverAction {
         By by = By.cssSelector(cssSelector);
         WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.textToBe(by, text));
-        facade.signalizeEventIsDone();
     }
 
     @Override

@@ -21,7 +21,6 @@ public class ElementByCssToBeClickable implements WebDriverAction {
 
     @Override
     public void execute(WebDriver driver, ReplayFiltersFacade facade) {
-        facade.setWaitingEvent("yaba-daba-du");
 
 //        By by = By.cssSelector(cssSelector);
 //        WebDriverWait wait = new WebDriverWait(driver, 4);

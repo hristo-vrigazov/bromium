@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.*;
 
 
 /**
@@ -51,6 +52,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
         try {
             this.automationResult = AutomationResult.EXECUTING;
+            ExecutorService executorService = Executors.newSingleThreadExecutor();
             while (testScenario.hasMoreSteps()) {
                 if (Utils.toSeconds(System.nanoTime() - elapsedTime) > executor.getTimeout()) {
                     this.automationResult = AutomationResult.TIMEOUT;
@@ -62,7 +64,16 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                 if (proxyFacade.httpQueueIsEmpty() && !proxyFacade.isLocked() && !proxyFacade.waitsForPrecondition()) {
                     proxyFacade.setLock(testScenario.nextActionExpectsHttpRequest());
                     WebDriverAction webDriverAction = testScenario.pollWebDriverAction();
-                    executeIgnoringExceptions(webDriverAction);
+                    Future<Void> future = executorService.submit(() -> {
+                        try {
+                            executeIgnoringExceptions(webDriverAction);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    });
+
+                    future.get(executor.getTimeout(), TimeUnit.SECONDS);
                     waitingTimes.add(System.nanoTime() - elapsedTime);
                     actionTimestamps.add(new Date());
                     elapsedTime = System.nanoTime();
@@ -79,8 +90,13 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         } catch (InterruptedException interruptedException) {
             interruptedException.printStackTrace();
             this.automationResult = AutomationResult.INTERRUPTED;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (java.util.concurrent.TimeoutException e) {
+            e.printStackTrace();
+            this.automationResult = AutomationResult.TIMEOUT;
         }
-        
+
         this.replaySettings.cleanUpReplay();
         this.loadingTimes = new LoadingTimes(testScenario.getActions(), waitingTimes, actionTimestamps);
         Har har = replaySettings.getHar();
@@ -147,12 +163,12 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         while (i < executor.getMaxRetries() &&
                 (Utils.toSeconds(System.nanoTime() - startTime) < executor.getTimeout())) {
             try {
-                Thread.sleep(executor.getMeasurementsPrecisionMilli());
                 webDriverAction.execute(replaySettings.getWebDriver(), proxyFacade);
                 return;
             } catch (WebDriverException ex) {
                 System.out.println(ex.toString());
                 System.out.println("Could not make it from first try");
+                Thread.sleep(executor.getMeasurementsPrecisionMilli());
                 i++;
             }
         }

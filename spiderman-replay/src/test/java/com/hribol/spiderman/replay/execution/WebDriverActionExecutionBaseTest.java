@@ -75,7 +75,7 @@ public class WebDriverActionExecutionBaseTest {
     public void timesoOutIfActionTakesTooLong() throws IOException, URISyntaxException, InterruptedException {
         WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(1);
         TestScenario testScenario = mock(TestScenario.class);
-        when(testScenario.hasMoreSteps()).thenReturn(true);
+        when(testScenario.hasMoreSteps()).thenReturn(true, false);
         when(testScenario.nextActionExpectsHttpRequest()).thenReturn(true);
         WebDriverAction firstAction = mock(WebDriverAction.class);
         doAnswer(invocationOnMock -> {
