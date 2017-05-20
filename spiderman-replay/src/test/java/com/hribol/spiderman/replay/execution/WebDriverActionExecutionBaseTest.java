@@ -15,6 +15,7 @@ import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.service.DriverService;
@@ -23,6 +24,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -65,7 +67,7 @@ public class WebDriverActionExecutionBaseTest {
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.hasMoreSteps()).thenReturn(true, false);
         WebDriverAction firstAction = mock(WebDriverAction.class);
-        doThrow(AssertionError.class).when(firstAction).execute(any(), any());
+        doThrow(new AssertionError()).when(firstAction).execute(any(), any());
         when(testScenario.pollWebDriverAction()).thenReturn(firstAction);
         ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.ASSERTION_ERROR, report.getAutomationResult());
@@ -307,16 +309,28 @@ public class WebDriverActionExecutionBaseTest {
     }
 
     private ExecutorBuilder getWebDriverActionExecutor(int timeout, int maxRetries) throws IOException {
+        AutomationResultBuilder automationResultBuilder = throwable -> {
+            if (throwable instanceof AssertionError) {
+                return AutomationResult.ASSERTION_ERROR;
+            } else if (throwable instanceof java.util.concurrent.TimeoutException || throwable instanceof TimeoutException) {
+                return AutomationResult.TIMEOUT;
+            } else if (throwable instanceof InterruptedException) {
+                return AutomationResult.INTERRUPTED;
+            }
+
+            return AutomationResult.UNRECOGNIZED_EXCEPTION;
+        };
+
         ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
         when(executorBuilder.getBaseURL()).thenReturn(baseURI);
         when(executorBuilder.getMeasurementsPrecisionMilli()).thenReturn(precision);
         when(executorBuilder.getTimeout()).thenReturn(timeout);
         when(executorBuilder.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
         when(executorBuilder.getMaxRetries()).thenReturn(maxRetries);
+        when(executorBuilder.getAutomationResultBuilder()).thenReturn(automationResultBuilder);
         return executorBuilder;
     }
-
-
+    
     private ReplaySettingsBase<DriverService> getReplaySettingsBase() {
         return new ReplaySettingsBase<DriverService>(
                 mock(RequestFilter.class),

@@ -61,7 +61,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                             + " to do " + testScenario.nextActionName()
                             + " http queries in queue: " + proxyFacade.getNumberOfRequestsInQueue());
 
-                    throw new WebDriverActionExecutionException("Timeout!", cause);
+                    throw new WebDriverActionExecutionException("Timeout!", cause, executor.getAutomationResultBuilder());
                 }
 
                 if (proxyFacade.httpQueueIsEmpty() && !proxyFacade.isLocked() && !proxyFacade.waitsForPrecondition()) {
@@ -71,8 +71,10 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                     Future<?> future = executorService.submit(() -> executeIgnoringExceptions(webDriverAction));
                     try {
                         future.get(executor.getTimeout(), TimeUnit.SECONDS);
-                    }  catch (ExecutionException | java.util.concurrent.TimeoutException | InterruptedException e) {
-                        throw new WebDriverActionExecutionException("Exception during execution", e);
+                    }  catch (java.util.concurrent.TimeoutException | InterruptedException e) {
+                        throw new WebDriverActionExecutionException("Exception during execution", e, executor.getAutomationResultBuilder());
+                    } catch (ExecutionException e) {
+                        throw new WebDriverActionExecutionException("Exception during execution", e.getCause(), executor.getAutomationResultBuilder());
                     }
                     waitingTimes.add(System.nanoTime() - elapsedTime);
                     actionTimestamps.add(new Date());
@@ -83,7 +85,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             this.automationResult = AutomationResult.SUCCESS;
         } catch (WebDriverActionExecutionException executionException) {
             executionException.printStackTrace();
-            this.automationResult = AutomationResult.ASSERTION_ERROR;
+            this.automationResult = executionException.getAutomationResult();
         }
 
         this.replaySettings.cleanUpReplay();
@@ -141,8 +143,8 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         System.setProperty(getSystemProperty(), executor.getPathToDriverExecutable());
         proxyFacade.setLock(false);
         this.automationResult = AutomationResult.NOT_STARTED;
-        screenToUse = Optional.ofNullable(screenToUse).orElse(":0");
-        replaySettings.prepareReplay(executor.getPathToDriverExecutable(), screenToUse, executor.getTimeout());
+        this.screenToUse = Optional.ofNullable(screenToUse).orElse(":0");
+        this.replaySettings.prepareReplay(executor.getPathToDriverExecutable(), screenToUse, executor.getTimeout());
     }
 
     private void executeIgnoringExceptions(WebDriverAction webDriverAction) {

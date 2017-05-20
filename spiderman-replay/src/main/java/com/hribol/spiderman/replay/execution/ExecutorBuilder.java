@@ -13,6 +13,7 @@ public class ExecutorBuilder {
     private Integer timeout;
     private Integer measurementsPrecisionMilli;
     private String baseURL;
+    private AutomationResultBuilder automationResultBuilder;
 
     public ExecutorBuilder pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
@@ -70,4 +71,7 @@ public class ExecutorBuilder {
         return Optional.ofNullable(maxRetries).orElse(100);
     }
 
+    public AutomationResultBuilder getAutomationResultBuilder() {
+        return Optional.ofNullable(automationResultBuilder).orElse(new InstanceBasedAutomationResultBuilder());
+    }
 }
