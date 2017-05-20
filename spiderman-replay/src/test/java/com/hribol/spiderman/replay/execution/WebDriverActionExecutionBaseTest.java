@@ -89,9 +89,9 @@ public class WebDriverActionExecutionBaseTest {
 
     @Test
     public void properlyHandlesInterruptedException() throws IOException, URISyntaxException {
-        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(10);
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(5);
         TestScenario testScenario = mock(TestScenario.class);
-        when(testScenario.hasMoreSteps()).thenReturn(true);
+        when(testScenario.hasMoreSteps()).thenReturn(true, false);
         when(testScenario.nextActionExpectsHttpRequest()).thenReturn(true);
         WebDriverAction firstAction = mock(WebDriverAction.class);
         doThrow(InterruptedException.class).when(firstAction).execute(any(), any());
@@ -184,7 +184,7 @@ public class WebDriverActionExecutionBaseTest {
         ReplaySettings replaySettings = getDefaultReplaySettings();
         ExecutorBuilder executor = getWebDriverActionExecutor(1);
         ProxyFacade proxyFacade = mock(ProxyFacade.class);
-        when(proxyFacade.httpQueueIsEmpty()).thenReturn(true, false);
+        when(proxyFacade.httpQueueIsEmpty()).thenReturn(false);
         when(proxyFacade.isLocked()).thenReturn(false);
 
         whenNew(ProxyFacade.class).withArguments(executor.getBaseURL()).thenReturn(proxyFacade);
@@ -200,13 +200,12 @@ public class WebDriverActionExecutionBaseTest {
             }
         };
 
-        WebDriverAction webDriverAction = mock(WebDriverAction.class);
-        when(webDriverAction.getName()).thenReturn("actionName");
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.hasMoreSteps()).thenReturn(true);
-        when(testScenario.pollWebDriverAction()).thenReturn(webDriverAction);
 
-        webDriverActionExecutionBase.execute(testScenario);
+        ExecutionReport executionReport = webDriverActionExecutionBase.execute(testScenario);
+
+        assertEquals(AutomationResult.TIMEOUT, executionReport.getAutomationResult());
     }
 
     @Test

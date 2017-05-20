@@ -56,24 +56,24 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             while (testScenario.hasMoreSteps()) {
                 if (Utils.toSeconds(System.nanoTime() - elapsedTime) > executor.getTimeout()) {
                     this.automationResult = AutomationResult.TIMEOUT;
-                    throw new TimeoutException("Could not execute the action! Waited "
+                    TimeoutException cause = new TimeoutException("Could not execute the action! Waited "
                             + String.valueOf(System.nanoTime() - elapsedTime)
                             + " to do " + testScenario.nextActionName()
                             + " http queries in queue: " + proxyFacade.getNumberOfRequestsInQueue());
+
+                    throw new WebDriverActionExecutionException("Timeout!", cause);
                 }
+
                 if (proxyFacade.httpQueueIsEmpty() && !proxyFacade.isLocked() && !proxyFacade.waitsForPrecondition()) {
                     proxyFacade.setLock(testScenario.nextActionExpectsHttpRequest());
                     WebDriverAction webDriverAction = testScenario.pollWebDriverAction();
-                    Future<Void> future = executorService.submit(() -> {
-                        try {
-                            executeIgnoringExceptions(webDriverAction);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        return null;
-                    });
 
-                    future.get(executor.getTimeout(), TimeUnit.SECONDS);
+                    Future<?> future = executorService.submit(() -> executeIgnoringExceptions(webDriverAction));
+                    try {
+                        future.get(executor.getTimeout(), TimeUnit.SECONDS);
+                    }  catch (ExecutionException | java.util.concurrent.TimeoutException | InterruptedException e) {
+                        throw new WebDriverActionExecutionException("Exception during execution", e);
+                    }
                     waitingTimes.add(System.nanoTime() - elapsedTime);
                     actionTimestamps.add(new Date());
                     elapsedTime = System.nanoTime();
@@ -81,20 +81,9 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             }
 
             this.automationResult = AutomationResult.SUCCESS;
-        } catch (AssertionError assertionError) {
-            assertionError.printStackTrace();
+        } catch (WebDriverActionExecutionException executionException) {
+            executionException.printStackTrace();
             this.automationResult = AutomationResult.ASSERTION_ERROR;
-        } catch (TimeoutException timeoutException) {
-            timeoutException.printStackTrace();
-            this.automationResult = AutomationResult.TIMEOUT;
-        } catch (InterruptedException interruptedException) {
-            interruptedException.printStackTrace();
-            this.automationResult = AutomationResult.INTERRUPTED;
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (java.util.concurrent.TimeoutException e) {
-            e.printStackTrace();
-            this.automationResult = AutomationResult.TIMEOUT;
         }
 
         this.replaySettings.cleanUpReplay();
@@ -156,7 +145,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         replaySettings.prepareReplay(executor.getPathToDriverExecutable(), screenToUse, executor.getTimeout());
     }
 
-    private void executeIgnoringExceptions(WebDriverAction webDriverAction) throws InterruptedException {
+    private void executeIgnoringExceptions(WebDriverAction webDriverAction) {
         int i = 0;
 
         long startTime = System.nanoTime();
@@ -168,7 +157,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             } catch (WebDriverException ex) {
                 System.out.println(ex.toString());
                 System.out.println("Could not make it from first try");
-                Thread.sleep(executor.getMeasurementsPrecisionMilli());
                 i++;
             }
         }
