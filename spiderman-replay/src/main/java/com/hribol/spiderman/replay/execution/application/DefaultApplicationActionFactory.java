@@ -1,7 +1,7 @@
 package com.hribol.spiderman.replay.execution.application;
 
-import com.hribol.spiderman.replay.config.ApplicationActionConfiguration;
-import com.hribol.spiderman.replay.config.ApplicationConfiguration;
+import com.hribol.spiderman.replay.config.config.ApplicationActionConfiguration;
+import com.hribol.spiderman.replay.config.config.ApplicationConfiguration;
 import com.hribol.spiderman.replay.execution.factory.PredefinedWebDriverActionFactory;
 import com.hribol.spiderman.replay.execution.factory.WebDriverActionFactory;
 

@@ -2,7 +2,7 @@ package com.hribol.spiderman.replay.config.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hribol.spiderman.replay.config.ApplicationConfiguration;
+import com.hribol.spiderman.replay.config.config.ApplicationConfiguration;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
