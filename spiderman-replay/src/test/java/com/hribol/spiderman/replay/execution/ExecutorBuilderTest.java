@@ -7,6 +7,7 @@ import org.junit.rules.ExpectedException;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 /**
  * Created by hvrigazov on 23.04.17.
@@ -20,19 +21,22 @@ public class ExecutorBuilderTest {
         int precision = 500;
         int timeout = 10;
         int maxRetries = 10;
+        AutomationResultBuilder automationResultBuilder = mock(AutomationResultBuilder.class);
 
         ExecutorBuilder executorBuilder = new ExecutorBuilder()
                 .pathToDriverExecutable(pathToDriverExecutable)
                 .baseURL(baseURI)
                 .measurementsPrecisionInMilliseconds(precision)
                 .timeoutInSeconds(timeout)
-                .maxRetries(10);
+                .maxRetries(10)
+                .automationResultBuilder(automationResultBuilder);
 
         assertEquals(pathToDriverExecutable, executorBuilder.getPathToDriverExecutable());
         assertEquals(baseURI, executorBuilder.getBaseURL());
         assertEquals(precision, executorBuilder.getMeasurementsPrecisionMilli());
         assertEquals(timeout, executorBuilder.getTimeout());
         assertEquals(maxRetries, executorBuilder.getMaxRetries());
+        assertEquals(automationResultBuilder, executorBuilder.getAutomationResultBuilder());
     }
 
     @Rule

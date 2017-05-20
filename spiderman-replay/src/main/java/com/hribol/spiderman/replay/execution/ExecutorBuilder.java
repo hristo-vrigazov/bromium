@@ -40,6 +40,11 @@ public class ExecutorBuilder {
         return this;
     }
 
+    public ExecutorBuilder automationResultBuilder(AutomationResultBuilder automationResultBuilder) {
+        this.automationResultBuilder = automationResultBuilder;
+        return this;
+    }
+
     public String getBaseURL() {
         if (baseURL == null) {
             throw new IllegalStateException("Base URI is not set. Please use the baseURL method");
@@ -60,18 +65,18 @@ public class ExecutorBuilder {
     }
 
     public int getTimeout() {
-        return Optional.ofNullable(timeout).orElse(20);
+        return Optional.ofNullable(timeout).orElse(this.timeout = 20);
     }
 
     public int getMeasurementsPrecisionMilli() {
-        return Optional.ofNullable(measurementsPrecisionMilli).orElse(500);
+        return Optional.ofNullable(measurementsPrecisionMilli).orElse(this.measurementsPrecisionMilli = 500);
     }
 
     public int getMaxRetries() {
-        return Optional.ofNullable(maxRetries).orElse(100);
+        return Optional.ofNullable(maxRetries).orElse(this.maxRetries = 100);
     }
 
     public AutomationResultBuilder getAutomationResultBuilder() {
-        return Optional.ofNullable(automationResultBuilder).orElse(new InstanceBasedAutomationResultBuilder());
+        return Optional.ofNullable(automationResultBuilder).orElse(this.automationResultBuilder = new InstanceBasedAutomationResultBuilder());
     }
 }

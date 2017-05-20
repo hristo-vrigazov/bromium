@@ -1,6 +1,6 @@
 package com.hribol.spiderman.replay.execution;
-import core.actions.WebDriverAction;
-import core.execution.scenario.TestScenario;
+import com.hribol.spiderman.replay.actions.WebDriverAction;
+import com.hribol.spiderman.replay.execution.scenario.TestScenario;
 import com.hribol.spiderman.replay.config.suite.VirtualScreenProcessCreator;
 import com.hribol.spiderman.replay.report.ExecutionReport;
 import com.hribol.spiderman.replay.report.LoadingTimes;

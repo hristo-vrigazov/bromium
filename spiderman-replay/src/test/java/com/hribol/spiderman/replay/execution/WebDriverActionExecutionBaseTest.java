@@ -1,7 +1,7 @@
 package com.hribol.spiderman.replay.execution;
 
-import core.actions.WebDriverAction;
-import core.execution.scenario.TestScenario;
+import com.hribol.spiderman.replay.actions.WebDriverAction;
+import com.hribol.spiderman.replay.execution.scenario.TestScenario;
 import com.hribol.spiderman.replay.config.suite.VirtualScreenProcessCreator;
 import com.hribol.spiderman.replay.config.suppliers.InvisibleWebDriverSupplier;
 import com.hribol.spiderman.replay.config.suppliers.VisibleWebDriverSupplier;
@@ -24,7 +24,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -330,7 +329,7 @@ public class WebDriverActionExecutionBaseTest {
         when(executorBuilder.getAutomationResultBuilder()).thenReturn(automationResultBuilder);
         return executorBuilder;
     }
-    
+
     private ReplaySettingsBase<DriverService> getReplaySettingsBase() {
         return new ReplaySettingsBase<DriverService>(
                 mock(RequestFilter.class),

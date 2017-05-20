@@ -1,11 +1,11 @@
 package com.hribol.spiderman.replay;
 
-import core.execution.application.ApplicationActionFactory;
-import core.execution.application.DefaultApplicationActionFactory;
-import core.execution.factory.PredefinedWebDriverActionFactory;
-import core.execution.factory.WebDriverActionFactory;
-import core.execution.scenario.TestScenario;
-import core.execution.scenario.TestScenarioFactory;
+import com.hribol.spiderman.replay.execution.application.ApplicationActionFactory;
+import com.hribol.spiderman.replay.execution.application.DefaultApplicationActionFactory;
+import com.hribol.spiderman.replay.execution.factory.PredefinedWebDriverActionFactory;
+import com.hribol.spiderman.replay.execution.factory.WebDriverActionFactory;
+import com.hribol.spiderman.replay.execution.scenario.TestScenario;
+import com.hribol.spiderman.replay.execution.scenario.TestScenarioFactory;
 import com.hribol.spiderman.replay.config.suite.VirtualScreenProcessCreator;
 import com.hribol.spiderman.replay.config.utils.ConfigurationUtils;
 import com.hribol.spiderman.replay.report.ExecutionReport;
