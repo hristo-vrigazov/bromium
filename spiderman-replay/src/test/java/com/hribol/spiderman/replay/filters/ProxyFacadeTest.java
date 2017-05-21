@@ -36,7 +36,7 @@ public class ProxyFacadeTest {
     public void waitsForConditionIfSet() throws URISyntaxException {
         String baseURI = "http://tenniskafe.com";
         ProxyFacade proxyFacade = new ProxyFacade(baseURI);
-        proxyFacade.setWaitingEvent("blabla");
+        proxyFacade.setWaitingEvent("blabla", new Object());
         assertTrue(proxyFacade.waitsForPrecondition());
     }
 
@@ -52,7 +52,7 @@ public class ProxyFacadeTest {
     public void releasesCondition() throws URISyntaxException {
         String baseURI = "http://tenniskafe.com";
         ProxyFacade proxyFacade = new ProxyFacade(baseURI);
-        proxyFacade.setWaitingEvent("blabla");
+        proxyFacade.setWaitingEvent("blabla", new Object());
         assertTrue(proxyFacade.waitsForPrecondition());
         proxyFacade.signalizeEventIsDone();
         assertFalse(proxyFacade.waitsForPrecondition());
@@ -69,7 +69,7 @@ public class ProxyFacadeTest {
         when(replayFiltersFactory.createReplayRequestFilter(any(), anyString(), anySet())).thenReturn(replayRequestFilter);
 
         ProxyFacade proxyFacade = new ProxyFacade(baseURI, replayFiltersFactory);
-        proxyFacade.setWaitingEvent(waitingEvent);
+        proxyFacade.setWaitingEvent(waitingEvent, new Object());
 
         assertTrue(proxyFacade.waitsForPrecondition());
     }
@@ -85,7 +85,7 @@ public class ProxyFacadeTest {
         when(replayFiltersFactory.createReplayRequestFilter(any(), anyString(), anySet())).thenReturn(replayRequestFilter);
 
         ProxyFacade proxyFacade = new ProxyFacade(baseURI, replayFiltersFactory);
-        proxyFacade.setWaitingEvent(waitingEvent);
+        proxyFacade.setWaitingEvent(waitingEvent, new Object());
 
         assertFalse(proxyFacade.waitsForPrecondition());
     }

@@ -66,8 +66,8 @@ public class ProxyFacade implements ReplayFiltersFacade {
     }
 
     @Override
-    public void setWaitingEvent(String event) {
-        requestFilter.setWaitingEvent(event);
+    public boolean setWaitingEvent(String event, Object lock) {
+        return requestFilter.setWaitingEvent(event, lock);
     }
 
     @Override

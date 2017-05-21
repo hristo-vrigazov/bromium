@@ -17,6 +17,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
+import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 /**
  * Created by hvrigazov on 07.05.17.
@@ -31,7 +32,7 @@ import static org.mockito.Mockito.*;
 public class ClickCssSelectorTest {
 
     @Test
-    public void canClickIfThereAreSuitableElements() throws InterruptedException {
+    public void canClickIfThereAreSuitableElements() throws Exception {
         WebElement webElement = mock(WebElement.class);
         String cssSelector = ".test-element";
         String eventName = "CLICK_SOMETHING";
@@ -42,12 +43,13 @@ public class ClickCssSelectorTest {
         when(webDriver.findElement(elementLocator)).thenReturn(webElement);
 
         ReplayRequestFilter replayRequestFilter = PowerMockito.mock(ReplayRequestFilter.class);
-        PowerMockito.doNothing().when(replayRequestFilter).wait();
+        Object lockMock = PowerMockito.mock(Object.class);
+        PowerMockito.doNothing().when(lockMock).wait();
 
         ReplayFiltersFacade facade = mock(ReplayFiltersFacade.class);
         when(facade.getRequestFilter()).thenReturn(replayRequestFilter);
 
-        WebDriverAction action = new ClickCssSelector(cssSelector, eventName, expectsHttpRequest);
+        WebDriverAction action = new ClickCssSelector(cssSelector, eventName, expectsHttpRequest, lockMock);
 
         action.execute(webDriver, facade);
 

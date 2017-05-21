@@ -63,7 +63,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                     throw new WebDriverActionExecutionException("Timeout!", cause, executor.getAutomationResultBuilder());
                 }
 
-                if (proxyFacade.httpQueueIsEmpty() && !proxyFacade.isLocked() && !proxyFacade.waitsForPrecondition()) {
+                if (proxyFacade.httpQueueIsEmpty() && !proxyFacade.isLocked()) {
                     proxyFacade.setLock(testScenario.nextActionExpectsHttpRequest());
                     WebDriverAction webDriverAction = testScenario.pollWebDriverAction();
 

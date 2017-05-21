@@ -25,12 +25,14 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
     private LockCallback lockCallback;
     private Set<String> conditionsSatisfied;
     private Optional<String> optionalEvent;
+    private Optional<Object> optionalLock;
 
     public ReplayRequestFilter(LockCallback lockCallback, String baseURI, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
         super(baseURI, httpRequestQueue);
         this.lockCallback = lockCallback;
         this.conditionsSatisfied = Collections.synchronizedSet(new HashSet<>());
         this.optionalEvent = Optional.empty();
+        this.optionalLock = Optional.empty();
     }
 
 
@@ -42,12 +44,16 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
         if (httpRequest.getUri().contains(CONDITION_SATISFIED_URL)) {
             try {
                 URL url = new URL(httpRequest.getUri());
-                conditionsSatisfied.add(url.getQuery());
+                String event = url.getQuery();
+                conditionsSatisfied.add(event);
                 System.out.println("Satisfied " + conditionsSatisfied.size());
 
-                if (!waitsForPrecondition()) {
-                    synchronized (this) {
-                        notify();
+                if (optionalEvent.isPresent() && optionalEvent.get().equals(event)) {
+                    if (optionalLock.isPresent()) {
+                        Object lock = optionalLock.get();
+                        synchronized (lock) {
+                            lock.notify();
+                        }
                     }
                 }
 
@@ -77,12 +83,16 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
         return optionalEvent.isPresent() && !isSatisfied(optionalEvent.get());
     }
 
-    public void setWaitingEvent(String event) {
+    public boolean setWaitingEvent(String event, Object lock) {
         optionalEvent = Optional.of(event);
+        optionalLock = Optional.of(lock);
+
+        return isSatisfied(event);
     }
 
     public void signalizeEventIsDone() {
         optionalEvent = Optional.empty();
+        optionalLock = Optional.empty();
     }
 
 }

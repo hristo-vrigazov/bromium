@@ -21,7 +21,7 @@ public interface ReplayFiltersFacade {
 
     boolean waitsForPrecondition();
 
-    void setWaitingEvent(String event);
+    boolean setWaitingEvent(String event, Object lock);
 
     void signalizeEventIsDone();
 }

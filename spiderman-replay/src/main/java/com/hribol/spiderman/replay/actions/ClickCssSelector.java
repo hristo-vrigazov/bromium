@@ -13,22 +13,30 @@ public class ClickCssSelector implements WebDriverAction {
     private final String cssSelector;
     private final String eventName;
     private final boolean expectsHttpRequest;
+    private final Object lock;
 
-    public ClickCssSelector(String cssSelector, String eventName, boolean expectsHttpRequest) {
+    public ClickCssSelector(String cssSelector, String eventName, boolean expectsHttpRequest, Object lock) {
         this.cssSelector = cssSelector;
         this.eventName = eventName;
         this.expectsHttpRequest = expectsHttpRequest;
+        this.lock = lock;
+    }
+
+    public ClickCssSelector(String cssSelector, String eventName, boolean expectsHttpRequest) {
+        this(cssSelector, eventName, expectsHttpRequest, new Object());
     }
 
     @Override
     public void execute(WebDriver driver, ReplayFiltersFacade facade) {
-        facade.setWaitingEvent(cssSelector.substring(1));
-        synchronized (facade.getRequestFilter()) {
+        synchronized (lock) {
             try {
-                facade.getRequestFilter().wait();
+                if (!facade.setWaitingEvent(cssSelector.substring(1), lock)) {
+                    lock.wait();
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
         }
 
         By byCss = By.cssSelector(cssSelector);
