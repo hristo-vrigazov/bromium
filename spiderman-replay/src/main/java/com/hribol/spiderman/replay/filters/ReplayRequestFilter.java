@@ -12,6 +12,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static com.hribol.spiderman.replay.config.utils.Constants.CONDITION_NOT_SATISFIED_URL;
@@ -23,11 +24,13 @@ import static com.hribol.spiderman.replay.config.utils.Constants.CONDITION_SATIS
 public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilter {
     private LockCallback lockCallback;
     private Set<String> conditionsSatisfied;
+    private Optional<String> optionalEvent;
 
     public ReplayRequestFilter(LockCallback lockCallback, String baseURI, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
         super(baseURI, httpRequestQueue);
         this.lockCallback = lockCallback;
         this.conditionsSatisfied = Collections.synchronizedSet(new HashSet<>());
+        this.optionalEvent = Optional.empty();
     }
 
 
@@ -41,6 +44,13 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
                 URL url = new URL(httpRequest.getUri());
                 conditionsSatisfied.add(url.getQuery());
                 System.out.println("Satisfied " + conditionsSatisfied.size());
+
+                if (!waitsForPrecondition()) {
+                    synchronized (this) {
+                        notify();
+                    }
+                }
+
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -61,6 +71,18 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
 
     public boolean isSatisfied(String event) {
         return conditionsSatisfied.contains(event);
+    }
+
+    public boolean waitsForPrecondition() {
+        return optionalEvent.isPresent() && !isSatisfied(optionalEvent.get());
+    }
+
+    public void setWaitingEvent(String event) {
+        optionalEvent = Optional.of(event);
+    }
+
+    public void signalizeEventIsDone() {
+        optionalEvent = Optional.empty();
     }
 
 }

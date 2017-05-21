@@ -64,7 +64,7 @@ public class ProxyFacadeTest {
         String baseURI = "http://tenniskafe.com";
 
         ReplayRequestFilter replayRequestFilter = mock(ReplayRequestFilter.class);
-        when(replayRequestFilter.isSatisfied(waitingEvent)).thenReturn(false);
+        when(replayRequestFilter.waitsForPrecondition()).thenReturn(true);
         ReplayFiltersFactory replayFiltersFactory = mock(ReplayFiltersFactory.class);
         when(replayFiltersFactory.createReplayRequestFilter(any(), anyString(), anySet())).thenReturn(replayRequestFilter);
 

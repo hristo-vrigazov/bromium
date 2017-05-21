@@ -22,10 +22,20 @@ public class ClickCssSelector implements WebDriverAction {
 
     @Override
     public void execute(WebDriver driver, ReplayFiltersFacade facade) {
+        facade.setWaitingEvent(cssSelector.substring(1));
+        synchronized (facade.getRequestFilter()) {
+            try {
+                facade.getRequestFilter().wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
         By byCss = By.cssSelector(cssSelector);
         WebElement webElement = driver.findElement(byCss);
         webElement.click();
+
+        facade.signalizeEventIsDone();
     }
 
     @Override

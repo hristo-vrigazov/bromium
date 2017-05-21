@@ -19,7 +19,6 @@ public class ProxyFacade implements ReplayFiltersFacade {
 
     private ReplayRequestFilter requestFilter;
     private ReplayResponseFilter responseFilter;
-    private Optional<String> optionalEvent;
 
     public ProxyFacade(String baseURI) throws URISyntaxException {
         this(baseURI, new ReplayFiltersFactory());
@@ -29,7 +28,6 @@ public class ProxyFacade implements ReplayFiltersFacade {
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
         this.requestFilter = replayFiltersFactory.createReplayRequestFilter(this::setLock, baseURI, httpRequestQueue);
         this.responseFilter = replayFiltersFactory.createReplayResponseFilter(baseURI, httpRequestQueue);
-        optionalEvent = Optional.empty();
     }
 
     @Override
@@ -64,17 +62,17 @@ public class ProxyFacade implements ReplayFiltersFacade {
 
     @Override
     public boolean waitsForPrecondition() {
-        return optionalEvent.isPresent() && !requestFilter.isSatisfied(optionalEvent.get());
+        return requestFilter.waitsForPrecondition();
     }
 
     @Override
     public void setWaitingEvent(String event) {
-        optionalEvent = Optional.of(event);
+        requestFilter.setWaitingEvent(event);
     }
 
     @Override
     public void signalizeEventIsDone() {
-        optionalEvent = Optional.empty();
+        requestFilter.signalizeEventIsDone();
     }
 
 

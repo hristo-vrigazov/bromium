@@ -3,7 +3,9 @@ package com.hribol.spiderman.replay.actions;
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
 import com.hribol.spiderman.replay.actions.ClickCssSelector;
 import com.hribol.spiderman.replay.actions.WebDriverAction;
+import com.hribol.spiderman.replay.filters.ReplayRequestFilter;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,7 +21,7 @@ import static org.mockito.Mockito.when;
 public class ClickCssSelectorTest {
 
     @Test
-    public void canClickIfThereAreSuitableElements() {
+    public void canClickIfThereAreSuitableElements() throws InterruptedException {
         WebElement webElement = mock(WebElement.class);
         String cssSelector = ".test-element";
         String eventName = "CLICK_SOMETHING";
@@ -29,11 +31,29 @@ public class ClickCssSelectorTest {
         WebDriver webDriver = mock(WebDriver.class);
         when(webDriver.findElement(elementLocator)).thenReturn(webElement);
 
-        WebDriverAction action = new ClickCssSelector(cssSelector, eventName, expectsHttpRequest);
-        action.execute(webDriver, mock(ReplayFiltersFacade.class));
+        ReplayRequestFilter replayRequestFilter = mock(ReplayRequestFilter.class);
+        ReplayFiltersFacade facade = mock(ReplayFiltersFacade.class);
+        when(facade.getRequestFilter()).thenReturn(replayRequestFilter);
 
-        verify(webElement).click();
-        assertEquals(eventName, action.getName());
-        assertEquals(expectsHttpRequest, action.expectsHttpRequest());
+        WebDriverAction action = new ClickCssSelector(cssSelector, eventName, expectsHttpRequest);
+
+        Thread notifiedThread = new Thread(() -> {
+            synchronized (replayRequestFilter) {
+                replayRequestFilter.notify();
+            }
+        });
+
+        Thread actionThread = new Thread(() -> {
+            action.execute(webDriver, facade);
+            verify(webElement).click();
+            assertEquals(eventName, action.getName());
+            assertEquals(expectsHttpRequest, action.expectsHttpRequest());
+        });
+
+        actionThread.start();
+        notifiedThread.start();
+
+//        actionThread.join();
+//        notifiedThread.join();
     }
 }
