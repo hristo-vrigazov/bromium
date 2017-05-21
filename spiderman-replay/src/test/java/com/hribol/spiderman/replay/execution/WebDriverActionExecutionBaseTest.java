@@ -198,37 +198,6 @@ public class WebDriverActionExecutionBaseTest {
         assertEquals(AutomationResult.TIMEOUT, executionReport.getAutomationResult());
     }
 
-//    @Test
-//    public void whenHttpRequestsAreInQueueDoesNotAct() throws Exception {
-//        ReplaySettings replaySettings = getDefaultReplaySettings();
-//        ProxyFacade proxyFacade = mock(ProxyFacade.class);
-//        when(proxyFacade.httpQueueIsEmpty()).thenReturn(false);
-//        when(proxyFacade.isLocked()).thenReturn(false);
-//        when(proxyFacade.waitsForPrecondition()).thenReturn(false);
-//        ProxyFacadeSupplier proxyFacadeSupplier = mock(ProxyFacadeSupplier.class);
-//        when(proxyFacadeSupplier.get(anyString())).thenReturn(proxyFacade);
-//        ExecutorBuilder executor = getWebDriverActionExecutor(1);
-//        when(executor.getProxyFacadeSupplier()).thenReturn(proxyFacadeSupplier);
-//        WebDriverActionExecutionBase webDriverActionExecutionBase = new WebDriverActionExecutionBase(executor) {
-//            @Override
-//            protected ReplaySettings createReplaySettings() {
-//                return replaySettings;
-//            }
-//
-//            @Override
-//            public String getSystemProperty() {
-//                return systemProperty;
-//            }
-//        };
-//
-//        TestScenario testScenario = mock(TestScenario.class);
-//        when(testScenario.hasMoreSteps()).thenReturn(true);
-//
-//        ExecutionReport executionReport = webDriverActionExecutionBase.execute(testScenario);
-//
-//        assertEquals(AutomationResult.TIMEOUT, executionReport.getAutomationResult());
-//    }
-
     @Test
     public void executeOnScreenExecutes() throws IOException, URISyntaxException {
         WebDriverActionExecutionBase webDriverActionExecutionBase = spy(getWebDriverActionExecutionBase());

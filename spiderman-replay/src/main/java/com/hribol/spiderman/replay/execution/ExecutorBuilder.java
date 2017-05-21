@@ -23,17 +23,17 @@ public class ExecutorBuilder {
         return this;
     }
 
-    public ExecutorBuilder timeoutInSeconds(int timeout) {
+    public ExecutorBuilder timeoutInSeconds(Integer timeout) {
         this.timeout = timeout;
         return this;
     }
 
-    public ExecutorBuilder measurementsPrecisionInMilliseconds(int measurementsPrecisionMilli) {
+    public ExecutorBuilder measurementsPrecisionInMilliseconds(Integer measurementsPrecisionMilli) {
         this.measurementsPrecisionMilli = measurementsPrecisionMilli;
         return this;
     }
 
-    public ExecutorBuilder maxRetries(int maxRetries) {
+    public ExecutorBuilder maxRetries(Integer maxRetries) {
         this.maxRetries = maxRetries;
         return this;
     }
@@ -73,7 +73,7 @@ public class ExecutorBuilder {
     }
 
     public int getTimeout() {
-        return Optional.ofNullable(timeout).orElse(this.timeout = 20);
+        return Optional.ofNullable(timeout).orElse(this.timeout = 10);
     }
 
     public int getMeasurementsPrecisionMilli() {
@@ -81,7 +81,7 @@ public class ExecutorBuilder {
     }
 
     public int getMaxRetries() {
-        return Optional.ofNullable(maxRetries).orElse(this.maxRetries = 100);
+        return Optional.ofNullable(maxRetries).orElse(this.maxRetries = 50);
     }
 
     public AutomationResultBuilder getAutomationResultBuilder() {

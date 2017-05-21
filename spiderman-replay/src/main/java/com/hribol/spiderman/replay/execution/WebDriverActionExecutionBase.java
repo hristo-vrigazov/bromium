@@ -52,7 +52,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
         try {
             this.automationResult = AutomationResult.EXECUTING;
-            ExecutorService executorService = Executors.newSingleThreadExecutor();
             while (testScenario.hasMoreSteps()) {
                 if (Utils.toSeconds(System.nanoTime() - elapsedTime) > executor.getTimeout()) {
                     this.automationResult = AutomationResult.TIMEOUT;
@@ -89,8 +88,9 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         }
 
         this.replaySettings.cleanUpReplay();
+        this.executorService.shutdown();
         this.loadingTimes = new LoadingTimes(testScenario.getActions(), waitingTimes, actionTimestamps);
-        Har har = replaySettings.getHar();
+        Har har = this.replaySettings.getHar();
         return new ExecutionReport(loadingTimes, har, automationResult);
     }
 
@@ -138,6 +138,8 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     private String screenToUse;
     private LoadingTimes loadingTimes;
     private final ExecutorBuilder executor;
+    private ExecutorService executorService;
+
 
     private void prepare() throws IOException {
         System.setProperty(getSystemProperty(), executor.getPathToDriverExecutable());
@@ -145,6 +147,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         this.automationResult = AutomationResult.NOT_STARTED;
         this.screenToUse = Optional.ofNullable(screenToUse).orElse(":0");
         this.replaySettings.prepareReplay(executor.getPathToDriverExecutable(), screenToUse, executor.getTimeout());
+        this.executorService = Executors.newSingleThreadExecutor();
     }
 
     private void executeIgnoringExceptions(WebDriverAction webDriverAction) {
