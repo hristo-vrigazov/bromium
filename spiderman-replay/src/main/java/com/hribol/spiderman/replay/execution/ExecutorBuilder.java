@@ -1,5 +1,7 @@
 package com.hribol.spiderman.replay.execution;
 
+import com.hribol.spiderman.replay.filters.ProxyFacadeSupplier;
+
 import java.io.IOException;
 import java.util.Optional;
 
@@ -14,6 +16,7 @@ public class ExecutorBuilder {
     private Integer measurementsPrecisionMilli;
     private String baseURL;
     private AutomationResultBuilder automationResultBuilder;
+    private ProxyFacadeSupplier proxyFacadeSupplier;
 
     public ExecutorBuilder pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
@@ -42,6 +45,11 @@ public class ExecutorBuilder {
 
     public ExecutorBuilder automationResultBuilder(AutomationResultBuilder automationResultBuilder) {
         this.automationResultBuilder = automationResultBuilder;
+        return this;
+    }
+
+    public ExecutorBuilder proxyFacadeSupplier(ProxyFacadeSupplier proxyFacadeSupplier) {
+        this.proxyFacadeSupplier = proxyFacadeSupplier;
         return this;
     }
 
@@ -78,5 +86,9 @@ public class ExecutorBuilder {
 
     public AutomationResultBuilder getAutomationResultBuilder() {
         return Optional.ofNullable(automationResultBuilder).orElse(this.automationResultBuilder = new InstanceBasedAutomationResultBuilder());
+    }
+
+    public ProxyFacadeSupplier getProxyFacadeSupplier() {
+        return Optional.ofNullable(proxyFacadeSupplier).orElse(this.proxyFacadeSupplier = new ProxyFacadeSupplier());
     }
 }

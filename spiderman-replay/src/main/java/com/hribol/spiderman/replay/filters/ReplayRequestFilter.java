@@ -14,6 +14,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.hribol.spiderman.replay.config.utils.Constants.CONDITION_NOT_SATISFIED_URL;
+import static com.hribol.spiderman.replay.config.utils.Constants.CONDITION_SATISFIED_URL;
+
 /**
  * Created by hvrigazov on 22.04.17.
  */
@@ -33,7 +36,7 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
         addHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
         lockCallback.setLock(false);
 
-        if (httpRequest.getUri().contains("http://spiderman-condition-satisfied.com/")) {
+        if (httpRequest.getUri().contains(CONDITION_SATISFIED_URL)) {
             try {
                 URL url = new URL(httpRequest.getUri());
                 conditionsSatisfied.add(url.getQuery());
@@ -43,7 +46,7 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
             }
         }
 
-        if (httpRequest.getUri().contains("http://spiderman-condition-not-satisfied.com/")) {
+        if (httpRequest.getUri().contains(CONDITION_NOT_SATISFIED_URL)) {
             try {
                 URL url = new URL(httpRequest.getUri());
                 conditionsSatisfied.remove(url.getQuery());

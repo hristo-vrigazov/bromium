@@ -10,6 +10,8 @@ import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.hribol.spiderman.replay.config.utils.Constants.CONDITION_NOT_SATISFIED_URL;
+import static com.hribol.spiderman.replay.config.utils.Constants.CONDITION_SATISFIED_URL;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
@@ -61,5 +63,104 @@ public class ReplayRequestFilterTest {
 
         assertFalse(httpRequestSet.contains(httpRequest));
         verify(lockCallback).setLock(false);
+    }
+
+    @Test
+    public void ifEventIsSubmittedAsSatisfiedItIsMarked() throws URISyntaxException {
+        LockCallback lockCallback = spy(LockCallback.class);
+        String baseURI = "http://tenniskafe.com";
+        Set<HttpRequest> httpRequestSet = new HashSet<>();
+
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(lockCallback, baseURI, httpRequestSet);
+
+        String event = "event";
+        HttpRequest httpRequest = mock(HttpRequest.class);
+        when(httpRequest.getUri()).thenReturn(CONDITION_SATISFIED_URL + "?" + event);
+
+        HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
+        HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
+
+        when(httpMessageInfo.getOriginalRequest()).thenReturn(httpRequest);
+
+        assertFalse(replayRequestFilter.isSatisfied(event));
+
+        replayRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
+
+        assertTrue(replayRequestFilter.isSatisfied(event));
+    }
+
+    @Test
+    public void ifEventIsSubmittedAsSatisfiedThenAsNotSatisfiedItIsMarked() throws URISyntaxException {
+        LockCallback lockCallback = spy(LockCallback.class);
+        String baseURI = "http://tenniskafe.com";
+        Set<HttpRequest> httpRequestSet = new HashSet<>();
+
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(lockCallback, baseURI, httpRequestSet);
+
+        String event = "event";
+        HttpRequest httpRequest = mock(HttpRequest.class);
+        when(httpRequest.getUri()).thenReturn(CONDITION_SATISFIED_URL + "?" + event);
+
+        HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
+        HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
+
+        when(httpMessageInfo.getOriginalRequest()).thenReturn(httpRequest);
+
+        assertFalse(replayRequestFilter.isSatisfied(event));
+
+        replayRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
+
+        assertTrue(replayRequestFilter.isSatisfied(event));
+
+        when(httpRequest.getUri()).thenReturn(CONDITION_NOT_SATISFIED_URL + "?" + event);
+        replayRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
+
+        assertFalse(replayRequestFilter.isSatisfied(event));
+    }
+
+    @Test
+    public void malformedURLForConditionSatisfied() throws URISyntaxException {
+        LockCallback lockCallback = spy(LockCallback.class);
+        String baseURI = "http://tenniskafe.com";
+        Set<HttpRequest> httpRequestSet = new HashSet<>();
+
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(lockCallback, baseURI, httpRequestSet);
+
+        String event = "event";
+        HttpRequest httpRequest = mock(HttpRequest.class);
+        when(httpRequest.getUri()).thenReturn("h" +CONDITION_SATISFIED_URL + "?" + event);
+
+        HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
+        HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
+
+        when(httpMessageInfo.getOriginalRequest()).thenReturn(httpRequest);
+
+        assertFalse(replayRequestFilter.isSatisfied(event));
+
+        replayRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
+
+        assertFalse(replayRequestFilter.isSatisfied(event));
+    }
+
+    @Test
+    public void malformedURLForConditionNotSatisfied() throws URISyntaxException {
+        LockCallback lockCallback = spy(LockCallback.class);
+        String baseURI = "http://tenniskafe.com";
+        Set<HttpRequest> httpRequestSet = new HashSet<>();
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(lockCallback, baseURI, httpRequestSet);
+        String event = "event";
+        HttpRequest httpRequest = mock(HttpRequest.class);
+        when(httpRequest.getUri()).thenReturn("hs" + CONDITION_NOT_SATISFIED_URL + "?" + event);
+
+        HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
+        HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
+
+        when(httpMessageInfo.getOriginalRequest()).thenReturn(httpRequest);
+
+        assertFalse(replayRequestFilter.isSatisfied(event));
+
+        replayRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
+
+        assertFalse(replayRequestFilter.isSatisfied(event));
     }
 }

@@ -29,7 +29,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     public WebDriverActionExecutionBase(ExecutorBuilder executor) throws IOException, URISyntaxException {
         this.executor = executor;
-        this.proxyFacade = new ProxyFacade(executor.getBaseURL());
+        this.proxyFacade = executor.getProxyFacadeSupplier().get(executor.getBaseURL());
         this.replaySettings = createReplaySettings();
         this.automationResult = AutomationResult.NOT_STARTED;
     }
@@ -150,9 +150,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     private void executeIgnoringExceptions(WebDriverAction webDriverAction) {
         int i = 0;
 
-        long startTime = System.nanoTime();
-        while (i < executor.getMaxRetries() &&
-                (Utils.toSeconds(System.nanoTime() - startTime) < executor.getTimeout())) {
+        while (i < executor.getMaxRetries()) {
             try {
                 webDriverAction.execute(replaySettings.getWebDriver(), proxyFacade);
                 return;
