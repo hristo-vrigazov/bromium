@@ -88,7 +88,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         }
 
         this.replaySettings.cleanUpReplay();
-        this.executorService.shutdown();
+        this.executorService.shutdownNow();
         this.loadingTimes = new LoadingTimes(testScenario.getActions(), waitingTimes, actionTimestamps);
         Har har = this.replaySettings.getHar();
         return new ExecutionReport(loadingTimes, har, automationResult);
