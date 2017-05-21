@@ -20,7 +20,7 @@ public interface WebDriverAction {
      * would be an implementation of an action called ClickId for example.
      * @param driver the instance of driver through which the action will be executed
      */
-    void execute(WebDriver driver, ReplayFiltersFacade replayFiltersFacade);
+    void execute(WebDriver driver, ReplayFiltersFacade facade);
 
     /**
      * The name of the action, which will be written in the measurements and in the

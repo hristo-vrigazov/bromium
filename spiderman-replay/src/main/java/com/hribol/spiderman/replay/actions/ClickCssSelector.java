@@ -8,12 +8,11 @@ import org.openqa.selenium.WebElement;
 /**
  * Clicks on the first element found by a css selector
  */
-public class ClickCssSelector implements WebDriverAction {
+public class ClickCssSelector extends ActionWithJSPreconditionBase {
 
     private final String cssSelector;
     private final String eventName;
     private final boolean expectsHttpRequest;
-    private final Object lock;
 
     public ClickCssSelector(String cssSelector, String eventName, boolean expectsHttpRequest, Object lock) {
         this.cssSelector = cssSelector;
@@ -27,23 +26,10 @@ public class ClickCssSelector implements WebDriverAction {
     }
 
     @Override
-    public void execute(WebDriver driver, ReplayFiltersFacade facade) {
-        synchronized (lock) {
-            try {
-                if (!facade.setWaitingEvent(cssSelector.substring(1), lock)) {
-                    lock.wait();
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }
-
+    protected void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayFiltersFacade facade) {
         By byCss = By.cssSelector(cssSelector);
         WebElement webElement = driver.findElement(byCss);
         webElement.click();
-
-        facade.signalizeEventIsDone();
     }
 
     @Override
@@ -54,5 +40,10 @@ public class ClickCssSelector implements WebDriverAction {
     @Override
     public boolean expectsHttpRequest() {
         return expectsHttpRequest;
+    }
+
+    @Override
+    public String getJSEventToWaitFor() {
+        return cssSelector.substring(1);
     }
 }
