@@ -1,5 +1,6 @@
-package com.hribol.spiderman.replay.actions;
+package com.hribol.spiderman.replay.actions.conditions.javascript;
 
+import com.hribol.spiderman.replay.actions.WebDriverAction;
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
 import org.openqa.selenium.WebDriver;
 
@@ -8,7 +9,11 @@ import org.openqa.selenium.WebDriver;
  */
 public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecondition, WebDriverAction {
 
-    protected Object lock;
+    protected final Object lock;
+
+    protected ActionWithJSPreconditionBase() {
+        this.lock = new Object();
+    }
 
     @Override
     public void execute(WebDriver driver, ReplayFiltersFacade facade) {
@@ -24,9 +29,8 @@ public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecon
 
         executeAfterJSPreconditionHasBeenSatisfied(driver, facade);
         facade.signalizeEventIsDone();
-
     }
 
-    protected abstract void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayFiltersFacade facade);
+    public abstract void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayFiltersFacade facade);
 
 }

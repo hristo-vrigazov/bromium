@@ -1,4 +1,4 @@
-package com.hribol.spiderman.replay.actions;
+package com.hribol.spiderman.replay.actions.conditions.javascript;
 
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
 import org.openqa.selenium.By;
@@ -14,19 +14,14 @@ public class ClickCssSelector extends ActionWithJSPreconditionBase {
     private final String eventName;
     private final boolean expectsHttpRequest;
 
-    public ClickCssSelector(String cssSelector, String eventName, boolean expectsHttpRequest, Object lock) {
+    public ClickCssSelector(String cssSelector, String eventName, boolean expectsHttpRequest) {
         this.cssSelector = cssSelector;
         this.eventName = eventName;
         this.expectsHttpRequest = expectsHttpRequest;
-        this.lock = lock;
-    }
-
-    public ClickCssSelector(String cssSelector, String eventName, boolean expectsHttpRequest) {
-        this(cssSelector, eventName, expectsHttpRequest, new Object());
     }
 
     @Override
-    protected void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayFiltersFacade facade) {
+    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayFiltersFacade facade) {
         By byCss = By.cssSelector(cssSelector);
         WebElement webElement = driver.findElement(byCss);
         webElement.click();

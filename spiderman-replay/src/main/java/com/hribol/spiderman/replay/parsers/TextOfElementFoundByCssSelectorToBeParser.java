@@ -1,6 +1,6 @@
 package com.hribol.spiderman.replay.parsers;
 
-import com.hribol.spiderman.replay.actions.TextOfElementFoundByCssSelectorToBe;
+import com.hribol.spiderman.replay.actions.conditions.selenium.TextOfElementFoundByCssSelectorToBe;
 import com.hribol.spiderman.replay.actions.WebDriverAction;
 
 import java.util.Map;

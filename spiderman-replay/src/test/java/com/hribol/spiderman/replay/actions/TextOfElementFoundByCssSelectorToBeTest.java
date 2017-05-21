@@ -1,5 +1,6 @@
 package com.hribol.spiderman.replay.actions;
 
+import com.hribol.spiderman.replay.actions.conditions.selenium.TextOfElementFoundByCssSelectorToBe;
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
 import org.junit.Rule;
 import org.junit.Test;

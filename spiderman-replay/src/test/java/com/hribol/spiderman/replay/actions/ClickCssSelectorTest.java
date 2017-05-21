@@ -1,17 +1,13 @@
 package com.hribol.spiderman.replay.actions;
 
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
-import com.hribol.spiderman.replay.actions.ClickCssSelector;
-import com.hribol.spiderman.replay.actions.WebDriverAction;
+import com.hribol.spiderman.replay.actions.conditions.javascript.ClickCssSelector;
 import com.hribol.spiderman.replay.filters.ReplayRequestFilter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -42,20 +38,12 @@ public class ClickCssSelectorTest {
         WebDriver webDriver = mock(WebDriver.class);
         when(webDriver.findElement(elementLocator)).thenReturn(webElement);
 
-        ReplayRequestFilter replayRequestFilter = PowerMockito.mock(ReplayRequestFilter.class);
-        Object lockMock = PowerMockito.mock(Object.class);
-        PowerMockito.doNothing().when(lockMock).wait();
+        ClickCssSelector action = new ClickCssSelector(cssSelector, eventName, expectsHttpRequest);
 
-        ReplayFiltersFacade facade = mock(ReplayFiltersFacade.class);
-        when(facade.getRequestFilter()).thenReturn(replayRequestFilter);
-
-        WebDriverAction action = new ClickCssSelector(cssSelector, eventName, expectsHttpRequest, lockMock);
-
-        action.execute(webDriver, facade);
+        action.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayFiltersFacade.class));
 
         verify(webElement).click();
         assertEquals(eventName, action.getName());
         assertEquals(expectsHttpRequest, action.expectsHttpRequest());
-
     }
 }
