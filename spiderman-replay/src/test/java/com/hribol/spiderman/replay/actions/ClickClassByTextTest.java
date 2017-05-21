@@ -1,7 +1,6 @@
 package com.hribol.spiderman.replay.actions;
 
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
-import com.hribol.spiderman.replay.actions.ClickClassByText;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

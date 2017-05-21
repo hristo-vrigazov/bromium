@@ -16,4 +16,6 @@ public class Constants {
     public final static String URL = "url";
     public final static String CONDITION_SATISFIED_URL = "http://spiderman-condition-satisfied.com/";
     public final static String CONDITION_NOT_SATISFIED_URL = "http://spiderman-condition-not-satisfied.com/";
+    public final static String TIMEOUT = "timeout";
+
 }

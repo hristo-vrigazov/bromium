@@ -14,17 +14,19 @@ public class TextOfElementFoundByCssSelectorToBe implements WebDriverAction {
     private final String cssSelector;
     private final String text;
     private final String eventName;
+    private final Integer timeout;
 
-    public TextOfElementFoundByCssSelectorToBe(String cssSelector, String text, String eventName) {
+    public TextOfElementFoundByCssSelectorToBe(String cssSelector, String text, String eventName, Integer timeout) {
         this.cssSelector = cssSelector;
         this.text = text;
         this.eventName = eventName;
+        this.timeout = timeout;
     }
 
     @Override
     public void execute(WebDriver driver, ReplayFiltersFacade facade) {
         By by = By.cssSelector(cssSelector);
-        WebDriverWait wait = new WebDriverWait(driver, 5);
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
         wait.until(ExpectedConditions.textToBe(by, text));
     }
 
