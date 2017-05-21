@@ -20,6 +20,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.service.DriverService;
+import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -30,6 +31,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 /**
@@ -38,7 +40,7 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({
         ProxyFacade.class,
-        WebDriverActionExecutionBase.class
+        WebDriverActionExecutionBase.class,
 })
 public class WebDriverActionExecutionBaseTest {
 
@@ -97,6 +99,22 @@ public class WebDriverActionExecutionBaseTest {
         when(testScenario.nextActionExpectsHttpRequest()).thenReturn(true);
         WebDriverAction firstAction = mock(WebDriverAction.class);
         doThrow(InterruptedException.class).when(firstAction).execute(any(), any());
+        when(testScenario.pollWebDriverAction()).thenReturn(firstAction);
+        ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
+        assertEquals(AutomationResult.INTERRUPTED, report.getAutomationResult());
+    }
+
+    @Test
+    public void properlyHandlesInterruptedExceptionBetweenRetries() throws IOException, URISyntaxException, InterruptedException {
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(5);
+        TestScenario testScenario = mock(TestScenario.class);
+        when(testScenario.hasMoreSteps()).thenReturn(true, false);
+        when(testScenario.nextActionExpectsHttpRequest()).thenReturn(true);
+        WebDriverAction firstAction = mock(WebDriverAction.class);
+        doThrow(new WebDriverException("Something happened!")).when(firstAction).execute(any(), any());
+        PowerMockito.mockStatic(Thread.class);
+        PowerMockito.doThrow(new InterruptedException()).when(Thread.class);
+        Thread.sleep(anyLong());
         when(testScenario.pollWebDriverAction()).thenReturn(firstAction);
         ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.INTERRUPTED, report.getAutomationResult());
@@ -349,6 +367,8 @@ public class WebDriverActionExecutionBaseTest {
             } else if (throwable instanceof java.util.concurrent.TimeoutException || throwable instanceof TimeoutException) {
                 return AutomationResult.TIMEOUT;
             } else if (throwable instanceof InterruptedException) {
+                return AutomationResult.INTERRUPTED;
+            } else if (throwable instanceof WebDriverActionExecutionException) {
                 return AutomationResult.INTERRUPTED;
             }
 

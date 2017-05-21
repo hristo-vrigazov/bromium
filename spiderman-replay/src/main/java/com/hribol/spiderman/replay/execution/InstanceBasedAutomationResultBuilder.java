@@ -18,6 +18,8 @@ public class InstanceBasedAutomationResultBuilder implements AutomationResultBui
             return AutomationResult.INTERRUPTED;
         } else if (throwable instanceof org.openqa.selenium.TimeoutException) {
             return AutomationResult.TIMEOUT;
+        } else if (throwable instanceof WebDriverActionExecutionException) {
+            return buildAutomationResult(throwable.getCause());
         }
 
         return AutomationResult.UNRECOGNIZED_EXCEPTION;

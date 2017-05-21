@@ -161,6 +161,11 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                 System.out.println(ex.toString());
                 System.out.println("Could not make it from first try");
                 i++;
+                try {
+                    Thread.sleep(executor.getMeasurementsPrecisionMilli());
+                } catch (InterruptedException e) {
+                    throw new WebDriverActionExecutionException("Interrupted while waiting to retry", e, executor.getAutomationResultBuilder());
+                }
             }
         }
 

@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.openqa.selenium.TimeoutException;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 /**
  * Created by hvrigazov on 21.05.17.
@@ -49,5 +50,14 @@ public class InstanceBasedAutomationResultBuilderTest {
         AutomationResultBuilder automationResultBuilder = new InstanceBasedAutomationResultBuilder();
         AutomationResult automationResult = automationResultBuilder.buildAutomationResult(throwable);
         assertEquals(automationResult, AutomationResult.UNRECOGNIZED_EXCEPTION);
+    }
+
+    @Test
+    public void correctlyCreatesExceptionWhenWeAreInterestedInTheCause() {
+        Throwable interrupted = new InterruptedException();
+        Throwable throwable = new WebDriverActionExecutionException("Something happened!", interrupted, mock(AutomationResultBuilder.class));
+        AutomationResultBuilder automationResultBuilder = new InstanceBasedAutomationResultBuilder();
+        AutomationResult automationResult = automationResultBuilder.buildAutomationResult(throwable);
+        assertEquals(automationResult, AutomationResult.INTERRUPTED);
     }
 }
