@@ -6,18 +6,28 @@ import com.hribol.spiderman.replay.actions.WebDriverAction;
 import com.hribol.spiderman.replay.filters.ReplayRequestFilter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by hvrigazov on 07.05.17.
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({
+        ReplayRequestFilter.class,
+        Object.class,
+        ReplayFiltersFacade.class,
+        ClickCssSelector.class
+})
 public class ClickCssSelectorTest {
 
     @Test
@@ -31,29 +41,19 @@ public class ClickCssSelectorTest {
         WebDriver webDriver = mock(WebDriver.class);
         when(webDriver.findElement(elementLocator)).thenReturn(webElement);
 
-        ReplayRequestFilter replayRequestFilter = mock(ReplayRequestFilter.class);
+        ReplayRequestFilter replayRequestFilter = PowerMockito.mock(ReplayRequestFilter.class);
+        PowerMockito.doNothing().when(replayRequestFilter).wait();
+
         ReplayFiltersFacade facade = mock(ReplayFiltersFacade.class);
         when(facade.getRequestFilter()).thenReturn(replayRequestFilter);
 
         WebDriverAction action = new ClickCssSelector(cssSelector, eventName, expectsHttpRequest);
 
-        Thread notifiedThread = new Thread(() -> {
-            synchronized (replayRequestFilter) {
-                replayRequestFilter.notify();
-            }
-        });
+        action.execute(webDriver, facade);
 
-        Thread actionThread = new Thread(() -> {
-            action.execute(webDriver, facade);
-            verify(webElement).click();
-            assertEquals(eventName, action.getName());
-            assertEquals(expectsHttpRequest, action.expectsHttpRequest());
-        });
+        verify(webElement).click();
+        assertEquals(eventName, action.getName());
+        assertEquals(expectsHttpRequest, action.expectsHttpRequest());
 
-        actionThread.start();
-        notifiedThread.start();
-
-//        actionThread.join();
-//        notifiedThread.join();
     }
 }
