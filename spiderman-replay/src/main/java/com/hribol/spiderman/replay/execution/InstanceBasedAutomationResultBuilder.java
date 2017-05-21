@@ -12,10 +12,12 @@ public class InstanceBasedAutomationResultBuilder implements AutomationResultBui
     public AutomationResult buildAutomationResult(Throwable throwable) {
         if (throwable instanceof AssertionError) {
             return AutomationResult.ASSERTION_ERROR;
-        } else if (throwable instanceof TimeoutException || throwable instanceof org.openqa.selenium.TimeoutException) {
+        } else if (throwable instanceof TimeoutException) {
             return AutomationResult.TIMEOUT;
         } else if (throwable instanceof InterruptedException) {
             return AutomationResult.INTERRUPTED;
+        } else if (throwable instanceof org.openqa.selenium.TimeoutException) {
+            return AutomationResult.TIMEOUT;
         }
 
         return AutomationResult.UNRECOGNIZED_EXCEPTION;

@@ -1,5 +1,6 @@
 package com.hribol.spiderman.replay.execution;
 
+import com.hribol.spiderman.replay.filters.ProxyFacadeSupplier;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -22,6 +23,7 @@ public class ExecutorBuilderTest {
         int timeout = 10;
         int maxRetries = 10;
         AutomationResultBuilder automationResultBuilder = mock(AutomationResultBuilder.class);
+        ProxyFacadeSupplier proxyFacadeSupplier = mock(ProxyFacadeSupplier.class);
 
         ExecutorBuilder executorBuilder = new ExecutorBuilder()
                 .pathToDriverExecutable(pathToDriverExecutable)
@@ -29,7 +31,8 @@ public class ExecutorBuilderTest {
                 .measurementsPrecisionInMilliseconds(precision)
                 .timeoutInSeconds(timeout)
                 .maxRetries(10)
-                .automationResultBuilder(automationResultBuilder);
+                .automationResultBuilder(automationResultBuilder)
+                .proxyFacadeSupplier(proxyFacadeSupplier);
 
         assertEquals(pathToDriverExecutable, executorBuilder.getPathToDriverExecutable());
         assertEquals(baseURI, executorBuilder.getBaseURL());
@@ -37,6 +40,7 @@ public class ExecutorBuilderTest {
         assertEquals(timeout, executorBuilder.getTimeout());
         assertEquals(maxRetries, executorBuilder.getMaxRetries());
         assertEquals(automationResultBuilder, executorBuilder.getAutomationResultBuilder());
+        assertEquals(proxyFacadeSupplier, executorBuilder.getProxyFacadeSupplier());
     }
 
     @Rule
