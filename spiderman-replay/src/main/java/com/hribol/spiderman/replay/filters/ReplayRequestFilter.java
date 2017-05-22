@@ -35,7 +35,6 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
         this.optionalLock = Optional.empty();
     }
 
-
     @Override
     public HttpResponse filterRequest(HttpRequest httpRequest, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
         addHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
@@ -85,7 +84,7 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
 
     public boolean setWaitingEvent(String event, Object lock) {
         optionalEvent = Optional.of(event);
-        optionalLock = Optional.of(lock);
+        optionalLock = Optional.ofNullable(lock);
 
         return isSatisfied(event);
     }
