@@ -12,7 +12,11 @@ public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecon
     protected final Object lock;
 
     protected ActionWithJSPreconditionBase() {
-        this.lock = new Object();
+        this(new Object());
+    }
+
+    protected ActionWithJSPreconditionBase(Object lock) {
+        this.lock = lock;
     }
 
     @Override

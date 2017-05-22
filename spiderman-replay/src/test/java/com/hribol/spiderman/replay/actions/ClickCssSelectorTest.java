@@ -45,5 +45,6 @@ public class ClickCssSelectorTest {
         verify(webElement).click();
         assertEquals(eventName, action.getName());
         assertEquals(expectsHttpRequest, action.expectsHttpRequest());
+        assertEquals("test-element", action.getJSEventToWaitFor());
     }
 }
