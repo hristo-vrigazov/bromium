@@ -32,6 +32,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         this.proxyFacade = executor.getProxyFacadeSupplier().get(executor.getBaseURL());
         this.replaySettings = createReplaySettings();
         this.automationResult = AutomationResult.NOT_STARTED;
+        this.lock = new Object();
     }
 
     @Override
@@ -53,6 +54,9 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         try {
             this.automationResult = AutomationResult.EXECUTING;
             while (testScenario.hasMoreSteps()) {
+
+                proxyFacade.signalizeExecutionThreadWantsToAct();
+
                 if (Utils.toSeconds(System.nanoTime() - elapsedTime) > executor.getTimeout()) {
                     this.automationResult = AutomationResult.TIMEOUT;
                     TimeoutException cause = new TimeoutException("Could not execute the action! Waited "
@@ -63,7 +67,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                     throw new WebDriverActionExecutionException("Timeout!", cause, executor.getAutomationResultBuilder());
                 }
 
-                if (proxyFacade.httpQueueIsEmpty() && !proxyFacade.isLocked()) {
+                if (proxyFacade.canAct()) {
                     proxyFacade.setLock(testScenario.nextActionExpectsHttpRequest());
                     WebDriverAction webDriverAction = testScenario.pollWebDriverAction();
 
@@ -138,6 +142,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     private String screenToUse;
     private LoadingTimes loadingTimes;
     private final ExecutorBuilder executor;
+    private final Object lock;
     private ExecutorService executorService;
 
 

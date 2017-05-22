@@ -26,6 +26,7 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
     private Set<String> conditionsSatisfied;
     private Optional<String> optionalEvent;
     private Optional<Object> optionalLock;
+    private boolean executionThreadWantToAct;
 
     public ReplayRequestFilter(LockCallback lockCallback, String baseURI, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
         super(baseURI, httpRequestQueue);
@@ -33,6 +34,7 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
         this.conditionsSatisfied = Collections.synchronizedSet(new HashSet<>());
         this.optionalEvent = Optional.empty();
         this.optionalLock = Optional.empty();
+        this.executionThreadWantToAct = false;
     }
 
     @Override
@@ -94,4 +96,7 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
         optionalLock = Optional.empty();
     }
 
+    public void signalizeExecutionThreadWantsToAct() {
+        this.executionThreadWantToAct = true;
+    }
 }

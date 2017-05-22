@@ -28,6 +28,7 @@ public class ProxyFacade implements ReplayFiltersFacade {
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
         this.requestFilter = replayFiltersFactory.createReplayRequestFilter(this::setLock, baseURI, httpRequestQueue);
         this.responseFilter = replayFiltersFactory.createReplayResponseFilter(baseURI, httpRequestQueue);
+        this.lock = false;
     }
 
     @Override
@@ -71,8 +72,18 @@ public class ProxyFacade implements ReplayFiltersFacade {
     }
 
     @Override
+    public boolean canAct() {
+        return httpQueueIsEmpty() && !isLocked();
+    }
+
+    @Override
     public void signalizeEventIsDone() {
         requestFilter.signalizeEventIsDone();
+    }
+
+    @Override
+    public void signalizeExecutionThreadWantsToAct() {
+        requestFilter.signalizeExecutionThreadWantsToAct();
     }
 
 

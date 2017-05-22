@@ -23,5 +23,9 @@ public interface ReplayFiltersFacade {
 
     boolean setWaitingEvent(String event, Object lock);
 
+    boolean canAct();
+
     void signalizeEventIsDone();
+
+    void signalizeExecutionThreadWantsToAct();
 }
