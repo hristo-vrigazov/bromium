@@ -1,8 +1,8 @@
 package com.hribol.spiderman.cli.commands;
 
 import com.hribol.spiderman.cli.factory.ExecutionFactory;
-import com.hribol.spiderman.core.execution.factory.PredefinedWebDriverActionFactory;
-import com.hribol.spiderman.core.execution.factory.WebDriverActionFactory;
+import com.hribol.spiderman.replay.execution.factory.PredefinedWebDriverActionFactory;
+import com.hribol.spiderman.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.spiderman.replay.*;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
 import com.hribol.spiderman.replay.execution.ExecutorBuilder;

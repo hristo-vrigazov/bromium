@@ -1,5 +1,7 @@
 package com.hribol.spiderman.replay.execution;
 
+import com.hribol.spiderman.replay.filters.ProxyFacadeSupplier;
+
 import java.io.IOException;
 import java.util.Optional;
 
@@ -13,29 +15,41 @@ public class ExecutorBuilder {
     private Integer timeout;
     private Integer measurementsPrecisionMilli;
     private String baseURL;
+    private AutomationResultBuilder automationResultBuilder;
+    private ProxyFacadeSupplier proxyFacadeSupplier;
 
     public ExecutorBuilder pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
         return this;
     }
 
-    public ExecutorBuilder timeoutInSeconds(int timeout) {
+    public ExecutorBuilder timeoutInSeconds(Integer timeout) {
         this.timeout = timeout;
         return this;
     }
 
-    public ExecutorBuilder measurementsPrecisionInMilliseconds(int measurementsPrecisionMilli) {
+    public ExecutorBuilder measurementsPrecisionInMilliseconds(Integer measurementsPrecisionMilli) {
         this.measurementsPrecisionMilli = measurementsPrecisionMilli;
         return this;
     }
 
-    public ExecutorBuilder maxRetries(int maxRetries) {
+    public ExecutorBuilder maxRetries(Integer maxRetries) {
         this.maxRetries = maxRetries;
         return this;
     }
 
     public ExecutorBuilder baseURL(String baseURL) {
         this.baseURL = baseURL;
+        return this;
+    }
+
+    public ExecutorBuilder automationResultBuilder(AutomationResultBuilder automationResultBuilder) {
+        this.automationResultBuilder = automationResultBuilder;
+        return this;
+    }
+
+    public ExecutorBuilder proxyFacadeSupplier(ProxyFacadeSupplier proxyFacadeSupplier) {
+        this.proxyFacadeSupplier = proxyFacadeSupplier;
         return this;
     }
 
@@ -59,15 +73,22 @@ public class ExecutorBuilder {
     }
 
     public int getTimeout() {
-        return Optional.ofNullable(timeout).orElse(20);
+        return Optional.ofNullable(timeout).orElse(this.timeout = 10);
     }
 
     public int getMeasurementsPrecisionMilli() {
-        return Optional.ofNullable(measurementsPrecisionMilli).orElse(500);
+        return Optional.ofNullable(measurementsPrecisionMilli).orElse(this.measurementsPrecisionMilli = 500);
     }
 
     public int getMaxRetries() {
-        return Optional.ofNullable(maxRetries).orElse(100);
+        return Optional.ofNullable(maxRetries).orElse(this.maxRetries = 50);
     }
 
+    public AutomationResultBuilder getAutomationResultBuilder() {
+        return Optional.ofNullable(automationResultBuilder).orElse(this.automationResultBuilder = new InstanceBasedAutomationResultBuilder());
+    }
+
+    public ProxyFacadeSupplier getProxyFacadeSupplier() {
+        return Optional.ofNullable(proxyFacadeSupplier).orElse(this.proxyFacadeSupplier = new ProxyFacadeSupplier());
+    }
 }

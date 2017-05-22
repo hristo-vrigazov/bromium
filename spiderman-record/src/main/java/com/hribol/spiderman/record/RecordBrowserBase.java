@@ -2,7 +2,7 @@ package com.hribol.spiderman.record;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hribol.spiderman.core.suppliers.VisibleWebDriverSupplier;
+import com.hribol.spiderman.replay.config.suppliers.VisibleWebDriverSupplier;
 import com.hribol.spiderman.record.settings.ProxyDriverIntegrator;
 import com.hribol.spiderman.record.settings.RecordManager;
 import net.lightbody.bmp.BrowserMobProxy;

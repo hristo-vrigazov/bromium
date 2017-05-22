@@ -1,10 +1,10 @@
 package com.hribol.spiderman.replay.execution;
-import com.hribol.spiderman.core.actions.WebDriverAction;
-import com.hribol.spiderman.core.execution.scenario.TestScenario;
-import com.hribol.spiderman.core.suite.VirtualScreenProcessCreator;
+import com.hribol.spiderman.replay.actions.WebDriverAction;
+import com.hribol.spiderman.replay.execution.scenario.TestScenario;
+import com.hribol.spiderman.replay.config.suite.VirtualScreenProcessCreator;
 import com.hribol.spiderman.replay.report.ExecutionReport;
 import com.hribol.spiderman.replay.report.LoadingTimes;
-import com.hribol.spiderman.core.utils.Utils;
+import com.hribol.spiderman.replay.config.utils.Utils;
 import com.hribol.spiderman.replay.report.AutomationResult;
 import com.hribol.spiderman.replay.filters.ProxyFacade;
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.*;
 
 
 /**
@@ -28,7 +29,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     public WebDriverActionExecutionBase(ExecutorBuilder executor) throws IOException, URISyntaxException {
         this.executor = executor;
-        this.proxyFacade = new ProxyFacade(executor.getBaseURL());
+        this.proxyFacade = executor.getProxyFacadeSupplier().get(executor.getBaseURL());
         this.replaySettings = createReplaySettings();
         this.automationResult = AutomationResult.NOT_STARTED;
     }
@@ -54,15 +55,26 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             while (testScenario.hasMoreSteps()) {
                 if (Utils.toSeconds(System.nanoTime() - elapsedTime) > executor.getTimeout()) {
                     this.automationResult = AutomationResult.TIMEOUT;
-                    throw new TimeoutException("Could not execute the action! Waited "
+                    TimeoutException cause = new TimeoutException("Could not execute the action! Waited "
                             + String.valueOf(System.nanoTime() - elapsedTime)
                             + " to do " + testScenario.nextActionName()
                             + " http queries in queue: " + proxyFacade.getNumberOfRequestsInQueue());
+
+                    throw new WebDriverActionExecutionException("Timeout!", cause, executor.getAutomationResultBuilder());
                 }
+
                 if (proxyFacade.httpQueueIsEmpty() && !proxyFacade.isLocked()) {
                     proxyFacade.setLock(testScenario.nextActionExpectsHttpRequest());
                     WebDriverAction webDriverAction = testScenario.pollWebDriverAction();
-                    executeIgnoringExceptions(webDriverAction);
+
+                    Future<?> future = executorService.submit(() -> executeIgnoringExceptions(webDriverAction));
+                    try {
+                        future.get(executor.getTimeout(), TimeUnit.SECONDS);
+                    }  catch (java.util.concurrent.TimeoutException | InterruptedException e) {
+                        throw new WebDriverActionExecutionException("Exception during execution", e, executor.getAutomationResultBuilder());
+                    } catch (ExecutionException e) {
+                        throw new WebDriverActionExecutionException("Exception during execution", e.getCause(), executor.getAutomationResultBuilder());
+                    }
                     waitingTimes.add(System.nanoTime() - elapsedTime);
                     actionTimestamps.add(new Date());
                     elapsedTime = System.nanoTime();
@@ -70,20 +82,15 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             }
 
             this.automationResult = AutomationResult.SUCCESS;
-        } catch (AssertionError assertionError) {
-            assertionError.printStackTrace();
-            this.automationResult = AutomationResult.ASSERTION_ERROR;
-        } catch (TimeoutException timeoutException) {
-            timeoutException.printStackTrace();
-            this.automationResult = AutomationResult.TIMEOUT;
-        } catch (InterruptedException interruptedException) {
-            interruptedException.printStackTrace();
-            this.automationResult = AutomationResult.INTERRUPTED;
+        } catch (WebDriverActionExecutionException executionException) {
+            executionException.printStackTrace();
+            this.automationResult = executionException.getAutomationResult();
         }
-        
+
         this.replaySettings.cleanUpReplay();
+        this.executorService.shutdownNow();
         this.loadingTimes = new LoadingTimes(testScenario.getActions(), waitingTimes, actionTimestamps);
-        Har har = replaySettings.getHar();
+        Har har = this.replaySettings.getHar();
         return new ExecutionReport(loadingTimes, har, automationResult);
     }
 
@@ -131,29 +138,34 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     private String screenToUse;
     private LoadingTimes loadingTimes;
     private final ExecutorBuilder executor;
+    private ExecutorService executorService;
+
 
     private void prepare() throws IOException {
         System.setProperty(getSystemProperty(), executor.getPathToDriverExecutable());
         proxyFacade.setLock(false);
         this.automationResult = AutomationResult.NOT_STARTED;
-        screenToUse = Optional.ofNullable(screenToUse).orElse(":0");
-        replaySettings.prepareReplay(executor.getPathToDriverExecutable(), screenToUse, executor.getTimeout());
+        this.screenToUse = Optional.ofNullable(screenToUse).orElse(":0");
+        this.replaySettings.prepareReplay(executor.getPathToDriverExecutable(), screenToUse, executor.getTimeout());
+        this.executorService = Executors.newSingleThreadExecutor();
     }
 
-    private void executeIgnoringExceptions(WebDriverAction webDriverAction) throws InterruptedException {
+    private void executeIgnoringExceptions(WebDriverAction webDriverAction) {
         int i = 0;
 
-        long startTime = System.nanoTime();
-        while (i < executor.getMaxRetries() &&
-                (Utils.toSeconds(System.nanoTime() - startTime) < executor.getTimeout())) {
+        while (i < executor.getMaxRetries()) {
             try {
-                Thread.sleep(executor.getMeasurementsPrecisionMilli());
-                webDriverAction.execute(replaySettings.getWebDriver());
+                webDriverAction.execute(replaySettings.getWebDriver(), proxyFacade);
                 return;
             } catch (WebDriverException ex) {
                 System.out.println(ex.toString());
                 System.out.println("Could not make it from first try");
                 i++;
+                try {
+                    Thread.sleep(executor.getMeasurementsPrecisionMilli());
+                } catch (InterruptedException e) {
+                    throw new WebDriverActionExecutionException("Interrupted while waiting to retry", e, executor.getAutomationResultBuilder());
+                }
             }
         }
 

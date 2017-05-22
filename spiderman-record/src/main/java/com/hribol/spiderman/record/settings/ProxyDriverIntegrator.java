@@ -1,9 +1,9 @@
 package com.hribol.spiderman.record.settings;
 
-import com.hribol.spiderman.core.suppliers.BrowserMobProxySupplier;
-import com.hribol.spiderman.core.suppliers.DesiredCapabilitiesSupplier;
-import com.hribol.spiderman.core.suppliers.SeleniumProxySupplier;
-import com.hribol.spiderman.core.suppliers.VisibleWebDriverSupplier;
+import com.hribol.spiderman.replay.config.suppliers.BrowserMobProxySupplier;
+import com.hribol.spiderman.replay.config.suppliers.DesiredCapabilitiesSupplier;
+import com.hribol.spiderman.replay.config.suppliers.SeleniumProxySupplier;
+import com.hribol.spiderman.replay.config.suppliers.VisibleWebDriverSupplier;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;

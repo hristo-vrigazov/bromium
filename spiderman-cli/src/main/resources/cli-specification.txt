@@ -3,7 +3,7 @@ Spiderman.
     Usage:
       spiderman init
       spiderman record -d <pathToDriver> -j <jsFile> -u <url> -o <output> [-b <browserType>] [-t <timeout>]
-      spiderman replay -d <pathToDriver> -a <configuration> -c <case> -p <precision> -m <measurements> -u <url> [-b <browserType>] [-t <timeout>]
+      spiderman replay -d <pathToDriver> -j <jsFile> -a <configuration> -c <case> -p <precision> -m <measurements> -u <url> [-b <browserType>] [-t <timeout>]
       spiderman update -a <configuration>
       spiderman version -a <configuration>
       spiderman (-h | --help)

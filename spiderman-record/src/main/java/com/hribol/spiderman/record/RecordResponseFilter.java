@@ -7,7 +7,7 @@ import net.lightbody.bmp.util.HttpMessageInfo;
 
 import java.net.URI;
 
-import static com.hribol.spiderman.core.utils.Utils.isFromCurrentHostAndAcceptsHTML;
+import static com.hribol.spiderman.replay.config.utils.Utils.isFromCurrentHostAndAcceptsHTML;
 
 /**
  * Created by hvrigazov on 22.04.17.

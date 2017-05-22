@@ -1,6 +1,6 @@
 package com.hribol.spiderman.browsers.chrome.base;
 
-import com.hribol.spiderman.core.suppliers.VisibleWebDriverSupplier;
+import com.hribol.spiderman.replay.config.suppliers.VisibleWebDriverSupplier;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.chrome.ChromeDriver;

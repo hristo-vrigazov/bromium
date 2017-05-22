@@ -1,15 +1,10 @@
 package com.hribol.spiderman.cli.factory;
 
-import com.hribol.spiderman.browsers.chrome.base.VisibleChromeDriverSupplier;
 import com.hribol.spiderman.browsers.chrome.record.ChromeRecordBrowser;
-import com.hribol.spiderman.cli.factory.RecordBrowserFactory;
-import com.hribol.spiderman.core.suppliers.VisibleWebDriverSupplier;
 import com.hribol.spiderman.record.JavascriptInjector;
 import com.hribol.spiderman.record.RecordBrowserBase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 

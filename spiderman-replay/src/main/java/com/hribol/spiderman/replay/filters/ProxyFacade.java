@@ -7,6 +7,7 @@ import net.lightbody.bmp.filters.ResponseFilter;
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -16,13 +17,17 @@ public class ProxyFacade implements ReplayFiltersFacade {
     private Boolean lock;
     private Set<HttpRequest> httpRequestQueue;
 
-    private RequestFilter requestFilter;
-    private ResponseFilter responseFilter;
+    private ReplayRequestFilter requestFilter;
+    private ReplayResponseFilter responseFilter;
 
     public ProxyFacade(String baseURI) throws URISyntaxException {
+        this(baseURI, new ReplayFiltersFactory());
+    }
+
+    public ProxyFacade(String baseURI, ReplayFiltersFactory replayFiltersFactory) throws URISyntaxException {
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
-        this.requestFilter = new ReplayRequestFilter(this::setLock, baseURI, httpRequestQueue);
-        this.responseFilter = new ReplayResponseFilter(baseURI, httpRequestQueue);
+        this.requestFilter = replayFiltersFactory.createReplayRequestFilter(this::setLock, baseURI, httpRequestQueue);
+        this.responseFilter = replayFiltersFactory.createReplayResponseFilter(baseURI, httpRequestQueue);
     }
 
     @Override
@@ -54,4 +59,21 @@ public class ProxyFacade implements ReplayFiltersFacade {
     public ResponseFilter getResponseFilter() {
         return responseFilter;
     }
+
+    @Override
+    public boolean waitsForPrecondition() {
+        return requestFilter.waitsForPrecondition();
+    }
+
+    @Override
+    public boolean setWaitingEvent(String event, Object lock) {
+        return requestFilter.setWaitingEvent(event, lock);
+    }
+
+    @Override
+    public void signalizeEventIsDone() {
+        requestFilter.signalizeEventIsDone();
+    }
+
+
 }

@@ -1,14 +1,13 @@
 package com.hribol.spiderman.cli.commands;
 
 import com.hribol.spiderman.cli.MainMenuChoice;
-import com.hribol.spiderman.core.config.ApplicationActionConfiguration;
-import com.hribol.spiderman.core.config.ApplicationConfiguration;
-import com.hribol.spiderman.core.config.ParameterConfiguration;
-import com.hribol.spiderman.core.config.WebDriverActionConfiguration;
+import com.hribol.spiderman.replay.config.config.ApplicationActionConfiguration;
+import com.hribol.spiderman.replay.config.config.ApplicationConfiguration;
+import com.hribol.spiderman.replay.config.config.ParameterConfiguration;
+import com.hribol.spiderman.replay.config.config.WebDriverActionConfiguration;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 
-import java.io.IOException;
 import java.util.*;
 
 /**

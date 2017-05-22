@@ -1,7 +1,7 @@
 package com.hribol.spiderman.cli.commands;
 
-import com.hribol.spiderman.core.config.ApplicationConfiguration;
-import com.hribol.spiderman.core.utils.ConfigurationUtils;
+import com.hribol.spiderman.replay.config.config.ApplicationConfiguration;
+import com.hribol.spiderman.replay.config.utils.ConfigurationUtils;
 import org.beryx.textio.TextIO;
 
 import java.io.IOException;

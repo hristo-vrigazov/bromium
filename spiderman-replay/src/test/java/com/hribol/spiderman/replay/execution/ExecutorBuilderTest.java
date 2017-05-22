@@ -1,5 +1,6 @@
 package com.hribol.spiderman.replay.execution;
 
+import com.hribol.spiderman.replay.filters.ProxyFacadeSupplier;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -7,6 +8,7 @@ import org.junit.rules.ExpectedException;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 /**
  * Created by hvrigazov on 23.04.17.
@@ -20,19 +22,25 @@ public class ExecutorBuilderTest {
         int precision = 500;
         int timeout = 10;
         int maxRetries = 10;
+        AutomationResultBuilder automationResultBuilder = mock(AutomationResultBuilder.class);
+        ProxyFacadeSupplier proxyFacadeSupplier = mock(ProxyFacadeSupplier.class);
 
         ExecutorBuilder executorBuilder = new ExecutorBuilder()
                 .pathToDriverExecutable(pathToDriverExecutable)
                 .baseURL(baseURI)
                 .measurementsPrecisionInMilliseconds(precision)
                 .timeoutInSeconds(timeout)
-                .maxRetries(10);
+                .maxRetries(10)
+                .automationResultBuilder(automationResultBuilder)
+                .proxyFacadeSupplier(proxyFacadeSupplier);
 
         assertEquals(pathToDriverExecutable, executorBuilder.getPathToDriverExecutable());
         assertEquals(baseURI, executorBuilder.getBaseURL());
         assertEquals(precision, executorBuilder.getMeasurementsPrecisionMilli());
         assertEquals(timeout, executorBuilder.getTimeout());
         assertEquals(maxRetries, executorBuilder.getMaxRetries());
+        assertEquals(automationResultBuilder, executorBuilder.getAutomationResultBuilder());
+        assertEquals(proxyFacadeSupplier, executorBuilder.getProxyFacadeSupplier());
     }
 
     @Rule
