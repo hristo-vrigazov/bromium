@@ -60,31 +60,31 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             automationResult = AutomationResult.EXECUTING;
             while (testScenario.hasMoreSteps()) {
 
-                if (Utils.toSeconds(System.nanoTime() - elapsedTime) > executor.getTimeout()) {
-                    automationResult = AutomationResult.TIMEOUT;
-                    TimeoutException cause = new TimeoutException("Could not execute the action! Waited "
-                            + String.valueOf(System.nanoTime() - elapsedTime)
-                            + " to do " + testScenario.nextActionName());
-
-                    throw new WebDriverActionExecutionException("Timeout!", cause, executor.getAutomationResultBuilder());
-                }
-
-                if (proxyFacade.canAct()) {
-                    proxyFacade.getRequestFilter().setHttpLock(testScenario.nextActionExpectsHttpRequest());
-                    WebDriverAction webDriverAction = testScenario.pollWebDriverAction();
-
-                    Future<?> future = executorService.submit(() -> executeIgnoringExceptions(replaySettings.getWebDriver(), webDriverAction));
-                    try {
-                        future.get(executor.getTimeout(), TimeUnit.SECONDS);
-                    }  catch (java.util.concurrent.TimeoutException | InterruptedException e) {
-                        throw new WebDriverActionExecutionException("Exception during execution", e, executor.getAutomationResultBuilder());
-                    } catch (ExecutionException e) {
-                        throw new WebDriverActionExecutionException("Exception during execution", e.getCause(), executor.getAutomationResultBuilder());
+                Object lock = new Object();
+                synchronized (lock) {
+                    if (!proxyFacade.getResponseFilter().setExecutionThreadLock(lock)) {
+                        try {
+                            lock.wait(executor.getTimeout());
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
-                    waitingTimes.add(System.nanoTime() - elapsedTime);
-                    actionTimestamps.add(new Date());
-                    elapsedTime = System.nanoTime();
                 }
+
+                proxyFacade.getRequestFilter().setHttpLock(testScenario.nextActionExpectsHttpRequest());
+                WebDriverAction webDriverAction = testScenario.pollWebDriverAction();
+
+                Future<?> future = executorService.submit(() -> executeIgnoringExceptions(replaySettings.getWebDriver(), webDriverAction));
+                try {
+                    future.get(executor.getTimeout(), TimeUnit.SECONDS);
+                }  catch (java.util.concurrent.TimeoutException | InterruptedException e) {
+                    throw new WebDriverActionExecutionException("Exception during execution", e, executor.getAutomationResultBuilder());
+                } catch (ExecutionException e) {
+                    throw new WebDriverActionExecutionException("Exception during execution", e.getCause(), executor.getAutomationResultBuilder());
+                }
+                waitingTimes.add(System.nanoTime() - elapsedTime);
+                actionTimestamps.add(new Date());
+                elapsedTime = System.nanoTime();
             }
 
             this.automationResult = AutomationResult.SUCCESS;

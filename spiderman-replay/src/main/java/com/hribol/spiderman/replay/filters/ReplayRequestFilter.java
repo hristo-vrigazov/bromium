@@ -90,10 +90,13 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
     }
 
     public boolean setJSWaitingEvent(String event, Object lock) {
+        if (isSatisfied(event)) {
+            return true;
+        }
+
         optionalEvent = Optional.of(event);
         optionalJSLock = Optional.ofNullable(lock);
-
-        return isSatisfied(event);
+        return false;
     }
 
     public void signalizeEventIsDone() {

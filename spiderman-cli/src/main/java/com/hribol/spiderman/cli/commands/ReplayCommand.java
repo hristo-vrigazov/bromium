@@ -41,8 +41,8 @@ public class ReplayCommand implements Command {
             WebDriverActionExecution execution = builder.executionFactory.create(builder.browserType, executor);
 
             ReplayBrowser replayBrowser = new ReplayBrowser(builder.applicationConfigurationInputStream, factory, execution);
-            ExecutionReport report = replayBrowser.replay(builder.testInputStream);
-        } catch (IOException | URISyntaxException | InterruptedException e) {
+            ExecutionReport report = replayBrowser.createVirtualScreenProcessAndExecute(builder.testInputStream, 1, new UbuntuVirtualScreenProcessCreator());
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
 

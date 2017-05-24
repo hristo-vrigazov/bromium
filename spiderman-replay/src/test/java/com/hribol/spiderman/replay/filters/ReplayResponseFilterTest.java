@@ -9,6 +9,7 @@ import org.junit.Test;
 import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.BooleanSupplier;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -24,7 +25,8 @@ public class ReplayResponseFilterTest {
     public void replayResponseFilterRemovesIfWhiteListedURL() throws URISyntaxException {
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
-        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter(baseURI, httpRequestSet);
+        BooleanSupplier booleanSupplier = mock(BooleanSupplier.class);
+        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter(booleanSupplier, baseURI, httpRequestSet);
 
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn("http://tenniskafe.com/static/some.css");
@@ -45,7 +47,8 @@ public class ReplayResponseFilterTest {
     public void replayResponseFilterDoesNotRemoveIfURLIsNotWhiteListed() throws URISyntaxException {
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
-        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter(baseURI, httpRequestSet);
+        BooleanSupplier booleanSupplier = mock(BooleanSupplier.class);
+        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter(booleanSupplier, baseURI, httpRequestSet);
 
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn("http://google.com/static/some.css");
