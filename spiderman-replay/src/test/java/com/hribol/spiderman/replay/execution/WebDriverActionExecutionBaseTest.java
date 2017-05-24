@@ -164,16 +164,17 @@ public class WebDriverActionExecutionBaseTest {
     @Test
     public void executingOnVirtualScreenKillsProcess() throws IOException, URISyntaxException {
         int screen = 1;
+        String screenString = ":1";
         Process process = mock(Process.class);
         VirtualScreenProcessCreator virtualScreenProcessCreator = mock(VirtualScreenProcessCreator.class);
-        when(virtualScreenProcessCreator.getScreen(screen)).thenReturn(":1");
+        when(virtualScreenProcessCreator.getScreen(screen)).thenReturn(screenString);
         when(virtualScreenProcessCreator.createXvfbProcess(screen)).thenReturn(process);
         TestScenario testScenario = mock(TestScenario.class);
 
         WebDriverActionExecutionBase webDriverActionExecutionBase = spy(getWebDriverActionExecutionBase());
         webDriverActionExecutionBase.createVirtualScreenProcessAndExecute(testScenario, screen, virtualScreenProcessCreator);
 
-        verify(webDriverActionExecutionBase).execute(testScenario);
+        verify(webDriverActionExecutionBase).execute(testScenario, screenString);
         verify(process).destroy();
     }
 
@@ -222,7 +223,7 @@ public class WebDriverActionExecutionBaseTest {
         TestScenario testScenario = mock(TestScenario.class);
         String screen = ":1";
         webDriverActionExecutionBase.execute(testScenario, screen);
-        verify(webDriverActionExecutionBase).execute(testScenario);
+        verify(testScenario).hasMoreSteps();
     }
 
     @Test

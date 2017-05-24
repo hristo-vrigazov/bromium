@@ -50,7 +50,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         } catch (IOException e) {
             this.automationResult = AutomationResult.COULD_NOT_CREATE_DRIVER;
             Har har = replaySettings.getHar();
-            return new ExecutionReport(loadingTimes, har, automationResult);
+            return new ExecutionReport(LoadingTimes.empty(), har, automationResult);
         }
 
         long elapsedTime = System.nanoTime();
@@ -98,7 +98,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
         this.replaySettings.cleanUpReplay();
         this.executorService.shutdownNow();
-        this.loadingTimes = new LoadingTimes(testScenario.getActions(), waitingTimes, actionTimestamps);
+        LoadingTimes loadingTimes = new LoadingTimes(testScenario.getActions(), waitingTimes, actionTimestamps);
         Har har = this.replaySettings.getHar();
         return new ExecutionReport(loadingTimes, har, automationResult);
     }
@@ -114,7 +114,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         } catch (IOException e) {
             this.automationResult = AutomationResult.NO_VIRTUAL_SCREEN;
             Har har = replaySettings.getHar();
-            return new ExecutionReport(loadingTimes, har, automationResult);
+            return new ExecutionReport(LoadingTimes.empty(), har, automationResult);
         }
 
         try {
@@ -137,7 +137,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     private ReplaySettings replaySettings;
     private AutomationResult automationResult;
 
-    private LoadingTimes loadingTimes;
     private final ExecutorBuilder executor;
     private final Object lock;
     private ExecutorService executorService;
