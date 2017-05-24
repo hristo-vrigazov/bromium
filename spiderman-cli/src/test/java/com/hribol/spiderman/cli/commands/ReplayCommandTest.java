@@ -6,6 +6,8 @@ import com.hribol.spiderman.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.spiderman.replay.ReplayBrowser;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
 import com.hribol.spiderman.replay.execution.ExecutorBuilder;
+import com.hribol.spiderman.replay.report.AutomationResult;
+import com.hribol.spiderman.replay.report.ExecutionReport;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -45,6 +47,9 @@ public class ReplayCommandTest {
     @Test
     public void ifDriverStartsSuccessfullyEverythingWorks() throws Exception {
         ReplayBrowser replayBrowser = mock(ReplayBrowser.class);
+        ExecutionReport executionReport = mock(ExecutionReport.class);
+        when(executionReport.getAutomationResult()).thenReturn(AutomationResult.SUCCESS);
+        when(replayBrowser.replay(any(InputStream.class))).thenReturn(executionReport);
         baseTest(replayBrowser);
         verify(replayBrowser).replay(any(InputStream.class));
 
@@ -53,6 +58,9 @@ public class ReplayCommandTest {
     @Test
     public void ifExceptionIsThrownThenItIsLogged() throws Exception {
         ReplayBrowser replayBrowser = mock(ReplayBrowser.class);
+        ExecutionReport executionReport = mock(ExecutionReport.class);
+        when(executionReport.getAutomationResult()).thenReturn(AutomationResult.SUCCESS);
+        when(replayBrowser.replay(any(InputStream.class))).thenReturn(executionReport);
         when(replayBrowser.replay(anyString(), anyString())).thenThrow(new IOException("No driver found"));
         baseTest(replayBrowser);
     }
