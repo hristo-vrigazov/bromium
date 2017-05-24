@@ -1,6 +1,8 @@
 package com.hribol.spiderman.replay.actions.conditions.javascript;
 
 import com.hribol.spiderman.replay.actions.WebDriverAction;
+import com.hribol.spiderman.replay.execution.InstanceBasedAutomationResultBuilder;
+import com.hribol.spiderman.replay.execution.WebDriverActionExecutionException;
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
 import org.openqa.selenium.WebDriver;
 
@@ -27,7 +29,7 @@ public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecon
                     lock.wait();
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                throw new WebDriverActionExecutionException("Interrupted while waiting for js", e);
             }
         }
 

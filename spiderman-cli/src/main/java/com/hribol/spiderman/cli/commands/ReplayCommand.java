@@ -42,6 +42,7 @@ public class ReplayCommand implements Command {
 
             ReplayBrowser replayBrowser = new ReplayBrowser(builder.applicationConfigurationInputStream, factory, execution);
             ExecutionReport report = replayBrowser.replay(builder.testInputStream);
+            System.out.println(report.getAutomationResult());
         } catch (IOException | URISyntaxException | InterruptedException e) {
             e.printStackTrace();
         }

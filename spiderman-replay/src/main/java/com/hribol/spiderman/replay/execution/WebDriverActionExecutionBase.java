@@ -66,7 +66,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                         try {
                             lock.wait(executor.getTimeout());
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            throw new WebDriverActionExecutionException("Interrupted!", e, executor.getAutomationResultBuilder());
                         }
                     }
                 }
