@@ -14,7 +14,6 @@ import java.util.Set;
  * Created by hvrigazov on 26.04.17.
  */
 public class ProxyFacade implements ReplayFiltersFacade {
-    private Boolean lock;
     private Set<HttpRequest> httpRequestQueue;
 
     private ReplayRequestFilter requestFilter;
@@ -26,24 +25,13 @@ public class ProxyFacade implements ReplayFiltersFacade {
 
     public ProxyFacade(String baseURI, ReplayFiltersFactory replayFiltersFactory) throws URISyntaxException {
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
-        this.requestFilter = replayFiltersFactory.createReplayRequestFilter(this::setLock, baseURI, httpRequestQueue);
+        this.requestFilter = replayFiltersFactory.createReplayRequestFilter(baseURI, httpRequestQueue);
         this.responseFilter = replayFiltersFactory.createReplayResponseFilter(baseURI, httpRequestQueue);
-        this.lock = false;
     }
 
     @Override
     public int getNumberOfRequestsInQueue() {
         return httpRequestQueue.size();
-    }
-
-    @Override
-    public void setLock(Boolean value) {
-        this.lock = value;
-    }
-
-    @Override
-    public Boolean isLocked() {
-        return lock;
     }
 
     @Override
@@ -62,19 +50,8 @@ public class ProxyFacade implements ReplayFiltersFacade {
     }
 
     @Override
-    public boolean waitsForPrecondition() {
-        return requestFilter.waitsForPrecondition();
-    }
-
-    @Override
     public boolean canAct() {
-        return httpQueueIsEmpty() && !isLocked();
+        return httpQueueIsEmpty() && !requestFilter.isHttpLocked();
     }
-
-    @Override
-    public void signalizeExecutionThreadWantsToAct() {
-        requestFilter.signalizeExecutionThreadWantsToAct();
-    }
-
 
 }

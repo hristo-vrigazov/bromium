@@ -45,7 +45,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         ExecutorService executorService;
         try {
             System.setProperty(getSystemProperty(), executor.getPathToDriverExecutable());
-            proxyFacade.setLock(false);
+            proxyFacade.getRequestFilter().setHttpLock(false);
             automationResult = AutomationResult.NOT_STARTED;
             replaySettings.prepareReplay(executor.getPathToDriverExecutable(), screenToUse, executor.getTimeout());
             executorService = Executors.newSingleThreadExecutor();
@@ -60,8 +60,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             automationResult = AutomationResult.EXECUTING;
             while (testScenario.hasMoreSteps()) {
 
-                proxyFacade.signalizeExecutionThreadWantsToAct();
-
                 if (Utils.toSeconds(System.nanoTime() - elapsedTime) > executor.getTimeout()) {
                     automationResult = AutomationResult.TIMEOUT;
                     TimeoutException cause = new TimeoutException("Could not execute the action! Waited "
@@ -73,7 +71,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                 }
 
                 if (proxyFacade.canAct()) {
-                    proxyFacade.setLock(testScenario.nextActionExpectsHttpRequest());
+                    proxyFacade.getRequestFilter().setHttpLock(testScenario.nextActionExpectsHttpRequest());
                     WebDriverAction webDriverAction = testScenario.pollWebDriverAction();
 
                     Future<?> future = executorService.submit(() -> executeIgnoringExceptions(replaySettings.getWebDriver(), webDriverAction));

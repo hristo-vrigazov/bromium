@@ -34,11 +34,10 @@ public class ReplayRequestFilterTest {
 
     @Test
     public void replayRequestFilterAddsToQueueIfWhiteListedAndUnlocks() throws URISyntaxException {
-        LockCallback lockCallback = spy(LockCallback.class);
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
 
-        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(lockCallback, baseURI, httpRequestSet);
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
 
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn("http://tenniskafe.com/static/some.css");
@@ -51,16 +50,14 @@ public class ReplayRequestFilterTest {
         replayRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
 
         assertTrue(httpRequestSet.contains(httpRequest));
-        verify(lockCallback).setLock(false);
     }
 
     @Test
     public void replayRequestFilterDoesNotAddToQueueIfNotWhiteListedAndUnlocks() throws URISyntaxException {
-        LockCallback lockCallback = spy(LockCallback.class);
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
 
-        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(lockCallback, baseURI, httpRequestSet);
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
 
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn("http://google.com/static/some.css");
@@ -73,7 +70,7 @@ public class ReplayRequestFilterTest {
         replayRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
 
         assertFalse(httpRequestSet.contains(httpRequest));
-        verify(lockCallback).setLock(false);
+        assertFalse(replayRequestFilter.isHttpLocked());
     }
 
     @Test
@@ -82,7 +79,7 @@ public class ReplayRequestFilterTest {
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
 
-        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(lockCallback, baseURI, httpRequestSet);
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
 
         String event = "event";
         HttpRequest httpRequest = mock(HttpRequest.class);
@@ -106,7 +103,7 @@ public class ReplayRequestFilterTest {
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
 
-        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(lockCallback, baseURI, httpRequestSet);
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
 
         String event = "event";
         HttpRequest httpRequest = mock(HttpRequest.class);
@@ -135,7 +132,7 @@ public class ReplayRequestFilterTest {
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
 
-        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(lockCallback, baseURI, httpRequestSet);
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
 
         String event = "event";
         HttpRequest httpRequest = mock(HttpRequest.class);
@@ -158,7 +155,7 @@ public class ReplayRequestFilterTest {
         LockCallback lockCallback = spy(LockCallback.class);
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
-        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(lockCallback, baseURI, httpRequestSet);
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
         String event = "event";
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn("hs" + CONDITION_NOT_SATISFIED_URL + "?" + event);
@@ -183,7 +180,7 @@ public class ReplayRequestFilterTest {
         String event = "jsEvent";
         Object lock = PowerMockito.mock(Object.class);
 
-        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(lockCallback, baseURI, httpRequestSet);
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
 
         replayRequestFilter.setWaitingEvent(event, lock);
 
@@ -209,7 +206,7 @@ public class ReplayRequestFilterTest {
         String otherEvent = "otherEvent";
         Object lock = PowerMockito.mock(Object.class);
 
-        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(lockCallback, baseURI, httpRequestSet);
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
 
         replayRequestFilter.setWaitingEvent(otherEvent, lock);
 
@@ -234,7 +231,7 @@ public class ReplayRequestFilterTest {
         String event = "jsEvent";
         Object lock = null;
 
-        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(lockCallback, baseURI, httpRequestSet);
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
 
         replayRequestFilter.setWaitingEvent(event, lock);
 
@@ -257,7 +254,7 @@ public class ReplayRequestFilterTest {
         String event = "jsEvent";
         Object lock = mock(Object.class);
 
-        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(lockCallback, baseURI, httpRequestSet);
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
         assertFalse(replayRequestFilter.waitsForPrecondition());
         replayRequestFilter.setWaitingEvent(event, lock);
         assertTrue(replayRequestFilter.waitsForPrecondition());

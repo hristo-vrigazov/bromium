@@ -22,25 +22,23 @@ import static com.hribol.spiderman.replay.config.utils.Constants.CONDITION_SATIS
  * Created by hvrigazov on 22.04.17.
  */
 public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilter {
-    private LockCallback lockCallback;
     private Set<String> conditionsSatisfied;
     private Optional<String> optionalEvent;
     private Optional<Object> optionalLock;
-    private boolean executionThreadWantToAct;
+    private boolean httpLock;
 
-    public ReplayRequestFilter(LockCallback lockCallback, String baseURI, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
+    public ReplayRequestFilter(String baseURI, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
         super(baseURI, httpRequestQueue);
-        this.lockCallback = lockCallback;
         this.conditionsSatisfied = Collections.synchronizedSet(new HashSet<>());
         this.optionalEvent = Optional.empty();
         this.optionalLock = Optional.empty();
-        this.executionThreadWantToAct = false;
+        this.httpLock = false;
     }
 
     @Override
     public HttpResponse filterRequest(HttpRequest httpRequest, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
         addHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
-        lockCallback.setLock(false);
+        this.httpLock = false;
 
         if (httpRequest.getUri().contains(CONDITION_SATISFIED_URL)) {
             try {
@@ -96,7 +94,11 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
         optionalLock = Optional.empty();
     }
 
-    public void signalizeExecutionThreadWantsToAct() {
-        this.executionThreadWantToAct = true;
+    public void setHttpLock(boolean lock) {
+        this.httpLock = lock;
+    }
+
+    public boolean isHttpLocked() {
+        return this.httpLock;
     }
 }

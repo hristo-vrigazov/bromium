@@ -29,7 +29,7 @@ public class ProxyFacadeTest {
     public void doesNotWaitForPreconditionInitially() throws URISyntaxException {
         String baseURI = "http://tenniskafe.com";
         ProxyFacade proxyFacade = new ProxyFacade(baseURI);
-        assertFalse(proxyFacade.waitsForPrecondition());
+        assertFalse(proxyFacade.getRequestFilter().waitsForPrecondition());
     }
 
 

@@ -6,6 +6,7 @@ import com.hribol.spiderman.replay.config.suite.VirtualScreenProcessCreator;
 import com.hribol.spiderman.replay.config.suppliers.InvisibleWebDriverSupplier;
 import com.hribol.spiderman.replay.config.suppliers.VisibleWebDriverSupplier;
 import com.hribol.spiderman.replay.filters.ProxyFacadeSupplier;
+import com.hribol.spiderman.replay.filters.ReplayRequestFilter;
 import com.hribol.spiderman.replay.report.AutomationResult;
 import com.hribol.spiderman.replay.filters.ProxyFacade;
 import com.hribol.spiderman.replay.report.ExecutionReport;
@@ -280,9 +281,11 @@ public class WebDriverActionExecutionBaseTest {
 
     private void baseDoesNotActIfConditionTest(boolean queueEmpty, boolean isLocked) throws URISyntaxException, IOException {
         ReplaySettings replaySettings = getDefaultReplaySettings();
+        ReplayRequestFilter replayRequestFilter = mock(ReplayRequestFilter.class);
         ProxyFacade proxyFacade = mock(ProxyFacade.class);
+        when(proxyFacade.getRequestFilter()).thenReturn(replayRequestFilter);
         when(proxyFacade.httpQueueIsEmpty()).thenReturn(queueEmpty);
-        when(proxyFacade.isLocked()).thenReturn(isLocked);
+        when(replayRequestFilter.isHttpLocked()).thenReturn(isLocked);
         ProxyFacadeSupplier proxyFacadeSupplier = mock(ProxyFacadeSupplier.class);
         when(proxyFacadeSupplier.get(anyString())).thenReturn(proxyFacade);
         ExecutorBuilder executor = getWebDriverActionExecutor(1);
