@@ -26,19 +26,10 @@ public class ProxyFacadeTest {
     }
 
     @Test
-    public void doesNotWaitForPreconditionInitially() throws URISyntaxException {
-        String baseURI = "http://tenniskafe.com";
-        ProxyFacade proxyFacade = new ProxyFacade(baseURI);
-        assertFalse(proxyFacade.getRequestFilter().waitsForPrecondition());
-    }
-
-
-    @Test
     public void requestQueueIsEmptyInBeginning() throws URISyntaxException {
         String baseURI = "http://tenniskafe.com";
         ProxyFacade proxyFacade = new ProxyFacade(baseURI);
-        assertTrue(proxyFacade.httpQueueIsEmpty());
-        assertEquals(0, proxyFacade.getNumberOfRequestsInQueue());
+        assertTrue(proxyFacade.canAct());
     }
 
 }

@@ -30,16 +30,6 @@ public class ProxyFacade implements ReplayFiltersFacade {
     }
 
     @Override
-    public int getNumberOfRequestsInQueue() {
-        return httpRequestQueue.size();
-    }
-
-    @Override
-    public boolean httpQueueIsEmpty() {
-        return httpRequestQueue.isEmpty();
-    }
-
-    @Override
     public ReplayRequestFilter getRequestFilter() {
         return requestFilter;
     }
@@ -51,7 +41,7 @@ public class ProxyFacade implements ReplayFiltersFacade {
 
     @Override
     public boolean canAct() {
-        return httpQueueIsEmpty() && !requestFilter.isHttpLocked();
+        return httpRequestQueue.isEmpty() && !requestFilter.isHttpLocked();
     }
 
 }

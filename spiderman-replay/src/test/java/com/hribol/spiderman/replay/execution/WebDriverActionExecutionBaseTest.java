@@ -271,21 +271,15 @@ public class WebDriverActionExecutionBaseTest {
 
     @Test
     public void doesNotActIfProxyFacadeIsLocked() throws IOException, URISyntaxException {
-        baseDoesNotActIfConditionTest(true, true);
+        baseDoesNotActIfConditionTest(false);
     }
 
-    @Test
-    public void doesNotActIfQueueIsEmpty() throws IOException, URISyntaxException {
-        baseDoesNotActIfConditionTest(false, false);
-    }
-
-    private void baseDoesNotActIfConditionTest(boolean queueEmpty, boolean isLocked) throws URISyntaxException, IOException {
+    private void baseDoesNotActIfConditionTest(boolean canAct) throws URISyntaxException, IOException {
         ReplaySettings replaySettings = getDefaultReplaySettings();
         ReplayRequestFilter replayRequestFilter = mock(ReplayRequestFilter.class);
         ProxyFacade proxyFacade = mock(ProxyFacade.class);
+        when(proxyFacade.canAct()).thenReturn(canAct);
         when(proxyFacade.getRequestFilter()).thenReturn(replayRequestFilter);
-        when(proxyFacade.httpQueueIsEmpty()).thenReturn(queueEmpty);
-        when(replayRequestFilter.isHttpLocked()).thenReturn(isLocked);
         ProxyFacadeSupplier proxyFacadeSupplier = mock(ProxyFacadeSupplier.class);
         when(proxyFacadeSupplier.get(anyString())).thenReturn(proxyFacade);
         ExecutorBuilder executor = getWebDriverActionExecutor(1);

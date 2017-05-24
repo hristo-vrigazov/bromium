@@ -64,8 +64,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                     automationResult = AutomationResult.TIMEOUT;
                     TimeoutException cause = new TimeoutException("Could not execute the action! Waited "
                             + String.valueOf(System.nanoTime() - elapsedTime)
-                            + " to do " + testScenario.nextActionName()
-                            + " http queries in queue: " + proxyFacade.getNumberOfRequestsInQueue());
+                            + " to do " + testScenario.nextActionName());
 
                     throw new WebDriverActionExecutionException("Timeout!", cause, executor.getAutomationResultBuilder());
                 }
