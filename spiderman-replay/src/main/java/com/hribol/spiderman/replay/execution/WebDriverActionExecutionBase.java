@@ -58,8 +58,8 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
         try {
             automationResult = AutomationResult.EXECUTING;
-            while (testScenario.hasMoreSteps()) {
 
+            for (WebDriverAction webDriverAction : testScenario.steps()) {
                 Object lock = new Object();
                 synchronized (lock) {
                     if (!proxyFacade.getResponseFilter().setExecutionThreadLock(lock)) {
@@ -71,8 +71,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                     }
                 }
 
-                proxyFacade.getRequestFilter().setHttpLock(testScenario.nextActionExpectsHttpRequest());
-                WebDriverAction webDriverAction = testScenario.pollWebDriverAction();
+                proxyFacade.getRequestFilter().setHttpLock(webDriverAction.expectsHttpRequest());
 
                 Future<?> future = executorService.submit(() -> executeIgnoringExceptions(replaySettings.getWebDriver(), webDriverAction));
                 try {
