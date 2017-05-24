@@ -124,7 +124,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     public abstract String getSystemProperty();
 
-    protected abstract ReplaySettings createReplaySettings();
+    public abstract ReplaySettings createReplaySettings();
     protected ReplayFiltersFacade proxyFacade;
 
     private AutomationResult automationResult;

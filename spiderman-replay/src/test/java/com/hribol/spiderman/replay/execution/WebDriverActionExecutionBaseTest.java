@@ -285,7 +285,7 @@ public class WebDriverActionExecutionBaseTest {
         WebDriverActionExecutionBase webDriverActionExecutionBase =
                 new WebDriverActionExecutionBase(executorBuilder) {
             @Override
-            protected ReplaySettings createReplaySettings() {
+            public ReplaySettings createReplaySettings() {
                 return null;
             }
 
@@ -308,7 +308,7 @@ public class WebDriverActionExecutionBaseTest {
 
         WebDriverActionExecutionBase webDriverActionExecutionBase = new WebDriverActionExecutionBase(executorBuilder) {
             @Override
-            protected ReplaySettings createReplaySettings() {
+            public ReplaySettings createReplaySettings() {
                 return null;
             }
 
@@ -354,7 +354,7 @@ public class WebDriverActionExecutionBaseTest {
 
         return new WebDriverActionExecutionBase(executorBuilder) {
             @Override
-            protected ReplaySettings createReplaySettings() {
+            public ReplaySettings createReplaySettings() {
                 return replaySettings;
             }
 
