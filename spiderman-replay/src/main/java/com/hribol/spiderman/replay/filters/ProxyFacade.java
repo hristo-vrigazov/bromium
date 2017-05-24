@@ -52,12 +52,12 @@ public class ProxyFacade implements ReplayFiltersFacade {
     }
 
     @Override
-    public RequestFilter getRequestFilter() {
+    public ReplayRequestFilter getRequestFilter() {
         return requestFilter;
     }
 
     @Override
-    public ResponseFilter getResponseFilter() {
+    public ReplayResponseFilter getResponseFilter() {
         return responseFilter;
     }
 
@@ -67,18 +67,8 @@ public class ProxyFacade implements ReplayFiltersFacade {
     }
 
     @Override
-    public boolean setWaitingEvent(String event, Object lock) {
-        return requestFilter.setWaitingEvent(event, lock);
-    }
-
-    @Override
     public boolean canAct() {
         return httpQueueIsEmpty() && !isLocked();
-    }
-
-    @Override
-    public void signalizeEventIsDone() {
-        requestFilter.signalizeEventIsDone();
     }
 
     @Override

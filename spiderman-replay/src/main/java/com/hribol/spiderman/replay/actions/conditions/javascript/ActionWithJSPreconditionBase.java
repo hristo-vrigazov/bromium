@@ -23,7 +23,7 @@ public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecon
     public void execute(WebDriver driver, ReplayFiltersFacade facade) {
         synchronized (lock) {
             try {
-                if (!facade.setWaitingEvent(getJSEventToWaitFor(), lock)) {
+                if (!facade.getRequestFilter().setWaitingEvent(getJSEventToWaitFor(), lock)) {
                     lock.wait();
                 }
             } catch (InterruptedException e) {
@@ -32,7 +32,7 @@ public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecon
         }
 
         executeAfterJSPreconditionHasBeenSatisfied(driver, facade);
-        facade.signalizeEventIsDone();
+        facade.getRequestFilter().signalizeEventIsDone();
     }
 
     public abstract void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayFiltersFacade facade);

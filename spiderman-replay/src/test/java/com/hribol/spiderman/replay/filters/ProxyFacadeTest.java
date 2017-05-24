@@ -32,13 +32,6 @@ public class ProxyFacadeTest {
         assertFalse(proxyFacade.waitsForPrecondition());
     }
 
-    @Test
-    public void waitsForConditionIfSet() throws URISyntaxException {
-        String baseURI = "http://tenniskafe.com";
-        ProxyFacade proxyFacade = new ProxyFacade(baseURI);
-        proxyFacade.setWaitingEvent("blabla", new Object());
-        assertTrue(proxyFacade.waitsForPrecondition());
-    }
 
     @Test
     public void requestQueueIsEmptyInBeginning() throws URISyntaxException {
@@ -46,48 +39,6 @@ public class ProxyFacadeTest {
         ProxyFacade proxyFacade = new ProxyFacade(baseURI);
         assertTrue(proxyFacade.httpQueueIsEmpty());
         assertEquals(0, proxyFacade.getNumberOfRequestsInQueue());
-    }
-
-    @Test
-    public void releasesCondition() throws URISyntaxException {
-        String baseURI = "http://tenniskafe.com";
-        ProxyFacade proxyFacade = new ProxyFacade(baseURI);
-        proxyFacade.setWaitingEvent("blabla", new Object());
-        assertTrue(proxyFacade.waitsForPrecondition());
-        proxyFacade.signalizeEventIsDone();
-        assertFalse(proxyFacade.waitsForPrecondition());
-    }
-
-    @Test
-    public void waitsIfConditionIsNotSatisfied() throws URISyntaxException {
-        String waitingEvent = "blabla";
-        String baseURI = "http://tenniskafe.com";
-
-        ReplayRequestFilter replayRequestFilter = mock(ReplayRequestFilter.class);
-        when(replayRequestFilter.waitsForPrecondition()).thenReturn(true);
-        ReplayFiltersFactory replayFiltersFactory = mock(ReplayFiltersFactory.class);
-        when(replayFiltersFactory.createReplayRequestFilter(any(), anyString(), anySet())).thenReturn(replayRequestFilter);
-
-        ProxyFacade proxyFacade = new ProxyFacade(baseURI, replayFiltersFactory);
-        proxyFacade.setWaitingEvent(waitingEvent, new Object());
-
-        assertTrue(proxyFacade.waitsForPrecondition());
-    }
-
-    @Test
-    public void doesNotWaitIfConditionIsSatisfied() throws URISyntaxException {
-        String waitingEvent = "blabla";
-        String baseURI = "http://tenniskafe.com";
-
-        ReplayRequestFilter replayRequestFilter = mock(ReplayRequestFilter.class);
-        when(replayRequestFilter.isSatisfied(waitingEvent)).thenReturn(true);
-        ReplayFiltersFactory replayFiltersFactory = mock(ReplayFiltersFactory.class);
-        when(replayFiltersFactory.createReplayRequestFilter(any(), anyString(), anySet())).thenReturn(replayRequestFilter);
-
-        ProxyFacade proxyFacade = new ProxyFacade(baseURI, replayFiltersFactory);
-        proxyFacade.setWaitingEvent(waitingEvent, new Object());
-
-        assertFalse(proxyFacade.waitsForPrecondition());
     }
 
 }

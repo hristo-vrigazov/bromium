@@ -134,7 +134,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     private AutomationResult automationResult;
     private ExecutorBuilder executor;
 
-
     private void executeIgnoringExceptions(WebDriver webDriver, WebDriverAction webDriverAction) {
         int i = 0;
 

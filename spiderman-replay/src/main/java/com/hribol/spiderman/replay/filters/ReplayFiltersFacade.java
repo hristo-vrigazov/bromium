@@ -15,17 +15,13 @@ public interface ReplayFiltersFacade {
 
     boolean httpQueueIsEmpty();
 
-    RequestFilter getRequestFilter();
+    ReplayRequestFilter getRequestFilter();
 
-    ResponseFilter getResponseFilter();
+    ReplayResponseFilter getResponseFilter();
 
     boolean waitsForPrecondition();
 
-    boolean setWaitingEvent(String event, Object lock);
-
     boolean canAct();
-
-    void signalizeEventIsDone();
 
     void signalizeExecutionThreadWantsToAct();
 }
