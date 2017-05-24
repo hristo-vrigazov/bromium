@@ -1,7 +1,6 @@
 package com.hribol.spiderman.replay.filters;
 
 import com.hribol.spiderman.replay.LockCallback;
-import com.hribol.spiderman.replay.actions.conditions.javascript.ActionWithJSPreconditionBase;
 import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
@@ -182,7 +181,7 @@ public class ReplayRequestFilterTest {
 
         ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
 
-        replayRequestFilter.setWaitingEvent(event, lock);
+        replayRequestFilter.setJSWaitingEvent(event, lock);
 
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn(CONDITION_SATISFIED_URL + "?" + event);
@@ -208,7 +207,7 @@ public class ReplayRequestFilterTest {
 
         ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
 
-        replayRequestFilter.setWaitingEvent(otherEvent, lock);
+        replayRequestFilter.setJSWaitingEvent(otherEvent, lock);
 
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn(CONDITION_SATISFIED_URL + "?" + event);
@@ -233,7 +232,7 @@ public class ReplayRequestFilterTest {
 
         ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
 
-        replayRequestFilter.setWaitingEvent(event, lock);
+        replayRequestFilter.setJSWaitingEvent(event, lock);
 
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn(CONDITION_SATISFIED_URL + "?" + event);
@@ -256,7 +255,7 @@ public class ReplayRequestFilterTest {
 
         ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
         assertFalse(replayRequestFilter.waitsForPrecondition());
-        replayRequestFilter.setWaitingEvent(event, lock);
+        replayRequestFilter.setJSWaitingEvent(event, lock);
         assertTrue(replayRequestFilter.waitsForPrecondition());
     }
 

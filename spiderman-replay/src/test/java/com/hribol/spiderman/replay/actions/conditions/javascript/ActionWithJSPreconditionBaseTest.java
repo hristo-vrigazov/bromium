@@ -1,9 +1,7 @@
 package com.hribol.spiderman.replay.actions.conditions.javascript;
 
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
-import com.hribol.spiderman.replay.filters.ReplayFiltersFactory;
 import com.hribol.spiderman.replay.filters.ReplayRequestFilter;
-import net.lightbody.bmp.filters.RequestFilter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -57,7 +55,7 @@ public class ActionWithJSPreconditionBaseTest {
         ReplayRequestFilter requestFilter = mock(ReplayRequestFilter.class);
         ReplayFiltersFacade facade = mock(ReplayFiltersFacade.class);
         when(facade.getRequestFilter()).thenReturn(requestFilter);
-        when(requestFilter.setWaitingEvent(jsEvent, lock)).thenReturn(false);
+        when(requestFilter.setJSWaitingEvent(jsEvent, lock)).thenReturn(false);
         actionWithJSPreconditionBase.execute(driver, facade);
 
         verify(lock).wait();
@@ -95,7 +93,7 @@ public class ActionWithJSPreconditionBaseTest {
         ReplayRequestFilter replayRequestFilter = mock(ReplayRequestFilter.class);
         ReplayFiltersFacade facade = mock(ReplayFiltersFacade.class);
         when(facade.getRequestFilter()).thenReturn(replayRequestFilter);
-        when(replayRequestFilter.setWaitingEvent(jsEvent, lock)).thenReturn(true);
+        when(replayRequestFilter.setJSWaitingEvent(jsEvent, lock)).thenReturn(true);
         actionWithJSPreconditionBase.execute(driver, facade);
 
         verify(lock, never()).wait();
@@ -133,7 +131,7 @@ public class ActionWithJSPreconditionBaseTest {
         ReplayRequestFilter replayRequestFilter = mock(ReplayRequestFilter.class);
         ReplayFiltersFacade facade = mock(ReplayFiltersFacade.class);
         when(facade.getRequestFilter()).thenReturn(replayRequestFilter);
-        when(replayRequestFilter.setWaitingEvent(jsEvent, lock)).thenReturn(false);
+        when(replayRequestFilter.setJSWaitingEvent(jsEvent, lock)).thenReturn(false);
         actionWithJSPreconditionBase.execute(driver, facade);
 
         actionWithJSPreconditionBase = spy(actionWithJSPreconditionBase);

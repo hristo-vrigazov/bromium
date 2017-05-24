@@ -22,4 +22,13 @@ public class ReplayResponseFilter extends ReplayBaseFilter implements ResponseFi
     public void filterResponse(HttpResponse httpResponse, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
         removeHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
     }
+
+    private void removeHttpRequestToQueue(HttpRequest httpRequest) {
+        if (!inWhiteList(httpRequest.getUri())) {
+            return;
+        }
+
+        System.out.println("Remove request " + httpRequest.getUri());
+        this.httpRequestQueue.remove(httpRequest);
+    }
 }

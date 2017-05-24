@@ -1,6 +1,5 @@
 package com.hribol.spiderman.replay.filters;
 
-import com.hribol.spiderman.replay.LockCallback;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.filters.RequestFilter;
@@ -24,14 +23,14 @@ import static com.hribol.spiderman.replay.config.utils.Constants.CONDITION_SATIS
 public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilter {
     private Set<String> conditionsSatisfied;
     private Optional<String> optionalEvent;
-    private Optional<Object> optionalLock;
+    private Optional<Object> optionalJSLock;
     private boolean httpLock;
 
     public ReplayRequestFilter(String baseURI, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
         super(baseURI, httpRequestQueue);
         this.conditionsSatisfied = Collections.synchronizedSet(new HashSet<>());
         this.optionalEvent = Optional.empty();
-        this.optionalLock = Optional.empty();
+        this.optionalJSLock = Optional.empty();
         this.httpLock = false;
     }
 
@@ -48,8 +47,8 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
                 System.out.println("Satisfied " + conditionsSatisfied.size());
 
                 if (optionalEvent.isPresent() && optionalEvent.get().equals(event)) {
-                    if (optionalLock.isPresent()) {
-                        Object lock = optionalLock.get();
+                    if (optionalJSLock.isPresent()) {
+                        Object lock = optionalJSLock.get();
                         synchronized (lock) {
                             lock.notify();
                         }
@@ -74,6 +73,14 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
         return null;
     }
 
+    private void addHttpRequestToQueue(HttpRequest httpRequest) {
+        if (!inWhiteList(httpRequest.getUri())) {
+            return;
+        }
+        System.out.println("Add request " + httpRequest.getUri());
+        this.httpRequestQueue.add(httpRequest);
+    }
+
     public boolean isSatisfied(String event) {
         return conditionsSatisfied.contains(event);
     }
@@ -82,16 +89,16 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
         return optionalEvent.isPresent() && !isSatisfied(optionalEvent.get());
     }
 
-    public boolean setWaitingEvent(String event, Object lock) {
+    public boolean setJSWaitingEvent(String event, Object lock) {
         optionalEvent = Optional.of(event);
-        optionalLock = Optional.ofNullable(lock);
+        optionalJSLock = Optional.ofNullable(lock);
 
         return isSatisfied(event);
     }
 
     public void signalizeEventIsDone() {
         optionalEvent = Optional.empty();
-        optionalLock = Optional.empty();
+        optionalJSLock = Optional.empty();
     }
 
     public void setHttpLock(boolean lock) {

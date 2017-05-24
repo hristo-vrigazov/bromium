@@ -23,7 +23,7 @@ public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecon
     public void execute(WebDriver driver, ReplayFiltersFacade facade) {
         synchronized (lock) {
             try {
-                if (!facade.getRequestFilter().setWaitingEvent(getJSEventToWaitFor(), lock)) {
+                if (!facade.getRequestFilter().setJSWaitingEvent(getJSEventToWaitFor(), lock)) {
                     lock.wait();
                 }
             } catch (InterruptedException e) {
