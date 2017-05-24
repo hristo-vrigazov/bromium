@@ -39,5 +39,6 @@ public class TestScenarioTest {
         expectedActionList.add(anotherActionName);
 
         assertEquals(expectedActionList, testScenario.getActions());
+        assertNotNull(testScenario.steps());
     }
 }

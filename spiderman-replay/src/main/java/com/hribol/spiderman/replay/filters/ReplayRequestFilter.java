@@ -85,10 +85,6 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
         return conditionsSatisfied.contains(event);
     }
 
-    public boolean waitsForPrecondition() {
-        return optionalEvent.isPresent() && !isSatisfied(optionalEvent.get());
-    }
-
     public boolean setJSWaitingEvent(String event, Object lock) {
         if (isSatisfied(event)) {
             return true;

@@ -172,7 +172,7 @@ public class ReplayRequestFilterTest {
     }
 
     @Test
-    public void ifWaitingForEventWhenConditionIsSatisfiedTheThreadIsNotified() throws URISyntaxException {
+    public void ifWaitingForEventWhenConditionIsSatisfiedTheThreadIsNotifiedAndWhenNotifyEndThenItIsNot() throws URISyntaxException {
         LockCallback lockCallback = spy(LockCallback.class);
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
@@ -193,7 +193,9 @@ public class ReplayRequestFilterTest {
 
         replayRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
 
-        verify(lock).notify();
+        replayRequestFilter.signalizeEventIsDone();
+        replayRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
+        verify(lock, times(1)).notify();
     }
 
     @Test
@@ -247,16 +249,54 @@ public class ReplayRequestFilterTest {
 
     @Test
     public void waitsForPreconditionIfTheConditionIsYetToBeSatisfied() throws URISyntaxException {
-        LockCallback lockCallback = spy(LockCallback.class);
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
         String event = "jsEvent";
         Object lock = mock(Object.class);
 
         ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
-        assertFalse(replayRequestFilter.waitsForPrecondition());
-        replayRequestFilter.setJSWaitingEvent(event, lock);
-        assertTrue(replayRequestFilter.waitsForPrecondition());
+        assertFalse(replayRequestFilter.setJSWaitingEvent(event, lock));
     }
 
+    @Test
+    public void ifJSEventIsAlreadySatisfiedTrueIsReturnedWhenSettingWaitingEvent() throws URISyntaxException {
+        String baseURI = "http://tenniskafe.com";
+        Set<HttpRequest> httpRequestSet = new HashSet<>();
+        String event = "jsEvent";
+        Object lock = PowerMockito.mock(Object.class);
+
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
+
+        HttpRequest httpRequest = mock(HttpRequest.class);
+        when(httpRequest.getUri()).thenReturn(CONDITION_SATISFIED_URL + "?" + event);
+
+        HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
+        HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
+
+        when(httpMessageInfo.getOriginalRequest()).thenReturn(httpRequest);
+
+        replayRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
+
+        assertTrue(replayRequestFilter.setJSWaitingEvent(event, lock));
+    }
+
+    @Test
+    public void httpLockedIsSetToFalseAfterRequestIfFiltered() throws URISyntaxException {
+        String baseURI = "http://tenniskafe.com";
+        Set<HttpRequest> httpRequestSet = new HashSet<>();
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
+
+        replayRequestFilter.setHttpLock(true);
+
+        assertTrue(replayRequestFilter.isHttpLocked());
+
+        HttpRequest httpRequest = mock(HttpRequest.class);
+        when(httpRequest.getUri()).thenReturn(baseURI);
+        HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
+        HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
+        when(httpMessageInfo.getOriginalRequest()).thenReturn(httpRequest);
+        replayRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
+
+        assertFalse(replayRequestFilter.isHttpLocked());
+    }
 }
