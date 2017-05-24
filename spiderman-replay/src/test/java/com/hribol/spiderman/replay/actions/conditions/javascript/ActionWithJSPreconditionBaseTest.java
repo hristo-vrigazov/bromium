@@ -1,8 +1,11 @@
 package com.hribol.spiderman.replay.actions.conditions.javascript;
 
+import com.hribol.spiderman.replay.execution.WebDriverActionExecutionException;
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
 import com.hribol.spiderman.replay.filters.ReplayRequestFilter;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.powermock.api.mockito.PowerMockito;
@@ -99,6 +102,9 @@ public class ActionWithJSPreconditionBaseTest {
         verify(lock, never()).wait();
     }
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Test
     public void doesNotCallExecuteIfInterruptedWhileWaiting() throws InterruptedException {
         String jsEvent = "jsEvent";
@@ -132,6 +138,7 @@ public class ActionWithJSPreconditionBaseTest {
         ReplayFiltersFacade facade = mock(ReplayFiltersFacade.class);
         when(facade.getRequestFilter()).thenReturn(replayRequestFilter);
         when(replayRequestFilter.setJSWaitingEvent(jsEvent, lock)).thenReturn(false);
+        thrown.expect(WebDriverActionExecutionException.class);
         actionWithJSPreconditionBase.execute(driver, facade);
 
         actionWithJSPreconditionBase = spy(actionWithJSPreconditionBase);
