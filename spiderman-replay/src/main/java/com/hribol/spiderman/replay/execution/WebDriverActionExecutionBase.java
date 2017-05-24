@@ -37,11 +37,16 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     @Override
     public ExecutionReport execute(TestScenario testScenario) {
+        return execute(testScenario, ":0");
+    }
+
+    @Override
+    public ExecutionReport execute(TestScenario testScenario, String screenToUse) {
         List<Long> waitingTimes = new ArrayList<>();
         List<Date> actionTimestamps = new ArrayList<>();
 
         try {
-            prepare();
+            prepare(screenToUse);
         } catch (IOException e) {
             this.automationResult = AutomationResult.COULD_NOT_CREATE_DRIVER;
             Har har = replaySettings.getHar();
@@ -99,12 +104,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     }
 
     @Override
-    public ExecutionReport execute(TestScenario testScenario, String screenToUse) {
-        this.screenToUse = screenToUse;
-        return execute(testScenario);
-    }
-
-    @Override
     public ExecutionReport createVirtualScreenProcessAndExecute(TestScenario testScenario,
                                                                 int screenNumber,
                                                                 VirtualScreenProcessCreator virtualScreenProcessCreator) {
@@ -118,9 +117,8 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             return new ExecutionReport(loadingTimes, har, automationResult);
         }
 
-        this.screenToUse = screen;
         try {
-            return this.execute(testScenario);
+            return this.execute(testScenario, screen);
         } finally {
             process.destroy();
         }
@@ -139,18 +137,16 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     private ReplaySettings replaySettings;
     private AutomationResult automationResult;
 
-    private String screenToUse;
     private LoadingTimes loadingTimes;
     private final ExecutorBuilder executor;
     private final Object lock;
     private ExecutorService executorService;
 
 
-    private void prepare() throws IOException {
+    private void prepare(String screenToUse) throws IOException {
         System.setProperty(getSystemProperty(), executor.getPathToDriverExecutable());
         proxyFacade.setLock(false);
         this.automationResult = AutomationResult.NOT_STARTED;
-        this.screenToUse = Optional.ofNullable(screenToUse).orElse(":0");
         this.replaySettings.prepareReplay(executor.getPathToDriverExecutable(), screenToUse, executor.getTimeout());
         this.executorService = Executors.newSingleThreadExecutor();
     }
