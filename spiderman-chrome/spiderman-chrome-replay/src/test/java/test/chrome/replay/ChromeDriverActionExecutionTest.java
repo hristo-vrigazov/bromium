@@ -4,6 +4,7 @@ import com.hribol.spiderman.browsers.chrome.replay.ChromeDriverActionExecution;
 import com.hribol.spiderman.replay.execution.ExecutorBuilder;
 import com.hribol.spiderman.replay.filters.ProxyFacade;
 import com.hribol.spiderman.replay.filters.ProxyFacadeSupplier;
+import com.hribol.spiderman.replay.settings.ReplaySettings;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriverService;
 
@@ -33,5 +34,6 @@ public class ChromeDriverActionExecutionTest {
         ChromeDriverActionExecution chromeDriverActionExecution = new ChromeDriverActionExecution(executorBuilder);
         assertNotNull(chromeDriverActionExecution);
         assertEquals(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, chromeDriverActionExecution.getSystemProperty());
+        assertNotNull(chromeDriverActionExecution.createReplaySettings());
     }
 }

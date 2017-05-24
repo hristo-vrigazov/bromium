@@ -1,6 +1,8 @@
 package com.hribol.spiderman.replay.actions.conditions.javascript;
 
 import com.hribol.spiderman.replay.actions.WebDriverAction;
+import com.hribol.spiderman.replay.execution.InstanceBasedAutomationResultBuilder;
+import com.hribol.spiderman.replay.execution.WebDriverActionExecutionException;
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
 import org.openqa.selenium.WebDriver;
 
@@ -23,16 +25,16 @@ public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecon
     public void execute(WebDriver driver, ReplayFiltersFacade facade) {
         synchronized (lock) {
             try {
-                if (!facade.setWaitingEvent(getJSEventToWaitFor(), lock)) {
+                if (!facade.getRequestFilter().setJSWaitingEvent(getJSEventToWaitFor(), lock)) {
                     lock.wait();
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                throw new WebDriverActionExecutionException("Interrupted while waiting for js", e);
             }
         }
 
         executeAfterJSPreconditionHasBeenSatisfied(driver, facade);
-        facade.signalizeEventIsDone();
+        facade.getRequestFilter().signalizeEventIsDone();
     }
 
     public abstract void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayFiltersFacade facade);

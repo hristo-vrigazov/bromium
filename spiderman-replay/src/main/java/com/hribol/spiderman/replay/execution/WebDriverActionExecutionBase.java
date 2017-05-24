@@ -1,16 +1,15 @@
 package com.hribol.spiderman.replay.execution;
 import com.hribol.spiderman.replay.actions.WebDriverAction;
-import com.hribol.spiderman.replay.execution.scenario.TestScenario;
 import com.hribol.spiderman.replay.config.suite.VirtualScreenProcessCreator;
+import com.hribol.spiderman.replay.config.utils.Utils;
+import com.hribol.spiderman.replay.execution.scenario.TestScenario;
+import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
+import com.hribol.spiderman.replay.report.AutomationResult;
 import com.hribol.spiderman.replay.report.ExecutionReport;
 import com.hribol.spiderman.replay.report.LoadingTimes;
-import com.hribol.spiderman.replay.config.utils.Utils;
-import com.hribol.spiderman.replay.report.AutomationResult;
-import com.hribol.spiderman.replay.filters.ProxyFacade;
-import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
 import com.hribol.spiderman.replay.settings.ReplaySettings;
-import net.lightbody.bmp.core.har.Har;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
 import java.io.IOException;
@@ -18,7 +17,6 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.*;
 
 
@@ -30,55 +28,62 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     public WebDriverActionExecutionBase(ExecutorBuilder executor) throws IOException, URISyntaxException {
         this.executor = executor;
         this.proxyFacade = executor.getProxyFacadeSupplier().get(executor.getBaseURL());
-        this.replaySettings = createReplaySettings();
         this.automationResult = AutomationResult.NOT_STARTED;
     }
 
     @Override
     public ExecutionReport execute(TestScenario testScenario) {
+        return execute(testScenario, ":0");
+    }
+
+    @Override
+    public ExecutionReport execute(TestScenario testScenario, String screenToUse) {
         List<Long> waitingTimes = new ArrayList<>();
         List<Date> actionTimestamps = new ArrayList<>();
 
+        ReplaySettings replaySettings = createReplaySettings();
+        ExecutorService executorService;
         try {
-            prepare();
+            System.setProperty(getSystemProperty(), executor.getPathToDriverExecutable());
+            proxyFacade.getRequestFilter().setHttpLock(false);
+            automationResult = AutomationResult.NOT_STARTED;
+            replaySettings.prepareReplay(executor.getPathToDriverExecutable(), screenToUse, executor.getTimeout());
+            executorService = Executors.newSingleThreadExecutor();
         } catch (IOException e) {
-            this.automationResult = AutomationResult.COULD_NOT_CREATE_DRIVER;
-            Har har = replaySettings.getHar();
-            return new ExecutionReport(loadingTimes, har, automationResult);
+            return ExecutionReport.couldNotCreateDriver();
         }
 
         long elapsedTime = System.nanoTime();
         actionTimestamps.add(new Date());
 
         try {
-            this.automationResult = AutomationResult.EXECUTING;
-            while (testScenario.hasMoreSteps()) {
-                if (Utils.toSeconds(System.nanoTime() - elapsedTime) > executor.getTimeout()) {
-                    this.automationResult = AutomationResult.TIMEOUT;
-                    TimeoutException cause = new TimeoutException("Could not execute the action! Waited "
-                            + String.valueOf(System.nanoTime() - elapsedTime)
-                            + " to do " + testScenario.nextActionName()
-                            + " http queries in queue: " + proxyFacade.getNumberOfRequestsInQueue());
+            automationResult = AutomationResult.EXECUTING;
 
-                    throw new WebDriverActionExecutionException("Timeout!", cause, executor.getAutomationResultBuilder());
-                }
-
-                if (proxyFacade.httpQueueIsEmpty() && !proxyFacade.isLocked()) {
-                    proxyFacade.setLock(testScenario.nextActionExpectsHttpRequest());
-                    WebDriverAction webDriverAction = testScenario.pollWebDriverAction();
-
-                    Future<?> future = executorService.submit(() -> executeIgnoringExceptions(webDriverAction));
-                    try {
-                        future.get(executor.getTimeout(), TimeUnit.SECONDS);
-                    }  catch (java.util.concurrent.TimeoutException | InterruptedException e) {
-                        throw new WebDriverActionExecutionException("Exception during execution", e, executor.getAutomationResultBuilder());
-                    } catch (ExecutionException e) {
-                        throw new WebDriverActionExecutionException("Exception during execution", e.getCause(), executor.getAutomationResultBuilder());
+            for (WebDriverAction webDriverAction : testScenario.steps()) {
+                Object lock = new Object();
+                synchronized (lock) {
+                    if (!proxyFacade.getResponseFilter().setExecutionThreadLock(lock)) {
+                        try {
+                            lock.wait(executor.getTimeout());
+                        } catch (InterruptedException e) {
+                            throw new WebDriverActionExecutionException("Interrupted!", e, executor.getAutomationResultBuilder());
+                        }
                     }
-                    waitingTimes.add(System.nanoTime() - elapsedTime);
-                    actionTimestamps.add(new Date());
-                    elapsedTime = System.nanoTime();
                 }
+
+                proxyFacade.getRequestFilter().setHttpLock(webDriverAction.expectsHttpRequest());
+
+                Future<?> future = executorService.submit(() -> executeIgnoringExceptions(replaySettings.getWebDriver(), webDriverAction));
+                try {
+                    future.get(executor.getTimeout(), TimeUnit.SECONDS);
+                }  catch (java.util.concurrent.TimeoutException | InterruptedException e) {
+                    throw new WebDriverActionExecutionException("Exception during execution", e, executor.getAutomationResultBuilder());
+                } catch (ExecutionException e) {
+                    throw new WebDriverActionExecutionException("Exception during execution", e.getCause(), executor.getAutomationResultBuilder());
+                }
+                waitingTimes.add(System.nanoTime() - elapsedTime);
+                actionTimestamps.add(new Date());
+                elapsedTime = System.nanoTime();
             }
 
             this.automationResult = AutomationResult.SUCCESS;
@@ -87,17 +92,10 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             this.automationResult = executionException.getAutomationResult();
         }
 
-        this.replaySettings.cleanUpReplay();
-        this.executorService.shutdownNow();
-        this.loadingTimes = new LoadingTimes(testScenario.getActions(), waitingTimes, actionTimestamps);
-        Har har = this.replaySettings.getHar();
-        return new ExecutionReport(loadingTimes, har, automationResult);
-    }
-
-    @Override
-    public ExecutionReport execute(TestScenario testScenario, String screenToUse) {
-        this.screenToUse = screenToUse;
-        return execute(testScenario);
+        replaySettings.cleanUpReplay();
+        executorService.shutdownNow();
+        LoadingTimes loadingTimes = new LoadingTimes(testScenario.getActions(), waitingTimes, actionTimestamps);
+        return new ExecutionReport(loadingTimes, replaySettings.getHar(), automationResult);
     }
 
     @Override
@@ -109,14 +107,11 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         try {
             process = virtualScreenProcessCreator.createXvfbProcess(screenNumber);
         } catch (IOException e) {
-            this.automationResult = AutomationResult.NO_VIRTUAL_SCREEN;
-            Har har = replaySettings.getHar();
-            return new ExecutionReport(loadingTimes, har, automationResult);
+            return ExecutionReport.noVirtualScreen();
         }
 
-        this.screenToUse = screen;
         try {
-            return this.execute(testScenario);
+            return this.execute(testScenario, screen);
         } finally {
             process.destroy();
         }
@@ -127,35 +122,20 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         return executor.getBaseURL();
     }
 
-    protected ReplayFiltersFacade proxyFacade;
-    protected String baseURI;
-    protected abstract ReplaySettings createReplaySettings();
     public abstract String getSystemProperty();
 
-    private ReplaySettings replaySettings;
+    public abstract ReplaySettings createReplaySettings();
+    protected ReplayFiltersFacade proxyFacade;
+
     private AutomationResult automationResult;
+    private ExecutorBuilder executor;
 
-    private String screenToUse;
-    private LoadingTimes loadingTimes;
-    private final ExecutorBuilder executor;
-    private ExecutorService executorService;
-
-
-    private void prepare() throws IOException {
-        System.setProperty(getSystemProperty(), executor.getPathToDriverExecutable());
-        proxyFacade.setLock(false);
-        this.automationResult = AutomationResult.NOT_STARTED;
-        this.screenToUse = Optional.ofNullable(screenToUse).orElse(":0");
-        this.replaySettings.prepareReplay(executor.getPathToDriverExecutable(), screenToUse, executor.getTimeout());
-        this.executorService = Executors.newSingleThreadExecutor();
-    }
-
-    private void executeIgnoringExceptions(WebDriverAction webDriverAction) {
+    private void executeIgnoringExceptions(WebDriver webDriver, WebDriverAction webDriverAction) {
         int i = 0;
 
         while (i < executor.getMaxRetries()) {
             try {
-                webDriverAction.execute(replaySettings.getWebDriver(), proxyFacade);
+                webDriverAction.execute(webDriver, proxyFacade);
                 return;
             } catch (WebDriverException ex) {
                 System.out.println(ex.toString());

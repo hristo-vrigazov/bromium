@@ -13,6 +13,14 @@ public class ExecutionReport {
     private Har har;
     private AutomationResult automationResult;
 
+    public static ExecutionReport noVirtualScreen() {
+        return new ExecutionReport(LoadingTimes.empty(), new Har(), AutomationResult.NO_VIRTUAL_SCREEN);
+    }
+
+    public static ExecutionReport couldNotCreateDriver() {
+        return new ExecutionReport(LoadingTimes.empty(), new Har(), AutomationResult.COULD_NOT_CREATE_DRIVER);
+    }
+
     public ExecutionReport(LoadingTimes loadingTimes, Har har, AutomationResult automationResult) {
         this.loadingTimes = loadingTimes;
         this.har = har;

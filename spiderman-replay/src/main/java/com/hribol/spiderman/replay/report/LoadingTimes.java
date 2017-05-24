@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +19,10 @@ public class LoadingTimes {
     private List<Date> actionTimestamps;
     private List<String> actions;
     private SimpleDateFormat simpleDateFormat;
+
+    public static LoadingTimes empty() {
+        return new LoadingTimes(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+    }
 
     public LoadingTimes(List<String> actions, List<Long> waitingTimes, List<Date> actionTimestamps) {
         this.waitingTimes = waitingTimes;

@@ -55,7 +55,7 @@
         <junit.version>4.12</junit.version>
         <guava.version>21.0</guava.version>
         <mockito.version>1.10.19</mockito.version>
-        <powermock.version>1.6.6</powermock.version>
+        <powermock.version>1.6.5</powermock.version>
         <jacoco.version>0.7.9</jacoco.version>
     </properties>
 

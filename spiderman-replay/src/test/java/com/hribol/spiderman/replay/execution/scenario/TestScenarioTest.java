@@ -34,22 +34,11 @@ public class TestScenarioTest {
         testScenario.addWebDriverAction(webDriverAction);
         testScenario.addWebDriverAction(anotherActionOptional);
 
-        assertTrue(testScenario.hasMoreSteps());
-        assertTrue(testScenario.nextActionExpectsHttpRequest());
-        assertEquals(actionName, testScenario.nextActionName());
-
         List<String> expectedActionList = new ArrayList<>();
         expectedActionList.add(actionName);
         expectedActionList.add(anotherActionName);
 
         assertEquals(expectedActionList, testScenario.getActions());
-
-        WebDriverAction actionOnTop = testScenario.pollWebDriverAction();
-        assertEquals(webDriverAction, actionOnTop);
-
-        WebDriverAction lastActionInQueue = testScenario.pollWebDriverAction();
-        assertEquals(anotherWebDriverAction, lastActionInQueue);
-
-        assertFalse(testScenario.hasMoreSteps());
+        assertNotNull(testScenario.steps());
     }
 }

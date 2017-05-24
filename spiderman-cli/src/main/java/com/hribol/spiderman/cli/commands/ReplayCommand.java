@@ -1,6 +1,7 @@
 package com.hribol.spiderman.cli.commands;
 
 import com.hribol.spiderman.cli.factory.ExecutionFactory;
+import com.hribol.spiderman.replay.config.suite.UbuntuVirtualScreenProcessCreator;
 import com.hribol.spiderman.replay.execution.factory.PredefinedWebDriverActionFactory;
 import com.hribol.spiderman.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.spiderman.replay.*;
@@ -41,7 +42,8 @@ public class ReplayCommand implements Command {
 
             ReplayBrowser replayBrowser = new ReplayBrowser(builder.applicationConfigurationInputStream, factory, execution);
             ExecutionReport report = replayBrowser.replay(builder.testInputStream);
-        } catch (IOException | InterruptedException | URISyntaxException e) {
+            System.out.println(report.getAutomationResult());
+        } catch (IOException | URISyntaxException | InterruptedException e) {
             e.printStackTrace();
         }
 

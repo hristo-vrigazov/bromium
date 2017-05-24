@@ -14,7 +14,6 @@ import java.util.Set;
  * Created by hvrigazov on 26.04.17.
  */
 public class ProxyFacade implements ReplayFiltersFacade {
-    private Boolean lock;
     private Set<HttpRequest> httpRequestQueue;
 
     private ReplayRequestFilter requestFilter;
@@ -26,54 +25,23 @@ public class ProxyFacade implements ReplayFiltersFacade {
 
     public ProxyFacade(String baseURI, ReplayFiltersFactory replayFiltersFactory) throws URISyntaxException {
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
-        this.requestFilter = replayFiltersFactory.createReplayRequestFilter(this::setLock, baseURI, httpRequestQueue);
-        this.responseFilter = replayFiltersFactory.createReplayResponseFilter(baseURI, httpRequestQueue);
+        this.requestFilter = replayFiltersFactory.createReplayRequestFilter(baseURI, httpRequestQueue);
+        this.responseFilter = replayFiltersFactory.createReplayResponseFilter(this::canAct, baseURI, httpRequestQueue);
     }
 
     @Override
-    public int getNumberOfRequestsInQueue() {
-        return httpRequestQueue.size();
-    }
-
-    @Override
-    public void setLock(Boolean value) {
-        this.lock = value;
-    }
-
-    @Override
-    public Boolean isLocked() {
-        return lock;
-    }
-
-    @Override
-    public boolean httpQueueIsEmpty() {
-        return httpRequestQueue.isEmpty();
-    }
-
-    @Override
-    public RequestFilter getRequestFilter() {
+    public ReplayRequestFilter getRequestFilter() {
         return requestFilter;
     }
 
     @Override
-    public ResponseFilter getResponseFilter() {
+    public ReplayResponseFilter getResponseFilter() {
         return responseFilter;
     }
 
     @Override
-    public boolean waitsForPrecondition() {
-        return requestFilter.waitsForPrecondition();
+    public boolean canAct() {
+        return httpRequestQueue.isEmpty() && !requestFilter.isHttpLocked();
     }
-
-    @Override
-    public boolean setWaitingEvent(String event, Object lock) {
-        return requestFilter.setWaitingEvent(event, lock);
-    }
-
-    @Override
-    public void signalizeEventIsDone() {
-        requestFilter.signalizeEventIsDone();
-    }
-
 
 }

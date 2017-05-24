@@ -1,8 +1,11 @@
 package com.hribol.spiderman.replay.actions.conditions.javascript;
 
+import com.hribol.spiderman.replay.execution.WebDriverActionExecutionException;
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
 import com.hribol.spiderman.replay.filters.ReplayRequestFilter;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.powermock.api.mockito.PowerMockito;
@@ -52,8 +55,10 @@ public class ActionWithJSPreconditionBaseTest {
         };
 
         WebDriver driver = mock(WebDriver.class);
+        ReplayRequestFilter requestFilter = mock(ReplayRequestFilter.class);
         ReplayFiltersFacade facade = mock(ReplayFiltersFacade.class);
-        when(facade.setWaitingEvent(jsEvent, lock)).thenReturn(false);
+        when(facade.getRequestFilter()).thenReturn(requestFilter);
+        when(requestFilter.setJSWaitingEvent(jsEvent, lock)).thenReturn(false);
         actionWithJSPreconditionBase.execute(driver, facade);
 
         verify(lock).wait();
@@ -88,12 +93,17 @@ public class ActionWithJSPreconditionBaseTest {
         };
 
         WebDriver driver = mock(WebDriver.class);
+        ReplayRequestFilter replayRequestFilter = mock(ReplayRequestFilter.class);
         ReplayFiltersFacade facade = mock(ReplayFiltersFacade.class);
-        when(facade.setWaitingEvent(jsEvent, lock)).thenReturn(true);
+        when(facade.getRequestFilter()).thenReturn(replayRequestFilter);
+        when(replayRequestFilter.setJSWaitingEvent(jsEvent, lock)).thenReturn(true);
         actionWithJSPreconditionBase.execute(driver, facade);
 
         verify(lock, never()).wait();
     }
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void doesNotCallExecuteIfInterruptedWhileWaiting() throws InterruptedException {
@@ -124,8 +134,11 @@ public class ActionWithJSPreconditionBaseTest {
         };
 
         WebDriver driver = mock(WebDriver.class);
+        ReplayRequestFilter replayRequestFilter = mock(ReplayRequestFilter.class);
         ReplayFiltersFacade facade = mock(ReplayFiltersFacade.class);
-        when(facade.setWaitingEvent(jsEvent, lock)).thenReturn(false);
+        when(facade.getRequestFilter()).thenReturn(replayRequestFilter);
+        when(replayRequestFilter.setJSWaitingEvent(jsEvent, lock)).thenReturn(false);
+        thrown.expect(WebDriverActionExecutionException.class);
         actionWithJSPreconditionBase.execute(driver, facade);
 
         actionWithJSPreconditionBase = spy(actionWithJSPreconditionBase);
