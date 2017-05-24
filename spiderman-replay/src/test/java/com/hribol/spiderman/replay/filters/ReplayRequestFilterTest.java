@@ -1,6 +1,5 @@
 package com.hribol.spiderman.replay.filters;
 
-import com.hribol.spiderman.replay.LockCallback;
 import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
@@ -74,7 +73,6 @@ public class ReplayRequestFilterTest {
 
     @Test
     public void ifEventIsSubmittedAsSatisfiedItIsMarked() throws URISyntaxException {
-        LockCallback lockCallback = spy(LockCallback.class);
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
 
@@ -98,7 +96,6 @@ public class ReplayRequestFilterTest {
 
     @Test
     public void ifEventIsSubmittedAsNotSatisfiedItIsMarked() throws URISyntaxException {
-        LockCallback lockCallback = spy(LockCallback.class);
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
 
@@ -127,7 +124,6 @@ public class ReplayRequestFilterTest {
 
     @Test
     public void malformedURLForConditionSatisfied() throws URISyntaxException {
-        LockCallback lockCallback = spy(LockCallback.class);
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
 
@@ -151,7 +147,6 @@ public class ReplayRequestFilterTest {
 
     @Test
     public void malformedURLForConditionNotSatisfied() throws URISyntaxException {
-        LockCallback lockCallback = spy(LockCallback.class);
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
         ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
@@ -173,7 +168,6 @@ public class ReplayRequestFilterTest {
 
     @Test
     public void ifWaitingForEventWhenConditionIsSatisfiedTheThreadIsNotifiedAndWhenNotifyEndThenItIsNot() throws URISyntaxException {
-        LockCallback lockCallback = spy(LockCallback.class);
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
         String event = "jsEvent";
@@ -200,7 +194,6 @@ public class ReplayRequestFilterTest {
 
     @Test
     public void ifWaitingForEventWhenConditionIsSatisfiedTheThreadIsNotNotifiedIfDifferentEventIsSubmitted() throws URISyntaxException {
-        LockCallback lockCallback = spy(LockCallback.class);
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
         String event = "jsEvent";
@@ -226,7 +219,6 @@ public class ReplayRequestFilterTest {
 
     @Test
     public void ifWaitingForEventWhenConditionIsSatisfiedTheThreadIsNotifiedIfNotNullLockObjectIsSupplied() throws URISyntaxException {
-        LockCallback lockCallback = spy(LockCallback.class);
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
         String event = "jsEvent";
