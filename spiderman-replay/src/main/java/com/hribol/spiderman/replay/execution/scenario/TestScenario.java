@@ -3,6 +3,7 @@ package com.hribol.spiderman.replay.execution.scenario;
 import com.hribol.spiderman.replay.actions.WebDriverAction;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Represents a test scenarion, which is just a list of {@link WebDriverAction} and
@@ -10,11 +11,9 @@ import java.util.*;
  */
 public class TestScenario {
     private Queue<WebDriverAction> webDriverActionQueue;
-    private List<String> actions;
 
     public TestScenario() {
         webDriverActionQueue = new LinkedList<>();
-        actions = new ArrayList<>();
     }
 
     public TestScenarioSteps steps() {
@@ -26,7 +25,6 @@ public class TestScenario {
      */
     public void addWebDriverAction(WebDriverAction webDriverAction) {
         webDriverActionQueue.add(webDriverAction);
-        actions.add(webDriverAction.getName());
     }
 
     /**
@@ -34,7 +32,9 @@ public class TestScenario {
      * @return a list of the names of all actions
      */
     public List<String> getActions() {
-        return actions;
+        return webDriverActionQueue.stream()
+                .map(WebDriverAction::getName)
+                .collect(Collectors.toList());
     }
 
     /**

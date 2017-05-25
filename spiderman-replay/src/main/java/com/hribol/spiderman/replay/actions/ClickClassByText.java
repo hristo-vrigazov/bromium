@@ -35,7 +35,7 @@ public class ClickClassByText implements WebDriverAction {
         List<WebElement> webElements = driver.findElements(elementsLocator);
 
         Optional<WebElement> webElementOptional = webElements.stream()
-                .filter(this::elementContainsTextAndIsDisplayed)
+                .filter(this::elementTextIsEqualToAndIsDisplayed)
                 .findFirst();
 
         if (!webElementOptional.isPresent()) {
@@ -57,7 +57,7 @@ public class ClickClassByText implements WebDriverAction {
         return expectsHttpRequest;
     }
 
-    private boolean elementContainsTextAndIsDisplayed(WebElement webElement) {
+    private boolean elementTextIsEqualToAndIsDisplayed(WebElement webElement) {
         boolean textIsCorrect = webElement.getAttribute(INNER_HTML).trim().equals(text);
         boolean elementIsDisplayed = webElement.isDisplayed();
         return textIsCorrect && elementIsDisplayed;
