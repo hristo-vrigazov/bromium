@@ -32,12 +32,8 @@ public class ReplayResponseFilter extends ReplayBaseFilter implements ResponseFi
 
     @Override
     public void filterResponse(HttpResponse httpResponse, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
-        try {
-            if (Utils.isFromCurrentHostAndAcceptsHTML(new URI(baseURL), httpMessageInfo.getOriginalRequest())) {
-                httpMessageContents.setTextContents(injectionCode + httpMessageContents.getTextContents());
-            }
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
+        if (Utils.isFromCurrentHostAndAcceptsHTML(baseURI, httpMessageInfo.getOriginalRequest())) {
+            httpMessageContents.setTextContents(injectionCode + httpMessageContents.getTextContents());
         }
         removeHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
     }

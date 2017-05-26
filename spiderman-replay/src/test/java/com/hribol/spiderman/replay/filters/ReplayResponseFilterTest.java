@@ -11,6 +11,7 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,7 +28,8 @@ import static org.mockito.Mockito.*;
 @PrepareForTest({
         ReplayResponseFilter.class,
         Object.class,
-        Utils.class
+        Utils.class,
+        URI.class
 })
 public class ReplayResponseFilterTest {
 
@@ -146,6 +148,33 @@ public class ReplayResponseFilterTest {
         replayResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
 
         verify(object, never()).notify();
+    }
+
+    @Test
+    public void injectsJSIfRequestingIsChanging() throws URISyntaxException {
+        String baseURI = "http://tenniskafe.com";
+        String injectionCode = "injection";
+        HttpRequest httpRequest = mock(HttpRequest.class);
+        when(httpRequest.getUri()).thenReturn(baseURI);
+        Set<HttpRequest> httpRequestSet = new HashSet<>();
+        httpRequestSet.add(httpRequest);
+        BooleanSupplier booleanSupplier = mock(BooleanSupplier.class);
+        when(booleanSupplier.getAsBoolean()).thenReturn(false);
+        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter(booleanSupplier, injectionCode, baseURI, httpRequestSet);
+
+        HttpResponse httpResponse = mock(HttpResponse.class);
+        String httpMessageText = "httpMessageText";
+        HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
+        when(httpMessageContents.getTextContents()).thenReturn(httpMessageText);
+        HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
+        when(httpMessageInfo.getOriginalRequest()).thenReturn(httpRequest);
+
+        PowerMockito.mockStatic(Utils.class);
+        when(Utils.isFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(true);
+
+        replayResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
+
+        verify(httpMessageContents).setTextContents(injectionCode + httpMessageText);
     }
 
 }

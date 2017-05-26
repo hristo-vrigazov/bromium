@@ -43,6 +43,7 @@ public class ReplayCommandTest {
     private String pathToDriver;
     private String pathToApplicationConfiguration;
     private String pathToSerializedTest;
+    private String pathToJS;
     private int timeout;
     private int measurementsPrecisionMilli;
     private String baseURI;
@@ -82,6 +83,7 @@ public class ReplayCommandTest {
         timeout = 10;
         measurementsPrecisionMilli = 500;
         baseURI = "http://tenniskafe.com";
+        pathToJS = getClass().getResource("/something.js").getFile();
 
         WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
 
@@ -92,6 +94,7 @@ public class ReplayCommandTest {
                 .pathToDriver(pathToDriver)
                 .applicationConfiguration(pathToApplicationConfiguration)
                 .testCase(pathToSerializedTest)
+                .javascriptFile(pathToJS)
                 .timeout(timeout)
                 .applicationConfigurationInputStream(new FileInputStream(pathToApplicationConfiguration))
                 .measurementsPrecisionMilli(measurementsPrecisionMilli)

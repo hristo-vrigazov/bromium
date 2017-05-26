@@ -9,7 +9,6 @@ import com.hribol.spiderman.replay.*;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
 import com.hribol.spiderman.replay.execution.ExecutorBuilder;
 import com.hribol.spiderman.replay.report.ExecutionReport;
-import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -102,8 +101,7 @@ public class ReplayCommand implements Command {
         }
 
         public Builder javascriptFile(File javascriptFile) throws FileNotFoundException {
-            this.javascriptInputStream = new FileInputStream(javascriptFile);
-            return this;
+            return javascriptInputStream(new FileInputStream(javascriptFile));
         }
 
         public Builder javascriptFile(String javascriptFilename) throws FileNotFoundException {
