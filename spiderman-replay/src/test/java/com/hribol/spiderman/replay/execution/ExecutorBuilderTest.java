@@ -19,9 +19,9 @@ public class ExecutorBuilderTest {
     public void correctlyBuildsConfiguration() throws IOException {
         String pathToDriverExecutable = "file:///somepath";
         String baseURI = "http://tennikafe.com";
-        int precision = 500;
-        int timeout = 10;
-        int maxRetries = 10;
+        int precision = 600;
+        int timeout = 20;
+        int maxRetries = 11;
         AutomationResultBuilder automationResultBuilder = mock(AutomationResultBuilder.class);
         ProxyFacadeSupplier proxyFacadeSupplier = mock(ProxyFacadeSupplier.class);
 
@@ -30,14 +30,17 @@ public class ExecutorBuilderTest {
                 .baseURL(baseURI)
                 .measurementsPrecisionInMilliseconds(precision)
                 .timeoutInSeconds(timeout)
-                .maxRetries(10)
+                .maxRetries(maxRetries)
                 .automationResultBuilder(automationResultBuilder)
                 .proxyFacadeSupplier(proxyFacadeSupplier);
 
         assertEquals(pathToDriverExecutable, executorBuilder.getPathToDriverExecutable());
         assertEquals(baseURI, executorBuilder.getBaseURL());
         assertEquals(precision, executorBuilder.getMeasurementsPrecisionMilli());
+        assertEquals(precision, executorBuilder.getMeasurementsPrecisionMilli());
         assertEquals(timeout, executorBuilder.getTimeout());
+        assertEquals(timeout, executorBuilder.getTimeout());
+        assertEquals(maxRetries, executorBuilder.getMaxRetries());
         assertEquals(maxRetries, executorBuilder.getMaxRetries());
         assertEquals(automationResultBuilder, executorBuilder.getAutomationResultBuilder());
         assertEquals(proxyFacadeSupplier, executorBuilder.getProxyFacadeSupplier());

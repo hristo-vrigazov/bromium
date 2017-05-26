@@ -27,7 +27,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     public WebDriverActionExecutionBase(ExecutorBuilder executor) throws IOException, URISyntaxException {
         this.executor = executor;
-        this.proxyFacade = executor.getProxyFacadeSupplier().get(executor.getBaseURL());
+        this.proxyFacade = executor.getProxyFacadeSupplier().get(executor.getBaseURL(), executor.getJavascriptInjectionCode());
         this.automationResult = AutomationResult.NOT_STARTED;
     }
 

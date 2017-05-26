@@ -1,21 +1,25 @@
 package com.hribol.spiderman.replay.actions;
 
+import com.hribol.spiderman.replay.actions.conditions.javascript.ActionWithJSPreconditionBase;
+import com.hribol.spiderman.replay.execution.factory.WebDriverActionFactoryBase;
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotSelectableException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 
 import static com.hribol.spiderman.replay.config.utils.Constants.INNER_HTML;
+import static com.hribol.spiderman.replay.execution.factory.WebDriverActionFactoryBase.CLICK_CLASS_BY_TEXT;
 
 /**
  * Finds all elements with a given class, and then clicks on
  * the element that contains a given text and is displayed
  */
-public class ClickClassByText implements WebDriverAction {
+public class ClickClassByText extends ActionWithJSPreconditionBase {
 
     private final String initialCollectorClass;
     private final String text;
@@ -30,7 +34,7 @@ public class ClickClassByText implements WebDriverAction {
     }
 
     @Override
-    public void execute(WebDriver driver, ReplayFiltersFacade facade) {
+    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayFiltersFacade facade) {
         By elementsLocator = By.className(initialCollectorClass);
         List<WebElement> webElements = driver.findElements(elementsLocator);
 
@@ -61,5 +65,10 @@ public class ClickClassByText implements WebDriverAction {
         boolean textIsCorrect = webElement.getAttribute(INNER_HTML).trim().equals(text);
         boolean elementIsDisplayed = webElement.isDisplayed();
         return textIsCorrect && elementIsDisplayed;
+    }
+
+    @Override
+    public String getJSEventToWaitFor() {
+        return MessageFormat.format("{0} .{1} {2}", CLICK_CLASS_BY_TEXT, initialCollectorClass, text);
     }
 }

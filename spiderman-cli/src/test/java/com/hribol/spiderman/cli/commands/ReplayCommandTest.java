@@ -1,15 +1,17 @@
 package com.hribol.spiderman.cli.commands;
 
 import com.hribol.spiderman.cli.factory.ExecutionFactory;
+import com.hribol.spiderman.replay.ReplayBrowser;
+import com.hribol.spiderman.replay.execution.ExecutorBuilder;
+import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
 import com.hribol.spiderman.replay.execution.factory.PredefinedWebDriverActionFactory;
 import com.hribol.spiderman.replay.execution.factory.WebDriverActionFactory;
-import com.hribol.spiderman.replay.ReplayBrowser;
-import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
-import com.hribol.spiderman.replay.execution.ExecutorBuilder;
 import com.hribol.spiderman.replay.report.AutomationResult;
 import com.hribol.spiderman.replay.report.ExecutionReport;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -33,7 +35,8 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
         PredefinedWebDriverActionFactory.class,
         ReplayBrowser.class,
         FileInputStream.class,
-        ReplayCommand.class
+        ReplayCommand.class,
+        IOUtils.class
 })
 public class ReplayCommandTest {
 
@@ -101,6 +104,9 @@ public class ReplayCommandTest {
 
         whenNew(ReplayBrowser.class).withAnyArguments().thenReturn(replayBrowser);
         whenNew(FileInputStream.class).withAnyArguments().thenReturn(fileInputStream);
+
+        PowerMockito.mockStatic(IOUtils.class);
+        when(IOUtils.toString(any(InputStream.class))).thenReturn("");
         replayCommand.run();
     }
 

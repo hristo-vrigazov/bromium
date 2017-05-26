@@ -74,6 +74,7 @@ public class ReplayCommandHandlerTest {
         when(builder.pathToDriver(pathToDriver)).thenReturn(builder);
         when(builder.applicationConfiguration(configuration)).thenReturn(builder);
         when(builder.testCase(testCase)).thenReturn(builder);
+        when(builder.javascriptFile(anyString())).thenReturn(builder);
         when(builder.timeout(10)).thenReturn(builder);
         when(builder.measurementsPrecisionMilli(500)).thenReturn(builder);
         when(builder.baseURL(url)).thenReturn(builder);

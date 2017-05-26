@@ -7,8 +7,8 @@ import java.net.URISyntaxException;
  */
 public class ProxyFacadeSupplier {
 
-    public ProxyFacade get(String baseURI) throws URISyntaxException {
-        return new ProxyFacade(baseURI);
+    public ProxyFacade get(String baseURI, String injectionCode) throws URISyntaxException {
+        return new ProxyFacade(baseURI, injectionCode);
     }
 
 }

@@ -1,11 +1,13 @@
 package com.hribol.spiderman.replay.filters;
 
+import com.hribol.spiderman.replay.config.utils.Utils;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.filters.ResponseFilter;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
 
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Optional;
 import java.util.Set;
@@ -18,15 +20,25 @@ public class ReplayResponseFilter extends ReplayBaseFilter implements ResponseFi
 
     private BooleanSupplier canAct;
     private Optional<Object> optionalExecutionThreadLock;
+    private String injectionCode;
 
-    public ReplayResponseFilter(BooleanSupplier canAct, String baseURI, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
+    public ReplayResponseFilter(BooleanSupplier canAct, String injectionCode, String baseURI, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
         super(baseURI, httpRequestQueue);
         this.canAct = canAct;
         this.optionalExecutionThreadLock = Optional.empty();
+        this.injectionCode = injectionCode;
+
     }
 
     @Override
     public void filterResponse(HttpResponse httpResponse, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
+        try {
+            if (Utils.isFromCurrentHostAndAcceptsHTML(new URI(baseURL), httpMessageInfo.getOriginalRequest())) {
+                httpMessageContents.setTextContents(injectionCode + httpMessageContents.getTextContents());
+            }
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         removeHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
     }
 
@@ -44,7 +56,7 @@ public class ReplayResponseFilter extends ReplayBaseFilter implements ResponseFi
             return;
         }
 
-        System.out.println("Remove request " + httpRequest.getUri());
+//        System.out.println("Remove request " + httpRequest.getUri());
         this.httpRequestQueue.remove(httpRequest);
 
         if (canAct.getAsBoolean()) {

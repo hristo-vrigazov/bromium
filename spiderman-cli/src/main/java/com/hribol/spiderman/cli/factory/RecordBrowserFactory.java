@@ -1,7 +1,7 @@
 package com.hribol.spiderman.cli.factory;
 
 import com.hribol.spiderman.browsers.chrome.record.ChromeRecordBrowser;
-import com.hribol.spiderman.record.JavascriptInjector;
+import com.hribol.spiderman.replay.config.utils.JavascriptInjector;
 import com.hribol.spiderman.record.RecordBrowserBase;
 
 import java.io.IOException;

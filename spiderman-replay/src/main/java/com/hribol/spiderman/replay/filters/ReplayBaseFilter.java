@@ -13,11 +13,11 @@ import java.util.Set;
  */
 public class ReplayBaseFilter {
     protected List<String> whiteListHttp;
-    protected String baseURI;
+    protected String baseURL;
     protected Set<HttpRequest> httpRequestQueue;
 
-    public ReplayBaseFilter(String baseURI, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
-        this.baseURI = baseURI;
+    public ReplayBaseFilter(String baseURL, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
+        this.baseURL = baseURL;
         this.httpRequestQueue = httpRequestQueue;
         this.whiteListHttp = buildWhitelist();
     }
@@ -29,7 +29,7 @@ public class ReplayBaseFilter {
     private List<String> buildWhitelist() throws URISyntaxException {
         List<String> whiteListHttp = new ArrayList<>();
         whiteListHttp.add("localhost");
-        URI uri = new URI(baseURI);
+        URI uri = new URI(baseURL);
         whiteListHttp.add(uri.getHost());
         return whiteListHttp;
     }

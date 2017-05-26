@@ -2,12 +2,14 @@ package com.hribol.spiderman.cli.commands;
 
 import com.hribol.spiderman.cli.factory.ExecutionFactory;
 import com.hribol.spiderman.replay.config.suite.UbuntuVirtualScreenProcessCreator;
+import com.hribol.spiderman.replay.config.utils.JavascriptInjector;
 import com.hribol.spiderman.replay.execution.factory.PredefinedWebDriverActionFactory;
 import com.hribol.spiderman.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.spiderman.replay.*;
 import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
 import com.hribol.spiderman.replay.execution.ExecutorBuilder;
 import com.hribol.spiderman.replay.report.ExecutionReport;
+import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -32,11 +34,13 @@ public class ReplayCommand implements Command {
         try {
             WebDriverActionFactory factory = new PredefinedWebDriverActionFactory(builder.baseURL);
 
+            String javascriptInjectionCode = new JavascriptInjector(builder.javascriptInputStream).getInjectionCode();
             ExecutorBuilder executor = new ExecutorBuilder()
                     .pathToDriverExecutable(builder.pathToDriver)
                     .baseURL(builder.baseURL)
                     .timeoutInSeconds(builder.timeout)
-                    .measurementsPrecisionInMilliseconds(builder.measurementsPrecisionMilli);
+                    .measurementsPrecisionInMilliseconds(builder.measurementsPrecisionMilli)
+                    .javascriptInjectionCode(javascriptInjectionCode);
 
             WebDriverActionExecution execution = builder.executionFactory.create(builder.browserType, executor);
 
@@ -53,6 +57,7 @@ public class ReplayCommand implements Command {
         private String pathToDriver;
         private InputStream applicationConfigurationInputStream;
         private InputStream testInputStream;
+        private InputStream javascriptInputStream;
         private Integer timeout;
         private Integer measurementsPrecisionMilli;
         private String baseURL;
@@ -89,6 +94,20 @@ public class ReplayCommand implements Command {
         public Builder testInputStream(InputStream inputStream) {
             this.testInputStream = inputStream;
             return this;
+        }
+
+        public Builder javascriptInputStream(InputStream inputStream) {
+            this.javascriptInputStream = inputStream;
+            return this;
+        }
+
+        public Builder javascriptFile(File javascriptFile) throws FileNotFoundException {
+            this.javascriptInputStream = new FileInputStream(javascriptFile);
+            return this;
+        }
+
+        public Builder javascriptFile(String javascriptFilename) throws FileNotFoundException {
+            return javascriptFile(new File(javascriptFilename));
         }
 
         public Builder timeout(Integer timeout) {

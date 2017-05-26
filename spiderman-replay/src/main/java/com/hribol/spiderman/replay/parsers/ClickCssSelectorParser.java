@@ -1,6 +1,6 @@
 package com.hribol.spiderman.replay.parsers;
 
-import com.hribol.spiderman.replay.actions.conditions.javascript.ClickCssSelector;
+import com.hribol.spiderman.replay.actions.ClickCssSelector;
 import com.hribol.spiderman.replay.actions.WebDriverAction;
 
 import java.util.Map;

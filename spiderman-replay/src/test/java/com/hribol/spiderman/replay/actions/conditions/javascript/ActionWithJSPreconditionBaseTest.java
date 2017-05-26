@@ -99,7 +99,7 @@ public class ActionWithJSPreconditionBaseTest {
         when(replayRequestFilter.setJSWaitingEvent(jsEvent, lock)).thenReturn(true);
         actionWithJSPreconditionBase.execute(driver, facade);
 
-        verify(lock, never()).wait();
+        verify(lock).wait();
     }
 
     @Rule

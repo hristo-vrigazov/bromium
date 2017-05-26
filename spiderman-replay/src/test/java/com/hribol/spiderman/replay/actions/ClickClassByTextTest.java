@@ -55,7 +55,7 @@ public class ClickClassByTextTest {
         when(webDriver.findElements(elementsLocator)).thenReturn(webElements);
 
         ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, eventName, expectsHttp);
-        clickClassByText.execute(webDriver, mock(ReplayFiltersFacade.class));
+        clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayFiltersFacade.class));
     }
 
     @Rule
@@ -76,7 +76,7 @@ public class ClickClassByTextTest {
 
         ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, eventName, expectsHttp);
         thrown.expect(ElementNotSelectableException.class);
-        clickClassByText.execute(webDriver, mock(ReplayFiltersFacade.class));
+        clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayFiltersFacade.class));
     }
 
     @Test
@@ -99,6 +99,6 @@ public class ClickClassByTextTest {
 
         ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, eventName, expectsHttp);
         thrown.expect(ElementNotSelectableException.class);
-        clickClassByText.execute(webDriver, mock(ReplayFiltersFacade.class));
+        clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayFiltersFacade.class));
     }
 }

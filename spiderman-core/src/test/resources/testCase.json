@@ -1,10 +1,7 @@
 [
 	{
-		"event": "Load initial page",
-		"url": ""
-	},
-    {
-        "event": "Click on the logo 1"
+       "event": "Load initial page",
+       "url": ""
     },
     {
         "event": "Click mega menu",
@@ -13,9 +10,5 @@
     {
         "event": "Click mega menu",
         "text": "Тенис оказион"
-    },
-    {
-        "event": "Click mega menu",
-        "text": "Любопитно"
     }
 ]
