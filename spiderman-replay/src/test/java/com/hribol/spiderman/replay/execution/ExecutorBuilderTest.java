@@ -8,6 +8,7 @@ import org.junit.rules.ExpectedException;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -19,6 +20,7 @@ public class ExecutorBuilderTest {
     public void correctlyBuildsConfiguration() throws IOException {
         String pathToDriverExecutable = "file:///somepath";
         String baseURI = "http://tennikafe.com";
+        String javascriptJsInjectionCode = "function() {}";
         int precision = 600;
         int timeout = 20;
         int maxRetries = 11;
@@ -30,6 +32,7 @@ public class ExecutorBuilderTest {
                 .baseURL(baseURI)
                 .measurementsPrecisionInMilliseconds(precision)
                 .timeoutInSeconds(timeout)
+                .javascriptInjectionCode(javascriptJsInjectionCode)
                 .maxRetries(maxRetries)
                 .automationResultBuilder(automationResultBuilder)
                 .proxyFacadeSupplier(proxyFacadeSupplier);
@@ -44,6 +47,7 @@ public class ExecutorBuilderTest {
         assertEquals(maxRetries, executorBuilder.getMaxRetries());
         assertEquals(automationResultBuilder, executorBuilder.getAutomationResultBuilder());
         assertEquals(proxyFacadeSupplier, executorBuilder.getProxyFacadeSupplier());
+        assertEquals(javascriptJsInjectionCode, executorBuilder.getJavascriptInjectionCode());
     }
 
     @Rule
@@ -69,5 +73,15 @@ public class ExecutorBuilderTest {
         ExecutorBuilder executorBuilder = new ExecutorBuilder();
         expectedException.expect(IOException.class);
         executorBuilder.getPathToDriverExecutable();
+    }
+
+    @Test
+    public void canGetDefaults() {
+        ExecutorBuilder executorBuilder = new ExecutorBuilder();
+        assertEquals(10, executorBuilder.getTimeout());
+        assertEquals(500, executorBuilder.getMeasurementsPrecisionMilli());
+        assertEquals(50, executorBuilder.getMaxRetries());
+        assertNotNull(executorBuilder.getAutomationResultBuilder());
+        assertNotNull(executorBuilder.getProxyFacadeSupplier());
     }
 }
