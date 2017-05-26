@@ -22,7 +22,7 @@ public class ProxyFacadeTest {
     @Test
     public void canGetFilters() throws URISyntaxException {
         String baseURI = "http://tenniskafe.com";
-        ProxyFacade proxyFacade = new ProxyFacade(baseURI);
+        ProxyFacade proxyFacade = new ProxyFacade(baseURI, "");
 
         assertNotNull(proxyFacade.getRequestFilter());
         assertNotNull(proxyFacade.getResponseFilter());
@@ -31,7 +31,7 @@ public class ProxyFacadeTest {
     @Test
     public void requestQueueIsEmptyInBeginning() throws URISyntaxException {
         String baseURI = "http://tenniskafe.com";
-        ProxyFacade proxyFacade = new ProxyFacade(baseURI);
+        ProxyFacade proxyFacade = new ProxyFacade(baseURI, "");
         assertTrue(proxyFacade.canAct());
     }
 
@@ -43,7 +43,7 @@ public class ProxyFacadeTest {
         when(replayRequestFilter.isHttpLocked()).thenReturn(true);
         ReplayFiltersFactory replayFiltersFactory = mock(ReplayFiltersFactory.class);
         when(replayFiltersFactory.createReplayRequestFilter(eq(baseURI), anySet())).thenReturn(replayRequestFilter);
-        ProxyFacade proxyFacade = new ProxyFacade(baseURI, replayFiltersFactory);
+        ProxyFacade proxyFacade = new ProxyFacade(baseURI, "", replayFiltersFactory);
         assertFalse(proxyFacade.canAct());
     }
 
@@ -54,7 +54,7 @@ public class ProxyFacadeTest {
         ReplayFiltersFactory replayFiltersFactory = mock(ReplayFiltersFactory.class);
         ProxyWhenCreatingRequestFilter proxyWhenCreatingRequestFilter = new ProxyWhenCreatingRequestFilter(replayRequestFilter);
         doAnswer(proxyWhenCreatingRequestFilter).when(replayFiltersFactory).createReplayRequestFilter(eq(baseURI), anySet());
-        ProxyFacade proxyFacade = new ProxyFacade(baseURI, replayFiltersFactory);
+        ProxyFacade proxyFacade = new ProxyFacade(baseURI, "", replayFiltersFactory);
         proxyWhenCreatingRequestFilter.addMockedRequest();
         assertFalse(proxyFacade.canAct());
     }

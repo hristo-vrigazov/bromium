@@ -1,6 +1,7 @@
 package com.hribol.spiderman.replay.execution;
 
 import com.hribol.spiderman.replay.filters.ProxyFacadeSupplier;
+import com.hribol.spiderman.replay.report.ExecutionReport;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -17,9 +18,15 @@ public class ExecutorBuilder {
     private String baseURL;
     private AutomationResultBuilder automationResultBuilder;
     private ProxyFacadeSupplier proxyFacadeSupplier;
+    private String javascriptInjectionCode;
 
     public ExecutorBuilder pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
+        return this;
+    }
+
+    public ExecutorBuilder javascriptInjectionCode(String javascriptInjectionCode) {
+        this.javascriptInjectionCode = javascriptInjectionCode;
         return this;
     }
 
@@ -63,7 +70,7 @@ public class ExecutorBuilder {
 
     public String getPathToDriverExecutable() throws IOException {
         pathToDriverExecutable = Optional.ofNullable(pathToDriverExecutable).orElse(System.getenv(DRIVER_EXECUTABLE));
-        if (pathToDriverExecutable == null) {
+        if (!Optional.ofNullable(pathToDriverExecutable).isPresent()) {
             throw new IOException("Path to driver executable not set. Please either set it using" +
                     " pathToDriverExecutable method or by setting the environment variable" +
                     " DRIVER_EXECUTABLE");
@@ -73,22 +80,46 @@ public class ExecutorBuilder {
     }
 
     public int getTimeout() {
-        return Optional.ofNullable(timeout).orElse(this.timeout = 10);
+        if (!Optional.ofNullable(timeout).isPresent()) {
+            this.timeout = 10;
+        }
+
+        return timeout;
     }
 
     public int getMeasurementsPrecisionMilli() {
-        return Optional.ofNullable(measurementsPrecisionMilli).orElse(this.measurementsPrecisionMilli = 500);
+        if (!Optional.ofNullable(measurementsPrecisionMilli).isPresent()) {
+            this.measurementsPrecisionMilli = 500;
+        }
+
+        return measurementsPrecisionMilli;
     }
 
     public int getMaxRetries() {
-        return Optional.ofNullable(maxRetries).orElse(this.maxRetries = 50);
+        if (!Optional.ofNullable(maxRetries).isPresent()) {
+            this.maxRetries = 50;
+        }
+
+        return maxRetries;
     }
 
     public AutomationResultBuilder getAutomationResultBuilder() {
-        return Optional.ofNullable(automationResultBuilder).orElse(this.automationResultBuilder = new InstanceBasedAutomationResultBuilder());
+        if (!Optional.ofNullable(automationResultBuilder).isPresent()) {
+            this.automationResultBuilder = new InstanceBasedAutomationResultBuilder();
+        }
+
+        return automationResultBuilder;
     }
 
     public ProxyFacadeSupplier getProxyFacadeSupplier() {
-        return Optional.ofNullable(proxyFacadeSupplier).orElse(this.proxyFacadeSupplier = new ProxyFacadeSupplier());
+        if (!Optional.ofNullable(proxyFacadeSupplier).isPresent()) {
+            this.proxyFacadeSupplier = new ProxyFacadeSupplier();
+        }
+
+        return proxyFacadeSupplier;
+    }
+
+    public String getJavascriptInjectionCode() {
+        return javascriptInjectionCode;
     }
 }

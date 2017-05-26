@@ -8,6 +8,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import java.net.URISyntaxException;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
@@ -26,9 +27,9 @@ public class ProxyFacadeSupplierTest {
     public void createsProxyFacade() throws Exception {
         String url = "http://tinkiwinki.com";
         ProxyFacade expected = mock(ProxyFacade.class);
-        whenNew(ProxyFacade.class).withArguments(url).thenReturn(expected);
+        whenNew(ProxyFacade.class).withArguments(anyString(), anyString()).thenReturn(expected);
         ProxyFacadeSupplier proxyFacadeSupplier = new ProxyFacadeSupplier();
-        ProxyFacade actual = proxyFacadeSupplier.get(url);
+        ProxyFacade actual = proxyFacadeSupplier.get(url, "");
 
         assertEquals(expected, actual);
     }

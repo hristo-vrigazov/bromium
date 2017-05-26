@@ -1,7 +1,6 @@
 package com.hribol.spiderman.replay.actions;
 
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
-import com.hribol.spiderman.replay.actions.conditions.javascript.ClickCssSelector;
 import com.hribol.spiderman.replay.filters.ReplayRequestFilter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import static com.hribol.spiderman.replay.execution.factory.WebDriverActionFactoryBase.CLICK_CSS_SELECTOR;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
@@ -45,6 +45,6 @@ public class ClickCssSelectorTest {
         verify(webElement).click();
         assertEquals(eventName, action.getName());
         assertEquals(expectsHttpRequest, action.expectsHttpRequest());
-        assertEquals("test-element", action.getJSEventToWaitFor());
+        assertEquals(CLICK_CSS_SELECTOR + " " + cssSelector, action.getJSEventToWaitFor());
     }
 }

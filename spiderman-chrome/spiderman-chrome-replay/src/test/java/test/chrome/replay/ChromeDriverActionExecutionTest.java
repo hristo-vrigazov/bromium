@@ -26,7 +26,7 @@ public class ChromeDriverActionExecutionTest {
     public void creatingExecution() throws IOException, URISyntaxException {
         ProxyFacade proxyFacade = mock(ProxyFacade.class);
         ProxyFacadeSupplier proxyFacadeSupplier = mock(ProxyFacadeSupplier.class);
-        when(proxyFacadeSupplier.get(anyString())).thenReturn(proxyFacade);
+        when(proxyFacadeSupplier.get(anyString(), anyString())).thenReturn(proxyFacade);
         ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
         when(executorBuilder.getProxyFacadeSupplier()).thenReturn(proxyFacadeSupplier);
         when(executorBuilder.getBaseURL()).thenReturn("http://tenniskafe.com");

@@ -1,15 +1,17 @@
 package com.hribol.spiderman.cli.commands;
 
 import com.hribol.spiderman.cli.factory.ExecutionFactory;
+import com.hribol.spiderman.replay.ReplayBrowser;
+import com.hribol.spiderman.replay.execution.ExecutorBuilder;
+import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
 import com.hribol.spiderman.replay.execution.factory.PredefinedWebDriverActionFactory;
 import com.hribol.spiderman.replay.execution.factory.WebDriverActionFactory;
-import com.hribol.spiderman.replay.ReplayBrowser;
-import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
-import com.hribol.spiderman.replay.execution.ExecutorBuilder;
 import com.hribol.spiderman.replay.report.AutomationResult;
 import com.hribol.spiderman.replay.report.ExecutionReport;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -33,13 +35,15 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
         PredefinedWebDriverActionFactory.class,
         ReplayBrowser.class,
         FileInputStream.class,
-        ReplayCommand.class
+        ReplayCommand.class,
+        IOUtils.class
 })
 public class ReplayCommandTest {
 
     private String pathToDriver;
     private String pathToApplicationConfiguration;
     private String pathToSerializedTest;
+    private String pathToJS;
     private int timeout;
     private int measurementsPrecisionMilli;
     private String baseURI;
@@ -79,6 +83,7 @@ public class ReplayCommandTest {
         timeout = 10;
         measurementsPrecisionMilli = 500;
         baseURI = "http://tenniskafe.com";
+        pathToJS = getClass().getResource("/something.js").getFile();
 
         WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
 
@@ -89,6 +94,7 @@ public class ReplayCommandTest {
                 .pathToDriver(pathToDriver)
                 .applicationConfiguration(pathToApplicationConfiguration)
                 .testCase(pathToSerializedTest)
+                .javascriptFile(pathToJS)
                 .timeout(timeout)
                 .applicationConfigurationInputStream(new FileInputStream(pathToApplicationConfiguration))
                 .measurementsPrecisionMilli(measurementsPrecisionMilli)
@@ -101,6 +107,9 @@ public class ReplayCommandTest {
 
         whenNew(ReplayBrowser.class).withAnyArguments().thenReturn(replayBrowser);
         whenNew(FileInputStream.class).withAnyArguments().thenReturn(fileInputStream);
+
+        PowerMockito.mockStatic(IOUtils.class);
+        when(IOUtils.toString(any(InputStream.class))).thenReturn("");
         replayCommand.run();
     }
 

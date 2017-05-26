@@ -1,5 +1,6 @@
 package com.hribol.spiderman.replay.filters;
 
+import com.hribol.spiderman.replay.config.utils.Utils;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.filters.RequestFilter;
@@ -7,6 +8,7 @@ import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
@@ -36,6 +38,7 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
 
     @Override
     public HttpResponse filterRequest(HttpRequest httpRequest, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
+
         addHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
         this.httpLock = false;
 
@@ -44,7 +47,7 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
                 URL url = new URL(httpRequest.getUri());
                 String event = url.getQuery();
                 conditionsSatisfied.add(event);
-                System.out.println("Satisfied " + conditionsSatisfied.size());
+                System.out.println("Satisfied " + event);
 
                 if (optionalEvent.isPresent() && optionalEvent.get().equals(event)) {
                     if (optionalJSLock.isPresent()) {
@@ -63,8 +66,9 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
         if (httpRequest.getUri().contains(CONDITION_NOT_SATISFIED_URL)) {
             try {
                 URL url = new URL(httpRequest.getUri());
+                String event = url.getQuery();
                 conditionsSatisfied.remove(url.getQuery());
-                System.out.println("Not Satisfied " + conditionsSatisfied.size());
+                System.out.println("Not Satisfied " + event);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -77,7 +81,7 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
         if (!inWhiteList(httpRequest.getUri())) {
             return;
         }
-        System.out.println("Add request " + httpRequest.getUri());
+//        System.out.println("Add request " + httpRequest.getUri());
         this.httpRequestQueue.add(httpRequest);
     }
 

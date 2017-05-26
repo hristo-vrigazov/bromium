@@ -16,7 +16,7 @@ public class ReplayFiltersFactory {
         return new ReplayRequestFilter(baseURI, httpRequestQueue);
     }
 
-    public ReplayResponseFilter createReplayResponseFilter(BooleanSupplier booleanSupplier, String baseURI, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
-        return new ReplayResponseFilter(booleanSupplier, baseURI, httpRequestQueue);
+    public ReplayResponseFilter createReplayResponseFilter(BooleanSupplier booleanSupplier, String injectionCode, String baseURI, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
+        return new ReplayResponseFilter(booleanSupplier, injectionCode, baseURI, httpRequestQueue);
     }
 }

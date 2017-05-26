@@ -1,9 +1,14 @@
-package com.hribol.spiderman.replay.actions.conditions.javascript;
+package com.hribol.spiderman.replay.actions;
 
+import com.hribol.spiderman.replay.actions.conditions.javascript.ActionWithJSPreconditionBase;
 import com.hribol.spiderman.replay.filters.ReplayFiltersFacade;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.text.MessageFormat;
+
+import static com.hribol.spiderman.replay.execution.factory.WebDriverActionFactoryBase.CLICK_CSS_SELECTOR;
 
 /**
  * Clicks on the first element found by a css selector
@@ -39,6 +44,6 @@ public class ClickCssSelector extends ActionWithJSPreconditionBase {
 
     @Override
     public String getJSEventToWaitFor() {
-        return cssSelector.substring(1);
+        return MessageFormat.format("{0} {1}", CLICK_CSS_SELECTOR, cssSelector);
     }
 }

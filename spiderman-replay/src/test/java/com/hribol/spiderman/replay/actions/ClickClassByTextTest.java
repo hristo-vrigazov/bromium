@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.hribol.spiderman.replay.config.utils.Constants.INNER_HTML;
+import static com.hribol.spiderman.replay.execution.factory.WebDriverActionFactoryBase.CLICK_CLASS_BY_TEXT;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -21,13 +23,14 @@ import static org.mockito.Mockito.when;
  */
 public class ClickClassByTextTest {
 
+    String initialCollectorClass = "mega-menu-click";
+    String text = "ATP";
+    String eventName = "clickMegaMenu";
+    boolean expectsHttp = true;
+
+
     @Test
     public void canClickIfThereIsSuitableElement() {
-        String initialCollectorClass = "mega-menu-click";
-        String text = "ATP";
-        String eventName = "clickMegaMenu";
-        boolean expectsHttp = true;
-
         WebElement correctWebElement = mock(WebElement.class);
         when(correctWebElement.getAttribute(INNER_HTML)).thenReturn("  ATP ");
         when(correctWebElement.isDisplayed()).thenReturn(true);
@@ -55,7 +58,7 @@ public class ClickClassByTextTest {
         when(webDriver.findElements(elementsLocator)).thenReturn(webElements);
 
         ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, eventName, expectsHttp);
-        clickClassByText.execute(webDriver, mock(ReplayFiltersFacade.class));
+        clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayFiltersFacade.class));
     }
 
     @Rule
@@ -63,11 +66,6 @@ public class ClickClassByTextTest {
 
     @Test
     public void throwsExceptionIfNoElementsAreFound() {
-        String initialCollectorClass = "mega-menu-click";
-        String text = "ATP";
-        String eventName = "clickMegaMenu";
-        boolean expectsHttp = true;
-
         List<WebElement> webElements = new ArrayList<>();
 
         By elementsLocator = By.className(initialCollectorClass);
@@ -76,16 +74,11 @@ public class ClickClassByTextTest {
 
         ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, eventName, expectsHttp);
         thrown.expect(ElementNotSelectableException.class);
-        clickClassByText.execute(webDriver, mock(ReplayFiltersFacade.class));
+        clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayFiltersFacade.class));
     }
 
     @Test
     public void throwsExceptionIfNoSuitableElementsAreFound() {
-        String initialCollectorClass = "mega-menu-click";
-        String text = "ATP";
-        String eventName = "clickMegaMenu";
-        boolean expectsHttp = true;
-
         WebElement incorrectWebElement = mock(WebElement.class);
         when(incorrectWebElement.getAttribute(INNER_HTML)).thenReturn("sometATPhing");
         when(incorrectWebElement.isDisplayed()).thenReturn(true);
@@ -99,6 +92,15 @@ public class ClickClassByTextTest {
 
         ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, eventName, expectsHttp);
         thrown.expect(ElementNotSelectableException.class);
-        clickClassByText.execute(webDriver, mock(ReplayFiltersFacade.class));
+        clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayFiltersFacade.class));
+    }
+
+    @Test
+    public void jsWaitingEventIsConstructedCorrectly() {
+        ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, eventName, expectsHttp);
+
+        String expected = CLICK_CLASS_BY_TEXT + " ." + initialCollectorClass + " " + text;
+        String actual = clickClassByText.getJSEventToWaitFor();
+        assertEquals(expected, actual);
     }
 }

@@ -18,8 +18,9 @@ public class ReplayCommandHandler implements CommandHandler {
         String pathToDriver = getPathToDriver(opts);
         String pathToApplicationConfiguration = getPathToApplicationConfiguration(opts);
         String pathToSerializedTest = getPathToTestCase(opts);
-        int timeout = getTimeout(opts);
-        int measurementsPrecisionMilli = getMeasurementsPrecisionMilli(opts);
+        String pathToJsFile = getPathToJS(opts);
+        Integer timeout = getTimeout(opts);
+        Integer measurementsPrecisionMilli = getMeasurementsPrecisionMilli(opts);
         String baseURL = getBaseUrl(opts);
         String browserType = getBrowserType(opts);
         ExecutionFactory executionFactory = new ExecutionFactory();
@@ -28,6 +29,7 @@ public class ReplayCommandHandler implements CommandHandler {
                 .pathToDriver(pathToDriver)
                 .applicationConfiguration(pathToApplicationConfiguration)
                 .testCase(pathToSerializedTest)
+                .javascriptFile(pathToJsFile)
                 .timeout(timeout)
                 .measurementsPrecisionMilli(measurementsPrecisionMilli)
                 .baseURL(baseURL)

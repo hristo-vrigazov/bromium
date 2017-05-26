@@ -1,6 +1,6 @@
-package com.hribol.spiderman.record;
+package com.hribol.spiderman.replay.config.utils;
 
-import com.hribol.spiderman.record.JavascriptInjector;
+import com.hribol.spiderman.replay.config.utils.JavascriptInjector;
 import org.junit.Test;
 
 import java.io.IOException;

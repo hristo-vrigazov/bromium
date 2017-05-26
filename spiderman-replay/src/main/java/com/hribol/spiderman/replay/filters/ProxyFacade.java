@@ -19,14 +19,14 @@ public class ProxyFacade implements ReplayFiltersFacade {
     private ReplayRequestFilter requestFilter;
     private ReplayResponseFilter responseFilter;
 
-    public ProxyFacade(String baseURI) throws URISyntaxException {
-        this(baseURI, new ReplayFiltersFactory());
+    public ProxyFacade(String baseURI, String injectionCode) throws URISyntaxException {
+        this(baseURI, injectionCode, new ReplayFiltersFactory());
     }
 
-    public ProxyFacade(String baseURI, ReplayFiltersFactory replayFiltersFactory) throws URISyntaxException {
+    public ProxyFacade(String baseURI, String injectionCode, ReplayFiltersFactory replayFiltersFactory) throws URISyntaxException {
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
         this.requestFilter = replayFiltersFactory.createReplayRequestFilter(baseURI, httpRequestQueue);
-        this.responseFilter = replayFiltersFactory.createReplayResponseFilter(this::canAct, baseURI, httpRequestQueue);
+        this.responseFilter = replayFiltersFactory.createReplayResponseFilter(this::canAct, injectionCode, baseURI, httpRequestQueue);
     }
 
     @Override

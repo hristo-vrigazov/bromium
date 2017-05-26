@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.hribol.spiderman.replay.config.suppliers.VisibleWebDriverSupplier;
 import com.hribol.spiderman.record.settings.ProxyDriverIntegrator;
 import com.hribol.spiderman.record.settings.RecordManager;
+import com.hribol.spiderman.replay.config.utils.JavascriptInjector;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.filters.ResponseFilter;
 import org.openqa.selenium.WebDriver;

@@ -1,8 +1,7 @@
 package com.hribol.spiderman.record;
 
 import com.hribol.spiderman.replay.config.suppliers.VisibleWebDriverSupplier;
-import com.hribol.spiderman.record.JavascriptInjector;
-import com.hribol.spiderman.record.RecordBrowserBase;
+import com.hribol.spiderman.replay.config.utils.JavascriptInjector;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
