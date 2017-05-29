@@ -7,7 +7,7 @@ import net.lightbody.bmp.util.HttpMessageInfo;
 
 import java.net.URI;
 
-import static com.hribol.spiderman.replay.config.utils.Utils.isFromCurrentHostAndAcceptsHTML;
+import static com.hribol.spiderman.replay.config.utils.Utils.isGETFromCurrentHostAndAcceptsHTML;
 
 /**
  * Created by hvrigazov on 22.04.17.
@@ -24,7 +24,7 @@ public class RecordResponseFilter implements ResponseFilter {
 
     @Override
     public void filterResponse(HttpResponse httpResponse, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
-        if (isFromCurrentHostAndAcceptsHTML(baseURI, httpMessageInfo.getOriginalRequest())) {
+        if (isGETFromCurrentHostAndAcceptsHTML(baseURI, httpMessageInfo.getOriginalRequest())) {
             httpMessageContents.setTextContents(injectionCode + httpMessageContents.getTextContents());
         }
     }

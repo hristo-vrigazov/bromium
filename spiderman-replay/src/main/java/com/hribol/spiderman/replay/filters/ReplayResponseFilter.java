@@ -7,7 +7,6 @@ import net.lightbody.bmp.filters.ResponseFilter;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Optional;
 import java.util.Set;
@@ -32,7 +31,7 @@ public class ReplayResponseFilter extends ReplayBaseFilter implements ResponseFi
 
     @Override
     public void filterResponse(HttpResponse httpResponse, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
-        if (Utils.isFromCurrentHostAndAcceptsHTML(baseURI, httpMessageInfo.getOriginalRequest())) {
+        if (Utils.isGETFromCurrentHostAndAcceptsHTML(baseURI, httpMessageInfo.getOriginalRequest())) {
             httpMessageContents.setTextContents(injectionCode + httpMessageContents.getTextContents());
         }
         removeHttpRequestToQueue(httpMessageInfo.getOriginalRequest());

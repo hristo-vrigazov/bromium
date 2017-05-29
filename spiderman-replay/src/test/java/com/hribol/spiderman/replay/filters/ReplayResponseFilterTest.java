@@ -51,7 +51,7 @@ public class ReplayResponseFilterTest {
         HttpResponse httpResponse = mock(HttpResponse.class);
 
         PowerMockito.mockStatic(Utils.class);
-        when(Utils.isFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(false);
+        when(Utils.isGETFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(false);
 
         replayResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
 
@@ -76,7 +76,7 @@ public class ReplayResponseFilterTest {
         HttpResponse httpResponse = mock(HttpResponse.class);
 
         PowerMockito.mockStatic(Utils.class);
-        when(Utils.isFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(false);
+        when(Utils.isGETFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(false);
 
         replayResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
 
@@ -116,7 +116,7 @@ public class ReplayResponseFilterTest {
         when(httpMessageInfo.getOriginalRequest()).thenReturn(httpRequest);
 
         PowerMockito.mockStatic(Utils.class);
-        when(Utils.isFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(false);
+        when(Utils.isGETFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(false);
 
         replayResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
 
@@ -143,7 +143,7 @@ public class ReplayResponseFilterTest {
         when(httpMessageInfo.getOriginalRequest()).thenReturn(httpRequest);
 
         PowerMockito.mockStatic(Utils.class);
-        when(Utils.isFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(false);
+        when(Utils.isGETFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(false);
 
         replayResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
 
@@ -170,7 +170,7 @@ public class ReplayResponseFilterTest {
         when(httpMessageInfo.getOriginalRequest()).thenReturn(httpRequest);
 
         PowerMockito.mockStatic(Utils.class);
-        when(Utils.isFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(true);
+        when(Utils.isGETFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(true);
 
         replayResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
 
