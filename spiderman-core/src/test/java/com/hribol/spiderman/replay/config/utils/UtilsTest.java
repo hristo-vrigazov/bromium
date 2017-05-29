@@ -1,6 +1,7 @@
 package com.hribol.spiderman.replay.config.utils;
 
 import io.netty.handler.codec.http.HttpHeaders;
+import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.HttpRequest;
 import org.junit.Test;
 
@@ -26,6 +27,7 @@ public class UtilsTest {
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn("http://google.com");
         when(httpRequest.headers()).thenReturn(httpHeaders);
+        when(httpRequest.getMethod()).thenReturn(HttpMethod.GET);
 
         assertFalse(Utils.isGETFromCurrentHostAndAcceptsHTML(uri, httpRequest));
     }
@@ -38,6 +40,8 @@ public class UtilsTest {
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn("http://google.com");
         when(httpRequest.headers()).thenReturn(httpHeaders);
+        when(httpRequest.getMethod()).thenReturn(HttpMethod.GET);
+
         assertFalse(Utils.isGETFromCurrentHostAndAcceptsHTML(uri, httpRequest));
     }
 
@@ -49,6 +53,8 @@ public class UtilsTest {
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn("http://tenniskafe.com/atp");
         when(httpRequest.headers()).thenReturn(httpHeaders);
+        when(httpRequest.getMethod()).thenReturn(HttpMethod.GET);
+
         assertFalse(Utils.isGETFromCurrentHostAndAcceptsHTML(uri, httpRequest));
     }
 
@@ -60,6 +66,8 @@ public class UtilsTest {
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn("http://tenniskafe.com");
         when(httpRequest.headers()).thenReturn(httpHeaders);
+        when(httpRequest.getMethod()).thenReturn(HttpMethod.GET);
+
         assertTrue(Utils.isGETFromCurrentHostAndAcceptsHTML(uri, httpRequest));
     }
 
