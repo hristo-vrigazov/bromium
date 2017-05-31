@@ -37,10 +37,10 @@
 
     <modules>
         <module>bromium-core</module>
-        <module>spiderman-cli</module>
+        <module>bromium-cli</module>
         <module>bromium-record</module>
         <module>bromium-replay</module>
-        <module>spiderman-chrome</module>
+        <module>bromium-chrome</module>
     </modules>
 
     <properties>

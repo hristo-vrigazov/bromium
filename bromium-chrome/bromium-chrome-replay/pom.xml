@@ -3,25 +3,25 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>spiderman-chrome</artifactId>
-        <groupId>com.hribol.spiderman</groupId>
+        <artifactId>bromium-chrome</artifactId>
+        <groupId>com.hribol.bromium</groupId>
         <version>0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <name>${project.groupId}:${project.artifactId}</name>
 
-    <artifactId>spiderman-chrome-replay</artifactId>
+    <artifactId>bromium-chrome-replay</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>spiderman-chrome-base</artifactId>
+            <artifactId>bromium-chrome-base</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>spiderman-replay</artifactId>
+            <artifactId>bromium-replay</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
