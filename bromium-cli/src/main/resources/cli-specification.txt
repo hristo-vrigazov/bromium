@@ -1,13 +1,13 @@
-Spiderman.
+bromium.
 
     Usage:
-      spiderman init
-      spiderman record -d <pathToDriver> -j <jsFile> -u <url> -o <output> [-b <browserType>] [-t <timeout>]
-      spiderman replay -d <pathToDriver> -j <jsFile> -a <configuration> -c <case> -m <measurements> -u <url> [-p <precision>] [-b <browserType>] [-t <timeout>]
-      spiderman update -a <configuration>
-      spiderman version -a <configuration>
-      spiderman (-h | --help)
-      spiderman --version
+      bromium init
+      bromium record -d <pathToDriver> -j <jsFile> -u <url> -o <output> [-b <browserType>] [-t <timeout>]
+      bromium replay -d <pathToDriver> -j <jsFile> -a <configuration> -c <case> -m <measurements> -u <url> [-p <precision>] [-b <browserType>] [-t <timeout>]
+      bromium update -a <configuration>
+      bromium version -a <configuration>
+      bromium (-h | --help)
+      bromium --version
 
     Options:
       -h --help                             Show this screen.

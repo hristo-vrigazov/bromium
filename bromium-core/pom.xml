@@ -7,7 +7,7 @@
     <name>${project.groupId}:${project.artifactId}</name>
     <description>A browser automation package that allows you to record and replay browser
         specific actions.</description>
-    <url>https://github.com/hristo-vrigazov/spiderman</url>
+    <url>https://github.com/hristo-vrigazov/bromium</url>
 
     <parent>
         <groupId>com.hribol.bromium</groupId>

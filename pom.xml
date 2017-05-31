@@ -30,9 +30,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/hristo-vrigazov/spiderman.git</connection>
-        <developerConnection>scm:git:ssh://github.com/hristo-vrigazov/spiderman.git</developerConnection>
-        <url>https://github.com/hristo-vrigazov/spiderman</url>
+        <connection>scm:git:git://github.com/hristo-vrigazov/bromium.git</connection>
+        <developerConnection>scm:git:ssh://github.com/hristo-vrigazov/bromium.git</developerConnection>
+        <url>https://github.com/hristo-vrigazov/bromium</url>
     </scm>
 
     <modules>
@@ -69,7 +69,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>com.hribol.spiderman.cli.Main</mainClass>
+                            <mainClass>com.hribol.bromium.cli.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

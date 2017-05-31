@@ -1,7 +1,7 @@
 package tests.chrome.record;
 
-import com.hribol.spiderman.browsers.chrome.record.ChromeRecordBrowser;
-import com.hribol.spiderman.replay.config.utils.JavascriptInjector;
+import com.hribol.bromium.browsers.chrome.record.ChromeRecordBrowser;
+import com.hribol.bromium.replay.config.utils.JavascriptInjector;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriverService;
 

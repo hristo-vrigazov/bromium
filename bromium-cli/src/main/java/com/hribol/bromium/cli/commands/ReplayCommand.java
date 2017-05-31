@@ -1,13 +1,13 @@
 package com.hribol.bromium.cli.commands;
 
 import com.hribol.bromium.cli.factory.ExecutionFactory;
-import com.hribol.spiderman.replay.config.utils.JavascriptInjector;
-import com.hribol.spiderman.replay.execution.factory.PredefinedWebDriverActionFactory;
-import com.hribol.spiderman.replay.execution.factory.WebDriverActionFactory;
-import com.hribol.spiderman.replay.*;
-import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
-import com.hribol.spiderman.replay.execution.ExecutorBuilder;
-import com.hribol.spiderman.replay.report.ExecutionReport;
+import com.hribol.bromium.replay.config.utils.JavascriptInjector;
+import com.hribol.bromium.replay.execution.factory.PredefinedWebDriverActionFactory;
+import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
+import com.hribol.bromium.replay.*;
+import com.hribol.bromium.replay.execution.WebDriverActionExecution;
+import com.hribol.bromium.replay.execution.ExecutorBuilder;
+import com.hribol.bromium.replay.report.ExecutionReport;
 
 import java.io.*;
 import java.net.URISyntaxException;
