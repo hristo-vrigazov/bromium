@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.hribol.spiderman</groupId>
-    <artifactId>spiderman</artifactId>
+    <groupId>com.hribol.bromium</groupId>
+    <artifactId>bromium</artifactId>
     <version>0.1</version>
 
     <packaging>pom</packaging>
@@ -36,7 +36,7 @@
     </scm>
 
     <modules>
-        <module>spiderman-core</module>
+        <module>bromium-core</module>
         <module>spiderman-cli</module>
         <module>spiderman-record</module>
         <module>spiderman-replay</module>

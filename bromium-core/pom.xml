@@ -10,12 +10,12 @@
     <url>https://github.com/hristo-vrigazov/spiderman</url>
 
     <parent>
-        <groupId>com.hribol.spiderman</groupId>
-        <artifactId>spiderman</artifactId>
+        <groupId>com.hribol.bromium</groupId>
+        <artifactId>bromium</artifactId>
         <version>0.1</version>
     </parent>
 
-    <artifactId>spiderman-core</artifactId>
+    <artifactId>bromium-core</artifactId>
     <version>0.1</version>
 
     <dependencies>
