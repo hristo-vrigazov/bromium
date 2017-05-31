@@ -1,8 +1,8 @@
 # Spiderman
 
-[![Build Status](https://travis-ci.org/hristo-vrigazov/spiderman.svg?branch=master)](https://travis-ci.org/hristo-vrigazov/spiderman)
+[![Build Status](https://travis-ci.org/hristo-vrigazov/bromium.svg?branch=master)](https://travis-ci.org/hristo-vrigazov/bromium)
 [![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
-[![Coverage Status](https://coveralls.io/repos/github/hristo-vrigazov/spiderman/badge.svg?branch=master)](https://coveralls.io/github/hristo-vrigazov/spiderman?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/hristo-vrigazov/bromium/badge.svg?branch=master)](https://coveralls.io/github/hristo-vrigazov/bromium?branch=master)
 
 A framework on top of selenium which allows you to define a set of actions specific
 for your application using selenium webdriver actions, and then records test cases 
