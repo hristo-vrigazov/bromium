@@ -1,11 +1,10 @@
 package test.chrome.replay;
 
-import com.hribol.spiderman.browsers.chrome.replay.ChromeDriverReplaySettings;
+import com.hribol.bromium.browsers.chrome.replay.ChromeDriverReplaySettings;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.remote.service.DriverService;
 import org.powermock.core.classloader.annotations.PrepareForTest;

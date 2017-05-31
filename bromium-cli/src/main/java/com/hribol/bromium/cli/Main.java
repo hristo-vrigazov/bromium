@@ -30,7 +30,7 @@ public class Main {
             InputStream inputStream = Main.class.getResourceAsStream("/cli-specification.txt");
             String doc = IOUtils.toString(inputStream);
             Docopt docopt = new Docopt(doc);
-            Map<String, Object> opts = docopt.withVersion("Spiderman 0.1").parse(args);
+            Map<String, Object> opts = docopt.withVersion("bromium 0.1").parse(args);
 
             System.out.println(opts);
 

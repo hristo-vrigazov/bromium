@@ -1,10 +1,9 @@
 package test.chrome.replay;
 
-import com.hribol.spiderman.browsers.chrome.replay.ChromeDriverActionExecution;
-import com.hribol.spiderman.replay.execution.ExecutorBuilder;
-import com.hribol.spiderman.replay.filters.ProxyFacade;
-import com.hribol.spiderman.replay.filters.ProxyFacadeSupplier;
-import com.hribol.spiderman.replay.settings.ReplaySettings;
+import com.hribol.bromium.browsers.chrome.replay.ChromeDriverActionExecution;
+import com.hribol.bromium.replay.execution.ExecutorBuilder;
+import com.hribol.bromium.replay.filters.ProxyFacade;
+import com.hribol.bromium.replay.filters.ProxyFacadeSupplier;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriverService;
 

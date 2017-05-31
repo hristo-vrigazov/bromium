@@ -1,13 +1,13 @@
 package com.hribol.bromium.cli.commands;
 
 import com.hribol.bromium.cli.factory.ExecutionFactory;
-import com.hribol.spiderman.replay.ReplayBrowser;
-import com.hribol.spiderman.replay.execution.ExecutorBuilder;
-import com.hribol.spiderman.replay.execution.WebDriverActionExecution;
-import com.hribol.spiderman.replay.execution.factory.PredefinedWebDriverActionFactory;
-import com.hribol.spiderman.replay.execution.factory.WebDriverActionFactory;
-import com.hribol.spiderman.replay.report.AutomationResult;
-import com.hribol.spiderman.replay.report.ExecutionReport;
+import com.hribol.bromium.replay.ReplayBrowser;
+import com.hribol.bromium.replay.execution.ExecutorBuilder;
+import com.hribol.bromium.replay.execution.WebDriverActionExecution;
+import com.hribol.bromium.replay.execution.factory.PredefinedWebDriverActionFactory;
+import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
+import com.hribol.bromium.replay.report.AutomationResult;
+import com.hribol.bromium.replay.report.ExecutionReport;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;

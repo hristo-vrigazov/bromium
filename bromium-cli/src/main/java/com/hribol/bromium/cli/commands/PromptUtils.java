@@ -1,10 +1,10 @@
 package com.hribol.bromium.cli.commands;
 
 import com.hribol.bromium.cli.MainMenuChoice;
-import com.hribol.spiderman.replay.config.config.ApplicationActionConfiguration;
-import com.hribol.spiderman.replay.config.config.ApplicationConfiguration;
-import com.hribol.spiderman.replay.config.config.ParameterConfiguration;
-import com.hribol.spiderman.replay.config.config.WebDriverActionConfiguration;
+import com.hribol.bromium.replay.config.config.ApplicationActionConfiguration;
+import com.hribol.bromium.replay.config.config.ApplicationConfiguration;
+import com.hribol.bromium.replay.config.config.ParameterConfiguration;
+import com.hribol.bromium.replay.config.config.WebDriverActionConfiguration;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 
