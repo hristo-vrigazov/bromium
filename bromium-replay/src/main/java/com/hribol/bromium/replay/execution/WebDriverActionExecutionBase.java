@@ -59,6 +59,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
             for (WebDriverAction webDriverAction : testScenario.steps()) {
                 try {
+                    System.out.println(Thread.currentThread().getName());
                     executor.getEventDispatcher().awaitUntil(executor.noHttpRequestsInQueue(), executor.getTimeout());
                 } catch (InterruptedException e) {
                     throw executor.webDriverActionExecutionException("Interrupted while waiting for http requests to be empty", e);

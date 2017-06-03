@@ -1,5 +1,8 @@
 package com.hribol.bromium.replay.execution.synchronization;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * Created by hvrigazov on 03.06.17.
  */
@@ -14,6 +17,8 @@ public class ThreadEventSynchronizer implements EventDispatcher {
         synchronized (lock) {
             if (!synchronizationEvent.isAlreadySatisfied()) {
                 synchronizationEvent.setLock(lock);
+                System.out.println("Await event");
+                System.out.println(Thread.currentThread().getName());
                 lock.wait(timeoutInSeconds);
             }
         }
@@ -22,6 +27,7 @@ public class ThreadEventSynchronizer implements EventDispatcher {
     @Override
     public void signalizeEvent(SynchronizationEvent synchronizationEvent) {
         synchronized (lock) {
+            System.out.println("Signalize event");
             lock.notify();
         }
     }
