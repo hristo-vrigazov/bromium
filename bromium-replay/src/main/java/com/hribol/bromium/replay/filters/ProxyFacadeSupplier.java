@@ -1,5 +1,7 @@
 package com.hribol.bromium.replay.filters;
 
+import com.hribol.bromium.replay.execution.synchronization.EventDispatcher;
+
 import java.net.URISyntaxException;
 
 /**
@@ -7,8 +9,8 @@ import java.net.URISyntaxException;
  */
 public class ProxyFacadeSupplier {
 
-    public ProxyFacade get(String baseURI, String injectionCode) throws URISyntaxException {
-        return new ProxyFacade(baseURI, injectionCode);
+    public ProxyFacade get(String baseURI, String injectionCode, EventDispatcher eventDispatcher) throws URISyntaxException {
+        return new ProxyFacade(baseURI, injectionCode, eventDispatcher);
     }
 
 }

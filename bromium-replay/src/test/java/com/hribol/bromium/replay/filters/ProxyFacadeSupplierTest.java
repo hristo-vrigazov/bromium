@@ -1,5 +1,6 @@
 package com.hribol.bromium.replay.filters;
 
+import com.hribol.bromium.replay.execution.synchronization.EventDispatcher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -8,6 +9,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import java.net.URISyntaxException;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -27,9 +29,9 @@ public class ProxyFacadeSupplierTest {
     public void createsProxyFacade() throws Exception {
         String url = "http://tinkiwinki.com";
         ProxyFacade expected = mock(ProxyFacade.class);
-        whenNew(ProxyFacade.class).withArguments(anyString(), anyString()).thenReturn(expected);
+        whenNew(ProxyFacade.class).withArguments(anyString(), anyString(), any(EventDispatcher.class)).thenReturn(expected);
         ProxyFacadeSupplier proxyFacadeSupplier = new ProxyFacadeSupplier();
-        ProxyFacade actual = proxyFacadeSupplier.get(url, "");
+        ProxyFacade actual = proxyFacadeSupplier.get(url, "", mock(EventDispatcher.class));
 
         assertEquals(expected, actual);
     }

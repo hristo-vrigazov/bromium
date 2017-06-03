@@ -1,8 +1,12 @@
 package com.hribol.bromium.replay.execution;
 
+import com.hribol.bromium.replay.execution.synchronization.EventDispatcher;
+import com.hribol.bromium.replay.execution.synchronization.ThreadEventSynchronizer;
+import com.hribol.bromium.replay.filters.ProxyFacade;
 import com.hribol.bromium.replay.filters.ProxyFacadeSupplier;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Optional;
 
 /**
@@ -18,6 +22,8 @@ public class ExecutorBuilder {
     private AutomationResultBuilder automationResultBuilder;
     private ProxyFacadeSupplier proxyFacadeSupplier;
     private String javascriptInjectionCode;
+    private EventDispatcher eventDispatcher;
+    private ProxyFacade proxyFacade;
 
     public ExecutorBuilder pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
@@ -56,6 +62,11 @@ public class ExecutorBuilder {
 
     public ExecutorBuilder proxyFacadeSupplier(ProxyFacadeSupplier proxyFacadeSupplier) {
         this.proxyFacadeSupplier = proxyFacadeSupplier;
+        return this;
+    }
+
+    public ExecutorBuilder eventDispatcher(EventDispatcher eventDispatcher) {
+        this.eventDispatcher = eventDispatcher;
         return this;
     }
 
@@ -120,5 +131,21 @@ public class ExecutorBuilder {
 
     public String getJavascriptInjectionCode() {
         return javascriptInjectionCode;
+    }
+
+    public EventDispatcher getEventDispatcher() {
+        if (!Optional.ofNullable(eventDispatcher).isPresent()) {
+            this.eventDispatcher = new ThreadEventSynchronizer();
+        }
+
+        return eventDispatcher;
+    }
+
+    public ProxyFacade getProxyFacade() throws URISyntaxException {
+        if (!Optional.ofNullable(proxyFacade).isPresent()) {
+            this.proxyFacade = getProxyFacadeSupplier().get(baseURL, javascriptInjectionCode, eventDispatcher);
+        }
+
+        return proxyFacade;
     }
 }

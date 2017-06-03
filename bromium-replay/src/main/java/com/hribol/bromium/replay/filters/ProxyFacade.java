@@ -1,5 +1,6 @@
 package com.hribol.bromium.replay.filters;
 
+import com.hribol.bromium.replay.execution.synchronization.EventDispatcher;
 import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
@@ -19,11 +20,11 @@ public class ProxyFacade implements ReplayFiltersFacade {
     private ReplayRequestFilter requestFilter;
     private ReplayResponseFilter responseFilter;
 
-    public ProxyFacade(String baseURI, String injectionCode) throws URISyntaxException {
-        this(baseURI, injectionCode, new ReplayFiltersFactory());
+    public ProxyFacade(String baseURI, String injectionCode, EventDispatcher eventDispatcher) throws URISyntaxException {
+        this(baseURI, injectionCode, eventDispatcher, new ReplayFiltersFactory());
     }
 
-    public ProxyFacade(String baseURI, String injectionCode, ReplayFiltersFactory replayFiltersFactory) throws URISyntaxException {
+    public ProxyFacade(String baseURI, String injectionCode, EventDispatcher eventDispatcher, ReplayFiltersFactory replayFiltersFactory) throws URISyntaxException {
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
         this.requestFilter = replayFiltersFactory.createReplayRequestFilter(baseURI, httpRequestQueue);
         this.responseFilter = replayFiltersFactory.createReplayResponseFilter(this::canAct, injectionCode, baseURI, httpRequestQueue);

@@ -2,6 +2,7 @@ package com.hribol.bromium.replay.execution;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.config.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
+import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvents;
 import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
 import com.hribol.bromium.replay.report.AutomationResult;
 import com.hribol.bromium.replay.report.ExecutionReport;
@@ -17,6 +18,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.*;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+import static com.hribol.bromium.replay.execution.synchronization.SynchronizationEvents.noHttpRequestsInQueue;
 
 
 /**
@@ -26,7 +31,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     public WebDriverActionExecutionBase(ExecutorBuilder executor) throws IOException, URISyntaxException {
         this.executor = executor;
-        this.proxyFacade = executor.getProxyFacadeSupplier().get(executor.getBaseURL(), executor.getJavascriptInjectionCode());
+        this.proxyFacade = executor.getProxyFacade();
         this.automationResult = AutomationResult.NOT_STARTED;
     }
 
@@ -80,6 +85,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                 } catch (ExecutionException e) {
                     throw new WebDriverActionExecutionException("Exception during execution", e.getCause(), executor.getAutomationResultBuilder());
                 }
+
                 waitingTimes.add(System.nanoTime() - elapsedTime);
                 actionTimestamps.add(new Date());
                 elapsedTime = System.nanoTime();

@@ -6,6 +6,7 @@ import com.hribol.bromium.replay.config.suppliers.InvisibleWebDriverSupplier;
 import com.hribol.bromium.replay.config.suppliers.VisibleWebDriverSupplier;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioSteps;
+import com.hribol.bromium.replay.execution.synchronization.EventDispatcher;
 import com.hribol.bromium.replay.filters.ProxyFacade;
 import com.hribol.bromium.replay.filters.ProxyFacadeSupplier;
 import com.hribol.bromium.replay.filters.ReplayRequestFilter;
@@ -31,6 +32,9 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Iterator;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -45,7 +49,9 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
 @PrepareForTest({
         ProxyFacade.class,
         WebDriverActionExecutionBase.class,
-        Object.class
+        Object.class,
+        Lock.class,
+        ReentrantLock.class
 })
 public class WebDriverActionExecutionBaseTest {
 
@@ -335,12 +341,13 @@ public class WebDriverActionExecutionBaseTest {
         when(proxyFacade.getRequestFilter()).thenReturn(replayRequestFilter);
         when(proxyFacade.getResponseFilter()).thenReturn(replayResponseFilter);
         ProxyFacadeSupplier proxyFacadeSupplier = mock(ProxyFacadeSupplier.class);
-        when(proxyFacadeSupplier.get(eq(baseURL), anyString())).thenReturn(proxyFacade);
+        when(proxyFacadeSupplier.get(eq(baseURL), anyString(), any(EventDispatcher.class))).thenReturn(proxyFacade);
         ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
         when(executorBuilder.getBaseURL()).thenReturn(baseURL);
         when(executorBuilder.getProxyFacadeSupplier()).thenReturn(proxyFacadeSupplier);
         when(executorBuilder.getPathToDriverExecutable()).thenReturn("driver");
         when(executorBuilder.getAutomationResultBuilder()).thenReturn(getAutomationResultBuilder());
+        when(executorBuilder.getProxyFacade()).thenReturn(proxyFacade);
 
         ReplaySettings replaySettings = mock(ReplaySettings.class);
         TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
@@ -421,8 +428,6 @@ public class WebDriverActionExecutionBaseTest {
         ProxyFacade proxyFacade = mock(ProxyFacade.class);
         when(proxyFacade.getRequestFilter()).thenReturn(replayRequestFilter);
         when(proxyFacade.getResponseFilter()).thenReturn(replayResponseFilter);
-        ProxyFacadeSupplier proxyFacadeSupplier = mock(ProxyFacadeSupplier.class);
-        when(proxyFacadeSupplier.get(anyString(), anyString())).thenReturn(proxyFacade);
         ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
         when(executorBuilder.getBaseURL()).thenReturn(baseURI);
         when(executorBuilder.getMeasurementsPrecisionMilli()).thenReturn(precision);
@@ -430,7 +435,7 @@ public class WebDriverActionExecutionBaseTest {
         when(executorBuilder.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
         when(executorBuilder.getMaxRetries()).thenReturn(maxRetries);
         when(executorBuilder.getAutomationResultBuilder()).thenReturn(automationResultBuilder);
-        when(executorBuilder.getProxyFacadeSupplier()).thenReturn(proxyFacadeSupplier);
+        when(executorBuilder.getProxyFacade()).thenReturn(proxyFacade);
         return executorBuilder;
     }
 
