@@ -37,9 +37,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     @Override
     public ExecutionReport execute(TestScenario testScenario, String screenToUse) {
-        List<Long> waitingTimes = new ArrayList<>();
-        List<Date> actionTimestamps = new ArrayList<>();
-
         ReplaySettings replaySettings = createReplaySettings();
         ExecutorService executorService;
         try {
@@ -52,6 +49,8 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             return ExecutionReport.couldNotCreateDriver();
         }
 
+        List<Long> waitingTimes = new ArrayList<>();
+        List<Date> actionTimestamps = new ArrayList<>();
         long elapsedTime = System.nanoTime();
         actionTimestamps.add(new Date());
 

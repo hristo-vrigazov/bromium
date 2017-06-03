@@ -66,7 +66,7 @@ public abstract class ReplaySettingsBase<T extends DriverService> implements Rep
         this.driver = useVirtualScreen ?
                 invisibleWebDriverSupplier.get(driverService, capabilities) :
                 visibleWebDriverSupplier.get(capabilities);
-        driver.manage().window().maximize();
+        this.driver.manage().window().maximize();
     }
 
 }
