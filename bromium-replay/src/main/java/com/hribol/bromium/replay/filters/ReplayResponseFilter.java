@@ -1,6 +1,8 @@
 package com.hribol.bromium.replay.filters;
 
 import com.hribol.bromium.replay.config.utils.Utils;
+import com.hribol.bromium.replay.execution.synchronization.SignalizerEvent;
+import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.filters.ResponseFilter;
@@ -19,6 +21,7 @@ public class ReplayResponseFilter extends ReplayBaseFilter implements ResponseFi
 
     private BooleanSupplier canAct;
     private Optional<Object> optionalExecutionThreadLock;
+    private SynchronizationEvent synchronizationEvent;
     private String injectionCode;
 
     public ReplayResponseFilter(BooleanSupplier canAct, String injectionCode, String baseURI, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
@@ -26,7 +29,6 @@ public class ReplayResponseFilter extends ReplayBaseFilter implements ResponseFi
         this.canAct = canAct;
         this.optionalExecutionThreadLock = Optional.empty();
         this.injectionCode = injectionCode;
-
     }
 
     @Override
@@ -37,13 +39,12 @@ public class ReplayResponseFilter extends ReplayBaseFilter implements ResponseFi
         removeHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
     }
 
-    public boolean setExecutionThreadLock(Object executionThreadLock) {
-        if (canAct.getAsBoolean()) {
-            return true;
-        }
+    public boolean canAct() {
+        return canAct.getAsBoolean();
+    }
 
+    public void setExecutionThreadLock(Object executionThreadLock) {
         optionalExecutionThreadLock = Optional.of(executionThreadLock);
-        return false;
     }
 
     private void removeHttpRequestToQueue(HttpRequest httpRequest) {
@@ -56,12 +57,13 @@ public class ReplayResponseFilter extends ReplayBaseFilter implements ResponseFi
 
         if (canAct.getAsBoolean()) {
             if (optionalExecutionThreadLock.isPresent()) {
-                Object executionThreadLock = optionalExecutionThreadLock.get();
-                synchronized (executionThreadLock) {
-                    executionThreadLock.notify();
-                }
+                synchronizationEvent.signalizeIsDone();
             }
         }
 
+    }
+
+    public void setSynchronizationEvent(SynchronizationEvent synchronizationEvent) {
+        this.synchronizationEvent = synchronizationEvent;
     }
 }

@@ -1,6 +1,7 @@
 package com.hribol.bromium.replay.execution;
 
 import com.hribol.bromium.replay.execution.synchronization.EventDispatcher;
+import com.hribol.bromium.replay.execution.synchronization.NoHttpRequestsInQueue;
 import com.hribol.bromium.replay.execution.synchronization.ThreadEventSynchronizer;
 import com.hribol.bromium.replay.filters.ProxyFacade;
 import com.hribol.bromium.replay.filters.ProxyFacadeSupplier;
@@ -24,6 +25,7 @@ public class ExecutorBuilder {
     private String javascriptInjectionCode;
     private EventDispatcher eventDispatcher;
     private ProxyFacade proxyFacade;
+    private NoHttpRequestsInQueue noHttpRequestsInQueue;
 
     public ExecutorBuilder pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
@@ -143,9 +145,17 @@ public class ExecutorBuilder {
 
     public ProxyFacade getProxyFacade() throws URISyntaxException {
         if (!Optional.ofNullable(proxyFacade).isPresent()) {
-            this.proxyFacade = getProxyFacadeSupplier().get(baseURL, javascriptInjectionCode, eventDispatcher);
+            this.proxyFacade = getProxyFacadeSupplier().get(baseURL, javascriptInjectionCode);
         }
 
         return proxyFacade;
+    }
+
+    public NoHttpRequestsInQueue noHttpRequestsInQueue() throws URISyntaxException {
+        return new NoHttpRequestsInQueue(proxyFacade.getResponseFilter(), eventDispatcher);
+    }
+
+    public WebDriverActionExecutionException webDriverActionExecutionException(String message, Throwable e) {
+        return new WebDriverActionExecutionException(message, e, getAutomationResultBuilder());
     }
 }

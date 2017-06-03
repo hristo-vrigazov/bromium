@@ -2,7 +2,6 @@ package com.hribol.bromium.replay.execution;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.config.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
-import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvents;
 import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
 import com.hribol.bromium.replay.report.AutomationResult;
 import com.hribol.bromium.replay.report.ExecutionReport;
@@ -18,11 +17,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.*;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
-import static com.hribol.bromium.replay.execution.synchronization.SynchronizationEvents.noHttpRequestsInQueue;
-
 
 /**
  * Created by hvrigazov on 16.03.17.
@@ -64,15 +58,12 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             automationResult = AutomationResult.EXECUTING;
 
             for (WebDriverAction webDriverAction : testScenario.steps()) {
-                Object lock = new Object();
-                synchronized (lock) {
-                    if (!proxyFacade.getResponseFilter().setExecutionThreadLock(lock)) {
-                        try {
-                            lock.wait(executor.getTimeout());
-                        } catch (InterruptedException e) {
-                            throw new WebDriverActionExecutionException("Interrupted!", e, executor.getAutomationResultBuilder());
-                        }
-                    }
+                try {
+                    executor.getEventDispatcher().awaitUntil(executor.noHttpRequestsInQueue(), executor.getTimeout());
+                } catch (InterruptedException e) {
+                    throw executor.webDriverActionExecutionException("Interrupted while waiting for http requests to be empty", e);
+                } catch (URISyntaxException e) {
+                    throw executor.webDriverActionExecutionException("URI syntax exception", e);
                 }
 
                 proxyFacade.getRequestFilter().setHttpLock(webDriverAction.expectsHttpRequest());
@@ -81,9 +72,9 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                 try {
                     future.get(executor.getTimeout(), TimeUnit.SECONDS);
                 }  catch (java.util.concurrent.TimeoutException | InterruptedException e) {
-                    throw new WebDriverActionExecutionException("Exception during execution", e, executor.getAutomationResultBuilder());
+                    throw executor.webDriverActionExecutionException("Exception during execution", e);
                 } catch (ExecutionException e) {
-                    throw new WebDriverActionExecutionException("Exception during execution", e.getCause(), executor.getAutomationResultBuilder());
+                    throw executor.webDriverActionExecutionException("Exception during execution", e.getCause());
                 }
 
                 waitingTimes.add(System.nanoTime() - elapsedTime);

@@ -1,6 +1,7 @@
 package com.hribol.bromium.replay.filters;
 
 import com.hribol.bromium.replay.execution.synchronization.EventDispatcher;
+import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -25,13 +26,15 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
 })
 public class ProxyFacadeSupplierTest {
 
+    SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
+
     @Test
     public void createsProxyFacade() throws Exception {
         String url = "http://tinkiwinki.com";
         ProxyFacade expected = mock(ProxyFacade.class);
-        whenNew(ProxyFacade.class).withArguments(anyString(), anyString(), any(EventDispatcher.class)).thenReturn(expected);
+        whenNew(ProxyFacade.class).withArguments(anyString(), anyString(), any(SynchronizationEvent.class)).thenReturn(expected);
         ProxyFacadeSupplier proxyFacadeSupplier = new ProxyFacadeSupplier();
-        ProxyFacade actual = proxyFacadeSupplier.get(url, "", mock(EventDispatcher.class));
+        ProxyFacade actual = proxyFacadeSupplier.get(url, "");
 
         assertEquals(expected, actual);
     }
