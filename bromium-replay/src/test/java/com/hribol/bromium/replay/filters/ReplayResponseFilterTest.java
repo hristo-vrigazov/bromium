@@ -122,6 +122,7 @@ public class ReplayResponseFilterTest {
         PowerMockito.mockStatic(Utils.class);
         when(Utils.isGETFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(false);
 
+        replayResponseFilter.setSynchronizationEvent(synchronizationEvent);
         replayResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
 
         verify(synchronizationEvent).signalizeIsDone();

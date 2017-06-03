@@ -26,13 +26,12 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
 })
 public class ProxyFacadeSupplierTest {
 
-    SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
 
     @Test
     public void createsProxyFacade() throws Exception {
         String url = "http://tinkiwinki.com";
         ProxyFacade expected = mock(ProxyFacade.class);
-        whenNew(ProxyFacade.class).withArguments(anyString(), anyString(), any(SynchronizationEvent.class)).thenReturn(expected);
+        whenNew(ProxyFacade.class).withArguments(anyString(), anyString()).thenReturn(expected);
         ProxyFacadeSupplier proxyFacadeSupplier = new ProxyFacadeSupplier();
         ProxyFacade actual = proxyFacadeSupplier.get(url, "");
 
