@@ -61,7 +61,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             for (WebDriverAction webDriverAction : testScenario.steps()) {
 
                 try {
-                    System.out.println(Thread.currentThread().getName());
                     SynchronizationEvent synchronizationEvent = executor.noHttpRequestsInQueue();
                     executor.getProxyFacade().getResponseFilter().setSynchronizationEvent(synchronizationEvent);
                     executor.getEventDispatcher().awaitUntil(synchronizationEvent, executor.getTimeout());

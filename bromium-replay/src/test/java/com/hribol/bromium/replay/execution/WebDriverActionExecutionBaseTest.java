@@ -199,6 +199,7 @@ public class WebDriverActionExecutionBaseTest {
 
         ProxyFacade proxyFacade = mock(ProxyFacade.class);
         when(proxyFacade.getRequestFilter()).thenReturn(mock(ReplayRequestFilter.class));
+        when(proxyFacade.getResponseFilter()).thenReturn(mock(ReplayResponseFilter.class));
 
         ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
         when(executorBuilder.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
