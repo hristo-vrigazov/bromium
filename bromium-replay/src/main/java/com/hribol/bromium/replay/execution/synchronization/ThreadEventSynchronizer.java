@@ -1,5 +1,10 @@
 package com.hribol.bromium.replay.execution.synchronization;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -8,27 +13,40 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ThreadEventSynchronizer implements EventDispatcher {
 
-    private Object lock;
+    private Lock lock = new ReentrantLock();
+    private Map<SynchronizationEvent, Condition> eventConditionMap = new HashMap<>();
 
     @Override
-    public void awaitUntil(SynchronizationEvent synchronizationEvent, int timeoutInSeconds) throws InterruptedException {
-        this.lock = new Object();
-
-        synchronized (lock) {
-            if (!synchronizationEvent.isAlreadySatisfied()) {
-                synchronizationEvent.setLock(lock);
-                System.out.println("Await event");
-                System.out.println(Thread.currentThread().getName());
-                lock.wait(timeoutInSeconds);
-            }
+    public void awaitUntil(SynchronizationEvent synchronizationEvent, int timeoutInSeconds) throws InterruptedException, TimeoutException {
+        if (synchronizationEvent.isAlreadySatisfied()) {
+            return;
         }
+
+        lock.lock();
+
+        Condition condition = lock.newCondition();
+        eventConditionMap.put(synchronizationEvent, condition);
+
+        boolean timedOut = !condition.await(timeoutInSeconds, TimeUnit.SECONDS);
+
+        if (timedOut) {
+            throw new TimeoutException("The synchronization event " + synchronizationEvent.getName() + " was not satisfied in the specified time");
+        }
+
+        lock.unlock();
     }
 
     @Override
     public void signalizeEvent(SynchronizationEvent synchronizationEvent) {
-        synchronized (lock) {
-            System.out.println("Signalize event");
-            lock.notify();
+        try {
+            if (eventConditionMap.containsKey(synchronizationEvent)) {
+                lock.lock();
+                eventConditionMap.get(synchronizationEvent).signal();
+                eventConditionMap.remove(synchronizationEvent);
+                lock.unlock();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

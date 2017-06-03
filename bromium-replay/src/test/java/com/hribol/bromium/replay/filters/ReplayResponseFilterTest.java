@@ -112,7 +112,6 @@ public class ReplayResponseFilterTest {
         doNothing().when(object).notify();
 
         assertFalse(replayResponseFilter.canAct());
-        replayResponseFilter.setExecutionThreadLock(object);
 
         HttpResponse httpResponse = mock(HttpResponse.class);
         HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);

@@ -26,11 +26,6 @@ public class NoHttpRequestsInQueue implements SynchronizationEvent {
     }
 
     @Override
-    public void setLock(Object lock) {
-        replayResponseFilter.setExecutionThreadLock(lock);
-    }
-
-    @Override
     public void signalizeIsDone() {
         System.out.println("Event is done");
         this.signalizerEvent.signalizeEvent(this);

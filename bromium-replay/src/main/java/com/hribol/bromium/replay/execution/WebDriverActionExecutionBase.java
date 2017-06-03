@@ -2,6 +2,7 @@ package com.hribol.bromium.replay.execution;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.config.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
+import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
 import com.hribol.bromium.replay.report.AutomationResult;
 import com.hribol.bromium.replay.report.ExecutionReport;
@@ -58,13 +59,14 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             automationResult = AutomationResult.EXECUTING;
 
             for (WebDriverAction webDriverAction : testScenario.steps()) {
+
                 try {
                     System.out.println(Thread.currentThread().getName());
-                    executor.getEventDispatcher().awaitUntil(executor.noHttpRequestsInQueue(), executor.getTimeout());
-                } catch (InterruptedException e) {
-                    throw executor.webDriverActionExecutionException("Interrupted while waiting for http requests to be empty", e);
-                } catch (URISyntaxException e) {
-                    throw executor.webDriverActionExecutionException("URI syntax exception", e);
+                    SynchronizationEvent synchronizationEvent = executor.noHttpRequestsInQueue();
+                    executor.getProxyFacade().getResponseFilter().setSynchronizationEvent(synchronizationEvent);
+                    executor.getEventDispatcher().awaitUntil(synchronizationEvent, executor.getTimeout());
+                } catch (InterruptedException | URISyntaxException | java.util.concurrent.TimeoutException e) {
+                    throw executor.webDriverActionExecutionException("Exception during execution", e);
                 }
 
                 proxyFacade.getRequestFilter().setHttpLock(webDriverAction.expectsHttpRequest());
