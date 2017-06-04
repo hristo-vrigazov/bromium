@@ -29,11 +29,13 @@ public class ThreadEventSynchronizer implements EventDispatcher {
 
         boolean timedOut = !condition.await(timeoutInSeconds, TimeUnit.SECONDS);
 
+        lock.unlock();
+
+
         if (timedOut) {
             throw new TimeoutException("The synchronization event " + synchronizationEvent.getName() + " was not satisfied in the specified time");
         }
 
-        lock.unlock();
     }
 
     @Override

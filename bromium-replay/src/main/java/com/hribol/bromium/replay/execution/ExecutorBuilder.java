@@ -152,7 +152,7 @@ public class ExecutorBuilder {
     }
 
     public NoHttpRequestsInQueue noHttpRequestsInQueue() throws URISyntaxException {
-        return new NoHttpRequestsInQueue(proxyFacade.getResponseFilter(), getEventDispatcher());
+        return new NoHttpRequestsInQueue(getProxyFacade().getResponseFilter(), getEventDispatcher());
     }
 
     public WebDriverActionExecutionException webDriverActionExecutionException(String message, Throwable e) {
