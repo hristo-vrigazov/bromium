@@ -1,6 +1,5 @@
 package com.hribol.bromium.replay.filters;
 
-import com.hribol.bromium.replay.execution.synchronization.EventDispatcher;
 import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 import io.netty.handler.codec.http.HttpRequest;
 import org.junit.Test;
@@ -8,7 +7,6 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import java.net.URISyntaxException;
-import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.Assert.*;

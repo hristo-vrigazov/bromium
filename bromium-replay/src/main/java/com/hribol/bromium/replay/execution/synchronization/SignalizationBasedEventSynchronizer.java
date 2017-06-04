@@ -11,7 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * Created by hvrigazov on 03.06.17.
  */
-public class ThreadEventSynchronizer implements EventDispatcher {
+public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
 
     private Lock lock = new ReentrantLock();
     private Map<SynchronizationEvent, Condition> eventConditionMap = new HashMap<>();

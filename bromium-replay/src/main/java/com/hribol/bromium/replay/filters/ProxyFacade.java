@@ -1,16 +1,10 @@
 package com.hribol.bromium.replay.filters;
 
-import com.hribol.bromium.replay.execution.synchronization.EventDispatcher;
-import com.hribol.bromium.replay.execution.synchronization.SignalizerEvent;
-import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 import io.netty.handler.codec.http.HttpRequest;
-import net.lightbody.bmp.filters.RequestFilter;
-import net.lightbody.bmp.filters.ResponseFilter;
 
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 /**
