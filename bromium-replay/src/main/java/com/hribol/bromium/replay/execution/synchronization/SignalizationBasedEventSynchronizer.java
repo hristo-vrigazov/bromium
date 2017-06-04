@@ -13,8 +13,16 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
 
-    private Lock lock = new ReentrantLock();
+    private Lock lock;
     private Map<SynchronizationEvent, Condition> eventConditionMap = new HashMap<>();
+
+    public SignalizationBasedEventSynchronizer() {
+        this(new ReentrantLock());
+    }
+
+    public SignalizationBasedEventSynchronizer(Lock lock) {
+        this.lock = lock;
+    }
 
     @Override
     public void awaitUntil(SynchronizationEvent synchronizationEvent, int timeoutInSeconds) throws InterruptedException, TimeoutException {
@@ -30,7 +38,6 @@ public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
         boolean timedOut = !condition.await(timeoutInSeconds, TimeUnit.SECONDS);
 
         lock.unlock();
-
 
         if (timedOut) {
             throw new TimeoutException("The synchronization event " + synchronizationEvent.getName() + " was not satisfied in the specified time");
