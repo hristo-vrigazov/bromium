@@ -74,6 +74,4 @@ public class SignalizationBasedEventSynchronizerTest {
         signalizingThread.join();
     }
 
-    @Test
-    public void 
 }
