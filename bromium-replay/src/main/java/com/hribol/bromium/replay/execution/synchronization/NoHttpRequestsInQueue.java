@@ -21,7 +21,7 @@ public class NoHttpRequestsInQueue implements SynchronizationEvent {
     }
 
     @Override
-    public boolean isAlreadySatisfied() {
+    public boolean isSatisfied() {
         return replayResponseFilter.canAct();
     }
 

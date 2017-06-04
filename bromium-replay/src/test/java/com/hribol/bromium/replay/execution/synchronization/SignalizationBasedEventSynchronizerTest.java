@@ -1,11 +1,8 @@
 package com.hribol.bromium.replay.execution.synchronization;
 
-import com.hribol.bromium.replay.config.utils.Utils;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -27,7 +24,7 @@ public class SignalizationBasedEventSynchronizerTest {
     @Test
     public void awaitForEventDoesNotLockTheThreadIfEventIsAlreadySatisfied() throws TimeoutException, InterruptedException {
         SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
-        when(synchronizationEvent.isAlreadySatisfied()).thenReturn(true);
+        when(synchronizationEvent.isSatisfied()).thenReturn(true);
         Lock lock = mock(Lock.class);
 
         SignalizationBasedEventSynchronizer signalizationBasedEventSynchronizer = new SignalizationBasedEventSynchronizer(lock);
@@ -39,7 +36,7 @@ public class SignalizationBasedEventSynchronizerTest {
     @Test
     public void exceptionIsThrownAndEventIsCleanedUpIfAwaitTimesOut() throws TimeoutException, InterruptedException {
         SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
-        when(synchronizationEvent.isAlreadySatisfied()).thenReturn(false);
+        when(synchronizationEvent.isSatisfied()).thenReturn(false);
 
         Condition condition = mock(Condition.class);
         // condition#await returns false if time was exceeded
@@ -56,7 +53,7 @@ public class SignalizationBasedEventSynchronizerTest {
     @Test
     public void ifEventIsSignalizedThenLockIsUnlocked() throws TimeoutException, InterruptedException {
         SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
-        when(synchronizationEvent.isAlreadySatisfied()).thenReturn(false);
+        when(synchronizationEvent.isSatisfied()).thenReturn(false);
 
         SignalizationBasedEventSynchronizer signalizationBasedEventSynchronizer = new SignalizationBasedEventSynchronizer();
 

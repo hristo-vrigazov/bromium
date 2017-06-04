@@ -5,6 +5,6 @@ package com.hribol.bromium.replay.execution.synchronization;
  */
 public interface SynchronizationEvent {
     String getName();
-    boolean isAlreadySatisfied();
+    boolean isSatisfied();
     void signalizeIsDone();
 }

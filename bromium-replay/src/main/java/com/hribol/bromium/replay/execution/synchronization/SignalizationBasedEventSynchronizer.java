@@ -26,7 +26,7 @@ public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
 
     @Override
     public void awaitUntil(SynchronizationEvent synchronizationEvent, int timeoutInSeconds) throws InterruptedException, TimeoutException {
-        if (synchronizationEvent.isAlreadySatisfied()) {
+        if (synchronizationEvent.isSatisfied()) {
             return;
         }
 
