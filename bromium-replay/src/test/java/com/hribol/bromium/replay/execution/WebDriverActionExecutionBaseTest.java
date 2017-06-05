@@ -192,7 +192,7 @@ public class WebDriverActionExecutionBaseTest {
     public void ifInterruptedWhileExecutionThreadIsWaitingThenAutomationResultIsSetCorrectly() throws Exception {
         EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
         doThrow(new InterruptedException("Interrupted while waiting"))
-                .when(eventSynchronizer).awaitUntil(any(SynchronizationEvent.class), anyInt());
+                .when(eventSynchronizer).awaitUntil(any(SynchronizationEvent.class));
 
         ProxyFacade proxyFacade = mock(ProxyFacade.class);
         when(proxyFacade.getRequestFilter()).thenReturn(mock(ReplayRequestFilter.class));
@@ -356,12 +356,12 @@ public class WebDriverActionExecutionBaseTest {
         String baseURL = "http://tenniskafe.com";
         ReplayRequestFilter replayRequestFilter = mock(ReplayRequestFilter.class);
         ReplayResponseFilter replayResponseFilter = mock(ReplayResponseFilter.class);
-        when(replayResponseFilter.canAct()).thenReturn(true);
+        when(replayResponseFilter.httpRequestQueueIsEmpty()).thenReturn(true);
         ProxyFacade proxyFacade = mock(ProxyFacade.class);
         when(proxyFacade.getRequestFilter()).thenReturn(replayRequestFilter);
         when(proxyFacade.getResponseFilter()).thenReturn(replayResponseFilter);
         ProxyFacadeSupplier proxyFacadeSupplier = mock(ProxyFacadeSupplier.class);
-        when(proxyFacadeSupplier.get(eq(baseURL), anyString())).thenReturn(proxyFacade);
+        when(proxyFacadeSupplier.get(eq(baseURL), anyString(), any(EventSynchronizer.class))).thenReturn(proxyFacade);
         EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
 
         ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);

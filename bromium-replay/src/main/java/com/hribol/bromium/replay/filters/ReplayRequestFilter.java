@@ -1,5 +1,6 @@
 package com.hribol.bromium.replay.filters;
 
+import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.filters.RequestFilter;
@@ -22,15 +23,13 @@ import static com.hribol.bromium.replay.config.utils.Constants.CONDITION_SATISFI
  */
 public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilter {
     private Set<String> conditionsSatisfied;
-    private Optional<String> optionalEvent;
-    private Optional<Object> optionalJSLock;
+    private Optional<SynchronizationEvent> synchronizationEventOptional;
     private boolean httpLock;
 
     public ReplayRequestFilter(String baseURI, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
         super(baseURI, httpRequestQueue);
         this.conditionsSatisfied = Collections.synchronizedSet(new HashSet<>());
-        this.optionalEvent = Optional.empty();
-        this.optionalJSLock = Optional.empty();
+        this.synchronizationEventOptional = Optional.empty();
         this.httpLock = false;
     }
 
@@ -47,13 +46,9 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
                 conditionsSatisfied.add(event);
                 System.out.println("Satisfied " + event);
 
-                if (optionalEvent.isPresent() && optionalEvent.get().equals(event)) {
-                    if (optionalJSLock.isPresent()) {
-                        Object lock = optionalJSLock.get();
-                        synchronized (lock) {
-                            lock.notify();
-                        }
-                    }
+                if (synchronizationEventOptional.isPresent() && isSatisfied(synchronizationEventOptional.get().getName())) {
+                    synchronizationEventOptional.get().signalizeIsDone();
+                    synchronizationEventOptional = Optional.empty();
                 }
 
             } catch (MalformedURLException e) {
@@ -79,7 +74,7 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
         if (!inWhiteList(httpRequest.getUri())) {
             return;
         }
-//        System.out.println("Add request " + httpRequest.getUri());
+        System.out.println("Add request " + httpRequest.getUri());
         this.httpRequestQueue.add(httpRequest);
     }
 
@@ -87,19 +82,8 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
         return conditionsSatisfied.contains(event);
     }
 
-    public boolean setJSWaitingEvent(String event, Object lock) {
-        if (isSatisfied(event)) {
-            return true;
-        }
-
-        optionalEvent = Optional.of(event);
-        optionalJSLock = Optional.ofNullable(lock);
-        return false;
-    }
-
-    public void signalizeEventIsDone() {
-        optionalEvent = Optional.empty();
-        optionalJSLock = Optional.empty();
+    public void setSynchronizationEvent(SynchronizationEvent synchronizationEventOptional) {
+        this.synchronizationEventOptional = Optional.of(synchronizationEventOptional);
     }
 
     public void setHttpLock(boolean lock) {

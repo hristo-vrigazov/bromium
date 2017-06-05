@@ -29,7 +29,7 @@ public class NoHttpRequestsInQueueTest {
     @Test
     public void delegatesToFilterWhenAskedIfCanAct() {
         NoHttpRequestsInQueue noHttpRequestsInQueue = new NoHttpRequestsInQueue(replayResponseFilter, signalizerEvent);
-        when(replayResponseFilter.canAct()).thenReturn(true);
+        when(replayResponseFilter.httpRequestQueueIsEmpty()).thenReturn(true);
         assertTrue(noHttpRequestsInQueue.isSatisfied());
     }
 

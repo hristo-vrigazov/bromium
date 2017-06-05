@@ -22,7 +22,7 @@ public class NoHttpRequestsInQueue implements SynchronizationEvent {
 
     @Override
     public boolean isSatisfied() {
-        return replayResponseFilter.canAct();
+        return replayResponseFilter.httpRequestQueueIsEmpty();
     }
 
     @Override

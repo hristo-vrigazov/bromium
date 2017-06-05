@@ -12,6 +12,8 @@ import java.net.URISyntaxException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -31,7 +33,7 @@ public class ExecutorBuilderTest {
         AutomationResultBuilder automationResultBuilder = mock(AutomationResultBuilder.class);
         ProxyFacade proxyFacade = mock(ProxyFacade.class);
         ProxyFacadeSupplier proxyFacadeSupplier = mock(ProxyFacadeSupplier.class);
-        when(proxyFacadeSupplier.get(baseURI, javascriptJsInjectionCode)).thenReturn(proxyFacade);
+        when(proxyFacadeSupplier.get(eq(baseURI), eq(javascriptJsInjectionCode), any(EventSynchronizer.class))).thenReturn(proxyFacade);
 
         EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
 
