@@ -57,18 +57,68 @@ public class SignalizationBasedEventSynchronizerTest {
 
         SignalizationBasedEventSynchronizer signalizationBasedEventSynchronizer = new SignalizationBasedEventSynchronizer();
 
-        Thread signalizingThread = new Thread(() -> {
-            try {
-                // simulate some work
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            signalizationBasedEventSynchronizer.signalizeEvent(synchronizationEvent);
-        });
+        Thread signalizingThread = new Thread(new SignalizingRunnable(signalizationBasedEventSynchronizer, synchronizationEvent));
+
         signalizingThread.start();
         signalizationBasedEventSynchronizer.awaitUntil(synchronizationEvent, timeout);
         signalizingThread.join();
     }
 
+    @Test
+    public void ifSignalizationEventIsNotFoundThenItIsNotLocked() {
+        SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
+        when(synchronizationEvent.isSatisfied()).thenReturn(false);
+        Lock lock = mock(Lock.class);
+
+        SignalizationBasedEventSynchronizer signalizationBasedEventSynchronizer = new SignalizationBasedEventSynchronizer(lock);
+
+        signalizationBasedEventSynchronizer.signalizeEvent(synchronizationEvent);
+
+        verify(lock, never()).lock();
+    }
+
+    @Test
+    public void ifIllegalStateExceptionIsThrownIsIsLocked() throws TimeoutException, InterruptedException {
+        SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
+        when(synchronizationEvent.isSatisfied()).thenReturn(false);
+
+        Condition condition = mock(Condition.class);
+        doAnswer(invocationOnMock -> {
+            Thread.sleep(2000);
+            return false;
+        }).when(condition).await(timeout, TimeUnit.SECONDS);
+        Lock lock = mock(Lock.class);
+        when(lock.newCondition()).thenReturn(condition);
+        doNothing().doThrow(new IllegalMonitorStateException()).when(lock).lock();
+
+        SignalizationBasedEventSynchronizer signalizationBasedEventSynchronizer = new SignalizationBasedEventSynchronizer(lock);
+
+        Thread signalizingThread = new Thread(new SignalizingRunnable(signalizationBasedEventSynchronizer, synchronizationEvent));
+
+        expectedException.expect(TimeoutException.class);
+        signalizingThread.start();
+        signalizationBasedEventSynchronizer.awaitUntil(synchronizationEvent, timeout);
+        signalizingThread.join();
+    }
+
+    private static class SignalizingRunnable implements Runnable {
+
+        private EventSynchronizer eventSynchronizer;
+        private SynchronizationEvent synchronizationEvent;
+
+        public SignalizingRunnable(EventSynchronizer eventSynchronizer, SynchronizationEvent synchronizationEvent) {
+            this.eventSynchronizer = eventSynchronizer;
+            this.synchronizationEvent = synchronizationEvent;
+        }
+
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            eventSynchronizer.signalizeEvent(synchronizationEvent);
+        }
+    }
 }
