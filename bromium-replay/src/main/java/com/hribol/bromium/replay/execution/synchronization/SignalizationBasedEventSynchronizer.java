@@ -15,17 +15,19 @@ public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
 
     private Lock lock;
     private Map<SynchronizationEvent, Condition> eventConditionMap = new HashMap<>();
+    private int timeoutInSeconds;
 
-    public SignalizationBasedEventSynchronizer() {
-        this(new ReentrantLock());
+    public SignalizationBasedEventSynchronizer(int timeoutInSeconds) {
+        this(timeoutInSeconds, new ReentrantLock());
     }
 
-    public SignalizationBasedEventSynchronizer(Lock lock) {
+    public SignalizationBasedEventSynchronizer(int timeoutInSeconds, Lock lock) {
+        this.timeoutInSeconds = timeoutInSeconds;
         this.lock = lock;
     }
 
     @Override
-    public void awaitUntil(SynchronizationEvent synchronizationEvent, int timeoutInSeconds) throws InterruptedException, TimeoutException {
+    public void awaitUntil(SynchronizationEvent synchronizationEvent) throws InterruptedException, TimeoutException {
         System.out.println("Before await " + synchronizationEvent.isSatisfied());
         if (synchronizationEvent.isSatisfied()) {
             return;

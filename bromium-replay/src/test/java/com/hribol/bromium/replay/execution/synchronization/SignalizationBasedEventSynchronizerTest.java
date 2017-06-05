@@ -27,8 +27,8 @@ public class SignalizationBasedEventSynchronizerTest {
         when(synchronizationEvent.isSatisfied()).thenReturn(true);
         Lock lock = mock(Lock.class);
 
-        SignalizationBasedEventSynchronizer signalizationBasedEventSynchronizer = new SignalizationBasedEventSynchronizer(lock);
-        signalizationBasedEventSynchronizer.awaitUntil(synchronizationEvent, timeout);
+        SignalizationBasedEventSynchronizer signalizationBasedEventSynchronizer = new SignalizationBasedEventSynchronizer(timeout, lock);
+        signalizationBasedEventSynchronizer.awaitUntil(synchronizationEvent);
 
         verify(lock, never()).lock();
     }
@@ -44,10 +44,10 @@ public class SignalizationBasedEventSynchronizerTest {
         Lock lock = mock(Lock.class);
         when(lock.newCondition()).thenReturn(condition);
 
-        SignalizationBasedEventSynchronizer signalizationBasedEventSynchronizer = new SignalizationBasedEventSynchronizer(lock);
+        SignalizationBasedEventSynchronizer signalizationBasedEventSynchronizer = new SignalizationBasedEventSynchronizer(timeout, lock);
 
         expectedException.expect(TimeoutException.class);
-        signalizationBasedEventSynchronizer.awaitUntil(synchronizationEvent, timeout);
+        signalizationBasedEventSynchronizer.awaitUntil(synchronizationEvent);
     }
 
     @Test
@@ -55,12 +55,12 @@ public class SignalizationBasedEventSynchronizerTest {
         SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
         when(synchronizationEvent.isSatisfied()).thenReturn(false);
 
-        SignalizationBasedEventSynchronizer signalizationBasedEventSynchronizer = new SignalizationBasedEventSynchronizer();
+        SignalizationBasedEventSynchronizer signalizationBasedEventSynchronizer = new SignalizationBasedEventSynchronizer(timeout);
 
         Thread signalizingThread = new Thread(new SignalizingRunnable(signalizationBasedEventSynchronizer, synchronizationEvent));
 
         signalizingThread.start();
-        signalizationBasedEventSynchronizer.awaitUntil(synchronizationEvent, timeout);
+        signalizationBasedEventSynchronizer.awaitUntil(synchronizationEvent);
         signalizingThread.join();
     }
 
@@ -70,7 +70,7 @@ public class SignalizationBasedEventSynchronizerTest {
         when(synchronizationEvent.isSatisfied()).thenReturn(false);
         Lock lock = mock(Lock.class);
 
-        SignalizationBasedEventSynchronizer signalizationBasedEventSynchronizer = new SignalizationBasedEventSynchronizer(lock);
+        SignalizationBasedEventSynchronizer signalizationBasedEventSynchronizer = new SignalizationBasedEventSynchronizer(timeout, lock);
 
         signalizationBasedEventSynchronizer.signalizeEvent(synchronizationEvent);
 
@@ -91,13 +91,13 @@ public class SignalizationBasedEventSynchronizerTest {
         when(lock.newCondition()).thenReturn(condition);
         doNothing().doThrow(new IllegalMonitorStateException()).when(lock).lock();
 
-        SignalizationBasedEventSynchronizer signalizationBasedEventSynchronizer = new SignalizationBasedEventSynchronizer(lock);
+        SignalizationBasedEventSynchronizer signalizationBasedEventSynchronizer = new SignalizationBasedEventSynchronizer(timeout, lock);
 
         Thread signalizingThread = new Thread(new SignalizingRunnable(signalizationBasedEventSynchronizer, synchronizationEvent));
 
         expectedException.expect(TimeoutException.class);
         signalizingThread.start();
-        signalizationBasedEventSynchronizer.awaitUntil(synchronizationEvent, timeout);
+        signalizationBasedEventSynchronizer.awaitUntil(synchronizationEvent);
         signalizingThread.join();
     }
 

@@ -1,5 +1,6 @@
 package com.hribol.bromium.replay.filters;
 
+import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -26,9 +27,9 @@ public class ProxyFacadeSupplierTest {
     public void createsProxyFacade() throws Exception {
         String url = "http://tinkiwinki.com";
         ProxyFacade expected = mock(ProxyFacade.class);
-        whenNew(ProxyFacade.class).withArguments(anyString(), anyString()).thenReturn(expected);
+        whenNew(ProxyFacade.class).withArguments(anyString(), anyString(), any(EventSynchronizer.class)).thenReturn(expected);
         ProxyFacadeSupplier proxyFacadeSupplier = new ProxyFacadeSupplier();
-        ProxyFacade actual = proxyFacadeSupplier.get(url, "");
+        ProxyFacade actual = proxyFacadeSupplier.get(url, "", mock(EventSynchronizer.class));
 
         assertEquals(expected, actual);
     }

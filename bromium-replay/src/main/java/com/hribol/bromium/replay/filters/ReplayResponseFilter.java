@@ -33,6 +33,7 @@ public class ReplayResponseFilter extends ReplayBaseFilter implements ResponseFi
             httpMessageContents.setTextContents(injectionCode + httpMessageContents.getTextContents());
         }
         removeHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
+        signalizeIfNoHttpQueriesInQueue();
     }
 
     public boolean httpRequestQueueIsEmpty() {
@@ -46,9 +47,12 @@ public class ReplayResponseFilter extends ReplayBaseFilter implements ResponseFi
 
         System.out.println("Remove request " + httpRequest.getUri());
         this.httpRequestQueue.remove(httpRequest);
+    }
 
+    private void signalizeIfNoHttpQueriesInQueue() {
         if (httpRequestQueueIsEmpty() && synchronizationEventOptional.isPresent()) {
             synchronizationEventOptional.get().signalizeIsDone();
+            synchronizationEventOptional = Optional.empty();
         }
     }
 

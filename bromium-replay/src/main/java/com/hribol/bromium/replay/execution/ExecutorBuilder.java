@@ -136,7 +136,7 @@ public class ExecutorBuilder {
 
     public EventSynchronizer getEventSynchronizer() {
         if (!Optional.ofNullable(eventSynchronizer).isPresent()) {
-            this.eventSynchronizer = new SignalizationBasedEventSynchronizer();
+            this.eventSynchronizer = new SignalizationBasedEventSynchronizer(getTimeout());
         }
 
         return eventSynchronizer;
@@ -144,7 +144,7 @@ public class ExecutorBuilder {
 
     public ProxyFacade getProxyFacade() throws URISyntaxException {
         if (!Optional.ofNullable(proxyFacade).isPresent()) {
-            this.proxyFacade = getProxyFacadeSupplier().get(baseURL, javascriptInjectionCode);
+            this.proxyFacade = getProxyFacadeSupplier().get(baseURL, javascriptInjectionCode, getEventSynchronizer());
         }
 
         return proxyFacade;

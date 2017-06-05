@@ -1,5 +1,6 @@
 package com.hribol.bromium.replay.filters;
 
+import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
@@ -175,7 +176,9 @@ public class ReplayRequestFilterTest {
 
         ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
 
-        replayRequestFilter.setJSWaitingEvent(event, lock);
+        SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
+        when(synchronizationEvent.getName()).thenReturn(event);
+        replayRequestFilter.setSynchronizationEvent(synchronizationEvent);
 
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn(CONDITION_SATISFIED_URL + "?" + event);
@@ -187,9 +190,8 @@ public class ReplayRequestFilterTest {
 
         replayRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
 
-        replayRequestFilter.signalizeEventIsDone();
         replayRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
-        verify(lock, times(1)).notify();
+        verify(synchronizationEvent, times(1)).signalizeIsDone();
     }
 
     @Test
@@ -198,11 +200,11 @@ public class ReplayRequestFilterTest {
         Set<HttpRequest> httpRequestSet = new HashSet<>();
         String event = "jsEvent";
         String otherEvent = "otherEvent";
-        Object lock = PowerMockito.mock(Object.class);
 
         ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
 
-        replayRequestFilter.setJSWaitingEvent(otherEvent, lock);
+        SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
+        replayRequestFilter.setSynchronizationEvent(synchronizationEvent);
 
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn(CONDITION_SATISFIED_URL + "?" + event);
@@ -214,7 +216,7 @@ public class ReplayRequestFilterTest {
 
         replayRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
 
-        verify(lock, never()).notify();
+        verify(synchronizationEvent, never()).signalizeIsDone();
     }
 
     @Test
@@ -226,7 +228,9 @@ public class ReplayRequestFilterTest {
 
         ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
 
-        replayRequestFilter.setJSWaitingEvent(event, lock);
+        SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
+        when(synchronizationEvent.getName()).thenReturn(event);
+        replayRequestFilter.setSynchronizationEvent(synchronizationEvent);
 
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn(CONDITION_SATISFIED_URL + "?" + event);
@@ -244,10 +248,9 @@ public class ReplayRequestFilterTest {
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
         String event = "jsEvent";
-        Object lock = mock(Object.class);
 
         ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
-        assertFalse(replayRequestFilter.setJSWaitingEvent(event, lock));
+        assertFalse(replayRequestFilter.isSatisfied(event));
     }
 
     @Test
@@ -255,7 +258,6 @@ public class ReplayRequestFilterTest {
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
         String event = "jsEvent";
-        Object lock = PowerMockito.mock(Object.class);
 
         ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(baseURI, httpRequestSet);
 
@@ -269,7 +271,7 @@ public class ReplayRequestFilterTest {
 
         replayRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
 
-        assertTrue(replayRequestFilter.setJSWaitingEvent(event, lock));
+        assertTrue(replayRequestFilter.isSatisfied(event));
     }
 
     @Test

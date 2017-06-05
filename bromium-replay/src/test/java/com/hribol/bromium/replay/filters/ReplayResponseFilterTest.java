@@ -28,7 +28,6 @@ import static org.mockito.Mockito.*;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({
         ReplayResponseFilter.class,
-        Object.class,
         Utils.class,
         URI.class
 })
@@ -40,7 +39,6 @@ public class ReplayResponseFilterTest {
     public void replayResponseFilterRemovesIfWhiteListedURL() throws URISyntaxException {
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
-        BooleanSupplier booleanSupplier = mock(BooleanSupplier.class);
         ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter("", baseURI, httpRequestSet);
 
         HttpRequest httpRequest = mock(HttpRequest.class);
@@ -65,7 +63,6 @@ public class ReplayResponseFilterTest {
     public void replayResponseFilterDoesNotRemoveIfURLIsNotWhiteListed() throws URISyntaxException {
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
-        BooleanSupplier booleanSupplier = mock(BooleanSupplier.class);
         ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter("", baseURI, httpRequestSet);
 
         HttpRequest httpRequest = mock(HttpRequest.class);
@@ -96,7 +93,7 @@ public class ReplayResponseFilterTest {
     }
 
     @Test
-    public void ifThereIsOneRequestInQueueAndExecutionLocksWhenTheRequestIsAnsweredNotifyIsCalled() throws URISyntaxException {
+    public void ifThereIsOneRequestInQueueWhenItIsRemovedEventIsSignalized() throws URISyntaxException {
         String baseURI = "http://tenniskafe.com";
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn(baseURI);
@@ -132,12 +129,7 @@ public class ReplayResponseFilterTest {
         when(httpRequest.getUri()).thenReturn(baseURI);
         Set<HttpRequest> httpRequestSet = new HashSet<>();
         httpRequestSet.add(httpRequest);
-        BooleanSupplier booleanSupplier = mock(BooleanSupplier.class);
-        when(booleanSupplier.getAsBoolean()).thenReturn(true);
         ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter( "", baseURI, httpRequestSet);
-
-        Object object = PowerMockito.mock(Object.class);
-        doNothing().when(object).notify();
 
         HttpResponse httpResponse = mock(HttpResponse.class);
         HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
@@ -148,8 +140,6 @@ public class ReplayResponseFilterTest {
         when(Utils.isGETFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(false);
 
         replayResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
-
-        verify(object, never()).notify();
     }
 
     @Test

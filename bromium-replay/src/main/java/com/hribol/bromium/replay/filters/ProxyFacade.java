@@ -1,5 +1,6 @@
 package com.hribol.bromium.replay.filters;
 
+import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
 import io.netty.handler.codec.http.HttpRequest;
 
 import java.net.URISyntaxException;
@@ -15,13 +16,15 @@ public class ProxyFacade implements ReplayFiltersFacade {
 
     private ReplayRequestFilter requestFilter;
     private ReplayResponseFilter responseFilter;
+    private EventSynchronizer eventSynchronizer;
 
-    public ProxyFacade(String baseURI, String injectionCode) throws URISyntaxException {
-        this(baseURI, injectionCode, new ReplayFiltersFactory());
+    public ProxyFacade(String baseURI, String injectionCode, EventSynchronizer eventSynchronizer) throws URISyntaxException {
+        this(baseURI, injectionCode, eventSynchronizer, new ReplayFiltersFactory());
     }
 
-    public ProxyFacade(String baseURI, String injectionCode, ReplayFiltersFactory replayFiltersFactory) throws URISyntaxException {
+    public ProxyFacade(String baseURI, String injectionCode, EventSynchronizer eventSynchronizer, ReplayFiltersFactory replayFiltersFactory) throws URISyntaxException {
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
+        this.eventSynchronizer = eventSynchronizer;
         this.requestFilter = replayFiltersFactory.createReplayRequestFilter(baseURI, httpRequestQueue);
         this.responseFilter = replayFiltersFactory.createReplayResponseFilter(injectionCode, baseURI, httpRequestQueue);
     }
@@ -34,6 +37,11 @@ public class ProxyFacade implements ReplayFiltersFacade {
     @Override
     public ReplayResponseFilter getResponseFilter() {
         return responseFilter;
+    }
+
+    @Override
+    public EventSynchronizer getEventSynchronizer() {
+        return eventSynchronizer;
     }
 
     @Override
