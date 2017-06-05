@@ -79,7 +79,7 @@ public class ReplayRequestFilter extends ReplayBaseFilter implements RequestFilt
         if (!inWhiteList(httpRequest.getUri())) {
             return;
         }
-//        System.out.println("Add request " + httpRequest.getUri());
+        System.out.println("Add request " + httpRequest.getUri());
         this.httpRequestQueue.add(httpRequest);
     }
 

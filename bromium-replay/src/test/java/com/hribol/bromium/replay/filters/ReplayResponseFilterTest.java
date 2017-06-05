@@ -41,7 +41,7 @@ public class ReplayResponseFilterTest {
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
         BooleanSupplier booleanSupplier = mock(BooleanSupplier.class);
-        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter(booleanSupplier, "", baseURI, httpRequestSet);
+        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter("", baseURI, httpRequestSet);
 
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn("http://tenniskafe.com/static/some.css");
@@ -66,7 +66,7 @@ public class ReplayResponseFilterTest {
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
         BooleanSupplier booleanSupplier = mock(BooleanSupplier.class);
-        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter(booleanSupplier, "", baseURI, httpRequestSet);
+        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter("", baseURI, httpRequestSet);
 
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn("http://google.com/static/some.css");
@@ -90,11 +90,9 @@ public class ReplayResponseFilterTest {
     public void ifAllowedToActItDoes() throws URISyntaxException {
         String baseURI = "http://tenniskafe.com";
         Set<HttpRequest> httpRequestSet = new HashSet<>();
-        BooleanSupplier booleanSupplier = mock(BooleanSupplier.class);
-        when(booleanSupplier.getAsBoolean()).thenReturn(true);
-        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter(booleanSupplier, "", baseURI, httpRequestSet);
+        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter( "", baseURI, httpRequestSet);
 
-        assertTrue(replayResponseFilter.canAct());
+        assertTrue(replayResponseFilter.httpRequestQueueIsEmpty());
     }
 
     @Test
@@ -106,12 +104,12 @@ public class ReplayResponseFilterTest {
         httpRequestSet.add(httpRequest);
         BooleanSupplier booleanSupplier = mock(BooleanSupplier.class);
         when(booleanSupplier.getAsBoolean()).thenReturn(false, true);
-        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter(booleanSupplier, "", baseURI, httpRequestSet);
+        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter( "", baseURI, httpRequestSet);
 
         Object object = PowerMockito.mock(Object.class);
         doNothing().when(object).notify();
 
-        assertFalse(replayResponseFilter.canAct());
+        assertFalse(replayResponseFilter.httpRequestQueueIsEmpty());
 
         HttpResponse httpResponse = mock(HttpResponse.class);
         HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
@@ -136,7 +134,7 @@ public class ReplayResponseFilterTest {
         httpRequestSet.add(httpRequest);
         BooleanSupplier booleanSupplier = mock(BooleanSupplier.class);
         when(booleanSupplier.getAsBoolean()).thenReturn(true);
-        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter(booleanSupplier, "", baseURI, httpRequestSet);
+        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter( "", baseURI, httpRequestSet);
 
         Object object = PowerMockito.mock(Object.class);
         doNothing().when(object).notify();
@@ -164,7 +162,7 @@ public class ReplayResponseFilterTest {
         httpRequestSet.add(httpRequest);
         BooleanSupplier booleanSupplier = mock(BooleanSupplier.class);
         when(booleanSupplier.getAsBoolean()).thenReturn(false);
-        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter(booleanSupplier, injectionCode, baseURI, httpRequestSet);
+        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter( injectionCode, baseURI, httpRequestSet);
 
         HttpResponse httpResponse = mock(HttpResponse.class);
         String httpMessageText = "httpMessageText";

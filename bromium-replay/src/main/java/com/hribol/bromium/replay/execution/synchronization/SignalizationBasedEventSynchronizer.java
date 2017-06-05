@@ -26,6 +26,7 @@ public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
 
     @Override
     public void awaitUntil(SynchronizationEvent synchronizationEvent, int timeoutInSeconds) throws InterruptedException, TimeoutException {
+        System.out.println("Before await " + synchronizationEvent.isSatisfied());
         if (synchronizationEvent.isSatisfied()) {
             return;
         }
@@ -35,11 +36,13 @@ public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
         Condition condition = lock.newCondition();
         eventConditionMap.put(synchronizationEvent, condition);
 
+        System.out.println("When calling await " + synchronizationEvent.isSatisfied());
         boolean timedOut = !condition.await(timeoutInSeconds, TimeUnit.SECONDS);
 
         lock.unlock();
 
         if (timedOut) {
+            System.out.println("After timeout " + synchronizationEvent.isSatisfied());
             throw new TimeoutException("The synchronization event " + synchronizationEvent.getName() + " was not satisfied in the specified time");
         }
 

@@ -356,7 +356,7 @@ public class WebDriverActionExecutionBaseTest {
         String baseURL = "http://tenniskafe.com";
         ReplayRequestFilter replayRequestFilter = mock(ReplayRequestFilter.class);
         ReplayResponseFilter replayResponseFilter = mock(ReplayResponseFilter.class);
-        when(replayResponseFilter.canAct()).thenReturn(true);
+        when(replayResponseFilter.httpRequestQueueIsEmpty()).thenReturn(true);
         ProxyFacade proxyFacade = mock(ProxyFacade.class);
         when(proxyFacade.getRequestFilter()).thenReturn(replayRequestFilter);
         when(proxyFacade.getResponseFilter()).thenReturn(replayResponseFilter);

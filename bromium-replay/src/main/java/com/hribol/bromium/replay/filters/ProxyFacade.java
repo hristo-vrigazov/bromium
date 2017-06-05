@@ -23,7 +23,7 @@ public class ProxyFacade implements ReplayFiltersFacade {
     public ProxyFacade(String baseURI, String injectionCode, ReplayFiltersFactory replayFiltersFactory) throws URISyntaxException {
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
         this.requestFilter = replayFiltersFactory.createReplayRequestFilter(baseURI, httpRequestQueue);
-        this.responseFilter = replayFiltersFactory.createReplayResponseFilter(this::canAct, injectionCode, baseURI, httpRequestQueue);
+        this.responseFilter = replayFiltersFactory.createReplayResponseFilter(injectionCode, baseURI, httpRequestQueue);
     }
 
     @Override

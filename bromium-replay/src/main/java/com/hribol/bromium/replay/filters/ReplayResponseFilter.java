@@ -18,13 +18,11 @@ import java.util.function.BooleanSupplier;
  */
 public class ReplayResponseFilter extends ReplayBaseFilter implements ResponseFilter {
 
-    private BooleanSupplier canAct;
     private Optional<SynchronizationEvent> synchronizationEventOptional;
     private String injectionCode;
 
-    public ReplayResponseFilter(BooleanSupplier canAct, String injectionCode, String baseURI, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
+    public ReplayResponseFilter(String injectionCode, String baseURI, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
         super(baseURI, httpRequestQueue);
-        this.canAct = canAct;
         this.injectionCode = injectionCode;
         this.synchronizationEventOptional = Optional.empty();
     }
@@ -37,8 +35,8 @@ public class ReplayResponseFilter extends ReplayBaseFilter implements ResponseFi
         removeHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
     }
 
-    public boolean canAct() {
-        return canAct.getAsBoolean();
+    public boolean httpRequestQueueIsEmpty() {
+        return httpRequestQueue.isEmpty();
     }
 
     private void removeHttpRequestToQueue(HttpRequest httpRequest) {
@@ -46,9 +44,10 @@ public class ReplayResponseFilter extends ReplayBaseFilter implements ResponseFi
             return;
         }
 
+        System.out.println("Remove request " + httpRequest.getUri());
         this.httpRequestQueue.remove(httpRequest);
 
-        if (canAct.getAsBoolean() && synchronizationEventOptional.isPresent()) {
+        if (httpRequestQueueIsEmpty() && synchronizationEventOptional.isPresent()) {
             synchronizationEventOptional.get().signalizeIsDone();
         }
     }
