@@ -2,6 +2,7 @@ package com.hribol.bromium.replay.execution;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.config.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
+import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
 import com.hribol.bromium.replay.report.AutomationResult;
 import com.hribol.bromium.replay.report.ExecutionReport;
@@ -18,7 +19,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.*;
 
-
 /**
  * Created by hvrigazov on 16.03.17.
  */
@@ -26,7 +26,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     public WebDriverActionExecutionBase(ExecutorBuilder executor) throws IOException, URISyntaxException {
         this.executor = executor;
-        this.proxyFacade = executor.getProxyFacadeSupplier().get(executor.getBaseURL(), executor.getJavascriptInjectionCode());
+        this.proxyFacade = executor.getProxyFacade();
         this.automationResult = AutomationResult.NOT_STARTED;
     }
 
@@ -37,9 +37,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     @Override
     public ExecutionReport execute(TestScenario testScenario, String screenToUse) {
-        List<Long> waitingTimes = new ArrayList<>();
-        List<Date> actionTimestamps = new ArrayList<>();
-
         ReplaySettings replaySettings = createReplaySettings();
         ExecutorService executorService;
         try {
@@ -52,6 +49,8 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             return ExecutionReport.couldNotCreateDriver();
         }
 
+        List<Long> waitingTimes = new ArrayList<>();
+        List<Date> actionTimestamps = new ArrayList<>();
         long elapsedTime = System.nanoTime();
         actionTimestamps.add(new Date());
 
@@ -59,15 +58,13 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             automationResult = AutomationResult.EXECUTING;
 
             for (WebDriverAction webDriverAction : testScenario.steps()) {
-                Object lock = new Object();
-                synchronized (lock) {
-                    if (!proxyFacade.getResponseFilter().setExecutionThreadLock(lock)) {
-                        try {
-                            lock.wait(executor.getTimeout());
-                        } catch (InterruptedException e) {
-                            throw new WebDriverActionExecutionException("Interrupted!", e, executor.getAutomationResultBuilder());
-                        }
-                    }
+
+                try {
+                    SynchronizationEvent synchronizationEvent = executor.noHttpRequestsInQueue();
+                    executor.getProxyFacade().getResponseFilter().setSynchronizationEvent(synchronizationEvent);
+                    executor.getEventSynchronizer().awaitUntil(synchronizationEvent, executor.getTimeout());
+                } catch (InterruptedException | URISyntaxException | java.util.concurrent.TimeoutException e) {
+                    throw executor.webDriverActionExecutionException("Exception during execution", e);
                 }
 
                 proxyFacade.getRequestFilter().setHttpLock(webDriverAction.expectsHttpRequest());
@@ -76,10 +73,11 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                 try {
                     future.get(executor.getTimeout(), TimeUnit.SECONDS);
                 }  catch (java.util.concurrent.TimeoutException | InterruptedException e) {
-                    throw new WebDriverActionExecutionException("Exception during execution", e, executor.getAutomationResultBuilder());
+                    throw executor.webDriverActionExecutionException("Exception during execution", e);
                 } catch (ExecutionException e) {
-                    throw new WebDriverActionExecutionException("Exception during execution", e.getCause(), executor.getAutomationResultBuilder());
+                    throw executor.webDriverActionExecutionException("Exception during execution", e.getCause());
                 }
+
                 waitingTimes.add(System.nanoTime() - elapsedTime);
                 actionTimestamps.add(new Date());
                 elapsedTime = System.nanoTime();

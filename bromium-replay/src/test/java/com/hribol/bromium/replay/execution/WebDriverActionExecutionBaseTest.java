@@ -6,6 +6,9 @@ import com.hribol.bromium.replay.config.suppliers.InvisibleWebDriverSupplier;
 import com.hribol.bromium.replay.config.suppliers.VisibleWebDriverSupplier;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioSteps;
+import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
+import com.hribol.bromium.replay.execution.synchronization.NoHttpRequestsInQueue;
+import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.filters.ProxyFacade;
 import com.hribol.bromium.replay.filters.ProxyFacadeSupplier;
 import com.hribol.bromium.replay.filters.ReplayRequestFilter;
@@ -31,6 +34,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Iterator;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -45,7 +50,9 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
 @PrepareForTest({
         ProxyFacade.class,
         WebDriverActionExecutionBase.class,
-        Object.class
+        Object.class,
+        Lock.class,
+        ReentrantLock.class
 })
 public class WebDriverActionExecutionBaseTest {
 
@@ -183,7 +190,26 @@ public class WebDriverActionExecutionBaseTest {
 
     @Test
     public void ifInterruptedWhileExecutionThreadIsWaitingThenAutomationResultIsSetCorrectly() throws Exception {
-        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase();
+        EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
+        doThrow(new InterruptedException("Interrupted while waiting"))
+                .when(eventSynchronizer).awaitUntil(any(SynchronizationEvent.class), anyInt());
+
+        ProxyFacade proxyFacade = mock(ProxyFacade.class);
+        when(proxyFacade.getRequestFilter()).thenReturn(mock(ReplayRequestFilter.class));
+        when(proxyFacade.getResponseFilter()).thenReturn(mock(ReplayResponseFilter.class));
+
+        ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
+        when(executorBuilder.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
+        when(executorBuilder.getProxyFacade()).thenReturn(proxyFacade);
+        when(executorBuilder.getEventSynchronizer()).thenReturn(eventSynchronizer);
+        doAnswer(invocationOnMock -> {
+            Object[] arguments = invocationOnMock.getArguments();
+            String message = (String) arguments[0];
+            Throwable throwable = (Throwable) arguments[1];
+            return new WebDriverActionExecutionException(message, throwable, getAutomationResultBuilder());
+        }).when(executorBuilder).webDriverActionExecutionException(anyString(), any(Throwable.class));
+
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(executorBuilder);
         Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
         TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
         when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
@@ -330,17 +356,22 @@ public class WebDriverActionExecutionBaseTest {
         String baseURL = "http://tenniskafe.com";
         ReplayRequestFilter replayRequestFilter = mock(ReplayRequestFilter.class);
         ReplayResponseFilter replayResponseFilter = mock(ReplayResponseFilter.class);
-        when(replayResponseFilter.setExecutionThreadLock(any())).thenReturn(true);
+        when(replayResponseFilter.canAct()).thenReturn(true);
         ProxyFacade proxyFacade = mock(ProxyFacade.class);
         when(proxyFacade.getRequestFilter()).thenReturn(replayRequestFilter);
         when(proxyFacade.getResponseFilter()).thenReturn(replayResponseFilter);
         ProxyFacadeSupplier proxyFacadeSupplier = mock(ProxyFacadeSupplier.class);
         when(proxyFacadeSupplier.get(eq(baseURL), anyString())).thenReturn(proxyFacade);
+        EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
+
         ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
         when(executorBuilder.getBaseURL()).thenReturn(baseURL);
         when(executorBuilder.getProxyFacadeSupplier()).thenReturn(proxyFacadeSupplier);
         when(executorBuilder.getPathToDriverExecutable()).thenReturn("driver");
         when(executorBuilder.getAutomationResultBuilder()).thenReturn(getAutomationResultBuilder());
+        when(executorBuilder.getProxyFacade()).thenReturn(proxyFacade);
+        when(executorBuilder.getEventSynchronizer()).thenReturn(eventSynchronizer);
+        when(executorBuilder.webDriverActionExecutionException(anyString(), any())).thenReturn(mock(WebDriverActionExecutionException.class));
 
         ReplaySettings replaySettings = mock(ReplaySettings.class);
         TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
@@ -369,6 +400,10 @@ public class WebDriverActionExecutionBaseTest {
         return getWebDriverActionExecutor(10);
     }
 
+    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(ExecutorBuilder executorBuilder) throws IOException, URISyntaxException {
+        return getWebDriverActionExecutionBase(executorBuilder, getDefaultReplaySettings());
+    }
+
     private WebDriverActionExecutionBase getWebDriverActionExecutionBase() throws IOException, URISyntaxException {
         return getWebDriverActionExecutionBase(10,  getDefaultReplaySettings());
     }
@@ -393,9 +428,7 @@ public class WebDriverActionExecutionBaseTest {
         return getWebDriverActionExecutionBase(timeout, 10, replaySettings);
     }
 
-    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, int maxRetries, ReplaySettings replaySettings) throws IOException, URISyntaxException {
-        ExecutorBuilder executorBuilder = getWebDriverActionExecutor(timeout, maxRetries);
-
+    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(ExecutorBuilder executorBuilder, ReplaySettings replaySettings) throws IOException, URISyntaxException {
         return new WebDriverActionExecutionBase(executorBuilder) {
             @Override
             public ReplaySettings createReplaySettings() {
@@ -409,6 +442,10 @@ public class WebDriverActionExecutionBaseTest {
         };
     }
 
+    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, int maxRetries, ReplaySettings replaySettings) throws IOException, URISyntaxException {
+        return getWebDriverActionExecutionBase(getWebDriverActionExecutor(timeout, maxRetries), replaySettings);
+    }
+
     private ExecutorBuilder getWebDriverActionExecutor(int timeout) throws IOException, URISyntaxException {
         return getWebDriverActionExecutor(timeout, 10);
     }
@@ -419,10 +456,10 @@ public class WebDriverActionExecutionBaseTest {
         ReplayRequestFilter replayRequestFilter = mock(ReplayRequestFilter.class);
         ReplayResponseFilter replayResponseFilter = mock(ReplayResponseFilter.class);
         ProxyFacade proxyFacade = mock(ProxyFacade.class);
+        NoHttpRequestsInQueue noHttpRequestsInQueue = mock(NoHttpRequestsInQueue.class);
+        EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
         when(proxyFacade.getRequestFilter()).thenReturn(replayRequestFilter);
         when(proxyFacade.getResponseFilter()).thenReturn(replayResponseFilter);
-        ProxyFacadeSupplier proxyFacadeSupplier = mock(ProxyFacadeSupplier.class);
-        when(proxyFacadeSupplier.get(anyString(), anyString())).thenReturn(proxyFacade);
         ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
         when(executorBuilder.getBaseURL()).thenReturn(baseURI);
         when(executorBuilder.getMeasurementsPrecisionMilli()).thenReturn(precision);
@@ -430,7 +467,15 @@ public class WebDriverActionExecutionBaseTest {
         when(executorBuilder.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
         when(executorBuilder.getMaxRetries()).thenReturn(maxRetries);
         when(executorBuilder.getAutomationResultBuilder()).thenReturn(automationResultBuilder);
-        when(executorBuilder.getProxyFacadeSupplier()).thenReturn(proxyFacadeSupplier);
+        when(executorBuilder.getProxyFacade()).thenReturn(proxyFacade);
+        when(executorBuilder.noHttpRequestsInQueue()).thenReturn(noHttpRequestsInQueue);
+        when(executorBuilder.getEventSynchronizer()).thenReturn(eventSynchronizer);
+        doAnswer(invocationOnMock -> {
+            Object[] arguments = invocationOnMock.getArguments();
+            String message = (String) arguments[0];
+            Throwable throwable = (Throwable) arguments[1];
+            return new WebDriverActionExecutionException(message, throwable, automationResultBuilder);
+        }).when(executorBuilder).webDriverActionExecutionException(anyString(), any(Throwable.class));
         return executorBuilder;
     }
 

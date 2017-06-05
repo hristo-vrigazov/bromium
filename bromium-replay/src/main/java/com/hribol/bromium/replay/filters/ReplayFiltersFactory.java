@@ -1,5 +1,6 @@
 package com.hribol.bromium.replay.filters;
 
+import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 import io.netty.handler.codec.http.HttpRequest;
 
 import java.net.URISyntaxException;

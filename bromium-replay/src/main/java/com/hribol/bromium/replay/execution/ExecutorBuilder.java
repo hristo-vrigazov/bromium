@@ -1,8 +1,13 @@
 package com.hribol.bromium.replay.execution;
 
+import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
+import com.hribol.bromium.replay.execution.synchronization.NoHttpRequestsInQueue;
+import com.hribol.bromium.replay.execution.synchronization.SignalizationBasedEventSynchronizer;
+import com.hribol.bromium.replay.filters.ProxyFacade;
 import com.hribol.bromium.replay.filters.ProxyFacadeSupplier;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Optional;
 
 /**
@@ -18,6 +23,8 @@ public class ExecutorBuilder {
     private AutomationResultBuilder automationResultBuilder;
     private ProxyFacadeSupplier proxyFacadeSupplier;
     private String javascriptInjectionCode;
+    private EventSynchronizer eventSynchronizer;
+    private ProxyFacade proxyFacade;
 
     public ExecutorBuilder pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
@@ -56,6 +63,11 @@ public class ExecutorBuilder {
 
     public ExecutorBuilder proxyFacadeSupplier(ProxyFacadeSupplier proxyFacadeSupplier) {
         this.proxyFacadeSupplier = proxyFacadeSupplier;
+        return this;
+    }
+
+    public ExecutorBuilder eventSynchronizer(EventSynchronizer eventSynchronizer) {
+        this.eventSynchronizer = eventSynchronizer;
         return this;
     }
 
@@ -120,5 +132,29 @@ public class ExecutorBuilder {
 
     public String getJavascriptInjectionCode() {
         return javascriptInjectionCode;
+    }
+
+    public EventSynchronizer getEventSynchronizer() {
+        if (!Optional.ofNullable(eventSynchronizer).isPresent()) {
+            this.eventSynchronizer = new SignalizationBasedEventSynchronizer();
+        }
+
+        return eventSynchronizer;
+    }
+
+    public ProxyFacade getProxyFacade() throws URISyntaxException {
+        if (!Optional.ofNullable(proxyFacade).isPresent()) {
+            this.proxyFacade = getProxyFacadeSupplier().get(baseURL, javascriptInjectionCode);
+        }
+
+        return proxyFacade;
+    }
+
+    public NoHttpRequestsInQueue noHttpRequestsInQueue() throws URISyntaxException {
+        return new NoHttpRequestsInQueue(getProxyFacade().getResponseFilter(), getEventSynchronizer());
+    }
+
+    public WebDriverActionExecutionException webDriverActionExecutionException(String message, Throwable e) {
+        return new WebDriverActionExecutionException(message, e, getAutomationResultBuilder());
     }
 }

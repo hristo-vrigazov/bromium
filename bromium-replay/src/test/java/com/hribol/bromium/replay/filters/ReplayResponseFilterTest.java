@@ -1,6 +1,7 @@
 package com.hribol.bromium.replay.filters;
 
 import com.hribol.bromium.replay.config.utils.Utils;
+import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.util.HttpMessageContents;
@@ -32,6 +33,8 @@ import static org.mockito.Mockito.*;
         URI.class
 })
 public class ReplayResponseFilterTest {
+
+    private SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
 
     @Test
     public void replayResponseFilterRemovesIfWhiteListedURL() throws URISyntaxException {
@@ -91,7 +94,7 @@ public class ReplayResponseFilterTest {
         when(booleanSupplier.getAsBoolean()).thenReturn(true);
         ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter(booleanSupplier, "", baseURI, httpRequestSet);
 
-        assertTrue(replayResponseFilter.setExecutionThreadLock(new Object()));
+        assertTrue(replayResponseFilter.canAct());
     }
 
     @Test
@@ -108,7 +111,7 @@ public class ReplayResponseFilterTest {
         Object object = PowerMockito.mock(Object.class);
         doNothing().when(object).notify();
 
-        assertFalse(replayResponseFilter.setExecutionThreadLock(object));
+        assertFalse(replayResponseFilter.canAct());
 
         HttpResponse httpResponse = mock(HttpResponse.class);
         HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
@@ -118,9 +121,10 @@ public class ReplayResponseFilterTest {
         PowerMockito.mockStatic(Utils.class);
         when(Utils.isGETFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(false);
 
+        replayResponseFilter.setSynchronizationEvent(synchronizationEvent);
         replayResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
 
-        verify(object).notify();
+        verify(synchronizationEvent).signalizeIsDone();
     }
 
     @Test

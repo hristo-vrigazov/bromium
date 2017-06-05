@@ -1,12 +1,12 @@
 package com.hribol.bromium.replay.filters;
 
+import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 import io.netty.handler.codec.http.HttpRequest;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import java.net.URISyntaxException;
-import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -18,6 +18,8 @@ import static org.mockito.Mockito.*;
  * Created by hvrigazov on 26.04.17.
  */
 public class ProxyFacadeTest {
+
+    SynchronizationEvent eventDispatcher = mock(SynchronizationEvent.class);
 
     @Test
     public void canGetFilters() throws URISyntaxException {

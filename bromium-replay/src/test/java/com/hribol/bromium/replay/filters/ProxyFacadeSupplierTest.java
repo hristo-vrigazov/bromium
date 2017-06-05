@@ -5,12 +5,10 @@ import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.net.URISyntaxException;
-
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 /**
@@ -22,6 +20,7 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
         ProxyFacade.class
 })
 public class ProxyFacadeSupplierTest {
+
 
     @Test
     public void createsProxyFacade() throws Exception {

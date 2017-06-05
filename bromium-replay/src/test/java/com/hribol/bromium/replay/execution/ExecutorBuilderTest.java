@@ -1,15 +1,19 @@
 package com.hribol.bromium.replay.execution;
 
+import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
+import com.hribol.bromium.replay.filters.ProxyFacade;
 import com.hribol.bromium.replay.filters.ProxyFacadeSupplier;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by hvrigazov on 23.04.17.
@@ -17,7 +21,7 @@ import static org.mockito.Mockito.mock;
 public class ExecutorBuilderTest {
 
     @Test
-    public void correctlyBuildsConfiguration() throws IOException {
+    public void correctlyBuildsConfiguration() throws IOException, URISyntaxException {
         String pathToDriverExecutable = "file:///somepath";
         String baseURI = "http://tennikafe.com";
         String javascriptJsInjectionCode = "function() {}";
@@ -25,7 +29,11 @@ public class ExecutorBuilderTest {
         int timeout = 20;
         int maxRetries = 11;
         AutomationResultBuilder automationResultBuilder = mock(AutomationResultBuilder.class);
+        ProxyFacade proxyFacade = mock(ProxyFacade.class);
         ProxyFacadeSupplier proxyFacadeSupplier = mock(ProxyFacadeSupplier.class);
+        when(proxyFacadeSupplier.get(baseURI, javascriptJsInjectionCode)).thenReturn(proxyFacade);
+
+        EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
 
         ExecutorBuilder executorBuilder = new ExecutorBuilder()
                 .pathToDriverExecutable(pathToDriverExecutable)
@@ -35,7 +43,8 @@ public class ExecutorBuilderTest {
                 .javascriptInjectionCode(javascriptJsInjectionCode)
                 .maxRetries(maxRetries)
                 .automationResultBuilder(automationResultBuilder)
-                .proxyFacadeSupplier(proxyFacadeSupplier);
+                .proxyFacadeSupplier(proxyFacadeSupplier)
+                .eventSynchronizer(eventSynchronizer);
 
         assertEquals(pathToDriverExecutable, executorBuilder.getPathToDriverExecutable());
         assertEquals(baseURI, executorBuilder.getBaseURL());
@@ -48,6 +57,10 @@ public class ExecutorBuilderTest {
         assertEquals(automationResultBuilder, executorBuilder.getAutomationResultBuilder());
         assertEquals(proxyFacadeSupplier, executorBuilder.getProxyFacadeSupplier());
         assertEquals(javascriptJsInjectionCode, executorBuilder.getJavascriptInjectionCode());
+        assertEquals(proxyFacade, executorBuilder.getProxyFacade());
+        assertEquals(proxyFacade, executorBuilder.getProxyFacade());
+        assertEquals(eventSynchronizer, executorBuilder.getEventSynchronizer());
+        assertNotNull(executorBuilder.noHttpRequestsInQueue());
     }
 
     @Rule
@@ -83,5 +96,7 @@ public class ExecutorBuilderTest {
         assertEquals(50, executorBuilder.getMaxRetries());
         assertNotNull(executorBuilder.getAutomationResultBuilder());
         assertNotNull(executorBuilder.getProxyFacadeSupplier());
+        assertNotNull(executorBuilder.getEventSynchronizer());
+        assertNotNull(executorBuilder.webDriverActionExecutionException("Something happened", mock(Throwable.class)));
     }
 }

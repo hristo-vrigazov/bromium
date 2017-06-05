@@ -1,13 +1,10 @@
 package com.hribol.bromium.replay.filters;
 
 import io.netty.handler.codec.http.HttpRequest;
-import net.lightbody.bmp.filters.RequestFilter;
-import net.lightbody.bmp.filters.ResponseFilter;
 
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 /**
