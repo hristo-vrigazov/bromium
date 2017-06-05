@@ -103,9 +103,6 @@ public class ReplayResponseFilterTest {
         when(booleanSupplier.getAsBoolean()).thenReturn(false, true);
         ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter( "", baseURI, httpRequestSet);
 
-        Object object = PowerMockito.mock(Object.class);
-        doNothing().when(object).notify();
-
         assertFalse(replayResponseFilter.httpRequestQueueIsEmpty());
 
         HttpResponse httpResponse = mock(HttpResponse.class);
