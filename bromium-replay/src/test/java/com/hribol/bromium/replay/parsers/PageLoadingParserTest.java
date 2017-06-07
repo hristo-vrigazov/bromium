@@ -6,8 +6,8 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.hribol.bromium.replay.config.utils.Constants.EVENT;
-import static com.hribol.bromium.replay.config.utils.Constants.URL;
+import static com.hribol.bromium.core.utils.Constants.EVENT;
+import static com.hribol.bromium.core.utils.Constants.URL;
 import static junit.framework.TestCase.assertEquals;
 
 /**

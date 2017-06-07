@@ -2,7 +2,7 @@ package com.hribol.bromium.replay.execution.scenario;
 
 import com.hribol.bromium.replay.execution.application.ApplicationAction;
 import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
-import com.hribol.bromium.replay.config.utils.ConfigurationUtils;
+import com.hribol.bromium.core.utils.ConfigurationUtils;
 
 import java.io.IOException;
 import java.io.InputStream;

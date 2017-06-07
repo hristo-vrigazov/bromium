@@ -1,6 +1,6 @@
 package com.hribol.bromium.replay.settings;
 
-import com.hribol.bromium.replay.config.suppliers.*;
+import com.hribol.bromium.core.suppliers.*;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.filters.RequestFilter;

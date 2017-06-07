@@ -1,13 +1,13 @@
 package com.hribol.bromium.replay.replay;
 
-import com.hribol.bromium.replay.config.config.ApplicationConfiguration;
+import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.replay.execution.application.DefaultApplicationActionFactory;
 import com.hribol.bromium.replay.execution.factory.PredefinedWebDriverActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
-import com.hribol.bromium.replay.config.suite.VirtualScreenProcessCreator;
-import com.hribol.bromium.replay.config.utils.ConfigurationUtils;
+import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
+import com.hribol.bromium.core.utils.ConfigurationUtils;
 import com.hribol.bromium.replay.ReplayBrowser;
 import com.hribol.bromium.replay.execution.WebDriverActionExecution;
 import com.hribol.bromium.replay.report.ExecutionReport;

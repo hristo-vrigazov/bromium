@@ -1,8 +1,8 @@
 package com.hribol.bromium.replay.execution.application;
 
-import com.hribol.bromium.replay.config.config.ApplicationActionConfiguration;
-import com.hribol.bromium.replay.config.config.ParameterConfiguration;
-import com.hribol.bromium.replay.config.config.WebDriverActionConfiguration;
+import com.hribol.bromium.core.config.ApplicationActionConfiguration;
+import com.hribol.bromium.core.config.ParameterConfiguration;
+import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import org.junit.Test;
@@ -10,8 +10,8 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.hribol.bromium.replay.config.utils.Constants.EVENT;
-import static com.hribol.bromium.replay.config.utils.Constants.NOTHING;
+import static com.hribol.bromium.core.utils.Constants.EVENT;
+import static com.hribol.bromium.core.utils.Constants.NOTHING;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

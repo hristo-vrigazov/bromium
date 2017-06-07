@@ -5,8 +5,8 @@ import com.hribol.bromium.replay.actions.WebDriverAction;
 
 import java.util.Map;
 
-import static com.hribol.bromium.replay.config.utils.Constants.CSS_SELECTOR;
-import static com.hribol.bromium.replay.config.utils.Constants.EVENT;
+import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
+import static com.hribol.bromium.core.utils.Constants.EVENT;
 
 /**
  * Parser for {@link ClickCssSelector}

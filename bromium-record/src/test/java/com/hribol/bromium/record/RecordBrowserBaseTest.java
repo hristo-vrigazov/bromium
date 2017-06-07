@@ -1,7 +1,7 @@
 package com.hribol.bromium.record;
 
-import com.hribol.bromium.replay.config.suppliers.VisibleWebDriverSupplier;
-import com.hribol.bromium.replay.config.utils.JavascriptInjector;
+import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
+import com.hribol.bromium.core.utils.JavascriptInjector;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 

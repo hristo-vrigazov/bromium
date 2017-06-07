@@ -1,9 +1,9 @@
 package com.hribol.bromium.replay.execution;
 
 import com.hribol.bromium.replay.actions.WebDriverAction;
-import com.hribol.bromium.replay.config.suite.VirtualScreenProcessCreator;
-import com.hribol.bromium.replay.config.suppliers.InvisibleWebDriverSupplier;
-import com.hribol.bromium.replay.config.suppliers.VisibleWebDriverSupplier;
+import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
+import com.hribol.bromium.core.suppliers.InvisibleWebDriverSupplier;
+import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioSteps;
 import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;

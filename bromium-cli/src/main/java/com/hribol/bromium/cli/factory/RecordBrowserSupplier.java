@@ -1,6 +1,6 @@
 package com.hribol.bromium.cli.factory;
 
-import com.hribol.bromium.replay.config.utils.JavascriptInjector;
+import com.hribol.bromium.core.utils.JavascriptInjector;
 import com.hribol.bromium.record.RecordBrowserBase;
 
 import java.io.IOException;

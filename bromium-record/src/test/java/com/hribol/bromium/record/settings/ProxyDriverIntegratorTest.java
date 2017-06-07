@@ -1,6 +1,6 @@
 package com.hribol.bromium.record.settings;
 
-import com.hribol.bromium.replay.config.suppliers.VisibleWebDriverSupplier;
+import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
 import org.junit.Test;

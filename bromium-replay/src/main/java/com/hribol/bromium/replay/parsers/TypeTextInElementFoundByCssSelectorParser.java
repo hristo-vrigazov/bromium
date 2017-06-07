@@ -1,8 +1,8 @@
 package com.hribol.bromium.replay.parsers;
 
-import static com.hribol.bromium.replay.config.utils.Constants.CSS_SELECTOR;
-import static com.hribol.bromium.replay.config.utils.Constants.EVENT;
-import static com.hribol.bromium.replay.config.utils.Constants.TEXT;
+import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
+import static com.hribol.bromium.core.utils.Constants.EVENT;
+import static com.hribol.bromium.core.utils.Constants.TEXT;
 
 import java.util.Map;
 

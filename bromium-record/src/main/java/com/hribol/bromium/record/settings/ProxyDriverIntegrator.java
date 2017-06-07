@@ -1,9 +1,9 @@
 package com.hribol.bromium.record.settings;
 
-import com.hribol.bromium.replay.config.suppliers.BrowserMobProxySupplier;
-import com.hribol.bromium.replay.config.suppliers.DesiredCapabilitiesSupplier;
-import com.hribol.bromium.replay.config.suppliers.SeleniumProxySupplier;
-import com.hribol.bromium.replay.config.suppliers.VisibleWebDriverSupplier;
+import com.hribol.bromium.core.suppliers.BrowserMobProxySupplier;
+import com.hribol.bromium.core.suppliers.DesiredCapabilitiesSupplier;
+import com.hribol.bromium.core.suppliers.SeleniumProxySupplier;
+import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;

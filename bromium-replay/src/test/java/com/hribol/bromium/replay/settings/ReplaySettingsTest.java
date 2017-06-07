@@ -1,7 +1,7 @@
 package com.hribol.bromium.replay.settings;
 
-import com.hribol.bromium.replay.config.suppliers.InvisibleWebDriverSupplier;
-import com.hribol.bromium.replay.config.suppliers.VisibleWebDriverSupplier;
+import com.hribol.bromium.core.suppliers.InvisibleWebDriverSupplier;
+import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;

@@ -1,6 +1,6 @@
 package com.hribol.bromium.replay.execution;
 import com.hribol.bromium.replay.actions.WebDriverAction;
-import com.hribol.bromium.replay.config.suite.VirtualScreenProcessCreator;
+import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
 import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.filters.ReplayFiltersFacade;

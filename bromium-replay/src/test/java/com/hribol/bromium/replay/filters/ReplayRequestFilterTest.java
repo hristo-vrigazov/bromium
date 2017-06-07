@@ -14,8 +14,8 @@ import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.hribol.bromium.replay.config.utils.Constants.CONDITION_NOT_SATISFIED_URL;
-import static com.hribol.bromium.replay.config.utils.Constants.CONDITION_SATISFIED_URL;
+import static com.hribol.bromium.core.utils.Constants.CONDITION_NOT_SATISFIED_URL;
+import static com.hribol.bromium.core.utils.Constants.CONDITION_SATISFIED_URL;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;

@@ -5,8 +5,6 @@ import com.hribol.bromium.replay.actions.WebDriverAction;
 
 import java.util.Map;
 
-import static com.hribol.bromium.replay.config.utils.Constants.*;
-
 /**
  * Created by hvrigazov on 18.05.17.
  */

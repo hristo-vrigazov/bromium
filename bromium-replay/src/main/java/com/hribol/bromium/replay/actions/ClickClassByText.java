@@ -11,7 +11,7 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
 
-import static com.hribol.bromium.replay.config.utils.Constants.INNER_HTML;
+import static com.hribol.bromium.core.utils.Constants.INNER_HTML;
 import static com.hribol.bromium.replay.execution.factory.WebDriverActionFactoryBase.CLICK_CLASS_BY_TEXT;
 
 /**

@@ -1,6 +1,6 @@
 package com.hribol.bromium.replay.report;
 
-import com.hribol.bromium.replay.config.utils.Utils;
+import com.hribol.bromium.core.utils.Utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;

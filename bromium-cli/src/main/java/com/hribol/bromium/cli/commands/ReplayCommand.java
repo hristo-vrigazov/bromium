@@ -1,7 +1,7 @@
 package com.hribol.bromium.cli.commands;
 
 import com.hribol.bromium.cli.factory.ExecutionFactory;
-import com.hribol.bromium.replay.config.utils.JavascriptInjector;
+import com.hribol.bromium.core.utils.JavascriptInjector;
 import com.hribol.bromium.replay.execution.factory.PredefinedWebDriverActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.*;

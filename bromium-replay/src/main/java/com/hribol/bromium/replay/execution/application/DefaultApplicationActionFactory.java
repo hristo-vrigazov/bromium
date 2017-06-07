@@ -1,14 +1,14 @@
 package com.hribol.bromium.replay.execution.application;
 
-import com.hribol.bromium.replay.config.config.ApplicationActionConfiguration;
-import com.hribol.bromium.replay.config.config.ApplicationConfiguration;
+import com.hribol.bromium.core.config.ApplicationActionConfiguration;
+import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.replay.execution.factory.PredefinedWebDriverActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.hribol.bromium.replay.config.utils.Constants.EVENT;
+import static com.hribol.bromium.core.utils.Constants.EVENT;
 
 /**
  * The {@link ApplicationActionFactory} that will be used most frequently.
