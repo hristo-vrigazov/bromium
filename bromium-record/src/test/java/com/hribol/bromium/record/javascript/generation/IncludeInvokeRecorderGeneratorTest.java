@@ -1,6 +1,7 @@
 package com.hribol.bromium.record.javascript.generation;
 
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
+import com.hribol.bromium.record.javascript.generation.webdriver.IncludeInvokeRecorderGenerator;
 import com.hribol.bromium.record.javascript.generation.webdriver.WebDriverActionRecorderGenerator;
 import org.junit.Test;
 
@@ -15,33 +16,20 @@ import static org.mockito.Mockito.when;
 public class IncludeInvokeRecorderGeneratorTest {
 
     @Test
-    public void ifActionWithTheSameTypeIsNotYetIncludedInJavascriptRecorderBuilderThenItsInvocationIsIncluded() {
-        String recordingString = "function clickId(id) { }";
+    public void registersActionAfterCodeIsGenerated() {
+        String functionCode = "function something(a) {}", invocationCode = "something(#a'";
+
         WebDriverActionConfiguration webDriverActionConfiguration = mock(WebDriverActionConfiguration.class);
-        JavascriptRecorderBuilder javascriptRecorderBuilder = mock(JavascriptRecorderBuilder.class);
-        when(javascriptRecorderBuilder.isActionWithTheSameTypeIncluded(webDriverActionConfiguration)).thenReturn(false);
-        when(javascriptRecorderBuilder.getRecordingCodeForType(webDriverActionConfiguration)).thenReturn(recordingString);
+        RecorderTypeRegistry recordingTypeRegistry = mock(RecorderTypeRegistry.class);
+        when(recordingTypeRegistry.getRecordingCodeForType(webDriverActionConfiguration))
+                .thenReturn(functionCode, invocationCode);
 
-        WebDriverActionRecorderGenerator includeInvokeRecorderGenerator = new IncludeInvokeRecorderGenerator(javascriptRecorderBuilder);
+        WebDriverActionRecorderGenerator webDriverActionRecorderGenerator = new IncludeInvokeRecorderGenerator(recordingTypeRegistry);
 
-        assertEquals(recordingString, includeInvokeRecorderGenerator.generate(webDriverActionConfiguration));
+        String actual = webDriverActionRecorderGenerator.generate(webDriverActionConfiguration);
 
-        verify(javascriptRecorderBuilder).registerRecordingType(webDriverActionConfiguration);
-    }
-
-    @Test
-    public void ifActionWithTheSameTypeHasAlreadyBeenIncludedThenInvocationIsAdded() {
-        String invocationString = "clickCssSelectorListener('#something')";
-        WebDriverActionConfiguration webDriverActionConfiguration = mock(WebDriverActionConfiguration.class);
-        JavascriptRecorderBuilder javascriptRecorderBuilder = mock(JavascriptRecorderBuilder.class);
-        when(javascriptRecorderBuilder.isActionWithTheSameTypeIncluded(webDriverActionConfiguration)).thenReturn(true);
-        when(javascriptRecorderBuilder.getInvocationCodeForType(webDriverActionConfiguration)).thenReturn(invocationString);
-
-        WebDriverActionRecorderGenerator includeInvokeRecorderGenerator = new IncludeInvokeRecorderGenerator(javascriptRecorderBuilder);
-
-        assertEquals(invocationString, includeInvokeRecorderGenerator.generate(webDriverActionConfiguration));
-
-        verify(javascriptRecorderBuilder).registerInvocationOfRecordingType(webDriverActionConfiguration);
+        assertEquals(functionCode, actual);
+        verify(recordingTypeRegistry).register(webDriverActionConfiguration);
     }
 
 }
