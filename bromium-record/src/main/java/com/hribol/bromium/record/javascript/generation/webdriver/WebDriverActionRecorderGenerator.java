@@ -5,6 +5,6 @@ import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 /**
  * Created by hvrigazov on 07.06.17.
  */
-public interface WebDriverActionRecorder {
+public interface WebDriverActionRecorderGenerator {
     String generate(WebDriverActionConfiguration webDriverActionConfiguration);
 }
