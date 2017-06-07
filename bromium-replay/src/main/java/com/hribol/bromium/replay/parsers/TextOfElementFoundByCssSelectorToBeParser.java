@@ -5,6 +5,11 @@ import com.hribol.bromium.replay.actions.WebDriverAction;
 
 import java.util.Map;
 
+import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
+import static com.hribol.bromium.core.utils.Constants.EVENT;
+import static com.hribol.bromium.core.utils.Constants.TEXT;
+import static com.hribol.bromium.core.utils.Constants.TIMEOUT;
+
 /**
  * Created by hvrigazov on 18.05.17.
  */
