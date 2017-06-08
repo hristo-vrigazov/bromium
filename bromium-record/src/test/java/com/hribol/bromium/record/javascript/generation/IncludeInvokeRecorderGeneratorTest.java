@@ -17,19 +17,20 @@ public class IncludeInvokeRecorderGeneratorTest {
 
     @Test
     public void registersActionAfterCodeIsGenerated() {
+        String eventName = "eventName";
         String functionCode = "function something(a) {}", invocationCode = "something(#a'";
 
         WebDriverActionConfiguration webDriverActionConfiguration = mock(WebDriverActionConfiguration.class);
         RecorderTypeRegistry recordingTypeRegistry = mock(RecorderTypeRegistry.class);
-        when(recordingTypeRegistry.getRecordingCodeForType(webDriverActionConfiguration))
+        when(recordingTypeRegistry.getRecordingCodeForType(eventName, webDriverActionConfiguration))
                 .thenReturn(functionCode, invocationCode);
 
         WebDriverActionRecorderGenerator webDriverActionRecorderGenerator = new IncludeInvokeRecorderGenerator(recordingTypeRegistry);
 
-        String actual = webDriverActionRecorderGenerator.generate(webDriverActionConfiguration);
+        String actual = webDriverActionRecorderGenerator.generate(eventName, webDriverActionConfiguration);
 
         assertEquals(functionCode, actual);
-        verify(recordingTypeRegistry).register(webDriverActionConfiguration);
+        verify(recordingTypeRegistry).register(eventName, webDriverActionConfiguration);
     }
 
 }

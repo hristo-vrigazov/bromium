@@ -9,5 +9,5 @@ import com.hribol.bromium.record.javascript.generation.invocations.RecorderFunct
  * Created by hvrigazov on 07.06.17.
  */
 public interface RecorderFunction extends JavascriptCodeSupplier {
-    RecorderFunctionInvocation getInvocation(WebDriverActionConfiguration webDriverActionConfiguration);
+    RecorderFunctionInvocation getInvocation(String eventName, WebDriverActionConfiguration webDriverActionConfiguration);
 }

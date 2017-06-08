@@ -15,6 +15,8 @@ public class RecordingWebDriverActionsOnly implements ApplicationActionRecorder 
 
     @Override
     public String generate(ApplicationActionConfiguration applicationActionConfiguration) {
-        return webDriverActionRecorderGenerator.generate(applicationActionConfiguration.getWebDriverAction());
+        return webDriverActionRecorderGenerator.generate(
+                applicationActionConfiguration.getName(),
+                applicationActionConfiguration.getWebDriverAction());
     }
 }

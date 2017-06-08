@@ -4,7 +4,6 @@ import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.record.javascript.generation.functions.factory.RecorderFunctionFactory;
 import com.hribol.bromium.record.javascript.generation.functions.RecorderFunction;
 import com.hribol.bromium.record.javascript.generation.invocations.RecorderFunctionInvocation;
-import com.hribol.bromium.record.javascript.generation.invocations.factory.RecorderFunctionInvocationFactory;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -22,7 +21,7 @@ public class RecorderTypeRegistryTest {
 
         RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(mocks.recorderFunctionFactory);
 
-        String generatedCode = recorderTypeRegistry.getRecordingCodeForType(mocks.webDriverActionConfiguration);
+        String generatedCode = recorderTypeRegistry.getRecordingCodeForType(mocks.eventName, mocks.webDriverActionConfiguration);
 
         assertEquals(mocks.functionCode + mocks.invocationCode, generatedCode);
     }
@@ -33,9 +32,9 @@ public class RecorderTypeRegistryTest {
 
         RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(mocks.recorderFunctionFactory);
 
-        recorderTypeRegistry.register(mocks.webDriverActionConfiguration);
+        recorderTypeRegistry.register(mocks.eventName, mocks.webDriverActionConfiguration);
 
-        String generatedCode = recorderTypeRegistry.getRecordingCodeForType(mocks.webDriverActionConfiguration);
+        String generatedCode = recorderTypeRegistry.getRecordingCodeForType(mocks.eventName, mocks.webDriverActionConfiguration);
 
         assertEquals("", generatedCode);
     }
@@ -46,9 +45,9 @@ public class RecorderTypeRegistryTest {
 
         RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(mocks.recorderFunctionFactory);
 
-        recorderTypeRegistry.register(mocks.webDriverActionConfiguration);
+        recorderTypeRegistry.register(mocks.eventName, mocks.webDriverActionConfiguration);
 
-        String generatedCode = recorderTypeRegistry.getRecordingCodeForType(mocks.anotherWebDriverActionConfiguration);
+        String generatedCode = recorderTypeRegistry.getRecordingCodeForType(mocks.eventName, mocks.anotherWebDriverActionConfiguration);
 
         assertEquals(mocks.anotherInvocationCode, generatedCode);
     }
@@ -59,11 +58,15 @@ public class RecorderTypeRegistryTest {
 
         RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(mocks.recorderFunctionFactory);
 
-        recorderTypeRegistry.register(mocks.webDriverActionConfiguration);
-        recorderTypeRegistry.register(mocks.anotherWebDriverActionConfiguration);
+        recorderTypeRegistry.register(mocks.eventName, mocks.webDriverActionConfiguration);
+        recorderTypeRegistry.register(mocks.eventName, mocks.anotherWebDriverActionConfiguration);
 
-        assertEquals("", recorderTypeRegistry.getRecordingCodeForType(mocks.webDriverActionConfiguration));
-        assertEquals("", recorderTypeRegistry.getRecordingCodeForType(mocks.anotherWebDriverActionConfiguration));
+        assertEquals("", recorderTypeRegistry.getRecordingCodeForType(
+                mocks.eventName,
+                mocks.webDriverActionConfiguration));
+        assertEquals("", recorderTypeRegistry.getRecordingCodeForType(
+                mocks.eventName,
+                mocks.anotherWebDriverActionConfiguration));
 
     }
 
@@ -73,11 +76,13 @@ public class RecorderTypeRegistryTest {
 
         RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(mocks.recorderFunctionFactory);
 
-        recorderTypeRegistry.register(mocks.webDriverActionConfiguration);
-        recorderTypeRegistry.register(mocks.webDriverActionConfiguration);
+        recorderTypeRegistry.register(mocks.eventName, mocks.webDriverActionConfiguration);
+        recorderTypeRegistry.register(mocks.eventName, mocks.webDriverActionConfiguration);
 
-        assertEquals("", recorderTypeRegistry.getRecordingCodeForType(mocks.webDriverActionConfiguration));
-        assertEquals(mocks.anotherInvocationCode, recorderTypeRegistry.getRecordingCodeForType(mocks.anotherWebDriverActionConfiguration));
+        assertEquals("", recorderTypeRegistry.getRecordingCodeForType(mocks.eventName, mocks.webDriverActionConfiguration));
+        assertEquals(mocks.anotherInvocationCode,
+                recorderTypeRegistry
+                        .getRecordingCodeForType(mocks.eventName, mocks.anotherWebDriverActionConfiguration));
     }
 
     private static class MocksContainer {
@@ -87,6 +92,7 @@ public class RecorderTypeRegistryTest {
         private String functionCode = "function something(a) {} ";
         private String invocationCode = " something('#a')";
         private String anotherInvocationCode = " something('#b')";
+        private String eventName = "eventName";
         private RecorderFunction recorderFunction = mock(RecorderFunction.class);
         private RecorderFunctionInvocation recorderFunctionInvocation = mock(RecorderFunctionInvocation.class);
         private RecorderFunctionInvocation anotherFunctionInvocation = mock(RecorderFunctionInvocation.class);
@@ -101,8 +107,8 @@ public class RecorderTypeRegistryTest {
             when(recorderFunctionFactory.create(webDriverActionConfiguration)).thenReturn(recorderFunction);
             when(recorderFunctionFactory.create(anotherWebDriverActionConfiguration)).thenReturn(recorderFunction);
 
-            when(recorderFunction.getInvocation(webDriverActionConfiguration)).thenReturn(recorderFunctionInvocation);
-            when(recorderFunction.getInvocation(anotherWebDriverActionConfiguration)).thenReturn(anotherFunctionInvocation);
+            when(recorderFunction.getInvocation(eventName, webDriverActionConfiguration)).thenReturn(recorderFunctionInvocation);
+            when(recorderFunction.getInvocation(eventName, anotherWebDriverActionConfiguration)).thenReturn(anotherFunctionInvocation);
         }
     }
 }

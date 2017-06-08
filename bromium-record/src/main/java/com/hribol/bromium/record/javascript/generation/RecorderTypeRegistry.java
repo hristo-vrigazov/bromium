@@ -20,7 +20,7 @@ public class RecorderTypeRegistry {
         this.recorderFunctionFactory = recorderFunctionFactory;
     }
 
-    public String getRecordingCodeForType(WebDriverActionConfiguration webDriverActionConfiguration) {
+    public String getRecordingCodeForType(String eventName, WebDriverActionConfiguration webDriverActionConfiguration) {
         StringBuilder stringBuilder = new StringBuilder();
         RecorderFunction recorderFunction = recorderFunctionFactory.create(webDriverActionConfiguration);
 
@@ -28,7 +28,7 @@ public class RecorderTypeRegistry {
             stringBuilder.append(recorderFunction.getJavascriptCode());
         }
 
-        RecorderFunctionInvocation recorderFunctionInvocation = recorderFunction.getInvocation(webDriverActionConfiguration);
+        RecorderFunctionInvocation recorderFunctionInvocation = recorderFunction.getInvocation(eventName, webDriverActionConfiguration);
         if (!recorderFunctionInvocations.contains(recorderFunctionInvocation)) {
             stringBuilder.append(recorderFunctionInvocation.getJavascriptCode());
         }
@@ -36,14 +36,14 @@ public class RecorderTypeRegistry {
         return stringBuilder.toString();
     }
 
-    public void register(WebDriverActionConfiguration webDriverActionConfiguration) {
+    public void register(String eventName, WebDriverActionConfiguration webDriverActionConfiguration) {
         RecorderFunction recorderFunction = recorderFunctionFactory.create(webDriverActionConfiguration);
 
         if (!recorderFunctions.contains(recorderFunction)) {
             recorderFunctions.add(recorderFunction);
         }
 
-        RecorderFunctionInvocation recorderFunctionInvocation = recorderFunction.getInvocation(webDriverActionConfiguration);
+        RecorderFunctionInvocation recorderFunctionInvocation = recorderFunction.getInvocation(eventName, webDriverActionConfiguration);
         if (!recorderFunctionInvocations.contains(recorderFunctionInvocation)) {
             recorderFunctionInvocations.add(recorderFunctionInvocation);
         }

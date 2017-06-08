@@ -14,9 +14,9 @@ public class IncludeInvokeRecorderGenerator implements WebDriverActionRecorderGe
     }
 
     @Override
-    public String generate(WebDriverActionConfiguration webDriverActionConfiguration) {
-        String getRecordingCode = recorderTypeRegistry.getRecordingCodeForType(webDriverActionConfiguration);
-        recorderTypeRegistry.register(webDriverActionConfiguration);
+    public String generate(String eventName, WebDriverActionConfiguration webDriverActionConfiguration) {
+        String getRecordingCode = recorderTypeRegistry.getRecordingCodeForType(eventName, webDriverActionConfiguration);
+        recorderTypeRegistry.register(eventName, webDriverActionConfiguration);
         return getRecordingCode;
     }
 }

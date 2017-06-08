@@ -7,6 +7,8 @@ import com.hribol.bromium.record.javascript.generation.application.RecordingWebD
 import com.hribol.bromium.record.javascript.generation.webdriver.WebDriverActionRecorderGenerator;
 import org.junit.Test;
 
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -27,6 +29,6 @@ public class RecordingWebDriverActionsOnlyTest {
 
         String generatedString = applicationActionRecorder.generate(applicationActionConfiguration);
 
-        verify(webDriverActionRecorderGenerator).generate(webDriverActionConfiguration);
+        verify(webDriverActionRecorderGenerator).generate(anyString(), eq(webDriverActionConfiguration));
     }
 }
