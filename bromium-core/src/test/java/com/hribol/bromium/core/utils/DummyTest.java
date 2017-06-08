@@ -14,5 +14,6 @@ public class DummyTest {
         // for code coverage
         assertNotNull(new Utils());
         assertNotNull(new Constants());
+        assertNotNull(new WebDriverActions());
     }
 }

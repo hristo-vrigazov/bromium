@@ -72,6 +72,19 @@ public class UtilsTest {
     }
 
     @Test
+    public void ifRequestIsNotGetThenItIsFalse() throws URISyntaxException {
+        URI uri = new URI("http://tenniskafe.com");
+        HttpHeaders httpHeaders = mock(HttpHeaders.class);
+        when(httpHeaders.get("Accept")).thenReturn("application/html");
+        HttpRequest httpRequest = mock(HttpRequest.class);
+        when(httpRequest.getUri()).thenReturn("http://tenniskafe.com");
+        when(httpRequest.headers()).thenReturn(httpHeaders);
+        when(httpRequest.getMethod()).thenReturn(HttpMethod.POST);
+
+        assertFalse(Utils.isGETFromCurrentHostAndAcceptsHTML(uri, httpRequest));
+    }
+
+    @Test
     public void correctlyConvertsNanoSecondsToSeconds() {
         double expected = 0.123456789;
         long nanoseconds = 123456789;
