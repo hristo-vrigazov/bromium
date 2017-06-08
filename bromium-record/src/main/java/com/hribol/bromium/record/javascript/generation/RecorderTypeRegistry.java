@@ -4,7 +4,6 @@ import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.record.javascript.generation.functions.factory.RecorderFunctionFactory;
 import com.hribol.bromium.record.javascript.generation.functions.RecorderFunction;
 import com.hribol.bromium.record.javascript.generation.invocations.RecorderFunctionInvocation;
-import com.hribol.bromium.record.javascript.generation.invocations.factory.RecorderFunctionInvocationFactory;
 
 import java.util.*;
 
