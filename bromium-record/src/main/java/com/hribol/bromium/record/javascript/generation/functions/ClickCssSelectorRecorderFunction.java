@@ -1,6 +1,7 @@
 package com.hribol.bromium.record.javascript.generation.functions;
 
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
+import com.hribol.bromium.record.javascript.generation.invocations.ClickCssSelectorRecorderFunctionInvocation;
 import com.hribol.bromium.record.javascript.generation.invocations.RecorderFunctionInvocation;
 
 import java.text.MessageFormat;
@@ -14,7 +15,7 @@ public class ClickCssSelectorRecorderFunction implements RecorderFunction {
     @Override
     public String getJavascriptCode() {
         return "function clickCssSelector(cssSelector, eventName) {\n" +
-                "    document.arrive(cssSelector, function () {\n" +
+                "    document.arrive(cssSelector, options, function () {\n" +
                 "        this.addEventListener('click', (e) => {\n" +
                 "            var parameters = {\n" +
                 "                \"event\": eventName\n" +
@@ -32,10 +33,6 @@ public class ClickCssSelectorRecorderFunction implements RecorderFunction {
                 .get(CSS_SELECTOR)
                 .getValue();
 
-        return () -> MessageFormat.format(
-                "clickCssSelector({0}, {1})",
-                cssSelector,
-                eventName
-        );
+        return new ClickCssSelectorRecorderFunctionInvocation(cssSelector, eventName);
     }
 }

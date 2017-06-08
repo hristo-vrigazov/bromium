@@ -12,14 +12,17 @@ import java.util.stream.Collectors;
 public class RecordingJavascriptGenerator implements JavascriptGenerator {
 
     private ApplicationActionRecorder applicationActionRecorder;
+    private String baseTemplate;
 
-    public RecordingJavascriptGenerator(ApplicationActionRecorder applicationActionRecorder) {
+    public RecordingJavascriptGenerator(String baseTemplate, ApplicationActionRecorder applicationActionRecorder) {
+        this.baseTemplate = baseTemplate;
         this.applicationActionRecorder = applicationActionRecorder;
     }
 
     @Override
     public String generate(ApplicationConfiguration applicationConfiguration) {
-        return applicationConfiguration
+        return baseTemplate +
+                applicationConfiguration
                 .getApplicationActionConfigurationList()
                 .stream()
                 .map(applicationActionConfiguration -> applicationActionRecorder.generate(applicationActionConfiguration))

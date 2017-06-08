@@ -2,13 +2,26 @@ package com.hribol.bromium.record.javascript.generation;
 
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
+import com.hribol.bromium.core.config.ParameterConfiguration;
+import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
 import com.hribol.bromium.record.javascript.generation.application.ApplicationActionRecorder;
+import com.hribol.bromium.record.javascript.generation.application.RecordingWebDriverActionsOnly;
+import com.hribol.bromium.record.javascript.generation.functions.factory.PredefinedRecorderFunctionFactory;
+import com.hribol.bromium.record.javascript.generation.functions.factory.RecorderFunctionFactory;
+import com.hribol.bromium.record.javascript.generation.webdriver.IncludeInvokeRecorderGenerator;
+import com.hribol.bromium.record.javascript.generation.webdriver.WebDriverActionRecorderGenerator;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
+import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CSS_SELECTOR;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -22,6 +35,7 @@ public class RecordingJavascriptGeneratorTest {
 
     @Test
     public void concatenatesApplicationActionRecorders() {
+        String baseTemplate = "baseTemplate";
         String generatedCodeForFirstAction = "generated1";
         String generatedCodeForSecondAction = "generated2";
 
@@ -39,11 +53,39 @@ public class RecordingJavascriptGeneratorTest {
         when(applicationActionRecorder.generate(firstAction)).thenReturn(generatedCodeForFirstAction);
         when(applicationActionRecorder.generate(secondAction)).thenReturn(generatedCodeForSecondAction);
 
-        JavascriptGenerator javascriptGenerator = new RecordingJavascriptGenerator(applicationActionRecorder);
+        JavascriptGenerator javascriptGenerator = new RecordingJavascriptGenerator(baseTemplate, applicationActionRecorder);
         String generatedJavascript = javascriptGenerator.generate(applicationConfiguration);
 
         assertTrue(generatedJavascript.contains(generatedCodeForFirstAction));
         assertTrue(generatedJavascript.contains(generatedCodeForSecondAction));
-        assertEquals(generatedJavascript, generatedCodeForFirstAction + generatedCodeForSecondAction);
+        assertEquals(generatedJavascript, baseTemplate + generatedCodeForFirstAction + generatedCodeForSecondAction);
+    }
+
+    @Test
+    public void DELETEME() throws IOException {
+        String baseTemplate = IOUtils.toString(getClass().getResourceAsStream("/template.js"));
+        RecorderFunctionFactory recorderFunctionFactory = new PredefinedRecorderFunctionFactory();
+        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(recorderFunctionFactory);
+        WebDriverActionRecorderGenerator webDriverActionRecorderGenerator = new IncludeInvokeRecorderGenerator(recorderTypeRegistry);
+        ApplicationActionRecorder applicationActionRecorder = new RecordingWebDriverActionsOnly(webDriverActionRecorderGenerator);
+        JavascriptGenerator javascriptGenerator = new RecordingJavascriptGenerator(baseTemplate, applicationActionRecorder);
+
+        WebDriverActionConfiguration webDriverActionConfiguration = new WebDriverActionConfiguration();
+        webDriverActionConfiguration.setWebDriverActionType(CLICK_CSS_SELECTOR);
+
+        ParameterConfiguration parameterConfiguration = new ParameterConfiguration();
+        parameterConfiguration.setValue("#ajax-demo");
+        Map<String, ParameterConfiguration> parameterConfigurationMap = new HashMap<>();
+        parameterConfigurationMap.put(CSS_SELECTOR, parameterConfiguration);
+        webDriverActionConfiguration.setParametersConfiguration(parameterConfigurationMap);
+
+        ApplicationActionConfiguration applicationActionConfiguration = new ApplicationActionConfiguration();
+        applicationActionConfiguration.setWebDriverAction(webDriverActionConfiguration);
+        applicationActionConfiguration.setName("someone clicked ico!");
+
+        ApplicationConfiguration applicationConfiguration = new ApplicationConfiguration();
+        applicationConfiguration.addApplicationActionConfiguration(applicationActionConfiguration);
+
+        System.out.println(javascriptGenerator.generate(applicationConfiguration));
     }
 }
