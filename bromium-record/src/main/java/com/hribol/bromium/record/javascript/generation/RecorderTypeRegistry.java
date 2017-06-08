@@ -1,6 +1,10 @@
 package com.hribol.bromium.record.javascript.generation;
 
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
+import com.hribol.bromium.record.javascript.generation.functions.factory.RecorderFunctionFactory;
+import com.hribol.bromium.record.javascript.generation.functions.RecorderFunction;
+import com.hribol.bromium.record.javascript.generation.invocations.RecorderFunctionInvocation;
+import com.hribol.bromium.record.javascript.generation.invocations.factory.RecorderFunctionInvocationFactory;
 
 import java.util.*;
 
@@ -12,10 +16,8 @@ public class RecorderTypeRegistry {
     private Set<RecorderFunctionInvocation> recorderFunctionInvocations = new HashSet<>();
 
     private RecorderFunctionFactory recorderFunctionFactory;
-    private RecorderFunctionInvocationFactory recorderFunctionInvocationFactory;
 
-    public RecorderTypeRegistry(RecorderFunctionFactory recorderFunctionFactory, RecorderFunctionInvocationFactory recorderFunctionInvocationFactory) {
-        this.recorderFunctionInvocationFactory = recorderFunctionInvocationFactory;
+    public RecorderTypeRegistry(RecorderFunctionFactory recorderFunctionFactory) {
         this.recorderFunctionFactory = recorderFunctionFactory;
     }
 
@@ -27,7 +29,7 @@ public class RecorderTypeRegistry {
             stringBuilder.append(recorderFunction.getJavascriptCode());
         }
 
-        RecorderFunctionInvocation recorderFunctionInvocation = recorderFunctionInvocationFactory.create(recorderFunction, webDriverActionConfiguration);
+        RecorderFunctionInvocation recorderFunctionInvocation = recorderFunction.getInvocation(webDriverActionConfiguration);
         if (!recorderFunctionInvocations.contains(recorderFunctionInvocation)) {
             stringBuilder.append(recorderFunctionInvocation.getJavascriptCode());
         }
@@ -42,7 +44,7 @@ public class RecorderTypeRegistry {
             recorderFunctions.add(recorderFunction);
         }
 
-        RecorderFunctionInvocation recorderFunctionInvocation = recorderFunctionInvocationFactory.create(recorderFunction, webDriverActionConfiguration);
+        RecorderFunctionInvocation recorderFunctionInvocation = recorderFunction.getInvocation(webDriverActionConfiguration);
         if (!recorderFunctionInvocations.contains(recorderFunctionInvocation)) {
             recorderFunctionInvocations.add(recorderFunctionInvocation);
         }

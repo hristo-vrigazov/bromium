@@ -10,21 +10,13 @@ import org.openqa.selenium.WebElement;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import static com.hribol.bromium.replay.execution.factory.WebDriverActionFactoryBase.CLICK_CSS_SELECTOR;
+import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CSS_SELECTOR;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
-import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 /**
  * Created by hvrigazov on 07.05.17.
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({
-        ReplayRequestFilter.class,
-        Object.class,
-        ReplayFiltersFacade.class,
-        ClickCssSelector.class
-})
 public class ClickCssSelectorTest {
 
     @Test

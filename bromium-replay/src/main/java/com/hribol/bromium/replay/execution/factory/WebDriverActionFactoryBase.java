@@ -6,6 +6,8 @@ import com.hribol.bromium.replay.parsers.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.hribol.bromium.core.utils.WebDriverActions.*;
+
 /**
  * The base of most {@link WebDriverActionFactory}. It includes built-in {@link WebDriverActionParameterParser}s
  * for built-in actions, and has a method {@link #addCustom()} which subclasses
@@ -21,12 +23,6 @@ public abstract class WebDriverActionFactoryBase implements WebDriverActionFacto
 
     private Map<String, WebDriverActionParameterParser> parsersRegistry;
 
-    public static final String CLICK_CSS_SELECTOR = "CLICK_CSS_SELECTOR";
-    public static final String CLICK_CLASS_BY_TEXT = "CLICK_CLASS_BY_TEXT";
-    public static final String TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR = "TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR";
-    public static final String PAGE_LOADING = "PAGE_LOADING";
-    public static final String ELEMENT_BY_CSS_TO_BE_CLICKABLE = "ELEMENT_BY_CSS_TO_BE_CLICKABLE";
-    public static final String TEXT_OF_ELEMENT_FOUND_BY_CSS_SELECTOR_TO_BE = "TEXT_OF_ELEMENT_FOUND_BY_CSS_SELECTOR_TO_BE";
     private final String baseURL;
 
     public WebDriverActionFactoryBase(String baseURL) {

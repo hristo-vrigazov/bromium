@@ -8,7 +8,8 @@ import org.openqa.selenium.WebElement;
 
 import java.text.MessageFormat;
 
-import static com.hribol.bromium.replay.execution.factory.WebDriverActionFactoryBase.CLICK_CSS_SELECTOR;
+import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CSS_SELECTOR;
+
 
 /**
  * Clicks on the first element found by a css selector

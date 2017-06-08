@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.hribol.bromium.core.utils.Constants.INNER_HTML;
-import static com.hribol.bromium.replay.execution.factory.WebDriverActionFactoryBase.CLICK_CLASS_BY_TEXT;
+import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CLASS_BY_TEXT;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

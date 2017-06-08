@@ -1,6 +1,10 @@
 package com.hribol.bromium.record.javascript.generation;
 
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
+import com.hribol.bromium.record.javascript.generation.functions.factory.RecorderFunctionFactory;
+import com.hribol.bromium.record.javascript.generation.functions.RecorderFunction;
+import com.hribol.bromium.record.javascript.generation.invocations.RecorderFunctionInvocation;
+import com.hribol.bromium.record.javascript.generation.invocations.factory.RecorderFunctionInvocationFactory;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -16,8 +20,7 @@ public class RecorderTypeRegistryTest {
     public void ifRecorderTypeActionWhichIsNotInRegistryIsAddedThenItsFunctionAndInvocationAreGenerated() {
         MocksContainer mocks = new MocksContainer();
 
-        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(
-                mocks.recorderFunctionFactory, mocks.recorderFunctionInvocationFactory);
+        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(mocks.recorderFunctionFactory);
 
         String generatedCode = recorderTypeRegistry.getRecordingCodeForType(mocks.webDriverActionConfiguration);
 
@@ -28,8 +31,7 @@ public class RecorderTypeRegistryTest {
     public void ifBothRecorderTypeAndInvocationAreIncludedEmptyStringIsReturned() {
         MocksContainer mocks = new MocksContainer();
 
-        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(
-                mocks.recorderFunctionFactory, mocks.recorderFunctionInvocationFactory);
+        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(mocks.recorderFunctionFactory);
 
         recorderTypeRegistry.register(mocks.webDriverActionConfiguration);
 
@@ -42,8 +44,7 @@ public class RecorderTypeRegistryTest {
     public void ifRecorderTypeIsRegisteredAndInvocationIsNotThenInvocationStringIsReturned() {
         MocksContainer mocks = new MocksContainer();
 
-        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(
-                mocks.recorderFunctionFactory, mocks.recorderFunctionInvocationFactory);
+        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(mocks.recorderFunctionFactory);
 
         recorderTypeRegistry.register(mocks.webDriverActionConfiguration);
 
@@ -56,8 +57,7 @@ public class RecorderTypeRegistryTest {
     public void registeringTwoInvocationsOfTheSameFunction() {
         MocksContainer mocks = new MocksContainer();
 
-        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(
-                mocks.recorderFunctionFactory, mocks.recorderFunctionInvocationFactory);
+        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(mocks.recorderFunctionFactory);
 
         recorderTypeRegistry.register(mocks.webDriverActionConfiguration);
         recorderTypeRegistry.register(mocks.anotherWebDriverActionConfiguration);
@@ -71,8 +71,7 @@ public class RecorderTypeRegistryTest {
     public void registeringAnInvocationTwoTimes() {
         MocksContainer mocks = new MocksContainer();
 
-        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(
-                mocks.recorderFunctionFactory, mocks.recorderFunctionInvocationFactory);
+        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(mocks.recorderFunctionFactory);
 
         recorderTypeRegistry.register(mocks.webDriverActionConfiguration);
         recorderTypeRegistry.register(mocks.webDriverActionConfiguration);
@@ -83,7 +82,6 @@ public class RecorderTypeRegistryTest {
 
     private static class MocksContainer {
         private RecorderFunctionFactory recorderFunctionFactory;
-        private RecorderFunctionInvocationFactory recorderFunctionInvocationFactory;
         private WebDriverActionConfiguration webDriverActionConfiguration = mock(WebDriverActionConfiguration.class);
         private WebDriverActionConfiguration anotherWebDriverActionConfiguration = mock(WebDriverActionConfiguration.class);
         private String functionCode = "function something(a) {} ";
@@ -103,12 +101,8 @@ public class RecorderTypeRegistryTest {
             when(recorderFunctionFactory.create(webDriverActionConfiguration)).thenReturn(recorderFunction);
             when(recorderFunctionFactory.create(anotherWebDriverActionConfiguration)).thenReturn(recorderFunction);
 
-            recorderFunctionInvocationFactory = mock(RecorderFunctionInvocationFactory.class);
-            when(recorderFunctionInvocationFactory.create(recorderFunction, webDriverActionConfiguration))
-                    .thenReturn(recorderFunctionInvocation);
-            when(recorderFunctionInvocationFactory.create(recorderFunction, anotherWebDriverActionConfiguration))
-                    .thenReturn(anotherFunctionInvocation);
-
+            when(recorderFunction.getInvocation(webDriverActionConfiguration)).thenReturn(recorderFunctionInvocation);
+            when(recorderFunction.getInvocation(anotherWebDriverActionConfiguration)).thenReturn(anotherFunctionInvocation);
         }
     }
 }

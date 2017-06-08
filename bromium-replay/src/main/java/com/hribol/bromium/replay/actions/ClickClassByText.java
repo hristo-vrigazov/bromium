@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.hribol.bromium.core.utils.Constants.INNER_HTML;
-import static com.hribol.bromium.replay.execution.factory.WebDriverActionFactoryBase.CLICK_CLASS_BY_TEXT;
+import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CLASS_BY_TEXT;
 
 /**
  * Finds all elements with a given class, and then clicks on
