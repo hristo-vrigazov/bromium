@@ -1,8 +1,11 @@
 package com.hribol.bromium.cli.handlers;
 
+import com.google.inject.Inject;
 import com.hribol.bromium.cli.commands.Command;
 import com.hribol.bromium.cli.commands.PromptUtils;
 import com.hribol.bromium.cli.commands.RecordCommand;
+import com.hribol.bromium.cli.factory.RecordBrowserFactory;
+import com.hribol.bromium.cli.suppliers.RecordCommandSupplier;
 
 import java.util.Map;
 
@@ -10,6 +13,20 @@ import java.util.Map;
  * Created by hvrigazov on 09.05.17.
  */
 public class RecordCommandHandler implements CommandHandler {
+
+    private PromptUtils promptUtils;
+    private RecordBrowserFactory recordBrowserFactory;
+    private RecordCommandSupplier recordCommandSupplier;
+
+    @Inject
+    public RecordCommandHandler(PromptUtils promptUtils,
+                                RecordBrowserFactory recordBrowserFactory,
+                                RecordCommandSupplier recordCommandSupplier) {
+        this.promptUtils = promptUtils;
+        this.recordBrowserFactory = recordBrowserFactory;
+        this.recordCommandSupplier = recordCommandSupplier;
+    }
+
     @Override
     public void handle(Map<String, Object> opts) {
         String pathToDriver = OptUtils.getPathToDriver(opts);
@@ -18,8 +35,10 @@ public class RecordCommandHandler implements CommandHandler {
         String outputFile = OptUtils.getOutputFile(opts);
         String browserType = OptUtils.getBrowserType(opts);
         int timeout = OptUtils.getTimeout(opts);
-        PromptUtils promptUtils = new PromptUtils();
-        Command command = new RecordCommand(pathToDriver, pathToConfigurationFile, baseUrl, outputFile, browserType, promptUtils, timeout);
+        Command command = recordCommandSupplier.get(pathToDriver, pathToConfigurationFile, baseUrl, outputFile, timeout,
+                browserType,
+                recordBrowserFactory,
+                promptUtils);
         command.run();
     }
 }

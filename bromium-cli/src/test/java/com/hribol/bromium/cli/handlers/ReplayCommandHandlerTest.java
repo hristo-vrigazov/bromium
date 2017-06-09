@@ -1,35 +1,21 @@
 package com.hribol.bromium.cli.handlers;
 
-import com.hribol.bromium.cli.commands.PromptUtils;
 import com.hribol.bromium.cli.commands.ReplayCommand;
 import com.hribol.bromium.cli.factory.ExecutionFactory;
+import com.hribol.bromium.cli.suppliers.ReplayCommandBuilderSupplier;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
-import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 /**
  * Created by hvrigazov on 09.05.17.
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({
-        ReplayCommandHandler.class,
-        ReplayCommand.class,
-        PromptUtils.class,
-        ReplayCommand.Builder.class
-})
 public class ReplayCommandHandlerTest {
     @Test
     public void replayCommandHandlerIsRan() throws Exception {
@@ -65,7 +51,9 @@ public class ReplayCommandHandlerTest {
         opts.put(OptUtils.TIMEOUT, timeout);
         opts.put(OptUtils.URL, url);
 
-        CommandHandler commandHandler = new ReplayCommandHandler();
+        ExecutionFactory executionFactory = mock(ExecutionFactory.class);
+        ReplayCommandBuilderSupplier replayCommandBuilderSupplier = mock(ReplayCommandBuilderSupplier.class);
+        CommandHandler commandHandler = new ReplayCommandHandler(executionFactory, replayCommandBuilderSupplier);
 
         ReplayCommand command = mock(ReplayCommand.class);
 
@@ -81,7 +69,8 @@ public class ReplayCommandHandlerTest {
         when(builder.executionFactory(any(ExecutionFactory.class))).thenReturn(builder);
         when(builder.build()).thenReturn(command);
 
-        whenNew(ReplayCommand.Builder.class).withAnyArguments().thenReturn(builder);
+
+        when(replayCommandBuilderSupplier.get()).thenReturn(builder);
 
         commandHandler.handle(opts);
 

@@ -1,5 +1,6 @@
 package com.hribol.bromium.cli.factory;
 
+import com.google.inject.Inject;
 import com.hribol.bromium.browsers.chrome.replay.ChromeDriverActionExecution;
 import com.hribol.bromium.replay.execution.WebDriverActionExecution;
 import com.hribol.bromium.replay.execution.ExecutorBuilder;
@@ -17,6 +18,7 @@ import static org.openqa.selenium.remote.BrowserType.CHROME;
 public class ExecutionFactory {
     private Map<String, ReplayBrowserSupplier> browserNameToSupplierMap;
 
+    @Inject
     public ExecutionFactory() {
         browserNameToSupplierMap = new HashMap<>();
         browserNameToSupplierMap.put(CHROME, this::getChrome);

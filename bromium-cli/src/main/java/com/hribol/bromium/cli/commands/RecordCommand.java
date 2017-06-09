@@ -1,5 +1,6 @@
 package com.hribol.bromium.cli.commands;
 
+import com.google.inject.Inject;
 import com.hribol.bromium.cli.factory.RecordBrowserFactory;
 import com.hribol.bromium.common.record.RecordBrowserBase;
 
@@ -19,16 +20,7 @@ public class RecordCommand implements Command {
     private RecordBrowserFactory recordBrowserFactory;
     private PromptUtils promptUtils;
 
-    public RecordCommand(String pathToDriver,
-                         String pathToApplicationConfiguration,
-                         String baseUrl,
-                         String outputFile,
-                         String browserType,
-                         PromptUtils promptUtils,
-                         int timeout) {
-        this(pathToDriver, pathToApplicationConfiguration, baseUrl, outputFile, timeout, browserType, new RecordBrowserFactory(), promptUtils);
-    }
-
+    @Inject
     public RecordCommand(String pathToDriver,
                          String pathToApplicationConfiguration,
                          String baseUrl,

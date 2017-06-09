@@ -1,7 +1,9 @@
-package com.hribol.bromium.common.record;
+package com.hribol.bromium.cli;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
+import com.hribol.bromium.cli.commands.RecordCommand;
+import com.hribol.bromium.common.record.RecorderTypeRegistry;
 import com.hribol.bromium.common.record.application.IncludeInvokeGenerator;
 import com.hribol.bromium.common.record.application.RecordingWebDriverActionsOnly;
 import com.hribol.bromium.common.record.factory.PredefinedRecorderFunctionFactory;

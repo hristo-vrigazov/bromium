@@ -1,5 +1,6 @@
 package com.hribol.bromium.cli.commands;
 
+import com.google.inject.Inject;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.utils.ConfigurationUtils;
 import org.beryx.textio.TextIO;
@@ -15,6 +16,7 @@ public class InitCommand implements Command {
     private ApplicationConfiguration applicationConfiguration;
     private PromptUtils promptUtils;
 
+    @Inject
     public InitCommand(PromptUtils promptUtils) {
         this.promptUtils = promptUtils;
     }

@@ -22,7 +22,6 @@ public class RecordCommandTest {
     private final String browserType = CHROME;
     private final int timeout = 10;
     private RecordBrowserBase recordBrowserBase = mock(RecordBrowserBase.class);
-    private RecordBrowserFactory recordBrowserFactory = mock(RecordBrowserFactory.class);
     private PromptUtils promptUtils = mock(PromptUtils.class);
 
 
@@ -35,13 +34,6 @@ public class RecordCommandTest {
         recordCommand.run();
 
         verify(recordBrowserBase).dumpActions(ouputFile);
-    }
-
-    @Test
-    public void canBeInstantiatedViaDefaultFactoryConstructor() {
-        RecordCommand recordCommand = new RecordCommand(pathToDriver, pathToJSInjectionFile, baseUrl, ouputFile,
-                browserType, promptUtils, timeout);
-        assertNotNull(recordCommand);
     }
 
     @Test

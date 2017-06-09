@@ -3,6 +3,7 @@ package com.hribol.bromium.cli.handlers;
 
 import com.hribol.bromium.cli.commands.InitCommand;
 import com.hribol.bromium.cli.commands.PromptUtils;
+import com.hribol.bromium.cli.suppliers.InitCommandSupplier;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -13,31 +14,26 @@ import java.util.Map;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.verifyNew;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({
-        InitCommandHandler.class,
-        InitCommand.class,
-        PromptUtils.class
-})
 public class InitCommandHandlerTest {
 
     @Test
     public void initCommandIsCreatedAndRan() throws Exception {
         Map<String, Object> opts = new HashMap<>();
-        InitCommandHandler initCommandHandler = new InitCommandHandler();
 
         PromptUtils promptUtils = mock(PromptUtils.class);
         InitCommand initCommand = mock(InitCommand.class);
+        InitCommandSupplier initCommandSupplier = mock(InitCommandSupplier.class);
+        when(initCommandSupplier.get(promptUtils)).thenReturn(initCommand);
 
-        whenNew(PromptUtils.class).withNoArguments().thenReturn(promptUtils);
-        whenNew(InitCommand.class).withArguments(promptUtils).thenReturn(initCommand);
+        InitCommandHandler initCommandHandler = new InitCommandHandler(promptUtils, initCommandSupplier);
 
         initCommandHandler.handle(opts);
 
-        verifyNew(InitCommand.class).withArguments(promptUtils);
+        verify(initCommandSupplier).get(promptUtils);
         verify(initCommand).run();
     }
 }
