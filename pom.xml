@@ -41,6 +41,7 @@
         <module>bromium-record</module>
         <module>bromium-replay</module>
         <module>bromium-chrome</module>
+        <module>bromium-common</module>
     </modules>
 
     <properties>
