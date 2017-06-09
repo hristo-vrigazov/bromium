@@ -19,9 +19,8 @@ public class JsFunctionBodyBuilder {
     }
 
     public JsArriveHandlerBuilder whenCssSelectorArrives(String cssSelector) {
-        String formattedMessage = MessageFormat.format("\tdocument.arrive({0}, options, function () '{'\n", cssSelector);
-        stringBuilder.append(formattedMessage);
-        return new JsArriveHandlerBuilder("});\n", this);
+
+        return new JsArriveHandlerBuilder(cssSelector, this);
     }
 
     public JsFunctionBodyBuilder write(String string) {

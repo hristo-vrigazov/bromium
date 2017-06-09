@@ -8,23 +8,21 @@ import java.text.MessageFormat;
 public class JsArriveHandlerBuilder {
 
     private StringBuilder stringBuilder;
-    private String trailingString;
     private JsFunctionBodyBuilder parent;
 
-    public JsArriveHandlerBuilder(String trailingString, JsFunctionBodyBuilder parent) {
+    public JsArriveHandlerBuilder(String cssSelector, JsFunctionBodyBuilder parent) {
         this.stringBuilder = new StringBuilder();
-        this.trailingString = trailingString;
         this.parent = parent;
+        String formattedMessage = MessageFormat.format("\tdocument.arrive({0}, options, function () '{'\n", cssSelector);
+        stringBuilder.append(formattedMessage);
     }
 
     public JsEventListenerBodyBuilder attachListenerForEvent(String event) {
-        String message = MessageFormat.format("\t\tthis.addEventListener(\"{0}\", function(e) '{'\n", event);
-        stringBuilder.append(message);
-        return new JsEventListenerBodyBuilder("\n\t\t});", this);
+        return new JsEventListenerBodyBuilder(event, this);
     }
 
     public JsFunctionBodyBuilder endArriveHandler() {
-        stringBuilder.append(trailingString);
+        stringBuilder.append("});\n");
         parent.write(stringBuilder.toString());
         return parent;
     }

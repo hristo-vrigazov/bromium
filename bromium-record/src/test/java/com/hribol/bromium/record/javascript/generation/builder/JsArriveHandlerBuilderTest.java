@@ -13,15 +13,16 @@ public class JsArriveHandlerBuilderTest {
 
     @Test
     public void canBuildArriveHandler() {
-        String trailingString = "});\n";
         JsFunctionBodyBuilder jsFunctionBodyBuilder = mock(JsFunctionBodyBuilder.class);
-        JsArriveHandlerBuilder jsArriveHandlerBuilder = new JsArriveHandlerBuilder(trailingString, jsFunctionBodyBuilder);
+        JsArriveHandlerBuilder jsArriveHandlerBuilder = new JsArriveHandlerBuilder("#title", jsFunctionBodyBuilder);
 
-        jsArriveHandlerBuilder.write("a").write("b");
+        jsArriveHandlerBuilder.write("\t\t\tvar something = 5;\n\t\t");
 
         jsArriveHandlerBuilder.endArriveHandler();
 
-        verify(jsFunctionBodyBuilder).write("ab});\n");
+        verify(jsFunctionBodyBuilder).write("\tdocument.arrive(#title, options, function () {\n" +
+                "\t\t\tvar something = 5;\n" +
+                "\t\t});\n");
     }
 
     @Test

@@ -23,7 +23,7 @@ public class ClickCssSelectorRecorderFunction implements RecorderFunction {
 
     public ClickCssSelectorRecorderFunction(JsCollector jsCollector) {
         this.functionDeclarationCode = jsCollector
-                .declareFunction("a")
+                .declareFunction("clickCssSelector")
                 .withParameters("cssSelector", "eventName")
                 .startBody()
                 .whenCssSelectorArrives("cssSelector")

@@ -13,25 +13,27 @@ public class JsEventListenerBodyBuilderTest {
 
     @Test
     public void canBuildListener() {
-        String trailingString = "});\n";
         JsArriveHandlerBuilder jsArriveHandlerBuilder = mock(JsArriveHandlerBuilder.class);
-        JsEventListenerBodyBuilder jsEventListenerBodyBuilder = new JsEventListenerBodyBuilder(trailingString, jsArriveHandlerBuilder);
+        JsEventListenerBodyBuilder jsEventListenerBodyBuilder = new JsEventListenerBodyBuilder("click", jsArriveHandlerBuilder);
 
-        jsEventListenerBodyBuilder.write("a").write("b").endListener();
+        jsEventListenerBodyBuilder.write("\t\t\t\tvar something = 5;").endListener();
 
-        verify(jsArriveHandlerBuilder).write("ab});\n");
+        verify(jsArriveHandlerBuilder).write("\t\tthis.addEventListener(\"click\", function(e) {\n" +
+                "\t\t\t\tvar something = 5;\n" +
+                "\t\t});");
     }
 
     @Test
     public void canAddBromiumNotification() {
-        String trailingString = "});\n";
         JsArriveHandlerBuilder jsArriveHandlerBuilder = mock(JsArriveHandlerBuilder.class);
-        JsEventListenerBodyBuilder jsEventListenerBodyBuilder = new JsEventListenerBodyBuilder(trailingString, jsArriveHandlerBuilder);
+        JsEventListenerBodyBuilder jsEventListenerBodyBuilder = new JsEventListenerBodyBuilder("click", jsArriveHandlerBuilder);
 
         jsEventListenerBodyBuilder.notifyBromium("params");
         jsEventListenerBodyBuilder.endListener();
 
-        verify(jsArriveHandlerBuilder).write("\t\t\tbromium.notifyEvent(params)});\n");
+        verify(jsArriveHandlerBuilder).write("\t\tthis.addEventListener(\"click\", function(e) {\n" +
+                "\t\t\tbromium.notifyEvent(params);\n" +
+                "\t\t});");
     }
 
     @Test

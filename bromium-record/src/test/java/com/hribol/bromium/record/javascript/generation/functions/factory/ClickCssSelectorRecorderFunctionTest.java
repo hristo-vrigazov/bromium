@@ -51,7 +51,7 @@ public class ClickCssSelectorRecorderFunctionTest {
         private ClickCssSelectorRecorderFunctionInvocation clickCssSelectorRecorderFunctionInvocation;
 
         public Mocks() throws Exception {
-            expected = "function a(cssSelector, eventName) {\n" +
+            expected = "function clickCssSelector(cssSelector, eventName) {\n" +
                     "\tdocument.arrive(cssSelector, options, function () {\n" +
                     "\t\tthis.addEventListener(click, function(e) {\n" +
                     "\t\t\tvar parameters = {\n" +
@@ -80,7 +80,7 @@ public class ClickCssSelectorRecorderFunctionTest {
             jsCollector = mock(JsCollector.class, RETURNS_DEEP_STUBS);
 
             when(jsCollector
-                    .declareFunction("a")
+                    .declareFunction("clickCssSelector")
                     .withParameters("cssSelector", "eventName")
                     .startBody()
                     .whenCssSelectorArrives("cssSelector")
