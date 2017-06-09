@@ -10,6 +10,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
+import static com.hribol.bromium.record.javascript.generation.builder.JsFunctionNames.CLICK_CSS_SELECTOR;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
@@ -79,9 +80,10 @@ public class ClickCssSelectorRecorderFunctionTest {
             
             jsCollector = mock(JsCollector.class, RETURNS_DEEP_STUBS);
 
+
             when(jsCollector
-                    .declareFunction("clickCssSelector")
-                    .withParameters("cssSelector", "eventName")
+                    .declareFunction(CLICK_CSS_SELECTOR)
+                    .withParameters(CSS_SELECTOR, "eventName")
                     .startBody()
                     .whenCssSelectorArrives("cssSelector")
                     .attachListenerForEvent("click")

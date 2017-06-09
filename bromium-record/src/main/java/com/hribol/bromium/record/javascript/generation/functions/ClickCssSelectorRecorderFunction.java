@@ -9,6 +9,7 @@ import com.hribol.bromium.record.javascript.generation.invocations.RecorderFunct
 import java.util.function.Supplier;
 
 import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
+import static com.hribol.bromium.record.javascript.generation.builder.JsFunctionNames.CLICK_CSS_SELECTOR;
 
 /**
  * Created by hvrigazov on 08.06.17.
@@ -23,8 +24,8 @@ public class ClickCssSelectorRecorderFunction implements RecorderFunction {
 
     public ClickCssSelectorRecorderFunction(JsCollector jsCollector) {
         this.functionDeclarationCode = jsCollector
-                .declareFunction("clickCssSelector")
-                .withParameters("cssSelector", "eventName")
+                .declareFunction(CLICK_CSS_SELECTOR)
+                .withParameters(CSS_SELECTOR, "eventName")
                 .startBody()
                 .whenCssSelectorArrives("cssSelector")
                 .attachListenerForEvent("click")
