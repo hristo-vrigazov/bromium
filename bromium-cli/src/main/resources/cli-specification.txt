@@ -2,7 +2,7 @@ bromium.
 
     Usage:
       bromium init
-      bromium record -d <pathToDriver> -j <jsFile> -u <url> -o <output> [-b <browserType>] [-t <timeout>]
+      bromium record -d <pathToDriver> -a <configuration> -u <url> -o <output> [-b <browserType>] [-t <timeout>]
       bromium replay -d <pathToDriver> -j <jsFile> -a <configuration> -c <case> -m <measurements> -u <url> [-p <precision>] [-b <browserType>] [-t <timeout>]
       bromium update -a <configuration>
       bromium version -a <configuration>

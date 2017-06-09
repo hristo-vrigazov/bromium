@@ -11,7 +11,7 @@ import java.net.URISyntaxException;
  */
 public class RecordCommand implements Command {
     private final String pathToDriver;
-    private final String pathToJSInjectionFile;
+    private final String pathToApplicationConfiguration;
     private final String baseUrl;
     private final String outputFile;
     private final String browserType;
@@ -20,17 +20,17 @@ public class RecordCommand implements Command {
     private PromptUtils promptUtils;
 
     public RecordCommand(String pathToDriver,
-                         String pathToJSInjectionFile,
+                         String pathToApplicationConfiguration,
                          String baseUrl,
                          String outputFile,
                          String browserType,
                          PromptUtils promptUtils,
                          int timeout) {
-        this(pathToDriver, pathToJSInjectionFile, baseUrl, outputFile, timeout, browserType, new RecordBrowserFactory(), promptUtils);
+        this(pathToDriver, pathToApplicationConfiguration, baseUrl, outputFile, timeout, browserType, new RecordBrowserFactory(), promptUtils);
     }
 
     public RecordCommand(String pathToDriver,
-                         String pathToJSInjectionFile,
+                         String pathToApplicationConfiguration,
                          String baseUrl,
                          String outputFile,
                          int timeout,
@@ -38,7 +38,7 @@ public class RecordCommand implements Command {
                          RecordBrowserFactory recordBrowserFactory,
                          PromptUtils promptUtils) {
         this.pathToDriver = pathToDriver;
-        this.pathToJSInjectionFile = pathToJSInjectionFile;
+        this.pathToApplicationConfiguration = pathToApplicationConfiguration;
         this.baseUrl = baseUrl;
         this.outputFile = outputFile;
         this.timeout = timeout;
@@ -50,7 +50,7 @@ public class RecordCommand implements Command {
     @Override
     public void run() {
         try {
-            RecordBrowserBase recordBrowserBase = recordBrowserFactory.create(browserType, pathToDriver, pathToJSInjectionFile);
+            RecordBrowserBase recordBrowserBase = recordBrowserFactory.create(browserType, pathToDriver, pathToApplicationConfiguration);
             recordBrowserBase.record(baseUrl, timeout);
             promptUtils.promptForRecording();
             recordBrowserBase.dumpActions(this.outputFile);

@@ -4,10 +4,7 @@ import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import org.apache.commons.io.IOUtils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 /**
  * Created by hvrigazov on 10.03.17.
@@ -16,16 +13,20 @@ public class JavascriptInjector {
 
     private String injectionCode;
 
-    public JavascriptInjector(InputStream inputStream) throws IOException {
+    public JavascriptInjector(Reader reader) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("<script>");
         stringBuilder.append("(function() {").append(System.lineSeparator());
-        stringBuilder.append(IOUtils.toString(inputStream));
+        stringBuilder.append(IOUtils.toString(reader));
         stringBuilder
                 .append(System.lineSeparator()).append("})();")
                 .append("</script>");
 
         this.injectionCode = stringBuilder.toString();
+    }
+
+    public JavascriptInjector(InputStream inputStream) throws IOException {
+        this(new BufferedReader(new InputStreamReader(inputStream)));
     }
 
     public JavascriptInjector(String pathToJsInjectionFile) throws IOException {

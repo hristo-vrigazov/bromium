@@ -2,10 +2,13 @@ package com.hribol.bromium.record.javascript.generation.functions.factory;
 
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.record.javascript.generation.functions.ClickCssSelectorRecorderFunction;
+import com.hribol.bromium.record.javascript.generation.functions.EmptyRecorderFunction;
 import com.hribol.bromium.record.javascript.generation.functions.RecorderFunction;
+import com.hribol.bromium.record.javascript.generation.invocations.RecorderFunctionInvocation;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CSS_SELECTOR;
 
@@ -30,7 +33,9 @@ public abstract class BaseRecorderFunctionFactory implements RecorderFunctionFac
 
     @Override
     public RecorderFunction create(WebDriverActionConfiguration webDriverActionConfiguration) {
-        return typeToRecorderFunction.get(webDriverActionConfiguration.getWebDriverActionType());
+        return Optional
+                .ofNullable(typeToRecorderFunction.get(webDriverActionConfiguration.getWebDriverActionType()))
+                .orElse(new EmptyRecorderFunction());
     }
 
     protected void add(String webDriverActionType, RecorderFunction recorderFunction) {
