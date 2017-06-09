@@ -18,7 +18,7 @@ public class JsArriveHandlerBuilder {
     }
 
     public JsEventListenerBodyBuilder attachListenerForEvent(String event) {
-        String message = MessageFormat.format("\t\tthis.addEventListener({0}, function(e) '{'\n", event);
+        String message = MessageFormat.format("\t\tthis.addEventListener(\"{0}\", function(e) '{'\n", event);
         stringBuilder.append(message);
         return new JsEventListenerBodyBuilder("\n\t\t});", this);
     }

@@ -17,7 +17,8 @@ public class JsEventListenerBodyBuilder {
     }
 
     public JsParameterCollectorBuilder startCollectingParameters(String parameters) {
-        stringBuilder.append("\t\t\tvar parameters = {\n\t\t\t\t");
+        String toBeAdded = MessageFormat.format("\t\t\tvar {0} = '{'\n\t\t\t\t", parameters);
+        stringBuilder.append(toBeAdded);
         return new JsParameterCollectorBuilder("\n\t\t\t};\n", this);
     }
 

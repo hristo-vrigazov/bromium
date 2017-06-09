@@ -18,6 +18,7 @@ public class JsFunctionDeclarerBuilder {
     public JsFunctionDeclarerBuilder withParameters(String... parameters) {
         stringBuilder.append("(");
         if (parameters.length == 0) {
+            stringBuilder.append(") {\n");
             return this;
         }
 

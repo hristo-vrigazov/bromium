@@ -61,31 +61,31 @@ public class RecordingJavascriptGeneratorTest {
         assertEquals(generatedJavascript, baseTemplate + generatedCodeForFirstAction + generatedCodeForSecondAction);
     }
 
-//    @Test
-//    public void DELETEME() throws IOException {
-//        String baseTemplate = IOUtils.toString(getClass().getResourceAsStream("/template.js"));
-//        RecorderFunctionFactory recorderFunctionFactory = new PredefinedRecorderFunctionFactory();
-//        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(recorderFunctionFactory);
-//        WebDriverActionRecorderGenerator webDriverActionRecorderGenerator = new IncludeInvokeRecorderGenerator(recorderTypeRegistry);
-//        ApplicationActionRecorder applicationActionRecorder = new RecordingWebDriverActionsOnly(webDriverActionRecorderGenerator);
-//        JavascriptGenerator javascriptGenerator = new RecordingJavascriptGenerator(baseTemplate, applicationActionRecorder);
-//
-//        WebDriverActionConfiguration webDriverActionConfiguration = new WebDriverActionConfiguration();
-//        webDriverActionConfiguration.setWebDriverActionType(CLICK_CSS_SELECTOR);
-//
-//        ParameterConfiguration parameterConfiguration = new ParameterConfiguration();
-//        parameterConfiguration.setValue("#ajax-demo");
-//        Map<String, ParameterConfiguration> parameterConfigurationMap = new HashMap<>();
-//        parameterConfigurationMap.put(CSS_SELECTOR, parameterConfiguration);
-//        webDriverActionConfiguration.setParametersConfiguration(parameterConfigurationMap);
-//
-//        ApplicationActionConfiguration applicationActionConfiguration = new ApplicationActionConfiguration();
-//        applicationActionConfiguration.setWebDriverAction(webDriverActionConfiguration);
-//        applicationActionConfiguration.setName("someone clicked ico!");
-//
-//        ApplicationConfiguration applicationConfiguration = new ApplicationConfiguration();
-//        applicationConfiguration.addApplicationActionConfiguration(applicationActionConfiguration);
-//
-//        System.out.println(javascriptGenerator.generate(applicationConfiguration));
-//    }
+    @Test
+    public void DELETEME() throws IOException {
+        String baseTemplate = IOUtils.toString(getClass().getResourceAsStream("/template.js"));
+        RecorderFunctionFactory recorderFunctionFactory = new PredefinedRecorderFunctionFactory();
+        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(recorderFunctionFactory);
+        WebDriverActionRecorderGenerator webDriverActionRecorderGenerator = new IncludeInvokeRecorderGenerator(recorderTypeRegistry);
+        ApplicationActionRecorder applicationActionRecorder = new RecordingWebDriverActionsOnly(webDriverActionRecorderGenerator);
+        JavascriptGenerator javascriptGenerator = new RecordingJavascriptGenerator(baseTemplate, applicationActionRecorder);
+
+        WebDriverActionConfiguration webDriverActionConfiguration = new WebDriverActionConfiguration();
+        webDriverActionConfiguration.setWebDriverActionType(CLICK_CSS_SELECTOR);
+
+        ParameterConfiguration parameterConfiguration = new ParameterConfiguration();
+        parameterConfiguration.setValue("#ajax-demo");
+        Map<String, ParameterConfiguration> parameterConfigurationMap = new HashMap<>();
+        parameterConfigurationMap.put(CSS_SELECTOR, parameterConfiguration);
+        webDriverActionConfiguration.setParametersConfiguration(parameterConfigurationMap);
+
+        ApplicationActionConfiguration applicationActionConfiguration = new ApplicationActionConfiguration();
+        applicationActionConfiguration.setWebDriverAction(webDriverActionConfiguration);
+        applicationActionConfiguration.setName("someone clicked ico!");
+
+        ApplicationConfiguration applicationConfiguration = new ApplicationConfiguration();
+        applicationConfiguration.addApplicationActionConfiguration(applicationActionConfiguration);
+
+        System.out.println(javascriptGenerator.generate(applicationConfiguration));
+    }
 }
