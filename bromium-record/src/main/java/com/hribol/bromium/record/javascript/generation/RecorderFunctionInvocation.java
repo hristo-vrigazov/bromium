@@ -1,4 +1,4 @@
-package com.hribol.bromium.record.javascript.generation.invocations;
+package com.hribol.bromium.record.javascript.generation;
 
 import com.hribol.bromium.record.javascript.generation.JavascriptCodeSupplier;
 

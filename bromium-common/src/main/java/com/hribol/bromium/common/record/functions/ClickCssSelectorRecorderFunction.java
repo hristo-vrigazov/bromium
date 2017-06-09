@@ -2,9 +2,9 @@ package com.hribol.bromium.common.record.functions;
 
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.record.javascript.generation.builder.JsCollector;
-import com.hribol.bromium.record.javascript.generation.functions.RecorderFunction;
+import com.hribol.bromium.record.javascript.generation.RecorderFunction;
 import com.hribol.bromium.common.record.invocations.ClickCssSelectorRecorderFunctionInvocation;
-import com.hribol.bromium.record.javascript.generation.invocations.RecorderFunctionInvocation;
+import com.hribol.bromium.record.javascript.generation.RecorderFunctionInvocation;
 
 import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
 import static com.hribol.bromium.record.javascript.generation.builder.JsFunctionNames.CLICK_CSS_SELECTOR;

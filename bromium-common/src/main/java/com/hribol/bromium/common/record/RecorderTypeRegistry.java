@@ -1,10 +1,10 @@
-package com.hribol.bromium.record.javascript.generation;
+package com.hribol.bromium.common.record;
 
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.record.TypeRegistry;
-import com.hribol.bromium.record.javascript.generation.functions.factory.RecorderFunctionFactory;
-import com.hribol.bromium.record.javascript.generation.functions.RecorderFunction;
-import com.hribol.bromium.record.javascript.generation.invocations.RecorderFunctionInvocation;
+import com.hribol.bromium.record.javascript.generation.RecorderFunctionFactory;
+import com.hribol.bromium.record.javascript.generation.RecorderFunction;
+import com.hribol.bromium.record.javascript.generation.RecorderFunctionInvocation;
 
 import java.util.*;
 

@@ -6,14 +6,14 @@ import com.hribol.bromium.core.generation.JavascriptGenerator;
 import com.hribol.bromium.core.utils.ConfigurationUtils;
 import com.hribol.bromium.core.utils.JavascriptInjector;
 import com.hribol.bromium.common.record.RecordBrowserBase;
-import com.hribol.bromium.record.javascript.generation.RecorderTypeRegistry;
+import com.hribol.bromium.common.record.RecorderTypeRegistry;
 import com.hribol.bromium.common.record.RecordingJavascriptGenerator;
-import com.hribol.bromium.record.javascript.generation.application.ApplicationActionRecorder;
+import com.hribol.bromium.record.javascript.generation.ApplicationActionRecorder;
 import com.hribol.bromium.common.record.application.RecordingWebDriverActionsOnly;
 import com.hribol.bromium.common.record.factory.PredefinedRecorderFunctionFactory;
-import com.hribol.bromium.record.javascript.generation.functions.factory.RecorderFunctionFactory;
+import com.hribol.bromium.record.javascript.generation.RecorderFunctionFactory;
 import com.hribol.bromium.common.record.application.IncludeInvokeRecorderGenerator;
-import com.hribol.bromium.record.javascript.generation.webdriver.WebDriverActionRecorderGenerator;
+import com.hribol.bromium.record.javascript.generation.WebDriverActionRecorderGenerator;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;

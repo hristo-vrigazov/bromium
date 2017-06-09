@@ -2,7 +2,7 @@ package com.hribol.bromium.common.record;
 
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
-import com.hribol.bromium.record.javascript.generation.application.ApplicationActionRecorder;
+import com.hribol.bromium.record.javascript.generation.ApplicationActionRecorder;
 
 import java.util.stream.Collectors;
 
