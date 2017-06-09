@@ -2,6 +2,7 @@ package com.hribol.bromium.cli;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.hribol.bromium.cli.commands.VersionCommand;
 import com.hribol.bromium.cli.handlers.*;
 import org.apache.commons.io.IOUtils;
 import org.docopt.Docopt;
@@ -64,8 +65,8 @@ public class Main {
         map.put(Commands.INIT, injector.getInstance(InitCommandHandler.class));
         map.put(Commands.RECORD, injector.getInstance(RecordCommandHandler.class));
         map.put(Commands.REPLAY, injector.getInstance(ReplayCommandHandler.class));
-        map.put(Commands.UPDATE, new UpdateCommandHandler());
-        map.put(Commands.VERSION, new VersionCommandHandler());
+        map.put(Commands.UPDATE, injector.getInstance(UpdateCommandHandler.class));
+        map.put(Commands.VERSION, injector.getInstance(VersionCommandHandler.class));
         return map;
     }
 }

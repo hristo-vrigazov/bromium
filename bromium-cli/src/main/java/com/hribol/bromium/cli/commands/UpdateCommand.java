@@ -1,5 +1,6 @@
 package com.hribol.bromium.cli.commands;
 
+import com.google.inject.Inject;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.utils.ConfigurationUtils;
 import org.beryx.textio.TextIO;
@@ -14,6 +15,7 @@ public class UpdateCommand implements Command {
     private String pathToApplicationConfiguration;
     private PromptUtils promptUtils;
 
+    @Inject
     public UpdateCommand(String pathToApplicationConfiguration, PromptUtils promptUtils) {
         this.pathToApplicationConfiguration = pathToApplicationConfiguration;
         this.promptUtils = promptUtils;
