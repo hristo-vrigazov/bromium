@@ -5,6 +5,6 @@ import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 /**
  * Created by hvrigazov on 07.06.17.
  */
-public interface ApplicationActionRecorder {
+public interface ApplicationActionGenerator {
     String generate(ApplicationActionConfiguration applicationActionConfiguration);
 }

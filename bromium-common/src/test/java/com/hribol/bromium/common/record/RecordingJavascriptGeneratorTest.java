@@ -3,7 +3,7 @@ package com.hribol.bromium.common.record;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
-import com.hribol.bromium.record.javascript.generation.ApplicationActionRecorder;
+import com.hribol.bromium.record.javascript.generation.ApplicationActionGenerator;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -36,11 +36,11 @@ public class RecordingJavascriptGeneratorTest {
         ApplicationConfiguration applicationConfiguration = mock(ApplicationConfiguration.class);
         when(applicationConfiguration.getApplicationActionConfigurationList()).thenReturn(applicationActionConfigurationList);
 
-        ApplicationActionRecorder applicationActionRecorder = mock(ApplicationActionRecorder.class);
-        when(applicationActionRecorder.generate(firstAction)).thenReturn(generatedCodeForFirstAction);
-        when(applicationActionRecorder.generate(secondAction)).thenReturn(generatedCodeForSecondAction);
+        ApplicationActionGenerator applicationActionGenerator = mock(ApplicationActionGenerator.class);
+        when(applicationActionGenerator.generate(firstAction)).thenReturn(generatedCodeForFirstAction);
+        when(applicationActionGenerator.generate(secondAction)).thenReturn(generatedCodeForSecondAction);
 
-        JavascriptGenerator javascriptGenerator = new RecordingJavascriptGenerator(baseTemplate, applicationActionRecorder);
+        JavascriptGenerator javascriptGenerator = new RecordingJavascriptGenerator(baseTemplate, applicationActionGenerator);
         String generatedJavascript = javascriptGenerator.generate(applicationConfiguration);
 
         assertTrue(generatedJavascript.contains(generatedCodeForFirstAction));
@@ -53,8 +53,8 @@ public class RecordingJavascriptGeneratorTest {
 //        String baseTemplate = IOUtils.toString(getClass().getResourceAsStream("/template.js"));
 //        RecorderFunctionFactory recorderFunctionFactory = new PredefinedRecorderFunctionFactory();
 //        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(recorderFunctionFactory);
-//        WebDriverActionRecorderGenerator webDriverActionRecorderGenerator = new IncludeInvokeRecorderGenerator(recorderTypeRegistry);
-//        ApplicationActionRecorder applicationActionRecorder = new RecordingWebDriverActionsOnly(webDriverActionRecorderGenerator);
+//        WebDriverActionGenerator webDriverActionRecorderGenerator = new IncludeInvokeGenerator(recorderTypeRegistry);
+//        ApplicationActionGenerator applicationActionRecorder = new RecordingWebDriverActionsOnly(webDriverActionRecorderGenerator);
 //        JavascriptGenerator javascriptGenerator = new RecordingJavascriptGenerator(baseTemplate, applicationActionRecorder);
 //
 //        WebDriverActionConfiguration webDriverActionConfiguration = new WebDriverActionConfiguration();

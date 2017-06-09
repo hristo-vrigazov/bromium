@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.record;
 
+import com.google.inject.Inject;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.record.TypeRegistry;
 import com.hribol.bromium.record.javascript.generation.RecorderFunctionFactory;
@@ -17,6 +18,7 @@ public class RecorderTypeRegistry implements TypeRegistry {
 
     private RecorderFunctionFactory recorderFunctionFactory;
 
+    @Inject
     public RecorderTypeRegistry(RecorderFunctionFactory recorderFunctionFactory) {
         this.recorderFunctionFactory = recorderFunctionFactory;
     }

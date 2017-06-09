@@ -1,19 +1,16 @@
 package com.hribol.bromium.cli.factory;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.hribol.bromium.browsers.chrome.record.ChromeRecordBrowser;
+import com.hribol.bromium.common.record.RecordingInjectionModule;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
 import com.hribol.bromium.core.utils.ConfigurationUtils;
 import com.hribol.bromium.core.utils.JavascriptInjector;
 import com.hribol.bromium.common.record.RecordBrowserBase;
-import com.hribol.bromium.common.record.RecorderTypeRegistry;
 import com.hribol.bromium.common.record.RecordingJavascriptGenerator;
-import com.hribol.bromium.record.javascript.generation.ApplicationActionRecorder;
-import com.hribol.bromium.common.record.application.RecordingWebDriverActionsOnly;
-import com.hribol.bromium.common.record.factory.PredefinedRecorderFunctionFactory;
-import com.hribol.bromium.record.javascript.generation.RecorderFunctionFactory;
-import com.hribol.bromium.common.record.application.IncludeInvokeRecorderGenerator;
-import com.hribol.bromium.record.javascript.generation.WebDriverActionRecorderGenerator;
+import com.hribol.bromium.record.javascript.generation.ApplicationActionGenerator;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
@@ -35,13 +32,11 @@ public class RecordBrowserFactory {
     }
 
     public RecordBrowserBase create(String browserName, String pathToDriver, String pathToApplicationConfiguration) throws IOException {
-        ApplicationConfiguration applicationConfiguration = ConfigurationUtils.parseApplicationConfiguration(pathToApplicationConfiguration);
+        Injector injector = Guice.createInjector(new RecordingInjectionModule());
+        ApplicationActionGenerator applicationActionGenerator = injector.getInstance(ApplicationActionGenerator.class);
         String baseTemplate = IOUtils.toString(getClass().getResourceAsStream("/template.js"));
-        RecorderFunctionFactory recorderFunctionFactory = new PredefinedRecorderFunctionFactory();
-        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(recorderFunctionFactory);
-        WebDriverActionRecorderGenerator webDriverActionRecorderGenerator = new IncludeInvokeRecorderGenerator(recorderTypeRegistry);
-        ApplicationActionRecorder applicationActionRecorder = new RecordingWebDriverActionsOnly(webDriverActionRecorderGenerator);
-        JavascriptGenerator recordingJavascriptGenerator = new RecordingJavascriptGenerator(baseTemplate, applicationActionRecorder);
+        ApplicationConfiguration applicationConfiguration = ConfigurationUtils.parseApplicationConfiguration(pathToApplicationConfiguration);
+        JavascriptGenerator recordingJavascriptGenerator = new RecordingJavascriptGenerator(baseTemplate, applicationActionGenerator);
         String recordingJavascript = recordingJavascriptGenerator.generate(applicationConfiguration);
         System.out.println(recordingJavascript);
         StringReader stringReader = new StringReader(recordingJavascript);

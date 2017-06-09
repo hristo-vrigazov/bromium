@@ -2,8 +2,8 @@ package com.hribol.bromium.common.record.application;
 
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
-import com.hribol.bromium.record.javascript.generation.ApplicationActionRecorder;
-import com.hribol.bromium.record.javascript.generation.WebDriverActionRecorderGenerator;
+import com.hribol.bromium.record.javascript.generation.ApplicationActionGenerator;
+import com.hribol.bromium.record.javascript.generation.WebDriverActionGenerator;
 import org.junit.Test;
 
 import static org.mockito.Matchers.anyString;
@@ -23,11 +23,11 @@ public class RecordingWebDriverActionsOnlyTest {
         ApplicationActionConfiguration applicationActionConfiguration = mock(ApplicationActionConfiguration.class);
         when(applicationActionConfiguration.getWebDriverAction()).thenReturn(webDriverActionConfiguration);
 
-        WebDriverActionRecorderGenerator webDriverActionRecorderGenerator = mock(WebDriverActionRecorderGenerator.class);
-        ApplicationActionRecorder applicationActionRecorder = new RecordingWebDriverActionsOnly(webDriverActionRecorderGenerator);
+        WebDriverActionGenerator webDriverActionGenerator = mock(WebDriverActionGenerator.class);
+        ApplicationActionGenerator applicationActionGenerator = new RecordingWebDriverActionsOnly(webDriverActionGenerator);
 
-        String generatedString = applicationActionRecorder.generate(applicationActionConfiguration);
+        String generatedString = applicationActionGenerator.generate(applicationActionConfiguration);
 
-        verify(webDriverActionRecorderGenerator).generate(anyString(), eq(webDriverActionConfiguration));
+        verify(webDriverActionGenerator).generate(anyString(), eq(webDriverActionConfiguration));
     }
 }

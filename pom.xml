@@ -58,6 +58,8 @@
         <mockito.version>1.10.19</mockito.version>
         <powermock.version>1.6.5</powermock.version>
         <jacoco.version>0.7.9</jacoco.version>
+        <guice.version>4.1.0</guice.version>
+        <docopt.version>0.6.0.20150202</docopt.version>
     </properties>
 
     <build>
@@ -255,7 +257,13 @@
             <dependency>
                 <groupId>com.offbytwo</groupId>
                 <artifactId>docopt</artifactId>
-                <version>0.6.0.20150202</version>
+                <version>${docopt.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.google.inject/guice -->
+            <dependency>
+                <groupId>com.google.inject</groupId>
+                <artifactId>guice</artifactId>
+                <version>${guice.version}</version>
             </dependency>
 
         </dependencies>

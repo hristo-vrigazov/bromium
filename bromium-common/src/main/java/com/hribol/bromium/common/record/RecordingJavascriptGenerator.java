@@ -2,7 +2,7 @@ package com.hribol.bromium.common.record;
 
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
-import com.hribol.bromium.record.javascript.generation.ApplicationActionRecorder;
+import com.hribol.bromium.record.javascript.generation.ApplicationActionGenerator;
 
 import java.util.stream.Collectors;
 
@@ -11,12 +11,12 @@ import java.util.stream.Collectors;
  */
 public class RecordingJavascriptGenerator implements JavascriptGenerator {
 
-    private ApplicationActionRecorder applicationActionRecorder;
+    private ApplicationActionGenerator applicationActionGenerator;
     private String baseTemplate;
 
-    public RecordingJavascriptGenerator(String baseTemplate, ApplicationActionRecorder applicationActionRecorder) {
+    public RecordingJavascriptGenerator(String baseTemplate, ApplicationActionGenerator applicationActionGenerator) {
         this.baseTemplate = baseTemplate;
-        this.applicationActionRecorder = applicationActionRecorder;
+        this.applicationActionGenerator = applicationActionGenerator;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class RecordingJavascriptGenerator implements JavascriptGenerator {
                 applicationConfiguration
                 .getApplicationActionConfigurationList()
                 .stream()
-                .map(applicationActionConfiguration -> applicationActionRecorder.generate(applicationActionConfiguration))
+                .map(applicationActionConfiguration -> applicationActionGenerator.generate(applicationActionConfiguration))
                 .collect(Collectors.joining());
     }
 }
