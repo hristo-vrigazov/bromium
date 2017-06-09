@@ -1,4 +1,4 @@
-package com.hribol.bromium.record.settings;
+package com.hribol.bromium.common.record.settings;
 
 import net.lightbody.bmp.BrowserMobProxy;
 import org.junit.Test;

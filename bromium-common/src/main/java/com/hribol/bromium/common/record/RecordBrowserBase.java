@@ -1,10 +1,12 @@
-package com.hribol.bromium.record;
+package com.hribol.bromium.common.record;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
-import com.hribol.bromium.record.settings.ProxyDriverIntegrator;
-import com.hribol.bromium.record.settings.RecordManager;
+import com.hribol.bromium.record.RecordRequestFilter;
+import com.hribol.bromium.record.RecordResponseFilter;
+import com.hribol.bromium.common.record.settings.ProxyDriverIntegrator;
+import com.hribol.bromium.common.record.settings.RecordManager;
 import com.hribol.bromium.core.utils.JavascriptInjector;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.filters.ResponseFilter;

@@ -1,6 +1,7 @@
-package com.hribol.bromium.record.javascript.generation.application;
+package com.hribol.bromium.common.record.application;
 
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
+import com.hribol.bromium.record.javascript.generation.application.ApplicationActionRecorder;
 import com.hribol.bromium.record.javascript.generation.webdriver.WebDriverActionRecorderGenerator;
 
 /**

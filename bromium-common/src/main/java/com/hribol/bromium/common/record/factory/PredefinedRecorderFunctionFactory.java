@@ -1,4 +1,4 @@
-package com.hribol.bromium.record.javascript.generation.functions.factory;
+package com.hribol.bromium.common.record.factory;
 
 /**
  * Created by hvrigazov on 08.06.17.

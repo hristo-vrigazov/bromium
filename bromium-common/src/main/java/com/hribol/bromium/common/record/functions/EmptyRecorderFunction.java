@@ -1,7 +1,8 @@
-package com.hribol.bromium.record.javascript.generation.functions;
+package com.hribol.bromium.common.record.functions;
 
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
-import com.hribol.bromium.record.javascript.generation.invocations.EmptyRecorderFunctionInvocation;
+import com.hribol.bromium.record.javascript.generation.functions.RecorderFunction;
+import com.hribol.bromium.common.record.invocations.EmptyRecorderFunctionInvocation;
 import com.hribol.bromium.record.javascript.generation.invocations.RecorderFunctionInvocation;
 
 /**

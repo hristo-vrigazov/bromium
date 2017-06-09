@@ -1,16 +1,7 @@
 package com.hribol.bromium.cli.factory;
 
-import com.hribol.bromium.browsers.chrome.record.ChromeRecordBrowser;
-import com.hribol.bromium.core.utils.JavascriptInjector;
-import com.hribol.bromium.record.RecordBrowserBase;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.openqa.selenium.remote.BrowserType.CHROME;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
 //
 //@RunWith(PowerMockRunner.class)

@@ -1,7 +1,7 @@
-package com.hribol.bromium.record.javascript.generation;
+package com.hribol.bromium.common.record.application;
 
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
-import com.hribol.bromium.record.javascript.generation.webdriver.IncludeInvokeRecorderGenerator;
+import com.hribol.bromium.record.javascript.generation.RecorderTypeRegistry;
 import com.hribol.bromium.record.javascript.generation.webdriver.WebDriverActionRecorderGenerator;
 import org.junit.Test;
 

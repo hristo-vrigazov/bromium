@@ -1,8 +1,10 @@
-package com.hribol.bromium.record;
+package com.hribol.bromium.common.record;
 
 import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
 import com.hribol.bromium.core.utils.JavascriptInjector;
 import org.junit.Test;
+import org.mockito.Matchers;
+import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 
 import java.io.File;
@@ -10,11 +12,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-
 /**
  * Created by hvrigazov on 27.04.17.
  */
@@ -22,18 +19,18 @@ public class RecordBrowserBaseTest {
 
     @Test
     public void integratesComponentsInCorrectWay() throws IOException, URISyntaxException, InterruptedException {
-        WebDriver.Window window = mock(WebDriver.Window.class);
-        WebDriver.Options options = mock(WebDriver.Options.class);
-        when(options.window()).thenReturn(window);
-        WebDriver driver = spy(WebDriver.class);
-        when(driver.manage()).thenReturn(options);
+        WebDriver.Window window = Mockito.mock(WebDriver.Window.class);
+        WebDriver.Options options = Mockito.mock(WebDriver.Options.class);
+        Mockito.when(options.window()).thenReturn(window);
+        WebDriver driver = Mockito.spy(WebDriver.class);
+        Mockito.when(driver.manage()).thenReturn(options);
         // does not matter, will mock the supplier anyway
         String pathToChromeDriver = "chromedriver";
         String pathToJSInjectionFile = getClass().getResource("/eventsRecorder.js").getFile();
         JavascriptInjector javascriptInjector = new JavascriptInjector(pathToJSInjectionFile);
 
-        VisibleWebDriverSupplier visibleWebDriverSupplier = mock(VisibleWebDriverSupplier.class);
-        when(visibleWebDriverSupplier.get(any())).thenReturn(driver);
+        VisibleWebDriverSupplier visibleWebDriverSupplier = Mockito.mock(VisibleWebDriverSupplier.class);
+        Mockito.when(visibleWebDriverSupplier.get(Matchers.any())).thenReturn(driver);
 
         RecordBrowserBase recordBrowserBase = new RecordBrowserBase(pathToChromeDriver, javascriptInjector) {
             @Override

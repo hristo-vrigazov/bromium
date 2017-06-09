@@ -1,4 +1,4 @@
-package com.hribol.bromium.record.settings;
+package com.hribol.bromium.common.record.settings;
 
 import com.hribol.bromium.core.suppliers.BrowserMobProxySupplier;
 import com.hribol.bromium.core.suppliers.DesiredCapabilitiesSupplier;

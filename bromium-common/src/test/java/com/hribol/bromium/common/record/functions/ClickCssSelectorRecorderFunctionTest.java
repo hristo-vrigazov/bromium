@@ -1,9 +1,8 @@
-package com.hribol.bromium.record.javascript.generation.functions.factory;
+package com.hribol.bromium.common.record.functions;
 
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.record.javascript.generation.builder.JsCollector;
-import com.hribol.bromium.record.javascript.generation.functions.ClickCssSelectorRecorderFunction;
-import com.hribol.bromium.record.javascript.generation.invocations.ClickCssSelectorRecorderFunctionInvocation;
+import com.hribol.bromium.common.record.invocations.ClickCssSelectorRecorderFunctionInvocation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;

@@ -2,26 +2,13 @@ package com.hribol.bromium.record.javascript.generation;
 
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
-import com.hribol.bromium.core.config.ParameterConfiguration;
-import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
 import com.hribol.bromium.record.javascript.generation.application.ApplicationActionRecorder;
-import com.hribol.bromium.record.javascript.generation.application.RecordingWebDriverActionsOnly;
-import com.hribol.bromium.record.javascript.generation.functions.factory.PredefinedRecorderFunctionFactory;
-import com.hribol.bromium.record.javascript.generation.functions.factory.RecorderFunctionFactory;
-import com.hribol.bromium.record.javascript.generation.webdriver.IncludeInvokeRecorderGenerator;
-import com.hribol.bromium.record.javascript.generation.webdriver.WebDriverActionRecorderGenerator;
-import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
-import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CSS_SELECTOR;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;

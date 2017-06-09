@@ -1,7 +1,7 @@
 package com.hribol.bromium.cli.commands;
 
 import com.hribol.bromium.cli.factory.RecordBrowserFactory;
-import com.hribol.bromium.record.RecordBrowserBase;
+import com.hribol.bromium.common.record.RecordBrowserBase;
 import org.junit.Test;
 
 import java.io.IOException;
