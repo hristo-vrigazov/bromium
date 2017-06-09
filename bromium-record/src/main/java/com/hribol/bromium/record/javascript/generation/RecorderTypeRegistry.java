@@ -1,6 +1,7 @@
 package com.hribol.bromium.record.javascript.generation;
 
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
+import com.hribol.bromium.record.TypeRegistry;
 import com.hribol.bromium.record.javascript.generation.functions.factory.RecorderFunctionFactory;
 import com.hribol.bromium.record.javascript.generation.functions.RecorderFunction;
 import com.hribol.bromium.record.javascript.generation.invocations.RecorderFunctionInvocation;
@@ -10,7 +11,7 @@ import java.util.*;
 /**
  * Created by hvrigazov on 07.06.17.
  */
-public class RecorderTypeRegistry {
+public class RecorderTypeRegistry implements TypeRegistry {
     private Set<RecorderFunction> recorderFunctions = new HashSet<>();
     private Set<RecorderFunctionInvocation> recorderFunctionInvocations = new HashSet<>();
 
@@ -20,7 +21,8 @@ public class RecorderTypeRegistry {
         this.recorderFunctionFactory = recorderFunctionFactory;
     }
 
-    public String getRecordingCodeForType(String eventName, WebDriverActionConfiguration webDriverActionConfiguration) {
+    @Override
+    public String getCodeForType(String eventName, WebDriverActionConfiguration webDriverActionConfiguration) {
         StringBuilder stringBuilder = new StringBuilder();
         RecorderFunction recorderFunction = recorderFunctionFactory.create(webDriverActionConfiguration);
 
@@ -36,6 +38,7 @@ public class RecorderTypeRegistry {
         return stringBuilder.toString();
     }
 
+    @Override
     public void register(String eventName, WebDriverActionConfiguration webDriverActionConfiguration) {
         RecorderFunction recorderFunction = recorderFunctionFactory.create(webDriverActionConfiguration);
 

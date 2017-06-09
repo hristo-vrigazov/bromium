@@ -21,7 +21,7 @@ public class RecorderTypeRegistryTest {
 
         RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(mocks.recorderFunctionFactory);
 
-        String generatedCode = recorderTypeRegistry.getRecordingCodeForType(mocks.eventName, mocks.webDriverActionConfiguration);
+        String generatedCode = recorderTypeRegistry.getCodeForType(mocks.eventName, mocks.webDriverActionConfiguration);
 
         assertEquals(mocks.functionCode + mocks.invocationCode, generatedCode);
     }
@@ -34,7 +34,7 @@ public class RecorderTypeRegistryTest {
 
         recorderTypeRegistry.register(mocks.eventName, mocks.webDriverActionConfiguration);
 
-        String generatedCode = recorderTypeRegistry.getRecordingCodeForType(mocks.eventName, mocks.webDriverActionConfiguration);
+        String generatedCode = recorderTypeRegistry.getCodeForType(mocks.eventName, mocks.webDriverActionConfiguration);
 
         assertEquals("", generatedCode);
     }
@@ -47,7 +47,7 @@ public class RecorderTypeRegistryTest {
 
         recorderTypeRegistry.register(mocks.eventName, mocks.webDriverActionConfiguration);
 
-        String generatedCode = recorderTypeRegistry.getRecordingCodeForType(mocks.eventName, mocks.anotherWebDriverActionConfiguration);
+        String generatedCode = recorderTypeRegistry.getCodeForType(mocks.eventName, mocks.anotherWebDriverActionConfiguration);
 
         assertEquals(mocks.anotherInvocationCode, generatedCode);
     }
@@ -61,10 +61,10 @@ public class RecorderTypeRegistryTest {
         recorderTypeRegistry.register(mocks.eventName, mocks.webDriverActionConfiguration);
         recorderTypeRegistry.register(mocks.eventName, mocks.anotherWebDriverActionConfiguration);
 
-        assertEquals("", recorderTypeRegistry.getRecordingCodeForType(
+        assertEquals("", recorderTypeRegistry.getCodeForType(
                 mocks.eventName,
                 mocks.webDriverActionConfiguration));
-        assertEquals("", recorderTypeRegistry.getRecordingCodeForType(
+        assertEquals("", recorderTypeRegistry.getCodeForType(
                 mocks.eventName,
                 mocks.anotherWebDriverActionConfiguration));
 
@@ -79,10 +79,10 @@ public class RecorderTypeRegistryTest {
         recorderTypeRegistry.register(mocks.eventName, mocks.webDriverActionConfiguration);
         recorderTypeRegistry.register(mocks.eventName, mocks.webDriverActionConfiguration);
 
-        assertEquals("", recorderTypeRegistry.getRecordingCodeForType(mocks.eventName, mocks.webDriverActionConfiguration));
+        assertEquals("", recorderTypeRegistry.getCodeForType(mocks.eventName, mocks.webDriverActionConfiguration));
         assertEquals(mocks.anotherInvocationCode,
                 recorderTypeRegistry
-                        .getRecordingCodeForType(mocks.eventName, mocks.anotherWebDriverActionConfiguration));
+                        .getCodeForType(mocks.eventName, mocks.anotherWebDriverActionConfiguration));
     }
 
     private static class MocksContainer {

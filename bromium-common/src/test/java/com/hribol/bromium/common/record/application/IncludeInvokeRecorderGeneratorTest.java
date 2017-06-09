@@ -22,7 +22,7 @@ public class IncludeInvokeRecorderGeneratorTest {
 
         WebDriverActionConfiguration webDriverActionConfiguration = mock(WebDriverActionConfiguration.class);
         RecorderTypeRegistry recordingTypeRegistry = mock(RecorderTypeRegistry.class);
-        when(recordingTypeRegistry.getRecordingCodeForType(eventName, webDriverActionConfiguration))
+        when(recordingTypeRegistry.getCodeForType(eventName, webDriverActionConfiguration))
                 .thenReturn(functionCode, invocationCode);
 
         WebDriverActionRecorderGenerator webDriverActionRecorderGenerator = new IncludeInvokeRecorderGenerator(recordingTypeRegistry);
