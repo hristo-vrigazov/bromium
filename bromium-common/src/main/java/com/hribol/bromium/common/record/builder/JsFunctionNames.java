@@ -1,4 +1,4 @@
-package com.hribol.bromium.record.javascript.generation.builder;
+package com.hribol.bromium.common.record.builder;
 
 /**
  * Created by hvrigazov on 08.06.17.

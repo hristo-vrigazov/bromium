@@ -1,7 +1,7 @@
 package com.hribol.bromium.common.record.functions;
 
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
-import com.hribol.bromium.record.javascript.generation.builder.JsCollector;
+import com.hribol.bromium.common.record.builder.JsCollector;
 import com.hribol.bromium.common.record.invocations.ClickCssSelectorRecorderFunctionInvocation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +9,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
-import static com.hribol.bromium.record.javascript.generation.builder.JsFunctionNames.CLICK_CSS_SELECTOR;
+import static com.hribol.bromium.common.record.builder.JsFunctionNames.CLICK_CSS_SELECTOR;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;

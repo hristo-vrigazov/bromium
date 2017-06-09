@@ -1,6 +1,4 @@
-package com.hribol.bromium.record.javascript.generation.builder;
-
-import java.text.MessageFormat;
+package com.hribol.bromium.common.record.builder;
 
 /**
  * Created by hvrigazov on 09.06.17.
