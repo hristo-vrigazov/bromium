@@ -2,7 +2,6 @@ package com.hribol.bromium.cli;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.hribol.bromium.cli.commands.VersionCommand;
 import com.hribol.bromium.cli.handlers.*;
 import org.apache.commons.io.IOUtils;
 import org.docopt.Docopt;

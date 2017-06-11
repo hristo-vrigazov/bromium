@@ -1,7 +1,5 @@
 package com.hribol.bromium.core.utils;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.Files;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;

@@ -1,12 +1,18 @@
 package com.hribol.bromium.cli.commands;
 
 import com.hribol.bromium.cli.factory.ExecutionFactory;
+import com.hribol.bromium.common.replay.factory.DefaultApplicationActionFactory;
+import com.hribol.bromium.common.replay.factory.TestCaseStepToApplicationActionConverter;
+import com.hribol.bromium.core.config.ApplicationConfiguration;
+import com.hribol.bromium.core.utils.ConfigurationUtils;
 import com.hribol.bromium.core.utils.JavascriptInjector;
-import com.hribol.bromium.replay.execution.factory.PredefinedWebDriverActionFactory;
+import com.hribol.bromium.common.replay.factory.PredefinedWebDriverActionFactory;
+import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.*;
 import com.hribol.bromium.replay.execution.WebDriverActionExecution;
 import com.hribol.bromium.replay.execution.ExecutorBuilder;
+import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
 import com.hribol.bromium.replay.report.ExecutionReport;
 
 import java.io.*;
@@ -42,7 +48,14 @@ public class ReplayCommand implements Command {
 
             WebDriverActionExecution execution = builder.executionFactory.create(builder.browserType, executor);
 
-            ReplayBrowser replayBrowser = new ReplayBrowser(builder.applicationConfigurationInputStream, factory, execution);
+            WebDriverActionFactory webDriverActionFactory = new PredefinedWebDriverActionFactory(builder.baseURL);
+            TestCaseStepToApplicationActionConverter testCaseStepToApplicationActionConverter =
+                    new TestCaseStepToApplicationActionConverter(webDriverActionFactory);
+            ApplicationConfiguration applicationConfiguration = ConfigurationUtils.parseApplicationConfiguration(builder.applicationConfigurationInputStream);
+            ApplicationActionFactory applicationActionFactory = new DefaultApplicationActionFactory(applicationConfiguration,
+                    testCaseStepToApplicationActionConverter);
+            TestScenarioFactory testScenarioFactory = new TestScenarioFactory(applicationActionFactory);
+            ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, execution);
             ExecutionReport report = replayBrowser.replay(builder.testInputStream);
             System.out.println(report.getAutomationResult());
         } catch (IOException | URISyntaxException | InterruptedException e) {
