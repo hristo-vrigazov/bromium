@@ -3,7 +3,7 @@ package com.hribol.bromium.browsers.chrome.replay;
 import com.google.common.collect.ImmutableMap;
 import com.hribol.bromium.browsers.chrome.base.InvisibleChromeDriverSupplier;
 import com.hribol.bromium.browsers.chrome.base.VisibleChromeDriverSupplier;
-import com.hribol.bromium.replay.settings.ReplaySettingsBase;
+import com.hribol.bromium.common.replay.ReplaySettingsBase;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
 import org.openqa.selenium.chrome.ChromeDriverService;

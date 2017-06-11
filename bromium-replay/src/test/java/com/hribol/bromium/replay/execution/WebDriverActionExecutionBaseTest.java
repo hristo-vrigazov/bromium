@@ -1,9 +1,7 @@
 package com.hribol.bromium.replay.execution;
 
-import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
-import com.hribol.bromium.core.suppliers.InvisibleWebDriverSupplier;
-import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
+import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioSteps;
 import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
@@ -16,10 +14,7 @@ import com.hribol.bromium.replay.filters.ReplayResponseFilter;
 import com.hribol.bromium.replay.report.AutomationResult;
 import com.hribol.bromium.replay.report.ExecutionReport;
 import com.hribol.bromium.replay.settings.ReplaySettings;
-import com.hribol.bromium.replay.settings.ReplaySettingsBase;
 import net.lightbody.bmp.core.har.Har;
-import net.lightbody.bmp.filters.RequestFilter;
-import net.lightbody.bmp.filters.ResponseFilter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -268,7 +263,8 @@ public class WebDriverActionExecutionBaseTest {
 
     @Test
     public void correctAutomationResultIfNoDriverIsFound() throws IOException, URISyntaxException {
-        ReplaySettings<DriverService> replaySettingsMock = getReplaySettingsBase();
+        ReplaySettings<DriverService> replaySettingsMock = mock(ReplaySettings.class);
+        doThrow(new IOException()).when(replaySettingsMock).prepareReplay(anyString(), anyString(), anyInt());
         WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(replaySettingsMock);
         ExecutionReport executionReport = webDriverActionExecutionBase.execute(mock(TestScenario.class));
         assertEquals(AutomationResult.COULD_NOT_CREATE_DRIVER, executionReport.getAutomationResult());
@@ -495,27 +491,27 @@ public class WebDriverActionExecutionBaseTest {
         };
     }
 
-    private ReplaySettingsBase<DriverService> getReplaySettingsBase() {
-        return new ReplaySettingsBase<DriverService>(
-                mock(RequestFilter.class),
-                mock(ResponseFilter.class),
-                mock(InvisibleWebDriverSupplier.class),
-                mock(VisibleWebDriverSupplier.class)) {
-            @Override
-            public DriverService getDriverService(String pathToDriverExecutable, String screenToUse) throws IOException {
-                return null;
-            }
-
-            @Override
-            public void prepareReplay(String pathToDriver, String screenToUse, int timeout) throws IOException {
-                throw new IOException("No webdriver");
-            }
-
-            @Override
-            public Har getHar() {
-                return mock(Har.class);
-            }
-
-        };
-    }
+//    private ReplaySettingsBase<DriverService> getReplaySettingsBase() {
+//        return new ReplaySettingsBase<DriverService>(
+//                mock(RequestFilter.class),
+//                mock(ResponseFilter.class),
+//                mock(InvisibleWebDriverSupplier.class),
+//                mock(VisibleWebDriverSupplier.class)) {
+//            @Override
+//            public DriverService getDriverService(String pathToDriverExecutable, String screenToUse) throws IOException {
+//                return null;
+//            }
+//
+//            @Override
+//            public void prepareReplay(String pathToDriver, String screenToUse, int timeout) throws IOException {
+//                throw new IOException("No webdriver");
+//            }
+//
+//            @Override
+//            public Har getHar() {
+//                return mock(Har.class);
+//            }
+//
+//        };
+//    }
 }
