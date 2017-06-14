@@ -1,28 +1,6 @@
 package com.hribol.bromium.cli.commands;
 
-import com.hribol.bromium.cli.factory.ExecutionFactory;
-import com.hribol.bromium.replay.ReplayBrowser;
-import com.hribol.bromium.replay.execution.ExecutorBuilder;
-import com.hribol.bromium.replay.execution.WebDriverActionExecution;
-import com.hribol.bromium.common.replay.factory.PredefinedWebDriverActionFactory;
-import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
-import com.hribol.bromium.replay.report.AutomationResult;
-import com.hribol.bromium.replay.report.ExecutionReport;
-import org.apache.commons.io.IOUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.*;
-import static org.openqa.selenium.remote.BrowserType.CHROME;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 /**

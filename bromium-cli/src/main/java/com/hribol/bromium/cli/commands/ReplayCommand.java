@@ -11,7 +11,7 @@ import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.*;
 import com.hribol.bromium.replay.execution.WebDriverActionExecution;
-import com.hribol.bromium.replay.execution.ExecutorBuilder;
+import com.hribol.bromium.common.replay.ExecutorBuilder;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
 import com.hribol.bromium.replay.report.ExecutionReport;
 

@@ -1,7 +1,7 @@
 package com.hribol.bromium.cli.factory;
 
 import com.hribol.bromium.replay.execution.WebDriverActionExecution;
-import com.hribol.bromium.replay.execution.ExecutorBuilder;
+import com.hribol.bromium.common.replay.ExecutorBuilder;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

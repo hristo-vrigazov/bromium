@@ -1,10 +1,8 @@
 package test.chrome.replay;
 
 import com.hribol.bromium.browsers.chrome.replay.ChromeDriverActionExecution;
-import com.hribol.bromium.replay.execution.ExecutorBuilder;
-import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
+import com.hribol.bromium.common.replay.ExecutorBuilder;
 import com.hribol.bromium.replay.filters.ProxyFacade;
-import com.hribol.bromium.replay.filters.ProxyFacadeSupplier;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriverService;
 
@@ -14,7 +12,6 @@ import java.net.URISyntaxException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

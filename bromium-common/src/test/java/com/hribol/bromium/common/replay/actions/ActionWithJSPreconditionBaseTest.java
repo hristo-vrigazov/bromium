@@ -1,4 +1,4 @@
-package com.hribol.bromium.replay.actions.conditions.javascript;
+package com.hribol.bromium.common.replay.actions;
 
 import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
@@ -8,11 +8,8 @@ import com.hribol.bromium.replay.filters.ReplayRequestFilter;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.concurrent.TimeoutException;
 
@@ -136,7 +133,7 @@ public class ActionWithJSPreconditionBaseTest {
         thrown.expect(WebDriverActionExecutionException.class);
         actionWithJSPreconditionBase.execute(driver, facade);
 
-        actionWithJSPreconditionBase = spy(actionWithJSPreconditionBase);
+        actionWithJSPreconditionBase = Mockito.spy(actionWithJSPreconditionBase);
         verify(actionWithJSPreconditionBase, never()).executeAfterJSPreconditionHasBeenSatisfied(driver, facade);
     }
 

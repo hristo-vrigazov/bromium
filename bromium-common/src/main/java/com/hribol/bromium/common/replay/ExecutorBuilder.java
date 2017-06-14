@@ -1,10 +1,13 @@
-package com.hribol.bromium.replay.execution;
+package com.hribol.bromium.common.replay;
 
+import com.hribol.bromium.replay.execution.AutomationResultBuilder;
+import com.hribol.bromium.replay.execution.InstanceBasedAutomationResultBuilder;
+import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
-import com.hribol.bromium.replay.execution.synchronization.NoHttpRequestsInQueue;
-import com.hribol.bromium.replay.execution.synchronization.SignalizationBasedEventSynchronizer;
 import com.hribol.bromium.replay.filters.ProxyFacade;
 import com.hribol.bromium.replay.filters.ProxyFacadeSupplier;
+import com.hribol.bromium.common.synchronization.NoHttpRequestsInQueue;
+import com.hribol.bromium.common.synchronization.SignalizationBasedEventSynchronizer;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

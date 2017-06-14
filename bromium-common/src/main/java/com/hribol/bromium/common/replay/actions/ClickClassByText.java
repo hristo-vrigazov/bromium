@@ -1,6 +1,5 @@
 package com.hribol.bromium.common.replay.actions;
 
-import com.hribol.bromium.replay.actions.conditions.javascript.ActionWithJSPreconditionBase;
 import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotSelectableException;

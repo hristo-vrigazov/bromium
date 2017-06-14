@@ -1,10 +1,10 @@
-package com.hribol.bromium.replay.actions.conditions.javascript;
+package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.common.synchronization.JSPrecondition;
 import com.hribol.bromium.replay.actions.WebDriverAction;
+import com.hribol.bromium.replay.actions.ActionWithJSPrecondition;
 import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
-import com.hribol.bromium.replay.execution.synchronization.JSPrecondition;
-import com.hribol.bromium.replay.execution.synchronization.SignalizerEvent;
 import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
 import org.openqa.selenium.WebDriver;

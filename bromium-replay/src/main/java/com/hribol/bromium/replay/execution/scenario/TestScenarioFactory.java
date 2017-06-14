@@ -14,7 +14,6 @@ import java.util.Map;
  */
 public class TestScenarioFactory {
 
-
     private ApplicationActionFactory applicationActionFactory;
 
     public TestScenarioFactory(ApplicationActionFactory applicationActionFactory) {

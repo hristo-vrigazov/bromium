@@ -1,5 +1,7 @@
-package com.hribol.bromium.replay.execution.synchronization;
+package com.hribol.bromium.common.synchronization;
 
+import com.hribol.bromium.replay.execution.synchronization.SignalizerEvent;
+import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.filters.ReplayResponseFilter;
 
 /**

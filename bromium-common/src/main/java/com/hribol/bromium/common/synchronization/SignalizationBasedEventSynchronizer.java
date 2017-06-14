@@ -1,4 +1,7 @@
-package com.hribol.bromium.replay.execution.synchronization;
+package com.hribol.bromium.common.synchronization;
+
+import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
+import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 
 import java.util.HashMap;
 import java.util.Map;

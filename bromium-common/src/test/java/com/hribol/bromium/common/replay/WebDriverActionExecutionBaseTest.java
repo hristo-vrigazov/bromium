@@ -1,11 +1,13 @@
-package com.hribol.bromium.replay.execution;
+package com.hribol.bromium.common.replay;
 
+import com.hribol.bromium.common.synchronization.NoHttpRequestsInQueue;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.replay.actions.WebDriverAction;
+import com.hribol.bromium.replay.execution.AutomationResultBuilder;
+import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioSteps;
 import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
-import com.hribol.bromium.replay.execution.synchronization.NoHttpRequestsInQueue;
 import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.filters.ProxyFacade;
 import com.hribol.bromium.replay.filters.ProxyFacadeSupplier;
@@ -237,7 +239,7 @@ public class WebDriverActionExecutionBaseTest {
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.steps()).thenReturn(testScenarioSteps);
 
-        WebDriverActionExecutionBase webDriverActionExecutionBase = spy(getWebDriverActionExecutionBase());
+        WebDriverActionExecutionBase webDriverActionExecutionBase = Mockito.spy(getWebDriverActionExecutionBase());
         webDriverActionExecutionBase.createVirtualScreenProcessAndExecute(testScenario, screen, virtualScreenProcessCreator);
 
         verify(webDriverActionExecutionBase).execute(testScenario, screenString);
@@ -292,7 +294,7 @@ public class WebDriverActionExecutionBaseTest {
 
     @Test
     public void executeOnScreenExecutes() throws IOException, URISyntaxException {
-        WebDriverActionExecutionBase webDriverActionExecutionBase = spy(getWebDriverActionExecutionBase());
+        WebDriverActionExecutionBase webDriverActionExecutionBase = Mockito.spy(getWebDriverActionExecutionBase());
         WebDriverAction webDriverAction = mock(WebDriverAction.class);
         Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
         TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
