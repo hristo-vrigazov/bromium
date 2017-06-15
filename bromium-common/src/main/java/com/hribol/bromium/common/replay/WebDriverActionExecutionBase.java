@@ -144,7 +144,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
                 try {
                     Thread.sleep(executor.getMeasurementsPrecisionMilli());
                 } catch (InterruptedException e) {
-                    throw new WebDriverActionExecutionException("Interrupted while waiting to retry", e, executor.getAutomationResultBuilder());
+                    throw executor.webDriverActionExecutionException("Interrupted while waiting to retry", e);
                 }
             }
         }
