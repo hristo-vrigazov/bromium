@@ -1,9 +1,9 @@
-package com.hribol.bromium.common.record.application;
+package com.hribol.bromium.common.record.generation;
 
 import com.google.inject.Inject;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
-import com.hribol.bromium.record.TypeRegistry;
+import com.hribol.bromium.core.generation.TypeRegistry;
 
 /**
  * Created by hvrigazov on 07.06.17.

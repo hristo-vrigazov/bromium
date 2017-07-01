@@ -1,4 +1,4 @@
-package com.hribol.bromium.common.record.application;
+package com.hribol.bromium.common.record.generation;
 
 import com.google.inject.Inject;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;

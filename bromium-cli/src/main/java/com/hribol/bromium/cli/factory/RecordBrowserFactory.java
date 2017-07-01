@@ -3,7 +3,7 @@ package com.hribol.bromium.cli.factory;
 import com.google.inject.Inject;
 import com.hribol.bromium.browsers.chrome.record.ChromeRecordBrowser;
 import com.hribol.bromium.common.record.RecordBrowserBase;
-import com.hribol.bromium.common.record.RecordingJavascriptGenerator;
+import com.hribol.bromium.common.record.generation.RecordingJavascriptGenerator;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
@@ -33,9 +33,9 @@ public class RecordBrowserFactory {
     }
 
     public RecordBrowserBase create(String browserName, String pathToDriver, String pathToApplicationConfiguration) throws IOException {
-        String baseTemplate = IOUtils.toString(getClass().getResourceAsStream("/template.js"));
+        String baseTemplate = IOUtils.toString(getClass().getResourceAsStream("/record.js"));
         ApplicationConfiguration applicationConfiguration = ConfigurationUtils.parseApplicationConfiguration(pathToApplicationConfiguration);
-        JavascriptGenerator recordingJavascriptGenerator = new RecordingJavascriptGenerator(baseTemplate, applicationActionGenerator);
+        JavascriptGenerator<ApplicationConfiguration> recordingJavascriptGenerator = new RecordingJavascriptGenerator(baseTemplate, applicationActionGenerator);
         String recordingJavascript = recordingJavascriptGenerator.generate(applicationConfiguration);
         System.out.println(recordingJavascript);
         StringReader stringReader = new StringReader(recordingJavascript);

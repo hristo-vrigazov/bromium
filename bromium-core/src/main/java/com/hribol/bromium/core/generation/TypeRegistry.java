@@ -1,4 +1,4 @@
-package com.hribol.bromium.record;
+package com.hribol.bromium.core.generation;
 
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 

@@ -2,7 +2,7 @@ package com.hribol.bromium.common.record;
 
 import com.google.inject.Inject;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
-import com.hribol.bromium.record.TypeRegistry;
+import com.hribol.bromium.core.generation.TypeRegistry;
 import com.hribol.bromium.core.generation.RecorderFunctionFactory;
 import com.hribol.bromium.core.generation.RecorderFunction;
 import com.hribol.bromium.core.generation.RecorderFunctionInvocation;

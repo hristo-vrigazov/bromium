@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.record;
 
+import com.hribol.bromium.common.record.generation.RecordingJavascriptGenerator;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
@@ -49,7 +50,7 @@ public class RecordingJavascriptGeneratorTest {
 
 //    @Test
 //    public void DELETEME() throws IOException {
-//        String baseTemplate = IOUtils.toString(getClass().getResourceAsStream("/template.js"));
+//        String baseTemplate = IOUtils.toString(getClass().getResourceAsStream("/record.js"));
 //        RecorderFunctionFactory recorderFunctionFactory = new PredefinedRecorderFunctionFactory();
 //        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(recorderFunctionFactory);
 //        WebDriverActionGenerator webDriverActionRecorderGenerator = new IncludeInvokeGenerator(recorderTypeRegistry);

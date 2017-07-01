@@ -1,4 +1,4 @@
-package com.hribol.bromium.common.record;
+package com.hribol.bromium.common.record.generation;
 
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
