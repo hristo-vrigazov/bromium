@@ -3,7 +3,6 @@ package com.hribol.bromium.common.record;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
-import com.hribol.bromium.record.javascript.generation.ApplicationActionGenerator;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class RecordingJavascriptGeneratorTest {
         ApplicationConfiguration applicationConfiguration = mock(ApplicationConfiguration.class);
         when(applicationConfiguration.getApplicationActionConfigurationList()).thenReturn(applicationActionConfigurationList);
 
-        ApplicationActionGenerator applicationActionGenerator = mock(ApplicationActionGenerator.class);
+        JavascriptGenerator<ApplicationActionConfiguration> applicationActionGenerator = mock(JavascriptGenerator.class);
         when(applicationActionGenerator.generate(firstAction)).thenReturn(generatedCodeForFirstAction);
         when(applicationActionGenerator.generate(secondAction)).thenReturn(generatedCodeForSecondAction);
 

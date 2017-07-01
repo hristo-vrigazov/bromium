@@ -1,11 +1,13 @@
 package com.hribol.bromium.core.config;
 
+import com.hribol.bromium.core.generation.GenerationInformation;
+
 /**
  * A configuration of an action, which is usually contained
  * in the application configuration file. It is used
  * for serialization / deserialization
  */
-public class ApplicationActionConfiguration {
+public class ApplicationActionConfiguration implements GenerationInformation {
     private String name;
     private WebDriverActionConfiguration conditionBeforeExecution;
     private WebDriverActionConfiguration webDriverAction;

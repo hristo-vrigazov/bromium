@@ -1,4 +1,4 @@
-package com.hribol.bromium.common.record.builder;
+package com.hribol.bromium.common.builder;
 
 /**
  * Created by hvrigazov on 09.06.17.

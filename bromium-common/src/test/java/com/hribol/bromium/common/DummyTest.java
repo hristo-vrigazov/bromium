@@ -1,6 +1,6 @@
 package com.hribol.bromium.common;
 
-import com.hribol.bromium.common.record.builder.JsFunctionNames;
+import com.hribol.bromium.common.builder.JsFunctionNames;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;

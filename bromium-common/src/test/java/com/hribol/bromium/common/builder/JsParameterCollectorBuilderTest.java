@@ -1,4 +1,4 @@
-package com.hribol.bromium.common.record.builder;
+package com.hribol.bromium.common.builder;
 
 import org.junit.Test;
 

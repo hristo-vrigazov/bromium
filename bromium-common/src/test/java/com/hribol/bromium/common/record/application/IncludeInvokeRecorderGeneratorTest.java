@@ -2,7 +2,7 @@ package com.hribol.bromium.common.record.application;
 
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.common.record.RecorderTypeRegistry;
-import com.hribol.bromium.record.javascript.generation.WebDriverActionGenerator;
+import com.hribol.bromium.core.generation.JavascriptGenerator;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -25,9 +25,10 @@ public class IncludeInvokeRecorderGeneratorTest {
         when(recordingTypeRegistry.getCodeForType(eventName, webDriverActionConfiguration))
                 .thenReturn(functionCode, invocationCode);
 
-        WebDriverActionGenerator webDriverActionGenerator = new IncludeInvokeGenerator(recordingTypeRegistry);
+        JavascriptGenerator<NameWebDriverActionConfiguration> webDriverActionGenerator = new IncludeInvokeGenerator(recordingTypeRegistry);
 
-        String actual = webDriverActionGenerator.generate(eventName, webDriverActionConfiguration);
+        String actual = webDriverActionGenerator.generate(
+                new NameWebDriverActionConfiguration(eventName, webDriverActionConfiguration));
 
         assertEquals(functionCode, actual);
         verify(recordingTypeRegistry).register(eventName, webDriverActionConfiguration);

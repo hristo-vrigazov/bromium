@@ -12,11 +12,14 @@ import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.*;
 import com.hribol.bromium.replay.execution.WebDriverActionExecution;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
+import com.hribol.bromium.replay.execution.scenario.TestScenario;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
 import com.hribol.bromium.replay.report.ExecutionReport;
 
 import java.io.*;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hvrigazov on 11.04.17.
@@ -36,9 +39,16 @@ public class ReplayCommand implements Command {
     @Override
     public void run() {
         try {
-            WebDriverActionFactory factory = new PredefinedWebDriverActionFactory(builder.baseURL);
+            ApplicationConfiguration applicationConfiguration = ConfigurationUtils.parseApplicationConfiguration(builder.applicationConfigurationInputStream);
 
-            String javascriptInjectionCode = new JavascriptInjector(builder.javascriptInputStream).getInjectionCode();
+            WebDriverActionFactory webDriverActionFactory = new PredefinedWebDriverActionFactory(builder.baseURL);
+            TestCaseStepToApplicationActionConverter testCaseStepToApplicationActionConverter =
+                    new TestCaseStepToApplicationActionConverter(webDriverActionFactory);
+            ApplicationActionFactory applicationActionFactory = new DefaultApplicationActionFactory(applicationConfiguration,
+                    testCaseStepToApplicationActionConverter);
+            TestScenarioFactory testScenarioFactory = new TestScenarioFactory(applicationActionFactory);
+            String javascriptInjectionCode = "";
+            List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(builder.testInputStream);
             ExecutorBuilder executor = new ExecutorBuilder()
                     .pathToDriverExecutable(builder.pathToDriver)
                     .baseURL(builder.baseURL)
@@ -48,13 +58,6 @@ public class ReplayCommand implements Command {
 
             WebDriverActionExecution execution = builder.executionFactory.create(builder.browserType, executor);
 
-            WebDriverActionFactory webDriverActionFactory = new PredefinedWebDriverActionFactory(builder.baseURL);
-            TestCaseStepToApplicationActionConverter testCaseStepToApplicationActionConverter =
-                    new TestCaseStepToApplicationActionConverter(webDriverActionFactory);
-            ApplicationConfiguration applicationConfiguration = ConfigurationUtils.parseApplicationConfiguration(builder.applicationConfigurationInputStream);
-            ApplicationActionFactory applicationActionFactory = new DefaultApplicationActionFactory(applicationConfiguration,
-                    testCaseStepToApplicationActionConverter);
-            TestScenarioFactory testScenarioFactory = new TestScenarioFactory(applicationActionFactory);
             ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, execution);
             ExecutionReport report = replayBrowser.replay(builder.testInputStream);
             System.out.println(report.getAutomationResult());
@@ -68,7 +71,6 @@ public class ReplayCommand implements Command {
         private String pathToDriver;
         private InputStream applicationConfigurationInputStream;
         private InputStream testInputStream;
-        private InputStream javascriptInputStream;
         private Integer timeout;
         private Integer measurementsPrecisionMilli;
         private String baseURL;
@@ -105,19 +107,6 @@ public class ReplayCommand implements Command {
         public Builder testInputStream(InputStream inputStream) {
             this.testInputStream = inputStream;
             return this;
-        }
-
-        public Builder javascriptInputStream(InputStream inputStream) {
-            this.javascriptInputStream = inputStream;
-            return this;
-        }
-
-        public Builder javascriptFile(File javascriptFile) throws FileNotFoundException {
-            return javascriptInputStream(new FileInputStream(javascriptFile));
-        }
-
-        public Builder javascriptFile(String javascriptFilename) throws FileNotFoundException {
-            return javascriptFile(new File(javascriptFilename));
         }
 
         public Builder timeout(Integer timeout) {

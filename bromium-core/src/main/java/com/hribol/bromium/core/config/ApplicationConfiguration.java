@@ -1,5 +1,7 @@
 package com.hribol.bromium.core.config;
 
+import com.hribol.bromium.core.generation.GenerationInformation;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +9,7 @@ import java.util.List;
  * The configuration of an application. It describes how application-specific actions
  * are related to selenium actions. It is usually been read/written to a JSON file
  */
-public class ApplicationConfiguration {
+public class ApplicationConfiguration implements GenerationInformation {
     /**
      * The name of the application
      */
