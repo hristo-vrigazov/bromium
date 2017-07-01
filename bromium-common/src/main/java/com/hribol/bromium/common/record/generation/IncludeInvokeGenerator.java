@@ -9,19 +9,17 @@ import com.hribol.bromium.core.generation.TypeRegistry;
  * Created by hvrigazov on 07.06.17.
  */
 public class IncludeInvokeGenerator implements JavascriptGenerator<NameWebDriverActionConfiguration> {
-    private TypeRegistry recorderTypeRegistry;
+    private TypeRegistry<NameWebDriverActionConfiguration> recorderTypeRegistry;
 
     @Inject
-    public IncludeInvokeGenerator(TypeRegistry recorderTypeRegistry) {
+    public IncludeInvokeGenerator(TypeRegistry<NameWebDriverActionConfiguration> recorderTypeRegistry) {
         this.recorderTypeRegistry = recorderTypeRegistry;
     }
 
     @Override
     public String generate(NameWebDriverActionConfiguration generationInformation) {
-        String eventName = generationInformation.getEventName();
-        WebDriverActionConfiguration webDriverActionConfiguration = generationInformation.getWebDriverActionConfiguration();
-        String getRecordingCode = recorderTypeRegistry.getCodeForType(eventName, webDriverActionConfiguration);
-        recorderTypeRegistry.register(eventName, webDriverActionConfiguration);
+        String getRecordingCode = recorderTypeRegistry.generate(generationInformation);
+        recorderTypeRegistry.register(generationInformation);
         return getRecordingCode;
     }
 }

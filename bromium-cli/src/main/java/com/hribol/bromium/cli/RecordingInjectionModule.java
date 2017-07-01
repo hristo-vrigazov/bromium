@@ -24,6 +24,8 @@ public class RecordingInjectionModule implements Module {
         binder.bind(new TypeLiteral<JavascriptGenerator<NameWebDriverActionConfiguration>>() {})
                 .to(IncludeInvokeGenerator.class);
         binder.bind(new TypeLiteral<JavascriptGenerator<ApplicationActionConfiguration>>(){})
-        .to(RecordingWebDriverActionsOnly.class);
+                .to(RecordingWebDriverActionsOnly.class);
+        binder.bind(new TypeLiteral<TypeRegistry<NameWebDriverActionConfiguration>>(){})
+                .to(RecorderTypeRegistry.class);
     }
 }
