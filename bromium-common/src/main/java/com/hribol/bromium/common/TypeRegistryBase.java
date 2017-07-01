@@ -1,8 +1,5 @@
-package com.hribol.bromium.common.builder;
+package com.hribol.bromium.common;
 
-import com.hribol.bromium.common.record.functions.RecorderFunction;
-import com.hribol.bromium.common.record.functions.RecorderFunctionInvocation;
-import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.core.generation.*;
 
 import java.util.HashSet;

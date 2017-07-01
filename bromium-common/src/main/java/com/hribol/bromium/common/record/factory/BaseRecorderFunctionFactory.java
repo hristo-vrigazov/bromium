@@ -1,44 +1,31 @@
 package com.hribol.bromium.common.record.factory;
 
-import com.hribol.bromium.core.config.WebDriverActionConfiguration;
+import com.hribol.bromium.common.FunctionFactoryBase;
 import com.hribol.bromium.common.record.functions.ClickCssSelectorRecorderFunction;
-import com.hribol.bromium.common.record.functions.EmptyRecorderFunction;
-import com.hribol.bromium.common.record.functions.RecorderFunction;
-import com.hribol.bromium.common.record.functions.RecorderFunctionFactory;
+import com.hribol.bromium.common.record.functions.RecorderFunctionInvocation;
+import com.hribol.bromium.common.record.generation.NameWebDriverActionConfiguration;
+import com.hribol.bromium.core.config.WebDriverActionConfiguration;
+import com.hribol.bromium.core.generation.GeneratedFunction;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.function.Supplier;
 
 import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CSS_SELECTOR;
 
 /**
  * Created by hvrigazov on 08.06.17.
  */
-public abstract class BaseRecorderFunctionFactory implements RecorderFunctionFactory {
+public abstract class BaseRecorderFunctionFactory extends
+        FunctionFactoryBase<GeneratedFunction<NameWebDriverActionConfiguration, RecorderFunctionInvocation>, WebDriverActionConfiguration> {
 
-    private Map<String, RecorderFunction> typeToRecorderFunction;
-
-    public BaseRecorderFunctionFactory() {
-        typeToRecorderFunction = new HashMap<>();
-        addPredefined();
-        addCustom();
+    public BaseRecorderFunctionFactory(Supplier<GeneratedFunction<NameWebDriverActionConfiguration, RecorderFunctionInvocation>> emptyGeneratedFunctionSupplier) {
+        super(emptyGeneratedFunctionSupplier);
     }
 
     protected abstract void addCustom();
 
-    private void addPredefined() {
+    @Override
+    protected void addPredefined() {
         add(CLICK_CSS_SELECTOR, new ClickCssSelectorRecorderFunction());
     }
 
-    @Override
-    public RecorderFunction create(WebDriverActionConfiguration webDriverActionConfiguration) {
-        return Optional
-                .ofNullable(typeToRecorderFunction.get(webDriverActionConfiguration.getWebDriverActionType()))
-                .orElse(new EmptyRecorderFunction());
-    }
-
-    protected void add(String webDriverActionType, RecorderFunction recorderFunction) {
-        typeToRecorderFunction.put(webDriverActionType, recorderFunction);
-    }
 }

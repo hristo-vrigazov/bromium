@@ -47,4 +47,8 @@ public class WebDriverActionConfiguration implements GenerationFunctionInformati
         this.parametersConfiguration = parametersConfiguration;
     }
 
+    @Override
+    public String getKey() {
+        return getWebDriverActionType();
+    }
 }
