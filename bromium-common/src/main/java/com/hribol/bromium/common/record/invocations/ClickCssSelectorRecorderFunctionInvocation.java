@@ -1,6 +1,6 @@
 package com.hribol.bromium.common.record.invocations;
 
-import com.hribol.bromium.core.generation.RecorderFunctionInvocation;
+import com.hribol.bromium.common.record.functions.RecorderFunctionInvocation;
 
 import java.text.MessageFormat;
 

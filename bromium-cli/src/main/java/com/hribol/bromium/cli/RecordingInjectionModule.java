@@ -11,7 +11,7 @@ import com.hribol.bromium.common.record.factory.PredefinedRecorderFunctionFactor
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
 import com.hribol.bromium.core.generation.TypeRegistry;
-import com.hribol.bromium.core.generation.RecorderFunctionFactory;
+import com.hribol.bromium.common.record.functions.RecorderFunctionFactory;
 
 /**
  * Created by hvrigazov on 09.06.17.

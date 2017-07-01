@@ -1,11 +1,13 @@
 package com.hribol.bromium.core.config;
 
+import com.hribol.bromium.core.generation.GenerationFunctionInformation;
+
 import java.util.Map;
 
 /**
  * A configuration of a web driver action
  */
-public class WebDriverActionConfiguration {
+public class WebDriverActionConfiguration implements GenerationFunctionInformation {
     private String webDriverActionType;
     private Map<String, ParameterConfiguration> parametersConfiguration;
 

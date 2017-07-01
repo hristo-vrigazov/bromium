@@ -1,14 +1,7 @@
 package com.hribol.bromium.common.record;
 
-import com.hribol.bromium.core.config.WebDriverActionConfiguration;
-import com.hribol.bromium.core.generation.RecorderFunctionFactory;
-import com.hribol.bromium.core.generation.RecorderFunction;
-import com.hribol.bromium.core.generation.RecorderFunctionInvocation;
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by hvrigazov on 07.06.17.
