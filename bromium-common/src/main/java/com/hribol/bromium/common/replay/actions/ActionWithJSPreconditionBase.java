@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.common.replay.InstanceBasedAutomationResultBuilder;
 import com.hribol.bromium.common.synchronization.JSPrecondition;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.actions.ActionWithJSPrecondition;
@@ -25,7 +26,7 @@ public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecon
             facade.getRequestFilter().setSynchronizationEvent(synchronizationEvent);
             eventSynchronizer.awaitUntil(synchronizationEvent);
         } catch (InterruptedException | TimeoutException e) {
-            throw new WebDriverActionExecutionException("Exception while awaiting JS precondition", e);
+            throw new WebDriverActionExecutionException("Exception while awaiting JS precondition", e, new InstanceBasedAutomationResultBuilder());
         }
 
         executeAfterJSPreconditionHasBeenSatisfied(driver, facade);

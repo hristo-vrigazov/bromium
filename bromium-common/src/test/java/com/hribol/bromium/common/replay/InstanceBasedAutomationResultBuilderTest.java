@@ -1,5 +1,7 @@
-package com.hribol.bromium.replay.execution;
+package com.hribol.bromium.common.replay;
 
+import com.hribol.bromium.replay.execution.AutomationResultBuilder;
+import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import com.hribol.bromium.replay.report.AutomationResult;
 import org.junit.Test;
 import org.openqa.selenium.TimeoutException;

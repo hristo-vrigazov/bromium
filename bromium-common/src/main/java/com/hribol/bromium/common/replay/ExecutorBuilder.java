@@ -1,7 +1,6 @@
 package com.hribol.bromium.common.replay;
 
 import com.hribol.bromium.replay.execution.AutomationResultBuilder;
-import com.hribol.bromium.replay.execution.InstanceBasedAutomationResultBuilder;
 import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
 import com.hribol.bromium.replay.filters.ProxyFacade;
