@@ -1,21 +1,21 @@
-package com.hribol.bromium.common.record.invocations;
+package com.hribol.bromium.common.replay.invocations;
 
-import com.hribol.bromium.common.record.functions.RecorderFunctionInvocation;
+import com.hribol.bromium.common.replay.functions.ReplayFunctionInvocation;
 
 import java.text.MessageFormat;
 
 import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CSS_SELECTOR;
 
 /**
- * Created by hvrigazov on 08.06.17.
+ * Created by hvrigazov on 02.07.17.
  */
-public class ClickCssSelectorRecorderFunctionInvocation implements RecorderFunctionInvocation {
+public class ClickCssSelectorReplayFunctionInvocation implements ReplayFunctionInvocation {
     private String cssSelector;
-    private String eventName;
+    private String hashCode;
 
-    public ClickCssSelectorRecorderFunctionInvocation(String cssSelector, String eventName) {
+    public ClickCssSelectorReplayFunctionInvocation(String cssSelector, String hashCode) {
         this.cssSelector = cssSelector;
-        this.eventName = eventName;
+        this.hashCode = hashCode;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class ClickCssSelectorRecorderFunctionInvocation implements RecorderFunct
                         "\n",
                 CLICK_CSS_SELECTOR,
                 cssSelector,
-                eventName
+                hashCode
         );
     }
 }

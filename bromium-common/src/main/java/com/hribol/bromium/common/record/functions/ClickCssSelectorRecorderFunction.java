@@ -24,7 +24,7 @@ public class ClickCssSelectorRecorderFunction implements RecorderFunction {
                 .declareFunction(CLICK_CSS_SELECTOR)
                 .withParameters(CSS_SELECTOR, "eventName")
                 .startBody()
-                .whenCssSelectorArrives("cssSelector")
+                .whenCssSelectorArrives(CSS_SELECTOR)
                 .attachListenerForEvent("click")
                 .startCollectingParameters("parameters")
                 .parameter("event", "eventName")
