@@ -1,5 +1,8 @@
 package com.hribol.bromium.common.generation.replay;
 
+import com.hribol.bromium.common.generation.helper.StepAndActionConfiguration;
+import com.hribol.bromium.common.generation.helper.StepsAndConfiguration;
+import com.hribol.bromium.common.generation.helper.suppliers.StepAndActionConfigurationSupplier;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
@@ -17,10 +20,14 @@ public class ReplayingJavascriptGenerator implements JavascriptGenerator<StepsAn
 
     private String baseTemplate;
     private JavascriptGenerator<StepAndActionConfiguration> generatorByStepAndActionConfiguration;
+    private StepAndActionConfigurationSupplier stepAndActionConfigurationSupplier;
 
-    public ReplayingJavascriptGenerator(String baseTemplate, JavascriptGenerator<StepAndActionConfiguration> generatorByStepAndActionConfiguration) {
+    public ReplayingJavascriptGenerator(String baseTemplate,
+                                        JavascriptGenerator<StepAndActionConfiguration> generatorByStepAndActionConfiguration,
+                                        StepAndActionConfigurationSupplier stepAndActionConfigurationSupplier) {
         this.baseTemplate = baseTemplate;
         this.generatorByStepAndActionConfiguration = generatorByStepAndActionConfiguration;
+        this.stepAndActionConfigurationSupplier = stepAndActionConfigurationSupplier;
     }
 
     @Override
@@ -41,11 +48,13 @@ public class ReplayingJavascriptGenerator implements JavascriptGenerator<StepsAn
                     .filter(applicationActionConfiguration -> applicationActionConfiguration.getName().equals(eventName))
                     .findAny();
 
-            if (optional.isPresent()) {
-                ApplicationActionConfiguration applicationActionConfiguration = optional.get();
-                StepAndActionConfiguration stepAndActionConfiguration = new StepAndActionConfiguration(testCaseStep, applicationActionConfiguration);
-                stringBuilder.append(generatorByStepAndActionConfiguration.generate(stepAndActionConfiguration));
+            if (!optional.isPresent()) {
+                throw new IllegalStateException("The application action" + eventName + "in the test case step is not present in the configuration");
             }
+            ApplicationActionConfiguration applicationActionConfiguration = optional.get();
+            StepAndActionConfiguration stepAndActionConfiguration = stepAndActionConfigurationSupplier.get(testCaseStep, applicationActionConfiguration);
+            stringBuilder.append(generatorByStepAndActionConfiguration.generate(stepAndActionConfiguration));
+
         }
 
         return stringBuilder.toString();

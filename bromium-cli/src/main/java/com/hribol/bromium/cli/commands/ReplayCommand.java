@@ -3,6 +3,10 @@ package com.hribol.bromium.cli.commands;
 import com.hribol.bromium.cli.factory.ExecutionFactory;
 import com.hribol.bromium.common.generation.common.EmptyFunction;
 import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
+import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfiguration;
+import com.hribol.bromium.common.generation.helper.StepsAndConfiguration;
+import com.hribol.bromium.common.generation.helper.suppliers.StepAndActionConfigurationSupplier;
+import com.hribol.bromium.common.generation.helper.suppliers.StepAndWebDriverActionConfigurationSupplier;
 import com.hribol.bromium.common.generation.replay.*;
 import com.hribol.bromium.common.replay.factory.DefaultApplicationActionFactory;
 import com.hribol.bromium.common.replay.factory.TestCaseStepToApplicationActionConverter;
@@ -60,9 +64,13 @@ public class ReplayCommand implements Command {
             ReplayTypeRegistry replayTypeRegistry = new ReplayTypeRegistry(baseReplayFunctionFactory);
             IncludeInvokeGenerator<StepAndWebDriverActionConfiguration> includeInvokeGenerator = new IncludeInvokeGenerator<>(replayTypeRegistry);
 
-            ReplayGeneratorByStepAndActionConfiguration replayGeneratorByStepAndActionConfiguration = new ReplayGeneratorByStepAndActionConfiguration(includeInvokeGenerator);
+            StepAndActionConfigurationSupplier stepAndActionConfigurationSupplier = new StepAndActionConfigurationSupplier();
+            StepAndWebDriverActionConfigurationSupplier stepAndWebDriverActionConfigurationSupplier = new StepAndWebDriverActionConfigurationSupplier();
+
+            ReplayGeneratorByStepAndActionConfiguration replayGeneratorByStepAndActionConfiguration =
+                    new ReplayGeneratorByStepAndActionConfiguration(includeInvokeGenerator, stepAndWebDriverActionConfigurationSupplier);
             ReplayingJavascriptGenerator replayingJavascriptGenerator = new ReplayingJavascriptGenerator(baseTemplate,
-                    replayGeneratorByStepAndActionConfiguration);
+                    replayGeneratorByStepAndActionConfiguration, stepAndActionConfigurationSupplier);
             StringReader stringReader = new StringReader(replayingJavascriptGenerator.generate(stepsAndConfiguration));
             JavascriptInjector javascriptInjector = new JavascriptInjector(stringReader);
             String javascriptInjectionCode = javascriptInjector.getInjectionCode();

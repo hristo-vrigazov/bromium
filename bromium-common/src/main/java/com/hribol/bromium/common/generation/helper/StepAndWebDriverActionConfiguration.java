@@ -1,4 +1,4 @@
-package com.hribol.bromium.common.generation.replay;
+package com.hribol.bromium.common.generation.helper;
 
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.core.generation.GenerationInformation;

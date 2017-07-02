@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.generation.replay;
 
+import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
 import com.hribol.bromium.core.generation.GeneratedFunction;
 
