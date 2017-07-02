@@ -1,4 +1,4 @@
-package com.hribol.bromium.common.record.factory;
+package com.hribol.bromium.common.record.generation;
 
 import com.hribol.bromium.common.FunctionFactoryBase;
 import com.hribol.bromium.common.record.functions.ClickCssSelectorRecorderFunction;

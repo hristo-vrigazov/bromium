@@ -9,6 +9,8 @@ import com.hribol.bromium.replay.report.ExecutionReport;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hvrigazov on 15.03.17.
@@ -21,6 +23,11 @@ public class ReplayBrowser {
     public ReplayBrowser(TestScenarioFactory testScenarioFactory, WebDriverActionExecution execution) {
         this.testScenarioFactory = testScenarioFactory;
         this.webDriverActionExecution = execution;
+    }
+
+    public ExecutionReport replay(List<Map<String, String>> steps) {
+        TestScenario testScenario = testScenarioFactory.createFromTestCaseSteps(steps);
+        return webDriverActionExecution.execute(testScenario);
     }
 
     public ExecutionReport replay(String pathToSerializedTest)
