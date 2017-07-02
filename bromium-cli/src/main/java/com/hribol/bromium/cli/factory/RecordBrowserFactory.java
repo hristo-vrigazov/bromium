@@ -3,7 +3,7 @@ package com.hribol.bromium.cli.factory;
 import com.google.inject.Inject;
 import com.hribol.bromium.browsers.chrome.record.ChromeRecordBrowser;
 import com.hribol.bromium.common.record.RecordBrowserBase;
-import com.hribol.bromium.common.record.generation.RecordingJavascriptGenerator;
+import com.hribol.bromium.common.generation.record.RecordingJavascriptGenerator;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;

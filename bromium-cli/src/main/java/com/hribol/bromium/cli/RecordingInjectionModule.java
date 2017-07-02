@@ -4,14 +4,14 @@ import com.google.inject.Binder;
 import com.google.inject.Module;
 import com.google.inject.Provides;
 import com.google.inject.TypeLiteral;
-import com.hribol.bromium.common.record.generation.RecorderTypeRegistry;
-import com.hribol.bromium.common.record.generation.BaseRecorderFunctionFactory;
-import com.hribol.bromium.common.record.functions.EmptyRecorderFunction;
-import com.hribol.bromium.common.record.functions.RecorderFunctionInvocation;
-import com.hribol.bromium.common.record.generation.IncludeInvokeGenerator;
-import com.hribol.bromium.common.record.generation.NameWebDriverActionConfiguration;
-import com.hribol.bromium.common.record.generation.RecordingWebDriverActionsOnly;
-import com.hribol.bromium.common.record.generation.PredefinedRecorderFunctionFactory;
+import com.hribol.bromium.common.generation.common.EmptyFunction;
+import com.hribol.bromium.common.generation.record.RecorderTypeRegistry;
+import com.hribol.bromium.common.generation.record.BaseRecorderFunctionFactory;
+import com.hribol.bromium.common.generation.record.functions.RecorderFunctionInvocation;
+import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
+import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
+import com.hribol.bromium.common.generation.record.RecordingWebDriverActionsOnly;
+import com.hribol.bromium.common.generation.record.PredefinedRecorderFunctionFactory;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.generation.GeneratedFunction;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
@@ -28,7 +28,7 @@ public class RecordingInjectionModule implements Module {
         binder.bind(BaseRecorderFunctionFactory.class).to(PredefinedRecorderFunctionFactory.class);
         binder.bind(TypeRegistry.class).to(RecorderTypeRegistry.class);
         binder.bind(new TypeLiteral<JavascriptGenerator<NameWebDriverActionConfiguration>>() {})
-                .to(IncludeInvokeGenerator.class);
+                .to(new TypeLiteral<IncludeInvokeGenerator<NameWebDriverActionConfiguration>>() {});
         binder.bind(new TypeLiteral<JavascriptGenerator<ApplicationActionConfiguration>>(){})
                 .to(RecordingWebDriverActionsOnly.class);
         binder.bind(new TypeLiteral<TypeRegistry<NameWebDriverActionConfiguration>>(){})
@@ -37,6 +37,6 @@ public class RecordingInjectionModule implements Module {
 
     @Provides
     public Supplier<GeneratedFunction<NameWebDriverActionConfiguration, RecorderFunctionInvocation>> getEmptyFunctionSupplier() {
-        return EmptyRecorderFunction::new;
+        return EmptyFunction::new;
     }
 }

@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.record.settings;
 
+import com.hribol.bromium.common.record.RecordManager;
 import net.lightbody.bmp.BrowserMobProxy;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;

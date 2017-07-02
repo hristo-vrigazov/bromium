@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.record.settings;
 
+import com.hribol.bromium.common.record.ProxyDriverIntegrator;
 import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
