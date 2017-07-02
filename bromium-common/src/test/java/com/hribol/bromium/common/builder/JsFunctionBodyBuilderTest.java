@@ -30,4 +30,12 @@ public class JsFunctionBodyBuilderTest {
 
         assertNotNull(jsFunctionBodyBuilder.whenCssSelectorArrives("#title"));
     }
+
+    @Test
+    public void createsANotNullLeaveHandler() {
+        JsFunctionDeclarerBuilder jsFunctionDeclarerBuilder = mock(JsFunctionDeclarerBuilder.class);
+        JsFunctionBodyBuilder jsFunctionBodyBuilder = new JsFunctionBodyBuilder(jsFunctionDeclarerBuilder);
+
+        assertNotNull(jsFunctionBodyBuilder.whenCssSelectorLeaves("#title"));
+    }
 }

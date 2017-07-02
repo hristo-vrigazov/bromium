@@ -26,6 +26,21 @@ public class JsArriveHandlerBuilderTest {
     }
 
     @Test
+    public void canCreateNotifySatisfiedCondition() {
+        String hashCode = "1293";
+        JsFunctionBodyBuilder jsFunctionBodyBuilder = mock(JsFunctionBodyBuilder.class);
+        JsArriveHandlerBuilder jsArriveHandlerBuilder = new JsArriveHandlerBuilder("#title", jsFunctionBodyBuilder);
+
+        jsArriveHandlerBuilder
+                .notifySatisfiedCondition(hashCode)
+                .endArriveHandler();
+
+        verify(jsFunctionBodyBuilder).write("\tdocument.arrive(#title, options, function () {\n" +
+                "\t\tbromium.notifySatisfiedCondition(1293);\n" +
+                "\t});\n");
+    }
+
+    @Test
     public void canCreateNotNullEventHandler() {
         String trailingString = "});\n";
         JsFunctionBodyBuilder jsFunctionBodyBuilder = mock(JsFunctionBodyBuilder.class);
