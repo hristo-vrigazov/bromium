@@ -31,4 +31,10 @@ public class JsArriveHandlerBuilder {
         stringBuilder.append(string);
         return this;
     }
+
+    public JsArriveHandlerBuilder notifySatisfiedCondition(String hashcode) {
+        String toBeAdded = MessageFormat.format("\t\tbromium.notifySatisfiedCondition({0});\n\t", hashcode);
+        stringBuilder.append(toBeAdded);
+        return this;
+    }
 }

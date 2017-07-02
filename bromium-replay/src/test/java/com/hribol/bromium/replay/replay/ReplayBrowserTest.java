@@ -1,10 +1,15 @@
 package com.hribol.bromium.replay.replay;
 
+import com.google.common.annotations.VisibleForTesting;
+import com.hribol.bromium.core.config.ApplicationConfiguration;
+import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.core.utils.ConfigurationUtils;
 import com.hribol.bromium.replay.ReplayBrowser;
 import com.hribol.bromium.replay.execution.WebDriverActionExecution;
+import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
+import com.hribol.bromium.replay.report.ExecutionReport;
 import com.hribol.bromium.replay.report.LoadingTimes;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,23 +19,31 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
+import static org.powermock.api.mockito.PowerMockito.verifyNew;
+import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 /**
  * Created by hvrigazov on 22.04.17.
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({
-        ReplayBrowser.class,
-        FileInputStream.class,
-//        PredefinedWebDriverActionFactory.class,
-//        DefaultApplicationActionFactory.class,
-        TestScenarioFactory.class,
-        ConfigurationUtils.class
-})
+//@RunWith(PowerMockRunner.class)
+//@PrepareForTest({
+//        ReplayBrowser.class,
+//        FileInputStream.class,
+////        PredefinedWebDriverActionFactory.class,
+////        DefaultApplicationActionFactory.class,
+//        TestScenarioFactory.class,
+//        ConfigurationUtils.class
+//})
 public class ReplayBrowserTest {
 
     @Test
@@ -52,7 +65,6 @@ public class ReplayBrowserTest {
     public void replayFromFileOnScreenInvokesExecutionExecuteMethod() throws InterruptedException, IOException, URISyntaxException {
         TestScenario testScenario = mock(TestScenario.class);
         WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
-        LoadingTimes loadingTimes = mock(LoadingTimes.class);
         TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);
         String pathToSerializedTest = "testcase.json";
         String screen = ":1";
@@ -64,68 +76,76 @@ public class ReplayBrowserTest {
 
         Mockito.verify(webDriverActionExecution).execute(testScenario, screen);
     }
-//
-//    @Test
-//    public void canCreateReplayBrowserByConfigurationAndExecution() throws Exception {
-//        String screen = ":2";
-//        String baseURL = "http://something.com";
-//        String configurationFile = "config.json";
-//        WebDriverActionExecution execution = mock(WebDriverActionExecution.class);
-//        ExecutionReport executionReport = mock(ExecutionReport.class);
-//        when(execution.getBaseURL()).thenReturn(baseURL);
-//
-//        TestScenario testScenario = mock(TestScenario.class);
-//        FileInputStream fileInputStream = mock(FileInputStream.class);
-//        PredefinedWebDriverActionFactory predefinedWebDriverActionFactory = mock(PredefinedWebDriverActionFactory.class);
-//        DefaultApplicationActionFactory defaultApplicationActionFactory = mock(DefaultApplicationActionFactory.class);
-//        TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);
-//        when(testScenarioFactory.createFromInputStream(fileInputStream)).thenReturn(testScenario);
-//
-//        ApplicationConfiguration applicationConfiguration = mock(ApplicationConfiguration.class);
-//
-//        whenNew(FileInputStream.class).withArguments(configurationFile).thenReturn(fileInputStream);
-//        whenNew(PredefinedWebDriverActionFactory.class).withArguments(execution.getBaseURL()).thenReturn(predefinedWebDriverActionFactory);
-//        whenNew(DefaultApplicationActionFactory.class).withAnyArguments().thenReturn(defaultApplicationActionFactory);
-//        whenNew(TestScenarioFactory.class).withAnyArguments().thenReturn(testScenarioFactory);
-//
-//        mockStatic(ConfigurationUtils.class);
-//        when(ConfigurationUtils.parseApplicationConfiguration(fileInputStream)).thenReturn(applicationConfiguration);
-//        when(execution.execute(testScenario, screen)).thenReturn(executionReport);
-//
-//        ReplayBrowser replayBrowser = new ReplayBrowser(configurationFile, execution);
-//        ExecutionReport report = replayBrowser.replay(fileInputStream, screen);
-//        assertEquals(report, executionReport);
-//    }
-//
-//    @Test
-//    public void canInjectCustomWebDriverActionFactory() throws Exception {
-//        String configurationFile = "config.json";
-//        String baseURL = "http://something.com";
-//
-//        FileInputStream fileInputStream = mock(FileInputStream.class);
-//        WebDriverActionFactory webDriverActionFactory = mock(WebDriverActionFactory.class);
-//        WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
-//        WebDriverActionExecution execution = mock(WebDriverActionExecution.class);
-//        PredefinedWebDriverActionFactory predefinedWebDriverActionFactory = mock(PredefinedWebDriverActionFactory.class);
-//        TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);
-//
-//        when(execution.getBaseURL()).thenReturn(baseURL);
-//
-//        whenNew(FileInputStream.class).withArguments(configurationFile).thenReturn(fileInputStream);
-//
-//        ApplicationConfiguration applicationConfiguration = mock(ApplicationConfiguration.class);
-//
-//        mockStatic(ConfigurationUtils.class);
-//        when(ConfigurationUtils.parseApplicationConfiguration(fileInputStream)).thenReturn(applicationConfiguration);
-//        whenNew(PredefinedWebDriverActionFactory.class).withArguments(execution.getBaseURL()).thenReturn(predefinedWebDriverActionFactory);
-//        whenNew(TestScenarioFactory.class).withAnyArguments().thenReturn(testScenarioFactory);
-//
-//        ReplayBrowser replayBrowser = new ReplayBrowser(configurationFile, webDriverActionFactory, webDriverActionExecution);
-//
-//        VirtualScreenProcessCreator creator = mock(VirtualScreenProcessCreator.class);
-//
-//        replayBrowser.replay(fileInputStream);
-//        replayBrowser.createVirtualScreenProcessAndExecute(fileInputStream, 1, creator);
-//    }
 
+    @Test
+    public void delegatesCreateVirtualScreenProcessAndExecute() throws IOException {
+        ExecutionReport expectedReport = mock(ExecutionReport.class);
+        InputStream inputStream = mock(InputStream.class);
+        int screen = 2;
+        VirtualScreenProcessCreator virtualScreenProcessCreator = mock(VirtualScreenProcessCreator.class);
+        TestScenario testScenario = mock(TestScenario.class);
+        TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);
+        when(testScenarioFactory.createFromInputStream(inputStream)).thenReturn(testScenario);
+        WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
+        when(webDriverActionExecution.createVirtualScreenProcessAndExecute(testScenario, screen, virtualScreenProcessCreator))
+                .thenReturn(expectedReport);
+
+        ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, webDriverActionExecution);
+
+        ExecutionReport actualReport = replayBrowser.createVirtualScreenProcessAndExecute(inputStream, screen, virtualScreenProcessCreator);
+
+        assertEquals(expectedReport, actualReport);
+    }
+
+    @Test
+    public void delegatesExecuteFromInputStream() throws IOException, URISyntaxException, InterruptedException {
+        ExecutionReport expectedReport = mock(ExecutionReport.class);
+        InputStream inputStream = mock(InputStream.class);
+        TestScenario testScenario = mock(TestScenario.class);
+        TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);
+        when(testScenarioFactory.createFromInputStream(inputStream)).thenReturn(testScenario);
+        WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
+        when(webDriverActionExecution.execute(testScenario))
+                .thenReturn(expectedReport);
+
+        ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, webDriverActionExecution);
+
+        ExecutionReport actualReport = replayBrowser.replay(inputStream);
+        assertEquals(expectedReport, actualReport);
+    }
+
+    @Test
+    public void delegatesExecuteFromTestCaseSteps() throws IOException, URISyntaxException, InterruptedException {
+        ExecutionReport expectedReport = mock(ExecutionReport.class);
+        List<Map<String, String>> testCaseSteps = mock(List.class);
+        TestScenario testScenario = mock(TestScenario.class);
+        TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);
+        when(testScenarioFactory.createFromTestCaseSteps(testCaseSteps)).thenReturn(testScenario);
+        WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
+        when(webDriverActionExecution.execute(testScenario))
+                .thenReturn(expectedReport);
+
+        ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, webDriverActionExecution);
+
+        ExecutionReport actualReport = replayBrowser.replay(testCaseSteps);
+        assertEquals(expectedReport, actualReport);
+    }
+
+    @Test
+    public void delegatesExecuteFromInputStreamOnScreen() throws IOException, URISyntaxException, InterruptedException {
+        ExecutionReport expectedReport = mock(ExecutionReport.class);
+        String screenToUse = ":2";
+        InputStream inputStream = mock(InputStream.class);
+        TestScenario testScenario = mock(TestScenario.class);
+        TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);
+        when(testScenarioFactory.createFromInputStream(inputStream)).thenReturn(testScenario);
+        WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
+        when(webDriverActionExecution.execute(testScenario, screenToUse))
+                .thenReturn(expectedReport);
+
+        ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, webDriverActionExecution);
+
+        ExecutionReport actualReport = replayBrowser.replay(inputStream, screenToUse);
+        assertEquals(expectedReport, actualReport);
+    }
 }

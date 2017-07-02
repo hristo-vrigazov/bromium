@@ -9,6 +9,8 @@ import com.hribol.bromium.core.utils.WebDriverActions;
 
 import java.text.MessageFormat;
 
+import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CSS_SELECTOR;
+import static com.hribol.bromium.common.generation.replay.functions.Constants.HASHCODE;
 import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
 
 /**
@@ -23,14 +25,18 @@ public class ClickCssSelectorReplayFunction implements ReplayFunction {
     }
 
     public ClickCssSelectorReplayFunction(JsCollector jsCollector) {
-        this.functionDeclarationCode = "function ClickCssSelector(cssSelector, hashCode) {\n" +
-                "    document.arrive(cssSelector, options, function () {\n" +
-                "        bromium.notifySatisfiedCondition(hashCode);\n" +
-                "    });\n" +
-                "    document.leave(cssSelector, function () {\n" +
-                "        bromium.notifyNotSatisfiedCondition(hashCode);\n" +
-                "    });\n" +
-                "}";
+        this.functionDeclarationCode = jsCollector
+                .declareFunction(CLICK_CSS_SELECTOR)
+                .withParameters(CSS_SELECTOR, HASHCODE)
+                .startBody()
+                .whenCssSelectorArrives(CSS_SELECTOR)
+                .notifySatisfiedCondition(HASHCODE)
+                .endArriveHandler()
+                .whenCssSelectorLeaves(CSS_SELECTOR)
+                .notifyNotSatisfiedCondition(HASHCODE)
+                .endLeaveHandler()
+                .endBody()
+                .build();
     }
 
     @Override

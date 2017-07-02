@@ -30,6 +30,7 @@ public class ReplayingJavascriptGenerator implements JavascriptGenerator<StepsAn
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(baseTemplate);
+        stringBuilder.append(System.lineSeparator()).append(System.lineSeparator());
 
         for (Map<String, String> testCaseStep: testCaseSteps) {
             String eventName = testCaseStep.get(EVENT);

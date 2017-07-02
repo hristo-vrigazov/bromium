@@ -26,5 +26,6 @@ public class WebDriverActionConfigurationTest {
 
         assertEquals(webDriverActionType, webDriverActionConfiguration.getWebDriverActionType());
         assertEquals(parametersConfiguration, webDriverActionConfiguration.getParametersConfiguration());
+        assertEquals(webDriverActionType, webDriverActionConfiguration.getKey());
     }
 }

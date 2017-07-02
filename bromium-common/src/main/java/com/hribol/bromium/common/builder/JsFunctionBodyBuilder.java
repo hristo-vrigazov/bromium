@@ -25,4 +25,8 @@ public class JsFunctionBodyBuilder {
         stringBuilder.append(string);
         return this;
     }
+
+    public JsLeaveHandlerBuilder whenCssSelectorLeaves(String cssSelector) {
+        return new JsLeaveHandlerBuilder(cssSelector, this);
+    }
 }
