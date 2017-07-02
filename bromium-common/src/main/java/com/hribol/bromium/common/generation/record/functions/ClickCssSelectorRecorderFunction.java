@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.generation.record.functions;
 
+import com.google.inject.Inject;
 import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.common.builder.JsCollector;
@@ -15,10 +16,7 @@ public class ClickCssSelectorRecorderFunction implements RecorderFunction {
 
     private String functionDeclarationCode;
 
-    public ClickCssSelectorRecorderFunction() {
-        this(new JsCollector());
-    }
-
+    @Inject
     public ClickCssSelectorRecorderFunction(JsCollector jsCollector) {
         this.functionDeclarationCode = jsCollector
                 .declareFunction(CLICK_CSS_SELECTOR)

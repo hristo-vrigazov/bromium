@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.generation.common;
 
+import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.core.generation.GeneratedFunction;
 import com.hribol.bromium.core.generation.GeneratedFunctionFactory;
 import com.hribol.bromium.core.generation.GenerationFunctionInformation;
@@ -17,9 +18,11 @@ public abstract class FunctionFactoryBase<T extends GeneratedFunction, V extends
 
     private Map<String, T> typeToGeneratedFunction;
     private Supplier<T> emptyGeneratedFunctionSupplier;
+    protected JsCollector jsCollector;
 
-    public FunctionFactoryBase(Supplier<T> emptyGeneratedFunctionSupplier) {
+    public FunctionFactoryBase(Supplier<T> emptyGeneratedFunctionSupplier, JsCollector jsCollector) {
         this.emptyGeneratedFunctionSupplier = emptyGeneratedFunctionSupplier;
+        this.jsCollector = jsCollector;
         this.typeToGeneratedFunction = new HashMap<>();
         addPredefined();
         addCustom();

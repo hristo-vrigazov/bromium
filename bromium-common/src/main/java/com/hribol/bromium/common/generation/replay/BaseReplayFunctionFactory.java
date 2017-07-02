@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.generation.replay;
 
+import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.common.FunctionFactoryBase;
 import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.replay.functions.ClickCssSelectorReplayFunction;
@@ -20,14 +21,15 @@ public abstract class BaseReplayFunctionFactory extends
                 WebDriverActionConfiguration>  {
 
 
-    public BaseReplayFunctionFactory(Supplier<GeneratedFunction<StepAndWebDriverActionConfiguration, ReplayFunctionInvocation>> emptyGeneratedFunctionSupplier) {
-        super(emptyGeneratedFunctionSupplier);
+    public BaseReplayFunctionFactory(Supplier<GeneratedFunction<StepAndWebDriverActionConfiguration, ReplayFunctionInvocation>> emptyGeneratedFunctionSupplier,
+                                     JsCollector jsCollector) {
+        super(emptyGeneratedFunctionSupplier, jsCollector);
     }
 
     protected abstract void addCustom();
 
     @Override
     protected void addPredefined() {
-        add(CLICK_CSS_SELECTOR, new ClickCssSelectorReplayFunction());
+        add(CLICK_CSS_SELECTOR, new ClickCssSelectorReplayFunction(jsCollector));
     }
 }

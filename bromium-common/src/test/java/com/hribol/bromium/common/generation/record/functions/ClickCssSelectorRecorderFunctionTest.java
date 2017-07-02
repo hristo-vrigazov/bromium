@@ -1,8 +1,13 @@
 package com.hribol.bromium.common.generation.record.functions;
 
+import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.record.invocations.ClickCssSelectorRecorderFunctionInvocation;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
 import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CSS_SELECTOR;
@@ -14,37 +19,34 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
 /**
  * Created by hvrigazov on 09.06.17.
 // */
-//@RunWith(PowerMockRunner.class)
-//@PrepareForTest({
-//        ClickCssSelectorRecorderFunction.class
-//})
+
 public class ClickCssSelectorRecorderFunctionTest {
-//
-//    @Test
-//    public void buildsDeclarationFunction() throws Exception {
-//        Mocks mocks = new Mocks();
-//
-//        ClickCssSelectorRecorderFunction clickCssSelectorRecorderFunction = new ClickCssSelectorRecorderFunction(mocks.jsCollector);
-//
-//        assertEquals(mocks.expected, clickCssSelectorRecorderFunction.getJavascriptCode());
-//    }
-//
-//    @Test
-//    public void createsNotNullRecorderFunction() throws Exception {
-//        Mocks mocks = new Mocks();
-//
-//        ClickCssSelectorRecorderFunction clickCssSelectorRecorderFunction = new ClickCssSelectorRecorderFunction(mocks.jsCollector);
-//
-//        assertNotNull(clickCssSelectorRecorderFunction.getInvocation(mocks.eventName, mocks.webDriverActionConfiguration));
-//    }
+
+    @Test
+    public void buildsDeclarationFunction() throws Exception {
+        Mocks mocks = new Mocks();
+
+        ClickCssSelectorRecorderFunction clickCssSelectorRecorderFunction = new ClickCssSelectorRecorderFunction(mocks.jsCollector);
+
+        assertEquals(mocks.expected, clickCssSelectorRecorderFunction.getJavascriptCode());
+    }
+
+    @Test
+    public void createsNotNullRecorderFunction() throws Exception {
+        Mocks mocks = new Mocks();
+
+        ClickCssSelectorRecorderFunction clickCssSelectorRecorderFunction = new ClickCssSelectorRecorderFunction(mocks.jsCollector);
+
+        assertNotNull(clickCssSelectorRecorderFunction.getInvocation(mocks.nameWebDriverActionConfiguration));
+    }
 
     private static class Mocks {
         private JsCollector jsCollector;
         private String expected;
         private String eventName;
         private String cssSelector;
+        private NameWebDriverActionConfiguration nameWebDriverActionConfiguration;
         private WebDriverActionConfiguration webDriverActionConfiguration;
-        private ClickCssSelectorRecorderFunctionInvocation clickCssSelectorRecorderFunctionInvocation;
 
         public Mocks() throws Exception {
             expected = "function clickCssSelector(cssSelector, eventName) {\n" +
@@ -67,14 +69,13 @@ public class ClickCssSelectorRecorderFunctionTest {
                     .get(CSS_SELECTOR)
                     .getValue()).thenReturn(cssSelector);
             
-            clickCssSelectorRecorderFunctionInvocation = mock(ClickCssSelectorRecorderFunctionInvocation.class);
-            
-            whenNew(ClickCssSelectorRecorderFunctionInvocation.class)
-                    .withArguments(cssSelector, eventName)
-                    .thenReturn(clickCssSelectorRecorderFunctionInvocation);
-            
+
             jsCollector = mock(JsCollector.class, RETURNS_DEEP_STUBS);
 
+            nameWebDriverActionConfiguration = mock(NameWebDriverActionConfiguration.class);
+            when(nameWebDriverActionConfiguration.getEventName()).thenReturn(eventName);
+            when(nameWebDriverActionConfiguration.getWebDriverActionConfiguration()).thenReturn(webDriverActionConfiguration);
+            when(nameWebDriverActionConfiguration.getGenerationFunctionInformation()).thenReturn(webDriverActionConfiguration);
 
             when(jsCollector
                     .declareFunction(CLICK_CSS_SELECTOR)

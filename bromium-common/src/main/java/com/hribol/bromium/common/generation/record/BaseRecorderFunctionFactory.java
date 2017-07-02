@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.generation.record;
 
+import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.common.FunctionFactoryBase;
 import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.record.functions.ClickCssSelectorRecorderFunction;
@@ -17,15 +18,16 @@ import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CSS_SELECTOR;
 public abstract class BaseRecorderFunctionFactory extends
         FunctionFactoryBase<GeneratedFunction<NameWebDriverActionConfiguration, RecorderFunctionInvocation>, WebDriverActionConfiguration> {
 
-    public BaseRecorderFunctionFactory(Supplier<GeneratedFunction<NameWebDriverActionConfiguration, RecorderFunctionInvocation>> emptyGeneratedFunctionSupplier) {
-        super(emptyGeneratedFunctionSupplier);
+    public BaseRecorderFunctionFactory(Supplier<GeneratedFunction<NameWebDriverActionConfiguration, RecorderFunctionInvocation>> emptyGeneratedFunctionSupplier,
+                                       JsCollector jsCollector) {
+        super(emptyGeneratedFunctionSupplier, jsCollector);
     }
 
     protected abstract void addCustom();
 
     @Override
     protected void addPredefined() {
-        add(CLICK_CSS_SELECTOR, new ClickCssSelectorRecorderFunction());
+        add(CLICK_CSS_SELECTOR, new ClickCssSelectorRecorderFunction(jsCollector));
     }
 
 }

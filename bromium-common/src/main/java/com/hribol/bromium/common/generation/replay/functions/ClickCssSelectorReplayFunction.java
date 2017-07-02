@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.generation.replay.functions;
 
+import com.google.inject.Inject;
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.replay.invocations.ClickCssSelectorReplayInvocation;
@@ -20,10 +21,7 @@ public class ClickCssSelectorReplayFunction implements ReplayFunction {
 
     private String functionDeclarationCode;
 
-    public ClickCssSelectorReplayFunction() {
-        this(new JsCollector());
-    }
-
+    @Inject
     public ClickCssSelectorReplayFunction(JsCollector jsCollector) {
         this.functionDeclarationCode = jsCollector
                 .declareFunction(CLICK_CSS_SELECTOR)

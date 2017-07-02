@@ -1,6 +1,7 @@
 package com.hribol.bromium.cli.commands;
 
 import com.hribol.bromium.cli.factory.ExecutionFactory;
+import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.common.EmptyFunction;
 import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
 import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfiguration;
@@ -59,8 +60,8 @@ public class ReplayCommand implements Command {
 
             String baseTemplate = IOUtils.toString(getClass().getResourceAsStream("/replay.js"));
 
-
-            BaseReplayFunctionFactory baseReplayFunctionFactory = new PredefinedReplayFunctionFactory(EmptyFunction::new);
+            JsCollector jsCollector = new JsCollector();
+            BaseReplayFunctionFactory baseReplayFunctionFactory = new PredefinedReplayFunctionFactory(EmptyFunction::new, jsCollector);
             ReplayTypeRegistry replayTypeRegistry = new ReplayTypeRegistry(baseReplayFunctionFactory);
             IncludeInvokeGenerator<StepAndWebDriverActionConfiguration> includeInvokeGenerator = new IncludeInvokeGenerator<>(replayTypeRegistry);
 
