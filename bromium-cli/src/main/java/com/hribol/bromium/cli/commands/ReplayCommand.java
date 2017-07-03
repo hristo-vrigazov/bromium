@@ -15,6 +15,7 @@ import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.utils.ConfigurationUtils;
 import com.hribol.bromium.core.utils.JavascriptInjector;
 import com.hribol.bromium.common.replay.factory.PredefinedWebDriverActionFactory;
+import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
 import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.*;
@@ -47,7 +48,8 @@ public class ReplayCommand implements Command {
     @Override
     public void run() {
         try {
-            ApplicationConfiguration applicationConfiguration = ConfigurationUtils.parseApplicationConfiguration(builder.applicationConfigurationInputStream);
+            ApplicationConfiguration applicationConfiguration = builder.applicationConfigurationParser
+                    .parseApplicationConfiguration(builder.applicationConfigurationInputStream);
 
             WebDriverActionFactory webDriverActionFactory = new PredefinedWebDriverActionFactory(builder.baseURL);
             TestCaseStepToApplicationActionConverter testCaseStepToApplicationActionConverter =
@@ -103,6 +105,7 @@ public class ReplayCommand implements Command {
         private String baseURL;
         private String browserType;
         private ExecutionFactory executionFactory;
+        private ApplicationConfigurationParser applicationConfigurationParser;
 
         public Builder pathToDriver(String pathToDriver) {
             this.pathToDriver = pathToDriver;
@@ -118,8 +121,8 @@ public class ReplayCommand implements Command {
             return this;
         }
 
-        public Builder applicationConfigurationInputStream(InputStream inputStream) {
-            this.applicationConfigurationInputStream = inputStream;
+        public Builder applicationConfigurationParser(ApplicationConfigurationParser applicationConfigurationParser) {
+            this.applicationConfigurationParser = applicationConfigurationParser;
             return this;
         }
 

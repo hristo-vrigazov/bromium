@@ -3,10 +3,9 @@ package com.hribol.bromium.cli.handlers;
 import com.hribol.bromium.cli.commands.PromptUtils;
 import com.hribol.bromium.cli.commands.VersionCommand;
 import com.hribol.bromium.cli.suppliers.VersionCommandSupplier;
+import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationDumper;
+import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,9 +30,14 @@ public class VersionCommandHandlerTest {
         PromptUtils promptUtils = mock(PromptUtils.class);
         VersionCommand command = mock(VersionCommand.class);
         VersionCommandSupplier versionCommandSupplier = mock(VersionCommandSupplier.class);
-        when(versionCommandSupplier.get(pathToApplicationConfiguration, promptUtils)).thenReturn(command);
+        ApplicationConfigurationParser applicationConfigurationParser = mock(ApplicationConfigurationParser.class);
+        ApplicationConfigurationDumper applicationConfigurationDumper = mock(ApplicationConfigurationDumper.class);
 
-        CommandHandler commandHandler = new VersionCommandHandler(promptUtils, versionCommandSupplier);
+        when(versionCommandSupplier.get(pathToApplicationConfiguration, promptUtils,
+                applicationConfigurationParser,
+                applicationConfigurationDumper)).thenReturn(command);
+
+        CommandHandler commandHandler = new VersionCommandHandler(promptUtils, versionCommandSupplier, applicationConfigurationParser, applicationConfigurationDumper);
         commandHandler.handle(opts);
 
         verify(command).run();

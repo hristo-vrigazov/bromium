@@ -4,19 +4,13 @@ package com.hribol.bromium.cli.handlers;
 import com.hribol.bromium.cli.commands.InitCommand;
 import com.hribol.bromium.cli.commands.PromptUtils;
 import com.hribol.bromium.cli.suppliers.InitCommandSupplier;
+import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationDumper;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.powermock.api.mockito.PowerMockito.verifyNew;
-import static org.powermock.api.mockito.PowerMockito.whenNew;
+import static org.mockito.Mockito.*;
 
 public class InitCommandHandlerTest {
 
@@ -27,13 +21,15 @@ public class InitCommandHandlerTest {
         PromptUtils promptUtils = mock(PromptUtils.class);
         InitCommand initCommand = mock(InitCommand.class);
         InitCommandSupplier initCommandSupplier = mock(InitCommandSupplier.class);
-        when(initCommandSupplier.get(promptUtils)).thenReturn(initCommand);
+        ApplicationConfigurationDumper applicationConfigurationDumper = mock(ApplicationConfigurationDumper.class);
 
-        InitCommandHandler initCommandHandler = new InitCommandHandler(promptUtils, initCommandSupplier);
+        when(initCommandSupplier.get(promptUtils, applicationConfigurationDumper)).thenReturn(initCommand);
+
+        InitCommandHandler initCommandHandler = new InitCommandHandler(promptUtils, initCommandSupplier, applicationConfigurationDumper);
 
         initCommandHandler.handle(opts);
 
-        verify(initCommandSupplier).get(promptUtils);
+        verify(initCommandSupplier).get(promptUtils, applicationConfigurationDumper);
         verify(initCommand).run();
     }
 }

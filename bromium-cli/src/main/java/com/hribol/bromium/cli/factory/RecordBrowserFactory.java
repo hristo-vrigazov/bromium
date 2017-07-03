@@ -1,14 +1,17 @@
 package com.hribol.bromium.cli.factory;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import com.hribol.bromium.browsers.chrome.record.ChromeRecordBrowser;
+import com.hribol.bromium.common.generation.helper.suppliers.RecordingJavascriptGeneratorSupplier;
 import com.hribol.bromium.common.record.RecordBrowserBase;
-import com.hribol.bromium.common.generation.record.RecordingJavascriptGenerator;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
+import com.hribol.bromium.core.suppliers.JavascriptInjectorSupplier;
 import com.hribol.bromium.core.utils.ConfigurationUtils;
 import com.hribol.bromium.core.utils.JavascriptInjector;
+import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
@@ -24,22 +27,34 @@ import static org.openqa.selenium.remote.BrowserType.CHROME;
 public class RecordBrowserFactory {
     private Map<String, RecordBrowserSupplier> browserNameToSupplierMap;
     private JavascriptGenerator<ApplicationActionConfiguration> applicationActionGenerator;
+    private String pathToRecordTemplateResource;
+    private RecordingJavascriptGeneratorSupplier recordingJavascriptGeneratorSupplier;
+    private JavascriptInjectorSupplier javascriptInjectorSupplier;
+    private ApplicationConfigurationParser applicationConfigurationParser;
 
     @Inject
-    public RecordBrowserFactory(JavascriptGenerator<ApplicationActionConfiguration> applicationActionGenerator) {
+    public RecordBrowserFactory(JavascriptGenerator<ApplicationActionConfiguration> applicationActionGenerator,
+                                @Named("recordTemplateResource") String pathToRecordTemplateResource,
+                                RecordingJavascriptGeneratorSupplier recordingJavascriptGeneratorSupplier,
+                                JavascriptInjectorSupplier javascriptInjectorSupplier,
+                                ApplicationConfigurationParser applicationConfigurationParser) {
+        this.applicationActionGenerator = applicationActionGenerator;
+        this.pathToRecordTemplateResource = pathToRecordTemplateResource;
+        this.recordingJavascriptGeneratorSupplier = recordingJavascriptGeneratorSupplier;
+        this.javascriptInjectorSupplier = javascriptInjectorSupplier;
+        this.applicationConfigurationParser = applicationConfigurationParser;
         this.browserNameToSupplierMap = new HashMap<>();
         this.browserNameToSupplierMap.put(CHROME, this::getChrome);
-        this.applicationActionGenerator = applicationActionGenerator;
     }
 
     public RecordBrowserBase create(String browserName, String pathToDriver, String pathToApplicationConfiguration) throws IOException {
-        String baseTemplate = IOUtils.toString(getClass().getResourceAsStream("/record.js"));
-        ApplicationConfiguration applicationConfiguration = ConfigurationUtils.parseApplicationConfiguration(pathToApplicationConfiguration);
-        JavascriptGenerator<ApplicationConfiguration> recordingJavascriptGenerator = new RecordingJavascriptGenerator(baseTemplate, applicationActionGenerator);
+        String baseTemplate = IOUtils.toString(getClass().getResourceAsStream(pathToRecordTemplateResource));
+        ApplicationConfiguration applicationConfiguration = applicationConfigurationParser.parseApplicationConfiguration(pathToApplicationConfiguration);
+        JavascriptGenerator<ApplicationConfiguration> recordingJavascriptGenerator = recordingJavascriptGeneratorSupplier.get(baseTemplate, applicationActionGenerator);
         String recordingJavascript = recordingJavascriptGenerator.generate(applicationConfiguration);
         System.out.println(recordingJavascript);
         StringReader stringReader = new StringReader(recordingJavascript);
-        JavascriptInjector javascriptInjector = new JavascriptInjector(stringReader);
+        JavascriptInjector javascriptInjector = javascriptInjectorSupplier.get(stringReader);
         return this.browserNameToSupplierMap.get(browserName).get(pathToDriver, javascriptInjector);
     }
 

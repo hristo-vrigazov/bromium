@@ -4,6 +4,7 @@ import com.google.inject.Binder;
 import com.google.inject.Module;
 import com.google.inject.Provides;
 import com.google.inject.TypeLiteral;
+import com.google.inject.name.Names;
 import com.hribol.bromium.common.generation.common.EmptyFunction;
 import com.hribol.bromium.common.generation.record.RecorderFunctionRegistry;
 import com.hribol.bromium.common.generation.record.BaseRecorderFunctionFactory;
@@ -33,6 +34,7 @@ public class RecordingInjectionModule implements Module {
                 .to(RecordingWebDriverActionsOnly.class);
         binder.bind(new TypeLiteral<FunctionRegistry<NameWebDriverActionConfiguration>>(){})
                 .to(RecorderFunctionRegistry.class);
+        binder.bindConstant().annotatedWith(Names.named("recordTemplateResource")).to("/record.js");
     }
 
     @Provides

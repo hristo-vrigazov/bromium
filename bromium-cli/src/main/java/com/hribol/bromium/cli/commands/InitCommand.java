@@ -3,6 +3,7 @@ package com.hribol.bromium.cli.commands;
 import com.google.inject.Inject;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.utils.ConfigurationUtils;
+import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationDumper;
 import org.beryx.textio.TextIO;
 
 import java.io.IOException;
@@ -15,10 +16,12 @@ public class InitCommand implements Command {
     private TextIO textIO;
     private ApplicationConfiguration applicationConfiguration;
     private PromptUtils promptUtils;
+    private ApplicationConfigurationDumper applicationConfigurationDumper;
 
     @Inject
-    public InitCommand(PromptUtils promptUtils) {
+    public InitCommand(PromptUtils promptUtils, ApplicationConfigurationDumper applicationConfigurationDumper) {
         this.promptUtils = promptUtils;
+        this.applicationConfigurationDumper = applicationConfigurationDumper;
     }
 
     @Override
@@ -45,7 +48,7 @@ public class InitCommand implements Command {
             String outputFilename = textIO
                     .newStringInputReader()
                     .read("Where should I save the configuration");
-            ConfigurationUtils.dumpApplicationConfiguration(applicationConfiguration, outputFilename);
+            applicationConfigurationDumper.dumpApplicationConfiguration(applicationConfiguration, outputFilename);
         } catch (IOException e) {
             textIO.getTextTerminal().print(e.getMessage());
         }

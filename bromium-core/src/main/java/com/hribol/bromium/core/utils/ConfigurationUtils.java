@@ -18,34 +18,6 @@ import java.util.Map;
  */
 public class ConfigurationUtils {
 
-    /**
-     * Creates an {@link ApplicationConfiguration} by a given file
-     * @param file the file in which the configuration is written
-     * @return the {@link ApplicationConfiguration}
-     * @throws IOException if there is a problem when reading from file
-     */
-    public static ApplicationConfiguration parseApplicationConfiguration(File file) throws IOException {
-        FileInputStream fileInputStream = new FileInputStream(file);
-        return parseApplicationConfiguration(fileInputStream);
-    }
-
-    public static ApplicationConfiguration parseApplicationConfiguration(InputStream inputStream) throws IOException {
-        Gson gson = new GsonBuilder().create();
-        String configuration = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-        return gson.fromJson(configuration, ApplicationConfiguration.class);
-    }
-
-    public static ApplicationConfiguration parseApplicationConfiguration(String filename) throws IOException {
-        return parseApplicationConfiguration(new File(filename));
-    }
-
-    public static void dumpApplicationConfiguration(ApplicationConfiguration applicationConfiguration, String outputFilename) throws IOException {
-        Writer writer = new FileWriter(outputFilename);
-        Gson gson = new GsonBuilder().create();
-        gson.toJson(applicationConfiguration, writer);
-        writer.close();
-    }
-
     public static List<Map<String, String>> readSteps(String pathToSerializedTest) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(pathToSerializedTest);
         return readSteps(fileInputStream);
