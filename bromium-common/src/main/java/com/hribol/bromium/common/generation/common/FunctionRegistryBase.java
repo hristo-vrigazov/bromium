@@ -8,15 +8,15 @@ import java.util.Set;
 /**
  * Created by hvrigazov on 01.07.17.
  */
-public class TypeRegistryBase
+public class FunctionRegistryBase
         <T extends RegistryInformation<S>,
         V extends GeneratedInvocation,
-        S extends GenerationFunctionInformation> implements TypeRegistry<T> {
+        S extends GenerationFunctionInformation> implements FunctionRegistry<T> {
     private Set<GeneratedFunction<T, V>> functions = new HashSet<>();
     private Set<GeneratedInvocation> invocations = new HashSet<>();
     private GeneratedFunctionFactory<GeneratedFunction<T, V>, S> generatedFunctionFactory;
 
-    public TypeRegistryBase(GeneratedFunctionFactory<GeneratedFunction<T, V>, S> generatedFunctionFactory) {
+    public FunctionRegistryBase(GeneratedFunctionFactory<GeneratedFunction<T, V>, S> generatedFunctionFactory) {
         this.generatedFunctionFactory = generatedFunctionFactory;
     }
 

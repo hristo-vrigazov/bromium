@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by hvrigazov on 02.07.17.
  */
-public class ReplayTypeRegistryTest {
+public class ReplayFunctionRegistryTest {
 
     @Test
     public void addsFunctionDeclarationCodeIfFunctionIsNotRegistered() {
@@ -36,7 +36,7 @@ public class ReplayTypeRegistryTest {
 
         String expected = functionDefinition + functionInvocation;
         // Act
-        ReplayTypeRegistry replayTypeRegistry = new ReplayTypeRegistry(baseReplayFunctionFactory);
+        ReplayFunctionRegistry replayTypeRegistry = new ReplayFunctionRegistry(baseReplayFunctionFactory);
         String generatedString = replayTypeRegistry.generate(generationInformation);
 
         // Assert

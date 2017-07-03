@@ -62,7 +62,7 @@ public class ReplayCommand implements Command {
 
             JsCollector jsCollector = new JsCollector();
             BaseReplayFunctionFactory baseReplayFunctionFactory = new PredefinedReplayFunctionFactory(EmptyFunction::new, jsCollector);
-            ReplayTypeRegistry replayTypeRegistry = new ReplayTypeRegistry(baseReplayFunctionFactory);
+            ReplayFunctionRegistry replayTypeRegistry = new ReplayFunctionRegistry(baseReplayFunctionFactory);
             IncludeInvokeGenerator<StepAndWebDriverActionConfiguration> includeInvokeGenerator = new IncludeInvokeGenerator<>(replayTypeRegistry);
 
             StepAndActionConfigurationSupplier stepAndActionConfigurationSupplier = new StepAndActionConfigurationSupplier();

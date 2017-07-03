@@ -12,7 +12,7 @@ public class RecorderTypeRegistryTest {
 //    public void ifRecorderTypeActionWhichIsNotInRegistryIsAddedThenItsFunctionAndInvocationAreGenerated() {
 //        MocksContainer mocks = new MocksContainer();
 //
-//        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(mocks.recorderFunctionFactory);
+//        RecorderFunctionRegistry recorderTypeRegistry = new RecorderFunctionRegistry(mocks.recorderFunctionFactory);
 //
 //        String generatedCode = recorderTypeRegistry.generate(mocks.eventName, mocks.webDriverActionConfiguration);
 //
@@ -23,7 +23,7 @@ public class RecorderTypeRegistryTest {
 //    public void ifBothRecorderTypeAndInvocationAreIncludedEmptyStringIsReturned() {
 //        MocksContainer mocks = new MocksContainer();
 //
-//        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(mocks.recorderFunctionFactory);
+//        RecorderFunctionRegistry recorderTypeRegistry = new RecorderFunctionRegistry(mocks.recorderFunctionFactory);
 //
 //        recorderTypeRegistry.register(mocks.eventName, mocks.webDriverActionConfiguration);
 //
@@ -36,7 +36,7 @@ public class RecorderTypeRegistryTest {
 //    public void ifRecorderTypeIsRegisteredAndInvocationIsNotThenInvocationStringIsReturned() {
 //        MocksContainer mocks = new MocksContainer();
 //
-//        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(mocks.recorderFunctionFactory);
+//        RecorderFunctionRegistry recorderTypeRegistry = new RecorderFunctionRegistry(mocks.recorderFunctionFactory);
 //
 //        recorderTypeRegistry.register(mocks.eventName, mocks.webDriverActionConfiguration);
 //
@@ -49,7 +49,7 @@ public class RecorderTypeRegistryTest {
 //    public void registeringTwoInvocationsOfTheSameFunction() {
 //        MocksContainer mocks = new MocksContainer();
 //
-//        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(mocks.recorderFunctionFactory);
+//        RecorderFunctionRegistry recorderTypeRegistry = new RecorderFunctionRegistry(mocks.recorderFunctionFactory);
 //
 //        recorderTypeRegistry.register(mocks.eventName, mocks.webDriverActionConfiguration);
 //        recorderTypeRegistry.register(mocks.eventName, mocks.anotherWebDriverActionConfiguration);
@@ -67,7 +67,7 @@ public class RecorderTypeRegistryTest {
 //    public void registeringAnInvocationTwoTimes() {
 //        MocksContainer mocks = new MocksContainer();
 //
-//        RecorderTypeRegistry recorderTypeRegistry = new RecorderTypeRegistry(mocks.recorderFunctionFactory);
+//        RecorderFunctionRegistry recorderTypeRegistry = new RecorderFunctionRegistry(mocks.recorderFunctionFactory);
 //
 //        recorderTypeRegistry.register(mocks.eventName, mocks.webDriverActionConfiguration);
 //        recorderTypeRegistry.register(mocks.eventName, mocks.webDriverActionConfiguration);

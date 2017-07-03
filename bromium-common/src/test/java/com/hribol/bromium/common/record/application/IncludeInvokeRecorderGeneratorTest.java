@@ -15,7 +15,7 @@ public class IncludeInvokeRecorderGeneratorTest {
 //        String functionCode = "function something(a) {}", invocationCode = "something(#a'";
 //
 //        WebDriverActionConfiguration webDriverActionConfiguration = mock(WebDriverActionConfiguration.class);
-//        RecorderTypeRegistry recordingTypeRegistry = mock(RecorderTypeRegistry.class);
+//        RecorderFunctionRegistry recordingTypeRegistry = mock(RecorderFunctionRegistry.class);
 //        when(recordingTypeRegistry.generate(eventName, webDriverActionConfiguration))
 //                .thenReturn(functionCode, invocationCode);
 //
