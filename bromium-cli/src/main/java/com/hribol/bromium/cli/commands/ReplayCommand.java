@@ -1,6 +1,10 @@
 package com.hribol.bromium.cli.commands;
 
 import com.hribol.bromium.cli.factory.ExecutionFactory;
+import com.hribol.bromium.cli.suppliers.DefaultApplicationActionFactorySupplier;
+import com.hribol.bromium.cli.suppliers.PredefinedWebDriverActionFactorySupplier;
+import com.hribol.bromium.cli.suppliers.TestCaseStepToApplicationActionConverterSupplier;
+import com.hribol.bromium.cli.suppliers.TestScenarioFactorySupplier;
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.common.EmptyFunction;
 import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
@@ -41,23 +45,23 @@ public class ReplayCommand implements Command {
         this.builder = builder;
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
     @Override
     public void run() {
         try {
-            ApplicationConfiguration applicationConfiguration = builder.applicationConfigurationParser
-                    .parseApplicationConfiguration(builder.applicationConfigurationInputStream);
+            ApplicationConfiguration applicationConfiguration = builder.getApplicationConfigurationParser()
+                    .parseApplicationConfiguration(builder.getApplicationConfigurationInputStream());
 
-            WebDriverActionFactory webDriverActionFactory = new PredefinedWebDriverActionFactory(builder.baseURL);
+            WebDriverActionFactory webDriverActionFactory = builder.getPredefinedWebDriverActionFactorySupplier()
+                    .get(builder.getBaseURL());
             TestCaseStepToApplicationActionConverter testCaseStepToApplicationActionConverter =
-                    new TestCaseStepToApplicationActionConverter(webDriverActionFactory);
-            ApplicationActionFactory applicationActionFactory = new DefaultApplicationActionFactory(applicationConfiguration,
-                    testCaseStepToApplicationActionConverter);
-            TestScenarioFactory testScenarioFactory = new TestScenarioFactory(applicationActionFactory);
-            List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(builder.testInputStream);
+                    builder.getTestCaseStepToApplicationActionConverterSupplier().get(webDriverActionFactory);
+            ApplicationActionFactory applicationActionFactory = builder
+                    .getDefaultApplicationActionFactorySupplier().get(
+                            applicationConfiguration,
+                            testCaseStepToApplicationActionConverter);
+
+            TestScenarioFactory testScenarioFactory = builder.getTestScenarioFactorySupplier().get(applicationActionFactory);
+            List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(builder.getTestInputStream());
             StepsAndConfiguration stepsAndConfiguration = new StepsAndConfiguration(testCaseSteps, applicationConfiguration);
 
             String baseTemplate = IOUtils.toString(getClass().getResourceAsStream("/replay.js"));
@@ -79,13 +83,13 @@ public class ReplayCommand implements Command {
             String javascriptInjectionCode = javascriptInjector.getInjectionCode();
             System.out.println(javascriptInjectionCode);
             ExecutorBuilder executor = new ExecutorBuilder()
-                    .pathToDriverExecutable(builder.pathToDriver)
-                    .baseURL(builder.baseURL)
-                    .timeoutInSeconds(builder.timeout)
-                    .measurementsPrecisionInMilliseconds(builder.measurementsPrecisionMilli)
+                    .pathToDriverExecutable(builder.getPathToDriver())
+                    .baseURL(builder.getBaseURL())
+                    .timeoutInSeconds(builder.getTimeout())
+                    .measurementsPrecisionInMilliseconds(builder.getMeasurementsPrecisionMilli())
                     .javascriptInjectionCode(javascriptInjectionCode);
 
-            WebDriverActionExecution execution = builder.executionFactory.create(builder.browserType, executor);
+            WebDriverActionExecution execution = builder.getExecutionFactory().create(builder.getBrowserType(), executor);
 
             ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, execution);
             ExecutionReport report = replayBrowser.replay(testCaseSteps);
@@ -106,6 +110,46 @@ public class ReplayCommand implements Command {
         private String browserType;
         private ExecutionFactory executionFactory;
         private ApplicationConfigurationParser applicationConfigurationParser;
+        private PredefinedWebDriverActionFactorySupplier predefinedWebDriverActionFactorySupplier;
+        private TestCaseStepToApplicationActionConverterSupplier testCaseStepToApplicationActionConverterSupplier;
+        private DefaultApplicationActionFactorySupplier defaultApplicationActionFactorySupplier;
+        private TestScenarioFactorySupplier testScenarioFactorySupplier;
+
+        public String getPathToDriver() {
+            return pathToDriver;
+        }
+
+        public InputStream getApplicationConfigurationInputStream() {
+            return applicationConfigurationInputStream;
+        }
+
+        public InputStream getTestInputStream() {
+            return testInputStream;
+        }
+
+        public Integer getTimeout() {
+            return timeout;
+        }
+
+        public Integer getMeasurementsPrecisionMilli() {
+            return measurementsPrecisionMilli;
+        }
+
+        public String getBaseURL() {
+            return baseURL;
+        }
+
+        public String getBrowserType() {
+            return browserType;
+        }
+
+        public ExecutionFactory getExecutionFactory() {
+            return executionFactory;
+        }
+
+        public ApplicationConfigurationParser getApplicationConfigurationParser() {
+            return applicationConfigurationParser;
+        }
 
         public Builder pathToDriver(String pathToDriver) {
             this.pathToDriver = pathToDriver;
@@ -117,7 +161,11 @@ public class ReplayCommand implements Command {
         }
 
         public Builder applicationConfiguration(File configurationFile) throws FileNotFoundException {
-            this.applicationConfigurationInputStream = new FileInputStream(configurationFile);
+            return applicationConfigurationInputStream(new FileInputStream(configurationFile));
+        }
+
+        public Builder applicationConfigurationInputStream(InputStream inputStream) {
+            this.applicationConfigurationInputStream = inputStream;
             return this;
         }
 
@@ -164,8 +212,48 @@ public class ReplayCommand implements Command {
             return this;
         }
 
+        public Builder predefinedWebDriverActionFactorySupplier(PredefinedWebDriverActionFactorySupplier supplier) {
+            this.predefinedWebDriverActionFactorySupplier = supplier;
+            return this;
+        }
+
+        public PredefinedWebDriverActionFactorySupplier getPredefinedWebDriverActionFactorySupplier() {
+            return predefinedWebDriverActionFactorySupplier;
+        }
+
         public ReplayCommand build() {
             return new ReplayCommand(this);
         }
+
+
+        public TestCaseStepToApplicationActionConverterSupplier getTestCaseStepToApplicationActionConverterSupplier() {
+            return testCaseStepToApplicationActionConverterSupplier;
+        }
+
+        public Builder testCaseStepToApplicationActionConverterSupplier(
+                TestCaseStepToApplicationActionConverterSupplier supplier) {
+            this.testCaseStepToApplicationActionConverterSupplier = supplier;
+            return this;
+        }
+
+        public Builder defaultApplicationActionFactorySupplier(
+                DefaultApplicationActionFactorySupplier supplier) {
+            this.defaultApplicationActionFactorySupplier = supplier;
+            return this;
+        }
+
+        public DefaultApplicationActionFactorySupplier getDefaultApplicationActionFactorySupplier() {
+            return defaultApplicationActionFactorySupplier;
+        }
+
+        public TestScenarioFactorySupplier getTestScenarioFactorySupplier() {
+            return testScenarioFactorySupplier;
+        }
+
+        public Builder testScenarioFactorySupplier(TestScenarioFactorySupplier testScenarioFactorySupplier) {
+            this.testScenarioFactorySupplier = testScenarioFactorySupplier;
+            return this;
+        }
+
     }
 }

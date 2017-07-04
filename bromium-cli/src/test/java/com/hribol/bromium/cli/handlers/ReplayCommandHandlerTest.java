@@ -2,14 +2,14 @@ package com.hribol.bromium.cli.handlers;
 
 import com.hribol.bromium.cli.commands.ReplayCommand;
 import com.hribol.bromium.cli.factory.ExecutionFactory;
-import com.hribol.bromium.cli.suppliers.ReplayCommandBuilderSupplier;
+import com.hribol.bromium.cli.suppliers.*;
+import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
 import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
@@ -53,19 +53,35 @@ public class ReplayCommandHandlerTest {
 
         ExecutionFactory executionFactory = mock(ExecutionFactory.class);
         ReplayCommandBuilderSupplier replayCommandBuilderSupplier = mock(ReplayCommandBuilderSupplier.class);
-        CommandHandler commandHandler = new ReplayCommandHandler(executionFactory, replayCommandBuilderSupplier);
+        ApplicationConfigurationParser applicationConfigurationParser = mock(ApplicationConfigurationParser.class);
+        PredefinedWebDriverActionFactorySupplier predefinedWebDriverActionFactorySupplier = mock(PredefinedWebDriverActionFactorySupplier.class);
+        TestCaseStepToApplicationActionConverterSupplier testCaseStepToApplicationActionConverterSupplier = mock(TestCaseStepToApplicationActionConverterSupplier.class);
+        DefaultApplicationActionFactorySupplier defaultApplicationActionFactorySupplier = mock(DefaultApplicationActionFactorySupplier.class);
+        TestScenarioFactorySupplier testScenarioFactorySupplier = mock(TestScenarioFactorySupplier.class);
+        CommandHandler commandHandler = new ReplayCommandHandler(executionFactory,
+                replayCommandBuilderSupplier,
+                applicationConfigurationParser,
+                predefinedWebDriverActionFactorySupplier,
+                testCaseStepToApplicationActionConverterSupplier,
+                defaultApplicationActionFactorySupplier,
+                testScenarioFactorySupplier);
 
         ReplayCommand command = mock(ReplayCommand.class);
 
         ReplayCommand.Builder builder = mock(ReplayCommand.Builder.class);
         when(builder.pathToDriver(pathToDriver)).thenReturn(builder);
         when(builder.applicationConfiguration(configuration)).thenReturn(builder);
+        when(builder.applicationConfigurationParser(applicationConfigurationParser)).thenReturn(builder);
         when(builder.testCase(testCase)).thenReturn(builder);
         when(builder.timeout(10)).thenReturn(builder);
         when(builder.measurementsPrecisionMilli(500)).thenReturn(builder);
         when(builder.baseURL(url)).thenReturn(builder);
         when(builder.browserType(browserType)).thenReturn(builder);
         when(builder.executionFactory(any(ExecutionFactory.class))).thenReturn(builder);
+        when(builder.predefinedWebDriverActionFactorySupplier(any())).thenReturn(builder);
+        when(builder.testCaseStepToApplicationActionConverterSupplier(any())).thenReturn(builder);
+        when(builder.defaultApplicationActionFactorySupplier(any())).thenReturn(builder);
+        when(builder.testScenarioFactorySupplier(any())).thenReturn(builder);
         when(builder.build()).thenReturn(command);
 
 

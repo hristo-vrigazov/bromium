@@ -1,9 +1,9 @@
 package com.hribol.bromium.cli.handlers;
 
 import com.google.inject.Inject;
-import com.hribol.bromium.cli.commands.ReplayCommand;
 import com.hribol.bromium.cli.factory.ExecutionFactory;
-import com.hribol.bromium.cli.suppliers.ReplayCommandBuilderSupplier;
+import com.hribol.bromium.cli.suppliers.*;
+import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
 
 import java.io.FileNotFoundException;
 import java.util.Map;
@@ -17,11 +17,27 @@ public class ReplayCommandHandler implements CommandHandler {
 
     private ExecutionFactory executionFactory;
     private ReplayCommandBuilderSupplier replayCommandBuilderSupplier;
+    private ApplicationConfigurationParser applicationConfigurationParser;
+    private PredefinedWebDriverActionFactorySupplier predefinedWebDriverActionFactorySupplier;
+    private TestCaseStepToApplicationActionConverterSupplier testCaseStepToApplicationActionConverterSupplier;
+    private DefaultApplicationActionFactorySupplier defaultApplicationActionFactorySupplier;
+    private TestScenarioFactorySupplier testScenarioFactorySupplier;
 
     @Inject
-    public ReplayCommandHandler(ExecutionFactory executionFactory, ReplayCommandBuilderSupplier replayCommandBuilderSupplier) {
+    public ReplayCommandHandler(ExecutionFactory executionFactory,
+                                ReplayCommandBuilderSupplier replayCommandBuilderSupplier,
+                                ApplicationConfigurationParser applicationConfigurationParser,
+                                PredefinedWebDriverActionFactorySupplier predefinedWebDriverActionFactorySupplier,
+                                TestCaseStepToApplicationActionConverterSupplier testCaseStepToApplicationActionConverterSupplier,
+                                DefaultApplicationActionFactorySupplier defaultApplicationActionFactorySupplier,
+                                TestScenarioFactorySupplier testScenarioFactorySupplier) {
         this.executionFactory = executionFactory;
         this.replayCommandBuilderSupplier = replayCommandBuilderSupplier;
+        this.applicationConfigurationParser = applicationConfigurationParser;
+        this.predefinedWebDriverActionFactorySupplier = predefinedWebDriverActionFactorySupplier;
+        this.testCaseStepToApplicationActionConverterSupplier = testCaseStepToApplicationActionConverterSupplier;
+        this.defaultApplicationActionFactorySupplier = defaultApplicationActionFactorySupplier;
+        this.testScenarioFactorySupplier = testScenarioFactorySupplier;
     }
 
     @Override
@@ -36,6 +52,7 @@ public class ReplayCommandHandler implements CommandHandler {
 
         replayCommandBuilderSupplier.get()
                 .pathToDriver(pathToDriver)
+                .applicationConfigurationParser(applicationConfigurationParser)
                 .applicationConfiguration(pathToApplicationConfiguration)
                 .testCase(pathToSerializedTest)
                 .timeout(timeout)
@@ -43,6 +60,10 @@ public class ReplayCommandHandler implements CommandHandler {
                 .baseURL(baseURL)
                 .browserType(browserType)
                 .executionFactory(executionFactory)
+                .predefinedWebDriverActionFactorySupplier(predefinedWebDriverActionFactorySupplier)
+                .testCaseStepToApplicationActionConverterSupplier(testCaseStepToApplicationActionConverterSupplier)
+                .defaultApplicationActionFactorySupplier(defaultApplicationActionFactorySupplier)
+                .testScenarioFactorySupplier(testScenarioFactorySupplier)
                 .build()
                 .run();
 

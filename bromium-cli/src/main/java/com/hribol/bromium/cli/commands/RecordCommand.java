@@ -20,23 +20,15 @@ public class RecordCommand implements Command {
     private RecordBrowserFactory recordBrowserFactory;
     private PromptUtils promptUtils;
 
-    @Inject
-    public RecordCommand(String pathToDriver,
-                         String pathToApplicationConfiguration,
-                         String baseUrl,
-                         String outputFile,
-                         int timeout,
-                         String browserType,
-                         RecordBrowserFactory recordBrowserFactory,
-                         PromptUtils promptUtils) {
-        this.pathToDriver = pathToDriver;
-        this.pathToApplicationConfiguration = pathToApplicationConfiguration;
-        this.baseUrl = baseUrl;
-        this.outputFile = outputFile;
-        this.timeout = timeout;
-        this.browserType = browserType;
-        this.recordBrowserFactory = recordBrowserFactory;
-        this.promptUtils = promptUtils;
+    public RecordCommand(Builder builder) {
+        this.pathToDriver = builder.getPathToDriver();
+        this.pathToApplicationConfiguration = builder.getPathToApplicationConfiguration();
+        this.baseUrl = builder.getBaseUrl();
+        this.outputFile = builder.getOutputFile();
+        this.timeout = builder.getTimeout();
+        this.browserType = builder.getBrowserType();
+        this.recordBrowserFactory = builder.getRecordBrowserFactory();
+        this.promptUtils = builder.getPromptUtils();
     }
 
     @Override
@@ -51,5 +43,92 @@ public class RecordCommand implements Command {
             e.printStackTrace();
         }
 
+    }
+
+    public static class Builder {
+        public String getPathToDriver() {
+            return pathToDriver;
+        }
+
+        public String getPathToApplicationConfiguration() {
+            return pathToApplicationConfiguration;
+        }
+
+        public String getBaseUrl() {
+            return baseUrl;
+        }
+
+        public String getOutputFile() {
+            return outputFile;
+        }
+
+        public String getBrowserType() {
+            return browserType;
+        }
+
+        public int getTimeout() {
+            return timeout;
+        }
+
+        public RecordBrowserFactory getRecordBrowserFactory() {
+            return recordBrowserFactory;
+        }
+
+        public PromptUtils getPromptUtils() {
+            return promptUtils;
+        }
+
+        private String pathToDriver;
+        private String pathToApplicationConfiguration;
+        private String baseUrl;
+        private String outputFile;
+        private String browserType;
+        private int timeout;
+        private RecordBrowserFactory recordBrowserFactory;
+        private PromptUtils promptUtils;
+
+        public Builder pathToDriver(String pathToDriver) {
+            this.pathToDriver = pathToDriver;
+            return this;
+        }
+
+        public Builder pathToApplicationConfiguration(String pathToApplicationConfiguration) {
+            this.pathToApplicationConfiguration = pathToApplicationConfiguration;
+            return this;
+        }
+
+        public Builder baseUrl(String baseUrl) {
+            this.baseUrl = baseUrl;
+            return this;
+        }
+
+        public Builder outputFile(String outputFile) {
+            this.outputFile = outputFile;
+            return this;
+        }
+
+        public Builder browserType(String browserType) {
+            this.browserType = browserType;
+            return this;
+        }
+
+        public Builder timeout(int timeout) {
+            this.timeout = timeout;
+            return this;
+        }
+
+        public Builder recordBrowserFactory(RecordBrowserFactory recordBrowserFactory) {
+            this.recordBrowserFactory = recordBrowserFactory;
+            return this;
+        }
+
+        public Builder promptUtils(PromptUtils promptUtils) {
+            this.promptUtils = promptUtils;
+            return this;
+        }
+
+        public RecordCommand build() {
+            return new RecordCommand(this);
+        }
     }
 }
