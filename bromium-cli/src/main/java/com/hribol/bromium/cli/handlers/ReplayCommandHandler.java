@@ -3,10 +3,20 @@ package com.hribol.bromium.cli.handlers;
 import com.google.inject.Inject;
 import com.hribol.bromium.cli.factory.ExecutionFactory;
 import com.hribol.bromium.cli.suppliers.*;
+import com.hribol.bromium.common.builder.JsCollector;
+import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfiguration;
+import com.hribol.bromium.common.generation.helper.suppliers.StepAndActionConfigurationSupplier;
+import com.hribol.bromium.common.generation.helper.suppliers.StepAndWebDriverActionConfigurationSupplier;
+import com.hribol.bromium.common.generation.helper.suppliers.StepsAndConfigurationSupplier;
+import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
+import com.hribol.bromium.common.replay.ExecutorBuilder;
+import com.hribol.bromium.core.generation.GeneratedFunction;
+import com.hribol.bromium.core.suppliers.JavascriptInjectorSupplier;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
 
 import java.io.FileNotFoundException;
 import java.util.Map;
+import java.util.function.Supplier;
 
 import static com.hribol.bromium.cli.handlers.OptUtils.*;
 
@@ -22,6 +32,19 @@ public class ReplayCommandHandler implements CommandHandler {
     private TestCaseStepToApplicationActionConverterSupplier testCaseStepToApplicationActionConverterSupplier;
     private DefaultApplicationActionFactorySupplier defaultApplicationActionFactorySupplier;
     private TestScenarioFactorySupplier testScenarioFactorySupplier;
+    private StepsAndConfigurationSupplier stepsAndConfigurationSupplier;
+    private JsCollector jsCollector;
+    private PredefinedReplayFunctionFactorySupplier predefinedReplayFunctionFactorySupplier;
+    private Supplier<GeneratedFunction<StepAndWebDriverActionConfiguration, ReplayFunctionInvocation>> emptyGeneratedFunctionSupplier;
+    private ReplayFunctionRegistrySupplier replayFunctionRegistrySupplier;
+    private IncludeInvokeGeneratorSupplier includeInvokeGeneratorSupplier;
+    private StepAndActionConfigurationSupplier stepAndActionConfigurationSupplier;
+    private StepAndWebDriverActionConfigurationSupplier stepAndWebDriverActionConfigurationSupplier;
+    private ReplayGeneratorByStepAndActionConfigurationSupplier replayGeneratorByStepAndActionConfigurationSupplier;
+    private ReplayingJavascriptGeneratorSupplier replayingJavascriptGeneratorSupplier;
+    private JavascriptInjectorSupplier javascriptInjectorSupplier;
+    private ExecutorBuilder executorBuilder;
+    private ReplayBrowserSupplier replayBrowserSupplier;
 
     @Inject
     public ReplayCommandHandler(ExecutionFactory executionFactory,
@@ -30,7 +53,16 @@ public class ReplayCommandHandler implements CommandHandler {
                                 PredefinedWebDriverActionFactorySupplier predefinedWebDriverActionFactorySupplier,
                                 TestCaseStepToApplicationActionConverterSupplier testCaseStepToApplicationActionConverterSupplier,
                                 DefaultApplicationActionFactorySupplier defaultApplicationActionFactorySupplier,
-                                TestScenarioFactorySupplier testScenarioFactorySupplier) {
+                                TestScenarioFactorySupplier testScenarioFactorySupplier,
+                                StepsAndConfigurationSupplier stepsAndConfigurationSupplier,
+                                JsCollector jsCollector,
+                                PredefinedReplayFunctionFactorySupplier predefinedReplayFunctionFactorySupplier,
+                                Supplier<GeneratedFunction<StepAndWebDriverActionConfiguration, ReplayFunctionInvocation>> emptyGeneratedFunctionSupplier,
+                                ReplayFunctionRegistrySupplier replayFunctionRegistrySupplier,
+                                IncludeInvokeGeneratorSupplier includeInvokeGeneratorSupplier,
+                                StepAndActionConfigurationSupplier stepAndActionConfigurationSupplier,
+                                StepAndWebDriverActionConfigurationSupplier stepAndWebDriverActionConfigurationSupplier,
+                                ReplayGeneratorByStepAndActionConfigurationSupplier replayGeneratorByStepAndActionConfigurationSupplier, ReplayingJavascriptGeneratorSupplier replayingJavascriptGeneratorSupplier, JavascriptInjectorSupplier javascriptInjectorSupplier, ExecutorBuilder executorBuilder, ReplayBrowserSupplier replayBrowserSupplier) {
         this.executionFactory = executionFactory;
         this.replayCommandBuilderSupplier = replayCommandBuilderSupplier;
         this.applicationConfigurationParser = applicationConfigurationParser;
@@ -38,6 +70,19 @@ public class ReplayCommandHandler implements CommandHandler {
         this.testCaseStepToApplicationActionConverterSupplier = testCaseStepToApplicationActionConverterSupplier;
         this.defaultApplicationActionFactorySupplier = defaultApplicationActionFactorySupplier;
         this.testScenarioFactorySupplier = testScenarioFactorySupplier;
+        this.stepsAndConfigurationSupplier = stepsAndConfigurationSupplier;
+        this.jsCollector = jsCollector;
+        this.predefinedReplayFunctionFactorySupplier = predefinedReplayFunctionFactorySupplier;
+        this.emptyGeneratedFunctionSupplier = emptyGeneratedFunctionSupplier;
+        this.replayFunctionRegistrySupplier = replayFunctionRegistrySupplier;
+        this.includeInvokeGeneratorSupplier = includeInvokeGeneratorSupplier;
+        this.stepAndActionConfigurationSupplier = stepAndActionConfigurationSupplier;
+        this.stepAndWebDriverActionConfigurationSupplier = stepAndWebDriverActionConfigurationSupplier;
+        this.replayGeneratorByStepAndActionConfigurationSupplier = replayGeneratorByStepAndActionConfigurationSupplier;
+        this.replayingJavascriptGeneratorSupplier = replayingJavascriptGeneratorSupplier;
+        this.javascriptInjectorSupplier = javascriptInjectorSupplier;
+        this.executorBuilder = executorBuilder;
+        this.replayBrowserSupplier = replayBrowserSupplier;
     }
 
     @Override
@@ -64,6 +109,19 @@ public class ReplayCommandHandler implements CommandHandler {
                 .testCaseStepToApplicationActionConverterSupplier(testCaseStepToApplicationActionConverterSupplier)
                 .defaultApplicationActionFactorySupplier(defaultApplicationActionFactorySupplier)
                 .testScenarioFactorySupplier(testScenarioFactorySupplier)
+                .stepsAndConfigurationSupplier(stepsAndConfigurationSupplier)
+                .jsCollector(jsCollector)
+                .predefinedReplayFunctionFactorySupplier(predefinedReplayFunctionFactorySupplier)
+                .emptyGeneratedFunctionSupplier(emptyGeneratedFunctionSupplier)
+                .replayFunctionRegistrySupplier(replayFunctionRegistrySupplier)
+                .includeInvokeGeneratorSupplier(includeInvokeGeneratorSupplier)
+                .stepAndActionConfigurationSupplier(stepAndActionConfigurationSupplier)
+                .stepAndWebDriverActionConfigurationSupplier(stepAndWebDriverActionConfigurationSupplier)
+                .replayGeneratorByStepAndActionConfigurationSupplier(replayGeneratorByStepAndActionConfigurationSupplier)
+                .replayingJavascriptGeneratorSupplier(replayingJavascriptGeneratorSupplier)
+                .javascriptInjectorSupplier(javascriptInjectorSupplier)
+                .executorBuilder(executorBuilder)
+                .replayBrowserSupplier(replayBrowserSupplier)
                 .build()
                 .run();
 

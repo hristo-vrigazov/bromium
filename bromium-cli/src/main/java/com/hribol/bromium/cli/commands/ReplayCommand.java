@@ -1,10 +1,7 @@
 package com.hribol.bromium.cli.commands;
 
 import com.hribol.bromium.cli.factory.ExecutionFactory;
-import com.hribol.bromium.cli.suppliers.DefaultApplicationActionFactorySupplier;
-import com.hribol.bromium.cli.suppliers.PredefinedWebDriverActionFactorySupplier;
-import com.hribol.bromium.cli.suppliers.TestCaseStepToApplicationActionConverterSupplier;
-import com.hribol.bromium.cli.suppliers.TestScenarioFactorySupplier;
+import com.hribol.bromium.cli.suppliers.*;
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.common.EmptyFunction;
 import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
@@ -12,13 +9,15 @@ import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfigu
 import com.hribol.bromium.common.generation.helper.StepsAndConfiguration;
 import com.hribol.bromium.common.generation.helper.suppliers.StepAndActionConfigurationSupplier;
 import com.hribol.bromium.common.generation.helper.suppliers.StepAndWebDriverActionConfigurationSupplier;
+import com.hribol.bromium.common.generation.helper.suppliers.StepsAndConfigurationSupplier;
 import com.hribol.bromium.common.generation.replay.*;
-import com.hribol.bromium.common.replay.factory.DefaultApplicationActionFactory;
+import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
 import com.hribol.bromium.common.replay.factory.TestCaseStepToApplicationActionConverter;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
+import com.hribol.bromium.core.generation.GeneratedFunction;
+import com.hribol.bromium.core.suppliers.JavascriptInjectorSupplier;
 import com.hribol.bromium.core.utils.ConfigurationUtils;
 import com.hribol.bromium.core.utils.JavascriptInjector;
-import com.hribol.bromium.common.replay.factory.PredefinedWebDriverActionFactory;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
 import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
@@ -33,6 +32,7 @@ import java.io.*;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * Created by hvrigazov on 11.04.17.
@@ -62,27 +62,34 @@ public class ReplayCommand implements Command {
 
             TestScenarioFactory testScenarioFactory = builder.getTestScenarioFactorySupplier().get(applicationActionFactory);
             List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(builder.getTestInputStream());
-            StepsAndConfiguration stepsAndConfiguration = new StepsAndConfiguration(testCaseSteps, applicationConfiguration);
+            StepsAndConfiguration stepsAndConfiguration = builder.getStepsAndConfigurationSupplier().get(testCaseSteps, applicationConfiguration);
 
             String baseTemplate = IOUtils.toString(getClass().getResourceAsStream("/replay.js"));
 
-            JsCollector jsCollector = new JsCollector();
-            BaseReplayFunctionFactory baseReplayFunctionFactory = new PredefinedReplayFunctionFactory(EmptyFunction::new, jsCollector);
-            ReplayFunctionRegistry replayTypeRegistry = new ReplayFunctionRegistry(baseReplayFunctionFactory);
-            IncludeInvokeGenerator<StepAndWebDriverActionConfiguration> includeInvokeGenerator = new IncludeInvokeGenerator<>(replayTypeRegistry);
+            JsCollector jsCollector = builder.getJsCollector();
+            BaseReplayFunctionFactory baseReplayFunctionFactory = builder.getPredefinedReplayFunctionFactorySupplier()
+                    .get(builder.getEmptyGeneratedFunctionSupplier(), jsCollector);
+            ReplayFunctionRegistry replayFunctionRegistry = builder.getReplayFunctionRegistrySupplier().get(baseReplayFunctionFactory);
+            IncludeInvokeGenerator<StepAndWebDriverActionConfiguration> includeInvokeGenerator =
+                    builder.getIncludeInvokeGeneratorSupplier().get(replayFunctionRegistry);
 
-            StepAndActionConfigurationSupplier stepAndActionConfigurationSupplier = new StepAndActionConfigurationSupplier();
-            StepAndWebDriverActionConfigurationSupplier stepAndWebDriverActionConfigurationSupplier = new StepAndWebDriverActionConfigurationSupplier();
+            StepAndActionConfigurationSupplier stepAndActionConfigurationSupplier =
+                    builder.getStepAndActionConfigurationSupplier();
+            StepAndWebDriverActionConfigurationSupplier stepAndWebDriverActionConfigurationSupplier =
+                    builder.getStepAndWebDriverActionConfigurationSupplier();
 
             ReplayGeneratorByStepAndActionConfiguration replayGeneratorByStepAndActionConfiguration =
-                    new ReplayGeneratorByStepAndActionConfiguration(includeInvokeGenerator, stepAndWebDriverActionConfigurationSupplier);
-            ReplayingJavascriptGenerator replayingJavascriptGenerator = new ReplayingJavascriptGenerator(baseTemplate,
-                    replayGeneratorByStepAndActionConfiguration, stepAndActionConfigurationSupplier);
+                    builder.getReplayGeneratorByStepAndActionConfigurationSupplier()
+                            .get(includeInvokeGenerator, stepAndWebDriverActionConfigurationSupplier);
+            ReplayingJavascriptGenerator replayingJavascriptGenerator =
+                    builder.getReplayingJavascriptGeneratorSupplier().get(baseTemplate,
+                            replayGeneratorByStepAndActionConfiguration, stepAndActionConfigurationSupplier);
+
             StringReader stringReader = new StringReader(replayingJavascriptGenerator.generate(stepsAndConfiguration));
-            JavascriptInjector javascriptInjector = new JavascriptInjector(stringReader);
+            JavascriptInjector javascriptInjector = builder.getJavascriptInjectorSupplier().get(stringReader);
             String javascriptInjectionCode = javascriptInjector.getInjectionCode();
             System.out.println(javascriptInjectionCode);
-            ExecutorBuilder executor = new ExecutorBuilder()
+            ExecutorBuilder executor = builder.getExecutorBuilder()
                     .pathToDriverExecutable(builder.getPathToDriver())
                     .baseURL(builder.getBaseURL())
                     .timeoutInSeconds(builder.getTimeout())
@@ -91,7 +98,7 @@ public class ReplayCommand implements Command {
 
             WebDriverActionExecution execution = builder.getExecutionFactory().create(builder.getBrowserType(), executor);
 
-            ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, execution);
+            ReplayBrowser replayBrowser = builder.getReplayBrowserSupplier().get(testScenarioFactory, execution);
             ExecutionReport report = replayBrowser.replay(testCaseSteps);
             System.out.println(report.getAutomationResult());
         } catch (IOException | URISyntaxException e) {
@@ -114,6 +121,19 @@ public class ReplayCommand implements Command {
         private TestCaseStepToApplicationActionConverterSupplier testCaseStepToApplicationActionConverterSupplier;
         private DefaultApplicationActionFactorySupplier defaultApplicationActionFactorySupplier;
         private TestScenarioFactorySupplier testScenarioFactorySupplier;
+        private StepsAndConfigurationSupplier stepsAndConfigurationSupplier;
+        private JsCollector jsCollector;
+        private PredefinedReplayFunctionFactorySupplier predefinedReplayFunctionFactorySupplier;
+        private Supplier<GeneratedFunction<StepAndWebDriverActionConfiguration, ReplayFunctionInvocation>> emptyGeneratedFunctionSupplier;
+        private ReplayFunctionRegistrySupplier replayFunctionRegistrySupplier;
+        private IncludeInvokeGeneratorSupplier includeInvokeGeneratorSupplier;
+        private StepAndActionConfigurationSupplier stepAndActionConfigurationSupplier;
+        private StepAndWebDriverActionConfigurationSupplier stepAndWebDriverActionConfigurationSupplier;
+        private ReplayGeneratorByStepAndActionConfigurationSupplier replayGeneratorByStepAndActionConfigurationSupplier;
+        private ReplayingJavascriptGeneratorSupplier replayingJavascriptGeneratorSupplier;
+        private JavascriptInjectorSupplier javascriptInjectorSupplier;
+        private ExecutorBuilder executorBuilder;
+        private ReplayBrowserSupplier replayBrowserSupplier;
 
         public String getPathToDriver() {
             return pathToDriver;
@@ -255,5 +275,121 @@ public class ReplayCommand implements Command {
             return this;
         }
 
+        public StepsAndConfigurationSupplier getStepsAndConfigurationSupplier() {
+            return stepsAndConfigurationSupplier;
+        }
+
+        public Builder stepsAndConfigurationSupplier(StepsAndConfigurationSupplier stepsAndConfigurationSupplier) {
+            this.stepsAndConfigurationSupplier = stepsAndConfigurationSupplier;
+            return this;
+        }
+
+        public JsCollector getJsCollector() {
+            return jsCollector;
+        }
+
+        public Builder jsCollector(JsCollector jsCollector) {
+            this.jsCollector = jsCollector;
+            return this;
+        }
+
+        public PredefinedReplayFunctionFactorySupplier getPredefinedReplayFunctionFactorySupplier() {
+            return predefinedReplayFunctionFactorySupplier;
+        }
+
+        public Builder predefinedReplayFunctionFactorySupplier(PredefinedReplayFunctionFactorySupplier predefinedReplayFunctionFactorySupplier) {
+            this.predefinedReplayFunctionFactorySupplier = predefinedReplayFunctionFactorySupplier;
+            return this;
+        }
+
+        public Supplier<GeneratedFunction<StepAndWebDriverActionConfiguration, ReplayFunctionInvocation>> getEmptyGeneratedFunctionSupplier() {
+            return emptyGeneratedFunctionSupplier;
+        }
+
+        public Builder emptyGeneratedFunctionSupplier(Supplier<GeneratedFunction<StepAndWebDriverActionConfiguration, ReplayFunctionInvocation>> emptyGeneratedFunctionSupplier) {
+            this.emptyGeneratedFunctionSupplier = emptyGeneratedFunctionSupplier;
+            return this;
+        }
+
+        public ReplayFunctionRegistrySupplier getReplayFunctionRegistrySupplier() {
+            return replayFunctionRegistrySupplier;
+        }
+
+        public Builder replayFunctionRegistrySupplier(ReplayFunctionRegistrySupplier replayFunctionRegistrySupplier) {
+            this.replayFunctionRegistrySupplier = replayFunctionRegistrySupplier;
+            return this;
+        }
+
+        public IncludeInvokeGeneratorSupplier getIncludeInvokeGeneratorSupplier() {
+            return includeInvokeGeneratorSupplier;
+        }
+
+        public Builder includeInvokeGeneratorSupplier(IncludeInvokeGeneratorSupplier includeInvokeGeneratorSupplier) {
+            this.includeInvokeGeneratorSupplier = includeInvokeGeneratorSupplier;
+            return this;
+        }
+
+        public StepAndActionConfigurationSupplier getStepAndActionConfigurationSupplier() {
+            return stepAndActionConfigurationSupplier;
+        }
+
+        public Builder stepAndActionConfigurationSupplier(StepAndActionConfigurationSupplier stepAndActionConfigurationSupplier) {
+            this.stepAndActionConfigurationSupplier = stepAndActionConfigurationSupplier;
+            return this;
+        }
+
+        public StepAndWebDriverActionConfigurationSupplier getStepAndWebDriverActionConfigurationSupplier() {
+            return stepAndWebDriverActionConfigurationSupplier;
+        }
+
+        public Builder stepAndWebDriverActionConfigurationSupplier(StepAndWebDriverActionConfigurationSupplier stepAndWebDriverActionConfigurationSupplier) {
+            this.stepAndWebDriverActionConfigurationSupplier = stepAndWebDriverActionConfigurationSupplier;
+            return this;
+        }
+
+        public ReplayGeneratorByStepAndActionConfigurationSupplier getReplayGeneratorByStepAndActionConfigurationSupplier() {
+            return replayGeneratorByStepAndActionConfigurationSupplier;
+        }
+
+        public Builder replayGeneratorByStepAndActionConfigurationSupplier(ReplayGeneratorByStepAndActionConfigurationSupplier replayGeneratorByStepAndActionConfigurationSupplier) {
+            this.replayGeneratorByStepAndActionConfigurationSupplier = replayGeneratorByStepAndActionConfigurationSupplier;
+            return this;
+        }
+
+        public ReplayingJavascriptGeneratorSupplier getReplayingJavascriptGeneratorSupplier() {
+            return replayingJavascriptGeneratorSupplier;
+        }
+
+        public Builder replayingJavascriptGeneratorSupplier(ReplayingJavascriptGeneratorSupplier replayingJavascriptGeneratorSupplier) {
+            this.replayingJavascriptGeneratorSupplier = replayingJavascriptGeneratorSupplier;
+            return this;
+        }
+
+        public JavascriptInjectorSupplier getJavascriptInjectorSupplier() {
+            return javascriptInjectorSupplier;
+        }
+
+        public Builder javascriptInjectorSupplier(JavascriptInjectorSupplier javascriptInjectorSupplier) {
+            this.javascriptInjectorSupplier = javascriptInjectorSupplier;
+            return this;
+        }
+
+        public ExecutorBuilder getExecutorBuilder() {
+            return executorBuilder;
+        }
+
+        public Builder executorBuilder(ExecutorBuilder executorBuilder) {
+            this.executorBuilder = executorBuilder;
+            return this;
+        }
+
+        public ReplayBrowserSupplier getReplayBrowserSupplier() {
+            return replayBrowserSupplier;
+        }
+
+        public Builder replayBrowserSupplier(ReplayBrowserSupplier replayBrowserSupplier) {
+            this.replayBrowserSupplier = replayBrowserSupplier;
+            return this;
+        }
     }
 }
