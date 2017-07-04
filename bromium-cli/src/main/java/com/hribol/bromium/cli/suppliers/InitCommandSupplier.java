@@ -2,6 +2,7 @@ package com.hribol.bromium.cli.suppliers;
 
 import com.hribol.bromium.cli.commands.InitCommand;
 import com.hribol.bromium.cli.commands.PromptUtils;
+import com.hribol.bromium.core.suppliers.ApplicationConfigurationSupplier;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationDumper;
 
 /**
@@ -9,7 +10,8 @@ import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationDumper;
  */
 public class InitCommandSupplier {
     public InitCommand get(PromptUtils promptUtils,
-                           ApplicationConfigurationDumper applicationConfigurationDumper) {
-        return new InitCommand(promptUtils, applicationConfigurationDumper);
+                           ApplicationConfigurationDumper applicationConfigurationDumper,
+                           ApplicationConfigurationSupplier applicationConfigurationSupplier) {
+        return new InitCommand(promptUtils, applicationConfigurationDumper, applicationConfigurationSupplier);
     }
 }

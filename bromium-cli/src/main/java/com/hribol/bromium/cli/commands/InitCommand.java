@@ -2,7 +2,7 @@ package com.hribol.bromium.cli.commands;
 
 import com.google.inject.Inject;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
-import com.hribol.bromium.core.utils.ConfigurationUtils;
+import com.hribol.bromium.core.suppliers.ApplicationConfigurationSupplier;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationDumper;
 import org.beryx.textio.TextIO;
 
@@ -17,18 +17,22 @@ public class InitCommand implements Command {
     private ApplicationConfiguration applicationConfiguration;
     private PromptUtils promptUtils;
     private ApplicationConfigurationDumper applicationConfigurationDumper;
+    private ApplicationConfigurationSupplier applicationConfigurationSupplier;
 
     @Inject
-    public InitCommand(PromptUtils promptUtils, ApplicationConfigurationDumper applicationConfigurationDumper) {
+    public InitCommand(PromptUtils promptUtils,
+                       ApplicationConfigurationDumper applicationConfigurationDumper,
+                       ApplicationConfigurationSupplier applicationConfigurationSupplier) {
         this.promptUtils = promptUtils;
         this.applicationConfigurationDumper = applicationConfigurationDumper;
+        this.applicationConfigurationSupplier = applicationConfigurationSupplier;
     }
 
     @Override
     public void run() {
         textIO = promptUtils.getTextIO();
         textIO.getTextTerminal().println("Welcome! I will guide you through creating an automation layer for you application");
-        applicationConfiguration = new ApplicationConfiguration();
+        applicationConfiguration = applicationConfigurationSupplier.get();
 
         textIO.getTextTerminal().println();
         applicationConfiguration.setApplicationName(textIO

@@ -29,9 +29,10 @@ public class VersionCommand implements Command {
 
     @Override
     public void run() {
+        textIO = promptUtils.getTextIO();
+
         try {
             ApplicationConfiguration applicationConfiguration = applicationConfigurationParser.parseApplicationConfiguration(pathToApplicationConfiguration);
-            textIO = promptUtils.getTextIO();
             textIO.getTextTerminal().println("Let's create a new version");
 
             applicationConfiguration.setVersion(promptUtils.promptForVersion());
@@ -45,7 +46,7 @@ public class VersionCommand implements Command {
             applicationConfigurationDumper.dumpApplicationConfiguration(applicationConfiguration, outputFilename);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            textIO.getTextTerminal().print(e.getMessage());
         }
     }
 }

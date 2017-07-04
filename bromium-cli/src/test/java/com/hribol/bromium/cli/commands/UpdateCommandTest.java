@@ -14,9 +14,7 @@ import java.io.IOException;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by hvrigazov on 28.04.17.
@@ -43,9 +41,10 @@ public class UpdateCommandTest {
     @Test
     public void ifExceptionIsThrownDoesNotWriteToFile() throws IOException {
         String outputFilename = "/alibaba/asd";
+        String exceptionMessage = "Something happened!";
         Mocks mocks = new Mocks(outputFilename);
         when(mocks.applicationConfigurationParser
-                .parseApplicationConfiguration(mocks.inputFilename)).thenThrow(new IOException("Something happened!"));
+                .parseApplicationConfiguration(mocks.inputFilename)).thenThrow(new IOException(exceptionMessage));
 
         UpdateCommand updateCommand = new UpdateCommand(
                 mocks.inputFilename,
@@ -53,6 +52,9 @@ public class UpdateCommandTest {
                 mocks.applicationConfigurationParser,
                 mocks.applicationConfigurationDumper);
         updateCommand.run();
+
+        verify(mocks.textTerminal).print(exceptionMessage);
+
     }
 
     private static class Mocks {
