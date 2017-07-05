@@ -64,7 +64,7 @@ public class ReplayCommand implements Command {
             List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(builder.getTestInputStream());
             StepsAndConfiguration stepsAndConfiguration = builder.getStepsAndConfigurationSupplier().get(testCaseSteps, applicationConfiguration);
 
-            String baseTemplate = IOUtils.toString(getClass().getResourceAsStream("/replay.js"));
+            String baseTemplate = IOUtils.toString(getClass().getResourceAsStream(builder.getTemplateResource()));
 
             JsCollector jsCollector = builder.getJsCollector();
             BaseReplayFunctionFactory baseReplayFunctionFactory = builder.getPredefinedReplayFunctionFactorySupplier()
@@ -134,6 +134,7 @@ public class ReplayCommand implements Command {
         private JavascriptInjectorSupplier javascriptInjectorSupplier;
         private ExecutorBuilder executorBuilder;
         private ReplayBrowserSupplier replayBrowserSupplier;
+        private String templateResource;
 
         public String getPathToDriver() {
             return pathToDriver;
@@ -389,6 +390,15 @@ public class ReplayCommand implements Command {
 
         public Builder replayBrowserSupplier(ReplayBrowserSupplier replayBrowserSupplier) {
             this.replayBrowserSupplier = replayBrowserSupplier;
+            return this;
+        }
+
+        public String getTemplateResource() {
+            return templateResource;
+        }
+
+        public Builder templateResource(String templateResource) {
+            this.templateResource = templateResource;
             return this;
         }
     }

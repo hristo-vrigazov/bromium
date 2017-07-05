@@ -22,6 +22,9 @@ import com.hribol.bromium.core.generation.JavascriptGenerator;
 
 import java.util.function.Supplier;
 
+import static com.hribol.bromium.cli.Constants.RECORD_TEMPLATE_RESOURCE;
+import static com.hribol.bromium.cli.Constants.REPLAY_TEMPLATE_RESOURCE;
+
 /**
  * Created by hvrigazov on 09.06.17.
  */
@@ -36,7 +39,9 @@ public class RecordingInjectionModule implements Module {
                 .to(RecordingWebDriverActionsOnly.class);
         binder.bind(new TypeLiteral<FunctionRegistry<NameWebDriverActionConfiguration>>(){})
                 .to(RecorderFunctionRegistry.class);
-        binder.bindConstant().annotatedWith(Names.named("recordTemplateResource")).to("/record.js");
+        binder.bindConstant().annotatedWith(Names.named(RECORD_TEMPLATE_RESOURCE)).to("/record.js");
+        binder.bindConstant().annotatedWith(Names.named(REPLAY_TEMPLATE_RESOURCE)).to("/replay.js");
+
     }
 
     @Provides

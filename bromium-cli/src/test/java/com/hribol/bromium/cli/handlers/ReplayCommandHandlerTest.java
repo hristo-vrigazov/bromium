@@ -81,6 +81,7 @@ public class ReplayCommandHandlerTest {
         JavascriptInjectorSupplier javascriptInjectorSupplier = mock(JavascriptInjectorSupplier.class);
         ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
         ReplayBrowserSupplier replayBrowserSupplier = mock(ReplayBrowserSupplier.class);
+        String templateResource = "/replay.js";
         CommandHandler commandHandler = new ReplayCommandHandler(executionFactory,
                 replayCommandBuilderSupplier,
                 applicationConfigurationParser,
@@ -100,7 +101,8 @@ public class ReplayCommandHandlerTest {
                 replayingJavascriptGeneratorSupplier,
                 javascriptInjectorSupplier,
                 executorBuilder,
-                replayBrowserSupplier);
+                replayBrowserSupplier,
+                templateResource);
 
         ReplayCommand command = mock(ReplayCommand.class);
 
@@ -131,6 +133,7 @@ public class ReplayCommandHandlerTest {
         when(builder.javascriptInjectorSupplier(any())).thenReturn(builder);
         when(builder.executorBuilder(any())).thenReturn(builder);
         when(builder.replayBrowserSupplier(any())).thenReturn(builder);
+        when(builder.templateResource(anyString())).thenReturn(builder);
         when(builder.build()).thenReturn(command);
         when(replayCommandBuilderSupplier.get()).thenReturn(builder);
         commandHandler.handle(opts);

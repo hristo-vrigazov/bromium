@@ -1,6 +1,7 @@
 package com.hribol.bromium.cli.handlers;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import com.hribol.bromium.cli.factory.ExecutionFactory;
 import com.hribol.bromium.cli.suppliers.*;
 import com.hribol.bromium.common.builder.JsCollector;
@@ -18,6 +19,7 @@ import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import static com.hribol.bromium.cli.Constants.REPLAY_TEMPLATE_RESOURCE;
 import static com.hribol.bromium.cli.handlers.OptUtils.*;
 
 /**
@@ -45,6 +47,7 @@ public class ReplayCommandHandler implements CommandHandler {
     private JavascriptInjectorSupplier javascriptInjectorSupplier;
     private ExecutorBuilder executorBuilder;
     private ReplayBrowserSupplier replayBrowserSupplier;
+    private String templateResource;
 
     @Inject
     public ReplayCommandHandler(ExecutionFactory executionFactory,
@@ -62,7 +65,12 @@ public class ReplayCommandHandler implements CommandHandler {
                                 IncludeInvokeGeneratorSupplier includeInvokeGeneratorSupplier,
                                 StepAndActionConfigurationSupplier stepAndActionConfigurationSupplier,
                                 StepAndWebDriverActionConfigurationSupplier stepAndWebDriverActionConfigurationSupplier,
-                                ReplayGeneratorByStepAndActionConfigurationSupplier replayGeneratorByStepAndActionConfigurationSupplier, ReplayingJavascriptGeneratorSupplier replayingJavascriptGeneratorSupplier, JavascriptInjectorSupplier javascriptInjectorSupplier, ExecutorBuilder executorBuilder, ReplayBrowserSupplier replayBrowserSupplier) {
+                                ReplayGeneratorByStepAndActionConfigurationSupplier replayGeneratorByStepAndActionConfigurationSupplier,
+                                ReplayingJavascriptGeneratorSupplier replayingJavascriptGeneratorSupplier,
+                                JavascriptInjectorSupplier javascriptInjectorSupplier,
+                                ExecutorBuilder executorBuilder,
+                                ReplayBrowserSupplier replayBrowserSupplier,
+                                @Named(REPLAY_TEMPLATE_RESOURCE) String templateResource) {
         this.executionFactory = executionFactory;
         this.replayCommandBuilderSupplier = replayCommandBuilderSupplier;
         this.applicationConfigurationParser = applicationConfigurationParser;
@@ -83,6 +91,7 @@ public class ReplayCommandHandler implements CommandHandler {
         this.javascriptInjectorSupplier = javascriptInjectorSupplier;
         this.executorBuilder = executorBuilder;
         this.replayBrowserSupplier = replayBrowserSupplier;
+        this.templateResource = templateResource;
     }
 
     @Override
@@ -122,6 +131,7 @@ public class ReplayCommandHandler implements CommandHandler {
                 .javascriptInjectorSupplier(javascriptInjectorSupplier)
                 .executorBuilder(executorBuilder)
                 .replayBrowserSupplier(replayBrowserSupplier)
+                .templateResource(templateResource)
                 .build()
                 .run();
 

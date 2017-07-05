@@ -19,6 +19,7 @@ import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.hribol.bromium.cli.Constants.RECORD_TEMPLATE_RESOURCE;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
 /**
@@ -34,7 +35,7 @@ public class RecordBrowserFactory {
 
     @Inject
     public RecordBrowserFactory(JavascriptGenerator<ApplicationActionConfiguration> applicationActionGenerator,
-                                @Named("recordTemplateResource") String pathToRecordTemplateResource,
+                                @Named(RECORD_TEMPLATE_RESOURCE) String pathToRecordTemplateResource,
                                 RecordingJavascriptGeneratorSupplier recordingJavascriptGeneratorSupplier,
                                 JavascriptInjectorSupplier javascriptInjectorSupplier,
                                 ApplicationConfigurationParser applicationConfigurationParser) {
