@@ -1,6 +1,6 @@
 package com.hribol.bromium.record;
 
-import com.hribol.bromium.replay.config.utils.ConfigurationUtils;
+import com.hribol.bromium.core.utils.ConfigurationUtils;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.filters.RequestFilter;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.hribol.bromium.replay.config.utils.Constants.SUBMIT_EVENT_URL;
+import static com.hribol.bromium.core.utils.Constants.SUBMIT_EVENT_URL;
 
 /**
  * Created by hvrigazov on 22.04.17.

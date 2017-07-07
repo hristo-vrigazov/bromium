@@ -14,6 +14,10 @@ import java.util.List;
  * Created by hvrigazov on 21.04.17.
  */
 public class LoadingTimesTest {
+
+    private String pathname = "loadingTimes.csv";
+    File file = new File(pathname);
+
     @Test
     public void loadingTimesDumpsFile() throws UnsupportedEncodingException, FileNotFoundException {
         List<Long> loadingMeasurements = new ArrayList<>();
@@ -29,14 +33,21 @@ public class LoadingTimesTest {
         actionTimestamps.add(new Date());
 
         LoadingTimes loadingTimes = new LoadingTimes(actions, loadingMeasurements, actionTimestamps);
-        String pathname = "loadingTimes.csv";
-        File file = new File(pathname);
 
         loadingTimes.dump(file);
         Assert.assertTrue(file.exists());
         Assert.assertTrue(file.delete());
 
         loadingTimes.dump(pathname);
+        Assert.assertTrue(file.exists());
+        Assert.assertTrue(file.delete());
+    }
+
+    @Test
+    public void emptyLoadingTimesDoNotDumpAnything() throws UnsupportedEncodingException, FileNotFoundException {
+        LoadingTimes loadingTimes = LoadingTimes.empty();
+
+        loadingTimes.dump(file);
         Assert.assertTrue(file.exists());
         Assert.assertTrue(file.delete());
     }

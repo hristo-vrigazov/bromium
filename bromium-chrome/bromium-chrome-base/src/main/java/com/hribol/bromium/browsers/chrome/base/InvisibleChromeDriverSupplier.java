@@ -1,6 +1,6 @@
 package com.hribol.bromium.browsers.chrome.base;
 
-import com.hribol.bromium.replay.config.suppliers.InvisibleWebDriverSupplier;
+import com.hribol.bromium.core.suppliers.InvisibleWebDriverSupplier;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;

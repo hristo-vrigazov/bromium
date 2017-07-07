@@ -7,7 +7,7 @@ import net.lightbody.bmp.util.HttpMessageInfo;
 
 import java.net.URI;
 
-import static com.hribol.bromium.replay.config.utils.Utils.isGETFromCurrentHostAndAcceptsHTML;
+import static com.hribol.bromium.core.utils.Utils.isGETFromCurrentHostAndAcceptsHTML;
 
 /**
  * Created by hvrigazov on 22.04.17.

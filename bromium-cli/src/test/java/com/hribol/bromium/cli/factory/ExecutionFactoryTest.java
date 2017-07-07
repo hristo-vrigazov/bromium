@@ -1,7 +1,7 @@
 package com.hribol.bromium.cli.factory;
 
 import com.hribol.bromium.browsers.chrome.replay.ChromeDriverActionExecution;
-import com.hribol.bromium.replay.execution.ExecutorBuilder;
+import com.hribol.bromium.common.replay.ExecutorBuilder;
 import com.hribol.bromium.replay.execution.WebDriverActionExecution;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,9 +1,9 @@
 package com.hribol.bromium.browsers.chrome.record;
 
 import com.hribol.bromium.browsers.chrome.base.VisibleChromeDriverSupplier;
-import com.hribol.bromium.replay.config.suppliers.VisibleWebDriverSupplier;
-import com.hribol.bromium.replay.config.utils.JavascriptInjector;
-import com.hribol.bromium.record.RecordBrowserBase;
+import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
+import com.hribol.bromium.core.utils.JavascriptInjector;
+import com.hribol.bromium.common.record.RecordBrowserBase;
 import org.openqa.selenium.chrome.ChromeDriverService;
 
 import java.io.IOException;

@@ -1,6 +1,6 @@
 package com.hribol.bromium.replay.filters;
 
-import com.hribol.bromium.replay.config.utils.Utils;
+import com.hribol.bromium.core.utils.Utils;
 import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;

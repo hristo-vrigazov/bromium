@@ -15,8 +15,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static com.hribol.bromium.replay.config.utils.Constants.CONDITION_NOT_SATISFIED_URL;
-import static com.hribol.bromium.replay.config.utils.Constants.CONDITION_SATISFIED_URL;
+import static com.hribol.bromium.core.utils.Constants.CONDITION_NOT_SATISFIED_URL;
+import static com.hribol.bromium.core.utils.Constants.CONDITION_SATISFIED_URL;
 
 /**
  * Created by hvrigazov on 22.04.17.

@@ -1,5 +1,7 @@
 package com.hribol.bromium.cli;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.hribol.bromium.cli.handlers.*;
 import org.apache.commons.io.IOUtils;
 import org.docopt.Docopt;
@@ -24,6 +26,7 @@ public class Main {
         static final String VERSION = "version";
     }
 
+    private static Injector injector;
 
     public static void main(String[] args) {
         try {
@@ -31,6 +34,7 @@ public class Main {
             String doc = IOUtils.toString(inputStream);
             Docopt docopt = new Docopt(doc);
             Map<String, Object> opts = docopt.withVersion("bromium 0.1").parse(args);
+            injector = Guice.createInjector(new DefaultModule());
 
             System.out.println(opts);
 
@@ -57,11 +61,11 @@ public class Main {
 
     private static Map<String, CommandHandler> getCommands() {
         Map<String, CommandHandler> map = new HashMap<>();
-        map.put(Commands.INIT, new InitCommandHandler());
-        map.put(Commands.RECORD, new RecordCommandHandler());
-        map.put(Commands.REPLAY, new ReplayCommandHandler());
-        map.put(Commands.UPDATE, new UpdateCommandHandler());
-        map.put(Commands.VERSION, new VersionCommandHandler());
+        map.put(Commands.INIT, injector.getInstance(InitCommandHandler.class));
+        map.put(Commands.RECORD, injector.getInstance(RecordCommandHandler.class));
+        map.put(Commands.REPLAY, injector.getInstance(ReplayCommandHandler.class));
+        map.put(Commands.UPDATE, injector.getInstance(UpdateCommandHandler.class));
+        map.put(Commands.VERSION, injector.getInstance(VersionCommandHandler.class));
         return map;
     }
 }

@@ -1,17 +1,19 @@
 package com.hribol.bromium.cli.commands;
 
+import com.hribol.bromium.core.config.ApplicationConfiguration;
+import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationDumper;
+import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
 import org.beryx.textio.StringInputReader;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextTerminal;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by hvrigazov on 28.04.17.
@@ -19,35 +21,74 @@ import static org.mockito.Mockito.when;
 public class VersionCommandTest {
 
     @Test
-    public void dumpsVersionedApplication() {
+    public void dumpsVersionedApplication() throws IOException {
         String outputFilename = "updated-tmp.json";
-        baseTest(outputFilename);
-        File outputFile = new File(outputFilename);
-        assertTrue(outputFile.exists());
-        assertTrue(outputFile.delete());
+        Mocks mocks = new Mocks(outputFilename);
+        VersionCommand versionCommand = new VersionCommand(
+                mocks.inputFilename,
+                mocks.promptUtils,
+                mocks.applicationConfigurationParser,
+                mocks.applicationConfigurationDumper);
+        versionCommand.run();
+
+        verify(mocks.applicationConfigurationDumper)
+                .dumpApplicationConfiguration(mocks.applicationConfiguration, outputFilename);
     }
 
     @Test
-    public void ifExceptionIsThrownDoesNotWriteToFile() {
+    public void ifExceptionIsThrownDoesNotWriteToFile() throws IOException {
         String outputFilename = "/alibaba/asd";
-        baseTest(outputFilename);
-        File outputFile = new File(outputFilename);
-        assertFalse(outputFile.exists());
+        String exceptionMessage = "Exception while dumping!";
+        Mocks mocks = new Mocks(outputFilename);
+
+        doThrow(new IOException(exceptionMessage))
+                .when(mocks.applicationConfigurationDumper)
+                .dumpApplicationConfiguration(mocks.applicationConfiguration, outputFilename);
+
+        VersionCommand versionCommand = new VersionCommand(
+                mocks.inputFilename,
+                mocks.promptUtils,
+                mocks.applicationConfigurationParser,
+                mocks.applicationConfigurationDumper);
+        versionCommand.run();
+
+        verify(mocks.textTerminal).print(exceptionMessage);
     }
 
-    private void baseTest(String outputFilename) {
-        String inputFilename = getClass().getResource("/tenniskafe.json").getFile();
-        StringInputReader stringInputReader = mock(StringInputReader.class);
-        when(stringInputReader.read(anyString())).thenReturn(outputFilename);
+    private static class Mocks {
+        String pathToApplicationConfiguration;
+        String version;
+        String inputFilename;
+        StringInputReader stringInputReader;
+        TextTerminal textTerminal;
+        TextIO textIO;
+        PromptUtils promptUtils;
+        ApplicationConfiguration applicationConfiguration;
+        ApplicationConfigurationParser applicationConfigurationParser;
+        ApplicationConfigurationDumper applicationConfigurationDumper;
 
-        TextTerminal textTerminal = mock(TextTerminal.class);
-        TextIO textIO = mock(TextIO.class);
-        when(textIO.getTextTerminal()).thenReturn(textTerminal);
-        when(textIO.newStringInputReader()).thenReturn(stringInputReader);
-        PromptUtils promptUtils = mock(PromptUtils.class);
-        when(promptUtils.getTextIO()).thenReturn(textIO);
+        public Mocks(String outputFilename) throws IOException {
+            pathToApplicationConfiguration = "/tenniskafe.json";
+            version = "8.1.14";
+            inputFilename = getClass().getResource(pathToApplicationConfiguration).getFile();
+            stringInputReader = mock(StringInputReader.class);
+            when(stringInputReader.read(anyString())).thenReturn(outputFilename);
 
-        VersionCommand versionCommand = new VersionCommand(inputFilename, promptUtils);
-        versionCommand.run();
+            textTerminal = mock(TextTerminal.class);
+            textIO = mock(TextIO.class);
+            when(textIO.getTextTerminal()).thenReturn(textTerminal);
+            when(textIO.newStringInputReader()).thenReturn(stringInputReader);
+            promptUtils = mock(PromptUtils.class);
+            when(promptUtils.getTextIO()).thenReturn(textIO);
+            when(promptUtils.promptForVersion()).thenReturn(version);
+
+            applicationConfiguration = mock(ApplicationConfiguration.class);
+
+            applicationConfigurationParser = mock(ApplicationConfigurationParser.class);
+            when(applicationConfigurationParser.parseApplicationConfiguration(inputFilename))
+                    .thenReturn(applicationConfiguration);
+            applicationConfigurationDumper = mock(ApplicationConfigurationDumper.class);
+
+        }
     }
 }

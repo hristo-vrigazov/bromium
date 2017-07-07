@@ -1,5 +1,11 @@
 package com.hribol.bromium.cli;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.hribol.bromium.cli.commands.InitCommand;
+import com.hribol.bromium.cli.handlers.InitCommandHandler;
+import com.hribol.bromium.cli.handlers.RecordCommandHandler;
 import com.hribol.bromium.cli.handlers.UpdateCommandHandler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,35 +28,47 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({
+        IOUtils.class,
         Main.class,
-        UpdateCommandHandler.class,
-        IOUtils.class
+        Guice.class
 })
 public class MainTest {
 
     @Test
     public void dispatchesCorrectly() throws Exception {
         String[] args = {
-          "update", "-a", "configuration.json"
+          "init"
         };
 
-        UpdateCommandHandler updateCommandHandler = mock(UpdateCommandHandler.class);
-        doNothing().when(updateCommandHandler).handle(anyMap());
-        whenNew(UpdateCommandHandler.class).withAnyArguments().thenReturn(updateCommandHandler);
+        InitCommandHandler initCommandHandler = mock(InitCommandHandler.class);
+        Injector injector = mock(Injector.class);
+        PowerMockito.mockStatic(Guice.class);
+        when(Guice.createInjector(any(Module.class))).thenReturn(injector);
+        when(injector.getInstance(InitCommandHandler.class)).thenReturn(initCommandHandler);
 
         Main.main(args);
-        verify(updateCommandHandler).handle(anyMap());
+
+        verify(initCommandHandler).handle(anyMap());
     }
 
     @Test
     public void logsExceptionIfFileNotFound() throws Exception {
         String[] args = {
-                "update", "-a", "blablablabla.json"
+                "record",
+                "-d", "chromedriver",
+                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.json",
+                "-u", "http://localhost:3000",
+                "-o", "bromium-core/src/test/resources/dynamic-testCase.json"
         };
 
-        UpdateCommandHandler updateCommandHandler = mock(UpdateCommandHandler.class);
-        doThrow(FileNotFoundException.class).when(updateCommandHandler).handle(anyMap());
-        whenNew(UpdateCommandHandler.class).withAnyArguments().thenReturn(updateCommandHandler);
+        RecordCommandHandler initCommandHandler = mock(RecordCommandHandler.class);
+        doThrow(FileNotFoundException.class).when(initCommandHandler).handle(anyMap());
+
+        Injector injector = mock(Injector.class);
+        PowerMockito.mockStatic(Guice.class);
+        when(Guice.createInjector(any(Module.class))).thenReturn(injector);
+
+        when(injector.getInstance(RecordCommandHandler.class)).thenReturn(initCommandHandler);
 
         Main.main(args);
     }
@@ -66,4 +84,5 @@ public class MainTest {
 
         Main.main(args);
     }
+
 }

@@ -1,6 +1,6 @@
 package com.hribol.bromium.replay.report;
 
-import com.hribol.bromium.replay.config.utils.Utils;
+import com.hribol.bromium.core.utils.Utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,6 +43,10 @@ public class LoadingTimes {
     }
 
     private void dump(PrintWriter writer) {
+        if (actionTimestamps.isEmpty()) {
+            return;
+        }
+
         writer.println(simpleDateFormat.format(actionTimestamps.get(0)) + ",START,0");
 
         for (int i = 0; i < waitingTimes.size(); i++) {

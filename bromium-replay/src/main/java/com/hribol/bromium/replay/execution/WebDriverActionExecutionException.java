@@ -9,10 +9,6 @@ public class WebDriverActionExecutionException extends RuntimeException {
 
     private AutomationResult automationResult;
 
-    public WebDriverActionExecutionException(String message, Throwable cause) {
-        this(message, cause, new InstanceBasedAutomationResultBuilder());
-    }
-
     public WebDriverActionExecutionException(String message, Throwable cause, AutomationResultBuilder automationResultBuilder) {
         super(message, cause);
         this.automationResult = automationResultBuilder.buildAutomationResult(cause);

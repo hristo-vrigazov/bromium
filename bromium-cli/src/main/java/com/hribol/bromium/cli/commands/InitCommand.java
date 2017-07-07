@@ -1,7 +1,9 @@
 package com.hribol.bromium.cli.commands;
 
-import com.hribol.bromium.replay.config.config.ApplicationConfiguration;
-import com.hribol.bromium.replay.config.utils.ConfigurationUtils;
+import com.google.inject.Inject;
+import com.hribol.bromium.core.config.ApplicationConfiguration;
+import com.hribol.bromium.core.suppliers.ApplicationConfigurationSupplier;
+import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationDumper;
 import org.beryx.textio.TextIO;
 
 import java.io.IOException;
@@ -14,16 +16,23 @@ public class InitCommand implements Command {
     private TextIO textIO;
     private ApplicationConfiguration applicationConfiguration;
     private PromptUtils promptUtils;
+    private ApplicationConfigurationDumper applicationConfigurationDumper;
+    private ApplicationConfigurationSupplier applicationConfigurationSupplier;
 
-    public InitCommand(PromptUtils promptUtils) {
+    @Inject
+    public InitCommand(PromptUtils promptUtils,
+                       ApplicationConfigurationDumper applicationConfigurationDumper,
+                       ApplicationConfigurationSupplier applicationConfigurationSupplier) {
         this.promptUtils = promptUtils;
+        this.applicationConfigurationDumper = applicationConfigurationDumper;
+        this.applicationConfigurationSupplier = applicationConfigurationSupplier;
     }
 
     @Override
     public void run() {
         textIO = promptUtils.getTextIO();
         textIO.getTextTerminal().println("Welcome! I will guide you through creating an automation layer for you application");
-        applicationConfiguration = new ApplicationConfiguration();
+        applicationConfiguration = applicationConfigurationSupplier.get();
 
         textIO.getTextTerminal().println();
         applicationConfiguration.setApplicationName(textIO
@@ -43,7 +52,7 @@ public class InitCommand implements Command {
             String outputFilename = textIO
                     .newStringInputReader()
                     .read("Where should I save the configuration");
-            ConfigurationUtils.dumpApplicationConfiguration(applicationConfiguration, outputFilename);
+            applicationConfigurationDumper.dumpApplicationConfiguration(applicationConfiguration, outputFilename);
         } catch (IOException e) {
             textIO.getTextTerminal().print(e.getMessage());
         }

@@ -1,7 +1,7 @@
 package com.hribol.bromium.browsers.chrome.replay;
 
-import com.hribol.bromium.replay.execution.WebDriverActionExecutionBase;
-import com.hribol.bromium.replay.execution.ExecutorBuilder;
+import com.hribol.bromium.common.replay.WebDriverActionExecutionBase;
+import com.hribol.bromium.common.replay.ExecutorBuilder;
 import com.hribol.bromium.replay.settings.ReplaySettings;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
