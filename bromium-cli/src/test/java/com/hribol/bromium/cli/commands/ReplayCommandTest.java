@@ -44,16 +44,15 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
 //@RunWith(PowerMockRunner.class)
 //@PrepareForTest(IOUtils.class)
 public class ReplayCommandTest {
-
-    private String pathToDriver;
-    private String pathToApplicationConfiguration;
-    private String pathToSerializedTest;
-    private int timeout;
-    private int measurementsPrecisionMilli;
-    private String baseURI;
-    private String browserType;
-
-
+//
+//    private String pathToDriver;
+//    private String pathToApplicationConfiguration;
+//    private String pathToSerializedTest;
+//    private int timeout;
+//    private int measurementsPrecisionMilli;
+//    private String baseURI;
+//    private String browserType;
+//
 //    @Test
 //    public void ifDriverStartsSuccessfullyEverythingWorks() throws Exception {
 //        ReplayBrowser replayBrowser = mock(ReplayBrowser.class);
@@ -81,82 +80,82 @@ public class ReplayCommandTest {
 //        when(replayBrowser.replay(any(InputStream.class))).thenThrow(new IOException("No driver found"));
 //        baseTest(replayBrowser);
 //    }
-
-    private void baseTest(ReplayBrowser replayBrowser) throws Exception {
-        pathToDriver = "chromedriver";
-        pathToApplicationConfiguration = getClass().getResource("/tenniskafe.json").getFile();
-        pathToSerializedTest = getClass().getResource("/testCase.json").getFile();
-        timeout = 10;
-        measurementsPrecisionMilli = 500;
-        baseURI = "http://tenniskafe.com";
-        browserType = CHROME;
-
-
-        ApplicationConfigurationParser applicationConfigurationParser = mock(ApplicationConfigurationParser.class);
-        WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
-
-        ExecutionFactory executionFactory = mock(ExecutionFactory.class);
-        when(executionFactory.create(eq(CHROME), any(ExecutorBuilder.class))).thenReturn(webDriverActionExecution);
-
-        ReplayCommand.Builder builder = mock(ReplayCommand.Builder.class);
-
-        InputStream testInputStream = mock(InputStream.class);
-        InputStream applicationConfigurationInputStream = mock(InputStream.class);
-        JavascriptInjectorSupplier javascriptInjectorSupplier = mock(JavascriptInjectorSupplier.class);
-        PredefinedWebDriverActionFactorySupplier predefinedWebDriverActionFactorySupplier = mock(PredefinedWebDriverActionFactorySupplier.class);
-        TestCaseStepToApplicationActionConverterSupplier testCaseStepToApplicationActionConverterSupplier = mock(TestCaseStepToApplicationActionConverterSupplier.class);
-        DefaultApplicationActionFactorySupplier defaultApplicationActionFactorySupplier =
-                mock(DefaultApplicationActionFactorySupplier.class);
-        TestScenarioFactorySupplier testScenarioFactorySupplier = mock(TestScenarioFactorySupplier.class);
-        StepsAndConfigurationSupplier stepsAndConfigurationSupplier = mock(StepsAndConfigurationSupplier.class);
-        JsCollector jsCollector = mock(JsCollector.class);
-        PredefinedReplayFunctionFactorySupplier predefinedReplayFunctionFactorySupplier = mock(PredefinedReplayFunctionFactorySupplier.class);
-        Supplier<GeneratedFunction<StepAndWebDriverActionConfiguration, ReplayFunctionInvocation>> emptyFunctionSupplier =
-                mock(Supplier.class);
-        ReplayFunctionRegistrySupplier replayFunctionRegistrySupplier = mock(ReplayFunctionRegistrySupplier.class);
-        IncludeInvokeGeneratorSupplier includeInvokeGeneratorSupplier = mock(IncludeInvokeGeneratorSupplier.class);
-        StepAndActionConfigurationSupplier stepAndActionConfigurationSupplier = mock(StepAndActionConfigurationSupplier.class);
-        ReplayGeneratorByStepAndActionConfigurationSupplier replayGeneratorByStepAndActionConfigurationSupplier = mock(ReplayGeneratorByStepAndActionConfigurationSupplier.class);
-        ReplayingJavascriptGeneratorSupplier replayingJavascriptGeneratorSupplier = mock(ReplayingJavascriptGeneratorSupplier.class);
-        ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
-        ReplayBrowserSupplier replayBrowserSupplier = mock(ReplayBrowserSupplier.class);
-
-        Mockito.when(builder.getPathToDriver()).thenReturn(pathToDriver);
-        Mockito.when(builder.getApplicationConfigurationInputStream()).thenReturn(applicationConfigurationInputStream);
-        Mockito.when(builder.getApplicationConfigurationParser()).thenReturn(applicationConfigurationParser);
-        Mockito.when(builder.getTestInputStream()).thenReturn(testInputStream);
-        Mockito.when(builder.getTimeout()).thenReturn(timeout);
-        Mockito.when(builder.getMeasurementsPrecisionMilli()).thenReturn(measurementsPrecisionMilli);
-        Mockito.when(builder.getBaseURL()).thenReturn(baseURI);
-        Mockito.when(builder.getBrowserType()).thenReturn(browserType);
-        Mockito.when(builder.getExecutionFactory()).thenReturn(executionFactory);
-        Mockito.when(builder.getPredefinedWebDriverActionFactorySupplier()).thenReturn(predefinedWebDriverActionFactorySupplier);
-        Mockito.when(builder.getTestCaseStepToApplicationActionConverterSupplier()).thenReturn(testCaseStepToApplicationActionConverterSupplier);
-        Mockito.when(builder.getJavascriptInjectorSupplier()).thenReturn(javascriptInjectorSupplier);
-        Mockito.when(builder.getDefaultApplicationActionFactorySupplier()).thenReturn(defaultApplicationActionFactorySupplier);
-        Mockito.when(builder.getTestScenarioFactorySupplier()).thenReturn(testScenarioFactorySupplier);
-        Mockito.when(builder.getStepsAndConfigurationSupplier()).thenReturn(stepsAndConfigurationSupplier);
-        Mockito.when(builder.getJsCollector()).thenReturn(jsCollector);
-        Mockito.when(builder.getPredefinedReplayFunctionFactorySupplier()).thenReturn(predefinedReplayFunctionFactorySupplier);
-        Mockito.when(builder.getEmptyGeneratedFunctionSupplier()).thenReturn(emptyFunctionSupplier);
-        Mockito.when(builder.getReplayFunctionRegistrySupplier()).thenReturn(replayFunctionRegistrySupplier);
-        Mockito.when(builder.getIncludeInvokeGeneratorSupplier()).thenReturn(includeInvokeGeneratorSupplier);
-        Mockito.when(builder.getStepAndActionConfigurationSupplier()).thenReturn(stepAndActionConfigurationSupplier);
-        Mockito.when(builder.getReplayGeneratorByStepAndActionConfigurationSupplier()).thenReturn(replayGeneratorByStepAndActionConfigurationSupplier);
-        Mockito.when(builder.getReplayingJavascriptGeneratorSupplier()).thenReturn(replayingJavascriptGeneratorSupplier);
-        Mockito.when(builder.getExecutorBuilder()).thenReturn(executorBuilder);
-        Mockito.when(builder.getReplayBrowserSupplier()).thenReturn(replayBrowserSupplier);
-
-        FileInputStream fileInputStream = mock(FileInputStream.class);
-
-        whenNew(ReplayBrowser.class).withAnyArguments().thenReturn(replayBrowser);
-        whenNew(FileInputStream.class).withAnyArguments().thenReturn(fileInputStream);
-
-        PowerMockito.mockStatic(IOUtils.class);
-        when(IOUtils.toString(any(InputStream.class))).thenReturn("");
-
-        ReplayCommand replayCommand = new ReplayCommand(builder);
-        replayCommand.run();
-    }
+//
+//    private void baseTest(ReplayBrowser replayBrowser) throws Exception {
+//        pathToDriver = "chromedriver";
+//        pathToApplicationConfiguration = getClass().getResource("/tenniskafe.json").getFile();
+//        pathToSerializedTest = getClass().getResource("/testCase.json").getFile();
+//        timeout = 10;
+//        measurementsPrecisionMilli = 500;
+//        baseURI = "http://tenniskafe.com";
+//        browserType = CHROME;
+//
+//
+//        ApplicationConfigurationParser applicationConfigurationParser = mock(ApplicationConfigurationParser.class);
+//        WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
+//
+//        ExecutionFactory executionFactory = mock(ExecutionFactory.class);
+//        when(executionFactory.create(eq(CHROME), any(ExecutorBuilder.class))).thenReturn(webDriverActionExecution);
+//
+//        ReplayCommand.Builder builder = mock(ReplayCommand.Builder.class);
+//
+//        InputStream testInputStream = mock(InputStream.class);
+//        InputStream applicationConfigurationInputStream = mock(InputStream.class);
+//        JavascriptInjectorSupplier javascriptInjectorSupplier = mock(JavascriptInjectorSupplier.class);
+//        PredefinedWebDriverActionFactorySupplier predefinedWebDriverActionFactorySupplier = mock(PredefinedWebDriverActionFactorySupplier.class);
+//        TestCaseStepToApplicationActionConverterSupplier testCaseStepToApplicationActionConverterSupplier = mock(TestCaseStepToApplicationActionConverterSupplier.class);
+//        DefaultApplicationActionFactorySupplier defaultApplicationActionFactorySupplier =
+//                mock(DefaultApplicationActionFactorySupplier.class);
+//        TestScenarioFactorySupplier testScenarioFactorySupplier = mock(TestScenarioFactorySupplier.class);
+//        StepsAndConfigurationSupplier stepsAndConfigurationSupplier = mock(StepsAndConfigurationSupplier.class);
+//        JsCollector jsCollector = mock(JsCollector.class);
+//        PredefinedReplayFunctionFactorySupplier predefinedReplayFunctionFactorySupplier = mock(PredefinedReplayFunctionFactorySupplier.class);
+//        Supplier<GeneratedFunction<StepAndWebDriverActionConfiguration, ReplayFunctionInvocation>> emptyFunctionSupplier =
+//                mock(Supplier.class);
+//        ReplayFunctionRegistrySupplier replayFunctionRegistrySupplier = mock(ReplayFunctionRegistrySupplier.class);
+//        IncludeInvokeGeneratorSupplier includeInvokeGeneratorSupplier = mock(IncludeInvokeGeneratorSupplier.class);
+//        StepAndActionConfigurationSupplier stepAndActionConfigurationSupplier = mock(StepAndActionConfigurationSupplier.class);
+//        ReplayGeneratorByStepAndActionConfigurationSupplier replayGeneratorByStepAndActionConfigurationSupplier = mock(ReplayGeneratorByStepAndActionConfigurationSupplier.class);
+//        ReplayingJavascriptGeneratorSupplier replayingJavascriptGeneratorSupplier = mock(ReplayingJavascriptGeneratorSupplier.class);
+//        ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
+//        ReplayBrowserSupplier replayBrowserSupplier = mock(ReplayBrowserSupplier.class);
+//
+//        Mockito.when(builder.getPathToDriver()).thenReturn(pathToDriver);
+//        Mockito.when(builder.getApplicationConfigurationInputStream()).thenReturn(applicationConfigurationInputStream);
+//        Mockito.when(builder.getApplicationConfigurationParser()).thenReturn(applicationConfigurationParser);
+//        Mockito.when(builder.getTestInputStream()).thenReturn(testInputStream);
+//        Mockito.when(builder.getTimeout()).thenReturn(timeout);
+//        Mockito.when(builder.getMeasurementsPrecisionMilli()).thenReturn(measurementsPrecisionMilli);
+//        Mockito.when(builder.getBaseURL()).thenReturn(baseURI);
+//        Mockito.when(builder.getBrowserType()).thenReturn(browserType);
+//        Mockito.when(builder.getExecutionFactory()).thenReturn(executionFactory);
+//        Mockito.when(builder.getPredefinedWebDriverActionFactorySupplier()).thenReturn(predefinedWebDriverActionFactorySupplier);
+//        Mockito.when(builder.getTestCaseStepToApplicationActionConverterSupplier()).thenReturn(testCaseStepToApplicationActionConverterSupplier);
+//        Mockito.when(builder.getJavascriptInjectorSupplier()).thenReturn(javascriptInjectorSupplier);
+//        Mockito.when(builder.getDefaultApplicationActionFactorySupplier()).thenReturn(defaultApplicationActionFactorySupplier);
+//        Mockito.when(builder.getTestScenarioFactorySupplier()).thenReturn(testScenarioFactorySupplier);
+//        Mockito.when(builder.getStepsAndConfigurationSupplier()).thenReturn(stepsAndConfigurationSupplier);
+//        Mockito.when(builder.getJsCollector()).thenReturn(jsCollector);
+//        Mockito.when(builder.getPredefinedReplayFunctionFactorySupplier()).thenReturn(predefinedReplayFunctionFactorySupplier);
+//        Mockito.when(builder.getEmptyGeneratedFunctionSupplier()).thenReturn(emptyFunctionSupplier);
+//        Mockito.when(builder.getReplayFunctionRegistrySupplier()).thenReturn(replayFunctionRegistrySupplier);
+//        Mockito.when(builder.getIncludeInvokeGeneratorSupplier()).thenReturn(includeInvokeGeneratorSupplier);
+//        Mockito.when(builder.getStepAndActionConfigurationSupplier()).thenReturn(stepAndActionConfigurationSupplier);
+//        Mockito.when(builder.getReplayGeneratorByStepAndActionConfigurationSupplier()).thenReturn(replayGeneratorByStepAndActionConfigurationSupplier);
+//        Mockito.when(builder.getReplayingJavascriptGeneratorSupplier()).thenReturn(replayingJavascriptGeneratorSupplier);
+//        Mockito.when(builder.getExecutorBuilder()).thenReturn(executorBuilder);
+//        Mockito.when(builder.getReplayBrowserSupplier()).thenReturn(replayBrowserSupplier);
+//
+//        FileInputStream fileInputStream = mock(FileInputStream.class);
+//
+//        whenNew(ReplayBrowser.class).withAnyArguments().thenReturn(replayBrowser);
+//        whenNew(FileInputStream.class).withAnyArguments().thenReturn(fileInputStream);
+//
+//        PowerMockito.mockStatic(IOUtils.class);
+//        when(IOUtils.toString(any(InputStream.class))).thenReturn("");
+//
+//        ReplayCommand replayCommand = new ReplayCommand(builder);
+//        replayCommand.run();
+//    }
 
 }

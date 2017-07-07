@@ -30,11 +30,11 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            injector = Guice.createInjector(new RecordingInjectionModule());
             InputStream inputStream = Main.class.getResourceAsStream("/cli-specification.txt");
             String doc = IOUtils.toString(inputStream);
             Docopt docopt = new Docopt(doc);
             Map<String, Object> opts = docopt.withVersion("bromium 0.1").parse(args);
+            injector = Guice.createInjector(new DefaultModule());
 
             System.out.println(opts);
 

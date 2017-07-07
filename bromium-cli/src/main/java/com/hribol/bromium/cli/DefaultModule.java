@@ -28,7 +28,7 @@ import static com.hribol.bromium.cli.Constants.REPLAY_TEMPLATE_RESOURCE;
 /**
  * Created by hvrigazov on 09.06.17.
  */
-public class RecordingInjectionModule implements Module {
+public class DefaultModule implements Module {
     @Override
     public void configure(Binder binder) {
         binder.bind(BaseRecorderFunctionFactory.class).to(PredefinedRecorderFunctionFactory.class);

@@ -1,23 +1,14 @@
 package com.hribol.bromium.replay.replay;
 
-import com.google.common.annotations.VisibleForTesting;
-import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
-import com.hribol.bromium.core.utils.ConfigurationUtils;
 import com.hribol.bromium.replay.ReplayBrowser;
 import com.hribol.bromium.replay.execution.WebDriverActionExecution;
-import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
 import com.hribol.bromium.replay.report.ExecutionReport;
-import com.hribol.bromium.replay.report.LoadingTimes;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -26,24 +17,11 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
-import static org.powermock.api.mockito.PowerMockito.verifyNew;
-import static org.powermock.api.mockito.PowerMockito.whenNew;
 
 /**
  * Created by hvrigazov on 22.04.17.
  */
-//@RunWith(PowerMockRunner.class)
-//@PrepareForTest({
-//        ReplayBrowser.class,
-//        FileInputStream.class,
-////        PredefinedWebDriverActionFactory.class,
-////        DefaultApplicationActionFactory.class,
-//        TestScenarioFactory.class,
-//        ConfigurationUtils.class
-//})
 public class ReplayBrowserTest {
 
     @Test

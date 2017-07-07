@@ -1,6 +1,5 @@
 package com.hribol.bromium.cli.commands;
 
-import com.google.inject.Inject;
 import com.hribol.bromium.cli.factory.RecordBrowserFactory;
 import com.hribol.bromium.common.record.RecordBrowserBase;
 
