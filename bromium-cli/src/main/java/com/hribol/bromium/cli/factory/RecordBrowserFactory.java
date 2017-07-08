@@ -27,35 +27,14 @@ import static org.openqa.selenium.remote.BrowserType.CHROME;
  */
 public class RecordBrowserFactory {
     private Map<String, RecordBrowserSupplier> browserNameToSupplierMap;
-    private JavascriptGenerator<ApplicationActionConfiguration> applicationActionGenerator;
-    private String pathToRecordTemplateResource;
-    private RecordingJavascriptGeneratorSupplier recordingJavascriptGeneratorSupplier;
-    private JavascriptInjectorSupplier javascriptInjectorSupplier;
-    private ApplicationConfigurationParser applicationConfigurationParser;
 
     @Inject
-    public RecordBrowserFactory(JavascriptGenerator<ApplicationActionConfiguration> applicationActionGenerator,
-                                @Named(RECORD_TEMPLATE_RESOURCE) String pathToRecordTemplateResource,
-                                RecordingJavascriptGeneratorSupplier recordingJavascriptGeneratorSupplier,
-                                JavascriptInjectorSupplier javascriptInjectorSupplier,
-                                ApplicationConfigurationParser applicationConfigurationParser) {
-        this.applicationActionGenerator = applicationActionGenerator;
-        this.pathToRecordTemplateResource = pathToRecordTemplateResource;
-        this.recordingJavascriptGeneratorSupplier = recordingJavascriptGeneratorSupplier;
-        this.javascriptInjectorSupplier = javascriptInjectorSupplier;
-        this.applicationConfigurationParser = applicationConfigurationParser;
+    public RecordBrowserFactory() {
         this.browserNameToSupplierMap = new HashMap<>();
         this.browserNameToSupplierMap.put(CHROME, this::getChrome);
     }
 
-    public RecordBrowserBase create(String browserName, String pathToDriver, String pathToApplicationConfiguration) throws IOException {
-        String baseTemplate = IOUtils.toString(getClass().getResourceAsStream(pathToRecordTemplateResource));
-        ApplicationConfiguration applicationConfiguration = applicationConfigurationParser.parseApplicationConfiguration(pathToApplicationConfiguration);
-        JavascriptGenerator<ApplicationConfiguration> recordingJavascriptGenerator = recordingJavascriptGeneratorSupplier.get(baseTemplate, applicationActionGenerator);
-        String recordingJavascript = recordingJavascriptGenerator.generate(applicationConfiguration);
-        System.out.println(recordingJavascript);
-        StringReader stringReader = new StringReader(recordingJavascript);
-        JavascriptInjector javascriptInjector = javascriptInjectorSupplier.get(stringReader);
+    public RecordBrowserBase create(String browserName, String pathToDriver, JavascriptInjector javascriptInjector) throws IOException {
         return this.browserNameToSupplierMap.get(browserName).get(pathToDriver, javascriptInjector);
     }
 

@@ -18,13 +18,10 @@ import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfigu
 import com.hribol.bromium.common.generation.helper.StepsAndConfiguration;
 import com.hribol.bromium.common.generation.helper.suppliers.StepAndActionConfigurationSupplier;
 import com.hribol.bromium.common.generation.helper.suppliers.StepAndWebDriverActionConfigurationSupplier;
-import com.hribol.bromium.common.generation.record.RecorderFunctionRegistry;
-import com.hribol.bromium.common.generation.record.BaseRecorderFunctionFactory;
+import com.hribol.bromium.common.generation.record.*;
 import com.hribol.bromium.common.generation.record.functions.RecorderFunctionInvocation;
 import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
 import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
-import com.hribol.bromium.common.generation.record.RecordingWebDriverActionsOnly;
-import com.hribol.bromium.common.generation.record.PredefinedRecorderFunctionFactory;
 import com.hribol.bromium.common.generation.replay.*;
 import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
@@ -45,6 +42,7 @@ import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
 import org.apache.commons.io.IOUtils;
+import org.omg.CORBA.TIMEOUT;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -98,21 +96,34 @@ public class DefaultModule extends AbstractModule {
     }
 
     @Provides
-    public RecordCommand getRecordCommand(RecordCommand.Builder builder,
-                                          PromptUtils promptUtils,
-                                          ParsedOptions parsedOptions,
-                                          RecordBrowserFactory recordBrowserFactory) {
+    @Named(BROWSER_TYPE)
+    public String getBrowserType(ParsedOptions parsedOptions) {
+        return parsedOptions.getBrowserType();
+    }
 
-        return builder
-                .pathToDriver(parsedOptions.getPathToDriver())
-                .pathToApplicationConfiguration(parsedOptions.getPathToApplicationConfiguration())
-                .baseUrl(parsedOptions.getBaseUrl())
-                .outputFile(parsedOptions.getOutputFile())
-                .browserType(parsedOptions.getBrowserType())
-                .timeout(parsedOptions.getTimeout())
-                .recordBrowserFactory(recordBrowserFactory)
-                .promptUtils(promptUtils)
-                .build();
+    @Provides
+    @Named(BASE_URL)
+    public String getBaseUrl(ParsedOptions parsedOptions) {
+        return parsedOptions.getBaseUrl();
+    }
+
+    @Provides
+    @Named(PATH_TO_DRIVER)
+    public String getPathToDriver(ParsedOptions parsedOptions) {
+        return parsedOptions.getPathToDriver();
+    }
+
+    @Provides
+    @Named(OUTPUT_FILE)
+    public String getOutputFile(ParsedOptions parsedOptions) {
+        return parsedOptions.getOutputFile();
+    }
+
+
+    @Provides
+    @Named(TIMEOUT)
+    public Integer getTimeout(ParsedOptions parsedOptions) {
+        return parsedOptions.getTimeout();
     }
 
     @Provides
@@ -192,6 +203,13 @@ public class DefaultModule extends AbstractModule {
         return IOUtils.toString(getClass().getResourceAsStream(templateResource));
     }
 
+    @CheckedProvides(IOProvider.class)
+    @Named(BASE_RECORDING_TEMPLATE)
+    public String getBaseRecordingTemplate(@Named(RECORD_TEMPLATE_RESOURCE) String templateResource) throws IOException {
+        return IOUtils.toString(getClass().getResourceAsStream(templateResource));
+    }
+
+
     @Provides
     public BaseReplayFunctionFactory getBaseReplayFunctionFactory(
             Supplier<GeneratedFunction<StepAndWebDriverActionConfiguration, ReplayFunctionInvocation>>
@@ -228,6 +246,16 @@ public class DefaultModule extends AbstractModule {
         return new ReplayingJavascriptGenerator(baseTemplateProvider.get(), generatorByStepAndActionConfiguration, stepAndActionConfigurationSupplier);
     }
 
+
+    @CheckedProvides(IOProvider.class)
+    public RecordingJavascriptGenerator getRecordingJavascriptGenerator(@Named(BASE_RECORDING_TEMPLATE) IOProvider<String>
+                                                                                baseTemplateProvider,
+                                                                        JavascriptGenerator<ApplicationActionConfiguration>
+                                                                                applicationActionJavascriptGenerator)
+            throws IOException {
+        return new RecordingJavascriptGenerator(baseTemplateProvider.get(), applicationActionJavascriptGenerator);
+    }
+
     @CheckedProvides(IOProvider.class)
     @Named(GENERATED_REPLAY_JAVASCRIPT)
     public String getGeneratedReplayJavascript(IOProvider<ReplayingJavascriptGenerator> replayingJavascriptGeneratorProvider,
@@ -238,10 +266,27 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOProvider.class)
+    @Named(GENERATED_RECORD_JAVASCRIPT)
+    public String getGeneratedRecordJavascript(IOProvider<RecordingJavascriptGenerator> recordingJavascriptGeneratorIOProvider,
+                                               IOProvider<ApplicationConfiguration> configurationIOProvider) throws IOException {
+        ApplicationConfiguration configuration = configurationIOProvider.get();
+        RecordingJavascriptGenerator replayingJavascriptGenerator = recordingJavascriptGeneratorIOProvider.get();
+        return replayingJavascriptGenerator.generate(configuration);
+    }
+
+    @CheckedProvides(IOProvider.class)
     @Named(REPLAYING_JAVASCRIPT_INJECTOR)
-    public JavascriptInjector getJavascriptInjector(@Named(GENERATED_REPLAY_JAVASCRIPT)
+    public JavascriptInjector getReplayingJavascriptInjector(@Named(GENERATED_REPLAY_JAVASCRIPT)
                                                                 IOProvider<String> generatedReplayJavascript) throws IOException {
         String generatedCode = generatedReplayJavascript.get();
+        return new JavascriptInjector(new StringReader(generatedCode));
+    }
+
+    @CheckedProvides(IOProvider.class)
+    @Named(RECORDING_JAVASCRIPT_INJECTOR)
+    public JavascriptInjector getRecordingJavascriptInjector(@Named(GENERATED_RECORD_JAVASCRIPT)
+                                                            IOProvider<String> generatedRecordJavascript) throws IOException {
+        String generatedCode = generatedRecordJavascript.get();
         return new JavascriptInjector(new StringReader(generatedCode));
     }
 
@@ -249,7 +294,13 @@ public class DefaultModule extends AbstractModule {
     @Named(REPLAYING_JAVASCRIPT_CODE)
     public String getReplayingJavascriptCode(@Named(REPLAYING_JAVASCRIPT_INJECTOR)
                                                          IOProvider<JavascriptInjector> javascriptInjectorIOProvider) throws IOException {
-        System.out.println(javascriptInjectorIOProvider.get().getInjectionCode());
+        return javascriptInjectorIOProvider.get().getInjectionCode();
+    }
+
+    @CheckedProvides(IOProvider.class)
+    @Named(RECORDING_JAVASCRIPT_CODE)
+    public String getRecordingJavascriptCode(@Named(RECORDING_JAVASCRIPT_INJECTOR)
+                                                     IOProvider<JavascriptInjector> javascriptInjectorIOProvider) throws IOException {
         return javascriptInjectorIOProvider.get().getInjectionCode();
     }
 

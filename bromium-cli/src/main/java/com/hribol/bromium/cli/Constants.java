@@ -13,10 +13,22 @@ public class Constants {
     public static final String CONFIGURATION_FILE = "CONFIGURATION_FILE";
     public static final String TEST_CASE_FILE = "TEST_CASE_FILE";
 
+    public static final String BASE_RECORDING_TEMPLATE = "BASE_RECORDING_TEMPLATE";
     public static final String BASE_REPLAYING_TEMPLATE = "BASE_REPLAYING_TEMPLATE";
 
     public static final String GENERATED_REPLAY_JAVASCRIPT = "GENERATED_REPLAY_JAVASCRIPT";
+    public static final String GENERATED_RECORD_JAVASCRIPT = "GENERATED_RECORD_JAVASCRIPT";
 
     public static final String REPLAYING_JAVASCRIPT_INJECTOR = "REPLAYING_JAVASCRIPT_INJECTOR";
+    public static final String RECORDING_JAVASCRIPT_INJECTOR = "RECORDING_JAVASCRIPT_INJECTOR";
+
     public static final String REPLAYING_JAVASCRIPT_CODE = "REPLAYING_JAVASCRIPT_CODE";
+    public static final String RECORDING_JAVASCRIPT_CODE = "RECORDING_JAVASCRIPT_CODE";
+
+    public static final String BROWSER_TYPE = "BROWSER_TYPE";
+    public static final String PATH_TO_DRIVER = "PATH_TO_DRIVER";
+    public static final String BASE_URL = "BASE_URL";
+    public static final String TIMEOUT = "TIMEOUT";
+    public static final String OUTPUT_FILE = "OUTPUT_FILE";
+
 }
