@@ -1,4 +1,4 @@
-package com.hribol.bromium.cli.handlers;
+package com.hribol.bromium.cli;
 
 import java.util.Map;
 

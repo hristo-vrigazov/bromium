@@ -9,7 +9,6 @@ import com.hribol.bromium.cli.commands.PromptUtils;
 import com.hribol.bromium.cli.commands.RecordCommand;
 import com.hribol.bromium.cli.factory.ExecutionFactory;
 import com.hribol.bromium.cli.factory.RecordBrowserFactory;
-import com.hribol.bromium.cli.handlers.ParsedOptions;
 import com.hribol.bromium.cli.providers.IOProvider;
 import com.hribol.bromium.cli.providers.IOURIProvider;
 import com.hribol.bromium.common.builder.JsCollector;
