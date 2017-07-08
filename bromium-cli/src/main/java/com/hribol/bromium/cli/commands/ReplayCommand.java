@@ -13,13 +13,15 @@ import java.util.Map;
 /**
  * Created by hvrigazov on 08.07.17.
  */
-public class ReplayCommandRewrite implements Command {
+public class ReplayCommand implements Command {
 
+    private PromptUtils promptUtils;
     private IOURIProvider<ReplayBrowser> replayBrowserProvider;
     private IOProvider<List<Map<String, String>>> stepsProvider;
 
     @Inject
-    public ReplayCommandRewrite(IOURIProvider<ReplayBrowser> replayBrowserProvider, IOProvider<List<Map<String, String>>> stepsProvider) {
+    public ReplayCommand(PromptUtils promptUtils, IOURIProvider<ReplayBrowser> replayBrowserProvider, IOProvider<List<Map<String, String>>> stepsProvider) {
+        this.promptUtils = promptUtils;
         this.replayBrowserProvider = replayBrowserProvider;
         this.stepsProvider = stepsProvider;
     }
@@ -30,6 +32,8 @@ public class ReplayCommandRewrite implements Command {
             replayBrowserProvider.get().replay(stepsProvider.get());
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
+        } finally {
+            promptUtils.dispose();
         }
     }
 }

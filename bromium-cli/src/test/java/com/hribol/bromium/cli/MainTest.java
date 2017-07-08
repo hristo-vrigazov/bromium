@@ -5,9 +5,6 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.hribol.bromium.cli.commands.InitCommand;
 import com.hribol.bromium.cli.commands.RecordCommand;
-import com.hribol.bromium.cli.handlers.InitCommandHandler;
-import com.hribol.bromium.cli.handlers.RecordCommandHandler;
-import com.hribol.bromium.cli.handlers.UpdateCommandHandler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
@@ -19,7 +16,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static org.mockito.Matchers.anyMap;
 import static org.mockito.Mockito.*;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.whenNew;

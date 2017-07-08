@@ -40,6 +40,8 @@ public class RecordCommand implements Command {
             recordBrowserBase.cleanUp();
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
+        } finally {
+            promptUtils.dispose();
         }
 
     }

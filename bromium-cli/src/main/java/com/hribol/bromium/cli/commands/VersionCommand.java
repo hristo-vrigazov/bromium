@@ -1,5 +1,7 @@
 package com.hribol.bromium.cli.commands;
 
+import com.google.inject.Inject;
+import com.hribol.bromium.cli.providers.IOProvider;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.utils.ConfigurationUtils;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationDumper;
@@ -13,17 +15,16 @@ import java.io.IOException;
  */
 public class VersionCommand implements Command {
     private TextIO textIO;
-    private String pathToApplicationConfiguration;
     private PromptUtils promptUtils;
-    private ApplicationConfigurationParser applicationConfigurationParser;
+    private IOProvider<ApplicationConfiguration> applicationConfigurationIOProvider;
     private ApplicationConfigurationDumper applicationConfigurationDumper;
 
-    public VersionCommand(String pathToApplicationConfiguration,
-                          PromptUtils promptUtils,
-                          ApplicationConfigurationParser applicationConfigurationParser, ApplicationConfigurationDumper applicationConfigurationDumper) {
-        this.pathToApplicationConfiguration = pathToApplicationConfiguration;
+    @Inject
+    public VersionCommand(PromptUtils promptUtils,
+                          IOProvider<ApplicationConfiguration> applicationConfigurationIOProvider,
+                          ApplicationConfigurationDumper applicationConfigurationDumper) {
         this.promptUtils = promptUtils;
-        this.applicationConfigurationParser = applicationConfigurationParser;
+        this.applicationConfigurationIOProvider = applicationConfigurationIOProvider;
         this.applicationConfigurationDumper = applicationConfigurationDumper;
     }
 
@@ -32,7 +33,7 @@ public class VersionCommand implements Command {
         textIO = promptUtils.getTextIO();
 
         try {
-            ApplicationConfiguration applicationConfiguration = applicationConfigurationParser.parseApplicationConfiguration(pathToApplicationConfiguration);
+            ApplicationConfiguration applicationConfiguration = applicationConfigurationIOProvider.get();
             textIO.getTextTerminal().println("Let's create a new version");
 
             applicationConfiguration.setVersion(promptUtils.promptForVersion());
@@ -47,6 +48,8 @@ public class VersionCommand implements Command {
 
         } catch (IOException e) {
             textIO.getTextTerminal().print(e.getMessage());
+        } finally {
+            promptUtils.dispose();
         }
     }
 }

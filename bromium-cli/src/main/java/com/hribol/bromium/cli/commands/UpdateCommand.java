@@ -1,6 +1,7 @@
 package com.hribol.bromium.cli.commands;
 
 import com.google.inject.Inject;
+import com.hribol.bromium.cli.providers.IOProvider;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.utils.ConfigurationUtils;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationDumper;
@@ -14,18 +15,16 @@ import java.io.IOException;
  */
 public class UpdateCommand implements Command {
     private TextIO textIO;
-    private String pathToApplicationConfiguration;
+    private IOProvider<ApplicationConfiguration> applicationConfigurationIOProvider;
     private PromptUtils promptUtils;
-    private ApplicationConfigurationParser applicationConfigurationParser;
     private ApplicationConfigurationDumper applicationConfigurationDumper;
 
     @Inject
-    public UpdateCommand(String pathToApplicationConfiguration,
+    public UpdateCommand(IOProvider<ApplicationConfiguration> applicationConfigurationIOProvider,
                          PromptUtils promptUtils,
-                         ApplicationConfigurationParser applicationConfigurationParser, ApplicationConfigurationDumper applicationConfigurationDumper) {
-        this.pathToApplicationConfiguration = pathToApplicationConfiguration;
+                         ApplicationConfigurationDumper applicationConfigurationDumper) {
+        this.applicationConfigurationIOProvider = applicationConfigurationIOProvider;
         this.promptUtils = promptUtils;
-        this.applicationConfigurationParser = applicationConfigurationParser;
         this.applicationConfigurationDumper = applicationConfigurationDumper;
     }
 
@@ -34,7 +33,7 @@ public class UpdateCommand implements Command {
         textIO = promptUtils.getTextIO();
 
         try {
-            ApplicationConfiguration applicationConfiguration = applicationConfigurationParser.parseApplicationConfiguration(pathToApplicationConfiguration);
+            ApplicationConfiguration applicationConfiguration = applicationConfigurationIOProvider.get();
             textIO.getTextTerminal().println("Let's update the configuration!");
 
             promptUtils.updateApplicationConfiguration(applicationConfiguration);
@@ -46,6 +45,8 @@ public class UpdateCommand implements Command {
 
         } catch (IOException e) {
             textIO.getTextTerminal().print(e.getMessage());
+        } finally {
+            promptUtils.dispose();
         }
     }
 }
