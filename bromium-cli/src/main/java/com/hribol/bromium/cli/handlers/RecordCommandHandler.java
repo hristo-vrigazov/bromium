@@ -16,24 +16,27 @@ public class RecordCommandHandler implements CommandHandler {
     private PromptUtils promptUtils;
     private RecordBrowserFactory recordBrowserFactory;
     private RecordCommandBuilderSupplier recordCommandBuilderSupplier;
+    private ParsedOptions parsedOptions;
 
     @Inject
     public RecordCommandHandler(PromptUtils promptUtils,
                                 RecordBrowserFactory recordBrowserFactory,
-                                RecordCommandBuilderSupplier recordCommandBuilderSupplier) {
+                                RecordCommandBuilderSupplier recordCommandBuilderSupplier,
+                                ParsedOptions parsedOptions) {
         this.promptUtils = promptUtils;
         this.recordBrowserFactory = recordBrowserFactory;
         this.recordCommandBuilderSupplier = recordCommandBuilderSupplier;
+        this.parsedOptions = parsedOptions;
     }
 
     @Override
     public void handle(Map<String, Object> opts) {
-        String pathToDriver = OptUtils.getPathToDriver(opts);
-        String pathToConfigurationFile = OptUtils.getPathToApplicationConfiguration(opts);
-        String baseUrl = OptUtils.getBaseUrl(opts);
-        String outputFile = OptUtils.getOutputFile(opts);
-        String browserType = OptUtils.getBrowserType(opts);
-        int timeout = OptUtils.getTimeout(opts);
+        String pathToDriver = parsedOptions.getPathToDriver();
+        String pathToConfigurationFile = parsedOptions.getPathToApplicationConfiguration();
+        String baseUrl = parsedOptions.getBaseUrl();
+        String outputFile = parsedOptions.getOutputFile();
+        String browserType = parsedOptions.getBrowserType();
+        int timeout = parsedOptions.getTimeout();
 
         Command command = recordCommandBuilderSupplier
                 .get()

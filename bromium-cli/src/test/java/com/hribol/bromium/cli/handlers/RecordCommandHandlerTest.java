@@ -19,20 +19,22 @@ import static org.openqa.selenium.remote.BrowserType.CHROME;
 public class RecordCommandHandlerTest {
     @Test
     public void recordCommandHandlerIsRan() throws Exception {
+        ParsedOptions parsedOptions = mock(ParsedOptions.class);
         Map<String, Object> opts = new HashMap<>();
 
         String pathToDriver = "chromedriver";
         String pathToConfiguration = "config.json";
         String baseUrl = "http://something.com";
         String testCaseFile = "case.json";
-        String timeout = "10";
+        int timeout = 10;
+        String browserType = CHROME;
 
-        opts.put(OptUtils.DRIVER, pathToDriver);
-        opts.put(OptUtils.APPLICATION, pathToConfiguration);
-        opts.put(OptUtils.URL, baseUrl);
-        opts.put(OptUtils.OUTPUT, testCaseFile);
-        opts.put(OptUtils.BROWSER, CHROME);
-        opts.put(OptUtils.TIMEOUT, timeout);
+        when(parsedOptions.getPathToDriver()).thenReturn(pathToDriver);
+        when(parsedOptions.getPathToApplicationConfiguration()).thenReturn(pathToConfiguration);
+        when(parsedOptions.getBaseUrl()).thenReturn(baseUrl);
+        when(parsedOptions.getOutputFile()).thenReturn(testCaseFile);
+        when(parsedOptions.getBrowserType()).thenReturn(browserType);
+        when(parsedOptions.getTimeout()).thenReturn(10);
 
         RecordBrowserBase recordBrowserBase = mock(RecordBrowserBase.class);
         PromptUtils promptUtils = mock(PromptUtils.class);
@@ -46,7 +48,8 @@ public class RecordCommandHandlerTest {
 
         CommandHandler commandHandler = new RecordCommandHandler(promptUtils,
                 recordBrowserFactory,
-                recordCommandBuilderSupplier);
+                recordCommandBuilderSupplier,
+                parsedOptions);
 
         RecordCommand command = mock(RecordCommand.class);
 
