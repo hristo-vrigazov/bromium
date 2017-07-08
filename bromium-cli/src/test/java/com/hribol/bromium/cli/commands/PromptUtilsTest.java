@@ -234,4 +234,19 @@ public class PromptUtilsTest {
         assertEquals(ELEMENT_TEXT_TO_BE, assertion.getWebDriverAction().getWebDriverActionType());
         assertEquals(NOTHING, assertion.getConditionAfterExecution().getWebDriverActionType());
     }
+
+    @Test
+    public void disposeDisposesTerminal() {
+        TextTerminal textTerminal = mock(TextTerminal.class);
+        TextIO textIO = mock(TextIO.class);
+        when(textIO.getTextTerminal()).thenReturn(textTerminal);
+        mockStatic(TextIoFactory.class);
+        when(TextIoFactory.getTextIO()).thenReturn(textIO);
+
+        PromptUtils promptUtils = new PromptUtils();
+        promptUtils.dispose();
+
+        verify(textTerminal).dispose();
+        verify(textIO).dispose();
+    }
 }

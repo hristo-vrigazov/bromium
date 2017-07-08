@@ -16,11 +16,6 @@ import java.util.Map;
  */
 public class StepsReader {
 
-    public List<Map<String, String>> readSteps(String pathToSerializedTest) throws IOException {
-        FileInputStream fileInputStream = new FileInputStream(pathToSerializedTest);
-        return readSteps(fileInputStream);
-    }
-
     public List<Map<String, String>> readSteps(InputStream inputStream) throws IOException {
         String stepsRaw = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
         Gson gson = new GsonBuilder().create();

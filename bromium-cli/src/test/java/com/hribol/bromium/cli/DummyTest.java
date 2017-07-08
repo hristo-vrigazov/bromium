@@ -14,5 +14,6 @@ public class DummyTest {
         assertNotNull(new Main.Commands());
         assertNotNull(new Main());
         assertNotNull(MainMenuChoice.valueOf("ACTION"));
+        assertNotNull(new Constants());
     }
 }
