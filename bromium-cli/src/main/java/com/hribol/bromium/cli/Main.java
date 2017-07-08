@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import com.hribol.bromium.cli.commands.Command;
 import com.hribol.bromium.cli.commands.InitCommand;
 import com.hribol.bromium.cli.commands.RecordCommand;
+import com.hribol.bromium.cli.commands.ReplayCommandRewrite;
 import com.hribol.bromium.cli.handlers.*;
 import org.apache.commons.io.IOUtils;
 import org.docopt.Docopt;
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 import static com.hribol.bromium.cli.Main.Commands.INIT;
 import static com.hribol.bromium.cli.Main.Commands.RECORD;
+import static com.hribol.bromium.cli.Main.Commands.REPLAY;
 
 /**
  * Created by hvrigazov on 14.03.17.
@@ -63,6 +65,7 @@ public class Main {
         Map<String, Command> map = new HashMap<>();
         map.put(INIT, injector.getInstance(InitCommand.class));
         map.put(RECORD, injector.getInstance(RecordCommand.class));
+        map.put(REPLAY, injector.getInstance(ReplayCommandRewrite.class));
         return map;
     }
 
@@ -70,7 +73,6 @@ public class Main {
         Map<String, CommandHandler> map = new HashMap<>();
         map.put(INIT, injector.getInstance(InitCommandHandler.class));
         map.put(RECORD, injector.getInstance(RecordCommandHandler.class));
-        map.put(Commands.REPLAY, injector.getInstance(ReplayCommandHandler.class));
         map.put(Commands.UPDATE, injector.getInstance(UpdateCommandHandler.class));
         map.put(Commands.VERSION, injector.getInstance(VersionCommandHandler.class));
         return map;

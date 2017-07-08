@@ -4,6 +4,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.hribol.bromium.cli.commands.InitCommand;
+import com.hribol.bromium.cli.commands.RecordCommand;
 import com.hribol.bromium.cli.handlers.InitCommandHandler;
 import com.hribol.bromium.cli.handlers.RecordCommandHandler;
 import com.hribol.bromium.cli.handlers.UpdateCommandHandler;
@@ -40,15 +41,15 @@ public class MainTest {
           "init"
         };
 
-        InitCommandHandler initCommandHandler = mock(InitCommandHandler.class);
+        InitCommand initCommand = mock(InitCommand.class);
         Injector injector = mock(Injector.class);
         PowerMockito.mockStatic(Guice.class);
         when(Guice.createInjector(any(Module.class))).thenReturn(injector);
-        when(injector.getInstance(InitCommandHandler.class)).thenReturn(initCommandHandler);
+        when(injector.getInstance(InitCommand.class)).thenReturn(initCommand);
 
         Main.main(args);
 
-        verify(initCommandHandler).handle(anyMap());
+        verify(initCommand).run();
     }
 
     @Test
@@ -61,14 +62,14 @@ public class MainTest {
                 "-o", "bromium-core/src/test/resources/dynamic-testCase.json"
         };
 
-        RecordCommandHandler initCommandHandler = mock(RecordCommandHandler.class);
-        doThrow(FileNotFoundException.class).when(initCommandHandler).handle(anyMap());
+        RecordCommand recordCommand = mock(RecordCommand.class);
+        doThrow(FileNotFoundException.class).when(recordCommand).run();
 
         Injector injector = mock(Injector.class);
         PowerMockito.mockStatic(Guice.class);
         when(Guice.createInjector(any(Module.class))).thenReturn(injector);
 
-        when(injector.getInstance(RecordCommandHandler.class)).thenReturn(initCommandHandler);
+        when(injector.getInstance(RecordCommand.class)).thenReturn(recordCommand);
 
         Main.main(args);
     }
