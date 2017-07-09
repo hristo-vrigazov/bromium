@@ -1,6 +1,5 @@
 package com.hribol.bromium.cli;
 
-import com.hribol.bromium.cli.handlers.OptUtils;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
@@ -12,9 +11,9 @@ public class DummyTest {
 
     @Test
     public void dummy() {
-        assertNotNull(new OptUtils());
         assertNotNull(new Main.Commands());
         assertNotNull(new Main());
         assertNotNull(MainMenuChoice.valueOf("ACTION"));
+        assertNotNull(new Constants());
     }
 }

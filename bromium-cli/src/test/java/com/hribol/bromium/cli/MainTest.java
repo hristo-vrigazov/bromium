@@ -3,10 +3,7 @@ package com.hribol.bromium.cli;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.hribol.bromium.cli.commands.InitCommand;
-import com.hribol.bromium.cli.handlers.InitCommandHandler;
-import com.hribol.bromium.cli.handlers.RecordCommandHandler;
-import com.hribol.bromium.cli.handlers.UpdateCommandHandler;
+import com.hribol.bromium.cli.commands.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
@@ -18,7 +15,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static org.mockito.Matchers.anyMap;
 import static org.mockito.Mockito.*;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.whenNew;
@@ -35,24 +31,16 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
 public class MainTest {
 
     @Test
-    public void dispatchesCorrectly() throws Exception {
+    public void dispatchesToInitCorrectly() throws Exception {
         String[] args = {
           "init"
         };
 
-        InitCommandHandler initCommandHandler = mock(InitCommandHandler.class);
-        Injector injector = mock(Injector.class);
-        PowerMockito.mockStatic(Guice.class);
-        when(Guice.createInjector(any(Module.class))).thenReturn(injector);
-        when(injector.getInstance(InitCommandHandler.class)).thenReturn(initCommandHandler);
-
-        Main.main(args);
-
-        verify(initCommandHandler).handle(anyMap());
+        baseTest(args, InitCommand.class);
     }
 
     @Test
-    public void logsExceptionIfFileNotFound() throws Exception {
+    public void dispatchesToRecordCorrectly() throws Exception {
         String[] args = {
                 "record",
                 "-d", "chromedriver",
@@ -61,16 +49,55 @@ public class MainTest {
                 "-o", "bromium-core/src/test/resources/dynamic-testCase.json"
         };
 
-        RecordCommandHandler initCommandHandler = mock(RecordCommandHandler.class);
-        doThrow(FileNotFoundException.class).when(initCommandHandler).handle(anyMap());
+        baseTest(args, RecordCommand.class);
+    }
+
+    @Test
+    public void dispatchesToReplayCorrectly() throws Exception {
+        String[] args = {
+                "replay",
+                "-d", "chromedriver",
+                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.json",
+                "-u", "http://localhost:3000",
+                "-c", "bromium-core/src/test/resources/dynamic-testCase.json",
+                "-m", "measurements.csv"
+        };
+
+        baseTest(args, ReplayCommand.class);
+    }
+
+
+    @Test
+    public void dispatchesToUpdateCorrectly() throws Exception {
+        String[] args = {
+                "update",
+                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.json",
+        };
+
+        baseTest(args, UpdateCommand.class);
+    }
+
+    @Test
+    public void dispatchesToVersionCorrectly() throws Exception {
+        String[] args = {
+                "version",
+                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.json",
+        };
+
+        baseTest(args, VersionCommand.class);
+    }
+
+    private <T extends Command> void baseTest(String[] args, Class<T> klazz) {
+        T command = mock(klazz);
 
         Injector injector = mock(Injector.class);
         PowerMockito.mockStatic(Guice.class);
         when(Guice.createInjector(any(Module.class))).thenReturn(injector);
 
-        when(injector.getInstance(RecordCommandHandler.class)).thenReturn(initCommandHandler);
+        when(injector.getInstance(klazz)).thenReturn(command);
 
         Main.main(args);
+        verify(command).run();
     }
 
     @Test

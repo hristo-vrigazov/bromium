@@ -268,5 +268,8 @@ public class PromptUtils {
         textIO.dispose();
     }
 
-
+    public void dispose() {
+        textIO.dispose();
+        textIO.getTextTerminal().dispose();
+    }
 }

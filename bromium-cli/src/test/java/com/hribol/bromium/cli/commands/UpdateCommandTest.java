@@ -1,5 +1,6 @@
 package com.hribol.bromium.cli.commands;
 
+import com.hribol.bromium.cli.providers.IOProvider;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationDumper;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
@@ -27,9 +28,8 @@ public class UpdateCommandTest {
         Mocks mocks = new Mocks(outputFilename);
 
         UpdateCommand updateCommand = new UpdateCommand(
-                mocks.inputFilename,
+                mocks.applicationConfigurationIOProvider,
                 mocks.promptUtils,
-                mocks.applicationConfigurationParser,
                 mocks.applicationConfigurationDumper);
         updateCommand.run();
 
@@ -43,13 +43,11 @@ public class UpdateCommandTest {
         String outputFilename = "/alibaba/asd";
         String exceptionMessage = "Something happened!";
         Mocks mocks = new Mocks(outputFilename);
-        when(mocks.applicationConfigurationParser
-                .parseApplicationConfiguration(mocks.inputFilename)).thenThrow(new IOException(exceptionMessage));
+        when(mocks.applicationConfigurationIOProvider.get()).thenThrow(new IOException(exceptionMessage));
 
         UpdateCommand updateCommand = new UpdateCommand(
-                mocks.inputFilename,
+                mocks.applicationConfigurationIOProvider,
                 mocks.promptUtils,
-                mocks.applicationConfigurationParser,
                 mocks.applicationConfigurationDumper);
         updateCommand.run();
 
@@ -58,20 +56,18 @@ public class UpdateCommandTest {
     }
 
     private static class Mocks {
-        String inputFilename;
-        ApplicationConfigurationParser applicationConfigurationParser;
         ApplicationConfiguration applicationConfiguration;
         ApplicationConfigurationDumper applicationConfigurationDumper;
         StringInputReader stringInputReader;
         TextTerminal textTerminal;
         TextIO textIO;
         PromptUtils promptUtils;
+        IOProvider<ApplicationConfiguration> applicationConfigurationIOProvider;
 
         public Mocks(String outputFilename) throws IOException {
-            inputFilename = getClass().getResource("/tenniskafe.json").getFile();
+            applicationConfigurationIOProvider = mock(IOProvider.class);
             applicationConfiguration = mock(ApplicationConfiguration.class);
-            applicationConfigurationParser = mock(ApplicationConfigurationParser.class);
-            when(applicationConfigurationParser.parseApplicationConfiguration(inputFilename)).thenReturn(applicationConfiguration);
+            when(applicationConfigurationIOProvider.get()).thenReturn(applicationConfiguration);
             applicationConfigurationDumper = mock(ApplicationConfigurationDumper.class);
 
             stringInputReader = mock(StringInputReader.class);

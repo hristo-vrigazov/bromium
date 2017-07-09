@@ -55,6 +55,8 @@ public class InitCommand implements Command {
             applicationConfigurationDumper.dumpApplicationConfiguration(applicationConfiguration, outputFilename);
         } catch (IOException e) {
             textIO.getTextTerminal().print(e.getMessage());
+        } finally {
+            promptUtils.dispose();
         }
     }
 

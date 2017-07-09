@@ -265,6 +265,12 @@
                 <artifactId>guice</artifactId>
                 <version>${guice.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/com.google.inject.extensions/guice-throwingproviders -->
+            <dependency>
+                <groupId>com.google.inject.extensions</groupId>
+                <artifactId>guice-throwingproviders</artifactId>
+                <version>${guice.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

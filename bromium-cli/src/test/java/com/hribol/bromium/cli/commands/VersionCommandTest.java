@@ -1,5 +1,6 @@
 package com.hribol.bromium.cli.commands;
 
+import com.hribol.bromium.cli.providers.IOProvider;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationDumper;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
@@ -25,9 +26,8 @@ public class VersionCommandTest {
         String outputFilename = "updated-tmp.json";
         Mocks mocks = new Mocks(outputFilename);
         VersionCommand versionCommand = new VersionCommand(
-                mocks.inputFilename,
                 mocks.promptUtils,
-                mocks.applicationConfigurationParser,
+                mocks.applicationConfigurationIOProvider,
                 mocks.applicationConfigurationDumper);
         versionCommand.run();
 
@@ -46,9 +46,8 @@ public class VersionCommandTest {
                 .dumpApplicationConfiguration(mocks.applicationConfiguration, outputFilename);
 
         VersionCommand versionCommand = new VersionCommand(
-                mocks.inputFilename,
                 mocks.promptUtils,
-                mocks.applicationConfigurationParser,
+                mocks.applicationConfigurationIOProvider,
                 mocks.applicationConfigurationDumper);
         versionCommand.run();
 
@@ -66,8 +65,11 @@ public class VersionCommandTest {
         ApplicationConfiguration applicationConfiguration;
         ApplicationConfigurationParser applicationConfigurationParser;
         ApplicationConfigurationDumper applicationConfigurationDumper;
+        IOProvider<ApplicationConfiguration> applicationConfigurationIOProvider;
+
 
         public Mocks(String outputFilename) throws IOException {
+            applicationConfigurationIOProvider = mock(IOProvider.class);
             pathToApplicationConfiguration = "/tenniskafe.json";
             version = "8.1.14";
             inputFilename = getClass().getResource(pathToApplicationConfiguration).getFile();
@@ -83,6 +85,8 @@ public class VersionCommandTest {
             when(promptUtils.promptForVersion()).thenReturn(version);
 
             applicationConfiguration = mock(ApplicationConfiguration.class);
+
+            when(applicationConfigurationIOProvider.get()).thenReturn(applicationConfiguration);
 
             applicationConfigurationParser = mock(ApplicationConfigurationParser.class);
             when(applicationConfigurationParser.parseApplicationConfiguration(inputFilename))

@@ -2,16 +2,18 @@ package com.hribol.bromium.cli;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.hribol.bromium.cli.handlers.*;
+import com.hribol.bromium.cli.commands.*;
 import org.apache.commons.io.IOUtils;
 import org.docopt.Docopt;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Supplier;
+
+import static com.hribol.bromium.cli.Main.Commands.*;
 
 /**
  * Created by hvrigazov on 14.03.17.
@@ -34,24 +36,18 @@ public class Main {
             String doc = IOUtils.toString(inputStream);
             Docopt docopt = new Docopt(doc);
             Map<String, Object> opts = docopt.withVersion("bromium 0.1").parse(args);
-            injector = Guice.createInjector(new DefaultModule());
 
             System.out.println(opts);
+            injector = Guice.createInjector(new DefaultModule(opts));
 
-            Map<String, CommandHandler> commandToHandler = getCommands();
+            Map<String, Supplier<Command>> commandToHandler = getCommands();
             Optional<String> optionalSelectedCommand = commandToHandler
                     .keySet()
                     .stream()
                     .filter(command -> opts.get(command).equals(true))
                     .findAny();
 
-            optionalSelectedCommand.ifPresent(command -> {
-                try {
-                    commandToHandler.get(command).handle(opts);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-            });
+            optionalSelectedCommand.ifPresent(command -> commandToHandler.get(command).get().run());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -59,13 +55,14 @@ public class Main {
 
     }
 
-    private static Map<String, CommandHandler> getCommands() {
-        Map<String, CommandHandler> map = new HashMap<>();
-        map.put(Commands.INIT, injector.getInstance(InitCommandHandler.class));
-        map.put(Commands.RECORD, injector.getInstance(RecordCommandHandler.class));
-        map.put(Commands.REPLAY, injector.getInstance(ReplayCommandHandler.class));
-        map.put(Commands.UPDATE, injector.getInstance(UpdateCommandHandler.class));
-        map.put(Commands.VERSION, injector.getInstance(VersionCommandHandler.class));
+    private static Map<String, Supplier<Command>> getCommands() {
+        Map<String, Supplier<Command>> map = new HashMap<>();
+        map.put(INIT, () -> injector.getInstance(InitCommand.class));
+        map.put(RECORD, () -> injector.getInstance(RecordCommand.class));
+        map.put(REPLAY, () -> injector.getInstance(ReplayCommand.class));
+        map.put(UPDATE, () -> injector.getInstance(UpdateCommand.class));
+        map.put(VERSION, () -> injector.getInstance(VersionCommand.class));
         return map;
     }
+
 }
