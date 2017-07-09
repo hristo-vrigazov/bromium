@@ -70,7 +70,7 @@ public class VersionCommandTest {
 
         public Mocks(String outputFilename) throws IOException {
             applicationConfigurationIOProvider = mock(IOProvider.class);
-            pathToApplicationConfiguration = "/tenniskafe.json";
+            pathToApplicationConfiguration = "/demo.json";
             version = "8.1.14";
             inputFilename = getClass().getResource(pathToApplicationConfiguration).getFile();
             stringInputReader = mock(StringInputReader.class);

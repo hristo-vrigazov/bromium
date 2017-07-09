@@ -1,0 +1,15 @@
+[
+	{
+		"event": "Load page",
+		"url": "ajax.html"
+	},
+    {
+        "event": "Click Ajax Demo button"
+    },
+    {
+        "event": "Click Ajax created button"
+    },
+    {
+        "event": "Click destroy ajax created button"
+    }
+]

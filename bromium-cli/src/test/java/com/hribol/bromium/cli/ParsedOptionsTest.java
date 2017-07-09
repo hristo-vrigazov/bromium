@@ -19,7 +19,7 @@ public class ParsedOptionsTest {
         Map<String, Object> opts = new HashMap<>();
 
         String pathToDriver = "/chromedriver";
-        String pathToJs = "/something.js";
+        String pathToJs = "/something-whatever.js";
         String url = "http://something";
         String browserType = CHROME;
         String outputFile = "output.json";
