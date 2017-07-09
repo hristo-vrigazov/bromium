@@ -3,8 +3,7 @@ package com.hribol.bromium.cli;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.hribol.bromium.cli.commands.InitCommand;
-import com.hribol.bromium.cli.commands.RecordCommand;
+import com.hribol.bromium.cli.commands.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
@@ -32,24 +31,16 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
 public class MainTest {
 
     @Test
-    public void dispatchesCorrectly() throws Exception {
+    public void dispatchesToInitCorrectly() throws Exception {
         String[] args = {
           "init"
         };
 
-        InitCommand initCommand = mock(InitCommand.class);
-        Injector injector = mock(Injector.class);
-        PowerMockito.mockStatic(Guice.class);
-        when(Guice.createInjector(any(Module.class))).thenReturn(injector);
-        when(injector.getInstance(InitCommand.class)).thenReturn(initCommand);
-
-        Main.main(args);
-
-        verify(initCommand).run();
+        baseTest(args, InitCommand.class);
     }
 
     @Test
-    public void logsExceptionIfFileNotFound() throws Exception {
+    public void dispatchesToRecordCorrectly() throws Exception {
         String[] args = {
                 "record",
                 "-d", "chromedriver",
@@ -58,16 +49,55 @@ public class MainTest {
                 "-o", "bromium-core/src/test/resources/dynamic-testCase.json"
         };
 
-        RecordCommand recordCommand = mock(RecordCommand.class);
-        doThrow(FileNotFoundException.class).when(recordCommand).run();
+        baseTest(args, RecordCommand.class);
+    }
+
+    @Test
+    public void dispatchesToReplayCorrectly() throws Exception {
+        String[] args = {
+                "replay",
+                "-d", "chromedriver",
+                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.json",
+                "-u", "http://localhost:3000",
+                "-c", "bromium-core/src/test/resources/dynamic-testCase.json",
+                "-m", "measurements.csv"
+        };
+
+        baseTest(args, ReplayCommand.class);
+    }
+
+
+    @Test
+    public void dispatchesToUpdateCorrectly() throws Exception {
+        String[] args = {
+                "update",
+                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.json",
+        };
+
+        baseTest(args, UpdateCommand.class);
+    }
+
+    @Test
+    public void dispatchesToVersionCorrectly() throws Exception {
+        String[] args = {
+                "version",
+                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.json",
+        };
+
+        baseTest(args, VersionCommand.class);
+    }
+
+    private <T extends Command> void baseTest(String[] args, Class<T> klazz) {
+        T command = mock(klazz);
 
         Injector injector = mock(Injector.class);
         PowerMockito.mockStatic(Guice.class);
         when(Guice.createInjector(any(Module.class))).thenReturn(injector);
 
-        when(injector.getInstance(RecordCommand.class)).thenReturn(recordCommand);
+        when(injector.getInstance(klazz)).thenReturn(command);
 
         Main.main(args);
+        verify(command).run();
     }
 
     @Test
