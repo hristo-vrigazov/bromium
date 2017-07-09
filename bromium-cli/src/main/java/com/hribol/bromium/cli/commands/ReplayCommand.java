@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.hribol.bromium.cli.providers.IOProvider;
 import com.hribol.bromium.cli.providers.IOURIProvider;
 import com.hribol.bromium.replay.ReplayBrowser;
+import com.hribol.bromium.replay.report.ExecutionReport;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -29,9 +30,12 @@ public class ReplayCommand implements Command {
     @Override
     public void run() {
         try {
-            replayBrowserProvider.get().replay(stepsProvider.get());
+            List<Map<String, String>> testCaseSteps = stepsProvider.get();
+            ReplayBrowser replayBrowser = replayBrowserProvider.get();
+            ExecutionReport executionReport = replayBrowser.replay(testCaseSteps);
+            System.out.println(executionReport.getAutomationResult());
         } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
+            promptUtils.getTextIO().getTextTerminal().println(e.getMessage());
         } finally {
             promptUtils.dispose();
         }
