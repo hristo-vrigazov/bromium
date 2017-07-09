@@ -4,6 +4,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.hribol.bromium.cli.commands.InitCommand;
 import com.hribol.bromium.cli.commands.RecordCommand;
+import com.hribol.bromium.cli.commands.ReplayCommand;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -39,5 +40,20 @@ public class DefaultModuleTest {
         Injector injector = Guice.createInjector(new DefaultModule(opts));
 
         injector.getInstance(RecordCommand.class);
+    }
+
+    @Test
+    public void canCreateReplayCommand() {
+        Map<String, Object> opts = new HashMap<>();
+        opts.put(DRIVER, "chromedriver");
+        opts.put(APPLICATION, "/home/hvrigazov/bromium-data/demo-app/configurations/demo.json");
+        opts.put(URL, "http://localhost:3000");
+        opts.put(CASE, "/home/hvrigazov/bromium-data/demo-app/test-cases/dynamic.json");
+        opts.put(BROWSER, CHROME);
+        opts.put(TIMEOUT, "5");
+
+        Injector injector = Guice.createInjector(new DefaultModule(opts));
+
+        injector.getInstance(ReplayCommand.class);
     }
 }
