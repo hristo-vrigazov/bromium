@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import static com.hribol.bromium.cli.Main.Commands.*;
 
@@ -39,14 +40,14 @@ public class Main {
             System.out.println(opts);
             injector = Guice.createInjector(new DefaultModule(opts));
 
-            Map<String, Command> commandToHandler = getCommands();
+            Map<String, Supplier<Command>> commandToHandler = getCommands();
             Optional<String> optionalSelectedCommand = commandToHandler
                     .keySet()
                     .stream()
                     .filter(command -> opts.get(command).equals(true))
                     .findAny();
 
-            optionalSelectedCommand.ifPresent(command -> commandToHandler.get(command).run());
+            optionalSelectedCommand.ifPresent(command -> commandToHandler.get(command).get().run());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -54,13 +55,13 @@ public class Main {
 
     }
 
-    private static Map<String, Command> getCommands() {
-        Map<String, Command> map = new HashMap<>();
-        map.put(INIT, injector.getInstance(InitCommand.class));
-        map.put(RECORD, injector.getInstance(RecordCommand.class));
-        map.put(REPLAY, injector.getInstance(ReplayCommand.class));
-        map.put(UPDATE, injector.getInstance(UpdateCommand.class));
-        map.put(VERSION, injector.getInstance(VersionCommand.class));
+    private static Map<String, Supplier<Command>> getCommands() {
+        Map<String, Supplier<Command>> map = new HashMap<>();
+        map.put(INIT, () -> injector.getInstance(InitCommand.class));
+        map.put(RECORD, () -> injector.getInstance(RecordCommand.class));
+        map.put(REPLAY, () -> injector.getInstance(ReplayCommand.class));
+        map.put(UPDATE, () -> injector.getInstance(UpdateCommand.class));
+        map.put(VERSION, () -> injector.getInstance(VersionCommand.class));
         return map;
     }
 
