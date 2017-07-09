@@ -17,15 +17,13 @@ public class ParsedOptions {
     public static final String TIMEOUT = "--timeout";
     public static final String APPLICATION = "--application";
     public static final String CASE = "--case";
-    public static final String MEASUREMENTS = "--measurements";
     public static final String PRECISION = "--precision";
 
     public ParsedOptions(Map<String, Object> opts) {
         this.opts = opts;
     }
 
-
-    public int getMeasurementsPrecisionMilli() {
+    public Integer getMeasurementsPrecisionMilli() {
         return getInt(PRECISION);
     }
 
