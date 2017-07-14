@@ -66,6 +66,11 @@
             <classifier>runtime</classifier>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.hribol.bromium</groupId>
+            <artifactId>bromium-demo-app</artifactId>
+            <version>0.1</version>
+        </dependency>
     </dependencies>
 
     <parent>
