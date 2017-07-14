@@ -37,6 +37,7 @@ public class ReplayAjaxIT {
     public void prepare() throws Exception {
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
+        System.setProperty("java.awt.headless", "true");
 
         testResourcesDirectory = Files.createTempDir();
         demoAppResourcesDirectory = Files.createTempDir();
