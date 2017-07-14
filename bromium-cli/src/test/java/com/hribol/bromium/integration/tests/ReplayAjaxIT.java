@@ -57,7 +57,7 @@ public class ReplayAjaxIT {
     public void something() {
         String[] args = {
                 "replay",
-                "-d", "/usr/bin/chromedriver",
+                "-d", chromedriverFile.getAbsolutePath(),
                 "-a", configurationFile.getAbsolutePath(),
                 "-u", "http://localhost:" + demoApp.getPort() + "/",
                 "-c", testCaseFile.getAbsolutePath(),

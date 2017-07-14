@@ -1,12 +1,9 @@
-sudo: required
-dist: trusty
 language: java
 
 jdk:
   - oraclejdk8
 
 before_install:
- - sudo apt-get update
- - sudo apt-get install chromium-chromedriver
+  - sudo apt-get install chromium-browser
 
 install: mvn clean install coveralls:report
