@@ -4,6 +4,10 @@ jdk:
   - oraclejdk8
 
 addons:
-  chrome: stable
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
 
 install: mvn clean install coveralls:report
