@@ -16,4 +16,3 @@ geckodriver
 *.har
 cheatsheet
 bromium-core/src/test/resources/dynamic-testCase.json
-replay.js
