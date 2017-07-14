@@ -9,7 +9,6 @@ buildNumber.properties
 .mvn/timing.properties
 *.iml
 .idea/
-chromedriver
 geckodriver
 *.csv
 *.out
