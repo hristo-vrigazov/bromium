@@ -11,9 +11,6 @@ import org.junit.Test;
 
 import java.io.*;
 
-import static com.hribol.bromium.replay.report.AutomationResult.SUCCESS;
-import static org.junit.Assert.assertEquals;
-
 /**
  * Created by hvrigazov on 15.07.17.
  */
