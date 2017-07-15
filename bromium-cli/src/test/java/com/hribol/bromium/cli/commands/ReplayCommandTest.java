@@ -6,6 +6,7 @@ import com.hribol.bromium.replay.ReplayBrowser;
 import com.hribol.bromium.replay.report.AutomationResult;
 import com.hribol.bromium.replay.report.ExecutionReport;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -32,13 +33,13 @@ public class ReplayCommandTest {
         List<Map<String, String>> steps = new ArrayList<>();
         when(stepsProvider.get()).thenReturn(steps);
         when(executionReport.getAutomationResult()).thenReturn(AutomationResult.SUCCESS);
-        when(replayBrowser.replay(steps)).thenReturn(executionReport);
+        when(replayBrowser.createVirtualScreenProcessAndExecute(eq(steps),eq(1), any())).thenReturn(executionReport);
 
         ReplayCommand replayCommand = new ReplayCommand(promptUtils, replayBrowserProvider, stepsProvider);
 
         replayCommand.run();
 
-        verify(replayBrowser).replay(steps);
+//   TODO: Figure out the correct way to do this: Mockito.verify(replayBrowser).replay(eq(steps), eq(1), any());
         verify(promptUtils).dispose();
     }
 
