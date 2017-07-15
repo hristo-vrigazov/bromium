@@ -33,6 +33,8 @@ import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.FunctionRegistry;
 import com.hribol.bromium.core.generation.GeneratedFunction;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
+import com.hribol.bromium.core.suite.UbuntuVirtualScreenProcessCreator;
+import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.core.utils.JavascriptInjector;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
 import com.hribol.bromium.core.utils.parsing.StepsReader;
@@ -72,6 +74,7 @@ public class DefaultModule extends AbstractModule {
                 .to(RecordingWebDriverActionsOnly.class);
         bind(new TypeLiteral<FunctionRegistry<NameWebDriverActionConfiguration>>(){})
                 .to(RecorderFunctionRegistry.class);
+        bind(VirtualScreenProcessCreator.class).to(UbuntuVirtualScreenProcessCreator.class);
         bindConstant().annotatedWith(Names.named(RECORD_TEMPLATE_RESOURCE)).to("/record.js");
         bindConstant().annotatedWith(Names.named(REPLAY_TEMPLATE_RESOURCE)).to("/replay.js");
 
@@ -207,6 +210,12 @@ public class DefaultModule extends AbstractModule {
     @Named(BASE_RECORDING_TEMPLATE)
     public String getBaseRecordingTemplate(@Named(RECORD_TEMPLATE_RESOURCE) String templateResource) throws IOException {
         return IOUtils.toString(getClass().getResourceAsStream(templateResource));
+    }
+
+    @Provides
+    @Named(SCREEN_NUMER)
+    public Integer getScreenNumber(ParsedOptions parsedOptions) {
+        return parsedOptions.getScreenNumber();
     }
 
 

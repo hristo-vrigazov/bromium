@@ -62,7 +62,8 @@ public class ReplayAjaxIT {
                 "-a", configurationFile.getAbsolutePath(),
                 "-u", "http://localhost:" + demoApp.getPort() + "/",
                 "-c", testCaseFile.getAbsolutePath(),
-                "-m", measurementsFile.getAbsolutePath()
+                "-m", measurementsFile.getAbsolutePath(),
+                "-s", "1"
         };
 
         Main.main(args);

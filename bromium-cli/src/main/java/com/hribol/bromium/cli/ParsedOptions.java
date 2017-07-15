@@ -18,6 +18,7 @@ public class ParsedOptions {
     public static final String APPLICATION = "--application";
     public static final String CASE = "--case";
     public static final String PRECISION = "--precision";
+    public static final String SCREEN = "--screen";
 
     public ParsedOptions(Map<String, Object> opts) {
         this.opts = opts;
@@ -63,10 +64,11 @@ public class ParsedOptions {
         return Integer.valueOf(getString(key));
     }
 
-
     public String getString(String key) {
         return (String) opts.get(key);
     }
 
-
+    public Integer getScreenNumber() {
+        return getInt(SCREEN);
+    }
 }
