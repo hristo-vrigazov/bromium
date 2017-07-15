@@ -92,6 +92,8 @@ public abstract class BaseReplayIntegrationTest {
         InputStream chromeDriverStream = getClass().getResourceAsStream("/" + resource);
         OutputStream fileOutputStream = new FileOutputStream(tempFile);
         IOUtils.copy(chromeDriverStream, fileOutputStream);
+        chromeDriverStream.close();
+        fileOutputStream.close();
         return tempFile;
     }
 
