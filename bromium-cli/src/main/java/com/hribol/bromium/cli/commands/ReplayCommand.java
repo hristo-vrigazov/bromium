@@ -3,6 +3,7 @@ package com.hribol.bromium.cli.commands;
 import com.google.inject.Inject;
 import com.hribol.bromium.cli.providers.IOProvider;
 import com.hribol.bromium.cli.providers.IOURIProvider;
+import com.hribol.bromium.core.suite.UbuntuVirtualScreenProcessCreator;
 import com.hribol.bromium.replay.ReplayBrowser;
 import com.hribol.bromium.replay.report.ExecutionReport;
 
@@ -32,7 +33,8 @@ public class ReplayCommand implements Command {
         try {
             List<Map<String, String>> testCaseSteps = stepsProvider.get();
             ReplayBrowser replayBrowser = replayBrowserProvider.get();
-            ExecutionReport executionReport = replayBrowser.replay(testCaseSteps);
+            ExecutionReport executionReport = replayBrowser.createVirtualScreenProcessAndExecute(testCaseSteps,
+                    1, new UbuntuVirtualScreenProcessCreator());
             System.out.println(executionReport.getAutomationResult());
         } catch (IOException | URISyntaxException e) {
             promptUtils.getTextIO().getTextTerminal().println(e.getMessage());

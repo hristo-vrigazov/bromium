@@ -60,4 +60,11 @@ public class ReplayBrowser {
         TestScenario testScenario = testScenarioFactory.createFromInputStream(inputStream);
         return webDriverActionExecution.createVirtualScreenProcessAndExecute(testScenario, screenNumber, virtualScreenProcessCreator);
     }
+
+    public ExecutionReport createVirtualScreenProcessAndExecute(List<Map<String, String>> steps,
+                                                                int screenNumber,
+                                                                VirtualScreenProcessCreator virtualScreenProcessCreator) throws IOException {
+        TestScenario testScenario = testScenarioFactory.createFromTestCaseSteps(steps);
+        return webDriverActionExecution.createVirtualScreenProcessAndExecute(testScenario, screenNumber, virtualScreenProcessCreator);
+    }
 }
