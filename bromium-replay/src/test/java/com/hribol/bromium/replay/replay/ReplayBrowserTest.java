@@ -126,4 +126,22 @@ public class ReplayBrowserTest {
         ExecutionReport actualReport = replayBrowser.replay(inputStream, screenToUse);
         assertEquals(expectedReport, actualReport);
     }
+
+    @Test
+    public void delegatesExecuteFromTestCaseStepsOnScreen() throws IOException, URISyntaxException, InterruptedException {
+        ExecutionReport expectedReport = mock(ExecutionReport.class);
+        String screenToUse = ":2";
+        List<Map<String, String>> testCaseSteps = mock(List.class);
+        TestScenario testScenario = mock(TestScenario.class);
+        TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);
+        when(testScenarioFactory.createFromTestCaseSteps(testCaseSteps)).thenReturn(testScenario);
+        WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
+        when(webDriverActionExecution.execute(testScenario))
+                .thenReturn(expectedReport);
+
+        ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, webDriverActionExecution);
+
+        ExecutionReport actualReport = replayBrowser.replay(testCaseSteps);
+        assertEquals(expectedReport, actualReport);
+    }
 }

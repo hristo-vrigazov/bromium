@@ -39,12 +39,31 @@ public class ReplayCommandTest {
 
         when(replayBrowser.createVirtualScreenProcessAndExecute(steps, screenNumber, virtualScreenProcessCreator)).thenReturn(executionReport);
 
+        ReplayCommand replayCommand = new ReplayCommand(promptUtils, replayBrowserProvider, stepsProvider,
+                virtualScreenProcessCreator, screenNumber);
+
+        replayCommand.run();
+        verify(replayBrowser).createVirtualScreenProcessAndExecute(steps, screenNumber, virtualScreenProcessCreator);
+        verify(promptUtils).dispose();
+    }
+
+    @Test
+    public void executesOnDefaultScreenIfSetToZero() throws IOException, URISyntaxException {
+        when(replayBrowserProvider.get()).thenReturn(replayBrowser);
+        List<Map<String, String>> steps = new ArrayList<>();
+        when(stepsProvider.get()).thenReturn(steps);
+        when(executionReport.getAutomationResult()).thenReturn(AutomationResult.SUCCESS);
+
+        VirtualScreenProcessCreator virtualScreenProcessCreator = mock(VirtualScreenProcessCreator.class);
+        Integer screenNumber = 0;
+
+        when(replayBrowser.replay(steps)).thenReturn(executionReport);
 
         ReplayCommand replayCommand = new ReplayCommand(promptUtils, replayBrowserProvider, stepsProvider,
                 virtualScreenProcessCreator, screenNumber);
 
         replayCommand.run();
-        verify(replayBrowser).createVirtualScreenProcessAndExecute(steps, 1, virtualScreenProcessCreator);
+        verify(replayBrowser).replay(steps);
         verify(promptUtils).dispose();
     }
 
