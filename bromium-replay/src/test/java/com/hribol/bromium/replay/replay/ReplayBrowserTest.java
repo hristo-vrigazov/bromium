@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -130,18 +131,20 @@ public class ReplayBrowserTest {
     @Test
     public void delegatesExecuteFromTestCaseStepsOnScreen() throws IOException, URISyntaxException, InterruptedException {
         ExecutionReport expectedReport = mock(ExecutionReport.class);
-        String screenToUse = ":2";
-        List<Map<String, String>> testCaseSteps = mock(List.class);
+        Integer screenToUse = 2;
+        List<Map<String, String>> testCaseSteps = new ArrayList<>();
         TestScenario testScenario = mock(TestScenario.class);
         TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);
         when(testScenarioFactory.createFromTestCaseSteps(testCaseSteps)).thenReturn(testScenario);
         WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
-        when(webDriverActionExecution.execute(testScenario))
+        VirtualScreenProcessCreator virtualScreenProcessCreator = mock(VirtualScreenProcessCreator.class);
+
+        when(webDriverActionExecution.createVirtualScreenProcessAndExecute(testScenario, screenToUse, virtualScreenProcessCreator))
                 .thenReturn(expectedReport);
 
         ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, webDriverActionExecution);
 
-        ExecutionReport actualReport = replayBrowser.replay(testCaseSteps);
+        ExecutionReport actualReport = replayBrowser.createVirtualScreenProcessAndExecute(testCaseSteps, screenToUse, virtualScreenProcessCreator);
         assertEquals(expectedReport, actualReport);
     }
 }
