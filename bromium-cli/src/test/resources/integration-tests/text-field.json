@@ -1,0 +1,10 @@
+[
+  {
+    "event": "Load page",
+    "url": "text-field.html"
+  },
+  {
+    "event": "Type text in name input",
+    "text": "something"
+  }
+]

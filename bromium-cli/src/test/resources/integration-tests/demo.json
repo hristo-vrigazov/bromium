@@ -175,6 +175,33 @@
                 },
                 "webDriverActionType": "PAGE_LOADING"
             }
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": true,
+            "name": "Type text in name input",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "cssSelector": {
+                        "expose": false,
+                        "parameterName": "cssSelector",
+                        "value": "#name-input"
+                    },
+                    "text": {
+                        "expose": true,
+                        "parameterName": "text",
+                        "alias": "text"
+                    }
+                },
+                "webDriverActionType": "TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR"
+            }
         }
     ],
     "applicationName": "Demo app for Bromium vs Selenium",

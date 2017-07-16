@@ -25,7 +25,12 @@ public class DemoApp {
 
     private final File baseOutputDirectory;
     private Server server;
-    private String[] resourcesToBeExtractedInDirectory = { "ajax.html", "dynamic.html", "race-http.html", "dynamic.html" };
+    private String[] resourcesToBeExtractedInDirectory = {
+            "ajax.html",
+            "dynamic.html",
+            "race-http.html",
+            "text-field.html",
+    };
 
     private int port;
 
