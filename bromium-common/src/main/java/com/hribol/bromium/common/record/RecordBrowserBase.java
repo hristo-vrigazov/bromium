@@ -38,14 +38,14 @@ public abstract class RecordBrowserBase {
     private ProxyDriverIntegrator proxyDriverIntegrator;
 
     public void record(String baseURI, int timeout) throws IOException, InterruptedException, URISyntaxException {
-        URI uri = new URI(baseURI);
+        System.setProperty(getSystemProperty(), pathToDriverExecutable);
+        URI uri = URI.create(baseURI);
         this.responseFilter = new RecordResponseFilter(uri, jsInjectionCode);
         this.recordRequestFilter = new RecordRequestFilter();
         this.proxyDriverIntegrator = new ProxyDriverIntegrator(recordRequestFilter, responseFilter, getVisibleWebDriverSupplier(), timeout);
         WebDriver driver = proxyDriverIntegrator.getDriver();
         BrowserMobProxy proxy = proxyDriverIntegrator.getProxy();
         this.recordManager = new RecordManager(driver, proxy);
-        System.setProperty(getSystemProperty(), pathToDriverExecutable);
         recordManager.prepareRecord();
         recordManager.open(baseURI);
     }
