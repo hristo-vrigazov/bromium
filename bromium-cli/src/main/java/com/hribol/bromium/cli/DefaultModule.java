@@ -5,8 +5,6 @@ import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import com.google.inject.throwingproviders.CheckedProvides;
 import com.google.inject.throwingproviders.ThrowingProviderBinder;
-import com.hribol.bromium.cli.commands.PromptUtils;
-import com.hribol.bromium.cli.commands.RecordCommand;
 import com.hribol.bromium.cli.factory.ExecutionFactory;
 import com.hribol.bromium.cli.factory.RecordBrowserFactory;
 import com.hribol.bromium.cli.providers.IOProvider;
@@ -45,7 +43,6 @@ import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
 import org.apache.commons.io.IOUtils;
-import org.omg.CORBA.TIMEOUT;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -214,7 +211,7 @@ public class DefaultModule extends AbstractModule {
     }
 
     @Provides
-    @Named(SCREEN_NUMER)
+    @Named(SCREEN_NUMBER)
     public Integer getScreenNumber(ParsedOptions parsedOptions) {
         return parsedOptions.getScreenNumber();
     }

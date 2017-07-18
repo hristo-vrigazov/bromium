@@ -13,7 +13,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 
-import static com.hribol.bromium.cli.Constants.SCREEN_NUMER;
+import static com.hribol.bromium.cli.Constants.SCREEN_NUMBER;
 
 /**
  * Created by hvrigazov on 08.07.17.
@@ -31,7 +31,7 @@ public class ReplayCommand implements Command {
                          IOURIProvider<ReplayBrowser> replayBrowserProvider,
                          IOProvider<List<Map<String, String>>> stepsProvider,
                          VirtualScreenProcessCreator virtualScreenProcessCreator,
-                         @Named(SCREEN_NUMER) Integer screenNumber) {
+                         @Named(SCREEN_NUMBER) Integer screenNumber) {
         this.promptUtils = promptUtils;
         this.replayBrowserProvider = replayBrowserProvider;
         this.stepsProvider = stepsProvider;

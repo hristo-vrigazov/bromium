@@ -1,14 +1,12 @@
 package com.hribol.bromium.cli.commands;
 
 import com.hribol.bromium.core.config.ApplicationConfiguration;
-import com.hribol.bromium.core.suppliers.ApplicationConfigurationSupplier;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationDumper;
 import org.beryx.textio.StringInputReader;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextTerminal;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.IOException;
 
 import static org.junit.Assert.assertFalse;
@@ -26,9 +24,9 @@ public class InitCommandTest {
         Mocks mocks = new Mocks();
 
         InitCommand initCommand = new InitCommand(
+                mocks.applicationConfiguration,
                 mocks.promptUtils,
-                mocks.applicationConfigurationDumper,
-                mocks.applicationConfigurationSupplier);
+                mocks.applicationConfigurationDumper);
         initCommand.run();
 
         verify(mocks.applicationConfigurationDumper)
@@ -46,9 +44,9 @@ public class InitCommandTest {
                 .dumpApplicationConfiguration(mocks.applicationConfiguration, mocks.outputfileName);
 
         InitCommand initCommand = new InitCommand(
+                mocks.applicationConfiguration,
                 mocks.promptUtils,
-                mocks.applicationConfigurationDumper,
-                mocks.applicationConfigurationSupplier);
+                mocks.applicationConfigurationDumper);
         initCommand.run();
 
         verify(mocks.textTerminal).print(exceptionMessage);
@@ -63,7 +61,6 @@ public class InitCommandTest {
         PromptUtils promptUtils;
         ApplicationConfigurationDumper applicationConfigurationDumper;
         ApplicationConfiguration applicationConfiguration;
-        ApplicationConfigurationSupplier applicationConfigurationSupplier;
 
         public Mocks() {
             applicationName = "tenniskafe";
@@ -83,9 +80,6 @@ public class InitCommandTest {
 
             applicationConfiguration = mock(ApplicationConfiguration.class);
             applicationConfigurationDumper = mock(ApplicationConfigurationDumper.class);
-            applicationConfigurationSupplier = mock(ApplicationConfigurationSupplier.class);
-
-            when(applicationConfigurationSupplier.get()).thenReturn(applicationConfiguration);
         }
     }
 }

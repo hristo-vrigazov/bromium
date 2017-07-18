@@ -31,6 +31,6 @@ public class Constants {
     public static final String TIMEOUT = "TIMEOUT";
     public static final String OUTPUT_FILE = "OUTPUT_FILE";
 
-    public static final String SCREEN_NUMER = "SCREEN_NUMER";
+    public static final String SCREEN_NUMBER = "SCREEN_NUMBER";
 
 }
