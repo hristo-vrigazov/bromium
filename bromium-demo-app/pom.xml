@@ -10,8 +10,8 @@
     <artifactId>bromium-demo-app</artifactId>
     <packaging>jar</packaging>
 
-    <name>bromium-demo-app</name>
-    <url>http://maven.apache.org</url>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <url>https://github.com/hristo-vrigazov/bromium</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

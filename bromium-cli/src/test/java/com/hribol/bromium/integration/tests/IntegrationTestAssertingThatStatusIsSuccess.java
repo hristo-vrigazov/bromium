@@ -7,8 +7,9 @@ import static org.junit.Assert.assertEquals;
  * Created by hvrigazov on 15.07.17.
  */
 public class IntegrationTestAssertingThatStatusIsSuccess extends BaseReplayIntegrationTest {
-    public IntegrationTestAssertingThatStatusIsSuccess(String resourceConfigurationPath, String resouceCasePath) {
-        super(resourceConfigurationPath, resouceCasePath);
+    public IntegrationTestAssertingThatStatusIsSuccess(String resourceConfigurationPath,
+                                                       String resouceCasePath) {
+        super(resourceConfigurationPath, resouceCasePath, System.getProperty("screen", "1"));
     }
 
     @Override

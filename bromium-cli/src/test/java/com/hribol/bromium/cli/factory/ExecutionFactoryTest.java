@@ -27,7 +27,7 @@ public class ExecutionFactoryTest {
 
     @Test
     public void canCreateChrome() throws Exception {
-        String baseURL = "http://something.com";
+        String baseURL = "http://runTest.com";
         ChromeDriverActionExecution chromeDriverActionExecution = mock(ChromeDriverActionExecution.class);
         when(chromeDriverActionExecution.getBaseURL()).thenReturn(baseURL);
         ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
