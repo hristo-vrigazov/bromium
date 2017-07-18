@@ -1,4 +1,4 @@
-package com.hribol.bromium.integration.tests;
+package com.hribol.bromium.integration.tests.replay;
 
 /**
  * Created by hvrigazov on 09.07.17.

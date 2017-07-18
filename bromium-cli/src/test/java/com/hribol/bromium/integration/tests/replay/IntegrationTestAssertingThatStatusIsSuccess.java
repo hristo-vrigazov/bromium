@@ -1,4 +1,4 @@
-package com.hribol.bromium.integration.tests;
+package com.hribol.bromium.integration.tests.replay;
 
 import static com.hribol.bromium.replay.report.AutomationResult.SUCCESS;
 import static org.junit.Assert.assertEquals;

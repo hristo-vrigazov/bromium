@@ -1,18 +1,26 @@
-package com.hribol.bromium.integration.tests;
+package com.hribol.bromium.integration.tests.replay;
 
 import com.hribol.bromium.cli.Main;
-import org.junit.Test;
+import com.hribol.bromium.integration.tests.BaseDemoAppIntegrationTest;
+import org.junit.Before;
+
+import java.io.IOException;
 
 /**
  * Created by hvrigazov on 15.07.17.
  */
-public abstract class BaseReplayIntegrationTest extends BaseIntegrationTest {
+public abstract class BaseReplayIntegrationTest extends BaseDemoAppIntegrationTest {
 
     public BaseReplayIntegrationTest(String resourceConfigurationPath, String resouceCasePath, String screen) {
         super(resourceConfigurationPath, resouceCasePath, screen);
     }
 
-    @Test
+    @Before
+    public void extractTestCaseToBeReplayed() throws IOException {
+        testCaseFile = extractResource(pathToTestCase);
+    }
+
+    @Override
     public void runTest() {
         String[] args = {
                 "replay",

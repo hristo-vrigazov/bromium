@@ -1,7 +1,6 @@
 package com.hribol.bromium.integration.tests;
 
 import com.google.common.io.Files;
-import com.hribol.bromium.cli.Main;
 import com.hribol.bromium.demo.app.DemoApp;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -14,7 +13,7 @@ import java.io.*;
 /**
  * Created by hvrigazov on 18.07.17.
  */
-public abstract class BaseIntegrationTest {
+public abstract class BaseDemoAppIntegrationTest {
 
     protected final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     protected final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -29,33 +28,42 @@ public abstract class BaseIntegrationTest {
     protected DemoApp demoApp;
 
     protected String resourceConfigurationPath;
-    protected String resouceCasePath;
+    protected String pathToTestCase;
 
-    public BaseIntegrationTest(String resourceConfigurationPath, String resouceCasePath, String screen) {
+    public BaseDemoAppIntegrationTest(String resourceConfigurationPath, String pathToTestCase, String screen) {
         this.resourceConfigurationPath = resourceConfigurationPath;
-        this.resouceCasePath = resouceCasePath;
+        this.pathToTestCase = pathToTestCase;
         this.screen = screen;
     }
 
     @Before
     public void prepare() throws Exception {
-        System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
-        System.setProperty("java.awt.headless", "true");
+        prepareSystem();
+        prepareTestResources();
+        prepareDemoApp();
+    }
 
-        testResourcesDirectory = Files.createTempDir();
+    private void prepareDemoApp() throws Exception {
         demoAppResourcesDirectory = Files.createTempDir();
+        demoApp = new DemoApp(demoAppResourcesDirectory);
+        demoApp.runOnSeparateThread();
+    }
+
+    private void prepareTestResources() throws IOException {
+        testResourcesDirectory = Files.createTempDir();
 
         chromedriverFile = extractResource("chromedriver");
         if (!chromedriverFile.setExecutable(true)) {
             throw new IllegalStateException("Cannot set chrome driver file to executable");
         }
         configurationFile = extractResource(resourceConfigurationPath);
-        testCaseFile = extractResource(resouceCasePath);
         measurementsFile = createTempFile("measurements.csv");
+    }
 
-        demoApp = new DemoApp(demoAppResourcesDirectory);
-        demoApp.runOnSeparateThread();
+    private void prepareSystem() {
+        System.setOut(new PrintStream(outContent));
+        System.setErr(new PrintStream(errContent));
+        System.setProperty("java.awt.headless", "true");
     }
 
     @Test

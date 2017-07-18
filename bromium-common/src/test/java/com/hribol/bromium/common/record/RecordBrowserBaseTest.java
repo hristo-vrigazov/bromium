@@ -44,7 +44,7 @@ public class RecordBrowserBaseTest {
             }
         };
 
-        recordBrowserBase.record("http://tenniskafe.com", 123);
+        recordBrowserBase.record("http://tenniskafe.com", 10);
         String outputFileName = "tmp.json";
         recordBrowserBase.dumpActions(outputFileName);
         File outputFile = new File(outputFileName);
