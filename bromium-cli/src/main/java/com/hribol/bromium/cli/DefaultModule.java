@@ -24,6 +24,7 @@ import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
 import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.replay.*;
 import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
+import com.hribol.bromium.common.record.RecordBrowserBase;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
 import com.hribol.bromium.common.replay.factory.DefaultApplicationActionFactory;
 import com.hribol.bromium.common.replay.factory.PredefinedWebDriverActionFactory;
@@ -325,6 +326,15 @@ public class DefaultModule extends AbstractModule {
                 .timeoutInSeconds(parsedOptions.getTimeout())
                 .measurementsPrecisionInMilliseconds(parsedOptions.getMeasurementsPrecisionMilli())
                 .javascriptInjectionCode(replayingJavascriptCodeProvider.get());
+    }
+
+    @CheckedProvides(IOProvider.class)
+    public RecordBrowserBase getRecordBrowser(@Named(BROWSER_TYPE) String browserType,
+                                              @Named(PATH_TO_DRIVER) String pathToDriver,
+                                              @Named(RECORDING_JAVASCRIPT_INJECTOR) IOProvider<JavascriptInjector> javascriptInjectorProvider,
+                                              RecordBrowserFactory recordBrowserFactory) throws IOException {
+        JavascriptInjector javascriptInjector = javascriptInjectorProvider.get();
+        return recordBrowserFactory.create(browserType, pathToDriver, javascriptInjector);
     }
 
     @CheckedProvides(IOURIProvider.class)

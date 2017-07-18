@@ -2,7 +2,6 @@ package com.hribol.bromium.cli.commands;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import com.hribol.bromium.cli.factory.RecordBrowserFactory;
 import com.hribol.bromium.cli.providers.IOProvider;
 import com.hribol.bromium.common.record.RecordBrowserBase;
 import com.hribol.bromium.core.utils.JavascriptInjector;
@@ -17,39 +16,29 @@ import static com.hribol.bromium.cli.Constants.*;
  */
 public class RecordCommand implements Command {
 
-    private RecordBrowserFactory recordBrowserFactory;
-    private String browserType;
-    private String pathToDriver;
-    private IOProvider<JavascriptInjector> javascriptInjectorProvider;
     private String baseUrl;
     private int timeout;
     private PromptUtils promptUtils;
     private String outputFile;
+    private IOProvider<RecordBrowserBase> recordBrowserBaseIOProvider;
 
     @Inject
-    public RecordCommand(@Named(BROWSER_TYPE) String browserType,
-                         @Named(PATH_TO_DRIVER) String pathToDriver,
-                         @Named(RECORDING_JAVASCRIPT_INJECTOR) IOProvider<JavascriptInjector> javascriptInjectorProvider,
-                         @Named(BASE_URL) String baseUrl,
+    public RecordCommand(@Named(BASE_URL) String baseUrl,
                          @Named(TIMEOUT) int timeout,
                          @Named(OUTPUT_FILE) String outputFile,
-                         RecordBrowserFactory recordBrowserFactory,
-                         PromptUtils promptUtils) {
-        this.recordBrowserFactory = recordBrowserFactory;
-        this.browserType = browserType;
-        this.pathToDriver = pathToDriver;
-        this.javascriptInjectorProvider = javascriptInjectorProvider;
+                         PromptUtils promptUtils,
+                         IOProvider<RecordBrowserBase> recordBrowserBaseIOProvider) {
         this.baseUrl = baseUrl;
         this.timeout = timeout;
         this.promptUtils = promptUtils;
         this.outputFile = outputFile;
+        this.recordBrowserBaseIOProvider = recordBrowserBaseIOProvider;
     }
 
     @Override
     public void run() {
         try {
-            JavascriptInjector javascriptInjector = javascriptInjectorProvider.get();
-            RecordBrowserBase recordBrowserBase = recordBrowserFactory.create(browserType, pathToDriver, javascriptInjector);
+            RecordBrowserBase recordBrowserBase = recordBrowserBaseIOProvider.get();
             recordBrowserBase.record(baseUrl, timeout);
             promptUtils.promptForRecording();
             recordBrowserBase.dumpActions(this.outputFile);
