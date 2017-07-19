@@ -12,6 +12,5 @@ public interface RecordBrowserSupplier {
     RecordBrowserBase get(String pathToChromeDriver,
                           JavascriptInjector javascriptInjector,
                           int timeout,
-                          String baseUrl,
-                          String outputFile) throws IOException;
+                          String baseUrl) throws IOException;
 }

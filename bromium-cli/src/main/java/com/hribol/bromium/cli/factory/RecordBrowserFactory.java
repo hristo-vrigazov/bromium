@@ -39,14 +39,13 @@ public class RecordBrowserFactory {
                                     String pathToDriver,
                                     JavascriptInjector javascriptInjector) throws IOException {
         return this.browserNameToSupplierMap.get(browserName).get(pathToDriver, javascriptInjector,
-                timeout, baseUrl, outputFile);
+                timeout, baseUrl);
     }
 
     private RecordBrowserBase getChrome(String pathToDriver,
                                         JavascriptInjector javascriptInjector,
                                         int timeout,
-                                        String baseUrl,
-                                        String outputFile) throws IOException {
-        return new ChromeRecordBrowser(pathToDriver, javascriptInjector, timeout, baseUrl, outputFile);
+                                        String baseUrl) throws IOException {
+        return new ChromeRecordBrowser(pathToDriver, javascriptInjector, timeout, baseUrl);
     }
 }

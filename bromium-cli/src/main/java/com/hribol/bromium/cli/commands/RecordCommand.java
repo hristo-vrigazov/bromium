@@ -4,6 +4,8 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.hribol.bromium.cli.providers.IOProvider;
 import com.hribol.bromium.common.record.RecordBrowserBase;
+import com.hribol.bromium.core.TestScenarioSteps;
+import com.hribol.bromium.core.utils.parsing.StepsDumper;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -18,14 +20,17 @@ public class RecordCommand implements Command {
     private PromptUtils promptUtils;
     private String outputFile;
     private IOProvider<RecordBrowserBase> recordBrowserBaseIOProvider;
+    private StepsDumper stepsDumper;
 
     @Inject
     public RecordCommand(@Named(OUTPUT_FILE) String outputFile,
                          PromptUtils promptUtils,
-                         IOProvider<RecordBrowserBase> recordBrowserBaseIOProvider) {
+                         IOProvider<RecordBrowserBase> recordBrowserBaseIOProvider,
+                         StepsDumper stepsDumper) {
         this.promptUtils = promptUtils;
         this.outputFile = outputFile;
         this.recordBrowserBaseIOProvider = recordBrowserBaseIOProvider;
+        this.stepsDumper = stepsDumper;
     }
 
     @Override
@@ -34,7 +39,8 @@ public class RecordCommand implements Command {
             RecordBrowserBase recordBrowserBase = recordBrowserBaseIOProvider.get();
             recordBrowserBase.record();
             promptUtils.promptForRecording();
-            recordBrowserBase.dumpActions();
+            TestScenarioSteps testScenarioSteps = recordBrowserBase.getTestCaseSteps();
+            stepsDumper.dump(testScenarioSteps, outputFile);
             recordBrowserBase.cleanUp();
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();

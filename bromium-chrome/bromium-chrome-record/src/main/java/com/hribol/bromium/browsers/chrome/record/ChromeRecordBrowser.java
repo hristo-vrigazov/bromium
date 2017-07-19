@@ -15,9 +15,8 @@ public class ChromeRecordBrowser extends RecordBrowserBase {
     public ChromeRecordBrowser(String pathToChromeDriver,
                                JavascriptInjector javascriptInjector,
                                int timeout,
-                               String baseUrl,
-                               String outputFile) throws IOException {
-        super(pathToChromeDriver, javascriptInjector, timeout, baseUrl, outputFile);
+                               String baseUrl) throws IOException {
+        super(pathToChromeDriver, javascriptInjector, timeout, baseUrl);
     }
 
     @Override

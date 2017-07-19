@@ -22,14 +22,12 @@ public class ChromeRecordBrowserTest {
         JavascriptInjector javascriptInjector = new JavascriptInjector(pathToJSInjectionFile);
 
         String baseUrl = "http://something.com";
-        String outputFile = "output";
 
         ChromeRecordBrowser chromeRecordBrowser = new ChromeRecordBrowser(
                 pathToDriverExecutable,
                 javascriptInjector,
                 10,
-                baseUrl,
-                outputFile);
+                baseUrl);
 
         assertNotNull(chromeRecordBrowser);
         assertNotNull(chromeRecordBrowser.getVisibleWebDriverSupplier());
