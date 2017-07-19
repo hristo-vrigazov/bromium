@@ -21,7 +21,13 @@ public class ChromeRecordBrowserTest {
         String pathToJSInjectionFile = getClass().getResource("/eventsRecorder.js").getFile();
         JavascriptInjector javascriptInjector = new JavascriptInjector(pathToJSInjectionFile);
 
-        ChromeRecordBrowser chromeRecordBrowser = new ChromeRecordBrowser(pathToDriverExecutable, javascriptInjector);
+        String baseUrl = "http://something.com";
+
+        ChromeRecordBrowser chromeRecordBrowser = new ChromeRecordBrowser(
+                pathToDriverExecutable,
+                javascriptInjector,
+                10,
+                baseUrl);
 
         assertNotNull(chromeRecordBrowser);
         assertNotNull(chromeRecordBrowser.getVisibleWebDriverSupplier());

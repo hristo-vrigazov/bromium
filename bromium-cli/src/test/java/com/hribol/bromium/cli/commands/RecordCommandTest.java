@@ -23,7 +23,6 @@ public class RecordCommandTest {
     public void recordDumpsFile() throws IOException {
         RecordCommand recordCommand = new RecordCommand(
                 baseUrl,
-                timeout,
                 outputFile,
                 promptUtils,
                 () -> recordBrowserBase
@@ -39,7 +38,6 @@ public class RecordCommandTest {
     public void ifExceptionIsThrownDoesNotDumpActions() throws IOException {
         RecordCommand recordCommand = new RecordCommand(
                 baseUrl,
-                timeout,
                 outputFile,
                 promptUtils,
                 () -> {

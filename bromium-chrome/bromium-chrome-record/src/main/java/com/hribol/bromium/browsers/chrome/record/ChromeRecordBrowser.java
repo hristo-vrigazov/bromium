@@ -12,8 +12,11 @@ import java.io.IOException;
  * Created by hvrigazov on 22.03.17.
  */
 public class ChromeRecordBrowser extends RecordBrowserBase {
-    public ChromeRecordBrowser(String pathToChromeDriver, JavascriptInjector javascriptInjector) throws IOException {
-        super(pathToChromeDriver, javascriptInjector);
+    public ChromeRecordBrowser(String pathToChromeDriver,
+                               JavascriptInjector javascriptInjector,
+                               int timeout,
+                               String baseUrl) throws IOException {
+        super(pathToChromeDriver, javascriptInjector, timeout, baseUrl);
     }
 
     @Override

@@ -32,7 +32,12 @@ public class RecordBrowserBaseTest {
         VisibleWebDriverSupplier visibleWebDriverSupplier = Mockito.mock(VisibleWebDriverSupplier.class);
         Mockito.when(visibleWebDriverSupplier.get(Matchers.any())).thenReturn(driver);
 
-        RecordBrowserBase recordBrowserBase = new RecordBrowserBase(pathToChromeDriver, javascriptInjector) {
+        String baseUrl = "http://tenniskafe.com";
+
+        RecordBrowserBase recordBrowserBase = new RecordBrowserBase(pathToChromeDriver,
+                javascriptInjector,
+                10,
+                baseUrl) {
             @Override
             public String getSystemProperty() {
                 return "webdriver.executable.path";
@@ -44,7 +49,7 @@ public class RecordBrowserBaseTest {
             }
         };
 
-        recordBrowserBase.record("http://tenniskafe.com", 10);
+        recordBrowserBase.record();
         String outputFileName = "tmp.json";
         recordBrowserBase.dumpActions(outputFileName);
         File outputFile = new File(outputFileName);

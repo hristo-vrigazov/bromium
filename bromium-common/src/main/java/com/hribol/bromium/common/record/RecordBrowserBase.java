@@ -24,10 +24,17 @@ public abstract class RecordBrowserBase {
     private RecordManager recordManager;
     private String pathToDriverExecutable;
     private String jsInjectionCode;
+    private int timeout;
+    private final String baseUrl;
 
-    public RecordBrowserBase(String pathToDriverExecutable, JavascriptInjector javascriptInjector) throws IOException {
+    public RecordBrowserBase(String pathToDriverExecutable,
+                             JavascriptInjector javascriptInjector,
+                             int timeout,
+                             String baseUrl) throws IOException {
         this.pathToDriverExecutable = pathToDriverExecutable;
         this.jsInjectionCode = javascriptInjector.getInjectionCode();
+        this.timeout = timeout;
+        this.baseUrl = baseUrl;
     }
 
     public abstract String getSystemProperty();
@@ -37,9 +44,9 @@ public abstract class RecordBrowserBase {
     private RecordRequestFilter recordRequestFilter;
     private ProxyDriverIntegrator proxyDriverIntegrator;
 
-    public void record(String baseURI, int timeout) throws IOException, InterruptedException, URISyntaxException {
+    public void record() throws IOException, InterruptedException, URISyntaxException {
         System.setProperty(getSystemProperty(), pathToDriverExecutable);
-        URI uri = URI.create(baseURI);
+        URI uri = URI.create(baseUrl);
         this.responseFilter = new RecordResponseFilter(uri, jsInjectionCode);
         this.recordRequestFilter = new RecordRequestFilter();
         this.proxyDriverIntegrator = new ProxyDriverIntegrator(recordRequestFilter, responseFilter, getVisibleWebDriverSupplier(), timeout);
@@ -47,7 +54,7 @@ public abstract class RecordBrowserBase {
         BrowserMobProxy proxy = proxyDriverIntegrator.getProxy();
         this.recordManager = new RecordManager(driver, proxy);
         recordManager.prepareRecord();
-        recordManager.open(baseURI);
+        recordManager.open(baseUrl);
     }
 
     public void dumpActions(String outputFile) throws IOException {

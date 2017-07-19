@@ -14,12 +14,14 @@ import static org.openqa.selenium.remote.BrowserType.CHROME;
 public class RecordBrowserFactoryTest {
 
     private final String pathToDriver = "/chromedriver";
+    private final String baseUrl = "http://something.com";
 
     @Test
     public void canCreateChromeDriver() throws Exception {
         JavascriptInjector javascriptInjector = mock(JavascriptInjector.class);
 
-        RecordBrowserFactory recordBrowserFactory = new RecordBrowserFactory();
+        Integer timeout = 10;
+        RecordBrowserFactory recordBrowserFactory = new RecordBrowserFactory(timeout, baseUrl);
 
         RecordBrowserBase recordBrowserBase = recordBrowserFactory.create(CHROME, pathToDriver, javascriptInjector);
 
