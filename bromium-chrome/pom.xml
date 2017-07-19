@@ -16,7 +16,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>bromium-chrome-base</module>
-        <module>bromium-chrome-record</module>
         <module>bromium-chrome-replay</module>
     </modules>
 

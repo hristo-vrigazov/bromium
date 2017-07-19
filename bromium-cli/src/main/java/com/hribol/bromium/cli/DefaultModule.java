@@ -5,10 +5,11 @@ import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import com.google.inject.throwingproviders.CheckedProvides;
 import com.google.inject.throwingproviders.ThrowingProviderBinder;
+import com.hribol.bromium.browsers.chrome.base.VisibleChromeDriverSupplier;
 import com.hribol.bromium.cli.factory.ExecutionFactory;
-import com.hribol.bromium.cli.factory.RecordBrowserFactory;
-import com.hribol.bromium.cli.providers.IOProvider;
-import com.hribol.bromium.cli.providers.IOURIProvider;
+//import com.hribol.bromium.cli.factory.RecordBrowserFactory;
+import com.hribol.bromium.core.providers.IOProvider;
+import com.hribol.bromium.core.providers.IOURIProvider;
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.common.EmptyFunction;
 import com.hribol.bromium.common.generation.helper.StepAndActionConfiguration;
@@ -22,7 +23,9 @@ import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
 import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.replay.*;
 import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
+import com.hribol.bromium.common.record.ProxyDriverIntegrator;
 import com.hribol.bromium.common.record.RecordBrowserBase;
+import com.hribol.bromium.common.record.RecordManager;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
 import com.hribol.bromium.common.replay.factory.DefaultApplicationActionFactory;
 import com.hribol.bromium.common.replay.factory.PredefinedWebDriverActionFactory;
@@ -35,25 +38,30 @@ import com.hribol.bromium.core.generation.GeneratedFunction;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
 import com.hribol.bromium.core.suite.UbuntuVirtualScreenProcessCreator;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
+import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
 import com.hribol.bromium.core.utils.JavascriptInjector;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
 import com.hribol.bromium.core.utils.parsing.StepsReader;
+import com.hribol.bromium.record.RecordRequestFilter;
 import com.hribol.bromium.record.RecordResponseFilter;
 import com.hribol.bromium.replay.ReplayBrowser;
 import com.hribol.bromium.replay.execution.WebDriverActionExecution;
 import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
+import net.lightbody.bmp.BrowserMobProxy;
 import org.apache.commons.io.IOUtils;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
 import static com.hribol.bromium.core.DependencyInjectionConstants.*;
+import static org.openqa.selenium.remote.BrowserType.CHROME;
 
 /**
  * Created by hvrigazov on 09.06.17.
@@ -329,12 +337,13 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOProvider.class)
-    public RecordBrowserBase getRecordBrowser(@Named(BROWSER_TYPE) String browserType,
-                                              @Named(PATH_TO_DRIVER) String pathToDriver,
-                                              @Named(RECORDING_JAVASCRIPT_INJECTOR) IOProvider<JavascriptInjector> javascriptInjectorProvider,
-                                              RecordBrowserFactory recordBrowserFactory) throws IOException {
-        JavascriptInjector javascriptInjector = javascriptInjectorProvider.get();
-        return recordBrowserFactory.create(browserType, pathToDriver, javascriptInjector);
+    public RecordBrowserBase getRecordBrowser(@Named(PATH_TO_DRIVER) String pathToDriverExecutable,
+                                              @Named(BASE_URL) String baseUrl,
+                                              @Named(PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY) String systemProperty,
+                                              IOProvider<RecordManager> recordManagerIOProvider) throws IOException {
+        return new RecordBrowserBase(pathToDriverExecutable,
+                baseUrl,
+                recordManagerIOProvider.get());
     }
 
     @CheckedProvides(IOURIProvider.class)
@@ -361,4 +370,48 @@ public class DefaultModule extends AbstractModule {
                                                         @Named(RECORDING_JAVASCRIPT_CODE) IOProvider<String> injectionCodeProvider) throws IOException {
         return new RecordResponseFilter(baseURI, injectionCodeProvider.get());
     }
+
+    @Named(PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY)
+    @Provides
+    public String getPathToDriverExecutableSystemProperty(@Named(BROWSER_TYPE) String browserType) {
+        switch (browserType) {
+            case CHROME:
+                return ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY;
+        }
+
+        return null;
+    }
+
+    @Provides
+    public VisibleWebDriverSupplier getVisibleWebDriverSupplier(@Named(BROWSER_TYPE) String browserType) {
+        switch (browserType) {
+            case CHROME:
+                return new VisibleChromeDriverSupplier();
+        }
+
+        return null;
+    }
+
+    @CheckedProvides(IOProvider.class)
+    public ProxyDriverIntegrator getProxyDriverIntegrator(RecordRequestFilter recordRequestFilter,
+                                                          IOProvider<RecordResponseFilter> recordResponseFilterIOProvider,
+                                                          VisibleWebDriverSupplier visibleWebDriverSupplier,
+                                                          @Named(PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY) String systemProperty,
+                                                          @Named(PATH_TO_DRIVER) String pathToDriverExecutable,
+                                                          @Named(TIMEOUT) int timeout) throws IOException {
+        return new ProxyDriverIntegrator(recordRequestFilter,
+                recordResponseFilterIOProvider.get(),
+                visibleWebDriverSupplier,
+                systemProperty,
+                pathToDriverExecutable,
+                timeout);
+    }
+
+    @CheckedProvides(IOProvider.class)
+    public RecordManager getRecordManager(IOProvider<ProxyDriverIntegrator> proxyDriverIntegratorIOProvider) throws IOException {
+        return new RecordManager(proxyDriverIntegratorIOProvider.get());
+    }
+
+
 }
+

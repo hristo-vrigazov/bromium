@@ -1,6 +1,6 @@
 package com.hribol.bromium.cli.commands;
 
-import com.hribol.bromium.cli.providers.IOProvider;
+import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationDumper;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;

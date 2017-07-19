@@ -1,61 +1,42 @@
 package com.hribol.bromium.common.record;
 
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import com.hribol.bromium.core.TestScenarioSteps;
-import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
-import com.hribol.bromium.core.utils.JavascriptInjector;
-import com.hribol.bromium.record.RecordRequestFilter;
-import com.hribol.bromium.record.RecordResponseFilter;
-import net.lightbody.bmp.BrowserMobProxy;
-import net.lightbody.bmp.filters.ResponseFilter;
-import org.openqa.selenium.WebDriver;
+import com.hribol.bromium.core.providers.IOProvider;
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
+
+import static com.hribol.bromium.core.DependencyInjectionConstants.BASE_URL;
+import static com.hribol.bromium.core.DependencyInjectionConstants.PATH_TO_DRIVER;
+import static com.hribol.bromium.core.DependencyInjectionConstants.PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY;
 
 /**
  * Created by hvrigazov on 09.03.17.
  */
-public abstract class RecordBrowserBase {
+public class RecordBrowserBase {
 
-    private RecordManager recordManager;
-    private String pathToDriverExecutable;
-    private String jsInjectionCode;
-    private int timeout;
+    private final String pathToDriverExecutable;
     private final String baseUrl;
+    private RecordManager recordManager;
 
-    public RecordBrowserBase(String pathToDriverExecutable,
-                             JavascriptInjector javascriptInjector,
-                             int timeout,
-                             String baseUrl,
-                             RecordResponseFilter recordResponseFilter) throws IOException {
+    @Inject
+    public RecordBrowserBase(@Named(PATH_TO_DRIVER) String pathToDriverExecutable,
+                             @Named(BASE_URL) String baseUrl,
+                             RecordManager recordManager) throws IOException {
         this.pathToDriverExecutable = pathToDriverExecutable;
-        this.jsInjectionCode = javascriptInjector.getInjectionCode();
-        this.timeout = timeout;
         this.baseUrl = baseUrl;
-        this.responseFilter = recordResponseFilter;
+        this.recordManager = recordManager;
     }
 
-    public abstract String getSystemProperty();
-    public abstract VisibleWebDriverSupplier getVisibleWebDriverSupplier();
-
-    private ResponseFilter responseFilter;
-    private RecordRequestFilter recordRequestFilter;
-    private ProxyDriverIntegrator proxyDriverIntegrator;
-
-    public void record() throws IOException, InterruptedException, URISyntaxException {
-        System.setProperty(getSystemProperty(), pathToDriverExecutable);
-        this.recordRequestFilter = new RecordRequestFilter();
-        this.proxyDriverIntegrator = new ProxyDriverIntegrator(recordRequestFilter, responseFilter, getVisibleWebDriverSupplier(), timeout);
-        WebDriver driver = proxyDriverIntegrator.getDriver();
-        BrowserMobProxy proxy = proxyDriverIntegrator.getProxy();
-        this.recordManager = new RecordManager(driver, proxy);
+    public void record() throws IOException {
         recordManager.prepareRecord();
         recordManager.open(baseUrl);
     }
 
     public TestScenarioSteps getTestCaseSteps() {
-        return recordRequestFilter.getApplicationSpecificActionList();
+        return recordManager.getTestCaseSteps();
     }
 
     public void cleanUp() {

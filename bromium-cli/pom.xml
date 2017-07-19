@@ -56,10 +56,7 @@
             <groupId>com.offbytwo</groupId>
             <artifactId>docopt</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.google.inject.extensions</groupId>
-            <artifactId>guice-throwingproviders</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.jacoco</groupId>
             <artifactId>org.jacoco.agent</artifactId>

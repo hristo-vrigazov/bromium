@@ -2,10 +2,12 @@ package com.hribol.bromium.cli.commands;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import com.hribol.bromium.cli.providers.IOProvider;
+import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.common.record.RecordBrowserBase;
 import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.utils.parsing.StepsDumper;
+import com.hribol.bromium.record.RecordRequestFilter;
+import com.hribol.bromium.record.RecordResponseFilter;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -21,16 +23,19 @@ public class RecordCommand implements Command {
     private String outputFile;
     private IOProvider<RecordBrowserBase> recordBrowserBaseIOProvider;
     private StepsDumper stepsDumper;
+    private RecordRequestFilter recordRequestFilter;
 
     @Inject
     public RecordCommand(@Named(OUTPUT_FILE) String outputFile,
                          PromptUtils promptUtils,
                          IOProvider<RecordBrowserBase> recordBrowserBaseIOProvider,
-                         StepsDumper stepsDumper) {
+                         StepsDumper stepsDumper,
+                         RecordRequestFilter recordRequestFilter) {
         this.promptUtils = promptUtils;
         this.outputFile = outputFile;
         this.recordBrowserBaseIOProvider = recordBrowserBaseIOProvider;
         this.stepsDumper = stepsDumper;
+        this.recordRequestFilter = recordRequestFilter;
     }
 
     @Override
@@ -42,7 +47,7 @@ public class RecordCommand implements Command {
             TestScenarioSteps testScenarioSteps = recordBrowserBase.getTestCaseSteps();
             stepsDumper.dump(testScenarioSteps, outputFile);
             recordBrowserBase.cleanUp();
-        } catch (IOException | InterruptedException | URISyntaxException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             promptUtils.dispose();

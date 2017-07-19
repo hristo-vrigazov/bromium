@@ -1,4 +1,4 @@
-package com.hribol.bromium.cli.providers;
+package com.hribol.bromium.core.providers;
 
 import com.google.inject.throwingproviders.CheckedProvider;
 

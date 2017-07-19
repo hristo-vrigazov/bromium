@@ -1,7 +1,7 @@
 package com.hribol.bromium.cli.commands;
 
-import com.hribol.bromium.cli.providers.IOProvider;
-import com.hribol.bromium.cli.providers.IOURIProvider;
+import com.hribol.bromium.core.providers.IOProvider;
+import com.hribol.bromium.core.providers.IOURIProvider;
 import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.replay.ReplayBrowser;
@@ -11,9 +11,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import static org.mockito.Mockito.*;
 
