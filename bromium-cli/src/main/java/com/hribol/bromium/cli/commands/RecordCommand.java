@@ -15,17 +15,14 @@ import static com.hribol.bromium.core.DependencyInjectionConstants.*;
  */
 public class RecordCommand implements Command {
 
-    private String baseUrl;
     private PromptUtils promptUtils;
     private String outputFile;
     private IOProvider<RecordBrowserBase> recordBrowserBaseIOProvider;
 
     @Inject
-    public RecordCommand(@Named(BASE_URL) String baseUrl,
-                         @Named(OUTPUT_FILE) String outputFile,
+    public RecordCommand(@Named(OUTPUT_FILE) String outputFile,
                          PromptUtils promptUtils,
                          IOProvider<RecordBrowserBase> recordBrowserBaseIOProvider) {
-        this.baseUrl = baseUrl;
         this.promptUtils = promptUtils;
         this.outputFile = outputFile;
         this.recordBrowserBaseIOProvider = recordBrowserBaseIOProvider;
@@ -37,7 +34,7 @@ public class RecordCommand implements Command {
             RecordBrowserBase recordBrowserBase = recordBrowserBaseIOProvider.get();
             recordBrowserBase.record();
             promptUtils.promptForRecording();
-            recordBrowserBase.dumpActions(this.outputFile);
+            recordBrowserBase.dumpActions();
             recordBrowserBase.cleanUp();
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();

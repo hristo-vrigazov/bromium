@@ -22,14 +22,13 @@ public class RecordCommandTest {
     @Test
     public void recordDumpsFile() throws IOException {
         RecordCommand recordCommand = new RecordCommand(
-                baseUrl,
                 outputFile,
                 promptUtils,
                 () -> recordBrowserBase
         );
         recordCommand.run();
 
-        verify(recordBrowserBase).dumpActions(outputFile);
+        verify(recordBrowserBase).dumpActions();
         verify(promptUtils).dispose();
     }
 
@@ -37,7 +36,6 @@ public class RecordCommandTest {
     @Test
     public void ifExceptionIsThrownDoesNotDumpActions() throws IOException {
         RecordCommand recordCommand = new RecordCommand(
-                baseUrl,
                 outputFile,
                 promptUtils,
                 () -> {
@@ -46,7 +44,7 @@ public class RecordCommandTest {
         );
         recordCommand.run();
 
-        verify(recordBrowserBase, never()).dumpActions(outputFile);
+        verify(recordBrowserBase, never()).dumpActions();
         verify(promptUtils).dispose();
     }
 }

@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.io.Writer;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hvrigazov on 09.03.17.
@@ -26,15 +28,18 @@ public abstract class RecordBrowserBase {
     private String jsInjectionCode;
     private int timeout;
     private final String baseUrl;
+    private final String outputFile;
 
     public RecordBrowserBase(String pathToDriverExecutable,
                              JavascriptInjector javascriptInjector,
                              int timeout,
-                             String baseUrl) throws IOException {
+                             String baseUrl,
+                             String outputFile) throws IOException {
         this.pathToDriverExecutable = pathToDriverExecutable;
         this.jsInjectionCode = javascriptInjector.getInjectionCode();
         this.timeout = timeout;
         this.baseUrl = baseUrl;
+        this.outputFile = outputFile;
     }
 
     public abstract String getSystemProperty();
@@ -57,10 +62,14 @@ public abstract class RecordBrowserBase {
         recordManager.open(baseUrl);
     }
 
-    public void dumpActions(String outputFile) throws IOException {
+    public List<Map<String, String>> getScenario() {
+        return recordRequestFilter.getApplicationSpecificActionList();
+    }
+
+    public void dumpActions() throws IOException {
         Writer writer = new FileWriter(outputFile);
         Gson gson = new GsonBuilder().create();
-        gson.toJson(recordRequestFilter.getApplicationSpecificActionList(), writer);
+        gson.toJson(getScenario(), writer);
         writer.close();
     }
 

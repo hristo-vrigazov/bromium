@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.hribol.bromium.core.DependencyInjectionConstants.BASE_URL;
+import static com.hribol.bromium.core.DependencyInjectionConstants.OUTPUT_FILE;
 import static com.hribol.bromium.core.DependencyInjectionConstants.TIMEOUT;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
@@ -21,12 +22,15 @@ public class RecordBrowserFactory {
     private Map<String, RecordBrowserSupplier> browserNameToSupplierMap;
     private int timeout;
     private String baseUrl;
+    private String outputFile;
 
     @Inject
     public RecordBrowserFactory(@Named(TIMEOUT) int timeout,
-                                @Named(BASE_URL) String baseUrl) {
+                                @Named(BASE_URL) String baseUrl,
+                                @Named(OUTPUT_FILE) String outputFile) {
         this.timeout = timeout;
         this.baseUrl = baseUrl;
+        this.outputFile = outputFile;
         this.browserNameToSupplierMap = new HashMap<>();
         this.browserNameToSupplierMap.put(CHROME, this::getChrome);
     }
@@ -34,13 +38,15 @@ public class RecordBrowserFactory {
     public RecordBrowserBase create(String browserName,
                                     String pathToDriver,
                                     JavascriptInjector javascriptInjector) throws IOException {
-        return this.browserNameToSupplierMap.get(browserName).get(pathToDriver, javascriptInjector, timeout, baseUrl);
+        return this.browserNameToSupplierMap.get(browserName).get(pathToDriver, javascriptInjector,
+                timeout, baseUrl, outputFile);
     }
 
     private RecordBrowserBase getChrome(String pathToDriver,
                                         JavascriptInjector javascriptInjector,
                                         int timeout,
-                                        String baseUrl) throws IOException {
-        return new ChromeRecordBrowser(pathToDriver, javascriptInjector, timeout, baseUrl);
+                                        String baseUrl,
+                                        String outputFile) throws IOException {
+        return new ChromeRecordBrowser(pathToDriver, javascriptInjector, timeout, baseUrl, outputFile);
     }
 }
