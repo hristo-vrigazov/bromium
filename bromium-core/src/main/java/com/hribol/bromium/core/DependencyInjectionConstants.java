@@ -28,6 +28,7 @@ public class DependencyInjectionConstants {
     public static final String BROWSER_TYPE = "BROWSER_TYPE";
     public static final String PATH_TO_DRIVER = "PATH_TO_DRIVER";
     public static final String BASE_URL = "BASE_URL";
+    public static final String BASE_URI = "BASE_URI";
     public static final String TIMEOUT = "TIMEOUT";
     public static final String OUTPUT_FILE = "OUTPUT_FILE";
 

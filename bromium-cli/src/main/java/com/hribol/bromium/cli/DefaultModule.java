@@ -38,6 +38,7 @@ import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.core.utils.JavascriptInjector;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
 import com.hribol.bromium.core.utils.parsing.StepsReader;
+import com.hribol.bromium.record.RecordResponseFilter;
 import com.hribol.bromium.replay.ReplayBrowser;
 import com.hribol.bromium.replay.execution.WebDriverActionExecution;
 import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
@@ -46,6 +47,7 @@ import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
@@ -346,5 +348,17 @@ public class DefaultModule extends AbstractModule {
     public ReplayBrowser getReplayBrowser(IOProvider<TestScenarioFactory> testScenarioFactoryIOProvider,
                                           IOURIProvider<WebDriverActionExecution> execution) throws IOException, URISyntaxException {
         return new ReplayBrowser(testScenarioFactoryIOProvider.get(), execution.get());
+    }
+
+    @Named(BASE_URI)
+    @Provides
+    public URI getBaseUri(@Named(BASE_URL) String baseUrl) {
+        return URI.create(baseUrl);
+    }
+
+    @CheckedProvides(IOProvider.class)
+    public RecordResponseFilter getRecordResponseFilter(@Named(BASE_URI) URI baseURI,
+                                                        @Named(RECORDING_JAVASCRIPT_CODE) IOProvider<String> injectionCodeProvider) throws IOException {
+        return new RecordResponseFilter(baseURI, injectionCodeProvider.get());
     }
 }

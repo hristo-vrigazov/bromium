@@ -2,6 +2,7 @@ package com.hribol.bromium.cli.factory;
 
 import com.hribol.bromium.core.utils.JavascriptInjector;
 import com.hribol.bromium.common.record.RecordBrowserBase;
+import com.hribol.bromium.record.RecordResponseFilter;
 
 import java.io.IOException;
 
@@ -12,5 +13,6 @@ public interface RecordBrowserSupplier {
     RecordBrowserBase get(String pathToChromeDriver,
                           JavascriptInjector javascriptInjector,
                           int timeout,
-                          String baseUrl) throws IOException;
+                          String baseUrl,
+                          RecordResponseFilter recordResponseFilter) throws IOException;
 }

@@ -27,11 +27,13 @@ public abstract class RecordBrowserBase {
     public RecordBrowserBase(String pathToDriverExecutable,
                              JavascriptInjector javascriptInjector,
                              int timeout,
-                             String baseUrl) throws IOException {
+                             String baseUrl,
+                             RecordResponseFilter recordResponseFilter) throws IOException {
         this.pathToDriverExecutable = pathToDriverExecutable;
         this.jsInjectionCode = javascriptInjector.getInjectionCode();
         this.timeout = timeout;
         this.baseUrl = baseUrl;
+        this.responseFilter = recordResponseFilter;
     }
 
     public abstract String getSystemProperty();
@@ -43,8 +45,6 @@ public abstract class RecordBrowserBase {
 
     public void record() throws IOException, InterruptedException, URISyntaxException {
         System.setProperty(getSystemProperty(), pathToDriverExecutable);
-        URI uri = URI.create(baseUrl);
-        this.responseFilter = new RecordResponseFilter(uri, jsInjectionCode);
         this.recordRequestFilter = new RecordRequestFilter();
         this.proxyDriverIntegrator = new ProxyDriverIntegrator(recordRequestFilter, responseFilter, getVisibleWebDriverSupplier(), timeout);
         WebDriver driver = proxyDriverIntegrator.getDriver();

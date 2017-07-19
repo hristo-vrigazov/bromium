@@ -4,6 +4,7 @@ import com.hribol.bromium.browsers.chrome.base.VisibleChromeDriverSupplier;
 import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
 import com.hribol.bromium.core.utils.JavascriptInjector;
 import com.hribol.bromium.common.record.RecordBrowserBase;
+import com.hribol.bromium.record.RecordResponseFilter;
 import org.openqa.selenium.chrome.ChromeDriverService;
 
 import java.io.IOException;
@@ -15,8 +16,9 @@ public class ChromeRecordBrowser extends RecordBrowserBase {
     public ChromeRecordBrowser(String pathToChromeDriver,
                                JavascriptInjector javascriptInjector,
                                int timeout,
-                               String baseUrl) throws IOException {
-        super(pathToChromeDriver, javascriptInjector, timeout, baseUrl);
+                               String baseUrl,
+                               RecordResponseFilter recordResponseFilter) throws IOException {
+        super(pathToChromeDriver, javascriptInjector, timeout, baseUrl, recordResponseFilter);
     }
 
     @Override
