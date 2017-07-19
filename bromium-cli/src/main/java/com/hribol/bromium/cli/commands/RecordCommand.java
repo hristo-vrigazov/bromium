@@ -4,12 +4,11 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.hribol.bromium.cli.providers.IOProvider;
 import com.hribol.bromium.common.record.RecordBrowserBase;
-import com.hribol.bromium.core.utils.JavascriptInjector;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static com.hribol.bromium.cli.Constants.*;
+import static com.hribol.bromium.core.DependencyInjectionConstants.*;
 
 /**
  * Created by hvrigazov on 11.04.17.

@@ -13,7 +13,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 
-import static com.hribol.bromium.cli.Constants.SCREEN_NUMBER;
+import static com.hribol.bromium.core.DependencyInjectionConstants.SCREEN_NUMBER;
 
 /**
  * Created by hvrigazov on 08.07.17.

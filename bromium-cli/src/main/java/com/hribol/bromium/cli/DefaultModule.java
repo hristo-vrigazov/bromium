@@ -50,7 +50,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import static com.hribol.bromium.cli.Constants.*;
+import static com.hribol.bromium.core.DependencyInjectionConstants.*;
 
 /**
  * Created by hvrigazov on 09.06.17.

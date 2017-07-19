@@ -1,9 +1,9 @@
-package com.hribol.bromium.cli;
+package com.hribol.bromium.core;
 
 /**
  * Created by hvrigazov on 05.07.17.
  */
-public class Constants {
+public class DependencyInjectionConstants {
     public static final String RECORD_TEMPLATE_RESOURCE = "RECORD_TEMPLATE_RESOURCE";
     public static final String REPLAY_TEMPLATE_RESOURCE = "REPLAY_TEMPLATE_RESOURCE";
 
