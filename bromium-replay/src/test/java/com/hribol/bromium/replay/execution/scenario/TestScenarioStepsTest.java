@@ -23,7 +23,7 @@ public class TestScenarioStepsTest {
             webDriverActionList.add(mock(WebDriverAction.class));
         }
 
-        TestScenarioSteps testScenarioSteps = new TestScenarioSteps(webDriverActionList);
+        TestScenarioActions testScenarioSteps = new TestScenarioActions(webDriverActionList);
 
         int numberOfActions = 0;
         for (WebDriverAction webDriverAction : testScenarioSteps) {

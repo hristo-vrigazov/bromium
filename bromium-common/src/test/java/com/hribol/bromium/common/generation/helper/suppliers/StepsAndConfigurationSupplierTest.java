@@ -1,6 +1,7 @@
 package com.hribol.bromium.common.generation.helper.suppliers;
 
 import com.hribol.bromium.common.generation.helper.StepsAndConfiguration;
+import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +25,7 @@ public class StepsAndConfigurationSupplierTest {
 
     @Test
     public void createsCorrectInstance() throws Exception {
-        List<Map<String, String>> testCaseSteps = new ArrayList<>();
+        TestScenarioSteps testCaseSteps = new TestScenarioSteps();
         ApplicationConfiguration applicationConfiguration = mock(ApplicationConfiguration.class);
 
         StepsAndConfiguration expected = mock(StepsAndConfiguration.class);

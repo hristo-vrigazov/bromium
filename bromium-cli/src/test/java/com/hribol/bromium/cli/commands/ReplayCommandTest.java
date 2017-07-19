@@ -2,6 +2,7 @@ package com.hribol.bromium.cli.commands;
 
 import com.hribol.bromium.cli.providers.IOProvider;
 import com.hribol.bromium.cli.providers.IOURIProvider;
+import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.replay.ReplayBrowser;
 import com.hribol.bromium.replay.report.AutomationResult;
@@ -25,12 +26,12 @@ public class ReplayCommandTest {
     private ReplayBrowser replayBrowser = mock(ReplayBrowser.class);
     private ExecutionReport executionReport = mock(ExecutionReport.class);
     private IOURIProvider<ReplayBrowser> replayBrowserProvider = mock(IOURIProvider.class);
-    private IOProvider<List<Map<String, String>>> stepsProvider = mock(IOProvider.class);
+    private IOProvider<TestScenarioSteps> stepsProvider = mock(IOProvider.class);
 
     @Test
     public void executesStepsWithTheSuppliedBrowser() throws IOException, URISyntaxException {
         when(replayBrowserProvider.get()).thenReturn(replayBrowser);
-        List<Map<String, String>> steps = new ArrayList<>();
+        TestScenarioSteps steps = new TestScenarioSteps();
         when(stepsProvider.get()).thenReturn(steps);
         when(executionReport.getAutomationResult()).thenReturn(AutomationResult.SUCCESS);
 
@@ -50,7 +51,7 @@ public class ReplayCommandTest {
     @Test
     public void executesOnDefaultScreenIfSetToZero() throws IOException, URISyntaxException {
         when(replayBrowserProvider.get()).thenReturn(replayBrowser);
-        List<Map<String, String>> steps = new ArrayList<>();
+        TestScenarioSteps steps = new TestScenarioSteps();
         when(stepsProvider.get()).thenReturn(steps);
         when(executionReport.getAutomationResult()).thenReturn(AutomationResult.SUCCESS);
 
@@ -71,7 +72,7 @@ public class ReplayCommandTest {
     public void cleansUpEvenIfExceptionIsThrown() throws IOException, URISyntaxException {
         String exceptionMessage = "Browser could not be created";
         when(replayBrowserProvider.get()).thenThrow(new IOException(exceptionMessage));
-        List<Map<String, String>> steps = new ArrayList<>();
+        TestScenarioSteps steps = new TestScenarioSteps();
         when(stepsProvider.get()).thenReturn(steps);
         when(executionReport.getAutomationResult()).thenReturn(AutomationResult.COULD_NOT_CREATE_DRIVER);
 

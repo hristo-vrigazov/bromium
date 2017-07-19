@@ -2,6 +2,7 @@ package com.hribol.bromium.common.record;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
 import com.hribol.bromium.record.RecordRequestFilter;
 import com.hribol.bromium.record.RecordResponseFilter;
@@ -15,8 +16,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by hvrigazov on 09.03.17.
@@ -62,14 +61,14 @@ public abstract class RecordBrowserBase {
         recordManager.open(baseUrl);
     }
 
-    public List<Map<String, String>> getScenario() {
+    public TestScenarioSteps getTestCaseSteps() {
         return recordRequestFilter.getApplicationSpecificActionList();
     }
 
     public void dumpActions() throws IOException {
         Writer writer = new FileWriter(outputFile);
         Gson gson = new GsonBuilder().create();
-        gson.toJson(getScenario(), writer);
+        gson.toJson(getTestCaseSteps(), writer);
         writer.close();
     }
 

@@ -1,5 +1,6 @@
 package com.hribol.bromium.replay.replay;
 
+import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.replay.ReplayBrowser;
 import com.hribol.bromium.replay.execution.WebDriverActionExecution;
@@ -96,7 +97,7 @@ public class ReplayBrowserTest {
     @Test
     public void delegatesExecuteFromTestCaseSteps() throws IOException, URISyntaxException, InterruptedException {
         ExecutionReport expectedReport = mock(ExecutionReport.class);
-        List<Map<String, String>> testCaseSteps = mock(List.class);
+        TestScenarioSteps testCaseSteps = mock(TestScenarioSteps.class);
         TestScenario testScenario = mock(TestScenario.class);
         TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);
         when(testScenarioFactory.createFromTestCaseSteps(testCaseSteps)).thenReturn(testScenario);
@@ -132,7 +133,7 @@ public class ReplayBrowserTest {
     public void delegatesExecuteFromTestCaseStepsOnScreen() throws IOException, URISyntaxException, InterruptedException {
         ExecutionReport expectedReport = mock(ExecutionReport.class);
         Integer screenToUse = 2;
-        List<Map<String, String>> testCaseSteps = new ArrayList<>();
+        TestScenarioSteps testCaseSteps = new TestScenarioSteps();
         TestScenario testScenario = mock(TestScenario.class);
         TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);
         when(testScenarioFactory.createFromTestCaseSteps(testCaseSteps)).thenReturn(testScenario);

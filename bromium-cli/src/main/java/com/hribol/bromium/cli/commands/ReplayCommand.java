@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.hribol.bromium.cli.providers.IOProvider;
 import com.hribol.bromium.cli.providers.IOURIProvider;
+import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.replay.ReplayBrowser;
 import com.hribol.bromium.replay.report.ExecutionReport;
@@ -22,14 +23,14 @@ public class ReplayCommand implements Command {
 
     private PromptUtils promptUtils;
     private IOURIProvider<ReplayBrowser> replayBrowserProvider;
-    private IOProvider<List<Map<String, String>>> stepsProvider;
+    private IOProvider<TestScenarioSteps> stepsProvider;
     private VirtualScreenProcessCreator virtualScreenProcessCreator;
     private Integer screenNumber;
 
     @Inject
     public ReplayCommand(PromptUtils promptUtils,
                          IOURIProvider<ReplayBrowser> replayBrowserProvider,
-                         IOProvider<List<Map<String, String>>> stepsProvider,
+                         IOProvider<TestScenarioSteps> stepsProvider,
                          VirtualScreenProcessCreator virtualScreenProcessCreator,
                          @Named(SCREEN_NUMBER) Integer screenNumber) {
         this.promptUtils = promptUtils;
@@ -42,7 +43,7 @@ public class ReplayCommand implements Command {
     @Override
     public void run() {
         try {
-            List<Map<String, String>> testCaseSteps = stepsProvider.get();
+            TestScenarioSteps testCaseSteps = stepsProvider.get();
             ReplayBrowser replayBrowser = replayBrowserProvider.get();
 
             ExecutionReport executionReport = screenNumber == 0 ?

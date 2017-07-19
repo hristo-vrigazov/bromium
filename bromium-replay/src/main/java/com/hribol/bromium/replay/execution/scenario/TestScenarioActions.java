@@ -8,11 +8,11 @@ import java.util.Iterator;
 /**
  * Created by hvrigazov on 24.05.17.
  */
-public class TestScenarioSteps implements Iterable<WebDriverAction> {
+public class TestScenarioActions implements Iterable<WebDriverAction> {
 
     private Collection<WebDriverAction> webDriverActions;
 
-    public TestScenarioSteps(Collection<WebDriverAction> webDriverActions) {
+    public TestScenarioActions(Collection<WebDriverAction> webDriverActions) {
         this.webDriverActions = webDriverActions;
     }
 

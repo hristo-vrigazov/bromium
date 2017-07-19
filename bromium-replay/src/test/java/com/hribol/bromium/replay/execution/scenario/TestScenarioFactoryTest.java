@@ -1,5 +1,6 @@
 package com.hribol.bromium.replay.execution.scenario;
 
+import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.replay.execution.application.ApplicationAction;
 import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.actions.WebDriverAction;
@@ -30,7 +31,7 @@ public class TestScenarioFactoryTest {
         when(initialPageLoading.getWebdriverAction()).thenReturn(Optional.of(pageLoadingWebDriverAction));
         ApplicationActionFactory applicationActionFactory = mock(ApplicationActionFactory.class);
 
-        List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(pathToTestCase);
+        TestScenarioSteps testCaseSteps = ConfigurationUtils.readSteps(pathToTestCase);
 
         createMock(applicationActionFactory, testCaseSteps);
 
@@ -50,7 +51,7 @@ public class TestScenarioFactoryTest {
         when(initialPageLoading.getWebdriverAction()).thenReturn(Optional.of(pageLoadingWebDriverAction));
         ApplicationActionFactory applicationActionFactory = mock(ApplicationActionFactory.class);
 
-        List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(pathToTestCase);
+        TestScenarioSteps testCaseSteps = ConfigurationUtils.readSteps(pathToTestCase);
 
         createMock(applicationActionFactory, testCaseSteps);
 
@@ -60,7 +61,7 @@ public class TestScenarioFactoryTest {
         assertEquals(testCaseSteps.size(), testScenario.getActions().size());
     }
 
-    private void createMock(ApplicationActionFactory applicationActionFactory, List<Map<String, String>> testCaseSteps) {
+    private void createMock(ApplicationActionFactory applicationActionFactory, TestScenarioSteps testCaseSteps) {
         for (Map<String, String> testCaseStep: testCaseSteps) {
             ApplicationAction domainSpecificAction = mock(ApplicationAction.class);
             String something = "something";

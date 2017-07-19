@@ -27,6 +27,7 @@ import com.hribol.bromium.common.replay.ExecutorBuilder;
 import com.hribol.bromium.common.replay.factory.DefaultApplicationActionFactory;
 import com.hribol.bromium.common.replay.factory.PredefinedWebDriverActionFactory;
 import com.hribol.bromium.common.replay.factory.TestCaseStepToApplicationActionConverter;
+import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.FunctionRegistry;
@@ -184,16 +185,16 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOProvider.class)
-    public List<Map<String, String>> getTestCaseSteps(StepsReader stepsReader,
-                                                      @Named(TEST_CASE_INPUT_STREAM) IOProvider<InputStream> testCaseInputStreamProvider)
+    public TestScenarioSteps getTestCaseSteps(StepsReader stepsReader,
+                                              @Named(TEST_CASE_INPUT_STREAM) IOProvider<InputStream> testCaseInputStreamProvider)
             throws IOException {
         return stepsReader.readSteps(testCaseInputStreamProvider.get());
     }
 
     @CheckedProvides(IOProvider.class)
-    public StepsAndConfiguration getStepsAndConfiguration(IOProvider<List<Map<String, String>>> stepsProvider,
+    public StepsAndConfiguration getStepsAndConfiguration(IOProvider<TestScenarioSteps> stepsProvider,
                                                           IOProvider<ApplicationConfiguration> applicationConfigurationIOProvider) throws IOException {
-        List<Map<String, String>> testCaseSteps = stepsProvider.get();
+        TestScenarioSteps testCaseSteps = stepsProvider.get();
         ApplicationConfiguration applicationConfiguration = applicationConfigurationIOProvider.get();
         return new StepsAndConfiguration(testCaseSteps, applicationConfiguration);
     }

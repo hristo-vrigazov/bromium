@@ -1,5 +1,6 @@
 package com.hribol.bromium.record;
 
+import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.utils.ConfigurationUtils;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
@@ -11,7 +12,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import static com.hribol.bromium.core.utils.Constants.SUBMIT_EVENT_URL;
@@ -20,10 +20,10 @@ import static com.hribol.bromium.core.utils.Constants.SUBMIT_EVENT_URL;
  * Created by hvrigazov on 22.04.17.
  */
 public class RecordRequestFilter implements RequestFilter {
-    private List<Map<String, String>> domainSpecificActionList;
+    private TestScenarioSteps domainSpecificActionList;
 
     public RecordRequestFilter() {
-        this.domainSpecificActionList = new ArrayList<>();
+        this.domainSpecificActionList = new TestScenarioSteps();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class RecordRequestFilter implements RequestFilter {
         return null;
     }
 
-    public List<Map<String, String>> getApplicationSpecificActionList() {
+    public TestScenarioSteps getApplicationSpecificActionList() {
         return domainSpecificActionList;
     }
 }

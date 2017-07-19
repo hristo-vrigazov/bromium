@@ -3,6 +3,7 @@ package com.hribol.bromium.common.generation.replay;
 import com.hribol.bromium.common.generation.helper.StepAndActionConfiguration;
 import com.hribol.bromium.common.generation.helper.StepsAndConfiguration;
 import com.hribol.bromium.common.generation.helper.suppliers.StepAndActionConfigurationSupplier;
+import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
@@ -33,7 +34,7 @@ public class ReplayingJavascriptGenerator implements JavascriptGenerator<StepsAn
     @Override
     public String generate(StepsAndConfiguration generationInformation) {
         ApplicationConfiguration applicationConfiguration = generationInformation.getApplicationConfiguration();
-        List<Map<String, String>> testCaseSteps = generationInformation.getTestCaseSteps();
+        TestScenarioSteps testCaseSteps = generationInformation.getTestCaseSteps();
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(baseTemplate);
