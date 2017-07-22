@@ -45,7 +45,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             System.setProperty(getSystemProperty(), executor.getPathToDriverExecutable());
             proxyFacade.getRequestFilter().setHttpLock(false);
             automationResult = AutomationResult.NOT_STARTED;
-            replaySettings.prepareReplay(executor.getPathToDriverExecutable(), screenToUse, executor.getTimeout());
+            replaySettings.prepareReplay(executor.getPathToDriverExecutable(), screenToUse);
             executorService = Executors.newSingleThreadExecutor();
         } catch (IOException e) {
             return ExecutionReport.couldNotCreateDriver();
@@ -125,10 +125,12 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     public abstract String getSystemProperty();
 
     public abstract ReplaySettings createReplaySettings();
+
     protected ReplayFiltersFacade proxyFacade;
+    protected ExecutorBuilder executor;
+
 
     private AutomationResult automationResult;
-    private ExecutorBuilder executor;
 
     private void executeIgnoringExceptions(WebDriver webDriver, WebDriverAction webDriverAction) {
         int i = 0;

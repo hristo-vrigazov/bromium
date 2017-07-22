@@ -32,10 +32,13 @@ public class ChromeDriverReplaySettingsTest {
     public void createsDriverService() throws Exception {
         String pathToExecutable = "chromedriver";
         String screenToUse = ":1";
+        int timeout = 10;
         File executableFile = new File(pathToExecutable);
         RequestFilter requestFilter = mock(RequestFilter.class);
         ResponseFilter responseFilter = mock(ResponseFilter.class);
-        ChromeDriverReplaySettings chromeDriverReplaySettings = new ChromeDriverReplaySettings(requestFilter, responseFilter);
+        ChromeDriverReplaySettings chromeDriverReplaySettings = new ChromeDriverReplaySettings(requestFilter,
+                responseFilter,
+                timeout);
 
         ChromeDriverService expected = mock(ChromeDriverService.class);
 

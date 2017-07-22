@@ -266,7 +266,7 @@ public class WebDriverActionExecutionBaseTest {
     @Test
     public void correctAutomationResultIfNoDriverIsFound() throws IOException, URISyntaxException {
         ReplaySettings<DriverService> replaySettingsMock = mock(ReplaySettings.class);
-        doThrow(new IOException()).when(replaySettingsMock).prepareReplay(anyString(), anyString(), anyInt());
+        doThrow(new IOException()).when(replaySettingsMock).prepareReplay(anyString(), anyString());
         WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(replaySettingsMock);
         ExecutionReport executionReport = webDriverActionExecutionBase.execute(mock(TestScenario.class));
         assertEquals(AutomationResult.COULD_NOT_CREATE_DRIVER, executionReport.getAutomationResult());

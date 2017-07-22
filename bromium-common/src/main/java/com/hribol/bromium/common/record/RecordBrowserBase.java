@@ -17,15 +17,12 @@ import static com.hribol.bromium.core.DependencyInjectionConstants.PATH_TO_DRIVE
  */
 public class RecordBrowserBase {
 
-    private final String pathToDriverExecutable;
     private final String baseUrl;
     private RecordManager recordManager;
 
     @Inject
-    public RecordBrowserBase(@Named(PATH_TO_DRIVER) String pathToDriverExecutable,
-                             @Named(BASE_URL) String baseUrl,
+    public RecordBrowserBase(@Named(BASE_URL) String baseUrl,
                              RecordManager recordManager) throws IOException {
-        this.pathToDriverExecutable = pathToDriverExecutable;
         this.baseUrl = baseUrl;
         this.recordManager = recordManager;
     }

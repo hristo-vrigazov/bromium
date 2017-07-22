@@ -23,19 +23,16 @@ public class RecordCommand implements Command {
     private String outputFile;
     private IOProvider<RecordBrowserBase> recordBrowserBaseIOProvider;
     private StepsDumper stepsDumper;
-    private RecordRequestFilter recordRequestFilter;
 
     @Inject
     public RecordCommand(@Named(OUTPUT_FILE) String outputFile,
                          PromptUtils promptUtils,
                          IOProvider<RecordBrowserBase> recordBrowserBaseIOProvider,
-                         StepsDumper stepsDumper,
-                         RecordRequestFilter recordRequestFilter) {
+                         StepsDumper stepsDumper) {
         this.promptUtils = promptUtils;
         this.outputFile = outputFile;
         this.recordBrowserBaseIOProvider = recordBrowserBaseIOProvider;
         this.stepsDumper = stepsDumper;
-        this.recordRequestFilter = recordRequestFilter;
     }
 
     @Override

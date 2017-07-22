@@ -23,7 +23,8 @@ public class ChromeDriverActionExecution extends WebDriverActionExecutionBase {
     public ReplaySettings createReplaySettings() {
         RequestFilter requestFilter = proxyFacade.getRequestFilter();
         ResponseFilter responseFilter = proxyFacade.getResponseFilter();
-        return new ChromeDriverReplaySettings(requestFilter, responseFilter);
+        int timeout = executor.getTimeout();
+        return new ChromeDriverReplaySettings(requestFilter, responseFilter, timeout);
     }
 
     @Override

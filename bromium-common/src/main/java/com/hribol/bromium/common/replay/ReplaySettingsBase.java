@@ -23,6 +23,7 @@ public abstract class ReplaySettingsBase<T extends DriverService> implements Rep
     private ResponseFilter responseFilter;
     private InvisibleWebDriverSupplier<T> invisibleWebDriverSupplier;
     private VisibleWebDriverSupplier visibleWebDriverSupplier;
+    private int timeout;
 
     private WebDriver driver;
     private T driverService;
@@ -31,11 +32,13 @@ public abstract class ReplaySettingsBase<T extends DriverService> implements Rep
     public ReplaySettingsBase(RequestFilter requestFilter,
                               ResponseFilter responseFilter,
                               InvisibleWebDriverSupplier<T> invisibleWebDriverSupplier,
-                              VisibleWebDriverSupplier visibleWebDriverSupplier) {
+                              VisibleWebDriverSupplier visibleWebDriverSupplier,
+                              int timeout) {
         this.requestFilter = requestFilter;
         this.responseFilter = responseFilter;
         this.invisibleWebDriverSupplier = invisibleWebDriverSupplier;
         this.visibleWebDriverSupplier = visibleWebDriverSupplier;
+        this.timeout = timeout;
     }
 
     @Override
@@ -56,7 +59,7 @@ public abstract class ReplaySettingsBase<T extends DriverService> implements Rep
     }
 
     @Override
-    public void prepareReplay(String pathToDriver, String screenToUse, int timeout)
+    public void prepareReplay(String pathToDriver, String screenToUse)
             throws IOException {
         boolean useVirtualScreen = !screenToUse.equals(":0");
         this.proxy = new BrowserMobProxySupplier(timeout, requestFilter, responseFilter).get();

@@ -47,21 +47,23 @@ public class ReplaySettingsTest {
         VisibleWebDriverSupplier visibleWebDriverSupplier = mock(VisibleWebDriverSupplier.class);
         when(visibleWebDriverSupplier.get(any())).thenReturn(webDriver);
 
+        String pathToChromeDriver = "file:///somepath";
+        int timeout = 10;
+
         ReplaySettings<DriverService> driverServiceReplaySettings = new ReplaySettingsBase<DriverService>(
                 requestFilter,
                 responseFilter,
                 invisibleWebDriverSupplier,
-                visibleWebDriverSupplier) {
+                visibleWebDriverSupplier,
+                timeout) {
             @Override
             public DriverService getDriverService(String pathToDriverExecutable, String screenToUse) throws IOException {
                 return driverService;
             }
         };
 
-        String pathToChromeDriver = "file:///somepath";
-        int timeout = 500;
 
-        driverServiceReplaySettings.prepareReplay(pathToChromeDriver, screen, timeout);
+        driverServiceReplaySettings.prepareReplay(pathToChromeDriver, screen);
 
         assertEquals(webDriver, driverServiceReplaySettings.getWebDriver());
 

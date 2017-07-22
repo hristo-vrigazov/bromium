@@ -7,7 +7,6 @@ import com.google.inject.throwingproviders.CheckedProvides;
 import com.google.inject.throwingproviders.ThrowingProviderBinder;
 import com.hribol.bromium.browsers.chrome.base.VisibleChromeDriverSupplier;
 import com.hribol.bromium.cli.factory.ExecutionFactory;
-//import com.hribol.bromium.cli.factory.RecordBrowserFactory;
 import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.providers.IOURIProvider;
 import com.hribol.bromium.common.builder.JsCollector;
@@ -38,9 +37,6 @@ import com.hribol.bromium.core.generation.GeneratedFunction;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
 import com.hribol.bromium.core.suite.UbuntuVirtualScreenProcessCreator;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
-import com.hribol.bromium.core.suppliers.BrowserMobProxySupplier;
-import com.hribol.bromium.core.suppliers.DesiredCapabilitiesSupplier;
-import com.hribol.bromium.core.suppliers.SeleniumProxySupplier;
 import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
 import com.hribol.bromium.core.utils.JavascriptInjector;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
@@ -53,17 +49,23 @@ import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
 import net.lightbody.bmp.BrowserMobProxy;
+import net.lightbody.bmp.BrowserMobProxyServer;
+import net.lightbody.bmp.client.ClientUtil;
+import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
+import net.lightbody.bmp.proxy.CaptureType;
 import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 import static com.hribol.bromium.core.DependencyInjectionConstants.*;
@@ -89,6 +91,7 @@ public class DefaultModule extends AbstractModule {
                 .to(RecordingWebDriverActionsOnly.class);
         bind(new TypeLiteral<FunctionRegistry<NameWebDriverActionConfiguration>>(){})
                 .to(RecorderFunctionRegistry.class);
+        // TODO: other OSes should have a different binding
         bind(VirtualScreenProcessCreator.class).to(UbuntuVirtualScreenProcessCreator.class);
         bindConstant().annotatedWith(Names.named(RECORD_TEMPLATE_RESOURCE)).to("/record.js");
         bindConstant().annotatedWith(Names.named(REPLAY_TEMPLATE_RESOURCE)).to("/replay.js");
@@ -343,11 +346,9 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOProvider.class)
-    public RecordBrowserBase getRecordBrowser(@Named(PATH_TO_DRIVER) String pathToDriverExecutable,
-                                              @Named(BASE_URL) String baseUrl,
-                                              @Named(PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY) String systemProperty,
+    public RecordBrowserBase getRecordBrowser(@Named(BASE_URL) String baseUrl,
                                               IOProvider<RecordManager> recordManagerIOProvider) throws IOException {
-        return new RecordBrowserBase(pathToDriverExecutable,
+        return new RecordBrowserBase(
                 baseUrl,
                 recordManagerIOProvider.get());
     }
@@ -406,10 +407,10 @@ public class DefaultModule extends AbstractModule {
                                                           @Named(PATH_TO_DRIVER) String pathToDriverExecutable,
                                                           @Named(TIMEOUT) int timeout) throws IOException {
         ResponseFilter responseFilter = recordResponseFilterIOProvider.get();
-        BrowserMobProxy proxy = new BrowserMobProxySupplier(timeout, recordRequestFilter, responseFilter).get();
+        BrowserMobProxy proxy = createBrowserMobProxy(timeout, recordRequestFilter, responseFilter);
         proxy.start(0);
-        Proxy seleniumProxy = new SeleniumProxySupplier(proxy).get();
-        DesiredCapabilities desiredCapabilities = new DesiredCapabilitiesSupplier(seleniumProxy).get();
+        Proxy seleniumProxy = createSeleniumProxy(proxy);
+        DesiredCapabilities desiredCapabilities = createDesiredCapabilities(seleniumProxy);
         System.setProperty(systemProperty, pathToDriverExecutable);
         WebDriver driver = visibleWebDriverSupplier.get(desiredCapabilities);
 
@@ -419,6 +420,27 @@ public class DefaultModule extends AbstractModule {
     @CheckedProvides(IOProvider.class)
     public RecordManager getRecordManager(IOProvider<ProxyDriverIntegrator> proxyDriverIntegratorIOProvider) throws IOException {
         return new RecordManager(proxyDriverIntegratorIOProvider.get());
+    }
+
+    public BrowserMobProxy createBrowserMobProxy(int timeout, RequestFilter requestFilter, ResponseFilter responseFilter) {
+        BrowserMobProxyServer proxy = new BrowserMobProxyServer();
+        proxy.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
+        proxy.newHar("measurements");
+        proxy.addRequestFilter(requestFilter);
+        proxy.addResponseFilter(responseFilter);
+        proxy.setIdleConnectionTimeout(timeout, TimeUnit.SECONDS);
+        proxy.setRequestTimeout(timeout, TimeUnit.SECONDS);
+        return proxy;
+    }
+
+    public Proxy createSeleniumProxy(BrowserMobProxy proxy) {
+        return ClientUtil.createSeleniumProxy(proxy);
+    }
+
+    public DesiredCapabilities createDesiredCapabilities(Proxy proxy) {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(CapabilityType.PROXY, proxy);
+        return capabilities;
     }
 }
 
