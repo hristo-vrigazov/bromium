@@ -38,6 +38,9 @@ import com.hribol.bromium.core.generation.GeneratedFunction;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
 import com.hribol.bromium.core.suite.UbuntuVirtualScreenProcessCreator;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
+import com.hribol.bromium.core.suppliers.BrowserMobProxySupplier;
+import com.hribol.bromium.core.suppliers.DesiredCapabilitiesSupplier;
+import com.hribol.bromium.core.suppliers.SeleniumProxySupplier;
 import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
 import com.hribol.bromium.core.utils.JavascriptInjector;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
@@ -50,9 +53,12 @@ import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
 import net.lightbody.bmp.BrowserMobProxy;
+import net.lightbody.bmp.filters.ResponseFilter;
 import org.apache.commons.io.IOUtils;
+import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.*;
 import java.net.URI;
@@ -399,19 +405,20 @@ public class DefaultModule extends AbstractModule {
                                                           @Named(PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY) String systemProperty,
                                                           @Named(PATH_TO_DRIVER) String pathToDriverExecutable,
                                                           @Named(TIMEOUT) int timeout) throws IOException {
-        return new ProxyDriverIntegrator(recordRequestFilter,
-                recordResponseFilterIOProvider.get(),
-                visibleWebDriverSupplier,
-                systemProperty,
-                pathToDriverExecutable,
-                timeout);
+        ResponseFilter responseFilter = recordResponseFilterIOProvider.get();
+        BrowserMobProxy proxy = new BrowserMobProxySupplier(timeout, recordRequestFilter, responseFilter).get();
+        proxy.start(0);
+        Proxy seleniumProxy = new SeleniumProxySupplier(proxy).get();
+        DesiredCapabilities desiredCapabilities = new DesiredCapabilitiesSupplier(seleniumProxy).get();
+        System.setProperty(systemProperty, pathToDriverExecutable);
+        WebDriver driver = visibleWebDriverSupplier.get(desiredCapabilities);
+
+        return new ProxyDriverIntegrator(recordRequestFilter, proxy, driver);
     }
 
     @CheckedProvides(IOProvider.class)
     public RecordManager getRecordManager(IOProvider<ProxyDriverIntegrator> proxyDriverIntegratorIOProvider) throws IOException {
         return new RecordManager(proxyDriverIntegratorIOProvider.get());
     }
-
-
 }
 
