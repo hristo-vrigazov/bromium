@@ -15,14 +15,14 @@ import static com.hribol.bromium.core.DependencyInjectionConstants.PATH_TO_DRIVE
 /**
  * Created by hvrigazov on 09.03.17.
  */
-public class RecordBrowserBase {
+public class RecordBrowser {
 
     private final String baseUrl;
-    private RecordManager recordManager;
+    private final RecordManager recordManager;
 
     @Inject
-    public RecordBrowserBase(@Named(BASE_URL) String baseUrl,
-                             RecordManager recordManager) throws IOException {
+    public RecordBrowser(@Named(BASE_URL) String baseUrl,
+                         RecordManager recordManager) throws IOException {
         this.baseUrl = baseUrl;
         this.recordManager = recordManager;
     }

@@ -1,6 +1,6 @@
 package com.hribol.bromium.cli.commands;
 
-import com.hribol.bromium.common.record.RecordBrowserBase;
+import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.utils.parsing.StepsDumper;
 import org.junit.Test;
@@ -17,19 +17,19 @@ public class RecordCommandTest {
     private final String baseUrl = "tenniskafe.com";
     private final String outputFile = "tmp-record.json";
     private final int timeout = 10;
-    private RecordBrowserBase recordBrowserBase = mock(RecordBrowserBase.class);
+    private RecordBrowser recordBrowser = mock(RecordBrowser.class);
     private PromptUtils promptUtils = mock(PromptUtils.class);
     private StepsDumper stepsDumper = mock(StepsDumper.class);
     private TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
 
     @Test
     public void recordDumpsFile() throws IOException {
-        when(recordBrowserBase.getTestCaseSteps()).thenReturn(testScenarioSteps);
+        when(recordBrowser.getTestCaseSteps()).thenReturn(testScenarioSteps);
 
         RecordCommand recordCommand = new RecordCommand(
                 outputFile,
                 promptUtils,
-                () -> recordBrowserBase,
+                () -> recordBrowser,
                 stepsDumper
         );
         recordCommand.run();

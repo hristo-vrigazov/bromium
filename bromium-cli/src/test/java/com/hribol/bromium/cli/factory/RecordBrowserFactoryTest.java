@@ -1,7 +1,7 @@
 //package com.hribol.bromium.cli.factory;
 //
 //import com.hribol.bromium.browsers.chrome.record.ChromeRecordBrowser;
-//import com.hribol.bromium.common.record.RecordBrowserBase;
+//import com.hribol.bromium.common.record.RecordBrowser;
 //import com.hribol.bromium.core.utils.JavascriptInjector;
 //import org.junit.Test;
 //
@@ -24,7 +24,7 @@
 ////        Integer timeout = 10;
 ////        RecordBrowserFactory recordBrowserFactory = new RecordBrowserFactory(timeout, baseUrl, outputFile);
 ////
-////        RecordBrowserBase recordBrowserBase = recordBrowserFactory.create(CHROME, pathToDriver, javascriptInjector);
+////        RecordBrowser recordBrowserBase = recordBrowserFactory.create(CHROME, pathToDriver, javascriptInjector);
 ////
 ////        assertNotNull(recordBrowserBase);
 ////        assertTrue(recordBrowserBase instanceof ChromeRecordBrowser);

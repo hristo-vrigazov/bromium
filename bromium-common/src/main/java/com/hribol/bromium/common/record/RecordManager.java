@@ -5,6 +5,8 @@ import com.hribol.bromium.record.RecordRequestFilter;
 import net.lightbody.bmp.BrowserMobProxy;
 import org.openqa.selenium.WebDriver;
 
+import java.util.function.Supplier;
+
 /**
  * Created by hvrigazov on 22.04.17.
  */
@@ -12,12 +14,12 @@ public class RecordManager {
 
     private WebDriver driver;
     private BrowserMobProxy proxy;
-    private RecordRequestFilter recordRequestFilter;
+    private Supplier<TestScenarioSteps> stepsSupplier;
 
     public RecordManager(ProxyDriverIntegrator proxyDriverIntegrator) {
         this.driver = proxyDriverIntegrator.getDriver();
         this.proxy = proxyDriverIntegrator.getProxy();
-        this.recordRequestFilter = proxyDriverIntegrator.getRequestFilter();
+        this.stepsSupplier = proxyDriverIntegrator.getStepsSupplier();
     }
 
     public void cleanUpRecord() {
@@ -34,6 +36,6 @@ public class RecordManager {
     }
 
     public TestScenarioSteps getTestCaseSteps() {
-        return recordRequestFilter.getApplicationSpecificActionList();
+        return stepsSupplier.get();
     }
 }

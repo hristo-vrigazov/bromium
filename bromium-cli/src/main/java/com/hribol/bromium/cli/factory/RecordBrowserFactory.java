@@ -4,7 +4,7 @@
 //import com.google.inject.name.Named;
 ////import com.hribol.bromium.browsers.chrome.record.ChromeRecordBrowser;
 //import com.hribol.bromium.core.providers.IOProvider;
-//import com.hribol.bromium.common.record.RecordBrowserBase;
+//import com.hribol.bromium.common.record.RecordBrowser;
 //import com.hribol.bromium.core.utils.JavascriptInjector;
 //import com.hribol.bromium.record.RecordResponseFilter;
 //
@@ -40,14 +40,14 @@
 //        this.browserNameToSupplierMap.put(CHROME, this::getChrome);
 //    }
 //
-//    public RecordBrowserBase create(String browserName,
+//    public RecordBrowser create(String browserName,
 //                                    String pathToDriver,
 //                                    JavascriptInjector javascriptInjector) throws IOException {
 //        return this.browserNameToSupplierMap.get(browserName).get(pathToDriver, javascriptInjector,
 //                timeout, baseUrl, recordResponseFilterIOProvider.get());
 //    }
 //
-//    private RecordBrowserBase getChrome(String pathToDriver,
+//    private RecordBrowser getChrome(String pathToDriver,
 //                                        JavascriptInjector javascriptInjector,
 //                                        int timeout,
 //                                        String baseUrl,

@@ -7,6 +7,7 @@ import com.google.inject.throwingproviders.CheckedProvides;
 import com.google.inject.throwingproviders.ThrowingProviderBinder;
 import com.hribol.bromium.browsers.chrome.base.VisibleChromeDriverSupplier;
 import com.hribol.bromium.cli.factory.ExecutionFactory;
+import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.providers.IOURIProvider;
 import com.hribol.bromium.common.builder.JsCollector;
@@ -23,7 +24,6 @@ import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfigurat
 import com.hribol.bromium.common.generation.replay.*;
 import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
 import com.hribol.bromium.common.record.ProxyDriverIntegrator;
-import com.hribol.bromium.common.record.RecordBrowserBase;
 import com.hribol.bromium.common.record.RecordManager;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
 import com.hribol.bromium.common.replay.factory.DefaultApplicationActionFactory;
@@ -346,9 +346,9 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOProvider.class)
-    public RecordBrowserBase getRecordBrowser(@Named(BASE_URL) String baseUrl,
-                                              IOProvider<RecordManager> recordManagerIOProvider) throws IOException {
-        return new RecordBrowserBase(
+    public RecordBrowser getRecordBrowser(@Named(BASE_URL) String baseUrl,
+                                          IOProvider<RecordManager> recordManagerIOProvider) throws IOException {
+        return new RecordBrowser(
                 baseUrl,
                 recordManagerIOProvider.get());
     }
@@ -414,7 +414,7 @@ public class DefaultModule extends AbstractModule {
         System.setProperty(systemProperty, pathToDriverExecutable);
         WebDriver driver = visibleWebDriverSupplier.get(desiredCapabilities);
 
-        return new ProxyDriverIntegrator(recordRequestFilter, proxy, driver);
+        return new ProxyDriverIntegrator(recordRequestFilter::getApplicationSpecificActionList, proxy, driver);
     }
 
     @CheckedProvides(IOProvider.class)

@@ -3,14 +3,11 @@ package com.hribol.bromium.cli.commands;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.hribol.bromium.core.providers.IOProvider;
-import com.hribol.bromium.common.record.RecordBrowserBase;
+import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.utils.parsing.StepsDumper;
-import com.hribol.bromium.record.RecordRequestFilter;
-import com.hribol.bromium.record.RecordResponseFilter;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 import static com.hribol.bromium.core.DependencyInjectionConstants.*;
 
@@ -21,13 +18,13 @@ public class RecordCommand implements Command {
 
     private PromptUtils promptUtils;
     private String outputFile;
-    private IOProvider<RecordBrowserBase> recordBrowserBaseIOProvider;
+    private IOProvider<RecordBrowser> recordBrowserBaseIOProvider;
     private StepsDumper stepsDumper;
 
     @Inject
     public RecordCommand(@Named(OUTPUT_FILE) String outputFile,
                          PromptUtils promptUtils,
-                         IOProvider<RecordBrowserBase> recordBrowserBaseIOProvider,
+                         IOProvider<RecordBrowser> recordBrowserBaseIOProvider,
                          StepsDumper stepsDumper) {
         this.promptUtils = promptUtils;
         this.outputFile = outputFile;
@@ -38,12 +35,12 @@ public class RecordCommand implements Command {
     @Override
     public void run() {
         try {
-            RecordBrowserBase recordBrowserBase = recordBrowserBaseIOProvider.get();
-            recordBrowserBase.record();
+            RecordBrowser recordBrowser = recordBrowserBaseIOProvider.get();
+            recordBrowser.record();
             promptUtils.promptForRecording();
-            TestScenarioSteps testScenarioSteps = recordBrowserBase.getTestCaseSteps();
+            TestScenarioSteps testScenarioSteps = recordBrowser.getTestCaseSteps();
             stepsDumper.dump(testScenarioSteps, outputFile);
-            recordBrowserBase.cleanUp();
+            recordBrowser.cleanUp();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
