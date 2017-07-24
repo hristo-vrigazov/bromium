@@ -26,7 +26,7 @@ public abstract class BaseReplayIntegrationTest extends BaseDemoAppIntegrationTe
                 "replay",
                 "-d", chromedriverFile.getAbsolutePath(),
                 "-a", configurationFile.getAbsolutePath(),
-                "-u", "http://localhost:" + demoApp.getPort() + "/",
+                "-u", demoApp.getBaseUrl(),
                 "-c", testCaseFile.getAbsolutePath(),
                 "-m", measurementsFile.getAbsolutePath(),
                 "-s", screen

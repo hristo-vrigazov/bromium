@@ -1,5 +1,6 @@
 package com.hribol.bromium.cli.commands;
 
+import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.hribol.bromium.core.providers.IOProvider;
@@ -48,5 +49,7 @@ public class RecordCommand implements Command {
         }
 
     }
+
+
 
 }

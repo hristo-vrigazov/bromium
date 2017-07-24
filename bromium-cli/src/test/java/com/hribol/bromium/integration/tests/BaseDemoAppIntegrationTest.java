@@ -67,7 +67,7 @@ public abstract class BaseDemoAppIntegrationTest {
     }
 
     @Test
-    abstract public void runTest();
+    abstract public void runTest() throws IOException;
 
     @After
     public void cleanUp() throws Exception {

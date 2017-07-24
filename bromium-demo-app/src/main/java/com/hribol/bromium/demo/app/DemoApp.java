@@ -90,4 +90,8 @@ public class DemoApp {
     public int getPort() {
         return port;
     }
+
+    public String getBaseUrl() {
+        return "http://localhost:" + getPort() + "/";
+    }
 }
