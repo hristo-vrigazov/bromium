@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.hribol.bromium.browsers.chrome.base.InvisibleChromeDriverSupplier;
 import com.hribol.bromium.browsers.chrome.base.VisibleChromeDriverSupplier;
 import com.hribol.bromium.common.replay.ReplaySettingsBase;
+import com.hribol.bromium.core.providers.IOProvider;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -16,12 +17,17 @@ import java.io.IOException;
  */
 public class ChromeDriverReplaySettings extends ReplaySettingsBase<ChromeDriverService> {
 
-    public ChromeDriverReplaySettings(RequestFilter requestFilter, ResponseFilter responseFilter, int timeout) {
+
+    public ChromeDriverReplaySettings(RequestFilter requestFilter,
+                                      ResponseFilter responseFilter,
+                                      int timeout,
+                                      String screenToUse) {
         super(requestFilter,
                 responseFilter,
                 new InvisibleChromeDriverSupplier(),
                 new VisibleChromeDriverSupplier(),
-                timeout);
+                timeout,
+                screenToUse);
     }
 
     @Override

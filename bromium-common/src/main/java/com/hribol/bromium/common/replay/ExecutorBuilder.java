@@ -63,6 +63,11 @@ public class ExecutorBuilder {
         return this;
     }
 
+    public ExecutorBuilder proxyFacade(ProxyFacade proxyFacade) {
+        this.proxyFacade = proxyFacade;
+        return this;
+    }
+
     public ExecutorBuilder proxyFacadeSupplier(ProxyFacadeSupplier proxyFacadeSupplier) {
         this.proxyFacadeSupplier = proxyFacadeSupplier;
         return this;
@@ -145,10 +150,6 @@ public class ExecutorBuilder {
     }
 
     public ProxyFacade getProxyFacade() throws URISyntaxException {
-        if (!Optional.ofNullable(proxyFacade).isPresent()) {
-            this.proxyFacade = getProxyFacadeSupplier().get(baseURL, javascriptInjectionCode, getEventSynchronizer());
-        }
-
         return proxyFacade;
     }
 

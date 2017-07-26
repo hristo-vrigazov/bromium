@@ -1,17 +1,19 @@
 package com.hribol.bromium.cli;
 
-import com.google.inject.*;
+import com.google.common.collect.ImmutableMap;
+import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
+import com.google.inject.TypeLiteral;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import com.google.inject.throwingproviders.CheckedProvides;
 import com.google.inject.throwingproviders.ThrowingProviderBinder;
 import com.hribol.bromium.browsers.chrome.base.VisibleChromeDriverSupplier;
 import com.hribol.bromium.cli.factory.ExecutionFactory;
-import com.hribol.bromium.common.record.RecordBrowser;
-import com.hribol.bromium.core.providers.IOProvider;
-import com.hribol.bromium.core.providers.IOURIProvider;
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.common.EmptyFunction;
+import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
+import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.helper.StepAndActionConfiguration;
 import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.helper.StepsAndConfiguration;
@@ -19,22 +21,24 @@ import com.hribol.bromium.common.generation.helper.suppliers.StepAndActionConfig
 import com.hribol.bromium.common.generation.helper.suppliers.StepAndWebDriverActionConfigurationSupplier;
 import com.hribol.bromium.common.generation.record.*;
 import com.hribol.bromium.common.generation.record.functions.RecorderFunctionInvocation;
-import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
-import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.replay.*;
 import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
 import com.hribol.bromium.common.record.ProxyDriverIntegrator;
+import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.common.record.RecordManager;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
 import com.hribol.bromium.common.replay.factory.DefaultApplicationActionFactory;
 import com.hribol.bromium.common.replay.factory.PredefinedWebDriverActionFactory;
 import com.hribol.bromium.common.replay.factory.TestCaseStepToApplicationActionConverter;
+import com.hribol.bromium.common.synchronization.SignalizationBasedEventSynchronizer;
 import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.FunctionRegistry;
 import com.hribol.bromium.core.generation.GeneratedFunction;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
+import com.hribol.bromium.core.providers.IOProvider;
+import com.hribol.bromium.core.providers.IOURIProvider;
 import com.hribol.bromium.core.suite.UbuntuVirtualScreenProcessCreator;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
@@ -48,6 +52,9 @@ import com.hribol.bromium.replay.execution.WebDriverActionExecution;
 import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
+import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
+import com.hribol.bromium.replay.filters.ProxyFacade;
+import com.hribol.bromium.replay.filters.ReplayFiltersFactory;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.BrowserMobProxyServer;
 import net.lightbody.bmp.client.ClientUtil;
@@ -60,6 +67,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.service.DriverService;
 
 import java.io.*;
 import java.net.URI;
@@ -236,6 +244,12 @@ public class DefaultModule extends AbstractModule {
         return parsedOptions.getScreenNumber();
     }
 
+    @Provides
+    @Named(SCREEN)
+    public String getScreenAsScreen(@Named(SCREEN_NUMBER) Integer screenNumber,
+                                    VirtualScreenProcessCreator virtualScreenProcessCreator) {
+        return virtualScreenProcessCreator.getScreen(screenNumber);
+    }
 
     @Provides
     public BaseReplayFunctionFactory getBaseReplayFunctionFactory(
@@ -332,17 +346,19 @@ public class DefaultModule extends AbstractModule {
     }
 
 
-    @CheckedProvides(IOProvider.class)
+    @CheckedProvides(IOURIProvider.class)
     public ExecutorBuilder getExecutorBuilder(ExecutorBuilder executorBuilder,
                                               ParsedOptions parsedOptions,
                                               @Named(REPLAYING_JAVASCRIPT_CODE) IOProvider<String>
-                                                          replayingJavascriptCodeProvider) throws IOException {
+                                                          replayingJavascriptCodeProvider,
+                                              IOURIProvider<ProxyFacade> proxyFacadeIOURIProvider) throws IOException, URISyntaxException {
         return executorBuilder
                 .pathToDriverExecutable(parsedOptions.getPathToDriver())
                 .baseURL(parsedOptions.getBaseUrl())
                 .timeoutInSeconds(parsedOptions.getTimeout())
                 .measurementsPrecisionInMilliseconds(parsedOptions.getMeasurementsPrecisionMilli())
-                .javascriptInjectionCode(replayingJavascriptCodeProvider.get());
+                .javascriptInjectionCode(replayingJavascriptCodeProvider.get())
+                .proxyFacade(proxyFacadeIOURIProvider.get());
     }
 
     @CheckedProvides(IOProvider.class)
@@ -355,7 +371,7 @@ public class DefaultModule extends AbstractModule {
 
     @CheckedProvides(IOURIProvider.class)
     public WebDriverActionExecution getWebDriverActionExecution(ExecutionFactory executionFactory,
-                                                                IOProvider<ExecutorBuilder> executorBuilderIOProvider,
+                                                                IOURIProvider<ExecutorBuilder> executorBuilderIOProvider,
                                                                 ParsedOptions parsedOptions) throws IOException, URISyntaxException {
         return executionFactory.create(parsedOptions.getBrowserType(), executorBuilderIOProvider.get());
     }
@@ -384,9 +400,9 @@ public class DefaultModule extends AbstractModule {
         switch (browserType) {
             case CHROME:
                 return ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY;
+            default:
+                throw new BrowserTypeNotSupportedException();
         }
-
-        return null;
     }
 
     @Provides
@@ -394,9 +410,10 @@ public class DefaultModule extends AbstractModule {
         switch (browserType) {
             case CHROME:
                 return new VisibleChromeDriverSupplier();
+            default:
+                throw new BrowserTypeNotSupportedException();
         }
 
-        return null;
     }
 
     @CheckedProvides(IOProvider.class)
@@ -441,6 +458,51 @@ public class DefaultModule extends AbstractModule {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(CapabilityType.PROXY, proxy);
         return capabilities;
+    }
+
+    @CheckedProvides(IOProvider.class)
+    public DriverService getDriverService(@Named(BROWSER_TYPE) String browserType,
+                                          IOProvider<ChromeDriverService> chromeDriverServiceIOProvider) throws IOException {
+        switch (browserType) {
+            case CHROME:
+                return chromeDriverServiceIOProvider.get();
+            default:
+                throw new BrowserTypeNotSupportedException();
+        }
+
+    }
+
+    @Provides
+    public String getDriverSystemProperty(@Named(BROWSER_TYPE) String browserType) {
+        switch (browserType) {
+            case CHROME:
+                return ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY;
+            default:
+                throw new BrowserTypeNotSupportedException();
+        }
+    }
+
+    @CheckedProvides(IOProvider.class)
+    public ChromeDriverService getDriverService(@Named(PATH_TO_DRIVER) String pathToDriverExecutable,
+                                                @Named(SCREEN) String screenToUse) throws IOException {
+        return new ChromeDriverService.Builder()
+                .usingDriverExecutable(new File(pathToDriverExecutable))
+                .usingAnyFreePort()
+                .withEnvironment(ImmutableMap.of("DISPLAY", screenToUse))
+                .build();
+    }
+
+    @Provides
+    public EventSynchronizer getEventSynchronizer(@Named(TIMEOUT) Integer timeout) {
+        return new SignalizationBasedEventSynchronizer(timeout);
+    }
+
+    @CheckedProvides(IOURIProvider.class)
+    public ProxyFacade getProxyFacade(@Named(BASE_URL) String baseURI,
+                                      @Named(REPLAYING_JAVASCRIPT_CODE) IOProvider<String> injectionCodeProvider,
+                                      EventSynchronizer eventSynchronizer,
+                                      ReplayFiltersFactory replayFiltersFactory) throws IOException, URISyntaxException {
+        return new ProxyFacade(baseURI, injectionCodeProvider.get(), eventSynchronizer, replayFiltersFactory);
     }
 }
 

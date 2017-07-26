@@ -39,13 +39,13 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     @Override
     public ExecutionReport execute(TestScenario testScenario, String screenToUse) {
-        ReplaySettings replaySettings = createReplaySettings();
+        ReplaySettings replaySettings = createReplaySettings(screenToUse);
         ExecutorService executorService;
         try {
             System.setProperty(getSystemProperty(), executor.getPathToDriverExecutable());
             proxyFacade.getRequestFilter().setHttpLock(false);
             automationResult = AutomationResult.NOT_STARTED;
-            replaySettings.prepareReplay(executor.getPathToDriverExecutable(), screenToUse);
+            replaySettings.prepareReplay(executor.getPathToDriverExecutable());
             executorService = Executors.newSingleThreadExecutor();
         } catch (IOException e) {
             return ExecutionReport.couldNotCreateDriver();
@@ -124,7 +124,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     public abstract String getSystemProperty();
 
-    public abstract ReplaySettings createReplaySettings();
+    public abstract ReplaySettings createReplaySettings(String screenToUse);
 
     protected ReplayFiltersFacade proxyFacade;
     protected ExecutorBuilder executor;
