@@ -15,7 +15,7 @@
 //import com.hribol.bromium.replay.filters.ReplayResponseFilter;
 //import com.hribol.bromium.replay.report.AutomationResult;
 //import com.hribol.bromium.replay.report.ExecutionReport;
-//import com.hribol.bromium.replay.settings.ReplaySettings;
+//import com.hribol.bromium.replay.settings.ReplayManager;
 //import net.lightbody.bmp.core.har.Har;
 //import org.junit.Test;
 //import org.junit.runner.RunWith;
@@ -170,7 +170,7 @@
 //    @Test
 //    public void ifTooManyAttemtpsActionTimesOut() throws IOException, URISyntaxException {
 //        int maxRetries = 3;
-//        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(10, maxRetries, mock(ReplaySettings.class));
+//        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(10, maxRetries, mock(ReplayManager.class));
 //        Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
 //        TestScenarioActions testScenarioSteps = mock(TestScenarioActions.class);
 //        when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
@@ -265,7 +265,7 @@
 //
 //    @Test
 //    public void correctAutomationResultIfNoDriverIsFound() throws IOException, URISyntaxException {
-//        ReplaySettings<DriverService> replaySettingsMock = mock(ReplaySettings.class);
+//        ReplayManager<DriverService> replaySettingsMock = mock(ReplayManager.class);
 //        doThrow(new IOException()).when(replaySettingsMock).prepareReplay(anyString(), anyString());
 //        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(replaySettingsMock);
 //        ExecutionReport executionReport = webDriverActionExecutionBase.execute(mock(TestScenario.class));
@@ -313,7 +313,7 @@
 //        WebDriverActionExecutionBase webDriverActionExecutionBase =
 //                new WebDriverActionExecutionBase(executorBuilder) {
 //            @Override
-//            public ReplaySettings createReplaySettings(String screenToUse) {
+//            public ReplayManager createReplayManager(String screenToUse) {
 //                return null;
 //            }
 //
@@ -336,7 +336,7 @@
 //
 //        WebDriverActionExecutionBase webDriverActionExecutionBase = new WebDriverActionExecutionBase(executorBuilder) {
 //            @Override
-//            public ReplaySettings createReplaySettings(String screenToUse) {
+//            public ReplayManager createReplayManager(String screenToUse) {
 //                return null;
 //            }
 //
@@ -371,7 +371,7 @@
 //        when(executorBuilder.getEventSynchronizer()).thenReturn(eventSynchronizer);
 //        when(executorBuilder.webDriverActionExecutionException(anyString(), any())).thenReturn(mock(WebDriverActionExecutionException.class));
 //
-//        ReplaySettings replaySettings = mock(ReplaySettings.class);
+//        ReplayManager replaySettings = mock(ReplayManager.class);
 //        TestScenarioActions testScenarioSteps = mock(TestScenarioActions.class);
 //        WebDriverAction webDriverAction = mock(WebDriverAction.class);
 //        Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
@@ -382,7 +382,7 @@
 //        when(testScenario.steps()).thenReturn(testScenarioSteps);
 //        WebDriverActionExecutionBase webDriverActionExecutionBase = new WebDriverActionExecutionBase(executorBuilder) {
 //            @Override
-//            public ReplaySettings createReplaySettings(String screenToUse) {
+//            public ReplayManager createReplayManager(String screenToUse) {
 //                return replaySettings;
 //            }
 //
@@ -410,26 +410,26 @@
 //        return getWebDriverActionExecutionBase(timeout,  getDefaultReplaySettings());
 //    }
 //
-//    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(ReplaySettings replaySettings) throws IOException, URISyntaxException {
+//    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(ReplayManager replaySettings) throws IOException, URISyntaxException {
 //        return getWebDriverActionExecutionBase(10,  replaySettings);
 //    }
 //
-//    private ReplaySettings getDefaultReplaySettings() {
-//        ReplaySettings replaySettings =  mock(ReplaySettings.class);
+//    private ReplayManager getDefaultReplaySettings() {
+//        ReplayManager replaySettings =  mock(ReplayManager.class);
 //        WebDriver webDriver = mock(WebDriver.class);
 //        when(replaySettings.getHar()).thenReturn(har);
 //        when(replaySettings.getWebDriver()).thenReturn(webDriver);
 //        return replaySettings;
 //    }
 //
-//    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, ReplaySettings replaySettings) throws IOException, URISyntaxException {
+//    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, ReplayManager replaySettings) throws IOException, URISyntaxException {
 //        return getWebDriverActionExecutionBase(timeout, 10, replaySettings);
 //    }
 //
-//    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(ExecutorBuilder executorBuilder, ReplaySettings replaySettings) throws IOException, URISyntaxException {
+//    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(ExecutorBuilder executorBuilder, ReplayManager replaySettings) throws IOException, URISyntaxException {
 //        return new WebDriverActionExecutionBase(executorBuilder) {
 //            @Override
-//            public ReplaySettings createReplaySettings(String screenToUse) {
+//            public ReplayManager createReplayManager(String screenToUse) {
 //                return replaySettings;
 //            }
 //
@@ -440,7 +440,7 @@
 //        };
 //    }
 //
-//    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, int maxRetries, ReplaySettings replaySettings) throws IOException, URISyntaxException {
+//    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, int maxRetries, ReplayManager replaySettings) throws IOException, URISyntaxException {
 //        return getWebDriverActionExecutionBase(getWebDriverActionExecutor(timeout, maxRetries), replaySettings);
 //    }
 //
@@ -493,8 +493,8 @@
 //        };
 //    }
 //
-////    private ReplaySettingsBase<DriverService> getReplaySettingsBase() {
-////        return new ReplaySettingsBase<DriverService>(
+////    private ReplayManagerBase<DriverService> getReplaySettingsBase() {
+////        return new ReplayManagerBase<DriverService>(
 ////                mock(RequestFilter.class),
 ////                mock(ResponseFilter.class),
 ////                mock(InvisibleWebDriverSupplier.class),

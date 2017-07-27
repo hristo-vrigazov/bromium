@@ -1,6 +1,6 @@
 //package test.chrome.replay;
 //
-//import com.hribol.bromium.browsers.chrome.replay.ChromeDriverReplaySettings;
+//import com.hribol.bromium.browsers.chrome.replay.ChromeDriverReplayManager;
 //import net.lightbody.bmp.filters.RequestFilter;
 //import net.lightbody.bmp.filters.ResponseFilter;
 //import org.junit.Test;
@@ -24,7 +24,7 @@
 //        ChromeDriverService.Builder.class,
 //        DriverService.class,
 //        ChromeDriverService.class,
-//        ChromeDriverReplaySettings.class
+//        ChromeDriverReplayManager.class
 //})
 //public class ChromeDriverReplaySettingsTest {
 //
@@ -36,7 +36,7 @@
 //        File executableFile = new File(pathToExecutable);
 //        RequestFilter requestFilter = mock(RequestFilter.class);
 //        ResponseFilter responseFilter = mock(ResponseFilter.class);
-//        ChromeDriverReplaySettings chromeDriverReplaySettings = new ChromeDriverReplaySettings(requestFilter,
+//        ChromeDriverReplayManager chromeDriverReplaySettings = new ChromeDriverReplayManager(requestFilter,
 //                responseFilter,
 //                timeout);
 //

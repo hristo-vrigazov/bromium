@@ -1,7 +1,7 @@
 package com.hribol.bromium.common.replay;
 
 import com.hribol.bromium.core.suppliers.*;
-import com.hribol.bromium.replay.settings.ReplaySettings;
+import com.hribol.bromium.replay.settings.ReplayManager;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.filters.RequestFilter;
@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * Created by hvrigazov on 21.03.17.
  */
-public abstract class ReplaySettingsBase<T extends DriverService> implements ReplaySettings<T> {
+public abstract class ReplayManagerBase<T extends DriverService> implements ReplayManager<T> {
     private BrowserMobProxy proxy;
     private Proxy seleniumProxy;
     private RequestFilter requestFilter;
@@ -30,12 +30,12 @@ public abstract class ReplaySettingsBase<T extends DriverService> implements Rep
     private T driverService;
     private DesiredCapabilities capabilities;
 
-    public ReplaySettingsBase(RequestFilter requestFilter,
-                              ResponseFilter responseFilter,
-                              InvisibleWebDriverSupplier<T> invisibleWebDriverSupplier,
-                              VisibleWebDriverSupplier visibleWebDriverSupplier,
-                              int timeout,
-                              String screenToUse) {
+    public ReplayManagerBase(RequestFilter requestFilter,
+                             ResponseFilter responseFilter,
+                             InvisibleWebDriverSupplier<T> invisibleWebDriverSupplier,
+                             VisibleWebDriverSupplier visibleWebDriverSupplier,
+                             int timeout,
+                             String screenToUse) {
         this.requestFilter = requestFilter;
         this.responseFilter = responseFilter;
         this.invisibleWebDriverSupplier = invisibleWebDriverSupplier;

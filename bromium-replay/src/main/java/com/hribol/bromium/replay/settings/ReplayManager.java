@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * Created by hvrigazov on 21.03.17.
  */
-public interface ReplaySettings<T extends DriverService> {
+public interface ReplayManager<T extends DriverService> {
     T getDriverService(String pathToDriverExecutable, String screenToUse) throws IOException;
 
     void cleanUpReplay();

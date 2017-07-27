@@ -9,7 +9,7 @@ import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
 import com.hribol.bromium.replay.report.AutomationResult;
 import com.hribol.bromium.replay.report.ExecutionReport;
 import com.hribol.bromium.replay.report.LoadingTimes;
-import com.hribol.bromium.replay.settings.ReplaySettings;
+import com.hribol.bromium.replay.settings.ReplayManager;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -34,17 +34,16 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     @Override
     public ExecutionReport execute(TestScenario testScenario) {
-        ReplaySettings replaySettings = createReplaySettings(executor.getScreenToUse());
-        ExecutorService executorService;
+        ReplayManager replayManager = createReplayManager(executor.getScreenToUse());
         try {
             System.setProperty(getSystemProperty(), executor.getPathToDriverExecutable());
             proxyFacade.getRequestFilter().setHttpLock(false);
             automationResult = AutomationResult.NOT_STARTED;
-            replaySettings.prepareReplay(executor.getPathToDriverExecutable());
-            executorService = Executors.newSingleThreadExecutor();
+            replayManager.prepareReplay(executor.getPathToDriverExecutable());
         } catch (IOException e) {
             return ExecutionReport.couldNotCreateDriver();
         }
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
 
         List<Long> waitingTimes = new ArrayList<>();
         List<Date> actionTimestamps = new ArrayList<>();
@@ -67,7 +66,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
                 proxyFacade.getRequestFilter().setHttpLock(webDriverAction.expectsHttpRequest());
 
-                Future<?> future = executorService.submit(() -> executeIgnoringExceptions(replaySettings.getWebDriver(), webDriverAction));
+                Future<?> future = executorService.submit(() -> executeIgnoringExceptions(replayManager.getWebDriver(), webDriverAction));
                 try {
                     future.get(executor.getTimeout(), TimeUnit.SECONDS);
                 }  catch (java.util.concurrent.TimeoutException | InterruptedException e) {
@@ -87,10 +86,10 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
             this.automationResult = executionException.getAutomationResult();
         }
 
-        replaySettings.cleanUpReplay();
+        replayManager.cleanUpReplay();
         executorService.shutdownNow();
         LoadingTimes loadingTimes = new LoadingTimes(testScenario.getActions(), waitingTimes, actionTimestamps);
-        return new ExecutionReport(loadingTimes, replaySettings.getHar(), automationResult);
+        return new ExecutionReport(loadingTimes, replayManager.getHar(), automationResult);
     }
 
     @Override
@@ -117,11 +116,10 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     public abstract String getSystemProperty();
 
-    public abstract ReplaySettings createReplaySettings(String screenToUse);
+    public abstract ReplayManager createReplayManager(String screenToUse);
 
     protected ReplayFiltersFacade proxyFacade;
     protected ExecutorBuilder executor;
-
 
     private AutomationResult automationResult;
 

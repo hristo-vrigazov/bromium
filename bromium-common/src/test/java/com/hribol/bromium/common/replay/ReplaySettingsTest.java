@@ -2,7 +2,7 @@
 //
 //import com.hribol.bromium.core.suppliers.InvisibleWebDriverSupplier;
 //import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
-//import com.hribol.bromium.replay.settings.ReplaySettings;
+//import com.hribol.bromium.replay.settings.ReplayManager;
 //import net.lightbody.bmp.core.har.Har;
 //import net.lightbody.bmp.filters.RequestFilter;
 //import net.lightbody.bmp.filters.ResponseFilter;
@@ -50,7 +50,7 @@
 //        String pathToChromeDriver = "file:///somepath";
 //        int timeout = 10;
 //
-//        ReplaySettings<DriverService> driverServiceReplaySettings = new ReplaySettingsBase<DriverService>(
+//        ReplayManager<DriverService> driverServiceReplaySettings = new ReplayManagerBase<DriverService>(
 //                requestFilter,
 //                responseFilter,
 //                invisibleWebDriverSupplier,

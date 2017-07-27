@@ -2,7 +2,7 @@ package com.hribol.bromium.browsers.chrome.replay;
 
 import com.hribol.bromium.common.replay.WebDriverActionExecutionBase;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
-import com.hribol.bromium.replay.settings.ReplaySettings;
+import com.hribol.bromium.replay.settings.ReplayManager;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -20,11 +20,11 @@ public class ChromeDriverActionExecution extends WebDriverActionExecutionBase {
     }
 
     @Override
-    public ReplaySettings createReplaySettings(String screenToUse) {
+    public ReplayManager createReplayManager(String screenToUse) {
         RequestFilter requestFilter = proxyFacade.getRequestFilter();
         ResponseFilter responseFilter = proxyFacade.getResponseFilter();
         int timeout = executor.getTimeout();
-        return new ChromeDriverReplaySettings(requestFilter, responseFilter, timeout, screenToUse);
+        return new ChromeDriverReplayManager(requestFilter, responseFilter, timeout, screenToUse);
     }
 
     @Override
