@@ -46,7 +46,7 @@ public class ReplayCommand implements Command {
 
             ExecutionReport executionReport = screenNumber == 0 ?
                     replayBrowser.replay(testCaseSteps) :
-                    replayBrowser.createVirtualScreenProcessAndExecute(testCaseSteps, screenNumber, virtualScreenProcessCreator);
+                    replayBrowser.createVirtualScreenProcessAndExecute(testCaseSteps, virtualScreenProcessCreator);
 
             System.out.println(executionReport.getAutomationResult());
         } catch (IOException | URISyntaxException e) {

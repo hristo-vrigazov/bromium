@@ -28,6 +28,7 @@ public class ExecutorBuilder {
     private EventSynchronizer eventSynchronizer;
     private ProxyFacade proxyFacade;
     private String screenToUse;
+    private int screenNumber;
 
     public ExecutorBuilder pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
@@ -169,5 +170,14 @@ public class ExecutorBuilder {
 
     public String getScreenToUse() {
         return screenToUse;
+    }
+
+    public ExecutorBuilder screenNumber(int screen) {
+        this.screenNumber = screen;
+        return this;
+    }
+
+    public int getScreenNumber() {
+        return screenNumber;
     }
 }

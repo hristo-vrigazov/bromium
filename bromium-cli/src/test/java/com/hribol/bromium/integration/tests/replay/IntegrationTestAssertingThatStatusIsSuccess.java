@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 public class IntegrationTestAssertingThatStatusIsSuccess extends BaseReplayIntegrationTest {
     public IntegrationTestAssertingThatStatusIsSuccess(String resourceConfigurationPath,
                                                        String resouceCasePath) {
-        super(resourceConfigurationPath, resouceCasePath, System.getProperty("screen", "1"));
+        super(resourceConfigurationPath, resouceCasePath, System.getProperty("screenNumber", "1"));
     }
 
     @Override

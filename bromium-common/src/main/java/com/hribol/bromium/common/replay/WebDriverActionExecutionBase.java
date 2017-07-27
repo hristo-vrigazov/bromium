@@ -95,12 +95,10 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     @Override
     public ExecutionReport createVirtualScreenProcessAndExecute(TestScenario testScenario,
-                                                                int screenNumber,
                                                                 VirtualScreenProcessCreator virtualScreenProcessCreator) {
         Process process;
-        String screen = virtualScreenProcessCreator.getScreen(screenNumber);
         try {
-            process = virtualScreenProcessCreator.createXvfbProcess(screenNumber);
+            process = virtualScreenProcessCreator.createXvfbProcess(executor.getScreenNumber());
         } catch (IOException e) {
             return ExecutionReport.noVirtualScreen();
         }

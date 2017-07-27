@@ -51,12 +51,12 @@ public class ReplayBrowserTest {
         TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);
         when(testScenarioFactory.createFromInputStream(inputStream)).thenReturn(testScenario);
         WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
-        when(webDriverActionExecution.createVirtualScreenProcessAndExecute(testScenario, screen, virtualScreenProcessCreator))
+        when(webDriverActionExecution.createVirtualScreenProcessAndExecute(testScenario, virtualScreenProcessCreator))
                 .thenReturn(expectedReport);
 
         ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, webDriverActionExecution);
 
-        ExecutionReport actualReport = replayBrowser.createVirtualScreenProcessAndExecute(inputStream, screen, virtualScreenProcessCreator);
+        ExecutionReport actualReport = replayBrowser.createVirtualScreenProcessAndExecute(inputStream, virtualScreenProcessCreator);
 
         assertEquals(expectedReport, actualReport);
     }
@@ -106,12 +106,12 @@ public class ReplayBrowserTest {
         WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
         VirtualScreenProcessCreator virtualScreenProcessCreator = mock(VirtualScreenProcessCreator.class);
 
-        when(webDriverActionExecution.createVirtualScreenProcessAndExecute(testScenario, screenToUse, virtualScreenProcessCreator))
+        when(webDriverActionExecution.createVirtualScreenProcessAndExecute(testScenario, virtualScreenProcessCreator))
                 .thenReturn(expectedReport);
 
         ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, webDriverActionExecution);
 
-        ExecutionReport actualReport = replayBrowser.createVirtualScreenProcessAndExecute(testCaseSteps, screenToUse, virtualScreenProcessCreator);
+        ExecutionReport actualReport = replayBrowser.createVirtualScreenProcessAndExecute(testCaseSteps, virtualScreenProcessCreator);
         assertEquals(expectedReport, actualReport);
     }
 }

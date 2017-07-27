@@ -34,7 +34,7 @@ import static org.openqa.selenium.remote.BrowserType.CHROME;
  */
 public class RecordThroughTheRecordRequestFilterIT extends BaseDemoAppIntegrationTest {
     public RecordThroughTheRecordRequestFilterIT() {
-        super("integration-tests/demo.json", "output.json", System.getProperty("screen", "1"));
+        super("integration-tests/demo.json", "output.json", System.getProperty("screenNumber", "1"));
     }
 
     @Override

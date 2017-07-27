@@ -35,13 +35,13 @@ public class ReplayCommandTest {
         VirtualScreenProcessCreator virtualScreenProcessCreator = mock(VirtualScreenProcessCreator.class);
         Integer screenNumber = 1;
 
-        when(replayBrowser.createVirtualScreenProcessAndExecute(steps, screenNumber, virtualScreenProcessCreator)).thenReturn(executionReport);
+        when(replayBrowser.createVirtualScreenProcessAndExecute(steps, virtualScreenProcessCreator)).thenReturn(executionReport);
 
         ReplayCommand replayCommand = new ReplayCommand(promptUtils, replayBrowserProvider, stepsProvider,
                 virtualScreenProcessCreator, screenNumber);
 
         replayCommand.run();
-        verify(replayBrowser).createVirtualScreenProcessAndExecute(steps, screenNumber, virtualScreenProcessCreator);
+        verify(replayBrowser).createVirtualScreenProcessAndExecute(steps, virtualScreenProcessCreator);
         verify(promptUtils).dispose();
     }
 
