@@ -9,7 +9,7 @@ import com.google.inject.name.Names;
 import com.google.inject.throwingproviders.CheckedProvides;
 import com.google.inject.throwingproviders.ThrowingProviderBinder;
 import com.hribol.bromium.browsers.chrome.base.VisibleChromeDriverSupplier;
-import com.hribol.bromium.cli.factory.ExecutionFactory;
+import com.hribol.bromium.browsers.chrome.replay.ChromeDriverActionExecution;
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.common.EmptyFunction;
 import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
@@ -351,14 +351,16 @@ public class DefaultModule extends AbstractModule {
                                               ParsedOptions parsedOptions,
                                               @Named(REPLAYING_JAVASCRIPT_CODE) IOProvider<String>
                                                           replayingJavascriptCodeProvider,
-                                              IOURIProvider<ProxyFacade> proxyFacadeIOURIProvider) throws IOException, URISyntaxException {
+                                              IOURIProvider<ProxyFacade> proxyFacadeIOURIProvider,
+                                              @Named(SCREEN) String screen) throws IOException, URISyntaxException {
         return executorBuilder
                 .pathToDriverExecutable(parsedOptions.getPathToDriver())
                 .baseURL(parsedOptions.getBaseUrl())
                 .timeoutInSeconds(parsedOptions.getTimeout())
                 .measurementsPrecisionInMilliseconds(parsedOptions.getMeasurementsPrecisionMilli())
                 .javascriptInjectionCode(replayingJavascriptCodeProvider.get())
-                .proxyFacade(proxyFacadeIOURIProvider.get());
+                .proxyFacade(proxyFacadeIOURIProvider.get())
+                .screenToUse(screen);
     }
 
     @CheckedProvides(IOProvider.class)
@@ -370,10 +372,14 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOURIProvider.class)
-    public WebDriverActionExecution getWebDriverActionExecution(ExecutionFactory executionFactory,
-                                                                IOURIProvider<ExecutorBuilder> executorBuilderIOProvider,
-                                                                ParsedOptions parsedOptions) throws IOException, URISyntaxException {
-        return executionFactory.create(parsedOptions.getBrowserType(), executorBuilderIOProvider.get());
+    public WebDriverActionExecution getWebDriverActionExecution(IOURIProvider<ExecutorBuilder> executorBuilderIOProvider,
+                                                                @Named(BROWSER_TYPE) String browserType) throws IOException, URISyntaxException {
+        switch (browserType) {
+            case CHROME:
+                return new ChromeDriverActionExecution(executorBuilderIOProvider.get());
+            default:
+                throw new BrowserTypeNotSupportedException();
+        }
     }
 
     @CheckedProvides(IOURIProvider.class)

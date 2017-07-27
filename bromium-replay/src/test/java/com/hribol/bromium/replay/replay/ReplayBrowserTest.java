@@ -42,22 +42,6 @@ public class ReplayBrowserTest {
     }
 
     @Test
-    public void replayFromFileOnScreenInvokesExecutionExecuteMethod() throws InterruptedException, IOException, URISyntaxException {
-        TestScenario testScenario = mock(TestScenario.class);
-        WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
-        TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);
-        String pathToSerializedTest = "testcase.json";
-        String screen = ":1";
-
-        when(testScenarioFactory.createFromFile(pathToSerializedTest)).thenReturn(testScenario);
-
-        ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, webDriverActionExecution);
-        replayBrowser.replay(pathToSerializedTest, screen);
-
-        Mockito.verify(webDriverActionExecution).execute(testScenario, screen);
-    }
-
-    @Test
     public void delegatesCreateVirtualScreenProcessAndExecute() throws IOException {
         ExecutionReport expectedReport = mock(ExecutionReport.class);
         InputStream inputStream = mock(InputStream.class);
@@ -108,24 +92,6 @@ public class ReplayBrowserTest {
         ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, webDriverActionExecution);
 
         ExecutionReport actualReport = replayBrowser.replay(testCaseSteps);
-        assertEquals(expectedReport, actualReport);
-    }
-
-    @Test
-    public void delegatesExecuteFromInputStreamOnScreen() throws IOException, URISyntaxException, InterruptedException {
-        ExecutionReport expectedReport = mock(ExecutionReport.class);
-        String screenToUse = ":2";
-        InputStream inputStream = mock(InputStream.class);
-        TestScenario testScenario = mock(TestScenario.class);
-        TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);
-        when(testScenarioFactory.createFromInputStream(inputStream)).thenReturn(testScenario);
-        WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
-        when(webDriverActionExecution.execute(testScenario, screenToUse))
-                .thenReturn(expectedReport);
-
-        ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, webDriverActionExecution);
-
-        ExecutionReport actualReport = replayBrowser.replay(inputStream, screenToUse);
         assertEquals(expectedReport, actualReport);
     }
 

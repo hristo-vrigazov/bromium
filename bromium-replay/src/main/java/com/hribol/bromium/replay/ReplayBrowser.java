@@ -42,19 +42,6 @@ public class ReplayBrowser {
         return webDriverActionExecution.execute(testScenario);
     }
 
-    public ExecutionReport replay(String pathToSerializedTest,
-                                  String screen)
-            throws IOException, URISyntaxException, InterruptedException {
-        TestScenario testScenario = testScenarioFactory.createFromFile(pathToSerializedTest);
-        return webDriverActionExecution.execute(testScenario, screen);
-    }
-
-    public ExecutionReport replay(InputStream inputStream,
-                                  String screen) throws IOException, URISyntaxException, InterruptedException {
-        TestScenario testScenario = testScenarioFactory.createFromInputStream(inputStream);
-        return webDriverActionExecution.execute(testScenario, screen);
-    }
-
     public ExecutionReport createVirtualScreenProcessAndExecute(InputStream inputStream,
                                                                 int screenNumber,
                                                                 VirtualScreenProcessCreator virtualScreenProcessCreator) throws IOException {

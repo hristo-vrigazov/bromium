@@ -34,12 +34,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     @Override
     public ExecutionReport execute(TestScenario testScenario) {
-        return execute(testScenario, ":0");
-    }
-
-    @Override
-    public ExecutionReport execute(TestScenario testScenario, String screenToUse) {
-        ReplaySettings replaySettings = createReplaySettings(screenToUse);
+        ReplaySettings replaySettings = createReplaySettings(executor.getScreenToUse());
         ExecutorService executorService;
         try {
             System.setProperty(getSystemProperty(), executor.getPathToDriverExecutable());
@@ -111,7 +106,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
         }
 
         try {
-            return this.execute(testScenario, screen);
+            return this.execute(testScenario);
         } finally {
             process.destroy();
         }

@@ -27,6 +27,7 @@ public class ExecutorBuilder {
     private String javascriptInjectionCode;
     private EventSynchronizer eventSynchronizer;
     private ProxyFacade proxyFacade;
+    private String screenToUse;
 
     public ExecutorBuilder pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
@@ -159,5 +160,14 @@ public class ExecutorBuilder {
 
     public WebDriverActionExecutionException webDriverActionExecutionException(String message, Throwable e) {
         return new WebDriverActionExecutionException(message, e, getAutomationResultBuilder());
+    }
+
+    public ExecutorBuilder screenToUse(String screen) {
+        this.screenToUse = screen;
+        return this;
+    }
+
+    public String getScreenToUse() {
+        return screenToUse;
     }
 }

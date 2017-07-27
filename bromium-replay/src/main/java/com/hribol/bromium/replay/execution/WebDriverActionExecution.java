@@ -9,7 +9,6 @@ import com.hribol.bromium.replay.report.ExecutionReport;
  */
 public interface WebDriverActionExecution {
     ExecutionReport execute(TestScenario testScenario);
-    ExecutionReport execute(TestScenario testScenario, String screenToUse);
     ExecutionReport createVirtualScreenProcessAndExecute(TestScenario testScenario,
                                                          int screenNumber,
                                                          VirtualScreenProcessCreator virtualScreenProcessCreator);
