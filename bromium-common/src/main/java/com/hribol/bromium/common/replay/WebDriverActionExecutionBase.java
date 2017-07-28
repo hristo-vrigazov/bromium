@@ -36,7 +36,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     public ExecutionReport execute(TestScenario testScenario) {
         ReplayManager replayManager = createReplayManager(executor.getScreenToUse());
         try {
-            System.setProperty(getSystemProperty(), executor.getPathToDriverExecutable());
+            System.setProperty(executor.getPathToDriverSystemProperty(), executor.getPathToDriverExecutable());
             proxyFacade.getRequestFilter().setHttpLock(false);
             automationResult = AutomationResult.NOT_STARTED;
             replayManager.prepareReplay(executor.getPathToDriverExecutable());
@@ -113,8 +113,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     public String getBaseURL() {
         return executor.getBaseURL();
     }
-
-    public abstract String getSystemProperty();
 
     public abstract ReplayManager createReplayManager(String screenToUse);
 

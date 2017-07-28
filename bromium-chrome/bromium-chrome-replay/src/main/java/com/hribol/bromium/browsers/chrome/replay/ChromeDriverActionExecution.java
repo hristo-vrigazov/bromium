@@ -5,7 +5,6 @@ import com.hribol.bromium.common.replay.ExecutorBuilder;
 import com.hribol.bromium.replay.settings.ReplayManager;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
-import org.openqa.selenium.chrome.ChromeDriverService;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -26,9 +25,5 @@ public class ChromeDriverActionExecution extends WebDriverActionExecutionBase {
         int timeout = executor.getTimeout();
         return new ChromeDriverReplayManager(requestFilter, responseFilter, timeout, screenToUse);
     }
-
-    @Override
-    public String getSystemProperty() {
-        return ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY;
-    }
+    
 }

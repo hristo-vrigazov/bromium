@@ -28,7 +28,7 @@
 //
 //        ChromeDriverActionExecution chromeDriverActionExecution = new ChromeDriverActionExecution(executorBuilder);
 //        assertNotNull(chromeDriverActionExecution);
-//        assertEquals(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, chromeDriverActionExecution.getSystemProperty());
+//        assertEquals(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, chromeDriverActionExecution.getPathToDriverSystemProperty());
 //        assertNotNull(chromeDriverActionExecution.createReplayManager(screenToUse));
 //    }
 //}

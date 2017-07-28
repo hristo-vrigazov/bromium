@@ -318,7 +318,7 @@
 //            }
 //
 //            @Override
-//            public String getSystemProperty() {
+//            public String getPathToDriverSystemProperty() {
 //                return null;
 //            }
 //        };
@@ -341,7 +341,7 @@
 //            }
 //
 //            @Override
-//            public String getSystemProperty() {
+//            public String getPathToDriverSystemProperty() {
 //                return null;
 //            }
 //        };
@@ -387,7 +387,7 @@
 //            }
 //
 //            @Override
-//            public String getSystemProperty() {
+//            public String getPathToDriverSystemProperty() {
 //                return "system_property";
 //            }
 //        };
@@ -434,7 +434,7 @@
 //            }
 //
 //            @Override
-//            public String getSystemProperty() {
+//            public String getPathToDriverSystemProperty() {
 //                return systemProperty;
 //            }
 //        };

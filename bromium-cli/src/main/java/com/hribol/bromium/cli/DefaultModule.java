@@ -360,7 +360,8 @@ public class DefaultModule extends AbstractModule {
                                                           replayingJavascriptCodeProvider,
                                               IOURIProvider<ProxyFacade> proxyFacadeIOURIProvider,
                                               @Named(SCREEN) String screen,
-                                              @Named(SCREEN_NUMBER) int screenNumber) throws IOException, URISyntaxException {
+                                              @Named(SCREEN_NUMBER) int screenNumber,
+                                              @Named(PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY) String pathToDriverSystemProperty) throws IOException, URISyntaxException {
         return executorBuilder
                 .pathToDriverExecutable(parsedOptions.getPathToDriver())
                 .baseURL(parsedOptions.getBaseUrl())
@@ -369,7 +370,8 @@ public class DefaultModule extends AbstractModule {
                 .javascriptInjectionCode(replayingJavascriptCodeProvider.get())
                 .proxyFacade(proxyFacadeIOURIProvider.get())
                 .screenNumber(screenNumber)
-                .screenToUse(screen);
+                .screenToUse(screen)
+                .pathToDriverSystemProperty(pathToDriverSystemProperty);
     }
 
     @CheckedProvides(IOProvider.class)
