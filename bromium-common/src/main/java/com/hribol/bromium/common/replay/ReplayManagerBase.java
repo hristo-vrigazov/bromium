@@ -18,7 +18,6 @@ import java.io.IOException;
  */
 public abstract class ReplayManagerBase<T extends DriverService> implements ReplayManager<T> {
     private BrowserMobProxy proxy;
-    private Proxy seleniumProxy;
     private RequestFilter requestFilter;
     private ResponseFilter responseFilter;
     private InvisibleWebDriverSupplier<T> invisibleWebDriverSupplier;
@@ -27,7 +26,6 @@ public abstract class ReplayManagerBase<T extends DriverService> implements Repl
 
     private WebDriver driver;
     private T driverService;
-    private DesiredCapabilities capabilities;
 
     public ReplayManagerBase(RequestFilter requestFilter,
                              ResponseFilter responseFilter,
@@ -63,8 +61,8 @@ public abstract class ReplayManagerBase<T extends DriverService> implements Repl
             throws IOException {
         this.proxy = new BrowserMobProxySupplier(timeout, requestFilter, responseFilter).get();
         this.proxy.start(0);
-        this.seleniumProxy = new SeleniumProxySupplier(proxy).get();
-        this.capabilities = new DesiredCapabilitiesSupplier(seleniumProxy).get();
+        Proxy seleniumProxy = new SeleniumProxySupplier(proxy).get();
+        DesiredCapabilities capabilities = new DesiredCapabilitiesSupplier(seleniumProxy).get();
         this.driverService = getDriverService(pathToDriver, screenToUse);
         this.driver = invisibleWebDriverSupplier.get(driverService, capabilities);
         this.driver.manage().window().maximize();
