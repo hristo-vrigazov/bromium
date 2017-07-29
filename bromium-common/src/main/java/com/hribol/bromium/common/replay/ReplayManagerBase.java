@@ -1,6 +1,7 @@
 package com.hribol.bromium.common.replay;
 
 import com.hribol.bromium.core.suppliers.*;
+import com.hribol.bromium.replay.settings.DriverServiceSupplier;
 import com.hribol.bromium.replay.settings.ReplayManager;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.core.har.Har;
@@ -16,11 +17,12 @@ import java.io.IOException;
 /**
  * Created by hvrigazov on 21.03.17.
  */
-public abstract class ReplayManagerBase<T extends DriverService> implements ReplayManager<T> {
+public class ReplayManagerBase<T extends DriverService> implements ReplayManager {
     private BrowserMobProxy proxy;
     private RequestFilter requestFilter;
     private ResponseFilter responseFilter;
     private InvisibleWebDriverSupplier<T> invisibleWebDriverSupplier;
+    private DriverServiceSupplier<T> driverServiceSupplier;
     private int timeout;
     private String screenToUse;
 
@@ -30,11 +32,13 @@ public abstract class ReplayManagerBase<T extends DriverService> implements Repl
     public ReplayManagerBase(RequestFilter requestFilter,
                              ResponseFilter responseFilter,
                              InvisibleWebDriverSupplier<T> invisibleWebDriverSupplier,
+                             DriverServiceSupplier<T> driverServiceSupplier,
                              int timeout,
                              String screenToUse) {
         this.requestFilter = requestFilter;
         this.responseFilter = responseFilter;
         this.invisibleWebDriverSupplier = invisibleWebDriverSupplier;
+        this.driverServiceSupplier = driverServiceSupplier;
         this.timeout = timeout;
         this.screenToUse = screenToUse;
     }
@@ -63,7 +67,7 @@ public abstract class ReplayManagerBase<T extends DriverService> implements Repl
         this.proxy.start(0);
         Proxy seleniumProxy = new SeleniumProxySupplier(proxy).get();
         DesiredCapabilities capabilities = new DesiredCapabilitiesSupplier(seleniumProxy).get();
-        T driverService = getDriverService(pathToDriver, screenToUse);
+        T driverService = driverServiceSupplier.getDriverService(pathToDriver, screenToUse);
         this.driver = invisibleWebDriverSupplier.get(driverService, capabilities);
         this.driverService = driverService;
         this.driver.manage().window().maximize();

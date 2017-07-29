@@ -10,7 +10,7 @@ import com.google.inject.throwingproviders.CheckedProvides;
 import com.google.inject.throwingproviders.ThrowingProviderBinder;
 import com.hribol.bromium.browsers.chrome.base.InvisibleChromeDriverSupplier;
 import com.hribol.bromium.browsers.chrome.base.VisibleChromeDriverSupplier;
-import com.hribol.bromium.browsers.chrome.replay.ChromeDriverReplayManager;
+import com.hribol.bromium.browsers.chrome.replay.ChromeDriverServiceSupplier;
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.common.EmptyFunction;
 import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
@@ -29,7 +29,6 @@ import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.common.record.RecordManager;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
 import com.hribol.bromium.common.replay.ReplayManagerBase;
-import com.hribol.bromium.common.replay.ReplayProxyDriverIntegrator;
 import com.hribol.bromium.common.replay.WebDriverActionExecutionBase;
 import com.hribol.bromium.common.replay.factory.DefaultApplicationActionFactory;
 import com.hribol.bromium.common.replay.factory.PredefinedWebDriverActionFactory;
@@ -386,7 +385,11 @@ public class DefaultModule extends AbstractModule {
     public ReplayManager createReplayManager(ProxyFacade proxyFacade, int timeout, String screenToUse) {
         RequestFilter requestFilter = proxyFacade.getRequestFilter();
         ResponseFilter responseFilter = proxyFacade.getResponseFilter();
-        return new ChromeDriverReplayManager(requestFilter, responseFilter, timeout, screenToUse);
+        return new ReplayManagerBase<>(requestFilter, responseFilter,
+                new InvisibleChromeDriverSupplier(),
+                new ChromeDriverServiceSupplier(),
+                timeout,
+                screenToUse);
     }
 
     @CheckedProvides(IOProvider.class)
