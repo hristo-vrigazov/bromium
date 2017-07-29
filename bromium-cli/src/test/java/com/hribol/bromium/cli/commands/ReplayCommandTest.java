@@ -32,16 +32,19 @@ public class ReplayCommandTest {
         when(stepsProvider.get()).thenReturn(steps);
         when(executionReport.getAutomationResult()).thenReturn(AutomationResult.SUCCESS);
 
+        Process process = mock(Process.class);
+
         VirtualScreenProcessCreator virtualScreenProcessCreator = mock(VirtualScreenProcessCreator.class);
         Integer screenNumber = 1;
+        when(virtualScreenProcessCreator.createXvfbProcess(screenNumber)).thenReturn(process);
 
-        when(replayBrowser.createVirtualScreenProcessAndExecute(steps, virtualScreenProcessCreator)).thenReturn(executionReport);
+        when(replayBrowser.replay(steps)).thenReturn(executionReport);
 
         ReplayCommand replayCommand = new ReplayCommand(promptUtils, replayBrowserProvider, stepsProvider,
                 virtualScreenProcessCreator, screenNumber);
 
         replayCommand.run();
-        verify(replayBrowser).createVirtualScreenProcessAndExecute(steps, virtualScreenProcessCreator);
+        verify(replayBrowser).replay(steps);
         verify(promptUtils).dispose();
     }
 
@@ -75,6 +78,9 @@ public class ReplayCommandTest {
 
         VirtualScreenProcessCreator virtualScreenProcessCreator = mock(VirtualScreenProcessCreator.class);
         Integer screenNumber = 1;
+        Process process = mock(Process.class);
+        when(virtualScreenProcessCreator.createXvfbProcess(screenNumber)).thenReturn(process);
+
 
         ReplayCommand replayCommand = new ReplayCommand(promptUtils, replayBrowserProvider, stepsProvider,
                 virtualScreenProcessCreator, screenNumber);

@@ -379,17 +379,23 @@ public class DefaultModule extends AbstractModule {
                 .screenNumber(screenNumber)
                 .screenToUse(screen)
                 .pathToDriverSystemProperty(pathToDriverSystemProperty)
-                .replayManager(createReplayManager(proxyFacade, timeout, screen));
+                .replayManager(createReplayManager(proxyFacade, timeout, pathToDriver, screen));
     }
 
-    public ReplayManager createReplayManager(ProxyFacade proxyFacade, int timeout, String screenToUse) {
+    public ReplayManager createReplayManager(ProxyFacade proxyFacade,
+                                             int timeout,
+                                             String pathToDriver,
+                                             String screenToUse) throws IOException {
         RequestFilter requestFilter = proxyFacade.getRequestFilter();
         ResponseFilter responseFilter = proxyFacade.getResponseFilter();
-        return new ReplayManagerBase<>(requestFilter, responseFilter,
+        ReplayManager replayManager =  new ReplayManagerBase<>(requestFilter, responseFilter,
                 new InvisibleChromeDriverSupplier(),
                 new ChromeDriverServiceSupplier(),
                 timeout,
                 screenToUse);
+
+        replayManager.prepareReplay(pathToDriver);
+        return replayManager;
     }
 
     @CheckedProvides(IOProvider.class)

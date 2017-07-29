@@ -35,13 +35,7 @@ public class WebDriverActionExecutionBase implements WebDriverActionExecution {
     @Override
     public ExecutionReport execute(TestScenario testScenario) {
         ReplayManager replayManager = executor.getReplayManager();
-        try {
-            proxyFacade.getRequestFilter().setHttpLock(false);
-            automationResult = AutomationResult.NOT_STARTED;
-            replayManager.prepareReplay(executor.getPathToDriverExecutable());
-        } catch (IOException e) {
-            return ExecutionReport.couldNotCreateDriver();
-        }
+        automationResult = AutomationResult.NOT_STARTED;
         ExecutorService executorService = Executors.newSingleThreadExecutor();
 
         List<Long> waitingTimes = new ArrayList<>();
@@ -92,29 +86,12 @@ public class WebDriverActionExecutionBase implements WebDriverActionExecution {
     }
 
     @Override
-    public ExecutionReport createVirtualScreenProcessAndExecute(TestScenario testScenario,
-                                                                VirtualScreenProcessCreator virtualScreenProcessCreator) {
-        Process process;
-        try {
-            process = virtualScreenProcessCreator.createXvfbProcess(executor.getScreenNumber());
-        } catch (IOException e) {
-            return ExecutionReport.noVirtualScreen();
-        }
-
-        try {
-            return this.execute(testScenario);
-        } finally {
-            process.destroy();
-        }
-    }
-
-    @Override
     public String getBaseURL() {
         return executor.getBaseURL();
     }
 
-    protected ReplayFiltersFacade proxyFacade;
-    protected ExecutorBuilder executor;
+    private ReplayFiltersFacade proxyFacade;
+    private ExecutorBuilder executor;
 
     private AutomationResult automationResult;
 

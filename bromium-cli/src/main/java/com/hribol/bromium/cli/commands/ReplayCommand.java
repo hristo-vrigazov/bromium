@@ -11,6 +11,7 @@ import com.hribol.bromium.replay.report.ExecutionReport;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Optional;
 
 import static com.hribol.bromium.core.DependencyInjectionConstants.SCREEN_NUMBER;
 
@@ -40,19 +41,22 @@ public class ReplayCommand implements Command {
 
     @Override
     public void run() {
+        Optional<Process> virtualScreenProcessOptional = Optional.empty();
         try {
+            if (screenNumber != 0) {
+                virtualScreenProcessOptional = Optional.of(virtualScreenProcessCreator.createXvfbProcess(screenNumber));
+            }
+
             TestScenarioSteps testCaseSteps = stepsProvider.get();
             ReplayBrowser replayBrowser = replayBrowserProvider.get();
 
-            ExecutionReport executionReport = screenNumber == 0 ?
-                    replayBrowser.replay(testCaseSteps) :
-                    replayBrowser.createVirtualScreenProcessAndExecute(testCaseSteps, virtualScreenProcessCreator);
-
+            ExecutionReport executionReport = replayBrowser.replay(testCaseSteps);
             System.out.println(executionReport.getAutomationResult());
         } catch (IOException | URISyntaxException e) {
             promptUtils.getTextIO().getTextTerminal().println(e.getMessage());
         } finally {
             promptUtils.dispose();
+            virtualScreenProcessOptional.ifPresent(Process::destroy);
         }
     }
 }

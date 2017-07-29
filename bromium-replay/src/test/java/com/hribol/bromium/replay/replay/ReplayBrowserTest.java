@@ -41,25 +41,6 @@ public class ReplayBrowserTest {
         Mockito.verify(webDriverActionExecution).execute(testScenario);
     }
 
-    @Test
-    public void delegatesCreateVirtualScreenProcessAndExecute() throws IOException {
-        ExecutionReport expectedReport = mock(ExecutionReport.class);
-        InputStream inputStream = mock(InputStream.class);
-        int screen = 2;
-        VirtualScreenProcessCreator virtualScreenProcessCreator = mock(VirtualScreenProcessCreator.class);
-        TestScenario testScenario = mock(TestScenario.class);
-        TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);
-        when(testScenarioFactory.createFromInputStream(inputStream)).thenReturn(testScenario);
-        WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
-        when(webDriverActionExecution.createVirtualScreenProcessAndExecute(testScenario, virtualScreenProcessCreator))
-                .thenReturn(expectedReport);
-
-        ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, webDriverActionExecution);
-
-        ExecutionReport actualReport = replayBrowser.createVirtualScreenProcessAndExecute(inputStream, virtualScreenProcessCreator);
-
-        assertEquals(expectedReport, actualReport);
-    }
 
     @Test
     public void delegatesExecuteFromInputStream() throws IOException, URISyntaxException, InterruptedException {
@@ -95,23 +76,4 @@ public class ReplayBrowserTest {
         assertEquals(expectedReport, actualReport);
     }
 
-    @Test
-    public void delegatesExecuteFromTestCaseStepsOnScreen() throws IOException, URISyntaxException, InterruptedException {
-        ExecutionReport expectedReport = mock(ExecutionReport.class);
-        Integer screenToUse = 2;
-        TestScenarioSteps testCaseSteps = new TestScenarioSteps();
-        TestScenario testScenario = mock(TestScenario.class);
-        TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);
-        when(testScenarioFactory.createFromTestCaseSteps(testCaseSteps)).thenReturn(testScenario);
-        WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
-        VirtualScreenProcessCreator virtualScreenProcessCreator = mock(VirtualScreenProcessCreator.class);
-
-        when(webDriverActionExecution.createVirtualScreenProcessAndExecute(testScenario, virtualScreenProcessCreator))
-                .thenReturn(expectedReport);
-
-        ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, webDriverActionExecution);
-
-        ExecutionReport actualReport = replayBrowser.createVirtualScreenProcessAndExecute(testCaseSteps, virtualScreenProcessCreator);
-        assertEquals(expectedReport, actualReport);
-    }
 }

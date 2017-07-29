@@ -97,7 +97,6 @@ public class ExecutorBuilderTest {
         assertEquals(500, executorBuilder.getMeasurementsPrecisionMilli());
         assertEquals(50, executorBuilder.getMaxRetries());
         assertNotNull(executorBuilder.getAutomationResultBuilder());
-        assertNotNull(executorBuilder.getProxyFacadeSupplier());
         assertNotNull(executorBuilder.getEventSynchronizer());
         assertNotNull(executorBuilder.webDriverActionExecutionException("Something happened", mock(Throwable.class)));
     }

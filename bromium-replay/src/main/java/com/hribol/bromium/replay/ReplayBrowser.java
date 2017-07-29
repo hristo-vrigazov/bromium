@@ -42,15 +42,4 @@ public class ReplayBrowser {
         return webDriverActionExecution.execute(testScenario);
     }
 
-    public ExecutionReport createVirtualScreenProcessAndExecute(InputStream inputStream,
-                                                                VirtualScreenProcessCreator virtualScreenProcessCreator) throws IOException {
-        TestScenario testScenario = testScenarioFactory.createFromInputStream(inputStream);
-        return webDriverActionExecution.createVirtualScreenProcessAndExecute(testScenario, virtualScreenProcessCreator);
-    }
-
-    public ExecutionReport createVirtualScreenProcessAndExecute(TestScenarioSteps steps,
-                                                                VirtualScreenProcessCreator virtualScreenProcessCreator) throws IOException {
-        TestScenario testScenario = testScenarioFactory.createFromTestCaseSteps(steps);
-        return webDriverActionExecution.createVirtualScreenProcessAndExecute(testScenario, virtualScreenProcessCreator);
-    }
 }

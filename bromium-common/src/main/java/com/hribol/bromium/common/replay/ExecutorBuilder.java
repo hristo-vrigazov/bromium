@@ -1,12 +1,11 @@
 package com.hribol.bromium.common.replay;
 
+import com.hribol.bromium.common.synchronization.NoHttpRequestsInQueue;
+import com.hribol.bromium.common.synchronization.SignalizationBasedEventSynchronizer;
 import com.hribol.bromium.replay.execution.AutomationResultBuilder;
 import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
 import com.hribol.bromium.replay.filters.ProxyFacade;
-import com.hribol.bromium.replay.filters.ProxyFacadeSupplier;
-import com.hribol.bromium.common.synchronization.NoHttpRequestsInQueue;
-import com.hribol.bromium.common.synchronization.SignalizationBasedEventSynchronizer;
 import com.hribol.bromium.replay.settings.ReplayManager;
 
 import java.io.IOException;
@@ -24,7 +23,6 @@ public class ExecutorBuilder {
     private Integer measurementsPrecisionMilli;
     private String baseURL;
     private AutomationResultBuilder automationResultBuilder;
-    private ProxyFacadeSupplier proxyFacadeSupplier;
     private String javascriptInjectionCode;
     private EventSynchronizer eventSynchronizer;
     private ProxyFacade proxyFacade;
@@ -70,11 +68,6 @@ public class ExecutorBuilder {
 
     public ExecutorBuilder proxyFacade(ProxyFacade proxyFacade) {
         this.proxyFacade = proxyFacade;
-        return this;
-    }
-
-    public ExecutorBuilder proxyFacadeSupplier(ProxyFacadeSupplier proxyFacadeSupplier) {
-        this.proxyFacadeSupplier = proxyFacadeSupplier;
         return this;
     }
 
@@ -132,14 +125,6 @@ public class ExecutorBuilder {
         }
 
         return automationResultBuilder;
-    }
-
-    public ProxyFacadeSupplier getProxyFacadeSupplier() {
-        if (!Optional.ofNullable(proxyFacadeSupplier).isPresent()) {
-            this.proxyFacadeSupplier = new ProxyFacadeSupplier();
-        }
-
-        return proxyFacadeSupplier;
     }
 
     public String getJavascriptInjectionCode() {
