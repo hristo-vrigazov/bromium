@@ -24,7 +24,6 @@ public class ChromeDriverReplayManager extends ReplayManagerBase<ChromeDriverSer
         super(requestFilter,
                 responseFilter,
                 new InvisibleChromeDriverSupplier(),
-                new VisibleChromeDriverSupplier(),
                 timeout,
                 screenToUse);
     }

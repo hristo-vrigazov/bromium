@@ -22,7 +22,6 @@ public abstract class ReplayManagerBase<T extends DriverService> implements Repl
     private RequestFilter requestFilter;
     private ResponseFilter responseFilter;
     private InvisibleWebDriverSupplier<T> invisibleWebDriverSupplier;
-    private VisibleWebDriverSupplier visibleWebDriverSupplier;
     private int timeout;
     private String screenToUse;
 
@@ -33,13 +32,11 @@ public abstract class ReplayManagerBase<T extends DriverService> implements Repl
     public ReplayManagerBase(RequestFilter requestFilter,
                              ResponseFilter responseFilter,
                              InvisibleWebDriverSupplier<T> invisibleWebDriverSupplier,
-                             VisibleWebDriverSupplier visibleWebDriverSupplier,
                              int timeout,
                              String screenToUse) {
         this.requestFilter = requestFilter;
         this.responseFilter = responseFilter;
         this.invisibleWebDriverSupplier = invisibleWebDriverSupplier;
-        this.visibleWebDriverSupplier = visibleWebDriverSupplier;
         this.timeout = timeout;
         this.screenToUse = screenToUse;
     }
@@ -64,15 +61,12 @@ public abstract class ReplayManagerBase<T extends DriverService> implements Repl
     @Override
     public void prepareReplay(String pathToDriver)
             throws IOException {
-        boolean useVirtualScreen = !screenToUse.equals(":0");
         this.proxy = new BrowserMobProxySupplier(timeout, requestFilter, responseFilter).get();
         this.proxy.start(0);
         this.seleniumProxy = new SeleniumProxySupplier(proxy).get();
         this.capabilities = new DesiredCapabilitiesSupplier(seleniumProxy).get();
         this.driverService = getDriverService(pathToDriver, screenToUse);
-        this.driver = useVirtualScreen ?
-                invisibleWebDriverSupplier.get(driverService, capabilities) :
-                visibleWebDriverSupplier.get(capabilities);
+        this.driver = invisibleWebDriverSupplier.get(driverService, capabilities);
         this.driver.manage().window().maximize();
     }
 
