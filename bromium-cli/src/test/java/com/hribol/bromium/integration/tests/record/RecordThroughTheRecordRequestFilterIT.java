@@ -1,12 +1,17 @@
 package com.hribol.bromium.integration.tests.record;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.inject.*;
 import com.google.inject.util.Modules;
 import com.hribol.bromium.browsers.chrome.base.VisibleChromeDriverSupplier;
 import com.hribol.bromium.cli.DefaultModule;
 import com.hribol.bromium.cli.commands.PromptUtils;
 import com.hribol.bromium.cli.commands.RecordCommand;
+import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
+import com.hribol.bromium.core.utils.ConfigurationUtils;
 import com.hribol.bromium.integration.tests.BaseDemoAppIntegrationTest;
 import com.hribol.bromium.record.RecordRequestFilter;
 import io.netty.handler.codec.http.HttpRequest;
@@ -23,6 +28,8 @@ import java.util.Map;
 
 import static com.hribol.bromium.cli.ParsedOptions.*;
 import static com.hribol.bromium.core.utils.Constants.SUBMIT_EVENT_URL;
+import static com.hribol.bromium.integration.tests.TestUtils.exampleTestScenarioSteps;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
@@ -54,15 +61,17 @@ public class RecordThroughTheRecordRequestFilterIT extends BaseDemoAppIntegratio
         opts.put(SCREEN, String.valueOf(1));
 
         Module defaultModule = new DefaultModule(opts);
-        Module mockedPromptUtilsModule = new ModuleWithMockedPromptUtils();
+        TestScenarioSteps expected = exampleTestScenarioSteps();
+
+        Module mockedPromptUtilsModule = new ModuleWithMockedPromptUtils(expected);
 
         Injector injector = Guice.createInjector(Modules.override(defaultModule).with(mockedPromptUtilsModule));
 
         RecordCommand recordCommand = injector.getInstance(RecordCommand.class);
         recordCommand.run();
 
-        //TODO: add assertions
-
+        TestScenarioSteps actual = ConfigurationUtils.readSteps(outputFile.getAbsolutePath());
+        assertEquals(expected, actual);
     }
 
     private static class ModuleWithMockedPromptUtils extends AbstractModule {
@@ -70,18 +79,21 @@ public class RecordThroughTheRecordRequestFilterIT extends BaseDemoAppIntegratio
         private PromptUtils promptUtils;
         private RecordRequestFilter recordRequestFilter;
 
-        private ModuleWithMockedPromptUtils() {
+        private ModuleWithMockedPromptUtils(TestScenarioSteps expected) {
             this.promptUtils = spy(new PromptUtils());
             this.recordRequestFilter = spy(new RecordRequestFilter());
 
-            HttpRequest httpRequest = mock(HttpRequest.class);
-            when(httpRequest.getUri()).thenReturn(SUBMIT_EVENT_URL + "?event=mockEvent&text=mockText");
-
-            HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
-            HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
-
             doAnswer(invocationOnMock -> {
-                recordRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
+                HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
+                HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
+
+                for (Map<String, String> testCaseStep: expected) {
+                    String queryString = ConfigurationUtils.toQueryString(testCaseStep);
+                    HttpRequest httpRequest = mock(HttpRequest.class);
+                    when(httpRequest.getUri()).thenReturn(SUBMIT_EVENT_URL + queryString);
+                    recordRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
+                }
+
                 return null;
             }).when(promptUtils).promptForRecording();
         }
