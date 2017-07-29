@@ -58,6 +58,7 @@ import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
 import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
 import com.hribol.bromium.replay.filters.ProxyFacade;
 import com.hribol.bromium.replay.filters.ReplayFiltersFactory;
+import com.hribol.bromium.replay.settings.DriverServiceSupplier;
 import com.hribol.bromium.replay.settings.ReplayManager;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.BrowserMobProxyServer;
@@ -71,6 +72,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.service.DriverService;
 
 import java.io.*;
 import java.net.URI;
@@ -366,9 +368,16 @@ public class DefaultModule extends AbstractModule {
                                               @Named(PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY) String pathToDriverSystemProperty,
                                               @Named(PATH_TO_DRIVER) String pathToDriver,
                                               @Named(MEASUREMENTS_PRECISION_MILLI) int measurementsPrecisionMilli,
-                                              IOURIProvider<ProxyFacade> proxyFacadeIOURIProvider) throws IOException, URISyntaxException {
+                                              IOURIProvider<ProxyFacade> proxyFacadeIOURIProvider,
+                                              InvisibleWebDriverSupplier invisibleWebDriverSupplier,
+                                              DriverServiceSupplier driverServiceSupplier) throws IOException, URISyntaxException {
         ProxyFacade proxyFacade = proxyFacadeIOURIProvider.get();
-
+        ReplayManager replayManager = createReplayManager(invisibleWebDriverSupplier,
+                driverServiceSupplier,
+                proxyFacade,
+                timeout,
+                pathToDriver,
+                screen);
         return executorBuilder
                 .pathToDriverExecutable(pathToDriver)
                 .baseURL(baseUrl)
@@ -379,18 +388,20 @@ public class DefaultModule extends AbstractModule {
                 .screenNumber(screenNumber)
                 .screenToUse(screen)
                 .pathToDriverSystemProperty(pathToDriverSystemProperty)
-                .replayManager(createReplayManager(proxyFacade, timeout, pathToDriver, screen));
+                .replayManager(replayManager);
     }
 
-    public ReplayManager createReplayManager(ProxyFacade proxyFacade,
-                                             int timeout,
-                                             String pathToDriver,
-                                             String screenToUse) throws IOException {
+    public <T extends DriverService> ReplayManager createReplayManager(InvisibleWebDriverSupplier<T> invisibleWebDriverSupplier,
+                                                                       DriverServiceSupplier<T> driverServiceSupplier,
+                                                                       ProxyFacade proxyFacade,
+                                                                       int timeout,
+                                                                       String pathToDriver,
+                                                                       String screenToUse) throws IOException {
         RequestFilter requestFilter = proxyFacade.getRequestFilter();
         ResponseFilter responseFilter = proxyFacade.getResponseFilter();
-        ReplayManager replayManager =  new ReplayManagerBase<>(requestFilter, responseFilter,
-                new InvisibleChromeDriverSupplier(),
-                new ChromeDriverServiceSupplier(),
+        ReplayManager replayManager =  new ReplayManagerBase<T>(requestFilter, responseFilter,
+                invisibleWebDriverSupplier,
+                driverServiceSupplier,
                 timeout,
                 screenToUse);
 
@@ -454,26 +465,38 @@ public class DefaultModule extends AbstractModule {
     @CheckedProvides(IOProvider.class)
     public ProxyDriverIntegrator getProxyDriverIntegrator(RecordRequestFilter recordRequestFilter,
                                                           IOProvider<RecordResponseFilter> recordResponseFilterIOProvider,
-                                                          VisibleWebDriverSupplier visibleWebDriverSupplier,
+                                                          InvisibleWebDriverSupplier invisibleWebDriverSupplier,
+                                                          DriverServiceSupplier driverServiceSupplier,
                                                           @Named(PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY) String systemProperty,
                                                           @Named(PATH_TO_DRIVER) String pathToDriverExecutable,
+                                                          @Named(SCREEN) String screen,
                                                           @Named(TIMEOUT) int timeout) throws IOException {
         ResponseFilter responseFilter = recordResponseFilterIOProvider.get();
         BrowserMobProxy proxy = createBrowserMobProxy(timeout, recordRequestFilter, responseFilter);
         proxy.start(0);
         Proxy seleniumProxy = createSeleniumProxy(proxy);
         DesiredCapabilities desiredCapabilities = createDesiredCapabilities(seleniumProxy);
-        System.setProperty(systemProperty, pathToDriverExecutable);
-        WebDriver driver = visibleWebDriverSupplier.get(desiredCapabilities);
+        DriverService driverService = driverServiceSupplier.getDriverService(pathToDriverExecutable, screen);
+        WebDriver driver = invisibleWebDriverSupplier.get(driverService, desiredCapabilities);
 
         return new ProxyDriverIntegrator(recordRequestFilter::getApplicationSpecificActionList, proxy, driver);
     }
 
     @Provides
-    public InvisibleWebDriverSupplier<ChromeDriverService> getInvisibleWebDriverSupplier(@Named(BROWSER_TYPE) String browserType) {
+    public InvisibleWebDriverSupplier getInvisibleWebDriverSupplier(@Named(BROWSER_TYPE) String browserType) {
         switch (browserType) {
             case CHROME:
                 return new InvisibleChromeDriverSupplier();
+            default:
+                throw new BrowserTypeNotSupportedException();
+        }
+    }
+
+    @Provides
+    public DriverServiceSupplier getDriverServiceSupplier(@Named(BROWSER_TYPE) String browserType) {
+        switch (browserType) {
+            case CHROME:
+                return new ChromeDriverServiceSupplier();
             default:
                 throw new BrowserTypeNotSupportedException();
         }

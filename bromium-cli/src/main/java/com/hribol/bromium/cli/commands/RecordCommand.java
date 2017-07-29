@@ -6,9 +6,11 @@ import com.google.inject.name.Named;
 import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.core.TestScenarioSteps;
+import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.core.utils.parsing.StepsDumper;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import static com.hribol.bromium.core.DependencyInjectionConstants.*;
 
@@ -17,25 +19,36 @@ import static com.hribol.bromium.core.DependencyInjectionConstants.*;
  */
 public class RecordCommand implements Command {
 
+    private final int screen;
     private PromptUtils promptUtils;
     private String outputFile;
     private IOProvider<RecordBrowser> recordBrowserBaseIOProvider;
+    private final VirtualScreenProcessCreator virtualScreenProcessCreator;
     private StepsDumper stepsDumper;
 
     @Inject
     public RecordCommand(@Named(OUTPUT_FILE) String outputFile,
+                         @Named(SCREEN_NUMBER) int screen,
                          PromptUtils promptUtils,
                          IOProvider<RecordBrowser> recordBrowserBaseIOProvider,
+                         VirtualScreenProcessCreator virtualScreenProcessCreator,
                          StepsDumper stepsDumper) {
+        this.screen = screen;
         this.promptUtils = promptUtils;
         this.outputFile = outputFile;
         this.recordBrowserBaseIOProvider = recordBrowserBaseIOProvider;
+        this.virtualScreenProcessCreator = virtualScreenProcessCreator;
         this.stepsDumper = stepsDumper;
     }
 
     @Override
     public void run() {
+        Optional<Process> virtualScreenProcessOptional = Optional.empty();
         try {
+            if (screen != 0) {
+                virtualScreenProcessOptional = Optional.of(virtualScreenProcessCreator.createXvfbProcess(screen));
+            }
+
             RecordBrowser recordBrowser = recordBrowserBaseIOProvider.get();
             recordBrowser.record();
             promptUtils.promptForRecording();
@@ -46,6 +59,7 @@ public class RecordCommand implements Command {
             e.printStackTrace();
         } finally {
             promptUtils.dispose();
+            virtualScreenProcessOptional.ifPresent(Process::destroy);
         }
 
     }

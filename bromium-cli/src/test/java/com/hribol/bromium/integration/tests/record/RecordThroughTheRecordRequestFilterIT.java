@@ -54,6 +54,7 @@ public class RecordThroughTheRecordRequestFilterIT extends BaseDemoAppIntegratio
         opts.put(OUTPUT, outputFile.getAbsolutePath());
         opts.put(BROWSER, CHROME);
         opts.put(TIMEOUT, String.valueOf(10));
+        opts.put(SCREEN, String.valueOf(1));
 
         Module defaultModule = new DefaultModule(opts);
         Module mockedPromptUtilsModule = new ModuleWithMockedPromptUtils();
@@ -62,7 +63,8 @@ public class RecordThroughTheRecordRequestFilterIT extends BaseDemoAppIntegratio
         RecordCommand recordCommand = injector.getInstance(RecordCommand.class);
         recordCommand.run();
 
-        System.out.println(outputFile);
+        //TODO: add assertions
+
     }
 
     private static class ModuleWithMockedPromptUtils extends AbstractModule {
