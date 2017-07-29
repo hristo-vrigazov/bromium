@@ -28,6 +28,8 @@ import com.hribol.bromium.common.record.ProxyDriverIntegrator;
 import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.common.record.RecordManager;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
+import com.hribol.bromium.common.replay.ReplayManagerBase;
+import com.hribol.bromium.common.replay.ReplayProxyDriverIntegrator;
 import com.hribol.bromium.common.replay.WebDriverActionExecutionBase;
 import com.hribol.bromium.common.replay.factory.DefaultApplicationActionFactory;
 import com.hribol.bromium.common.replay.factory.PredefinedWebDriverActionFactory;
@@ -494,18 +496,6 @@ public class DefaultModule extends AbstractModule {
         return capabilities;
     }
 
-//    @CheckedProvides(IOProvider.class)
-//    public DriverService getDriverService(@Named(BROWSER_TYPE) String browserType,
-//                                          IOProvider<ChromeDriverService> chromeDriverServiceIOProvider) throws IOException {
-//        switch (browserType) {
-//            case CHROME:
-//                return chromeDriverServiceIOProvider.get();
-//            default:
-//                throw new BrowserTypeNotSupportedException();
-//        }
-//
-//    }
-
     @Provides
     public String getDriverSystemProperty(@Named(BROWSER_TYPE) String browserType) {
         switch (browserType) {
@@ -544,5 +534,7 @@ public class DefaultModule extends AbstractModule {
                                       ReplayFiltersFactory replayFiltersFactory) throws IOException, URISyntaxException {
         return new ProxyFacade(baseURI, injectionCodeProvider.get(), eventSynchronizer, replayFiltersFactory);
     }
+
+
 }
 

@@ -25,7 +25,7 @@ public abstract class ReplayManagerBase<T extends DriverService> implements Repl
     private String screenToUse;
 
     private WebDriver driver;
-    private T driverService;
+    private DriverService driverService;
 
     public ReplayManagerBase(RequestFilter requestFilter,
                              ResponseFilter responseFilter,
@@ -63,8 +63,9 @@ public abstract class ReplayManagerBase<T extends DriverService> implements Repl
         this.proxy.start(0);
         Proxy seleniumProxy = new SeleniumProxySupplier(proxy).get();
         DesiredCapabilities capabilities = new DesiredCapabilitiesSupplier(seleniumProxy).get();
-        this.driverService = getDriverService(pathToDriver, screenToUse);
+        T driverService = getDriverService(pathToDriver, screenToUse);
         this.driver = invisibleWebDriverSupplier.get(driverService, capabilities);
+        this.driverService = driverService;
         this.driver.manage().window().maximize();
     }
 

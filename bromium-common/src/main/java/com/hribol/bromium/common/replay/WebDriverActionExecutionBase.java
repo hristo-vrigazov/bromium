@@ -36,7 +36,6 @@ public class WebDriverActionExecutionBase implements WebDriverActionExecution {
     public ExecutionReport execute(TestScenario testScenario) {
         ReplayManager replayManager = executor.getReplayManager();
         try {
-            System.setProperty(executor.getPathToDriverSystemProperty(), executor.getPathToDriverExecutable());
             proxyFacade.getRequestFilter().setHttpLock(false);
             automationResult = AutomationResult.NOT_STARTED;
             replayManager.prepareReplay(executor.getPathToDriverExecutable());
