@@ -11,6 +11,7 @@ import com.google.inject.throwingproviders.ThrowingProviderBinder;
 import com.hribol.bromium.browsers.chrome.base.InvisibleChromeDriverSupplier;
 import com.hribol.bromium.browsers.chrome.base.VisibleChromeDriverSupplier;
 import com.hribol.bromium.browsers.chrome.replay.ChromeDriverActionExecution;
+import com.hribol.bromium.browsers.chrome.replay.ChromeDriverReplayManager;
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.common.EmptyFunction;
 import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
@@ -59,6 +60,7 @@ import com.hribol.bromium.replay.filters.ProxyFacade;
 import com.hribol.bromium.replay.filters.ReplayFiltersFactory;
 import com.hribol.bromium.replay.filters.ReplayRequestFilter;
 import com.hribol.bromium.replay.filters.ReplayResponseFilter;
+import com.hribol.bromium.replay.settings.ReplayManager;
 import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.BrowserMobProxyServer;
@@ -160,6 +162,12 @@ public class DefaultModule extends AbstractModule {
     @Named(TIMEOUT)
     public Integer getTimeout(ParsedOptions parsedOptions) {
         return parsedOptions.getTimeout();
+    }
+
+    @Provides
+    @Named(MEASUREMENTS_PRECISION_MILLI)
+    public Integer getMeasurementsPrecisionMilli(ParsedOptions parsedOptions) {
+        return parsedOptions.getMeasurementsPrecisionMilli();
     }
 
     @Provides
@@ -355,23 +363,35 @@ public class DefaultModule extends AbstractModule {
 
     @CheckedProvides(IOURIProvider.class)
     public ExecutorBuilder getExecutorBuilder(ExecutorBuilder executorBuilder,
-                                              ParsedOptions parsedOptions,
+                                              @Named(TIMEOUT) int timeout,
+                                              @Named(BASE_URL) String baseUrl,
                                               @Named(REPLAYING_JAVASCRIPT_CODE) IOProvider<String>
                                                           replayingJavascriptCodeProvider,
-                                              IOURIProvider<ProxyFacade> proxyFacadeIOURIProvider,
                                               @Named(SCREEN) String screen,
                                               @Named(SCREEN_NUMBER) int screenNumber,
-                                              @Named(PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY) String pathToDriverSystemProperty) throws IOException, URISyntaxException {
+                                              @Named(PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY) String pathToDriverSystemProperty,
+                                              @Named(PATH_TO_DRIVER) String pathToDriver,
+                                              @Named(MEASUREMENTS_PRECISION_MILLI) int measurementsPrecisionMilli,
+                                              IOURIProvider<ProxyFacade> proxyFacadeIOURIProvider) throws IOException, URISyntaxException {
+        ProxyFacade proxyFacade = proxyFacadeIOURIProvider.get();
+
         return executorBuilder
-                .pathToDriverExecutable(parsedOptions.getPathToDriver())
-                .baseURL(parsedOptions.getBaseUrl())
-                .timeoutInSeconds(parsedOptions.getTimeout())
-                .measurementsPrecisionInMilliseconds(parsedOptions.getMeasurementsPrecisionMilli())
+                .pathToDriverExecutable(pathToDriver)
+                .baseURL(baseUrl)
+                .timeoutInSeconds(timeout)
+                .measurementsPrecisionInMilliseconds(measurementsPrecisionMilli)
                 .javascriptInjectionCode(replayingJavascriptCodeProvider.get())
-                .proxyFacade(proxyFacadeIOURIProvider.get())
+                .proxyFacade(proxyFacade)
                 .screenNumber(screenNumber)
                 .screenToUse(screen)
-                .pathToDriverSystemProperty(pathToDriverSystemProperty);
+                .pathToDriverSystemProperty(pathToDriverSystemProperty)
+                .replayManager(createReplayManager(proxyFacade, timeout, screen));
+    }
+
+    public ReplayManager createReplayManager(ProxyFacade proxyFacade, int timeout, String screenToUse) {
+        RequestFilter requestFilter = proxyFacade.getRequestFilter();
+        ResponseFilter responseFilter = proxyFacade.getResponseFilter();
+        return new ChromeDriverReplayManager(requestFilter, responseFilter, timeout, screenToUse);
     }
 
     @CheckedProvides(IOProvider.class)

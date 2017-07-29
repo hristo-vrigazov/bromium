@@ -7,6 +7,7 @@ import com.hribol.bromium.replay.filters.ProxyFacade;
 import com.hribol.bromium.replay.filters.ProxyFacadeSupplier;
 import com.hribol.bromium.common.synchronization.NoHttpRequestsInQueue;
 import com.hribol.bromium.common.synchronization.SignalizationBasedEventSynchronizer;
+import com.hribol.bromium.replay.settings.ReplayManager;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -30,6 +31,7 @@ public class ExecutorBuilder {
     private String screenToUse;
     private String systemProperty;
     private int screenNumber;
+    private ReplayManager replayManager;
 
     public ExecutorBuilder pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
@@ -188,6 +190,15 @@ public class ExecutorBuilder {
 
     public ExecutorBuilder pathToDriverSystemProperty(String systemProperty) {
         this.systemProperty = systemProperty;
+        return this;
+    }
+
+    public ReplayManager getReplayManager() {
+        return replayManager;
+    }
+
+    public ExecutorBuilder replayManager(ReplayManager replayManager) {
+        this.replayManager = replayManager;
         return this;
     }
 }

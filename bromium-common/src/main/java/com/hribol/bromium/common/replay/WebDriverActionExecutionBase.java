@@ -34,7 +34,7 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
 
     @Override
     public ExecutionReport execute(TestScenario testScenario) {
-        ReplayManager replayManager = createReplayManager(executor.getScreenToUse());
+        ReplayManager replayManager = executor.getReplayManager();
         try {
             System.setProperty(executor.getPathToDriverSystemProperty(), executor.getPathToDriverExecutable());
             proxyFacade.getRequestFilter().setHttpLock(false);

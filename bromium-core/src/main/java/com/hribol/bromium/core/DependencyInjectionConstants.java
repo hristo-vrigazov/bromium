@@ -31,6 +31,7 @@ public class DependencyInjectionConstants {
     public static final String BASE_URI = "BASE_URI";
     public static final String TIMEOUT = "TIMEOUT";
     public static final String OUTPUT_FILE = "OUTPUT_FILE";
+    public static final String MEASUREMENTS_PRECISION_MILLI = "MEASUREMENTS_PRECISION_MILLI";
 
     public static final String SCREEN_NUMBER = "SCREEN_NUMBER";
     public static final String SCREEN = "SCREEN";
