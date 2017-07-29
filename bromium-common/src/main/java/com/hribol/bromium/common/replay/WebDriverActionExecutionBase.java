@@ -85,11 +85,6 @@ public class WebDriverActionExecutionBase implements WebDriverActionExecution {
         return new ExecutionReport(loadingTimes, replayManager.getHar(), automationResult);
     }
 
-    @Override
-    public String getBaseURL() {
-        return executor.getBaseURL();
-    }
-
     private ReplayFiltersFacade proxyFacade;
     private ExecutorBuilder executor;
 

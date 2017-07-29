@@ -1,9 +1,6 @@
 package com.hribol.bromium.integration.tests.record;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Module;
+import com.google.inject.*;
 import com.google.inject.util.Modules;
 import com.hribol.bromium.browsers.chrome.base.VisibleChromeDriverSupplier;
 import com.hribol.bromium.cli.DefaultModule;
@@ -58,6 +55,7 @@ public class RecordThroughTheRecordRequestFilterIT extends BaseDemoAppIntegratio
 
         Module defaultModule = new DefaultModule(opts);
         Module mockedPromptUtilsModule = new ModuleWithMockedPromptUtils();
+
         Injector injector = Guice.createInjector(Modules.override(defaultModule).with(mockedPromptUtilsModule));
 
         RecordCommand recordCommand = injector.getInstance(RecordCommand.class);
