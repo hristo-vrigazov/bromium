@@ -2,17 +2,12 @@ package com.hribol.bromium.cli;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Key;
-import com.google.inject.TypeLiteral;
 import com.hribol.bromium.cli.commands.*;
-import com.hribol.bromium.common.replay.ReplayProxyDriverIntegrator;
-import com.hribol.bromium.core.providers.IOURIProvider;
 import org.apache.commons.io.IOUtils;
 import org.docopt.Docopt;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;

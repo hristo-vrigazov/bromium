@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -21,17 +20,17 @@ public class RecordBrowserTest {
     public void integratesComponentsInCorrectWay() throws IOException, URISyntaxException, InterruptedException {
         TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
 
-        RecordManager recordManager = mock(RecordManager.class);
-        when(recordManager.getTestCaseSteps()).thenReturn(testScenarioSteps);
+        RecordOperations recordOperations = mock(RecordOperations.class);
+        when(recordOperations.getTestCaseSteps()).thenReturn(testScenarioSteps);
 
         String baseUrl = "http://something.com";
 
-        RecordBrowser recordBrowser = new RecordBrowser(baseUrl, recordManager);
+        RecordBrowser recordBrowser = new RecordBrowser(baseUrl, recordOperations);
 
         recordBrowser.record();
 
-        verify(recordManager).prepareRecord();
-        verify(recordManager).open(baseUrl);
+        verify(recordOperations).prepareRecord();
+        verify(recordOperations).open(baseUrl);
 
         TestScenarioSteps actualTestCaseSteps = recordBrowser.getTestCaseSteps();
 
@@ -39,6 +38,6 @@ public class RecordBrowserTest {
 
         recordBrowser.cleanUp();
 
-        verify(recordManager).cleanUpRecord();
+        verify(recordOperations).cleanUpRecord();
     }
 }

@@ -1,7 +1,7 @@
 package com.hribol.bromium.common.record.settings;
 
 import com.hribol.bromium.common.record.ProxyDriverIntegrator;
-import com.hribol.bromium.common.record.RecordManager;
+import com.hribol.bromium.common.record.RecordOperations;
 import com.hribol.bromium.core.TestScenarioSteps;
 import net.lightbody.bmp.BrowserMobProxy;
 import org.junit.Test;
@@ -14,7 +14,7 @@ import static org.mockito.Mockito.*;
 /**
  * Created by hvrigazov on 27.04.17.
  */
-public class RecordManagerTest {
+public class RecordOperationsTest {
 
     @Test
     public void driverIsMaximizedAndCleansUp() {
@@ -32,11 +32,11 @@ public class RecordManagerTest {
         when(proxyDriverIntegrator.getDriver()).thenReturn(driver);
         when(proxyDriverIntegrator.getStepsSupplier()).thenReturn(stepsSupplier);
 
-        RecordManager recordManager = new RecordManager(proxyDriverIntegrator);
-        recordManager.prepareRecord();
-        recordManager.open(baseURI);
-        recordManager.cleanUpRecord();
-        TestScenarioSteps testCaseSteps = recordManager.getTestCaseSteps();
+        RecordOperations recordOperations = new RecordOperations(proxyDriverIntegrator);
+        recordOperations.prepareRecord();
+        recordOperations.open(baseURI);
+        recordOperations.cleanUpRecord();
+        TestScenarioSteps testCaseSteps = recordOperations.getTestCaseSteps();
 
         verify(driver).quit();
         verify(proxy).stop();

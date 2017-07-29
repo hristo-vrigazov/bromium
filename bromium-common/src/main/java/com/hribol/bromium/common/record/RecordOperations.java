@@ -10,13 +10,13 @@ import java.util.function.Supplier;
 /**
  * Created by hvrigazov on 22.04.17.
  */
-public class RecordManager {
+public class RecordOperations {
 
     private WebDriver driver;
     private BrowserMobProxy proxy;
     private Supplier<TestScenarioSteps> stepsSupplier;
 
-    public RecordManager(ProxyDriverIntegrator proxyDriverIntegrator) {
+    public RecordOperations(ProxyDriverIntegrator proxyDriverIntegrator) {
         this.driver = proxyDriverIntegrator.getDriver();
         this.proxy = proxyDriverIntegrator.getProxy();
         this.stepsSupplier = proxyDriverIntegrator.getStepsSupplier();

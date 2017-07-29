@@ -26,7 +26,7 @@ import com.hribol.bromium.common.generation.replay.*;
 import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
 import com.hribol.bromium.common.record.ProxyDriverIntegrator;
 import com.hribol.bromium.common.record.RecordBrowser;
-import com.hribol.bromium.common.record.RecordManager;
+import com.hribol.bromium.common.record.RecordOperations;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
 import com.hribol.bromium.common.replay.ReplayManagerBase;
 import com.hribol.bromium.common.replay.WebDriverActionExecutionBase;
@@ -411,7 +411,7 @@ public class DefaultModule extends AbstractModule {
 
     @CheckedProvides(IOProvider.class)
     public RecordBrowser getRecordBrowser(@Named(BASE_URL) String baseUrl,
-                                          IOProvider<RecordManager> recordManagerIOProvider) throws IOException {
+                                          IOProvider<RecordOperations> recordManagerIOProvider) throws IOException {
         return new RecordBrowser(
                 baseUrl,
                 recordManagerIOProvider.get());
@@ -503,8 +503,8 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOProvider.class)
-    public RecordManager getRecordManager(IOProvider<ProxyDriverIntegrator> proxyDriverIntegratorIOProvider) throws IOException {
-        return new RecordManager(proxyDriverIntegratorIOProvider.get());
+    public RecordOperations getRecordManager(IOProvider<ProxyDriverIntegrator> proxyDriverIntegratorIOProvider) throws IOException {
+        return new RecordOperations(proxyDriverIntegratorIOProvider.get());
     }
 
     public BrowserMobProxy createBrowserMobProxy(int timeout, RequestFilter requestFilter, ResponseFilter responseFilter) {

@@ -7,15 +7,15 @@ import org.openqa.selenium.remote.service.DriverService;
 /**
  * Created by hvrigazov on 27.07.17.
  */
-public class ReplayManager {
+public class DriverOperations {
     private WebDriver driver;
     private BrowserMobProxy proxy;
     private DriverService driverService;
 
-    public ReplayManager(ReplayProxyDriverIntegrator replayProxyDriverIntegrator) {
-        this.driver = replayProxyDriverIntegrator.getWebDriver();
-        this.proxy = replayProxyDriverIntegrator.getProxy();
-        this.driverService = replayProxyDriverIntegrator.getDriverService();
+    public DriverOperations(ProxyDriverIntegrator proxyDriverIntegrator) {
+        this.driver = proxyDriverIntegrator.getWebDriver();
+        this.proxy = proxyDriverIntegrator.getProxy();
+        this.driverService = proxyDriverIntegrator.getDriverService();
     }
 
     public void prepare() {
