@@ -4,7 +4,7 @@ import com.hribol.bromium.common.synchronization.NoHttpRequestsInQueue;
 import com.hribol.bromium.common.synchronization.SignalizationBasedEventSynchronizer;
 import com.hribol.bromium.replay.execution.AutomationResultBuilder;
 import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
-import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
+import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.replay.filters.ProxyFacade;
 import com.hribol.bromium.replay.settings.ReplayManager;
 

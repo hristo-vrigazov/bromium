@@ -1,7 +1,7 @@
 package com.hribol.bromium.replay.filters;
 
 import com.hribol.bromium.core.utils.Utils;
-import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
+import com.hribol.bromium.core.synchronization.SynchronizationEvent;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.filters.ResponseFilter;

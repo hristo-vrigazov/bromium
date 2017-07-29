@@ -1,7 +1,7 @@
 package com.hribol.bromium.common.synchronization;
 
-import com.hribol.bromium.replay.execution.synchronization.SignalizerEvent;
-import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
+import com.hribol.bromium.core.synchronization.EventSignalizer;
+import com.hribol.bromium.core.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.filters.ReplayResponseFilter;
 
 /**
@@ -10,11 +10,11 @@ import com.hribol.bromium.replay.filters.ReplayResponseFilter;
 public class NoHttpRequestsInQueue implements SynchronizationEvent {
 
     private ReplayResponseFilter replayResponseFilter;
-    private SignalizerEvent signalizerEvent;
+    private EventSignalizer eventSignalizer;
 
-    public NoHttpRequestsInQueue(ReplayResponseFilter replayResponseFilter, SignalizerEvent signalizerEvent) {
+    public NoHttpRequestsInQueue(ReplayResponseFilter replayResponseFilter, EventSignalizer eventSignalizer) {
         this.replayResponseFilter = replayResponseFilter;
-        this.signalizerEvent = signalizerEvent;
+        this.eventSignalizer = eventSignalizer;
     }
 
     @Override
@@ -29,6 +29,6 @@ public class NoHttpRequestsInQueue implements SynchronizationEvent {
 
     @Override
     public void signalizeIsDone() {
-        this.signalizerEvent.signalizeEvent(this);
+        this.eventSignalizer.signalizeEvent(this);
     }
 }

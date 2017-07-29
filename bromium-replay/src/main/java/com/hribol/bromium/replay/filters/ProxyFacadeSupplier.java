@@ -1,6 +1,6 @@
 package com.hribol.bromium.replay.filters;
 
-import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
+import com.hribol.bromium.core.synchronization.EventSynchronizer;
 
 import java.net.URISyntaxException;
 

@@ -1,6 +1,6 @@
 package com.hribol.bromium.replay.filters;
 
-import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
+import com.hribol.bromium.core.synchronization.EventSynchronizer;
 
 /**
  * Created by hvrigazov on 26.04.17.

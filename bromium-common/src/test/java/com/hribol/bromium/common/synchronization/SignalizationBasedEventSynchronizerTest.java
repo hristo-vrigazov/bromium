@@ -1,7 +1,7 @@
 package com.hribol.bromium.common.synchronization;
 
-import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
-import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
+import com.hribol.bromium.core.synchronization.EventSynchronizer;
+import com.hribol.bromium.core.synchronization.SynchronizationEvent;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

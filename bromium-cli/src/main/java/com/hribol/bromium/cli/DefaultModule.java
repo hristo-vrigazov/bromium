@@ -55,7 +55,7 @@ import com.hribol.bromium.replay.execution.WebDriverActionExecution;
 import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
-import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
+import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.replay.filters.ProxyFacade;
 import com.hribol.bromium.replay.filters.ReplayFiltersFactory;
 import com.hribol.bromium.replay.settings.DriverServiceSupplier;

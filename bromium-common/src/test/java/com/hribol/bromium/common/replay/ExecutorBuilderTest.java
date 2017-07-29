@@ -1,7 +1,7 @@
 package com.hribol.bromium.common.replay;
 
 import com.hribol.bromium.replay.execution.AutomationResultBuilder;
-import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
+import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.replay.filters.ProxyFacade;
 import com.hribol.bromium.replay.filters.ProxyFacadeSupplier;
 import org.junit.Rule;

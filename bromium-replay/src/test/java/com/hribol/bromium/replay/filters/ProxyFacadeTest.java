@@ -1,7 +1,7 @@
 package com.hribol.bromium.replay.filters;
 
-import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
-import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
+import com.hribol.bromium.core.synchronization.EventSynchronizer;
+import com.hribol.bromium.core.synchronization.SynchronizationEvent;
 import io.netty.handler.codec.http.HttpRequest;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;

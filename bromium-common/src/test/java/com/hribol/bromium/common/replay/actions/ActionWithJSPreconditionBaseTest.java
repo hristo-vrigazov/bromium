@@ -1,8 +1,8 @@
 package com.hribol.bromium.common.replay.actions;
 
 import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
-import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
-import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
+import com.hribol.bromium.core.synchronization.EventSynchronizer;
+import com.hribol.bromium.core.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
 import com.hribol.bromium.replay.filters.ReplayRequestFilter;
 import org.junit.Rule;

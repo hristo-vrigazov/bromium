@@ -1,19 +1,12 @@
 package com.hribol.bromium.replay.filters;
 
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
-import com.hribol.bromium.core.providers.IOProvider;
-import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
+import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import io.netty.handler.codec.http.HttpRequest;
 
-import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
-import static com.hribol.bromium.core.DependencyInjectionConstants.BASE_URL;
-import static com.hribol.bromium.core.DependencyInjectionConstants.REPLAYING_JAVASCRIPT_CODE;
 
 /**
  * Created by hvrigazov on 26.04.17.
