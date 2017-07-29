@@ -24,7 +24,7 @@ import java.util.concurrent.*;
 /**
  * Created by hvrigazov on 16.03.17.
  */
-public abstract class WebDriverActionExecutionBase implements WebDriverActionExecution {
+public class WebDriverActionExecutionBase implements WebDriverActionExecution {
 
     public WebDriverActionExecutionBase(ExecutorBuilder executor) throws IOException, URISyntaxException {
         this.executor = executor;
@@ -113,8 +113,6 @@ public abstract class WebDriverActionExecutionBase implements WebDriverActionExe
     public String getBaseURL() {
         return executor.getBaseURL();
     }
-
-    public abstract ReplayManager createReplayManager(String screenToUse);
 
     protected ReplayFiltersFacade proxyFacade;
     protected ExecutorBuilder executor;

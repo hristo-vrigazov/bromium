@@ -30,6 +30,7 @@ import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.common.record.RecordManager;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
 import com.hribol.bromium.common.replay.ReplayProxyDriverIntegrator;
+import com.hribol.bromium.common.replay.WebDriverActionExecutionBase;
 import com.hribol.bromium.common.replay.factory.DefaultApplicationActionFactory;
 import com.hribol.bromium.common.replay.factory.PredefinedWebDriverActionFactory;
 import com.hribol.bromium.common.replay.factory.TestCaseStepToApplicationActionConverter;
@@ -403,14 +404,8 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOURIProvider.class)
-    public WebDriverActionExecution getWebDriverActionExecution(IOURIProvider<ExecutorBuilder> executorBuilderIOProvider,
-                                                                @Named(BROWSER_TYPE) String browserType) throws IOException, URISyntaxException {
-        switch (browserType) {
-            case CHROME:
-                return new ChromeDriverActionExecution(executorBuilderIOProvider.get());
-            default:
-                throw new BrowserTypeNotSupportedException();
-        }
+    public WebDriverActionExecution getWebDriverActionExecution(IOURIProvider<ExecutorBuilder> executorBuilderIOProvider) throws IOException, URISyntaxException {
+        return new WebDriverActionExecutionBase(executorBuilderIOProvider.get());
     }
 
     @CheckedProvides(IOURIProvider.class)

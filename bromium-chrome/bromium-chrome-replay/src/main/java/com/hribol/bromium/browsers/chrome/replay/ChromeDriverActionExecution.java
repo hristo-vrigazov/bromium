@@ -17,13 +17,5 @@ public class ChromeDriverActionExecution extends WebDriverActionExecutionBase {
     public ChromeDriverActionExecution(ExecutorBuilder executorBuilder) throws IOException, URISyntaxException {
         super(executorBuilder);
     }
-
-    @Override
-    public ReplayManager createReplayManager(String screenToUse) {
-        RequestFilter requestFilter = proxyFacade.getRequestFilter();
-        ResponseFilter responseFilter = proxyFacade.getResponseFilter();
-        int timeout = executor.getTimeout();
-        return new ChromeDriverReplayManager(requestFilter, responseFilter, timeout, screenToUse);
-    }
     
 }
