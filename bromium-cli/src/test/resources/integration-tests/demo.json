@@ -1,0 +1,209 @@
+{
+    "applicationActionConfigurationList": [
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": true,
+            "name": "Click Ajax Demo button",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "cssSelector": {
+                        "expose": false,
+                        "parameterName": "cssSelector",
+                        "value": "#ajax-demo"
+                    }
+                },
+                "webDriverActionType": "CLICK_CSS_SELECTOR"
+            }
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": false,
+            "name": "Click Ajax created button",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "cssSelector": {
+                        "expose": false,
+                        "parameterName": "cssSelector",
+                        "value": "#ajax-button"
+                    }
+                },
+                "webDriverActionType": "CLICK_CSS_SELECTOR"
+            }
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": false,
+            "name": "Click destroy ajax created button",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "cssSelector": {
+                        "expose": false,
+                        "parameterName": "cssSelector",
+                        "value": "#destroy-ajax"
+                    }
+                },
+                "webDriverActionType": "CLICK_CSS_SELECTOR"
+            }
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": false,
+            "name": "Click dynamic button",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "cssSelector": {
+                        "expose": false,
+                        "parameterName": "cssSelector",
+                        "value": "#create-dynamic"
+                    }
+                },
+                "webDriverActionType": "CLICK_CSS_SELECTOR"
+            }
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": false,
+            "name": "Click dynamically created button",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "cssSelector": {
+                        "expose": false,
+                        "parameterName": "cssSelector",
+                        "value": "#late-creation"
+                    }
+                },
+                "webDriverActionType": "CLICK_CSS_SELECTOR"
+            }
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": false,
+            "name": "Click delete dynamically created button",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "cssSelector": {
+                        "expose": false,
+                        "parameterName": "cssSelector",
+                        "value": "#destroy-dynamic"
+                    }
+                },
+                "webDriverActionType": "CLICK_CSS_SELECTOR"
+            }
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": false,
+            "name": "Click on race demo button",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "cssSelector": {
+                        "expose": false,
+                        "parameterName": "cssSelector",
+                        "value": "#race-demo"
+                    }
+                },
+                "webDriverActionType": "CLICK_CSS_SELECTOR"
+            }
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": true,
+            "name": "Load page",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "url": {
+                        "expose": true,
+                        "parameterName": "url",
+                        "alias": "url"
+                    }
+                },
+                "webDriverActionType": "PAGE_LOADING"
+            }
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": true,
+            "name": "Type text in name input",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "cssSelector": {
+                        "expose": false,
+                        "parameterName": "cssSelector",
+                        "value": "#name-input"
+                    },
+                    "text": {
+                        "expose": true,
+                        "parameterName": "text",
+                        "alias": "text"
+                    }
+                },
+                "webDriverActionType": "TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR"
+            }
+        }
+    ],
+    "applicationName": "Demo app for Bromium vs Selenium",
+    "version": "0.0.1"
+}

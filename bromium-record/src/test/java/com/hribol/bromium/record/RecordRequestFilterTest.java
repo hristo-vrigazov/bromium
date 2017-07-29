@@ -1,5 +1,6 @@
 package com.hribol.bromium.record;
 
+import com.hribol.bromium.core.TestScenarioSteps;
 import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
@@ -27,7 +28,7 @@ public class RecordRequestFilterTest {
         when(httpRequest.getUri()).thenReturn(SUBMIT_EVENT_URL + "?event=mockEvent&text=mockText");
         RecordRequestFilter requestFilter = new RecordRequestFilter();
         requestFilter.filterRequest(httpRequest, mock(HttpMessageContents.class), mock(HttpMessageInfo.class));
-        List<Map<String, String>> applicationSpecificActionList = requestFilter.getApplicationSpecificActionList();
+        TestScenarioSteps applicationSpecificActionList = requestFilter.getApplicationSpecificActionList();
 
         assertTrue(applicationSpecificActionList.size() == 1);
         assertEquals(applicationSpecificActionList.get(0), event);
@@ -39,7 +40,7 @@ public class RecordRequestFilterTest {
         when(httpRequest.getUri()).thenReturn("http://something/" + "?event=mockEvent&text=mockText");
         RecordRequestFilter requestFilter = new RecordRequestFilter();
         requestFilter.filterRequest(httpRequest, mock(HttpMessageContents.class), mock(HttpMessageInfo.class));
-        List<Map<String, String>> applicationSpecificActionList = requestFilter.getApplicationSpecificActionList();
+        TestScenarioSteps applicationSpecificActionList = requestFilter.getApplicationSpecificActionList();
 
         assertTrue(applicationSpecificActionList.isEmpty());
     }
@@ -50,7 +51,7 @@ public class RecordRequestFilterTest {
         when(httpRequest.getUri()).thenReturn("blabla" + SUBMIT_EVENT_URL);
         RecordRequestFilter requestFilter = new RecordRequestFilter();
         requestFilter.filterRequest(httpRequest, mock(HttpMessageContents.class), mock(HttpMessageInfo.class));
-        List<Map<String, String>> applicationSpecificActionList = requestFilter.getApplicationSpecificActionList();
+        TestScenarioSteps applicationSpecificActionList = requestFilter.getApplicationSpecificActionList();
         assertTrue(applicationSpecificActionList.isEmpty());
     }
 

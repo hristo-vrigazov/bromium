@@ -1,12 +1,12 @@
 package com.hribol.bromium.common.replay;
 
+import com.hribol.bromium.common.synchronization.NoHttpRequestsInQueue;
+import com.hribol.bromium.common.synchronization.SignalizationBasedEventSynchronizer;
 import com.hribol.bromium.replay.execution.AutomationResultBuilder;
 import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
 import com.hribol.bromium.replay.filters.ProxyFacade;
-import com.hribol.bromium.replay.filters.ProxyFacadeSupplier;
-import com.hribol.bromium.common.synchronization.NoHttpRequestsInQueue;
-import com.hribol.bromium.common.synchronization.SignalizationBasedEventSynchronizer;
+import com.hribol.bromium.replay.settings.ReplayManager;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -23,10 +23,13 @@ public class ExecutorBuilder {
     private Integer measurementsPrecisionMilli;
     private String baseURL;
     private AutomationResultBuilder automationResultBuilder;
-    private ProxyFacadeSupplier proxyFacadeSupplier;
     private String javascriptInjectionCode;
     private EventSynchronizer eventSynchronizer;
     private ProxyFacade proxyFacade;
+    private String screenToUse;
+    private String systemProperty;
+    private int screenNumber;
+    private ReplayManager replayManager;
 
     public ExecutorBuilder pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
@@ -63,8 +66,8 @@ public class ExecutorBuilder {
         return this;
     }
 
-    public ExecutorBuilder proxyFacadeSupplier(ProxyFacadeSupplier proxyFacadeSupplier) {
-        this.proxyFacadeSupplier = proxyFacadeSupplier;
+    public ExecutorBuilder proxyFacade(ProxyFacade proxyFacade) {
+        this.proxyFacade = proxyFacade;
         return this;
     }
 
@@ -124,14 +127,6 @@ public class ExecutorBuilder {
         return automationResultBuilder;
     }
 
-    public ProxyFacadeSupplier getProxyFacadeSupplier() {
-        if (!Optional.ofNullable(proxyFacadeSupplier).isPresent()) {
-            this.proxyFacadeSupplier = new ProxyFacadeSupplier();
-        }
-
-        return proxyFacadeSupplier;
-    }
-
     public String getJavascriptInjectionCode() {
         return javascriptInjectionCode;
     }
@@ -145,10 +140,6 @@ public class ExecutorBuilder {
     }
 
     public ProxyFacade getProxyFacade() throws URISyntaxException {
-        if (!Optional.ofNullable(proxyFacade).isPresent()) {
-            this.proxyFacade = getProxyFacadeSupplier().get(baseURL, javascriptInjectionCode, getEventSynchronizer());
-        }
-
         return proxyFacade;
     }
 
@@ -158,5 +149,41 @@ public class ExecutorBuilder {
 
     public WebDriverActionExecutionException webDriverActionExecutionException(String message, Throwable e) {
         return new WebDriverActionExecutionException(message, e, getAutomationResultBuilder());
+    }
+
+    public ExecutorBuilder screenToUse(String screen) {
+        this.screenToUse = screen;
+        return this;
+    }
+
+    public String getScreenToUse() {
+        return screenToUse;
+    }
+
+    public ExecutorBuilder screenNumber(int screen) {
+        this.screenNumber = screen;
+        return this;
+    }
+
+    public int getScreenNumber() {
+        return screenNumber;
+    }
+
+    public String getPathToDriverSystemProperty() {
+        return systemProperty;
+    }
+
+    public ExecutorBuilder pathToDriverSystemProperty(String systemProperty) {
+        this.systemProperty = systemProperty;
+        return this;
+    }
+
+    public ReplayManager getReplayManager() {
+        return replayManager;
+    }
+
+    public ExecutorBuilder replayManager(ReplayManager replayManager) {
+        this.replayManager = replayManager;
+        return this;
     }
 }

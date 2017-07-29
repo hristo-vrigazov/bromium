@@ -3,6 +3,7 @@ package com.hribol.bromium.common.generation.replay;
 import com.hribol.bromium.common.generation.helper.StepAndActionConfiguration;
 import com.hribol.bromium.common.generation.helper.StepsAndConfiguration;
 import com.hribol.bromium.common.generation.helper.suppliers.StepAndActionConfigurationSupplier;
+import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
@@ -44,7 +45,7 @@ public class ReplayingJavascriptGeneratorTest {
 
         Map<String, String> testCaseStep = new HashMap<>();
         testCaseStep.put(EVENT, SOME_EVENT);
-        List<Map<String, String>> testCaseSteps = new ArrayList<>();
+        TestScenarioSteps testCaseSteps = new TestScenarioSteps();
         testCaseSteps.add(testCaseStep);
 
         StepsAndConfiguration stepsAndConfiguration = mock(StepsAndConfiguration.class);
@@ -83,7 +84,7 @@ public class ReplayingJavascriptGeneratorTest {
 
         Map<String, String> testCaseStep = new HashMap<>();
         testCaseStep.put(EVENT, "blabla");
-        List<Map<String, String>> testCaseSteps = new ArrayList<>();
+        TestScenarioSteps testCaseSteps = new TestScenarioSteps();
         testCaseSteps.add(testCaseStep);
 
         StepsAndConfiguration stepsAndConfiguration = mock(StepsAndConfiguration.class);

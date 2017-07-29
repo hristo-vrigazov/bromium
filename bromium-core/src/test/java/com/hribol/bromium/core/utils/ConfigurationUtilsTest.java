@@ -1,5 +1,6 @@
 package com.hribol.bromium.core.utils;
 
+import com.hribol.bromium.core.TestScenarioSteps;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -20,7 +21,8 @@ public class ConfigurationUtilsTest {
     @Test
     public void canReadSteps() throws IOException {
         String filename = getClass().getResource("/testCase.json").getFile();
-        List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(filename);
+
+        TestScenarioSteps testCaseSteps = ConfigurationUtils.readSteps(filename);
 
         Map<String, String> firstStep = testCaseSteps.get(0);
         String firstEvent = firstStep.get("event");

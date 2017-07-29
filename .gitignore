@@ -9,11 +9,9 @@ buildNumber.properties
 .mvn/timing.properties
 *.iml
 .idea/
-chromedriver
 geckodriver
 *.csv
 *.out
 *.har
 cheatsheet
 bromium-core/src/test/resources/dynamic-testCase.json
-replay.js

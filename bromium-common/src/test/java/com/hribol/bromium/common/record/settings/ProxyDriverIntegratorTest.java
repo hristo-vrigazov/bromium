@@ -1,16 +1,15 @@
 package com.hribol.bromium.common.record.settings;
 
 import com.hribol.bromium.common.record.ProxyDriverIntegrator;
-import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
-import net.lightbody.bmp.filters.RequestFilter;
-import net.lightbody.bmp.filters.ResponseFilter;
+import com.hribol.bromium.core.TestScenarioSteps;
+import net.lightbody.bmp.BrowserMobProxy;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
+import java.util.function.Supplier;
+
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by hvrigazov on 27.04.17.
@@ -19,17 +18,14 @@ public class ProxyDriverIntegratorTest {
 
     @Test
     public void canGetDriverAndProxyConfigured() {
-        WebDriver driver = mock(WebDriver.class);
-        RequestFilter requestFilter = mock(RequestFilter.class);
-        ResponseFilter responseFilter = mock(ResponseFilter.class);
-        VisibleWebDriverSupplier visibleWebDriverSupplier = mock(VisibleWebDriverSupplier.class);
-        when(visibleWebDriverSupplier.get(any())).thenReturn(driver);
-        int timeout = 10;
+        WebDriver expectedDriver = mock(WebDriver.class);
+        BrowserMobProxy expectedProxy = mock(BrowserMobProxy.class);
+        Supplier<TestScenarioSteps> expectedSupplier = mock(Supplier.class);
 
-        ProxyDriverIntegrator proxyDriverIntegrator = new ProxyDriverIntegrator(requestFilter, responseFilter,
-                visibleWebDriverSupplier, timeout);
+        ProxyDriverIntegrator proxyDriverIntegrator = new ProxyDriverIntegrator(expectedSupplier, expectedProxy, expectedDriver);
 
-        assertNotNull(proxyDriverIntegrator.getProxy());
-        assertNotNull(proxyDriverIntegrator.getDriver());
+        assertEquals(expectedDriver, proxyDriverIntegrator.getDriver());
+        assertEquals(expectedProxy, proxyDriverIntegrator.getProxy());
+        assertEquals(expectedSupplier, proxyDriverIntegrator.getStepsSupplier());
     }
 }

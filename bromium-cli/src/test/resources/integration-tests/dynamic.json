@@ -1,0 +1,15 @@
+[
+	{
+		"event": "Load page",
+		"url": "dynamic.html"
+	},
+    {
+        "event": "Click dynamic button"
+    },
+    {
+        "event": "Click dynamically created button"
+    },
+    {
+        "event": "Click delete dynamically created button"
+    }
+]

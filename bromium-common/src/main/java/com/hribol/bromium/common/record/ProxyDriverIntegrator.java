@@ -1,20 +1,17 @@
 package com.hribol.bromium.common.record;
 
-import com.hribol.bromium.core.suppliers.BrowserMobProxySupplier;
-import com.hribol.bromium.core.suppliers.DesiredCapabilitiesSupplier;
-import com.hribol.bromium.core.suppliers.SeleniumProxySupplier;
-import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
+import com.hribol.bromium.core.TestScenarioSteps;
+import com.hribol.bromium.record.RecordRequestFilter;
 import net.lightbody.bmp.BrowserMobProxy;
-import net.lightbody.bmp.filters.RequestFilter;
-import net.lightbody.bmp.filters.ResponseFilter;
-import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.util.function.Supplier;
 
 /**
  * Created by hvrigazov on 27.04.17.
  */
 public class ProxyDriverIntegrator {
+
     public BrowserMobProxy getProxy() {
         return proxy;
     }
@@ -23,17 +20,17 @@ public class ProxyDriverIntegrator {
         return driver;
     }
 
+    public Supplier<TestScenarioSteps> getStepsSupplier() {
+        return stepsSupplier;
+    }
+
+    public ProxyDriverIntegrator(Supplier<TestScenarioSteps> stepsSupplier, BrowserMobProxy proxy, WebDriver driver) {
+        this.stepsSupplier = stepsSupplier;
+        this.proxy = proxy;
+        this.driver = driver;
+    }
+
+    private Supplier<TestScenarioSteps> stepsSupplier;
     private BrowserMobProxy proxy;
     private WebDriver driver;
-
-    public ProxyDriverIntegrator(RequestFilter requestFilter,
-                                 ResponseFilter responseFilter,
-                                 VisibleWebDriverSupplier webDriverSupplier,
-                                 int timeout) {
-        this.proxy = new BrowserMobProxySupplier(timeout, requestFilter, responseFilter).get();
-        proxy.start(0);
-        Proxy seleniumProxy = new SeleniumProxySupplier(proxy).get();
-        DesiredCapabilities desiredCapabilities = new DesiredCapabilitiesSupplier(seleniumProxy).get();
-        this.driver = webDriverSupplier.get(desiredCapabilities);
-    }
 }

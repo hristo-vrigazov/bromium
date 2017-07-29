@@ -1,6 +1,6 @@
 package com.hribol.bromium.cli.commands;
 
-import com.hribol.bromium.cli.providers.IOProvider;
+import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationDumper;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
@@ -9,7 +9,6 @@ import org.beryx.textio.TextIO;
 import org.beryx.textio.TextTerminal;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.IOException;
 
 import static org.junit.Assert.assertFalse;
@@ -70,7 +69,7 @@ public class VersionCommandTest {
 
         public Mocks(String outputFilename) throws IOException {
             applicationConfigurationIOProvider = mock(IOProvider.class);
-            pathToApplicationConfiguration = "/tenniskafe.json";
+            pathToApplicationConfiguration = "/integration-tests/demo.json";
             version = "8.1.14";
             inputFilename = getClass().getResource(pathToApplicationConfiguration).getFile();
             stringInputReader = mock(StringInputReader.class);

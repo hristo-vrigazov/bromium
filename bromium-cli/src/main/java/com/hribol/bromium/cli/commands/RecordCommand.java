@@ -1,65 +1,69 @@
 package com.hribol.bromium.cli.commands;
 
+import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import com.hribol.bromium.cli.factory.RecordBrowserFactory;
-import com.hribol.bromium.cli.providers.IOProvider;
-import com.hribol.bromium.common.record.RecordBrowserBase;
-import com.hribol.bromium.core.utils.JavascriptInjector;
+import com.hribol.bromium.core.providers.IOProvider;
+import com.hribol.bromium.common.record.RecordBrowser;
+import com.hribol.bromium.core.TestScenarioSteps;
+import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
+import com.hribol.bromium.core.utils.parsing.StepsDumper;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.util.Optional;
 
-import static com.hribol.bromium.cli.Constants.*;
+import static com.hribol.bromium.core.DependencyInjectionConstants.*;
 
 /**
  * Created by hvrigazov on 11.04.17.
  */
 public class RecordCommand implements Command {
 
-    private RecordBrowserFactory recordBrowserFactory;
-    private String browserType;
-    private String pathToDriver;
-    private IOProvider<JavascriptInjector> javascriptInjectorProvider;
-    private String baseUrl;
-    private int timeout;
+    private final int screen;
     private PromptUtils promptUtils;
     private String outputFile;
+    private IOProvider<RecordBrowser> recordBrowserBaseIOProvider;
+    private final VirtualScreenProcessCreator virtualScreenProcessCreator;
+    private StepsDumper stepsDumper;
 
     @Inject
-    public RecordCommand(@Named(BROWSER_TYPE) String browserType,
-                         @Named(PATH_TO_DRIVER) String pathToDriver,
-                         @Named(RECORDING_JAVASCRIPT_INJECTOR) IOProvider<JavascriptInjector> javascriptInjectorProvider,
-                         @Named(BASE_URL) String baseUrl,
-                         @Named(TIMEOUT) int timeout,
-                         @Named(OUTPUT_FILE) String outputFile,
-                         RecordBrowserFactory recordBrowserFactory,
-                         PromptUtils promptUtils) {
-        this.recordBrowserFactory = recordBrowserFactory;
-        this.browserType = browserType;
-        this.pathToDriver = pathToDriver;
-        this.javascriptInjectorProvider = javascriptInjectorProvider;
-        this.baseUrl = baseUrl;
-        this.timeout = timeout;
+    public RecordCommand(@Named(OUTPUT_FILE) String outputFile,
+                         @Named(SCREEN_NUMBER) int screen,
+                         PromptUtils promptUtils,
+                         IOProvider<RecordBrowser> recordBrowserBaseIOProvider,
+                         VirtualScreenProcessCreator virtualScreenProcessCreator,
+                         StepsDumper stepsDumper) {
+        this.screen = screen;
         this.promptUtils = promptUtils;
         this.outputFile = outputFile;
+        this.recordBrowserBaseIOProvider = recordBrowserBaseIOProvider;
+        this.virtualScreenProcessCreator = virtualScreenProcessCreator;
+        this.stepsDumper = stepsDumper;
     }
 
     @Override
     public void run() {
+        Optional<Process> virtualScreenProcessOptional = Optional.empty();
         try {
-            JavascriptInjector javascriptInjector = javascriptInjectorProvider.get();
-            RecordBrowserBase recordBrowserBase = recordBrowserFactory.create(browserType, pathToDriver, javascriptInjector);
-            recordBrowserBase.record(baseUrl, timeout);
+            if (screen != 0) {
+                virtualScreenProcessOptional = Optional.of(virtualScreenProcessCreator.createXvfbProcess(screen));
+            }
+
+            RecordBrowser recordBrowser = recordBrowserBaseIOProvider.get();
+            recordBrowser.record();
             promptUtils.promptForRecording();
-            recordBrowserBase.dumpActions(this.outputFile);
-            recordBrowserBase.cleanUp();
-        } catch (IOException | InterruptedException | URISyntaxException e) {
+            TestScenarioSteps testScenarioSteps = recordBrowser.getTestCaseSteps();
+            stepsDumper.dump(testScenarioSteps, outputFile);
+            recordBrowser.cleanUp();
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             promptUtils.dispose();
+            virtualScreenProcessOptional.ifPresent(Process::destroy);
         }
 
     }
+
+
 
 }

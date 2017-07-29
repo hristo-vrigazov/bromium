@@ -2,8 +2,8 @@ bromium.
 
     Usage:
       bromium init
-      bromium record -d <pathToDriver> -a <configuration> -u <url> -o <output> [-b <browserType>] [-t <timeout>]
-      bromium replay -d <pathToDriver> -a <configuration> -c <case> -m <measurements> -u <url> [-p <precision>] [-b <browserType>] [-t <timeout>]
+      bromium record -d <pathToDriver> -a <configuration> -u <url> -o <output> [-b <browserType>] [-t <timeout>] [-s screen]
+      bromium replay -d <pathToDriver> -a <configuration> -c <case> -m <measurements> -u <url> [-s screen] [-p <precision>] [-b <browserType>] [-t <timeout>]
       bromium update -a <configuration>
       bromium version -a <configuration>
       bromium (-h | --help)
@@ -22,4 +22,5 @@ bromium.
       -p --precision <precision>            Precision in milliseconds [default: 500]
       -b --browser <browserType>            Type browser to use [default: chrome]
       -t --timeout <timeout>                Timeout [default: 10]
+      -s --screen <screen>                  Number of screen to use, 0 if the screen should be shown [default: 0]
 

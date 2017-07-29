@@ -1,12 +1,19 @@
 package com.hribol.bromium.replay.filters;
 
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
 import io.netty.handler.codec.http.HttpRequest;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
+import static com.hribol.bromium.core.DependencyInjectionConstants.BASE_URL;
+import static com.hribol.bromium.core.DependencyInjectionConstants.REPLAYING_JAVASCRIPT_CODE;
 
 /**
  * Created by hvrigazov on 26.04.17.
@@ -22,7 +29,10 @@ public class ProxyFacade implements ReplayFiltersFacade {
         this(baseURI, injectionCode, eventSynchronizer, new ReplayFiltersFactory());
     }
 
-    public ProxyFacade(String baseURI, String injectionCode, EventSynchronizer eventSynchronizer, ReplayFiltersFactory replayFiltersFactory) throws URISyntaxException {
+    public ProxyFacade(String baseURI,
+                       String injectionCode,
+                       EventSynchronizer eventSynchronizer,
+                       ReplayFiltersFactory replayFiltersFactory) throws URISyntaxException {
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
         this.eventSynchronizer = eventSynchronizer;
         this.requestFilter = replayFiltersFactory.createReplayRequestFilter(baseURI, httpRequestQueue);

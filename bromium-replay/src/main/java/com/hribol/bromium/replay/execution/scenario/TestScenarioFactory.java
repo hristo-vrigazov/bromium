@@ -1,5 +1,6 @@
 package com.hribol.bromium.replay.execution.scenario;
 
+import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.replay.execution.application.ApplicationAction;
 import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.core.utils.ConfigurationUtils;
@@ -21,11 +22,11 @@ public class TestScenarioFactory {
     }
 
     public TestScenario createFromFile(String pathToSerializedTest) throws IOException {
-        List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(pathToSerializedTest);
+        TestScenarioSteps testCaseSteps = ConfigurationUtils.readSteps(pathToSerializedTest);
         return createFromTestCaseSteps(testCaseSteps);
     }
 
-    public TestScenario createFromTestCaseSteps(List<Map<String, String>> testCaseSteps) {
+    public TestScenario createFromTestCaseSteps(TestScenarioSteps testCaseSteps) {
         TestScenario testScenario = new TestScenario();
 
         for (Map<String, String> testCaseStep: testCaseSteps) {
@@ -40,7 +41,7 @@ public class TestScenarioFactory {
     }
 
     public TestScenario createFromInputStream(InputStream inputStream) throws IOException {
-        List<Map<String, String>> testCaseSteps = ConfigurationUtils.readSteps(inputStream);
+        TestScenarioSteps testCaseSteps = ConfigurationUtils.readSteps(inputStream);
         return createFromTestCaseSteps(testCaseSteps);
     }
 }

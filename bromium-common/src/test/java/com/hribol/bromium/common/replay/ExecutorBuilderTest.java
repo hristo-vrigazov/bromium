@@ -46,7 +46,7 @@ public class ExecutorBuilderTest {
                 .javascriptInjectionCode(javascriptJsInjectionCode)
                 .maxRetries(maxRetries)
                 .automationResultBuilder(automationResultBuilder)
-                .proxyFacadeSupplier(proxyFacadeSupplier)
+                .proxyFacade(proxyFacade)
                 .eventSynchronizer(eventSynchronizer);
 
         assertEquals(pathToDriverExecutable, executorBuilder.getPathToDriverExecutable());
@@ -58,7 +58,6 @@ public class ExecutorBuilderTest {
         assertEquals(maxRetries, executorBuilder.getMaxRetries());
         assertEquals(maxRetries, executorBuilder.getMaxRetries());
         assertEquals(automationResultBuilder, executorBuilder.getAutomationResultBuilder());
-        assertEquals(proxyFacadeSupplier, executorBuilder.getProxyFacadeSupplier());
         assertEquals(javascriptJsInjectionCode, executorBuilder.getJavascriptInjectionCode());
         assertEquals(proxyFacade, executorBuilder.getProxyFacade());
         assertEquals(proxyFacade, executorBuilder.getProxyFacade());
@@ -98,7 +97,6 @@ public class ExecutorBuilderTest {
         assertEquals(500, executorBuilder.getMeasurementsPrecisionMilli());
         assertEquals(50, executorBuilder.getMaxRetries());
         assertNotNull(executorBuilder.getAutomationResultBuilder());
-        assertNotNull(executorBuilder.getProxyFacadeSupplier());
         assertNotNull(executorBuilder.getEventSynchronizer());
         assertNotNull(executorBuilder.webDriverActionExecutionException("Something happened", mock(Throwable.class)));
     }

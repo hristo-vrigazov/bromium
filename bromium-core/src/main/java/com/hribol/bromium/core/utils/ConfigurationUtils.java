@@ -2,6 +2,7 @@ package com.hribol.bromium.core.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import org.apache.commons.io.IOUtils;
 
@@ -18,15 +19,15 @@ import java.util.Map;
  */
 public class ConfigurationUtils {
 
-    public static List<Map<String, String>> readSteps(String pathToSerializedTest) throws IOException {
+    public static TestScenarioSteps readSteps(String pathToSerializedTest) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(pathToSerializedTest);
         return readSteps(fileInputStream);
     }
 
-    public static List<Map<String, String>> readSteps(InputStream inputStream) throws IOException {
+    public static TestScenarioSteps readSteps(InputStream inputStream) throws IOException {
         String stepsRaw = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
         Gson gson = new GsonBuilder().create();
-        return gson.fromJson(stepsRaw, List.class);
+        return gson.fromJson(stepsRaw, TestScenarioSteps.class);
     }
 
     public static Map<String, String> splitQuery(URL url) throws UnsupportedEncodingException {
@@ -38,5 +39,13 @@ public class ConfigurationUtils {
             queryPairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1), "UTF-8"));
         }
         return queryPairs;
+    }
+
+    public static String toQueryString(Map<String, String> params) {
+        return params.entrySet().stream()
+                .map(p -> p.getKey() + "=" + p.getValue())
+                .reduce((p1, p2) -> p1 + "&" + p2)
+                .map(s -> "?" + s)
+                .orElse("");
     }
 }

@@ -1,5 +1,15 @@
+sudo: required
+dist: trusty
 language: java
+
 jdk:
   - oraclejdk8
+
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
 
 install: mvn clean install coveralls:report

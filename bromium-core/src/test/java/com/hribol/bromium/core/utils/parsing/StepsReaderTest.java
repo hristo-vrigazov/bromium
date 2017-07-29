@@ -1,5 +1,6 @@
 package com.hribol.bromium.core.utils.parsing;
 
+import com.hribol.bromium.core.TestScenarioSteps;
 import org.junit.Test;
 
 import java.io.FileInputStream;
@@ -20,7 +21,7 @@ public class StepsReaderTest {
     public void readsStepsFromInputStream() throws IOException {
         InputStream testCaseInputStream = getClass().getResourceAsStream("/testCase.json");
         StepsReader stepsReader = new StepsReader();
-        List<Map<String, String>> steps = stepsReader.readSteps(testCaseInputStream);
+        TestScenarioSteps steps = stepsReader.readSteps(testCaseInputStream);
 
         Map<String, String> firstStep = steps.get(0);
         assertEquals(firstStep.get(EVENT), "Load initial page");

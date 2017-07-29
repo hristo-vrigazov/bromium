@@ -1,5 +1,6 @@
 package com.hribol.bromium.replay;
 
+import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.replay.execution.WebDriverActionExecution;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
@@ -25,7 +26,7 @@ public class ReplayBrowser {
         this.webDriverActionExecution = execution;
     }
 
-    public ExecutionReport replay(List<Map<String, String>> steps) {
+    public ExecutionReport replay(TestScenarioSteps steps) {
         TestScenario testScenario = testScenarioFactory.createFromTestCaseSteps(steps);
         return webDriverActionExecution.execute(testScenario);
     }
@@ -41,23 +42,4 @@ public class ReplayBrowser {
         return webDriverActionExecution.execute(testScenario);
     }
 
-    public ExecutionReport replay(String pathToSerializedTest,
-                                  String screen)
-            throws IOException, URISyntaxException, InterruptedException {
-        TestScenario testScenario = testScenarioFactory.createFromFile(pathToSerializedTest);
-        return webDriverActionExecution.execute(testScenario, screen);
-    }
-
-    public ExecutionReport replay(InputStream inputStream,
-                                  String screen) throws IOException, URISyntaxException, InterruptedException {
-        TestScenario testScenario = testScenarioFactory.createFromInputStream(inputStream);
-        return webDriverActionExecution.execute(testScenario, screen);
-    }
-
-    public ExecutionReport createVirtualScreenProcessAndExecute(InputStream inputStream,
-                                                                int screenNumber,
-                                                                VirtualScreenProcessCreator virtualScreenProcessCreator) throws IOException {
-        TestScenario testScenario = testScenarioFactory.createFromInputStream(inputStream);
-        return webDriverActionExecution.createVirtualScreenProcessAndExecute(testScenario, screenNumber, virtualScreenProcessCreator);
-    }
 }

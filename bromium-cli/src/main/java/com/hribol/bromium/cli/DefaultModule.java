@@ -1,18 +1,20 @@
 package com.hribol.bromium.cli;
 
-import com.google.inject.*;
+import com.google.common.collect.ImmutableMap;
+import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
+import com.google.inject.TypeLiteral;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import com.google.inject.throwingproviders.CheckedProvides;
 import com.google.inject.throwingproviders.ThrowingProviderBinder;
-import com.hribol.bromium.cli.commands.PromptUtils;
-import com.hribol.bromium.cli.commands.RecordCommand;
-import com.hribol.bromium.cli.factory.ExecutionFactory;
-import com.hribol.bromium.cli.factory.RecordBrowserFactory;
-import com.hribol.bromium.cli.providers.IOProvider;
-import com.hribol.bromium.cli.providers.IOURIProvider;
+import com.hribol.bromium.browsers.chrome.base.InvisibleChromeDriverSupplier;
+import com.hribol.bromium.browsers.chrome.base.VisibleChromeDriverSupplier;
+import com.hribol.bromium.browsers.chrome.replay.ChromeDriverServiceSupplier;
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.common.EmptyFunction;
+import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
+import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.helper.StepAndActionConfiguration;
 import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.helper.StepsAndConfiguration;
@@ -20,37 +22,67 @@ import com.hribol.bromium.common.generation.helper.suppliers.StepAndActionConfig
 import com.hribol.bromium.common.generation.helper.suppliers.StepAndWebDriverActionConfigurationSupplier;
 import com.hribol.bromium.common.generation.record.*;
 import com.hribol.bromium.common.generation.record.functions.RecorderFunctionInvocation;
-import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
-import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.replay.*;
 import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
+import com.hribol.bromium.common.record.ProxyDriverIntegrator;
+import com.hribol.bromium.common.record.RecordBrowser;
+import com.hribol.bromium.common.record.RecordManager;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
+import com.hribol.bromium.common.replay.ReplayManagerBase;
+import com.hribol.bromium.common.replay.WebDriverActionExecutionBase;
 import com.hribol.bromium.common.replay.factory.DefaultApplicationActionFactory;
 import com.hribol.bromium.common.replay.factory.PredefinedWebDriverActionFactory;
 import com.hribol.bromium.common.replay.factory.TestCaseStepToApplicationActionConverter;
+import com.hribol.bromium.common.synchronization.SignalizationBasedEventSynchronizer;
+import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.FunctionRegistry;
 import com.hribol.bromium.core.generation.GeneratedFunction;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
+import com.hribol.bromium.core.providers.IOProvider;
+import com.hribol.bromium.core.providers.IOURIProvider;
+import com.hribol.bromium.core.suite.UbuntuVirtualScreenProcessCreator;
+import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
+import com.hribol.bromium.core.suppliers.*;
 import com.hribol.bromium.core.utils.JavascriptInjector;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
 import com.hribol.bromium.core.utils.parsing.StepsReader;
+import com.hribol.bromium.record.RecordRequestFilter;
+import com.hribol.bromium.record.RecordResponseFilter;
 import com.hribol.bromium.replay.ReplayBrowser;
 import com.hribol.bromium.replay.execution.WebDriverActionExecution;
 import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
+import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
+import com.hribol.bromium.replay.filters.ProxyFacade;
+import com.hribol.bromium.replay.filters.ReplayFiltersFactory;
+import com.hribol.bromium.replay.settings.DriverServiceSupplier;
+import com.hribol.bromium.replay.settings.ReplayManager;
+import net.lightbody.bmp.BrowserMobProxy;
+import net.lightbody.bmp.BrowserMobProxyServer;
+import net.lightbody.bmp.client.ClientUtil;
+import net.lightbody.bmp.filters.RequestFilter;
+import net.lightbody.bmp.filters.ResponseFilter;
+import net.lightbody.bmp.proxy.CaptureType;
 import org.apache.commons.io.IOUtils;
-import org.omg.CORBA.TIMEOUT;
+import org.openqa.selenium.Proxy;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.service.DriverService;
 
 import java.io.*;
+import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
-import static com.hribol.bromium.cli.Constants.*;
+import static com.hribol.bromium.core.DependencyInjectionConstants.*;
+import static org.openqa.selenium.remote.BrowserType.CHROME;
 
 /**
  * Created by hvrigazov on 09.06.17.
@@ -72,6 +104,8 @@ public class DefaultModule extends AbstractModule {
                 .to(RecordingWebDriverActionsOnly.class);
         bind(new TypeLiteral<FunctionRegistry<NameWebDriverActionConfiguration>>(){})
                 .to(RecorderFunctionRegistry.class);
+        // TODO: other OSes should have a different binding
+        bind(VirtualScreenProcessCreator.class).to(UbuntuVirtualScreenProcessCreator.class);
         bindConstant().annotatedWith(Names.named(RECORD_TEMPLATE_RESOURCE)).to("/record.js");
         bindConstant().annotatedWith(Names.named(REPLAY_TEMPLATE_RESOURCE)).to("/replay.js");
 
@@ -124,6 +158,12 @@ public class DefaultModule extends AbstractModule {
     @Named(TIMEOUT)
     public Integer getTimeout(ParsedOptions parsedOptions) {
         return parsedOptions.getTimeout();
+    }
+
+    @Provides
+    @Named(MEASUREMENTS_PRECISION_MILLI)
+    public Integer getMeasurementsPrecisionMilli(ParsedOptions parsedOptions) {
+        return parsedOptions.getMeasurementsPrecisionMilli();
     }
 
     @Provides
@@ -183,16 +223,16 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOProvider.class)
-    public List<Map<String, String>> getTestCaseSteps(StepsReader stepsReader,
-                                                      @Named(TEST_CASE_INPUT_STREAM) IOProvider<InputStream> testCaseInputStreamProvider)
+    public TestScenarioSteps getTestCaseSteps(StepsReader stepsReader,
+                                              @Named(TEST_CASE_INPUT_STREAM) IOProvider<InputStream> testCaseInputStreamProvider)
             throws IOException {
         return stepsReader.readSteps(testCaseInputStreamProvider.get());
     }
 
     @CheckedProvides(IOProvider.class)
-    public StepsAndConfiguration getStepsAndConfiguration(IOProvider<List<Map<String, String>>> stepsProvider,
+    public StepsAndConfiguration getStepsAndConfiguration(IOProvider<TestScenarioSteps> stepsProvider,
                                                           IOProvider<ApplicationConfiguration> applicationConfigurationIOProvider) throws IOException {
-        List<Map<String, String>> testCaseSteps = stepsProvider.get();
+        TestScenarioSteps testCaseSteps = stepsProvider.get();
         ApplicationConfiguration applicationConfiguration = applicationConfigurationIOProvider.get();
         return new StepsAndConfiguration(testCaseSteps, applicationConfiguration);
     }
@@ -209,6 +249,18 @@ public class DefaultModule extends AbstractModule {
         return IOUtils.toString(getClass().getResourceAsStream(templateResource));
     }
 
+    @Provides
+    @Named(SCREEN_NUMBER)
+    public Integer getScreenNumber(ParsedOptions parsedOptions) {
+        return parsedOptions.getScreenNumber();
+    }
+
+    @Provides
+    @Named(SCREEN)
+    public String getScreenAsScreen(@Named(SCREEN_NUMBER) Integer screenNumber,
+                                    VirtualScreenProcessCreator virtualScreenProcessCreator) {
+        return virtualScreenProcessCreator.getScreen(screenNumber);
+    }
 
     @Provides
     public BaseReplayFunctionFactory getBaseReplayFunctionFactory(
@@ -305,24 +357,69 @@ public class DefaultModule extends AbstractModule {
     }
 
 
-    @CheckedProvides(IOProvider.class)
+    @CheckedProvides(IOURIProvider.class)
     public ExecutorBuilder getExecutorBuilder(ExecutorBuilder executorBuilder,
-                                              ParsedOptions parsedOptions,
+                                              @Named(TIMEOUT) int timeout,
+                                              @Named(BASE_URL) String baseUrl,
                                               @Named(REPLAYING_JAVASCRIPT_CODE) IOProvider<String>
-                                                          replayingJavascriptCodeProvider) throws IOException {
+                                                          replayingJavascriptCodeProvider,
+                                              @Named(SCREEN) String screen,
+                                              @Named(SCREEN_NUMBER) int screenNumber,
+                                              @Named(PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY) String pathToDriverSystemProperty,
+                                              @Named(PATH_TO_DRIVER) String pathToDriver,
+                                              @Named(MEASUREMENTS_PRECISION_MILLI) int measurementsPrecisionMilli,
+                                              IOURIProvider<ProxyFacade> proxyFacadeIOURIProvider,
+                                              InvisibleWebDriverSupplier invisibleWebDriverSupplier,
+                                              DriverServiceSupplier driverServiceSupplier) throws IOException, URISyntaxException {
+        ProxyFacade proxyFacade = proxyFacadeIOURIProvider.get();
+        ReplayManager replayManager = createReplayManager(invisibleWebDriverSupplier,
+                driverServiceSupplier,
+                proxyFacade,
+                timeout,
+                pathToDriver,
+                screen);
         return executorBuilder
-                .pathToDriverExecutable(parsedOptions.getPathToDriver())
-                .baseURL(parsedOptions.getBaseUrl())
-                .timeoutInSeconds(parsedOptions.getTimeout())
-                .measurementsPrecisionInMilliseconds(parsedOptions.getMeasurementsPrecisionMilli())
-                .javascriptInjectionCode(replayingJavascriptCodeProvider.get());
+                .pathToDriverExecutable(pathToDriver)
+                .baseURL(baseUrl)
+                .timeoutInSeconds(timeout)
+                .measurementsPrecisionInMilliseconds(measurementsPrecisionMilli)
+                .javascriptInjectionCode(replayingJavascriptCodeProvider.get())
+                .proxyFacade(proxyFacade)
+                .screenNumber(screenNumber)
+                .screenToUse(screen)
+                .pathToDriverSystemProperty(pathToDriverSystemProperty)
+                .replayManager(replayManager);
+    }
+
+    public <T extends DriverService> ReplayManager createReplayManager(InvisibleWebDriverSupplier<T> invisibleWebDriverSupplier,
+                                                                       DriverServiceSupplier<T> driverServiceSupplier,
+                                                                       ProxyFacade proxyFacade,
+                                                                       int timeout,
+                                                                       String pathToDriver,
+                                                                       String screenToUse) throws IOException {
+        RequestFilter requestFilter = proxyFacade.getRequestFilter();
+        ResponseFilter responseFilter = proxyFacade.getResponseFilter();
+        ReplayManager replayManager =  new ReplayManagerBase<T>(requestFilter, responseFilter,
+                invisibleWebDriverSupplier,
+                driverServiceSupplier,
+                timeout,
+                screenToUse);
+
+        replayManager.prepareReplay(pathToDriver);
+        return replayManager;
+    }
+
+    @CheckedProvides(IOProvider.class)
+    public RecordBrowser getRecordBrowser(@Named(BASE_URL) String baseUrl,
+                                          IOProvider<RecordManager> recordManagerIOProvider) throws IOException {
+        return new RecordBrowser(
+                baseUrl,
+                recordManagerIOProvider.get());
     }
 
     @CheckedProvides(IOURIProvider.class)
-    public WebDriverActionExecution getWebDriverActionExecution(ExecutionFactory executionFactory,
-                                                                IOProvider<ExecutorBuilder> executorBuilderIOProvider,
-                                                                ParsedOptions parsedOptions) throws IOException, URISyntaxException {
-        return executionFactory.create(parsedOptions.getBrowserType(), executorBuilderIOProvider.get());
+    public WebDriverActionExecution getWebDriverActionExecution(IOURIProvider<ExecutorBuilder> executorBuilderIOProvider) throws IOException, URISyntaxException {
+        return new WebDriverActionExecutionBase(executorBuilderIOProvider.get());
     }
 
     @CheckedProvides(IOURIProvider.class)
@@ -330,4 +427,146 @@ public class DefaultModule extends AbstractModule {
                                           IOURIProvider<WebDriverActionExecution> execution) throws IOException, URISyntaxException {
         return new ReplayBrowser(testScenarioFactoryIOProvider.get(), execution.get());
     }
+
+    @Named(BASE_URI)
+    @Provides
+    public URI getBaseUri(@Named(BASE_URL) String baseUrl) {
+        return URI.create(baseUrl);
+    }
+
+    @CheckedProvides(IOProvider.class)
+    public RecordResponseFilter getRecordResponseFilter(@Named(BASE_URI) URI baseURI,
+                                                        @Named(RECORDING_JAVASCRIPT_CODE) IOProvider<String> injectionCodeProvider) throws IOException {
+        return new RecordResponseFilter(baseURI, injectionCodeProvider.get());
+    }
+
+    @Named(PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY)
+    @Provides
+    public String getPathToDriverExecutableSystemProperty(@Named(BROWSER_TYPE) String browserType) {
+        switch (browserType) {
+            case CHROME:
+                return ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY;
+            default:
+                throw new BrowserTypeNotSupportedException();
+        }
+    }
+
+    @Provides
+    public VisibleWebDriverSupplier getVisibleWebDriverSupplier(@Named(BROWSER_TYPE) String browserType) {
+        switch (browserType) {
+            case CHROME:
+                return new VisibleChromeDriverSupplier();
+            default:
+                throw new BrowserTypeNotSupportedException();
+        }
+
+    }
+
+    @CheckedProvides(IOProvider.class)
+    public ProxyDriverIntegrator getProxyDriverIntegrator(RecordRequestFilter recordRequestFilter,
+                                                          IOProvider<RecordResponseFilter> recordResponseFilterIOProvider,
+                                                          InvisibleWebDriverSupplier invisibleWebDriverSupplier,
+                                                          DriverServiceSupplier driverServiceSupplier,
+                                                          @Named(PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY) String systemProperty,
+                                                          @Named(PATH_TO_DRIVER) String pathToDriverExecutable,
+                                                          @Named(SCREEN) String screen,
+                                                          @Named(TIMEOUT) int timeout) throws IOException {
+        ResponseFilter responseFilter = recordResponseFilterIOProvider.get();
+        BrowserMobProxy proxy = createBrowserMobProxy(timeout, recordRequestFilter, responseFilter);
+        proxy.start(0);
+        Proxy seleniumProxy = createSeleniumProxy(proxy);
+        DesiredCapabilities desiredCapabilities = createDesiredCapabilities(seleniumProxy);
+        DriverService driverService = driverServiceSupplier.getDriverService(pathToDriverExecutable, screen);
+        WebDriver driver = invisibleWebDriverSupplier.get(driverService, desiredCapabilities);
+
+        return new ProxyDriverIntegrator(recordRequestFilter::getApplicationSpecificActionList, proxy, driver);
+    }
+
+    @Provides
+    public InvisibleWebDriverSupplier getInvisibleWebDriverSupplier(@Named(BROWSER_TYPE) String browserType) {
+        switch (browserType) {
+            case CHROME:
+                return new InvisibleChromeDriverSupplier();
+            default:
+                throw new BrowserTypeNotSupportedException();
+        }
+    }
+
+    @Provides
+    public DriverServiceSupplier getDriverServiceSupplier(@Named(BROWSER_TYPE) String browserType) {
+        switch (browserType) {
+            case CHROME:
+                return new ChromeDriverServiceSupplier();
+            default:
+                throw new BrowserTypeNotSupportedException();
+        }
+    }
+
+    @CheckedProvides(IOProvider.class)
+    public RecordManager getRecordManager(IOProvider<ProxyDriverIntegrator> proxyDriverIntegratorIOProvider) throws IOException {
+        return new RecordManager(proxyDriverIntegratorIOProvider.get());
+    }
+
+    public BrowserMobProxy createBrowserMobProxy(int timeout, RequestFilter requestFilter, ResponseFilter responseFilter) {
+        BrowserMobProxyServer proxy = new BrowserMobProxyServer();
+        proxy.enableHarCaptureTypes(CaptureType.REQUEST_CONTENT, CaptureType.RESPONSE_CONTENT);
+        proxy.newHar("measurements");
+        proxy.addRequestFilter(requestFilter);
+        proxy.addResponseFilter(responseFilter);
+        proxy.setIdleConnectionTimeout(timeout, TimeUnit.SECONDS);
+        proxy.setRequestTimeout(timeout, TimeUnit.SECONDS);
+        return proxy;
+    }
+
+    public Proxy createSeleniumProxy(BrowserMobProxy proxy) {
+        return ClientUtil.createSeleniumProxy(proxy);
+    }
+
+    public DesiredCapabilities createDesiredCapabilities(Proxy proxy) {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(CapabilityType.PROXY, proxy);
+        return capabilities;
+    }
+
+    @Provides
+    public String getDriverSystemProperty(@Named(BROWSER_TYPE) String browserType) {
+        switch (browserType) {
+            case CHROME:
+                return ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY;
+            default:
+                throw new BrowserTypeNotSupportedException();
+        }
+    }
+
+    public ChromeDriverService getDriverService(@Named(PATH_TO_DRIVER) String pathToDriverExecutable,
+                                          @Named(BROWSER_TYPE) String browserType,
+                                          @Named(SCREEN) String screenToUse) throws IOException {
+        switch (browserType) {
+            case CHROME:
+                System.out.println("Driver service");
+                return new ChromeDriverService.Builder()
+                        .usingDriverExecutable(new File(pathToDriverExecutable))
+                        .usingAnyFreePort()
+                        .withEnvironment(ImmutableMap.of("DISPLAY", screenToUse))
+                        .build();
+            default:
+                throw new BrowserTypeNotSupportedException();
+        }
+    }
+
+    @Provides
+    public EventSynchronizer getEventSynchronizer(@Named(TIMEOUT) Integer timeout) {
+        return new SignalizationBasedEventSynchronizer(timeout);
+    }
+
+    @CheckedProvides(IOURIProvider.class)
+    public ProxyFacade getProxyFacade(@Named(BASE_URL) String baseURI,
+                                      @Named(REPLAYING_JAVASCRIPT_CODE) IOProvider<String> injectionCodeProvider,
+                                      EventSynchronizer eventSynchronizer,
+                                      ReplayFiltersFactory replayFiltersFactory) throws IOException, URISyntaxException {
+        return new ProxyFacade(baseURI, injectionCodeProvider.get(), eventSynchronizer, replayFiltersFactory);
+    }
+
+
 }
+

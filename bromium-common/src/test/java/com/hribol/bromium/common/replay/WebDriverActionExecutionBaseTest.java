@@ -1,12 +1,11 @@
 package com.hribol.bromium.common.replay;
 
 import com.hribol.bromium.common.synchronization.NoHttpRequestsInQueue;
-import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.execution.AutomationResultBuilder;
 import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
-import com.hribol.bromium.replay.execution.scenario.TestScenarioSteps;
+import com.hribol.bromium.replay.execution.scenario.TestScenarioActions;
 import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
 import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.filters.ProxyFacade;
@@ -15,7 +14,7 @@ import com.hribol.bromium.replay.filters.ReplayRequestFilter;
 import com.hribol.bromium.replay.filters.ReplayResponseFilter;
 import com.hribol.bromium.replay.report.AutomationResult;
 import com.hribol.bromium.replay.report.ExecutionReport;
-import com.hribol.bromium.replay.settings.ReplaySettings;
+import com.hribol.bromium.replay.settings.ReplayManager;
 import net.lightbody.bmp.core.har.Har;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +22,6 @@ import org.mockito.Mockito;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.remote.service.DriverService;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -65,7 +63,7 @@ public class WebDriverActionExecutionBaseTest {
     public void oneActionWithNoProblems() throws IOException, URISyntaxException, InterruptedException {
         WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase();
         Iterator<WebDriverAction> webDriverActionIterator = Mockito.mock(Iterator.class);
-        TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
+        TestScenarioActions testScenarioSteps = mock(TestScenarioActions.class);
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.steps()).thenReturn(testScenarioSteps);
         when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
@@ -80,7 +78,7 @@ public class WebDriverActionExecutionBaseTest {
     public void actionWhichThrowsAssertionError() throws IOException, URISyntaxException, InterruptedException {
         WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase();
         Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
-        TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
+        TestScenarioActions testScenarioSteps = mock(TestScenarioActions.class);
         when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.steps()).thenReturn(testScenarioSteps);
@@ -96,7 +94,7 @@ public class WebDriverActionExecutionBaseTest {
     public void timesoOutIfActionTakesTooLong() throws IOException, URISyntaxException, InterruptedException {
         WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(1);
         Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
-        TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
+        TestScenarioActions testScenarioSteps = mock(TestScenarioActions.class);
         when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.steps()).thenReturn(testScenarioSteps);
@@ -118,7 +116,7 @@ public class WebDriverActionExecutionBaseTest {
     public void properlyHandlesInterruptedException() throws IOException, URISyntaxException {
         WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(5);
         Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
-        TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
+        TestScenarioActions testScenarioSteps = mock(TestScenarioActions.class);
         when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.steps()).thenReturn(testScenarioSteps);
@@ -135,7 +133,7 @@ public class WebDriverActionExecutionBaseTest {
     public void properlyHandlesInterruptedExceptionBetweenRetries() throws IOException, URISyntaxException, InterruptedException {
         WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(5);
         Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
-        TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
+        TestScenarioActions testScenarioSteps = mock(TestScenarioActions.class);
         when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.steps()).thenReturn(testScenarioSteps);
@@ -155,7 +153,7 @@ public class WebDriverActionExecutionBaseTest {
     public void retriesIfCannotMakeItFromFirstTime() throws IOException, URISyntaxException {
         WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase();
         Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
-        TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
+        TestScenarioActions testScenarioSteps = mock(TestScenarioActions.class);
         when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.steps()).thenReturn(testScenarioSteps);
@@ -170,9 +168,9 @@ public class WebDriverActionExecutionBaseTest {
     @Test
     public void ifTooManyAttemtpsActionTimesOut() throws IOException, URISyntaxException {
         int maxRetries = 3;
-        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(10, maxRetries, mock(ReplaySettings.class));
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(10, maxRetries, mock(ReplayManager.class));
         Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
-        TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
+        TestScenarioActions testScenarioSteps = mock(TestScenarioActions.class);
         when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.steps()).thenReturn(testScenarioSteps);
@@ -208,7 +206,7 @@ public class WebDriverActionExecutionBaseTest {
 
         WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(executorBuilder);
         Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
-        TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
+        TestScenarioActions testScenarioSteps = mock(TestScenarioActions.class);
         when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.steps()).thenReturn(testScenarioSteps);
@@ -226,58 +224,11 @@ public class WebDriverActionExecutionBaseTest {
     }
 
     @Test
-    public void executingOnVirtualScreenKillsProcess() throws IOException, URISyntaxException {
-        int screen = 1;
-        String screenString = ":1";
-        Process process = mock(Process.class);
-        VirtualScreenProcessCreator virtualScreenProcessCreator = mock(VirtualScreenProcessCreator.class);
-        when(virtualScreenProcessCreator.getScreen(screen)).thenReturn(screenString);
-        when(virtualScreenProcessCreator.createXvfbProcess(screen)).thenReturn(process);
-        Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
-        TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
-        when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
-        TestScenario testScenario = mock(TestScenario.class);
-        when(testScenario.steps()).thenReturn(testScenarioSteps);
-
-        WebDriverActionExecutionBase webDriverActionExecutionBase = Mockito.spy(getWebDriverActionExecutionBase());
-        webDriverActionExecutionBase.createVirtualScreenProcessAndExecute(testScenario, screen, virtualScreenProcessCreator);
-
-        verify(webDriverActionExecutionBase).execute(testScenario, screenString);
-        verify(process).destroy();
-    }
-
-    @Test
-    public void correctAutomationResultIsSetIfVirtualScreenIsNotCreated() throws IOException, URISyntaxException {
-        int screen = 1;
-        VirtualScreenProcessCreator virtualScreenProcessCreator = mock(VirtualScreenProcessCreator.class);
-        when(virtualScreenProcessCreator.getScreen(screen)).thenReturn(":1");
-        when(virtualScreenProcessCreator.createXvfbProcess(screen)).thenThrow(new IOException());
-        Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
-        TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
-        when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
-        TestScenario testScenario = mock(TestScenario.class);
-
-        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase();
-        ExecutionReport executionReport = webDriverActionExecutionBase.createVirtualScreenProcessAndExecute(testScenario, screen, virtualScreenProcessCreator);
-
-        assertEquals(AutomationResult.NO_VIRTUAL_SCREEN, executionReport.getAutomationResult());
-    }
-
-    @Test
-    public void correctAutomationResultIfNoDriverIsFound() throws IOException, URISyntaxException {
-        ReplaySettings<DriverService> replaySettingsMock = mock(ReplaySettings.class);
-        doThrow(new IOException()).when(replaySettingsMock).prepareReplay(anyString(), anyString(), anyInt());
-        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(replaySettingsMock);
-        ExecutionReport executionReport = webDriverActionExecutionBase.execute(mock(TestScenario.class));
-        assertEquals(AutomationResult.COULD_NOT_CREATE_DRIVER, executionReport.getAutomationResult());
-    }
-
-    @Test
     public void throwsExceptionAfterMaxRetriesIsExceeded() throws IOException, URISyntaxException {
         WebDriverAction webDriverAction = mock(WebDriverAction.class);
         doThrow(new WebDriverException("Action cannot be executed")).when(webDriverAction).execute(any(), any());
         Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
-        TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
+        TestScenarioActions testScenarioSteps = mock(TestScenarioActions.class);
         when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
         TestScenario testScenario = mock(TestScenario.class);
         when(webDriverActionIterator.hasNext()).thenReturn(true);
@@ -292,62 +243,6 @@ public class WebDriverActionExecutionBaseTest {
         assertEquals(AutomationResult.TIMEOUT, executionReport.getAutomationResult());
     }
 
-    @Test
-    public void executeOnScreenExecutes() throws IOException, URISyntaxException {
-        WebDriverActionExecutionBase webDriverActionExecutionBase = Mockito.spy(getWebDriverActionExecutionBase());
-        WebDriverAction webDriverAction = mock(WebDriverAction.class);
-        Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
-        TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
-        when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
-        TestScenario testScenario = mock(TestScenario.class);
-        when(webDriverActionIterator.hasNext()).thenReturn(true, false);
-        when(testScenario.steps()).thenReturn(testScenarioSteps);
-        when(webDriverActionIterator.next()).thenReturn(webDriverAction);
-        String screen = ":1";
-        webDriverActionExecutionBase.execute(testScenario, screen);
-    }
-
-    @Test
-    public void canInstantiateWithDefault() throws IOException, URISyntaxException {
-        ExecutorBuilder executorBuilder = getWebDriverActionExecutor();
-        WebDriverActionExecutionBase webDriverActionExecutionBase =
-                new WebDriverActionExecutionBase(executorBuilder) {
-            @Override
-            public ReplaySettings createReplaySettings() {
-                return null;
-            }
-
-            @Override
-            public String getSystemProperty() {
-                return null;
-            }
-        };
-
-        assertNotNull(webDriverActionExecutionBase);
-    }
-
-    @Test
-    public void baseURLIsPassedCorrectly() throws IOException, URISyntaxException {
-        String baseURL = "http://tenniskafe.com";
-
-        ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
-        when(executorBuilder.getBaseURL()).thenReturn(baseURL);
-        when(executorBuilder.getProxyFacadeSupplier()).thenReturn(mock(ProxyFacadeSupplier.class));
-
-        WebDriverActionExecutionBase webDriverActionExecutionBase = new WebDriverActionExecutionBase(executorBuilder) {
-            @Override
-            public ReplaySettings createReplaySettings() {
-                return null;
-            }
-
-            @Override
-            public String getSystemProperty() {
-                return null;
-            }
-        };
-
-        assertEquals(baseURL, webDriverActionExecutionBase.getBaseURL());
-    }
 
     @Test
     public void whenSetExecutionThreadLockIsTrueExecutionThreadDoesNotWait() throws IOException, URISyntaxException {
@@ -364,15 +259,16 @@ public class WebDriverActionExecutionBaseTest {
 
         ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
         when(executorBuilder.getBaseURL()).thenReturn(baseURL);
-        when(executorBuilder.getProxyFacadeSupplier()).thenReturn(proxyFacadeSupplier);
         when(executorBuilder.getPathToDriverExecutable()).thenReturn("driver");
         when(executorBuilder.getAutomationResultBuilder()).thenReturn(getAutomationResultBuilder());
         when(executorBuilder.getProxyFacade()).thenReturn(proxyFacade);
         when(executorBuilder.getEventSynchronizer()).thenReturn(eventSynchronizer);
         when(executorBuilder.webDriverActionExecutionException(anyString(), any())).thenReturn(mock(WebDriverActionExecutionException.class));
 
-        ReplaySettings replaySettings = mock(ReplaySettings.class);
-        TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
+        ReplayManager replaySettings = mock(ReplayManager.class);
+        when(executorBuilder.getReplayManager()).thenReturn(replaySettings);
+
+        TestScenarioActions testScenarioSteps = mock(TestScenarioActions.class);
         WebDriverAction webDriverAction = mock(WebDriverAction.class);
         Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
         when(webDriverActionIterator.hasNext()).thenReturn(true, false);
@@ -380,17 +276,7 @@ public class WebDriverActionExecutionBaseTest {
         when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.steps()).thenReturn(testScenarioSteps);
-        WebDriverActionExecutionBase webDriverActionExecutionBase = new WebDriverActionExecutionBase(executorBuilder) {
-            @Override
-            public ReplaySettings createReplaySettings() {
-                return replaySettings;
-            }
-
-            @Override
-            public String getSystemProperty() {
-                return "system_property";
-            }
-        };
+        WebDriverActionExecutionBase webDriverActionExecutionBase = new WebDriverActionExecutionBase(executorBuilder);
         webDriverActionExecutionBase.execute(testScenario);
     }
 
@@ -410,37 +296,28 @@ public class WebDriverActionExecutionBaseTest {
         return getWebDriverActionExecutionBase(timeout,  getDefaultReplaySettings());
     }
 
-    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(ReplaySettings replaySettings) throws IOException, URISyntaxException {
+    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(ReplayManager replaySettings) throws IOException, URISyntaxException {
         return getWebDriverActionExecutionBase(10,  replaySettings);
     }
 
-    private ReplaySettings getDefaultReplaySettings() {
-        ReplaySettings replaySettings =  mock(ReplaySettings.class);
+    private ReplayManager getDefaultReplaySettings() {
+        ReplayManager replaySettings =  mock(ReplayManager.class);
         WebDriver webDriver = mock(WebDriver.class);
         when(replaySettings.getHar()).thenReturn(har);
         when(replaySettings.getWebDriver()).thenReturn(webDriver);
         return replaySettings;
     }
 
-    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, ReplaySettings replaySettings) throws IOException, URISyntaxException {
+    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, ReplayManager replaySettings) throws IOException, URISyntaxException {
         return getWebDriverActionExecutionBase(timeout, 10, replaySettings);
     }
 
-    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(ExecutorBuilder executorBuilder, ReplaySettings replaySettings) throws IOException, URISyntaxException {
-        return new WebDriverActionExecutionBase(executorBuilder) {
-            @Override
-            public ReplaySettings createReplaySettings() {
-                return replaySettings;
-            }
-
-            @Override
-            public String getSystemProperty() {
-                return systemProperty;
-            }
-        };
+    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(ExecutorBuilder executorBuilder, ReplayManager replaySettings) throws IOException, URISyntaxException {
+        when(executorBuilder.getReplayManager()).thenReturn(replaySettings);
+        return new WebDriverActionExecutionBase(executorBuilder);
     }
 
-    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, int maxRetries, ReplaySettings replaySettings) throws IOException, URISyntaxException {
+    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, int maxRetries, ReplayManager replaySettings) throws IOException, URISyntaxException {
         return getWebDriverActionExecutionBase(getWebDriverActionExecutor(timeout, maxRetries), replaySettings);
     }
 
@@ -493,8 +370,8 @@ public class WebDriverActionExecutionBaseTest {
         };
     }
 
-//    private ReplaySettingsBase<DriverService> getReplaySettingsBase() {
-//        return new ReplaySettingsBase<DriverService>(
+//    private ReplayManagerBase<DriverService> getReplaySettingsBase() {
+//        return new ReplayManagerBase<DriverService>(
 //                mock(RequestFilter.class),
 //                mock(ResponseFilter.class),
 //                mock(InvisibleWebDriverSupplier.class),

@@ -7,6 +7,6 @@ public abstract class VirtualScreenProcessCreatorBase implements VirtualScreenPr
 
     @Override
     public String getScreen(int i) {
-        return ":" + (i + 1);
+        return ":" + i;
     }
 }

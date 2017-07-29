@@ -16,8 +16,8 @@ public class TestScenario {
         webDriverActionQueue = new LinkedList<>();
     }
 
-    public TestScenarioSteps steps() {
-        return new TestScenarioSteps(webDriverActionQueue);
+    public TestScenarioActions steps() {
+        return new TestScenarioActions(webDriverActionQueue);
     }
     /**
      * Adds an action to the queue

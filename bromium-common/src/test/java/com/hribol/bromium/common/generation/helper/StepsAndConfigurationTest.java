@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.generation.helper;
 
+import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import org.junit.Test;
 
@@ -17,7 +18,7 @@ public class StepsAndConfigurationTest {
 
     @Test
     public void canPackage() {
-        List<Map<String, String>> steps = new ArrayList<>();
+        TestScenarioSteps steps = new TestScenarioSteps();
         ApplicationConfiguration applicationConfiguration = mock(ApplicationConfiguration.class);
 
         StepsAndConfiguration stepsAndConfiguration = new StepsAndConfiguration(steps, applicationConfiguration);

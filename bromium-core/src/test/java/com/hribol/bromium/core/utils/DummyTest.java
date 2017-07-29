@@ -1,5 +1,6 @@
 package com.hribol.bromium.core.utils;
 
+import com.hribol.bromium.core.DependencyInjectionConstants;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
@@ -15,5 +16,6 @@ public class DummyTest {
         assertNotNull(new Utils());
         assertNotNull(new Constants());
         assertNotNull(new WebDriverActions());
+        assertNotNull(new DependencyInjectionConstants());
     }
 }
