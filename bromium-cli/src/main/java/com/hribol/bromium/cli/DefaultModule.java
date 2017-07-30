@@ -390,7 +390,6 @@ public class DefaultModule extends AbstractModule {
                 .proxyFacade(proxyFacade)
                 .screenNumber(screenNumber)
                 .screenToUse(screen)
-                .pathToDriverSystemProperty(pathToDriverSystemProperty)
                 .replayManager(replayManager);
     }
 
@@ -509,11 +508,6 @@ public class DefaultModule extends AbstractModule {
     public DriverOperations getDriverOperations(IOURIProvider<ProxyDriverIntegrator> proxyDriverIntegratorIOURIProvider) throws IOException, URISyntaxException {
         return new DriverOperations(proxyDriverIntegratorIOURIProvider.get());
     }
-//
-//    @CheckedProvides(IOProvider.class)
-//    public RecordOperations getRecordManager(IOProvider<ProxyDriverIntegrator> proxyDriverIntegratorIOProvider) throws IOException {
-//        return new RecordOperations(proxyDriverIntegratorIOProvider.get());
-//    }
 
     public BrowserMobProxy createBrowserMobProxy(int timeout, RequestFilter requestFilter, ResponseFilter responseFilter) {
         BrowserMobProxyServer proxy = new BrowserMobProxyServer();

@@ -27,7 +27,6 @@ public class ExecutorBuilder {
     private EventSynchronizer eventSynchronizer;
     private ProxyFacade proxyFacade;
     private String screenToUse;
-    private String systemProperty;
     private int screenNumber;
     private ReplayManager replayManager;
 
@@ -169,14 +168,6 @@ public class ExecutorBuilder {
         return screenNumber;
     }
 
-    public String getPathToDriverSystemProperty() {
-        return systemProperty;
-    }
-
-    public ExecutorBuilder pathToDriverSystemProperty(String systemProperty) {
-        this.systemProperty = systemProperty;
-        return this;
-    }
 
     public ReplayManager getReplayManager() {
         return replayManager;

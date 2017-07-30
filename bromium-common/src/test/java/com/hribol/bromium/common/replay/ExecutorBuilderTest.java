@@ -4,6 +4,7 @@ import com.hribol.bromium.replay.execution.AutomationResultBuilder;
 import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.replay.filters.ProxyFacade;
 import com.hribol.bromium.replay.filters.ProxyFacadeSupplier;
+import com.hribol.bromium.replay.settings.ReplayManager;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -28,13 +29,14 @@ public class ExecutorBuilderTest {
         String pathToDriverExecutable = "file:///somepath";
         String baseURI = "http://tennikafe.com";
         String javascriptJsInjectionCode = "function() {}";
+        String screenToUse = ":1";
+        int screenNumber = 1;
         int precision = 600;
         int timeout = 20;
         int maxRetries = 11;
         AutomationResultBuilder automationResultBuilder = mock(AutomationResultBuilder.class);
         ProxyFacade proxyFacade = mock(ProxyFacade.class);
-        ProxyFacadeSupplier proxyFacadeSupplier = mock(ProxyFacadeSupplier.class);
-        when(proxyFacadeSupplier.get(eq(baseURI), eq(javascriptJsInjectionCode), any(EventSynchronizer.class))).thenReturn(proxyFacade);
+        ReplayManager replayManager = mock(ReplayManager.class);
 
         EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
 
@@ -47,7 +49,10 @@ public class ExecutorBuilderTest {
                 .maxRetries(maxRetries)
                 .automationResultBuilder(automationResultBuilder)
                 .proxyFacade(proxyFacade)
-                .eventSynchronizer(eventSynchronizer);
+                .eventSynchronizer(eventSynchronizer)
+                .screenToUse(screenToUse)
+                .screenNumber(screenNumber)
+                .replayManager(replayManager);
 
         assertEquals(pathToDriverExecutable, executorBuilder.getPathToDriverExecutable());
         assertEquals(baseURI, executorBuilder.getBaseURL());
@@ -63,6 +68,9 @@ public class ExecutorBuilderTest {
         assertEquals(proxyFacade, executorBuilder.getProxyFacade());
         assertEquals(eventSynchronizer, executorBuilder.getEventSynchronizer());
         assertNotNull(executorBuilder.noHttpRequestsInQueue());
+        assertEquals(screenToUse, executorBuilder.getScreenToUse());
+        assertEquals(screenNumber, executorBuilder.getScreenNumber());
+        assertEquals(replayManager, executorBuilder.getReplayManager());
     }
 
     @Rule
