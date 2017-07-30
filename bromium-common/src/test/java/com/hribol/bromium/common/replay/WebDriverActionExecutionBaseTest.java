@@ -2,6 +2,7 @@ package com.hribol.bromium.common.replay;
 
 import com.hribol.bromium.common.synchronization.NoHttpRequestsInQueue;
 import com.hribol.bromium.core.synchronization.EventSynchronizer;
+import com.hribol.bromium.core.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.execution.AutomationResultBuilder;
@@ -149,6 +150,40 @@ public class WebDriverActionExecutionBaseTest {
         when(webDriverActionIterator.next()).thenReturn(firstAction);
         ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.SUCCESS, report.getAutomationResult());
+    }
+
+    @Test
+    public void ifInterruptedWhileExecutionThreadIsWaitingThenAutomationResultIsSetCorrectly() throws Exception {
+        EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
+        doThrow(new InterruptedException("Interrupted while waiting"))
+                .when(eventSynchronizer).awaitUntil(any(SynchronizationEvent.class));
+
+        ReplayingState replayingState = mock(ReplayingState.class);
+        ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
+        when(executorBuilder.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
+        when(executorBuilder.getEventSynchronizer()).thenReturn(eventSynchronizer);
+        when(executorBuilder.getReplayingState()).thenReturn(replayingState);
+        doAnswer(invocationOnMock -> {
+            Object[] arguments = invocationOnMock.getArguments();
+            String message = (String) arguments[0];
+            Throwable throwable = (Throwable) arguments[1];
+            return new WebDriverActionExecutionException(message, throwable, getAutomationResultBuilder());
+        }).when(executorBuilder).webDriverActionExecutionException(anyString(), any(Throwable.class));
+
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(executorBuilder);
+        Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
+        TestScenarioActions testScenarioSteps = mock(TestScenarioActions.class);
+        when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
+        TestScenario testScenario = mock(TestScenario.class);
+        when(testScenario.steps()).thenReturn(testScenarioSteps);
+        when(webDriverActionIterator.hasNext()).thenReturn(true, false);
+        WebDriverAction firstAction = mock(WebDriverAction.class);
+        doThrow(new WebDriverException("Exception occured!")).when(firstAction).execute(any(), any());
+        when(webDriverActionIterator.next()).thenReturn(firstAction);
+
+
+        ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
+        assertEquals(AutomationResult.INTERRUPTED, report.getAutomationResult());
     }
 
     @Test

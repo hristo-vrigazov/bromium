@@ -13,6 +13,7 @@ import static org.mockito.Mockito.*;
  */
 public class DriverOperationsTest {
 
+    private String baseUrl = "http://something.com";
     private WebDriver driver = mock(WebDriver.class, RETURNS_DEEP_STUBS);
     private BrowserMobProxy proxy = mock(BrowserMobProxy.class);
     private DriverService driverService = mock(DriverService.class);
@@ -33,6 +34,14 @@ public class DriverOperationsTest {
         verify(driver).quit();
         verify(driverService).stop();
         verify(proxy).stop();
+    }
+
+    @Test
+    public void openBaseUrlDelegatesToDriver() {
+        DriverOperations driverOperations = new DriverOperations(getMockedProxyDriverIntegrator());
+        driverOperations.open(baseUrl);
+
+        verify(driver).get(baseUrl);
     }
 
     private ProxyDriverIntegrator getMockedProxyDriverIntegrator() {
