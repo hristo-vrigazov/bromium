@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -20,7 +21,7 @@ public class PageLoadingTest {
 
         PageLoading pageLoading = new PageLoading(url, pageLoadingEventName);
         WebDriver webDriver = mock(WebDriver.class);
-        pageLoading.execute(webDriver, mock(ReplayFiltersFacade.class));
+        pageLoading.execute(webDriver, mock(ReplayingState.class));
 
         verify(webDriver).get(url);
         assertEquals(pageLoadingEventName, pageLoading.getName());

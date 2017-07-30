@@ -53,12 +53,13 @@ import com.hribol.bromium.core.utils.parsing.StepsReader;
 import com.hribol.bromium.record.RecordRequestFilter;
 import com.hribol.bromium.record.RecordResponseFilter;
 import com.hribol.bromium.replay.ReplayBrowser;
+import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.execution.WebDriverActionExecution;
 import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
-import com.hribol.bromium.replay.filters.ProxyFacade;
-import com.hribol.bromium.replay.filters.ReplayFiltersFactory;
+import com.hribol.bromium.replay.filters.ReplayRequestFilter;
+import com.hribol.bromium.replay.filters.ReplayResponseFilter;
 import com.hribol.bromium.replay.settings.DriverServiceSupplier;
 import com.hribol.bromium.replay.settings.ReplayManager;
 import net.lightbody.bmp.BrowserMobProxy;
@@ -107,9 +108,12 @@ public class DefaultModule extends AbstractModule {
                 .to(RecorderFunctionRegistry.class);
         // TODO: other OSes should have a different binding
         bind(VirtualScreenProcessCreator.class).to(UbuntuVirtualScreenProcessCreator.class);
-        bind(RecordingState.class).in(Singleton.class);
         bindConstant().annotatedWith(Names.named(RECORD_TEMPLATE_RESOURCE)).to("/record.js");
         bindConstant().annotatedWith(Names.named(REPLAY_TEMPLATE_RESOURCE)).to("/replay.js");
+
+        // state
+        bind(RecordingState.class).in(Singleton.class);
+        bind(ReplayingState.class).in(Singleton.class);
 
         install(ThrowingProviderBinder.forModule(this));
     }
@@ -367,16 +371,19 @@ public class DefaultModule extends AbstractModule {
                                                           replayingJavascriptCodeProvider,
                                               @Named(SCREEN) String screen,
                                               @Named(SCREEN_NUMBER) int screenNumber,
-                                              @Named(PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY) String pathToDriverSystemProperty,
                                               @Named(PATH_TO_DRIVER) String pathToDriver,
                                               @Named(MEASUREMENTS_PRECISION_MILLI) int measurementsPrecisionMilli,
-                                              IOURIProvider<ProxyFacade> proxyFacadeIOURIProvider,
+                                              EventSynchronizer eventSynchronizer,
                                               WebDriverSupplier webDriverSupplier,
-                                              DriverServiceSupplier driverServiceSupplier) throws IOException, URISyntaxException {
-        ProxyFacade proxyFacade = proxyFacadeIOURIProvider.get();
-        ReplayManager replayManager = createReplayManager(webDriverSupplier,
+                                              ReplayRequestFilter replayRequestFilter,
+                                              IOProvider<ReplayResponseFilter> replayResponseFilterIOProvider,
+                                              DriverServiceSupplier driverServiceSupplier,
+                                              ReplayingState replayingState) throws IOException, URISyntaxException {
+        ReplayManager replayManager = createReplayManager(
+                replayRequestFilter,
+                replayResponseFilterIOProvider.get(),
+                webDriverSupplier,
                 driverServiceSupplier,
-                proxyFacade,
                 timeout,
                 pathToDriver,
                 screen);
@@ -387,21 +394,23 @@ public class DefaultModule extends AbstractModule {
                 .timeoutInSeconds(timeout)
                 .measurementsPrecisionInMilliseconds(measurementsPrecisionMilli)
                 .javascriptInjectionCode(replayingJavascriptCodeProvider.get())
-                .proxyFacade(proxyFacade)
                 .screenNumber(screenNumber)
                 .screenToUse(screen)
-                .replayManager(replayManager);
+                .replayManager(replayManager)
+                .replayingState(replayingState)
+                .eventSynchronizer(eventSynchronizer);
     }
 
-    public <T extends DriverService> ReplayManager createReplayManager(WebDriverSupplier<T> webDriverSupplier,
-                                                                       DriverServiceSupplier<T> driverServiceSupplier,
-                                                                       ProxyFacade proxyFacade,
-                                                                       int timeout,
-                                                                       String pathToDriver,
-                                                                       String screenToUse) throws IOException {
-        RequestFilter requestFilter = proxyFacade.getRequestFilter();
-        ResponseFilter responseFilter = proxyFacade.getResponseFilter();
-        ReplayManager replayManager = new ReplayManagerBase<>(requestFilter, responseFilter,
+    public <T extends DriverService> ReplayManager createReplayManager(
+            ReplayRequestFilter requestFilter,
+            ReplayResponseFilter responseFilter,
+            WebDriverSupplier<T> webDriverSupplier,
+            DriverServiceSupplier<T> driverServiceSupplier,
+            int timeout,
+            String pathToDriver,
+            String screenToUse) throws IOException {
+        ReplayManager replayManager = new ReplayManagerBase<>(requestFilter,
+                responseFilter,
                 webDriverSupplier,
                 driverServiceSupplier,
                 timeout,
@@ -557,18 +566,17 @@ public class DefaultModule extends AbstractModule {
     }
 
     @Provides
+    @Singleton
     public EventSynchronizer getEventSynchronizer(@Named(TIMEOUT) Integer timeout) {
         return new SignalizationBasedEventSynchronizer(timeout);
     }
 
-    @CheckedProvides(IOURIProvider.class)
-    public ProxyFacade getProxyFacade(@Named(BASE_URL) String baseURI,
-                                      @Named(REPLAYING_JAVASCRIPT_CODE) IOProvider<String> injectionCodeProvider,
-                                      EventSynchronizer eventSynchronizer,
-                                      ReplayFiltersFactory replayFiltersFactory) throws IOException, URISyntaxException {
-        return new ProxyFacade(baseURI, injectionCodeProvider.get(), eventSynchronizer, replayFiltersFactory);
+    @CheckedProvides(IOProvider.class)
+    public ReplayResponseFilter getReplayResponseFilter(@Named(BASE_URI) URI baseURI,
+                                                        @Named(REPLAYING_JAVASCRIPT_CODE) IOProvider<String> codeProvider,
+                                                        ReplayingState replayingState) throws IOException {
+        return new ReplayResponseFilter(baseURI, codeProvider.get(), replayingState);
     }
-
 
 }
 

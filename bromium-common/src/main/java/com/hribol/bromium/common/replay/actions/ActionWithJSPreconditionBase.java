@@ -2,6 +2,7 @@ package com.hribol.bromium.common.replay.actions;
 
 import com.hribol.bromium.common.replay.InstanceBasedAutomationResultBuilder;
 import com.hribol.bromium.common.synchronization.JSPrecondition;
+import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.actions.ActionWithJSPrecondition;
 import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
@@ -18,20 +19,20 @@ import java.util.concurrent.TimeoutException;
 public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecondition, WebDriverAction {
 
     @Override
-    public void execute(WebDriver driver, ReplayFiltersFacade facade) {
+    public void execute(WebDriver driver, ReplayingState replayingState) {
         String hashCodeToWaitFor = String.valueOf(getJSEventToWaitFor().hashCode());
-        EventSynchronizer eventSynchronizer = facade.getEventSynchronizer();
-        SynchronizationEvent synchronizationEvent = new JSPrecondition(hashCodeToWaitFor, facade.getRequestFilter(), eventSynchronizer);
+        EventSynchronizer eventSynchronizer = replayingState.getEventSynchronizer();
+        SynchronizationEvent synchronizationEvent = new JSPrecondition(hashCodeToWaitFor, eventSynchronizer, replayingState);
         try {
-            facade.getRequestFilter().setSynchronizationEvent(synchronizationEvent);
+            replayingState.setSynchronizationEvent(synchronizationEvent);
             eventSynchronizer.awaitUntil(synchronizationEvent);
         } catch (InterruptedException | TimeoutException e) {
             throw new WebDriverActionExecutionException("Exception while awaiting JS precondition", e, new InstanceBasedAutomationResultBuilder());
         }
 
-        executeAfterJSPreconditionHasBeenSatisfied(driver, facade);
+        executeAfterJSPreconditionHasBeenSatisfied(driver, replayingState);
     }
 
-    public abstract void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayFiltersFacade facade);
+    public abstract void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState);
 
 }

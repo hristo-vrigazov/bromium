@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
 import org.junit.Rule;
@@ -35,13 +36,13 @@ public class TextOfElementFoundByCssSelectorToBeTest {
     public void timesOutIfNoSuitableElements() {
         WebDriverAction webDriverAction = getActionBase("bla");
         thrown.expect(TimeoutException.class);
-        webDriverAction.execute(driver, mock(ReplayFiltersFacade.class));
+        webDriverAction.execute(driver, mock(ReplayingState.class));
     }
 
     @Test
     public void doesNotTimeoutIfSuitableElementIsFound() {
         WebDriverAction webDriverAction = getActionBase(text);
-        webDriverAction.execute(driver, mock(ReplayFiltersFacade.class));
+        webDriverAction.execute(driver, mock(ReplayingState.class));
     }
 
     private WebDriverAction getActionBase(String textOfElement) {

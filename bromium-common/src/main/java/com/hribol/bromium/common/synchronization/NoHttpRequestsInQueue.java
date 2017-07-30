@@ -2,6 +2,7 @@ package com.hribol.bromium.common.synchronization;
 
 import com.hribol.bromium.core.synchronization.EventSignalizer;
 import com.hribol.bromium.core.synchronization.SynchronizationEvent;
+import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.filters.ReplayResponseFilter;
 
 /**
@@ -9,11 +10,11 @@ import com.hribol.bromium.replay.filters.ReplayResponseFilter;
  */
 public class NoHttpRequestsInQueue implements SynchronizationEvent {
 
-    private ReplayResponseFilter replayResponseFilter;
+    private ReplayingState replayingState;
     private EventSignalizer eventSignalizer;
 
-    public NoHttpRequestsInQueue(ReplayResponseFilter replayResponseFilter, EventSignalizer eventSignalizer) {
-        this.replayResponseFilter = replayResponseFilter;
+    public NoHttpRequestsInQueue(ReplayingState replayingState, EventSignalizer eventSignalizer) {
+        this.replayingState = replayingState;
         this.eventSignalizer = eventSignalizer;
     }
 
@@ -24,7 +25,7 @@ public class NoHttpRequestsInQueue implements SynchronizationEvent {
 
     @Override
     public boolean isSatisfied() {
-        return replayResponseFilter.httpRequestQueueIsEmpty();
+        return replayingState.httpRequestQueueIsEmpty();
     }
 
     @Override

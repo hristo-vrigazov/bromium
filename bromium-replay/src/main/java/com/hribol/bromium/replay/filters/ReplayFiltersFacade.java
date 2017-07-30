@@ -12,6 +12,4 @@ public interface ReplayFiltersFacade {
     ReplayResponseFilter getResponseFilter();
 
     EventSynchronizer getEventSynchronizer();
-
-    boolean canAct();
 }

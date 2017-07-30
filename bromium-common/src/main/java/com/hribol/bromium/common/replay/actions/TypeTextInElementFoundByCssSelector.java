@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
 import org.openqa.selenium.By;
@@ -24,7 +25,7 @@ public class TypeTextInElementFoundByCssSelector implements WebDriverAction {
     }
 
     @Override
-    public void execute(WebDriver driver, ReplayFiltersFacade facade) {
+    public void execute(WebDriver driver, ReplayingState state) {
         By locator = By.cssSelector(cssSelector);
         WebElement element = driver.findElement(locator);
         element.clear();

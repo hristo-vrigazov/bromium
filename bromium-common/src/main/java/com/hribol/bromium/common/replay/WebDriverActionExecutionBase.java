@@ -27,7 +27,6 @@ public class WebDriverActionExecutionBase implements WebDriverActionExecution {
 
     public WebDriverActionExecutionBase(ExecutorBuilder executor) throws IOException, URISyntaxException {
         this.executor = executor;
-        this.proxyFacade = executor.getProxyFacade();
         this.automationResult = AutomationResult.NOT_STARTED;
     }
 
@@ -50,13 +49,13 @@ public class WebDriverActionExecutionBase implements WebDriverActionExecution {
                 System.out.println("Executing " + webDriverAction.getName());
                 try {
                     SynchronizationEvent synchronizationEvent = executor.noHttpRequestsInQueue();
-                    executor.getProxyFacade().getResponseFilter().setSynchronizationEvent(synchronizationEvent);
+                    executor.getReplayingState().setSynchronizationEvent(synchronizationEvent);
                     executor.getEventSynchronizer().awaitUntil(synchronizationEvent);
                 } catch (InterruptedException | URISyntaxException | java.util.concurrent.TimeoutException e) {
                     throw executor.webDriverActionExecutionException("Exception during execution", e);
                 }
 
-                proxyFacade.getRequestFilter().setHttpLock(webDriverAction.expectsHttpRequest());
+                executor.getReplayingState().setHttpLock(webDriverAction.expectsHttpRequest());
 
                 Future<?> future = executorService.submit(() -> executeIgnoringExceptions(replayManager.getWebDriver(), webDriverAction));
                 try {
@@ -84,7 +83,6 @@ public class WebDriverActionExecutionBase implements WebDriverActionExecution {
         return new ExecutionReport(loadingTimes, replayManager.getHar(), automationResult);
     }
 
-    private ReplayFiltersFacade proxyFacade;
     private ExecutorBuilder executor;
 
     private AutomationResult automationResult;
@@ -94,7 +92,7 @@ public class WebDriverActionExecutionBase implements WebDriverActionExecution {
 
         while (i < executor.getMaxRetries()) {
             try {
-                webDriverAction.execute(webDriver, proxyFacade);
+                webDriverAction.execute(webDriver, executor.getReplayingState());
                 return;
             } catch (WebDriverException ex) {
                 System.out.println(ex.toString());

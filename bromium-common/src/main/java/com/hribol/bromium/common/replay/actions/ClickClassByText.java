@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotSelectableException;
@@ -32,7 +33,7 @@ public class ClickClassByText extends ActionWithJSPreconditionBase {
     }
 
     @Override
-    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayFiltersFacade facade) {
+    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState state) {
         By elementsLocator = By.className(initialCollectorClass);
         List<WebElement> webElements = driver.findElements(elementsLocator);
 
