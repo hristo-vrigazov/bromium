@@ -29,6 +29,7 @@ public class ExecutorBuilder {
     private int screenNumber;
     private ReplayManager replayManager;
     private ReplayingState replayingState;
+    private DriverOperations driverOperations;
 
     public ExecutorBuilder pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
@@ -176,5 +177,14 @@ public class ExecutorBuilder {
 
     public ReplayingState getReplayingState() {
         return replayingState;
+    }
+
+    public DriverOperations getDriverOperations() {
+        return driverOperations;
+    }
+
+    public ExecutorBuilder driverOperations(DriverOperations driverOperations) {
+        this.driverOperations = driverOperations;
+        return this;
     }
 }

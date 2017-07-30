@@ -84,6 +84,7 @@ import org.openqa.selenium.remote.service.DriverService;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Driver;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
@@ -423,20 +424,8 @@ public class DefaultModule extends AbstractModule {
                                               @Named(PATH_TO_DRIVER) String pathToDriver,
                                               @Named(MEASUREMENTS_PRECISION_MILLI) int measurementsPrecisionMilli,
                                               EventSynchronizer eventSynchronizer,
-                                              WebDriverSupplier webDriverSupplier,
-                                              ReplayRequestFilter replayRequestFilter,
-                                              IOProvider<ReplayResponseFilter> replayResponseFilterIOProvider,
-                                              DriverServiceSupplier driverServiceSupplier,
-                                              ReplayingState replayingState) throws IOException, URISyntaxException {
-        ReplayManager replayManager = createReplayManager(
-                replayRequestFilter,
-                replayResponseFilterIOProvider.get(),
-                webDriverSupplier,
-                driverServiceSupplier,
-                timeout,
-                pathToDriver,
-                screen);
-
+                                              ReplayingState replayingState,
+                                              IOURIProvider<DriverOperations> driverOperationsIOURIProvider) throws IOException, URISyntaxException {
         return executorBuilder
                 .pathToDriverExecutable(pathToDriver)
                 .baseURL(baseUrl)
@@ -445,28 +434,9 @@ public class DefaultModule extends AbstractModule {
                 .javascriptInjectionCode(replayingJavascriptCodeProvider.get())
                 .screenNumber(screenNumber)
                 .screenToUse(screen)
-                .replayManager(replayManager)
                 .replayingState(replayingState)
-                .eventSynchronizer(eventSynchronizer);
-    }
-
-    public <T extends DriverService> ReplayManager createReplayManager(
-            ReplayRequestFilter requestFilter,
-            ReplayResponseFilter responseFilter,
-            WebDriverSupplier<T> webDriverSupplier,
-            DriverServiceSupplier<T> driverServiceSupplier,
-            int timeout,
-            String pathToDriver,
-            String screenToUse) throws IOException {
-        ReplayManager replayManager = new ReplayManagerBase<>(requestFilter,
-                responseFilter,
-                webDriverSupplier,
-                driverServiceSupplier,
-                timeout,
-                screenToUse);
-
-        replayManager.prepareReplay(pathToDriver);
-        return replayManager;
+                .eventSynchronizer(eventSynchronizer)
+                .driverOperations(driverOperationsIOURIProvider.get());
     }
 
     @CheckedProvides(IOURIProvider.class)

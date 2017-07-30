@@ -159,10 +159,12 @@ public class WebDriverActionExecutionBaseTest {
                 .when(eventSynchronizer).awaitUntil(any(SynchronizationEvent.class));
 
         ReplayingState replayingState = mock(ReplayingState.class);
+        DriverOperations driverOperations = mock(DriverOperations.class);
         ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
         when(executorBuilder.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
         when(executorBuilder.getEventSynchronizer()).thenReturn(eventSynchronizer);
         when(executorBuilder.getReplayingState()).thenReturn(replayingState);
+        when(executorBuilder.getDriverOperations()).thenReturn(driverOperations);
         doAnswer(invocationOnMock -> {
             Object[] arguments = invocationOnMock.getArguments();
             String message = (String) arguments[0];
@@ -255,6 +257,7 @@ public class WebDriverActionExecutionBaseTest {
         NoHttpRequestsInQueue noHttpRequestsInQueue = mock(NoHttpRequestsInQueue.class);
         EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
         ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
+        DriverOperations driverOperations = mock(DriverOperations.class);
         when(executorBuilder.getBaseURL()).thenReturn(baseURI);
         when(executorBuilder.getMeasurementsPrecisionMilli()).thenReturn(precision);
         when(executorBuilder.getTimeout()).thenReturn(timeout);
@@ -264,6 +267,7 @@ public class WebDriverActionExecutionBaseTest {
         when(executorBuilder.noHttpRequestsInQueue()).thenReturn(noHttpRequestsInQueue);
         when(executorBuilder.getReplayingState()).thenReturn(replayingState);
         when(executorBuilder.getEventSynchronizer()).thenReturn(eventSynchronizer);
+        when(executorBuilder.getDriverOperations()).thenReturn(driverOperations);
         doAnswer(invocationOnMock -> {
             Object[] arguments = invocationOnMock.getArguments();
             String message = (String) arguments[0];
@@ -288,28 +292,4 @@ public class WebDriverActionExecutionBaseTest {
             return AutomationResult.UNRECOGNIZED_EXCEPTION;
         };
     }
-
-//    private ReplayManagerBase<DriverService> getReplaySettingsBase() {
-//        return new ReplayManagerBase<DriverService>(
-//                mock(RequestFilter.class),
-//                mock(ResponseFilter.class),
-//                mock(WebDriverSupplier.class),
-//                mock(VisibleWebDriverSupplier.class)) {
-//            @Override
-//            public DriverService getDriverService(String pathToDriverExecutable, String screenToUse) throws IOException {
-//                return null;
-//            }
-//
-//            @Override
-//            public void prepareReplay(String pathToDriver, String screenToUse, int timeout) throws IOException {
-//                throw new IOException("No webdriver");
-//            }
-//
-//            @Override
-//            public Har getHar() {
-//                return mock(Har.class);
-//            }
-//
-//        };
-//    }
 }

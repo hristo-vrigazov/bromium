@@ -32,7 +32,8 @@ public class WebDriverActionExecutionBase implements WebDriverActionExecution {
 
     @Override
     public ExecutionReport execute(TestScenario testScenario) {
-        ReplayManager replayManager = executor.getReplayManager();
+        DriverOperations driverOperations = executor.getDriverOperations();
+        driverOperations.prepare();
         automationResult = AutomationResult.NOT_STARTED;
         ExecutorService executorService = Executors.newSingleThreadExecutor();
 
@@ -57,7 +58,8 @@ public class WebDriverActionExecutionBase implements WebDriverActionExecution {
 
                 executor.getReplayingState().setHttpLock(webDriverAction.expectsHttpRequest());
 
-                Future<?> future = executorService.submit(() -> executeIgnoringExceptions(replayManager.getWebDriver(), webDriverAction));
+                Future<?> future = executorService.submit(() -> executeIgnoringExceptions(driverOperations.getDriver(),
+                        webDriverAction));
                 try {
                     future.get(executor.getTimeout(), TimeUnit.SECONDS);
                 }  catch (java.util.concurrent.TimeoutException | InterruptedException e) {
@@ -77,10 +79,10 @@ public class WebDriverActionExecutionBase implements WebDriverActionExecution {
             this.automationResult = executionException.getAutomationResult();
         }
 
-        replayManager.cleanUpReplay();
+        driverOperations.cleanUp();
         executorService.shutdownNow();
         LoadingTimes loadingTimes = new LoadingTimes(testScenario.getActions(), waitingTimes, actionTimestamps);
-        return new ExecutionReport(loadingTimes, replayManager.getHar(), automationResult);
+        return new ExecutionReport(loadingTimes, driverOperations.getHar(), automationResult);
     }
 
     private ExecutorBuilder executor;
