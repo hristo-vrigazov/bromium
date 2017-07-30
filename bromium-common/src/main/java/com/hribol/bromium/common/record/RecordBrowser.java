@@ -1,8 +1,10 @@
 package com.hribol.bromium.common.record;
 
+import com.hribol.bromium.common.replay.DriverOperations;
 import com.hribol.bromium.core.TestScenarioSteps;
 
 import java.io.IOException;
+import java.util.function.Supplier;
 
 /**
  * Created by hvrigazov on 09.03.17.
@@ -10,24 +12,27 @@ import java.io.IOException;
 public class RecordBrowser {
 
     private final String baseUrl;
-    private final RecordOperations recordOperations;
+    private final DriverOperations recordOperations;
+    private Supplier<TestScenarioSteps> stepsSupplier;
 
     public RecordBrowser(String baseUrl,
-                         RecordOperations recordOperations) throws IOException {
+                         DriverOperations recordOperations,
+                         Supplier<TestScenarioSteps> stepsSupplier) throws IOException {
         this.baseUrl = baseUrl;
         this.recordOperations = recordOperations;
+        this.stepsSupplier = stepsSupplier;
     }
 
     public void record() throws IOException {
-        recordOperations.prepareRecord();
+        recordOperations.prepare();
         recordOperations.open(baseUrl);
     }
 
     public TestScenarioSteps getTestCaseSteps() {
-        return recordOperations.getTestCaseSteps();
+        return stepsSupplier.get();
     }
 
     public void cleanUp() {
-        recordOperations.cleanUpRecord();
+        recordOperations.cleanUp();
     }
 }

@@ -1,6 +1,6 @@
 package com.hribol.bromium.browsers.chrome.base;
 
-import com.hribol.bromium.core.suppliers.InvisibleWebDriverSupplier;
+import com.hribol.bromium.core.suppliers.WebDriverSupplier;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -24,8 +24,8 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
         DriverService.class,
         ChromeDriverService.class,
         DesiredCapabilities.class,
-        InvisibleWebDriverSupplier.class,
-        InvisibleChromeDriverSupplier.class})
+        WebDriverSupplier.class,
+        ChromeDriverSupplier.class})
 public class InvisibleChromeDriverSupplierTest {
 
     @Test
@@ -34,8 +34,8 @@ public class InvisibleChromeDriverSupplierTest {
         ChromeDriverService chromeDriverService = mock(ChromeDriverService.class);
         DesiredCapabilities desiredCapabilities = mock(DesiredCapabilities.class);
         whenNew(ChromeDriver.class).withArguments(chromeDriverService, desiredCapabilities).thenReturn(chromeDriver);
-        InvisibleWebDriverSupplier<ChromeDriverService> invisibleWebDriverSupplier = new InvisibleChromeDriverSupplier();
-        WebDriver driver = invisibleWebDriverSupplier.get(chromeDriverService, desiredCapabilities);
+        WebDriverSupplier<ChromeDriverService> webDriverSupplier = new ChromeDriverSupplier();
+        WebDriver driver = webDriverSupplier.get(chromeDriverService, desiredCapabilities);
         assertNotNull(driver);
     }
 }

@@ -6,10 +6,12 @@ import com.google.inject.name.Named;
 import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.core.TestScenarioSteps;
+import com.hribol.bromium.core.providers.IOURIProvider;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.core.utils.parsing.StepsDumper;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Optional;
 
 import static com.hribol.bromium.core.DependencyInjectionConstants.*;
@@ -22,7 +24,7 @@ public class RecordCommand implements Command {
     private final int screen;
     private PromptUtils promptUtils;
     private String outputFile;
-    private IOProvider<RecordBrowser> recordBrowserBaseIOProvider;
+    private IOURIProvider<RecordBrowser> recordBrowserBaseIOProvider;
     private final VirtualScreenProcessCreator virtualScreenProcessCreator;
     private StepsDumper stepsDumper;
 
@@ -30,7 +32,7 @@ public class RecordCommand implements Command {
     public RecordCommand(@Named(OUTPUT_FILE) String outputFile,
                          @Named(SCREEN_NUMBER) int screen,
                          PromptUtils promptUtils,
-                         IOProvider<RecordBrowser> recordBrowserBaseIOProvider,
+                         IOURIProvider<RecordBrowser> recordBrowserBaseIOProvider,
                          VirtualScreenProcessCreator virtualScreenProcessCreator,
                          StepsDumper stepsDumper) {
         this.screen = screen;
@@ -55,7 +57,7 @@ public class RecordCommand implements Command {
             TestScenarioSteps testScenarioSteps = recordBrowser.getTestCaseSteps();
             stepsDumper.dump(testScenarioSteps, outputFile);
             recordBrowser.cleanUp();
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         } finally {
             promptUtils.dispose();

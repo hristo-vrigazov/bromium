@@ -20,7 +20,7 @@ import static com.hribol.bromium.cli.Main.Commands.*;
  */
 public class Main {
 
-    static class Commands {
+    public static class Commands {
         static final String INIT = "init";
         static final String RECORD = "record";
         static final String REPLAY = "replay";

@@ -21,7 +21,7 @@ public class ReplayManagerBase<T extends DriverService> implements ReplayManager
     private BrowserMobProxy proxy;
     private RequestFilter requestFilter;
     private ResponseFilter responseFilter;
-    private InvisibleWebDriverSupplier<T> invisibleWebDriverSupplier;
+    private WebDriverSupplier<T> webDriverSupplier;
     private DriverServiceSupplier<T> driverServiceSupplier;
     private int timeout;
     private String screenToUse;
@@ -31,13 +31,13 @@ public class ReplayManagerBase<T extends DriverService> implements ReplayManager
 
     public ReplayManagerBase(RequestFilter requestFilter,
                              ResponseFilter responseFilter,
-                             InvisibleWebDriverSupplier<T> invisibleWebDriverSupplier,
+                             WebDriverSupplier<T> webDriverSupplier,
                              DriverServiceSupplier<T> driverServiceSupplier,
                              int timeout,
                              String screenToUse) {
         this.requestFilter = requestFilter;
         this.responseFilter = responseFilter;
-        this.invisibleWebDriverSupplier = invisibleWebDriverSupplier;
+        this.webDriverSupplier = webDriverSupplier;
         this.driverServiceSupplier = driverServiceSupplier;
         this.timeout = timeout;
         this.screenToUse = screenToUse;
@@ -68,7 +68,7 @@ public class ReplayManagerBase<T extends DriverService> implements ReplayManager
         Proxy seleniumProxy = new SeleniumProxySupplier(proxy).get();
         DesiredCapabilities capabilities = new DesiredCapabilitiesSupplier(seleniumProxy).get();
         T driverService = driverServiceSupplier.getDriverService(pathToDriver, screenToUse);
-        this.driver = invisibleWebDriverSupplier.get(driverService, capabilities);
+        this.driver = webDriverSupplier.get(driverService, capabilities);
         this.driverService = driverService;
         this.driver.manage().window().maximize();
     }

@@ -374,7 +374,7 @@ public class WebDriverActionExecutionBaseTest {
 //        return new ReplayManagerBase<DriverService>(
 //                mock(RequestFilter.class),
 //                mock(ResponseFilter.class),
-//                mock(InvisibleWebDriverSupplier.class),
+//                mock(WebDriverSupplier.class),
 //                mock(VisibleWebDriverSupplier.class)) {
 //            @Override
 //            public DriverService getDriverService(String pathToDriverExecutable, String screenToUse) throws IOException {

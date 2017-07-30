@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay;
 
+import com.hribol.bromium.common.ProxyDriverIntegrator;
 import net.lightbody.bmp.BrowserMobProxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.service.DriverService;
@@ -26,5 +27,9 @@ public class DriverOperations {
         driver.quit();
         proxy.stop();
         driverService.stop();
+    }
+
+    public void open(String baseUrl) {
+        driver.get(baseUrl);
     }
 }

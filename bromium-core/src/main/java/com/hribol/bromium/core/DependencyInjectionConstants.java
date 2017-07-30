@@ -37,4 +37,5 @@ public class DependencyInjectionConstants {
     public static final String SCREEN = "SCREEN";
     public static final String PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY = "PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY";
 
+    public static final String COMMAND = "COMMAND";
 }
