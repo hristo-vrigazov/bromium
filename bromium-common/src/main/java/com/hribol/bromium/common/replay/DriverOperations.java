@@ -2,6 +2,7 @@ package com.hribol.bromium.common.replay;
 
 import com.hribol.bromium.common.ProxyDriverIntegrator;
 import net.lightbody.bmp.BrowserMobProxy;
+import net.lightbody.bmp.core.har.Har;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.service.DriverService;
 
@@ -9,6 +10,10 @@ import org.openqa.selenium.remote.service.DriverService;
  * Created by hvrigazov on 27.07.17.
  */
 public class DriverOperations {
+    public WebDriver getDriver() {
+        return driver;
+    }
+
     private WebDriver driver;
     private BrowserMobProxy proxy;
     private DriverService driverService;
@@ -31,5 +36,9 @@ public class DriverOperations {
 
     public void open(String baseUrl) {
         driver.get(baseUrl);
+    }
+
+    public Har getHar() {
+        return proxy.getHar();
     }
 }

@@ -21,11 +21,11 @@ import static com.hribol.bromium.cli.Main.Commands.*;
 public class Main {
 
     public static class Commands {
-        static final String INIT = "init";
-        static final String RECORD = "record";
-        static final String REPLAY = "replay";
-        static final String UPDATE = "update";
-        static final String VERSION = "version";
+        public static final String INIT = "init";
+        public static final String RECORD = "record";
+        public static final String REPLAY = "replay";
+        public static final String UPDATE = "update";
+        public static final String VERSION = "version";
     }
 
     private static Injector injector;
@@ -38,8 +38,6 @@ public class Main {
             Map<String, Object> opts = docopt.withVersion("bromium 0.1").parse(args);
 
             System.out.println(opts);
-            injector = Guice.createInjector(new DefaultModule(opts));
-
             Map<String, Supplier<Command>> commandToHandler = getCommands();
             Optional<String> optionalSelectedCommand = commandToHandler
                     .keySet()
@@ -47,7 +45,14 @@ public class Main {
                     .filter(command -> opts.get(command).equals(true))
                     .findAny();
 
+            if (!optionalSelectedCommand.isPresent()) {
+                System.out.println("No command selected");
+                return;
+            }
+
+            injector = Guice.createInjector(new DefaultModule(optionalSelectedCommand.get(), opts));
             optionalSelectedCommand.ifPresent(command -> commandToHandler.get(command).get().run());
+
         } catch (IOException e) {
             e.printStackTrace();
         }

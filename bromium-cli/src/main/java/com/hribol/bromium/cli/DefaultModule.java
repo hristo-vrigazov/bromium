@@ -26,6 +26,9 @@ import com.hribol.bromium.common.generation.replay.*;
 import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
 import com.hribol.bromium.common.ProxyDriverIntegrator;
 import com.hribol.bromium.common.record.RecordBrowser;
+import com.hribol.bromium.core.suppliers.BrowserMobProxySupplier;
+import com.hribol.bromium.core.suppliers.DesiredCapabilitiesSupplier;
+import com.hribol.bromium.core.suppliers.SeleniumProxySupplier;
 import com.hribol.bromium.core.utils.GetHtmlFromCurrentHostPredicate;
 import com.hribol.bromium.record.RecordingState;
 import com.hribol.bromium.common.replay.DriverOperations;
@@ -86,6 +89,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import static com.hribol.bromium.cli.Main.Commands.RECORD;
+import static com.hribol.bromium.cli.Main.Commands.REPLAY;
 import static com.hribol.bromium.core.DependencyInjectionConstants.*;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
@@ -93,9 +98,11 @@ import static org.openqa.selenium.remote.BrowserType.CHROME;
  * Created by hvrigazov on 09.06.17.
  */
 public class DefaultModule extends AbstractModule {
+    private String command;
     private Map<String, Object> opts;
 
-    public DefaultModule(Map<String, Object> opts) {
+    public DefaultModule(String command, Map<String, Object> opts) {
+        this.command = command;
         this.opts = opts;
     }
 
@@ -199,6 +206,44 @@ public class DefaultModule extends AbstractModule {
     @Provides
     public WebDriverActionFactory getWebDriverActionFactory(ParsedOptions parsedOptions) {
         return new PredefinedWebDriverActionFactory(parsedOptions.getBaseUrl());
+    }
+
+    @Provides
+    @Named(COMMAND)
+    public String getCommand() {
+        return command;
+    }
+
+    @Provides
+    public RequestFilter getRequestFilter(@Named(COMMAND) String command,
+                                          RecordingState recordingState,
+                                          ReplayingState replayingState) {
+        switch (command) {
+            case RECORD:
+                return new RecordRequestFilter(recordingState);
+            case REPLAY:
+                return new ReplayRequestFilter(replayingState);
+            default:
+                throw new NoSuchCommandException();
+        }
+    }
+
+    @CheckedProvides(IOProvider.class)
+    public ResponseFilter getResponseFilter(@Named(COMMAND) String command,
+                                            ReplayingState replayingState,
+                                            Predicate<HttpRequest> httpRequestPredicate,
+                                            @Named(RECORDING_JAVASCRIPT_CODE) IOProvider<String>
+                                                        recordingJavascriptCodeProvider,
+                                            @Named(REPLAYING_JAVASCRIPT_CODE) IOProvider<String>
+                                                        replayingJavascriptCodeProvider) throws IOException {
+        switch (command) {
+            case RECORD:
+                return new RecordResponseFilter(recordingJavascriptCodeProvider.get(), httpRequestPredicate);
+            case REPLAY:
+                return new ReplayResponseFilter(replayingJavascriptCodeProvider.get(), replayingState,httpRequestPredicate);
+            default:
+                throw new NoSuchCommandException();
+        }
     }
 
     @Provides
@@ -431,7 +476,7 @@ public class DefaultModule extends AbstractModule {
         return new RecordBrowser(
                 baseUrl,
                 driverOperationsIOURIProvider.get(),
-                () -> recordingState.getTestScenarioSteps());
+                recordingState::getTestScenarioSteps);
     }
 
     @CheckedProvides(IOURIProvider.class)
@@ -469,15 +514,32 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOURIProvider.class)
-    public ProxyDriverIntegrator getProxyDriverIntegrator(RecordRequestFilter recordRequestFilter,
-                                                          IOProvider<RecordResponseFilter> responseFilterIOURIProvider,
+    public ProxyDriverIntegrator getProxyDriverIntegrator(RequestFilter requestFilter,
+                                                          IOProvider<ResponseFilter> responseFilterIOURIProvider,
                                                           WebDriverSupplier webDriverSupplier,
                                                           DriverServiceSupplier driverServiceSupplier,
                                                           @Named(PATH_TO_DRIVER) String pathToDriverExecutable,
                                                           @Named(SCREEN) String screen,
                                                           @Named(TIMEOUT) int timeout) throws IOException, URISyntaxException {
-        ResponseFilter responseFilter = responseFilterIOURIProvider.get();
-        return getProxyDriverIntegrator(recordRequestFilter, webDriverSupplier, driverServiceSupplier, pathToDriverExecutable, screen, timeout, responseFilter);
+        return getProxyDriverIntegrator(requestFilter, webDriverSupplier, driverServiceSupplier, pathToDriverExecutable, screen, timeout,
+                responseFilterIOURIProvider.get());
+    }
+
+    private <T extends DriverService> ProxyDriverIntegrator createProxyDriverIntegrator(
+            int timeout,
+            RequestFilter requestFilter,
+            ResponseFilter responseFilter,
+            DriverServiceSupplier<T> driverServiceSupplier,
+            WebDriverSupplier<T> webDriverSupplier,
+            String pathToDriver,
+            String screenToUse) throws IOException {
+        BrowserMobProxy proxy = new BrowserMobProxySupplier(timeout, requestFilter, responseFilter).get();
+        proxy.start(0);
+        Proxy seleniumProxy = new SeleniumProxySupplier(proxy).get();
+        DesiredCapabilities capabilities = new DesiredCapabilitiesSupplier(seleniumProxy).get();
+        T driverService = driverServiceSupplier.getDriverService(pathToDriver, screenToUse);
+        WebDriver driver = webDriverSupplier.get(driverService, capabilities);
+        return new ProxyDriverIntegrator(driver, proxy, driverService);
     }
 
     private ProxyDriverIntegrator getProxyDriverIntegrator(RequestFilter recordRequestFilter,

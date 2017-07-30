@@ -3,6 +3,7 @@ package com.hribol.bromium.integration.tests.record;
 import com.google.inject.*;
 import com.google.inject.util.Modules;
 import com.hribol.bromium.cli.DefaultModule;
+import com.hribol.bromium.cli.Main;
 import com.hribol.bromium.cli.commands.PromptUtils;
 import com.hribol.bromium.cli.commands.RecordCommand;
 import com.hribol.bromium.core.TestScenarioSteps;
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.hribol.bromium.cli.Main.Commands.RECORD;
 import static com.hribol.bromium.cli.ParsedOptions.*;
 import static com.hribol.bromium.core.utils.Constants.SUBMIT_EVENT_URL;
 import static com.hribol.bromium.integration.tests.TestUtils.exampleTestScenarioSteps;
@@ -53,7 +55,8 @@ public class RecordThroughTheRecordRequestFilterIT extends BaseDemoAppIntegratio
         opts.put(TIMEOUT, String.valueOf(10));
         opts.put(SCREEN, String.valueOf(1));
 
-        Module defaultModule = new DefaultModule(opts);
+
+        Module defaultModule = new DefaultModule(RECORD, opts);
         TestScenarioSteps expected = exampleTestScenarioSteps();
 
         Injector originalInjector = Guice.createInjector(defaultModule);

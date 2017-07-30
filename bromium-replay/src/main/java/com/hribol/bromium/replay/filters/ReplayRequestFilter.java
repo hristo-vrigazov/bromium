@@ -22,7 +22,7 @@ public class ReplayRequestFilter implements RequestFilter {
     private final ReplayingState replayingState;
 
     @Inject
-    public ReplayRequestFilter(ReplayingState replayingState) throws URISyntaxException {
+    public ReplayRequestFilter(ReplayingState replayingState) {
         this.replayingState = replayingState;
     }
 
