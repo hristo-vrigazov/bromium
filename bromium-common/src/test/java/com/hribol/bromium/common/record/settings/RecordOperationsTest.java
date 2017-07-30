@@ -6,6 +6,7 @@ import com.hribol.bromium.core.TestScenarioSteps;
 import net.lightbody.bmp.BrowserMobProxy;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.service.DriverService;
 
 import java.util.function.Supplier;
 
@@ -26,11 +27,13 @@ public class RecordOperationsTest {
         when(driver.manage()).thenReturn(options);
         BrowserMobProxy proxy = spy(BrowserMobProxy.class);
         Supplier<TestScenarioSteps> stepsSupplier = mock(Supplier.class);
+        DriverService driverService = mock(DriverService.class);
 
         ProxyDriverIntegrator proxyDriverIntegrator = mock(ProxyDriverIntegrator.class);
         when(proxyDriverIntegrator.getProxy()).thenReturn(proxy);
         when(proxyDriverIntegrator.getDriver()).thenReturn(driver);
         when(proxyDriverIntegrator.getStepsSupplier()).thenReturn(stepsSupplier);
+        when(proxyDriverIntegrator.getDriverService()).thenReturn(driverService);
 
         RecordOperations recordOperations = new RecordOperations(proxyDriverIntegrator);
         recordOperations.prepareRecord();

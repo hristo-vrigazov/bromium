@@ -9,7 +9,6 @@ import com.google.inject.name.Names;
 import com.google.inject.throwingproviders.CheckedProvides;
 import com.google.inject.throwingproviders.ThrowingProviderBinder;
 import com.hribol.bromium.browsers.chrome.base.InvisibleChromeDriverSupplier;
-import com.hribol.bromium.browsers.chrome.base.VisibleChromeDriverSupplier;
 import com.hribol.bromium.browsers.chrome.replay.ChromeDriverServiceSupplier;
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.common.EmptyFunction;
@@ -451,17 +450,6 @@ public class DefaultModule extends AbstractModule {
         }
     }
 
-    @Provides
-    public VisibleWebDriverSupplier getVisibleWebDriverSupplier(@Named(BROWSER_TYPE) String browserType) {
-        switch (browserType) {
-            case CHROME:
-                return new VisibleChromeDriverSupplier();
-            default:
-                throw new BrowserTypeNotSupportedException();
-        }
-
-    }
-
     @CheckedProvides(IOProvider.class)
     public ProxyDriverIntegrator getProxyDriverIntegrator(RecordRequestFilter recordRequestFilter,
                                                           IOProvider<RecordResponseFilter> recordResponseFilterIOProvider,
@@ -479,7 +467,10 @@ public class DefaultModule extends AbstractModule {
         DriverService driverService = driverServiceSupplier.getDriverService(pathToDriverExecutable, screen);
         WebDriver driver = invisibleWebDriverSupplier.get(driverService, desiredCapabilities);
 
-        return new ProxyDriverIntegrator(recordRequestFilter::getApplicationSpecificActionList, proxy, driver);
+        return new ProxyDriverIntegrator(recordRequestFilter::getApplicationSpecificActionList,
+                proxy,
+                driver,
+                driverService);
     }
 
     @Provides

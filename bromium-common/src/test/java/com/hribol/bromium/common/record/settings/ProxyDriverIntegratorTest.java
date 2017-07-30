@@ -5,6 +5,7 @@ import com.hribol.bromium.core.TestScenarioSteps;
 import net.lightbody.bmp.BrowserMobProxy;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.service.DriverService;
 
 import java.util.function.Supplier;
 
@@ -21,8 +22,8 @@ public class ProxyDriverIntegratorTest {
         WebDriver expectedDriver = mock(WebDriver.class);
         BrowserMobProxy expectedProxy = mock(BrowserMobProxy.class);
         Supplier<TestScenarioSteps> expectedSupplier = mock(Supplier.class);
-
-        ProxyDriverIntegrator proxyDriverIntegrator = new ProxyDriverIntegrator(expectedSupplier, expectedProxy, expectedDriver);
+        DriverService driverService = mock(DriverService.class);
+        ProxyDriverIntegrator proxyDriverIntegrator = new ProxyDriverIntegrator(expectedSupplier, expectedProxy, expectedDriver, driverService);
 
         assertEquals(expectedDriver, proxyDriverIntegrator.getDriver());
         assertEquals(expectedProxy, proxyDriverIntegrator.getProxy());
