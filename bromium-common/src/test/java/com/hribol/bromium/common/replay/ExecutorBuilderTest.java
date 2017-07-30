@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay;
 
+import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.execution.AutomationResultBuilder;
 import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.replay.settings.ReplayManager;
@@ -33,6 +34,7 @@ public class ExecutorBuilderTest {
         int maxRetries = 11;
         AutomationResultBuilder automationResultBuilder = mock(AutomationResultBuilder.class);
         ReplayManager replayManager = mock(ReplayManager.class);
+        ReplayingState replayingState = mock(ReplayingState.class);
 
         EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
 
@@ -47,7 +49,8 @@ public class ExecutorBuilderTest {
                 .eventSynchronizer(eventSynchronizer)
                 .screenToUse(screenToUse)
                 .screenNumber(screenNumber)
-                .replayManager(replayManager);
+                .replayManager(replayManager)
+                .replayingState(replayingState);
 
         assertEquals(pathToDriverExecutable, executorBuilder.getPathToDriverExecutable());
         assertEquals(baseURI, executorBuilder.getBaseURL());
@@ -64,6 +67,7 @@ public class ExecutorBuilderTest {
         assertEquals(screenToUse, executorBuilder.getScreenToUse());
         assertEquals(screenNumber, executorBuilder.getScreenNumber());
         assertEquals(replayManager, executorBuilder.getReplayManager());
+        assertEquals(replayingState, executorBuilder.getReplayingState());
     }
 
     @Rule

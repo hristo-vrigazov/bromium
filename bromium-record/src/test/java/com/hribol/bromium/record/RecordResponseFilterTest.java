@@ -1,70 +1,52 @@
 package com.hribol.bromium.record;
 
-import com.hribol.bromium.core.utils.Utils;
-import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.function.Predicate;
 
 import static org.mockito.Mockito.*;
 
 /**
  * Created by hvrigazov on 27.04.17.
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({
-        Utils.class,
-        RecordResponseFilter.class
-})
 public class RecordResponseFilterTest {
 
+    private final String injectionCode = "<script>function() {}</script>";
+    private final String htmlContent = "<html><head></head><body></body></html>";
+    private final String expected = htmlContent + injectionCode;
+
+    private HttpMessageContents httpMessageContents;
+
     @Test
-    public void ifQueryisFromCurrentHostAndAcceptsHTMLThenJSIsInjectedInIt() throws URISyntaxException {
-        String jsInjectionCode = "<script>var something = 5;</script>";
-        HttpResponse httpResponse = mock(HttpResponse.class);
-        HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
-        HttpHeaders httpHeaders = mock(HttpHeaders.class);
-        HttpRequest httpRequest = mock(HttpRequest.class);
-        when(httpRequest.headers()).thenReturn(httpHeaders);
-        HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
-        when(httpMessageInfo.getOriginalRequest()).thenReturn(httpRequest);
-        URI baseURI = new URI("http://tenniskafe.com");
-        RecordResponseFilter recordResponseFilter = new RecordResponseFilter(baseURI, jsInjectionCode);
-
-        PowerMockito.mockStatic(Utils.class);
-        when(Utils.isGETFromCurrentHostAndAcceptsHTML(baseURI, httpRequest)).thenReturn(true);
-
-        recordResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
-
-        verify(httpMessageContents).setTextContents(jsInjectionCode + httpMessageContents.getTextContents());
+    public void ifPredicateIsOKThenJsIsInjected() throws URISyntaxException {
+        baseTest(true);
+        verify(httpMessageContents).setTextContents(expected);
     }
 
     @Test
-    public void ifQueryisFromDifferentHostAndAcceptsHTMLThenJSIsNotInjectedInIt() throws URISyntaxException {
-        String jsInjectionCode = "<script>var something = 5;</script>";
-        HttpResponse httpResponse = mock(HttpResponse.class);
-        HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
+    public void ifPredicateIsNotOKThenItIsNotInjected() throws URISyntaxException {
+        baseTest(false);
+        verify(httpMessageContents, never()).setTextContents(expected);
+    }
+
+    private void baseTest(boolean predicateReturnValue) {
         HttpRequest httpRequest = mock(HttpRequest.class);
+        HttpResponse httpResponse = mock(HttpResponse.class);
+        httpMessageContents = mock(HttpMessageContents.class);
+        when(httpMessageContents.getTextContents()).thenReturn(htmlContent);
         HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
         when(httpMessageInfo.getOriginalRequest()).thenReturn(httpRequest);
 
-        URI baseURI = new URI("http://tenniskafe.com");
+        Predicate<HttpRequest> predicate = mock(Predicate.class);
+        when(predicate.test(httpRequest)).thenReturn(predicateReturnValue);
 
-        PowerMockito.mockStatic(Utils.class);
-        when(Utils.isGETFromCurrentHostAndAcceptsHTML(baseURI, httpRequest)).thenReturn(false);
-
-        RecordResponseFilter recordResponseFilter = new RecordResponseFilter(baseURI, jsInjectionCode);
+        RecordResponseFilter recordResponseFilter = new RecordResponseFilter(injectionCode, predicate);
         recordResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
-
-        verify(httpMessageContents, never()).setTextContents(jsInjectionCode + httpMessageContents.getTextContents());
     }
+
 }

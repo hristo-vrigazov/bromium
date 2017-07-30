@@ -452,9 +452,9 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOProvider.class)
-    public RecordResponseFilter getRecordResponseFilter(@Named(BASE_URI) URI baseURI,
-                                                        @Named(RECORDING_JAVASCRIPT_CODE) IOProvider<String> injectionCodeProvider) throws IOException {
-        return new RecordResponseFilter(baseURI, injectionCodeProvider.get());
+    public RecordResponseFilter getRecordResponseFilter(@Named(RECORDING_JAVASCRIPT_CODE) IOProvider<String> injectionCodeProvider,
+                                                        Predicate<HttpRequest> shouldIncludeJavascriptPredicate) throws IOException {
+        return new RecordResponseFilter(injectionCodeProvider.get(), shouldIncludeJavascriptPredicate);
     }
 
     @Named(PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY)
@@ -576,11 +576,10 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOProvider.class)
-    public ReplayResponseFilter getReplayResponseFilter(@Named(BASE_URI) URI baseURI,
-                                                        @Named(REPLAYING_JAVASCRIPT_CODE) IOProvider<String> codeProvider,
+    public ReplayResponseFilter getReplayResponseFilter(@Named(REPLAYING_JAVASCRIPT_CODE) IOProvider<String> codeProvider,
                                                         ReplayingState replayingState,
                                                         Predicate<HttpRequest> getHtmlFromCurrentHostPredicate) throws IOException {
-        return new ReplayResponseFilter(baseURI, codeProvider.get(), replayingState, getHtmlFromCurrentHostPredicate);
+        return new ReplayResponseFilter(codeProvider.get(), replayingState, getHtmlFromCurrentHostPredicate);
     }
 
 }
