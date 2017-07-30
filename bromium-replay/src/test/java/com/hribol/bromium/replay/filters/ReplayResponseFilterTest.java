@@ -21,7 +21,6 @@ import static org.mockito.Mockito.when;
  */
 public class ReplayResponseFilterTest {
 
-    private URI baseURI = URI.create("http://something.com");
     private String injectionCode = "<script>function() {}</script>";
     private String htmlContent = "<html><head></head><body></body></html>";
 
@@ -38,7 +37,7 @@ public class ReplayResponseFilterTest {
         Predicate<HttpRequest> shouldInjectJavascriptPredicate = mock(Predicate.class);
         when(shouldInjectJavascriptPredicate.test(httpRequest)).thenReturn(true);
 
-        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter(baseURI, injectionCode, replayingState,
+        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter(injectionCode, replayingState,
                 shouldInjectJavascriptPredicate);
 
         replayResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
