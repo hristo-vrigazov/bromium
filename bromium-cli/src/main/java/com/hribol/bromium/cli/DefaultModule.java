@@ -26,6 +26,7 @@ import com.hribol.bromium.common.generation.replay.*;
 import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
 import com.hribol.bromium.common.ProxyDriverIntegrator;
 import com.hribol.bromium.common.record.RecordBrowser;
+import com.hribol.bromium.core.utils.GetHtmlFromCurrentHostPredicate;
 import com.hribol.bromium.record.RecordingState;
 import com.hribol.bromium.common.replay.DriverOperations;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
@@ -62,6 +63,7 @@ import com.hribol.bromium.replay.filters.ReplayRequestFilter;
 import com.hribol.bromium.replay.filters.ReplayResponseFilter;
 import com.hribol.bromium.replay.settings.DriverServiceSupplier;
 import com.hribol.bromium.replay.settings.ReplayManager;
+import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.BrowserMobProxyServer;
 import net.lightbody.bmp.client.ClientUtil;
@@ -81,6 +83,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import static com.hribol.bromium.core.DependencyInjectionConstants.*;
@@ -106,6 +109,7 @@ public class DefaultModule extends AbstractModule {
                 .to(RecordingWebDriverActionsOnly.class);
         bind(new TypeLiteral<FunctionRegistry<NameWebDriverActionConfiguration>>(){})
                 .to(RecorderFunctionRegistry.class);
+        bind(new TypeLiteral<Predicate<HttpRequest>>() {}).to(GetHtmlFromCurrentHostPredicate.class);
         // TODO: other OSes should have a different binding
         bind(VirtualScreenProcessCreator.class).to(UbuntuVirtualScreenProcessCreator.class);
         bindConstant().annotatedWith(Names.named(RECORD_TEMPLATE_RESOURCE)).to("/record.js");
@@ -574,8 +578,9 @@ public class DefaultModule extends AbstractModule {
     @CheckedProvides(IOProvider.class)
     public ReplayResponseFilter getReplayResponseFilter(@Named(BASE_URI) URI baseURI,
                                                         @Named(REPLAYING_JAVASCRIPT_CODE) IOProvider<String> codeProvider,
-                                                        ReplayingState replayingState) throws IOException {
-        return new ReplayResponseFilter(baseURI, codeProvider.get(), replayingState);
+                                                        ReplayingState replayingState,
+                                                        Predicate<HttpRequest> getHtmlFromCurrentHostPredicate) throws IOException {
+        return new ReplayResponseFilter(baseURI, codeProvider.get(), replayingState, getHtmlFromCurrentHostPredicate);
     }
 
 }

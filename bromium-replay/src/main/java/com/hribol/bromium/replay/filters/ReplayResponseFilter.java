@@ -15,6 +15,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import static com.hribol.bromium.core.DependencyInjectionConstants.BASE_URI;
 
@@ -26,18 +27,21 @@ public class ReplayResponseFilter implements ResponseFilter {
     private URI baseURI;
     private String injectionCode;
     private ReplayingState replayingState;
+    private Predicate<HttpRequest> shouldInjectJavascriptPredicate;
 
     public ReplayResponseFilter(URI baseURI,
                                 String injectionCode,
-                                ReplayingState replayingState) {
+                                ReplayingState replayingState,
+                                Predicate<HttpRequest> shouldInjectJavascriptPredicate) {
         this.baseURI = baseURI;
         this.injectionCode = injectionCode;
         this.replayingState = replayingState;
+        this.shouldInjectJavascriptPredicate = shouldInjectJavascriptPredicate;
     }
 
     @Override
     public void filterResponse(HttpResponse httpResponse, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
-        if (Utils.isGETFromCurrentHostAndAcceptsHTML(baseURI, httpMessageInfo.getOriginalRequest())) {
+        if (shouldInjectJavascriptPredicate.test(httpMessageInfo.getOriginalRequest())) {
             httpMessageContents.setTextContents(injectionCode + httpMessageContents.getTextContents());
         }
 
