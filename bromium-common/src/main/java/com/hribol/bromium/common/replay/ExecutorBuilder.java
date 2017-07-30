@@ -27,7 +27,6 @@ public class ExecutorBuilder {
     private EventSynchronizer eventSynchronizer;
     private String screenToUse;
     private int screenNumber;
-    private ReplayManager replayManager;
     private ReplayingState replayingState;
     private DriverOperations driverOperations;
 
@@ -158,16 +157,6 @@ public class ExecutorBuilder {
 
     public int getScreenNumber() {
         return screenNumber;
-    }
-
-
-    public ReplayManager getReplayManager() {
-        return replayManager;
-    }
-
-    public ExecutorBuilder replayManager(ReplayManager replayManager) {
-        this.replayManager = replayManager;
-        return this;
     }
 
     public ExecutorBuilder replayingState(ReplayingState replayingState) {

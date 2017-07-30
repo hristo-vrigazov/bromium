@@ -191,7 +191,7 @@ public class WebDriverActionExecutionBaseTest {
     @Test
     public void ifTooManyAttemtpsActionTimesOut() throws IOException, URISyntaxException {
         int maxRetries = 3;
-        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(10, maxRetries, mock(ReplayManager.class));
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(10, maxRetries);
         Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
         TestScenarioActions testScenarioSteps = mock(TestScenarioActions.class);
         when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
@@ -211,19 +211,15 @@ public class WebDriverActionExecutionBaseTest {
     }
 
     private WebDriverActionExecutionBase getWebDriverActionExecutionBase(ExecutorBuilder executorBuilder) throws IOException, URISyntaxException {
-        return getWebDriverActionExecutionBase(executorBuilder, getDefaultReplaySettings());
-    }
-
-    private WebDriverActionExecutionBase getWebDriverActionExecutionBase() throws IOException, URISyntaxException {
-        return getWebDriverActionExecutionBase(10,  getDefaultReplaySettings());
+        return new WebDriverActionExecutionBase(executorBuilder);
     }
 
     private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout) throws IOException, URISyntaxException {
-        return getWebDriverActionExecutionBase(timeout,  getDefaultReplaySettings());
+        return getWebDriverActionExecutionBase(getWebDriverActionExecutor(timeout, 10));
     }
 
-    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(ReplayManager replaySettings) throws IOException, URISyntaxException {
-        return getWebDriverActionExecutionBase(10,  replaySettings);
+    private WebDriverActionExecutionBase getWebDriverActionExecutionBase() throws IOException, URISyntaxException {
+        return getWebDriverActionExecutionBase(10);
     }
 
     private ReplayManager getDefaultReplaySettings() {
@@ -234,17 +230,8 @@ public class WebDriverActionExecutionBaseTest {
         return replaySettings;
     }
 
-    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, ReplayManager replaySettings) throws IOException, URISyntaxException {
-        return getWebDriverActionExecutionBase(timeout, 10, replaySettings);
-    }
-
-    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(ExecutorBuilder executorBuilder, ReplayManager replaySettings) throws IOException, URISyntaxException {
-        when(executorBuilder.getReplayManager()).thenReturn(replaySettings);
-        return new WebDriverActionExecutionBase(executorBuilder);
-    }
-
-    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, int maxRetries, ReplayManager replaySettings) throws IOException, URISyntaxException {
-        return getWebDriverActionExecutionBase(getWebDriverActionExecutor(timeout, maxRetries), replaySettings);
+    private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, int maxRetries) throws IOException, URISyntaxException {
+        return getWebDriverActionExecutionBase(getWebDriverActionExecutor(timeout, maxRetries));
     }
 
     private ExecutorBuilder getWebDriverActionExecutor(int timeout) throws IOException, URISyntaxException {

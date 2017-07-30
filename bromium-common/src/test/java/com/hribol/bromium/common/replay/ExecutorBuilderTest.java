@@ -33,7 +33,6 @@ public class ExecutorBuilderTest {
         int timeout = 20;
         int maxRetries = 11;
         AutomationResultBuilder automationResultBuilder = mock(AutomationResultBuilder.class);
-        ReplayManager replayManager = mock(ReplayManager.class);
         ReplayingState replayingState = mock(ReplayingState.class);
 
         EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
@@ -49,7 +48,6 @@ public class ExecutorBuilderTest {
                 .eventSynchronizer(eventSynchronizer)
                 .screenToUse(screenToUse)
                 .screenNumber(screenNumber)
-                .replayManager(replayManager)
                 .replayingState(replayingState);
 
         assertEquals(pathToDriverExecutable, executorBuilder.getPathToDriverExecutable());
@@ -66,7 +64,6 @@ public class ExecutorBuilderTest {
         assertNotNull(executorBuilder.noHttpRequestsInQueue());
         assertEquals(screenToUse, executorBuilder.getScreenToUse());
         assertEquals(screenNumber, executorBuilder.getScreenNumber());
-        assertEquals(replayManager, executorBuilder.getReplayManager());
         assertEquals(replayingState, executorBuilder.getReplayingState());
     }
 
