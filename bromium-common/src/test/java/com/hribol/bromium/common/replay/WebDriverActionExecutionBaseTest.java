@@ -5,6 +5,7 @@ import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.execution.AutomationResultBuilder;
+import com.hribol.bromium.replay.execution.WebDriverActionExecution;
 import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioActions;
@@ -19,6 +20,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.io.IOException;
@@ -33,6 +35,7 @@ import static org.mockito.Mockito.*;
  * Created by hvrigazov on 23.04.17.
  */
 @RunWith(PowerMockRunner.class)
+@PrepareForTest(WebDriverActionExecutionBase.class)
 public class WebDriverActionExecutionBaseTest {
 
     String baseURI = "http://tenniskafe.com";
@@ -111,26 +114,26 @@ public class WebDriverActionExecutionBaseTest {
         ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.INTERRUPTED, report.getAutomationResult());
     }
-//
-//    @Test
-//    public void properlyHandlesInterruptedExceptionBetweenRetries() throws IOException, URISyntaxException, InterruptedException {
-//        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(5);
-//        Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
-//        TestScenarioActions testScenarioSteps = mock(TestScenarioActions.class);
-//        when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
-//        TestScenario testScenario = mock(TestScenario.class);
-//        when(testScenario.steps()).thenReturn(testScenarioSteps);
-//        WebDriverAction firstAction = mock(WebDriverAction.class);
-//        doThrow(new WebDriverException("Something happened!")).when(firstAction).execute(any(), any());
-//        when(webDriverActionIterator.hasNext()).thenReturn(true, false);
-//        when(firstAction.expectsHttpRequest()).thenReturn(true);
-//        PowerMockito.mockStatic(Thread.class);
-//        PowerMockito.doThrow(new InterruptedException()).when(Thread.class);
-//        Thread.sleep(anyLong());
-//        when(webDriverActionIterator.next()).thenReturn(firstAction);
-//        ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
-//        assertEquals(AutomationResult.INTERRUPTED, report.getAutomationResult());
-//    }
+
+    @Test
+    public void properlyHandlesInterruptedExceptionBetweenRetries() throws IOException, URISyntaxException, InterruptedException {
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(10);
+        Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
+        TestScenarioActions testScenarioSteps = mock(TestScenarioActions.class);
+        when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
+        TestScenario testScenario = mock(TestScenario.class);
+        when(testScenario.steps()).thenReturn(testScenarioSteps);
+        WebDriverAction firstAction = mock(WebDriverAction.class);
+        doThrow(new WebDriverException("Something happened!")).when(firstAction).execute(any(), any());
+        when(webDriverActionIterator.hasNext()).thenReturn(true, false);
+        when(firstAction.expectsHttpRequest()).thenReturn(true);
+        PowerMockito.mockStatic(Thread.class);
+        PowerMockito.doThrow(new InterruptedException()).when(Thread.class);
+        Thread.sleep(anyLong());
+        when(webDriverActionIterator.next()).thenReturn(firstAction);
+        ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
+        assertEquals(AutomationResult.INTERRUPTED, report.getAutomationResult());
+    }
 
     @Test
     public void retriesIfCannotMakeItFromFirstTime() throws IOException, URISyntaxException {

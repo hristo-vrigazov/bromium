@@ -133,7 +133,7 @@ public class ExecutorBuilder {
         return eventSynchronizer;
     }
 
-    public NoHttpRequestsInQueue noHttpRequestsInQueue() throws URISyntaxException {
+    public NoHttpRequestsInQueue noHttpRequestsInQueue() {
         return new NoHttpRequestsInQueue(getReplayingState(), getEventSynchronizer());
     }
 
