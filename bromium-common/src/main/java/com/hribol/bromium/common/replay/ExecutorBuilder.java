@@ -6,10 +6,8 @@ import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.execution.AutomationResultBuilder;
 import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import com.hribol.bromium.core.synchronization.EventSynchronizer;
-import com.hribol.bromium.replay.settings.ReplayManager;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Optional;
 
 /**

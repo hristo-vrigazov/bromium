@@ -6,19 +6,16 @@ import com.hribol.bromium.core.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.execution.AutomationResultBuilder;
-import com.hribol.bromium.replay.execution.WebDriverActionExecution;
 import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioActions;
 import com.hribol.bromium.replay.report.AutomationResult;
 import com.hribol.bromium.replay.report.ExecutionReport;
-import com.hribol.bromium.replay.settings.ReplayManager;
 import net.lightbody.bmp.core.har.Har;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -220,14 +217,6 @@ public class WebDriverActionExecutionBaseTest {
 
     private WebDriverActionExecutionBase getWebDriverActionExecutionBase() throws IOException, URISyntaxException {
         return getWebDriverActionExecutionBase(10);
-    }
-
-    private ReplayManager getDefaultReplaySettings() {
-        ReplayManager replaySettings =  mock(ReplayManager.class);
-        WebDriver webDriver = mock(WebDriver.class);
-        when(replaySettings.getHar()).thenReturn(har);
-        when(replaySettings.getWebDriver()).thenReturn(webDriver);
-        return replaySettings;
     }
 
     private WebDriverActionExecutionBase getWebDriverActionExecutionBase(int timeout, int maxRetries) throws IOException, URISyntaxException {
