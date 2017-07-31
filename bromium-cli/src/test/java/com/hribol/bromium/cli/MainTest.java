@@ -4,7 +4,10 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.hribol.bromium.cli.commands.*;
+import org.docopt.DocoptExitException;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -109,6 +112,18 @@ public class MainTest {
                 "update", "-a", "configuration.json"
         };
 
+        Main.main(args);
+    }
+
+    @Rule
+    private ExpectedException expectedException = ExpectedException.none();
+
+    @Test
+    public void commandThatDoesNotExistThrowsDocoptExitException() {
+        expectedException.expect(DocoptExitException.class);
+        String[] args = {
+                "yoyo"
+        };
         Main.main(args);
     }
 

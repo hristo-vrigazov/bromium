@@ -35,24 +35,23 @@ public class Main {
             InputStream inputStream = Main.class.getResourceAsStream("/cli-specification.txt");
             String doc = IOUtils.toString(inputStream);
             Docopt docopt = new Docopt(doc);
-            Map<String, Object> opts = docopt.withVersion("bromium 0.1").parse(args);
+            Map<String, Object> opts = docopt
+                    .withVersion("bromium 0.1")
+                    .withExit(false)
+                    .parse(args);
 
             System.out.println(opts);
             Map<String, Supplier<Command>> commandToHandler = getCommands();
-            Optional<String> optionalSelectedCommand = commandToHandler
+            String selectedCommand = commandToHandler
                     .keySet()
                     .stream()
                     .filter(command -> opts.get(command).equals(true))
-                    .findAny();
+                    .findAny()
+                    // we know that a command must be present because otherwise docopt would have stopped
+                    .get();
 
-            if (!optionalSelectedCommand.isPresent()) {
-                System.out.println("No command selected");
-                return;
-            }
-
-            injector = Guice.createInjector(new DefaultModule(optionalSelectedCommand.get(), opts));
-            optionalSelectedCommand.ifPresent(command -> commandToHandler.get(command).get().run());
-
+            injector = Guice.createInjector(new DefaultModule(selectedCommand, opts));
+            commandToHandler.get(selectedCommand).get().run();
         } catch (IOException e) {
             e.printStackTrace();
         }
