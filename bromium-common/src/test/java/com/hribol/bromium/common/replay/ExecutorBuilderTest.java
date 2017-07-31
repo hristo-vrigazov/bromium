@@ -33,6 +33,7 @@ public class ExecutorBuilderTest {
         int maxRetries = 11;
         AutomationResultBuilder automationResultBuilder = mock(AutomationResultBuilder.class);
         ReplayingState replayingState = mock(ReplayingState.class);
+        DriverOperations driverOperations = mock(DriverOperations.class);
 
         EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
 
@@ -47,7 +48,8 @@ public class ExecutorBuilderTest {
                 .eventSynchronizer(eventSynchronizer)
                 .screenToUse(screenToUse)
                 .screenNumber(screenNumber)
-                .replayingState(replayingState);
+                .replayingState(replayingState)
+                .driverOperations(driverOperations);
 
         assertEquals(pathToDriverExecutable, executorBuilder.getPathToDriverExecutable());
         assertEquals(baseURI, executorBuilder.getBaseURL());
@@ -64,6 +66,7 @@ public class ExecutorBuilderTest {
         assertEquals(screenToUse, executorBuilder.getScreenToUse());
         assertEquals(screenNumber, executorBuilder.getScreenNumber());
         assertEquals(replayingState, executorBuilder.getReplayingState());
+        assertEquals(driverOperations, executorBuilder.getDriverOperations());
     }
 
     @Rule
