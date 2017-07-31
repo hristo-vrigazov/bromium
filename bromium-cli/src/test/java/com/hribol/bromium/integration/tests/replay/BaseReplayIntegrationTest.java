@@ -6,6 +6,8 @@ import org.junit.Before;
 
 import java.io.IOException;
 
+import static com.hribol.bromium.integration.tests.TestUtils.extractResource;
+
 /**
  * Created by hvrigazov on 15.07.17.
  */
@@ -17,7 +19,7 @@ public abstract class BaseReplayIntegrationTest extends BaseDemoAppIntegrationTe
 
     @Before
     public void extractTestCaseToBeReplayed() throws IOException {
-        testCaseFile = extractResource(pathToTestCase);
+        testCaseFile = extractResource(pathToTestCase, testResourcesDirectory);
     }
 
     @Override
