@@ -10,6 +10,7 @@ import java.net.URI;
 import java.util.*;
 
 import static com.hribol.bromium.core.DependencyInjectionConstants.BASE_URI;
+import static com.hribol.bromium.core.utils.Constants.NO_HTTP_REQUESTS_IN_QUEUE;
 
 /**
  * Created by hvrigazov on 30.07.17.
@@ -58,13 +59,14 @@ public class ReplayingState {
 
     public void setConditionSatisfied(String condition) {
         this.conditionsSatisfied.add(condition);
+        System.out.println("Satisfied " + condition);
+    }
 
+    public void signalizeIfSynchronizationEventIsSatisfied() {
         if (synchronizationEventOptional.isPresent() && isSatisfied(synchronizationEventOptional.get().getName())) {
             synchronizationEventOptional.get().signalizeIsDone();
             synchronizationEventOptional = Optional.empty();
         }
-
-        System.out.println("Satisfied " + condition);
     }
 
     public void setConditionNotSatisfied(String condition) {
@@ -95,8 +97,11 @@ public class ReplayingState {
 
     public void signalizeIfNoHttpQueriesInQueue() {
         if (httpRequestQueueIsEmpty() && synchronizationEventOptional.isPresent()) {
-            synchronizationEventOptional.get().signalizeIsDone();
-            synchronizationEventOptional = Optional.empty();
+            SynchronizationEvent synchronizationEvent = synchronizationEventOptional.get();
+            if (synchronizationEvent.getName().equals(NO_HTTP_REQUESTS_IN_QUEUE)) {
+                synchronizationEvent.signalizeIsDone();
+                synchronizationEventOptional = Optional.empty();
+            }
         }
     }
 

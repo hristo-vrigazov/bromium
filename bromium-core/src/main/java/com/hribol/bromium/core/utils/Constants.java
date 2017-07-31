@@ -17,5 +17,6 @@ public class Constants {
     public final static String CONDITION_SATISFIED_URL = "http://bromium-condition-satisfied.com/";
     public final static String CONDITION_NOT_SATISFIED_URL = "http://bromium-condition-not-satisfied.com/";
     public final static String TIMEOUT = "timeout";
+    public final static String NO_HTTP_REQUESTS_IN_QUEUE = "NO_HTTP_REQUESTS_IN_QUEUE";
 
 }

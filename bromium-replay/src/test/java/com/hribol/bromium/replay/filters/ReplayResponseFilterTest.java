@@ -12,9 +12,7 @@ import org.mockito.Mock;
 import java.net.URI;
 import java.util.function.Predicate;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by hvrigazov on 30.07.17.
@@ -23,27 +21,37 @@ public class ReplayResponseFilterTest {
 
     private String injectionCode = "<script>function() {}</script>";
     private String htmlContent = "<html><head></head><body></body></html>";
+    private String expected = injectionCode + htmlContent;
+    private ReplayingState replayingState = mock(ReplayingState.class);
+    private HttpRequest httpRequest = mock(HttpRequest.class);
+    private HttpResponse httpResponse = mock(HttpResponse.class);
+    private HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
+    private HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
+    private Predicate<HttpRequest> shouldInjectJavascriptPredicate = mock(Predicate.class);
 
     @Test
     public void appendsJavascriptIfisGETFromCurrentHostAndAcceptsHTML() {
-        ReplayingState replayingState = mock(ReplayingState.class);
-        HttpRequest httpRequest = mock(HttpRequest.class);
-        HttpResponse httpResponse = mock(HttpResponse.class);
-        HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
-        HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
-        when(httpMessageContents.getTextContents()).thenReturn(htmlContent);
+        baseTest(true);
+        verify(httpMessageContents).setTextContents(expected);
+    }
 
+    @Test
+    public void doesNotJavascriptIfisGETFromCurrentHostAndAcceptsHTML() {
+        baseTest(false);
+        verify(httpMessageContents, never()).setTextContents(expected);
+    }
+
+    private void baseTest(boolean predicateReturnValue) {
+        when(httpMessageContents.getTextContents()).thenReturn(htmlContent);
         when(httpMessageInfo.getOriginalRequest()).thenReturn(httpRequest);
-        Predicate<HttpRequest> shouldInjectJavascriptPredicate = mock(Predicate.class);
-        when(shouldInjectJavascriptPredicate.test(httpRequest)).thenReturn(true);
+
+        when(shouldInjectJavascriptPredicate.test(httpRequest)).thenReturn(predicateReturnValue);
 
         ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter(injectionCode, replayingState,
                 shouldInjectJavascriptPredicate);
 
         replayResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
-
-        String expected = injectionCode + httpMessageContents.getTextContents();
-        verify(httpMessageContents).setTextContents(expected);
     }
+
 
 }

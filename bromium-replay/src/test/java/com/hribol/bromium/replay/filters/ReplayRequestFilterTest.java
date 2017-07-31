@@ -25,6 +25,10 @@ public class ReplayRequestFilterTest {
 
     private final String RANDOM_URL = "http://something.com";
 
+    private final String EXAMPLE_INVALID_SATISFIED_URL = "bla" + CONDITION_SATISFIED_URL + "bla";
+
+    private final String EXAMPLE_INVALID_NOT_SATISFIED_URL = "bla" + CONDITION_NOT_SATISFIED_URL + "bla";
+
     private final String EXAMPLE_CONDITION = "9890013";
 
     private final String EXAMPLE_CONDITION_SATISFIED_URL = CONDITION_SATISFIED_URL + "?" + EXAMPLE_CONDITION;
@@ -35,6 +39,8 @@ public class ReplayRequestFilterTest {
     public void invokesHttpUnlockAndAddsRequestToQueue() {
         baseTest(RANDOM_URL);
         verify(replayingState).addHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
+        verify(replayingState, never()).setConditionSatisfied(EXAMPLE_CONDITION);
+        verify(replayingState, never()).setConditionNotSatisfied(EXAMPLE_CONDITION);
     }
 
     @Test
@@ -47,6 +53,20 @@ public class ReplayRequestFilterTest {
     public void invokesEventNotSatisfied() {
         baseTest(EXAMPLE_CONDITION_NOT_SATISFIED_URL);
         verify(replayingState).setConditionNotSatisfied(EXAMPLE_CONDITION);
+    }
+
+    @Test
+    public void ifURLIsNotValidButContainsSatisfiedConditionNothingIsCalled() {
+        baseTest(EXAMPLE_INVALID_SATISFIED_URL);
+        verify(replayingState, never()).setConditionSatisfied(EXAMPLE_CONDITION);
+        verify(replayingState, never()).setConditionNotSatisfied(EXAMPLE_CONDITION);
+    }
+
+    @Test
+    public void ifURLIsNotValidButContainsNotSatisfiedConditionNothingIsCalled() {
+        baseTest(EXAMPLE_INVALID_NOT_SATISFIED_URL);
+        verify(replayingState, never()).setConditionSatisfied(EXAMPLE_CONDITION);
+        verify(replayingState, never()).setConditionNotSatisfied(EXAMPLE_CONDITION);
     }
 
     private void baseTest(String url) {

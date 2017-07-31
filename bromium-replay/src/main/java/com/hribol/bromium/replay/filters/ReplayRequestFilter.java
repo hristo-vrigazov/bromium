@@ -35,6 +35,7 @@ public class ReplayRequestFilter implements RequestFilter {
                 URL url = new URL(httpRequest.getUri());
                 String event = url.getQuery();
                 replayingState.setConditionSatisfied(event);
+                replayingState.signalizeIfSynchronizationEventIsSatisfied();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }

@@ -5,6 +5,8 @@ import com.hribol.bromium.core.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.filters.ReplayResponseFilter;
 
+import static com.hribol.bromium.core.utils.Constants.NO_HTTP_REQUESTS_IN_QUEUE;
+
 /**
  * Created by hvrigazov on 03.06.17.
  */
@@ -20,7 +22,7 @@ public class NoHttpRequestsInQueue implements SynchronizationEvent {
 
     @Override
     public String getName() {
-        return "NO_HTTP_REQUESTS_IN_QUEUE";
+        return NO_HTTP_REQUESTS_IN_QUEUE;
     }
 
     @Override
