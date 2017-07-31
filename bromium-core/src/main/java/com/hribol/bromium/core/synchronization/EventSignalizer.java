@@ -1,8 +1,8 @@
-package com.hribol.bromium.replay.execution.synchronization;
+package com.hribol.bromium.core.synchronization;
 
 /**
  * Created by hvrigazov on 03.06.17.
  */
-public interface SignalizerEvent {
+public interface EventSignalizer {
     void signalizeEvent(SynchronizationEvent synchronizationEvent);
 }

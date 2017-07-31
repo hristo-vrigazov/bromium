@@ -1,6 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
-import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
+import com.hribol.bromium.replay.ReplayingState;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -28,7 +28,7 @@ public class ClickCssSelectorTest {
 
         ClickCssSelector action = new ClickCssSelector(cssSelector, eventName, expectsHttpRequest);
 
-        action.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayFiltersFacade.class));
+        action.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class));
 
         verify(webElement).click();
         assertEquals(eventName, action.getName());

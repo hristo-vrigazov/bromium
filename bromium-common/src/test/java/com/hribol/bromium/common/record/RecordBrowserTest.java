@@ -1,11 +1,12 @@
 package com.hribol.bromium.common.record;
 
+import com.hribol.bromium.common.replay.DriverOperations;
 import com.hribol.bromium.core.TestScenarioSteps;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
+import java.util.function.Supplier;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -21,17 +22,17 @@ public class RecordBrowserTest {
     public void integratesComponentsInCorrectWay() throws IOException, URISyntaxException, InterruptedException {
         TestScenarioSteps testScenarioSteps = mock(TestScenarioSteps.class);
 
-        RecordManager recordManager = mock(RecordManager.class);
-        when(recordManager.getTestCaseSteps()).thenReturn(testScenarioSteps);
+        DriverOperations recordOperations = mock(DriverOperations.class);
+        Supplier<TestScenarioSteps> stepsSupplier = () -> testScenarioSteps;
 
         String baseUrl = "http://something.com";
 
-        RecordBrowser recordBrowser = new RecordBrowser(baseUrl, recordManager);
+        RecordBrowser recordBrowser = new RecordBrowser(baseUrl, recordOperations, stepsSupplier);
 
         recordBrowser.record();
 
-        verify(recordManager).prepareRecord();
-        verify(recordManager).open(baseUrl);
+        verify(recordOperations).prepare();
+        verify(recordOperations).open(baseUrl);
 
         TestScenarioSteps actualTestCaseSteps = recordBrowser.getTestCaseSteps();
 
@@ -39,6 +40,6 @@ public class RecordBrowserTest {
 
         recordBrowser.cleanUp();
 
-        verify(recordManager).cleanUpRecord();
+        verify(recordOperations).cleanUp();
     }
 }

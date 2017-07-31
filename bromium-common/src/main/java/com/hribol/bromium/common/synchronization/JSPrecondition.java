@@ -1,7 +1,8 @@
 package com.hribol.bromium.common.synchronization;
 
-import com.hribol.bromium.replay.execution.synchronization.SignalizerEvent;
-import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
+import com.hribol.bromium.core.synchronization.EventSignalizer;
+import com.hribol.bromium.core.synchronization.SynchronizationEvent;
+import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.filters.ReplayRequestFilter;
 
 /**
@@ -10,13 +11,15 @@ import com.hribol.bromium.replay.filters.ReplayRequestFilter;
 public class JSPrecondition implements SynchronizationEvent {
 
     private String eventName;
-    private ReplayRequestFilter replayRequestFilter;
-    private SignalizerEvent signalizerEvent;
+    private EventSignalizer eventSignalizer;
+    private ReplayingState replayingState;
 
-    public JSPrecondition(String eventName, ReplayRequestFilter replayRequestFilter, SignalizerEvent signalizerEvent) {
+    public JSPrecondition(String eventName,
+                          EventSignalizer eventSignalizer,
+                          ReplayingState replayingState) {
         this.eventName = eventName;
-        this.replayRequestFilter = replayRequestFilter;
-        this.signalizerEvent = signalizerEvent;
+        this.eventSignalizer = eventSignalizer;
+        this.replayingState = replayingState;
     }
 
     @Override
@@ -26,11 +29,11 @@ public class JSPrecondition implements SynchronizationEvent {
 
     @Override
     public boolean isSatisfied() {
-        return replayRequestFilter.isSatisfied(eventName);
+        return replayingState.isSatisfied(eventName);
     }
 
     @Override
     public void signalizeIsDone() {
-        signalizerEvent.signalizeEvent(this);
+        eventSignalizer.signalizeEvent(this);
     }
 }

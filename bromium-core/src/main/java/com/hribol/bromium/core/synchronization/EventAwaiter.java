@@ -1,4 +1,4 @@
-package com.hribol.bromium.replay.execution.synchronization;
+package com.hribol.bromium.core.synchronization;
 
 import java.util.concurrent.TimeoutException;
 

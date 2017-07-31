@@ -1,16 +1,10 @@
 package com.hribol.bromium.common.record;
 
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
+import com.hribol.bromium.common.replay.DriverOperations;
 import com.hribol.bromium.core.TestScenarioSteps;
-import com.hribol.bromium.core.providers.IOProvider;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-
-import static com.hribol.bromium.core.DependencyInjectionConstants.BASE_URL;
-import static com.hribol.bromium.core.DependencyInjectionConstants.PATH_TO_DRIVER;
-import static com.hribol.bromium.core.DependencyInjectionConstants.PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY;
+import java.util.function.Supplier;
 
 /**
  * Created by hvrigazov on 09.03.17.
@@ -18,25 +12,27 @@ import static com.hribol.bromium.core.DependencyInjectionConstants.PATH_TO_DRIVE
 public class RecordBrowser {
 
     private final String baseUrl;
-    private final RecordManager recordManager;
+    private final DriverOperations recordOperations;
+    private Supplier<TestScenarioSteps> stepsSupplier;
 
-    @Inject
-    public RecordBrowser(@Named(BASE_URL) String baseUrl,
-                         RecordManager recordManager) throws IOException {
+    public RecordBrowser(String baseUrl,
+                         DriverOperations recordOperations,
+                         Supplier<TestScenarioSteps> stepsSupplier) throws IOException {
         this.baseUrl = baseUrl;
-        this.recordManager = recordManager;
+        this.recordOperations = recordOperations;
+        this.stepsSupplier = stepsSupplier;
     }
 
     public void record() throws IOException {
-        recordManager.prepareRecord();
-        recordManager.open(baseUrl);
+        recordOperations.prepare();
+        recordOperations.open(baseUrl);
     }
 
     public TestScenarioSteps getTestCaseSteps() {
-        return recordManager.getTestCaseSteps();
+        return stepsSupplier.get();
     }
 
     public void cleanUp() {
-        recordManager.cleanUpRecord();
+        recordOperations.cleanUp();
     }
 }

@@ -1,61 +1,40 @@
 package com.hribol.bromium.replay.filters;
 
-import com.hribol.bromium.core.utils.Utils;
-import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
+import com.hribol.bromium.replay.ReplayingState;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.filters.ResponseFilter;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
 
-import java.net.URISyntaxException;
-import java.util.Optional;
-import java.util.Set;
+import java.net.URI;
+import java.util.function.Predicate;
 
 /**
  * Created by hvrigazov on 22.04.17.
  */
-public class ReplayResponseFilter extends ReplayBaseFilter implements ResponseFilter {
+public class ReplayResponseFilter implements ResponseFilter {
 
-    private Optional<SynchronizationEvent> synchronizationEventOptional;
     private String injectionCode;
+    private ReplayingState replayingState;
+    private Predicate<HttpRequest> shouldInjectJavascriptPredicate;
 
-    public ReplayResponseFilter(String injectionCode, String baseURI, Set<HttpRequest> httpRequestQueue) throws URISyntaxException {
-        super(baseURI, httpRequestQueue);
+    public ReplayResponseFilter(String injectionCode,
+                                ReplayingState replayingState,
+                                Predicate<HttpRequest> shouldInjectJavascriptPredicate) {
         this.injectionCode = injectionCode;
-        this.synchronizationEventOptional = Optional.empty();
+        this.replayingState = replayingState;
+        this.shouldInjectJavascriptPredicate = shouldInjectJavascriptPredicate;
     }
 
     @Override
     public void filterResponse(HttpResponse httpResponse, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
-        if (Utils.isGETFromCurrentHostAndAcceptsHTML(baseURI, httpMessageInfo.getOriginalRequest())) {
+        if (shouldInjectJavascriptPredicate.test(httpMessageInfo.getOriginalRequest())) {
             httpMessageContents.setTextContents(injectionCode + httpMessageContents.getTextContents());
         }
-        removeHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
-        signalizeIfNoHttpQueriesInQueue();
+
+        replayingState.removeHttpRequestFromQueue(httpMessageInfo.getOriginalRequest());
+        replayingState.signalizeIfNoHttpQueriesInQueue();
     }
 
-    public boolean httpRequestQueueIsEmpty() {
-        return httpRequestQueue.isEmpty();
-    }
-
-    private void removeHttpRequestToQueue(HttpRequest httpRequest) {
-        if (!inWhiteList(httpRequest.getUri())) {
-            return;
-        }
-
-        System.out.println("Remove request " + httpRequest.getUri());
-        this.httpRequestQueue.remove(httpRequest);
-    }
-
-    private void signalizeIfNoHttpQueriesInQueue() {
-        if (httpRequestQueueIsEmpty() && synchronizationEventOptional.isPresent()) {
-            synchronizationEventOptional.get().signalizeIsDone();
-            synchronizationEventOptional = Optional.empty();
-        }
-    }
-
-    public void setSynchronizationEvent(SynchronizationEvent synchronizationEventOptional) {
-        this.synchronizationEventOptional = Optional.of(synchronizationEventOptional);
-    }
 }

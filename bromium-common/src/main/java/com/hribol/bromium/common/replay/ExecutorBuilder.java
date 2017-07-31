@@ -2,14 +2,12 @@ package com.hribol.bromium.common.replay;
 
 import com.hribol.bromium.common.synchronization.NoHttpRequestsInQueue;
 import com.hribol.bromium.common.synchronization.SignalizationBasedEventSynchronizer;
+import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.execution.AutomationResultBuilder;
 import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
-import com.hribol.bromium.replay.execution.synchronization.EventSynchronizer;
-import com.hribol.bromium.replay.filters.ProxyFacade;
-import com.hribol.bromium.replay.settings.ReplayManager;
+import com.hribol.bromium.core.synchronization.EventSynchronizer;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Optional;
 
 /**
@@ -25,11 +23,10 @@ public class ExecutorBuilder {
     private AutomationResultBuilder automationResultBuilder;
     private String javascriptInjectionCode;
     private EventSynchronizer eventSynchronizer;
-    private ProxyFacade proxyFacade;
     private String screenToUse;
-    private String systemProperty;
     private int screenNumber;
-    private ReplayManager replayManager;
+    private ReplayingState replayingState;
+    private DriverOperations driverOperations;
 
     public ExecutorBuilder pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
@@ -63,11 +60,6 @@ public class ExecutorBuilder {
 
     public ExecutorBuilder automationResultBuilder(AutomationResultBuilder automationResultBuilder) {
         this.automationResultBuilder = automationResultBuilder;
-        return this;
-    }
-
-    public ExecutorBuilder proxyFacade(ProxyFacade proxyFacade) {
-        this.proxyFacade = proxyFacade;
         return this;
     }
 
@@ -139,12 +131,8 @@ public class ExecutorBuilder {
         return eventSynchronizer;
     }
 
-    public ProxyFacade getProxyFacade() throws URISyntaxException {
-        return proxyFacade;
-    }
-
-    public NoHttpRequestsInQueue noHttpRequestsInQueue() throws URISyntaxException {
-        return new NoHttpRequestsInQueue(getProxyFacade().getResponseFilter(), getEventSynchronizer());
+    public NoHttpRequestsInQueue noHttpRequestsInQueue() {
+        return new NoHttpRequestsInQueue(getReplayingState(), getEventSynchronizer());
     }
 
     public WebDriverActionExecutionException webDriverActionExecutionException(String message, Throwable e) {
@@ -169,21 +157,21 @@ public class ExecutorBuilder {
         return screenNumber;
     }
 
-    public String getPathToDriverSystemProperty() {
-        return systemProperty;
-    }
-
-    public ExecutorBuilder pathToDriverSystemProperty(String systemProperty) {
-        this.systemProperty = systemProperty;
+    public ExecutorBuilder replayingState(ReplayingState replayingState) {
+        this.replayingState = replayingState;
         return this;
     }
 
-    public ReplayManager getReplayManager() {
-        return replayManager;
+    public ReplayingState getReplayingState() {
+        return replayingState;
     }
 
-    public ExecutorBuilder replayManager(ReplayManager replayManager) {
-        this.replayManager = replayManager;
+    public DriverOperations getDriverOperations() {
+        return driverOperations;
+    }
+
+    public ExecutorBuilder driverOperations(DriverOperations driverOperations) {
+        this.driverOperations = driverOperations;
         return this;
     }
 }

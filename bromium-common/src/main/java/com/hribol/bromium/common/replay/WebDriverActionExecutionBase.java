@@ -1,15 +1,12 @@
 package com.hribol.bromium.common.replay;
 import com.hribol.bromium.replay.actions.WebDriverAction;
-import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.replay.execution.WebDriverActionExecution;
 import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
-import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
-import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
+import com.hribol.bromium.core.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.report.AutomationResult;
 import com.hribol.bromium.replay.report.ExecutionReport;
 import com.hribol.bromium.replay.report.LoadingTimes;
-import com.hribol.bromium.replay.settings.ReplayManager;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -28,13 +25,13 @@ public class WebDriverActionExecutionBase implements WebDriverActionExecution {
 
     public WebDriverActionExecutionBase(ExecutorBuilder executor) throws IOException, URISyntaxException {
         this.executor = executor;
-        this.proxyFacade = executor.getProxyFacade();
         this.automationResult = AutomationResult.NOT_STARTED;
     }
 
     @Override
     public ExecutionReport execute(TestScenario testScenario) {
-        ReplayManager replayManager = executor.getReplayManager();
+        DriverOperations driverOperations = executor.getDriverOperations();
+        driverOperations.prepare();
         automationResult = AutomationResult.NOT_STARTED;
         ExecutorService executorService = Executors.newSingleThreadExecutor();
 
@@ -51,15 +48,16 @@ public class WebDriverActionExecutionBase implements WebDriverActionExecution {
                 System.out.println("Executing " + webDriverAction.getName());
                 try {
                     SynchronizationEvent synchronizationEvent = executor.noHttpRequestsInQueue();
-                    executor.getProxyFacade().getResponseFilter().setSynchronizationEvent(synchronizationEvent);
+                    executor.getReplayingState().setSynchronizationEvent(synchronizationEvent);
                     executor.getEventSynchronizer().awaitUntil(synchronizationEvent);
-                } catch (InterruptedException | URISyntaxException | java.util.concurrent.TimeoutException e) {
+                } catch (InterruptedException | java.util.concurrent.TimeoutException e) {
                     throw executor.webDriverActionExecutionException("Exception during execution", e);
                 }
 
-                proxyFacade.getRequestFilter().setHttpLock(webDriverAction.expectsHttpRequest());
+                executor.getReplayingState().setHttpLock(webDriverAction.expectsHttpRequest());
 
-                Future<?> future = executorService.submit(() -> executeIgnoringExceptions(replayManager.getWebDriver(), webDriverAction));
+                Future<?> future = executorService.submit(() -> executeIgnoringExceptions(driverOperations.getDriver(),
+                        webDriverAction));
                 try {
                     future.get(executor.getTimeout(), TimeUnit.SECONDS);
                 }  catch (java.util.concurrent.TimeoutException | InterruptedException e) {
@@ -79,13 +77,12 @@ public class WebDriverActionExecutionBase implements WebDriverActionExecution {
             this.automationResult = executionException.getAutomationResult();
         }
 
-        replayManager.cleanUpReplay();
+        driverOperations.cleanUp();
         executorService.shutdownNow();
         LoadingTimes loadingTimes = new LoadingTimes(testScenario.getActions(), waitingTimes, actionTimestamps);
-        return new ExecutionReport(loadingTimes, replayManager.getHar(), automationResult);
+        return new ExecutionReport(loadingTimes, driverOperations.getHar(), automationResult);
     }
 
-    private ReplayFiltersFacade proxyFacade;
     private ExecutorBuilder executor;
 
     private AutomationResult automationResult;
@@ -95,7 +92,7 @@ public class WebDriverActionExecutionBase implements WebDriverActionExecution {
 
         while (i < executor.getMaxRetries()) {
             try {
-                webDriverAction.execute(webDriver, proxyFacade);
+                webDriverAction.execute(webDriver, executor.getReplayingState(), executor.getEventSynchronizer());
                 return;
             } catch (WebDriverException ex) {
                 System.out.println(ex.toString());

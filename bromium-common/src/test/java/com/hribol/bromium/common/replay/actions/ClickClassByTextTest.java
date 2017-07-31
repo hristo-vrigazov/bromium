@@ -1,6 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
-import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
+import com.hribol.bromium.replay.ReplayingState;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -58,7 +58,7 @@ public class ClickClassByTextTest {
         when(webDriver.findElements(elementsLocator)).thenReturn(webElements);
 
         ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, eventName, expectsHttp);
-        clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayFiltersFacade.class));
+        clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class));
     }
 
     @Rule
@@ -74,7 +74,7 @@ public class ClickClassByTextTest {
 
         ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, eventName, expectsHttp);
         thrown.expect(ElementNotSelectableException.class);
-        clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayFiltersFacade.class));
+        clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class));
     }
 
     @Test
@@ -92,7 +92,7 @@ public class ClickClassByTextTest {
 
         ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, eventName, expectsHttp);
         thrown.expect(ElementNotSelectableException.class);
-        clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayFiltersFacade.class));
+        clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class));
     }
 
     @Test

@@ -1,7 +1,8 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.core.synchronization.EventSynchronizer;
+import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.actions.WebDriverAction;
-import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -22,7 +23,7 @@ public class PageLoading implements WebDriverAction {
      * @param driver the instance of driver through which the action will be executed
      */
     @Override
-    public void execute(WebDriver driver, ReplayFiltersFacade facade) {
+    public void execute(WebDriver driver, ReplayingState state, EventSynchronizer eventSynchronizer) {
         driver.get(url);
     }
 

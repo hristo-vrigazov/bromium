@@ -1,7 +1,8 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.core.synchronization.EventSynchronizer;
+import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.actions.WebDriverAction;
-import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -33,13 +34,13 @@ public class ElementByCssToBeClickableTest {
     public void timesOutIfNoSuitableElements() {
         WebDriverAction webDriverAction = getActionBase(true, false);
         thrown.expect(TimeoutException.class);
-        webDriverAction.execute(driver, mock(ReplayFiltersFacade.class));
+        webDriverAction.execute(driver, mock(ReplayingState.class), mock(EventSynchronizer.class));
     }
 
     @Test
     public void doesNotTimeoutIfSuitableElementIsFound() {
         WebDriverAction webDriverAction = getActionBase(true, true);
-        webDriverAction.execute(driver, mock(ReplayFiltersFacade.class));
+        webDriverAction.execute(driver, mock(ReplayingState.class), mock(EventSynchronizer.class));
     }
 
     private WebDriverAction getActionBase(boolean enabled, boolean displayed) {

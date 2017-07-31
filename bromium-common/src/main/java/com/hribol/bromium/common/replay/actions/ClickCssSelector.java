@@ -1,6 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
-import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
+import com.hribol.bromium.replay.ReplayingState;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,7 +26,7 @@ public class ClickCssSelector extends ActionWithJSPreconditionBase {
     }
 
     @Override
-    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayFiltersFacade facade) {
+    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState state) {
         By byCss = By.cssSelector(cssSelector);
         WebElement webElement = driver.findElement(byCss);
         webElement.click();

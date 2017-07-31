@@ -1,169 +1,57 @@
 package com.hribol.bromium.replay.filters;
 
-import com.hribol.bromium.core.utils.Utils;
-import com.hribol.bromium.replay.execution.synchronization.SynchronizationEvent;
+import com.hribol.bromium.replay.ReplayingState;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.Answers;
+import org.mockito.Mock;
 
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.function.BooleanSupplier;
+import java.util.function.Predicate;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by hvrigazov on 23.04.17.
+ * Created by hvrigazov on 30.07.17.
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({
-        ReplayResponseFilter.class,
-        Utils.class,
-        URI.class
-})
 public class ReplayResponseFilterTest {
 
-    private SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
+    private String injectionCode = "<script>function() {}</script>";
+    private String htmlContent = "<html><head></head><body></body></html>";
+    private String expected = injectionCode + htmlContent;
+    private ReplayingState replayingState = mock(ReplayingState.class);
+    private HttpRequest httpRequest = mock(HttpRequest.class);
+    private HttpResponse httpResponse = mock(HttpResponse.class);
+    private HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
+    private HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
+    private Predicate<HttpRequest> shouldInjectJavascriptPredicate = mock(Predicate.class);
 
     @Test
-    public void replayResponseFilterRemovesIfWhiteListedURL() throws URISyntaxException {
-        String baseURI = "http://tenniskafe.com";
-        Set<HttpRequest> httpRequestSet = new HashSet<>();
-        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter("", baseURI, httpRequestSet);
-
-        HttpRequest httpRequest = mock(HttpRequest.class);
-        when(httpRequest.getUri()).thenReturn("http://tenniskafe.com/static/some.css");
-        httpRequestSet.add(httpRequest);
-        HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
-        HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
-
-        when(httpMessageInfo.getOriginalRequest()).thenReturn(httpRequest);
-
-        HttpResponse httpResponse = mock(HttpResponse.class);
-
-        PowerMockito.mockStatic(Utils.class);
-        when(Utils.isGETFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(false);
-
-        replayResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
-
-        assertFalse(httpRequestSet.contains(httpRequest));
+    public void appendsJavascriptIfisGETFromCurrentHostAndAcceptsHTML() {
+        baseTest(true);
+        verify(httpMessageContents).setTextContents(expected);
     }
 
     @Test
-    public void replayResponseFilterDoesNotRemoveIfURLIsNotWhiteListed() throws URISyntaxException {
-        String baseURI = "http://tenniskafe.com";
-        Set<HttpRequest> httpRequestSet = new HashSet<>();
-        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter("", baseURI, httpRequestSet);
-
-        HttpRequest httpRequest = mock(HttpRequest.class);
-        when(httpRequest.getUri()).thenReturn("http://google.com/static/some.css");
-        httpRequestSet.add(httpRequest);
-        HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
-        HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
-
-        when(httpMessageInfo.getOriginalRequest()).thenReturn(httpRequest);
-
-        HttpResponse httpResponse = mock(HttpResponse.class);
-
-        PowerMockito.mockStatic(Utils.class);
-        when(Utils.isGETFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(false);
-
-        replayResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
-
-        assertTrue(httpRequestSet.contains(httpRequest));
+    public void doesNotJavascriptIfisGETFromCurrentHostAndAcceptsHTML() {
+        baseTest(false);
+        verify(httpMessageContents, never()).setTextContents(expected);
     }
 
-    @Test
-    public void ifAllowedToActItDoes() throws URISyntaxException {
-        String baseURI = "http://tenniskafe.com";
-        Set<HttpRequest> httpRequestSet = new HashSet<>();
-        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter( "", baseURI, httpRequestSet);
-
-        assertTrue(replayResponseFilter.httpRequestQueueIsEmpty());
-    }
-
-    @Test
-    public void ifThereIsOneRequestInQueueWhenItIsRemovedEventIsSignalized() throws URISyntaxException {
-        String baseURI = "http://tenniskafe.com";
-        HttpRequest httpRequest = mock(HttpRequest.class);
-        when(httpRequest.getUri()).thenReturn(baseURI);
-        Set<HttpRequest> httpRequestSet = new HashSet<>();
-        httpRequestSet.add(httpRequest);
-        BooleanSupplier booleanSupplier = mock(BooleanSupplier.class);
-        when(booleanSupplier.getAsBoolean()).thenReturn(false, true);
-        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter( "", baseURI, httpRequestSet);
-
-        assertFalse(replayResponseFilter.httpRequestQueueIsEmpty());
-
-        HttpResponse httpResponse = mock(HttpResponse.class);
-        HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
-        HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
+    private void baseTest(boolean predicateReturnValue) {
+        when(httpMessageContents.getTextContents()).thenReturn(htmlContent);
         when(httpMessageInfo.getOriginalRequest()).thenReturn(httpRequest);
 
-        PowerMockito.mockStatic(Utils.class);
-        when(Utils.isGETFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(false);
+        when(shouldInjectJavascriptPredicate.test(httpRequest)).thenReturn(predicateReturnValue);
 
-        replayResponseFilter.setSynchronizationEvent(synchronizationEvent);
-        replayResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
-
-        verify(synchronizationEvent).signalizeIsDone();
-    }
-
-    @Test
-    public void ifThereIsOneRequestInQueueWhenTheRequestIsAnsweredNotifyIsNotCalled() throws URISyntaxException {
-        String baseURI = "http://tenniskafe.com";
-        HttpRequest httpRequest = mock(HttpRequest.class);
-        when(httpRequest.getUri()).thenReturn(baseURI);
-        Set<HttpRequest> httpRequestSet = new HashSet<>();
-        httpRequestSet.add(httpRequest);
-        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter( "", baseURI, httpRequestSet);
-
-        HttpResponse httpResponse = mock(HttpResponse.class);
-        HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
-        HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
-        when(httpMessageInfo.getOriginalRequest()).thenReturn(httpRequest);
-
-        PowerMockito.mockStatic(Utils.class);
-        when(Utils.isGETFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(false);
+        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter(injectionCode, replayingState,
+                shouldInjectJavascriptPredicate);
 
         replayResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
     }
 
-    @Test
-    public void injectsJSIfRequestingIsChanging() throws URISyntaxException {
-        String baseURI = "http://tenniskafe.com";
-        String injectionCode = "injection";
-        HttpRequest httpRequest = mock(HttpRequest.class);
-        when(httpRequest.getUri()).thenReturn(baseURI);
-        Set<HttpRequest> httpRequestSet = new HashSet<>();
-        httpRequestSet.add(httpRequest);
-        BooleanSupplier booleanSupplier = mock(BooleanSupplier.class);
-        when(booleanSupplier.getAsBoolean()).thenReturn(false);
-        ReplayResponseFilter replayResponseFilter = new ReplayResponseFilter( injectionCode, baseURI, httpRequestSet);
-
-        HttpResponse httpResponse = mock(HttpResponse.class);
-        String httpMessageText = "httpMessageText";
-        HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
-        when(httpMessageContents.getTextContents()).thenReturn(httpMessageText);
-        HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
-        when(httpMessageInfo.getOriginalRequest()).thenReturn(httpRequest);
-
-        PowerMockito.mockStatic(Utils.class);
-        when(Utils.isGETFromCurrentHostAndAcceptsHTML(any(), any())).thenReturn(true);
-
-        replayResponseFilter.filterResponse(httpResponse, httpMessageContents, httpMessageInfo);
-
-        verify(httpMessageContents).setTextContents(injectionCode + httpMessageText);
-    }
 
 }

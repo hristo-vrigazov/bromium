@@ -1,7 +1,8 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.core.synchronization.EventSynchronizer;
+import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.actions.WebDriverAction;
-import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,7 +26,7 @@ public class TextOfElementFoundByCssSelectorToBe implements WebDriverAction {
     }
 
     @Override
-    public void execute(WebDriver driver, ReplayFiltersFacade facade) {
+    public void execute(WebDriver driver, ReplayingState state, EventSynchronizer eventSynchronizer) {
         By by = By.cssSelector(cssSelector);
         WebDriverWait wait = new WebDriverWait(driver, timeout);
         wait.until(ExpectedConditions.textToBe(by, text));

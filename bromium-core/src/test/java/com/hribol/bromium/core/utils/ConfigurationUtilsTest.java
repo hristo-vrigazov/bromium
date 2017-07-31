@@ -1,5 +1,6 @@
 package com.hribol.bromium.core.utils;
 
+import com.google.common.collect.ImmutableMap;
 import com.hribol.bromium.core.TestScenarioSteps;
 import org.junit.Test;
 
@@ -40,5 +41,13 @@ public class ConfigurationUtilsTest {
         assertEquals("value1", parameters.get("key1"));
         assertTrue(parameters.containsKey("key2"));
         assertEquals("value2", parameters.get("key2"));
+    }
+
+    @Test
+    public void canConstructQueryString() {
+        Map<String, String> map = ImmutableMap.of("k1", "v1", "k2", "v2");
+        String expected = "?k1=v1&k2=v2";
+        String actual = ConfigurationUtils.toQueryString(map);
+        assertEquals(expected, actual);
     }
 }

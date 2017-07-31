@@ -1,31 +1,26 @@
 package com.hribol.bromium.integration.tests.record;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.inject.*;
 import com.google.inject.util.Modules;
-import com.hribol.bromium.browsers.chrome.base.VisibleChromeDriverSupplier;
 import com.hribol.bromium.cli.DefaultModule;
+import com.hribol.bromium.cli.Main;
 import com.hribol.bromium.cli.commands.PromptUtils;
 import com.hribol.bromium.cli.commands.RecordCommand;
 import com.hribol.bromium.core.TestScenarioSteps;
-import com.hribol.bromium.core.suppliers.VisibleWebDriverSupplier;
 import com.hribol.bromium.core.utils.ConfigurationUtils;
 import com.hribol.bromium.integration.tests.BaseDemoAppIntegrationTest;
 import com.hribol.bromium.record.RecordRequestFilter;
+import com.hribol.bromium.record.RecordingState;
 import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import org.openqa.selenium.WebDriver;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.hribol.bromium.cli.Main.Commands.RECORD;
 import static com.hribol.bromium.cli.ParsedOptions.*;
 import static com.hribol.bromium.core.utils.Constants.SUBMIT_EVENT_URL;
 import static com.hribol.bromium.integration.tests.TestUtils.exampleTestScenarioSteps;
@@ -60,10 +55,13 @@ public class RecordThroughTheRecordRequestFilterIT extends BaseDemoAppIntegratio
         opts.put(TIMEOUT, String.valueOf(10));
         opts.put(SCREEN, String.valueOf(1));
 
-        Module defaultModule = new DefaultModule(opts);
+
+        Module defaultModule = new DefaultModule(RECORD, opts);
         TestScenarioSteps expected = exampleTestScenarioSteps();
 
-        Module mockedPromptUtilsModule = new ModuleWithMockedPromptUtils(expected);
+        Injector originalInjector = Guice.createInjector(defaultModule);
+
+        Module mockedPromptUtilsModule = new ModuleWithMockedPromptUtils(originalInjector, expected);
 
         Injector injector = Guice.createInjector(Modules.override(defaultModule).with(mockedPromptUtilsModule));
 
@@ -78,10 +76,12 @@ public class RecordThroughTheRecordRequestFilterIT extends BaseDemoAppIntegratio
 
         private PromptUtils promptUtils;
         private RecordRequestFilter recordRequestFilter;
+        private RecordingState recordingState;
 
-        private ModuleWithMockedPromptUtils(TestScenarioSteps expected) {
-            this.promptUtils = spy(new PromptUtils());
-            this.recordRequestFilter = spy(new RecordRequestFilter());
+        private ModuleWithMockedPromptUtils(Injector originalInjector, TestScenarioSteps expected) {
+            this.promptUtils = spy(originalInjector.getInstance(PromptUtils.class));
+            this.recordRequestFilter = spy(originalInjector.getInstance(RecordRequestFilter.class));
+            this.recordingState = spy(originalInjector.getInstance(RecordingState.class));
 
             doAnswer(invocationOnMock -> {
                 HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
@@ -100,8 +100,9 @@ public class RecordThroughTheRecordRequestFilterIT extends BaseDemoAppIntegratio
 
         @Override
         protected void configure() {
-            bind(PromptUtils.class).toInstance(promptUtils);
-            bind(RecordRequestFilter.class).toInstance(recordRequestFilter);
+            bind(PromptUtils.class).toProvider(() -> promptUtils);
+            bind(RecordingState.class).toProvider(() -> recordingState);
+            bind(RecordRequestFilter.class).toProvider(() -> recordRequestFilter);
         }
     }
 }

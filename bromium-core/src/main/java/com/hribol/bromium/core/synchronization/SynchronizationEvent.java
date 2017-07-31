@@ -1,4 +1,4 @@
-package com.hribol.bromium.replay.execution.synchronization;
+package com.hribol.bromium.core.synchronization;
 
 /**
  * Created by hvrigazov on 03.06.17.
