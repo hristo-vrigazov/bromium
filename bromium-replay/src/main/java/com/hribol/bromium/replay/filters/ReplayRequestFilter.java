@@ -9,7 +9,6 @@ import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
 
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 
 import static com.hribol.bromium.core.utils.Constants.CONDITION_NOT_SATISFIED_URL;
@@ -29,23 +28,13 @@ public class ReplayRequestFilter implements RequestFilter {
     @Override
     public HttpResponse filterRequest(HttpRequest httpRequest, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
         replayingState.addHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
-//        addHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
         replayingState.setHttpLock(false);
-//        this.httpLock = false;
 
         if (httpRequest.getUri().contains(CONDITION_SATISFIED_URL)) {
             try {
                 URL url = new URL(httpRequest.getUri());
                 String event = url.getQuery();
                 replayingState.setConditionSatisfied(event);
-//                conditionsSatisfied.add(event);
-//                System.out.println("Satisfied " + event);
-//
-//                if (synchronizationEventOptional.isPresent() && isSatisfied(synchronizationEventOptional.get().getName())) {
-//                    synchronizationEventOptional.get().signalizeIsDone();
-//                    synchronizationEventOptional = Optional.empty();
-//                }
-
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -56,7 +45,6 @@ public class ReplayRequestFilter implements RequestFilter {
                 URL url = new URL(httpRequest.getUri());
                 String event = url.getQuery();
                 replayingState.setConditionNotSatisfied(event);
-//                conditionsSatisfied.remove(event);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }

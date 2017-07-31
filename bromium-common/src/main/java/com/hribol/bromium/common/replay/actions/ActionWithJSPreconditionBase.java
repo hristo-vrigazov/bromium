@@ -8,7 +8,6 @@ import com.hribol.bromium.replay.actions.ActionWithJSPrecondition;
 import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.core.synchronization.SynchronizationEvent;
-import com.hribol.bromium.replay.filters.ReplayFiltersFacade;
 import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeoutException;
