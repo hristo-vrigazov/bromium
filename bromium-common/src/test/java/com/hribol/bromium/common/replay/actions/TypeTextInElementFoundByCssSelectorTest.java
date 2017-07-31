@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import org.junit.Test;
@@ -29,7 +30,7 @@ public class TypeTextInElementFoundByCssSelectorTest {
         when(driver.findElement(By.cssSelector(cssSelector))).thenReturn(textBox);
 
         WebDriverAction action = new TypeTextInElementFoundByCssSelector(cssSelector, text, eventName, expectsHttp);
-        action.execute(driver, mock(ReplayingState.class));
+        action.execute(driver, mock(ReplayingState.class), mock(EventSynchronizer.class));
 
         verify(textBox).sendKeys(text);
         assertEquals(eventName, action.getName());

@@ -21,12 +21,9 @@ public class ReplayingState {
     private boolean httpLock;
     private Set<HttpRequest> httpRequestQueue;
     private List<String> whiteListHttp;
-    private EventSynchronizer eventSynchronizer;
 
     @Inject
-    public ReplayingState(@Named(BASE_URI) URI baseUri,
-                          EventSynchronizer eventSynchronizer) {
-        this.eventSynchronizer = eventSynchronizer;
+    public ReplayingState(@Named(BASE_URI) URI baseUri) {
         this.synchronizationEventOptional = Optional.empty();
         this.httpLock = false;
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
@@ -85,10 +82,6 @@ public class ReplayingState {
 
     private boolean inWhiteList(String url) {
         return whiteListHttp.stream().anyMatch(url::contains);
-    }
-
-    public EventSynchronizer getEventSynchronizer() {
-        return eventSynchronizer;
     }
 
     public boolean httpRequestQueueIsEmpty() {

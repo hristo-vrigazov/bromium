@@ -1,11 +1,12 @@
 package com.hribol.bromium.replay.actions;
 
+import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.replay.ReplayingState;
 import org.openqa.selenium.WebDriver;
 
 /**
  * Encapsulated selenium {@link org.openqa.selenium.WebDriver} action.
- * The action is executed using the {@link #execute(WebDriver, ReplayingState)} method.
+ * The action is executed using the {@link #execute(WebDriver, ReplayingState, EventSynchronizer)} method.
  * The name of the event, which is written in the measurements file can
  * be accessed through the {@link #getName()} method. Every action also
  * has to tell whether it expects an HTTP query after it, so that it is known
@@ -20,7 +21,7 @@ public interface WebDriverAction {
      * would be an implementation of an action called ClickId for example.
      * @param driver the instance of driver through which the action will be executed
      */
-    void execute(WebDriver driver, ReplayingState replayingState);
+    void execute(WebDriver driver, ReplayingState replayingState, EventSynchronizer eventSynchronizer);
 
     /**
      * The name of the action, which will be written in the measurements and in the

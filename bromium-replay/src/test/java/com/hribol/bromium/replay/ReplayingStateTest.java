@@ -27,14 +27,14 @@ public class ReplayingStateTest {
 
     @Test
     public void addingEventToTheSatisfiedListMarksItAsSatisfied() {
-        ReplayingState replayingState = new ReplayingState(baseURI, eventSynchronizer);
+        ReplayingState replayingState = new ReplayingState(baseURI);
         replayingState.setConditionSatisfied(exampleCondition);
         assertTrue(replayingState.isSatisfied(exampleCondition));
     }
 
     @Test
     public void ifConditionIsSetToNotSatisfiedThenItIsNotMarked() {
-        ReplayingState replayingState = new ReplayingState(baseURI, eventSynchronizer);
+        ReplayingState replayingState = new ReplayingState(baseURI);
         replayingState.setConditionSatisfied(exampleCondition);
         replayingState.setConditionNotSatisfied(exampleCondition);
         assertFalse(replayingState.isSatisfied(exampleCondition));
@@ -42,7 +42,7 @@ public class ReplayingStateTest {
 
     @Test
     public void signalizesIfEventIsSatisfiedAndCheckWasTriggered() {
-        ReplayingState replayingState = new ReplayingState(baseURI, eventSynchronizer);
+        ReplayingState replayingState = new ReplayingState(baseURI);
         SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
         when(synchronizationEvent.getName()).thenReturn(exampleCondition);
         replayingState.setSynchronizationEvent(synchronizationEvent);
@@ -53,7 +53,7 @@ public class ReplayingStateTest {
 
     @Test
     public void doesNotSignalizeIfEventIsSatisfiedAndCheckWasTriggered() {
-        ReplayingState replayingState = new ReplayingState(baseURI, eventSynchronizer);
+        ReplayingState replayingState = new ReplayingState(baseURI);
         SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
         when(synchronizationEvent.getName()).thenReturn(exampleCondition);
         replayingState.setSynchronizationEvent(synchronizationEvent);
@@ -63,7 +63,7 @@ public class ReplayingStateTest {
 
     @Test
     public void doesNotSignalizeIfEventIsNotSet() {
-        ReplayingState replayingState = new ReplayingState(baseURI, eventSynchronizer);
+        ReplayingState replayingState = new ReplayingState(baseURI);
         SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
         when(synchronizationEvent.getName()).thenReturn(exampleCondition);
         replayingState.signalizeIfSynchronizationEventIsSatisfied();
@@ -72,20 +72,14 @@ public class ReplayingStateTest {
 
     @Test
     public void lockLocks() {
-        ReplayingState replayingState = new ReplayingState(baseURI, eventSynchronizer);
+        ReplayingState replayingState = new ReplayingState(baseURI);
         replayingState.setHttpLock(true);
         assertTrue(replayingState.isHttpLocked());
     }
 
     @Test
-    public void eventSynchronizerIsExposed() {
-        ReplayingState replayingState = new ReplayingState(baseURI, eventSynchronizer);
-        assertEquals(eventSynchronizer, replayingState.getEventSynchronizer());
-    }
-
-    @Test
     public void httpQueueIsEmptyInTheBeginningButNotWhenWeAddRequestInWhiteList() {
-        ReplayingState replayingState = new ReplayingState(baseURI, eventSynchronizer);
+        ReplayingState replayingState = new ReplayingState(baseURI);
         assertTrue(replayingState.httpRequestQueueIsEmpty());
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn(exampleURIFromTheSameHost);
@@ -95,7 +89,7 @@ public class ReplayingStateTest {
 
     @Test
     public void httpQueueIsEmptyInTheBeginningAndRemainsEmptyIfURIIsNotInWhiteList() {
-        ReplayingState replayingState = new ReplayingState(baseURI, eventSynchronizer);
+        ReplayingState replayingState = new ReplayingState(baseURI);
         assertTrue(replayingState.httpRequestQueueIsEmpty());
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn(exampleURIFromAnotherHost);
@@ -106,7 +100,7 @@ public class ReplayingStateTest {
     @Test
     public void ifHttpQueueIsNotEmptyItDoesNotTrigger() {
         // Arrange
-        ReplayingState replayingState = new ReplayingState(baseURI, eventSynchronizer);
+        ReplayingState replayingState = new ReplayingState(baseURI);
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn(exampleURIFromTheSameHost);
         replayingState.addHttpRequestToQueue(httpRequest);
@@ -124,7 +118,7 @@ public class ReplayingStateTest {
     @Test
     public void ifHttpQueueIsEmptyAndSynchronizationEventIsSetItDoesTrigger() {
         // Arrange
-        ReplayingState replayingState = new ReplayingState(baseURI, eventSynchronizer);
+        ReplayingState replayingState = new ReplayingState(baseURI);
         SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
         when(synchronizationEvent.getName()).thenReturn(NO_HTTP_REQUESTS_IN_QUEUE);
         replayingState.setSynchronizationEvent(synchronizationEvent);
@@ -139,7 +133,7 @@ public class ReplayingStateTest {
     @Test
     public void ifHttpQueueIsEmptyAndSynchronizationEventIsNotEmptyRequestsItDoesNotTrigger() {
         // Arrange
-        ReplayingState replayingState = new ReplayingState(baseURI, eventSynchronizer);
+        ReplayingState replayingState = new ReplayingState(baseURI);
         SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
         when(synchronizationEvent.getName()).thenReturn("something");
         replayingState.setSynchronizationEvent(synchronizationEvent);
@@ -154,7 +148,7 @@ public class ReplayingStateTest {
     @Test
     public void ifEventIsNotSetThenItDoesNotGetInvokedEventIfQueueIsEmpty() {
         // Arrange
-        ReplayingState replayingState = new ReplayingState(baseURI, eventSynchronizer);
+        ReplayingState replayingState = new ReplayingState(baseURI);
         SynchronizationEvent synchronizationEvent = mock(SynchronizationEvent.class);
         when(synchronizationEvent.getName()).thenReturn(NO_HTTP_REQUESTS_IN_QUEUE);
 
@@ -168,7 +162,7 @@ public class ReplayingStateTest {
     @Test
     public void removingARequestLeadsToEmptyQueue() {
         // Arrange
-        ReplayingState replayingState = new ReplayingState(baseURI, eventSynchronizer);
+        ReplayingState replayingState = new ReplayingState(baseURI);
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn(exampleURIFromTheSameHost);
 
@@ -183,7 +177,7 @@ public class ReplayingStateTest {
     @Test
     public void whenRemoveFromDifferentHostQueueIsNotEmpty() {
         // Arrange
-        ReplayingState replayingState = new ReplayingState(baseURI, eventSynchronizer);
+        ReplayingState replayingState = new ReplayingState(baseURI);
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn(exampleURIFromTheSameHost);
 

@@ -18,9 +18,8 @@ import java.util.concurrent.TimeoutException;
 public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecondition, WebDriverAction {
 
     @Override
-    public void execute(WebDriver driver, ReplayingState replayingState) {
+    public void execute(WebDriver driver, ReplayingState replayingState, EventSynchronizer eventSynchronizer) {
         String hashCodeToWaitFor = String.valueOf(getJSEventToWaitFor().hashCode());
-        EventSynchronizer eventSynchronizer = replayingState.getEventSynchronizer();
         SynchronizationEvent synchronizationEvent = new JSPrecondition(hashCodeToWaitFor, eventSynchronizer, replayingState);
         try {
             replayingState.setSynchronizationEvent(synchronizationEvent);

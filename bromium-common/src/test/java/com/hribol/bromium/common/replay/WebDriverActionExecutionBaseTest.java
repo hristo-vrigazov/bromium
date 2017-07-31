@@ -68,7 +68,7 @@ public class WebDriverActionExecutionBaseTest {
         when(testScenario.steps()).thenReturn(testScenarioSteps);
         when(webDriverActionIterator.hasNext()).thenReturn(true, false);
         WebDriverAction firstAction = mock(WebDriverAction.class);
-        doThrow(new AssertionError()).when(firstAction).execute(any(), any());
+        doThrow(new AssertionError()).when(firstAction).execute(any(), any(), any());
         when(webDriverActionIterator.next()).thenReturn(firstAction);
         ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.ASSERTION_ERROR, report.getAutomationResult());
@@ -88,7 +88,7 @@ public class WebDriverActionExecutionBaseTest {
         doAnswer(invocationOnMock -> {
             Thread.sleep(1500);
             return null;
-        }).when(firstAction).execute(any(), any());
+        }).when(firstAction).execute(any(), any(), any());
 
         when(firstAction.expectsHttpRequest()).thenReturn(true);
         when(webDriverActionIterator.next()).thenReturn(firstAction);
@@ -107,7 +107,7 @@ public class WebDriverActionExecutionBaseTest {
         WebDriverAction firstAction = mock(WebDriverAction.class);
         when(webDriverActionIterator.hasNext()).thenReturn(true, false);
         when(firstAction.expectsHttpRequest()).thenReturn(true);
-        doThrow(InterruptedException.class).when(firstAction).execute(any(), any());
+        doThrow(InterruptedException.class).when(firstAction).execute(any(), any(), any());
         when(webDriverActionIterator.next()).thenReturn(firstAction);
         ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.INTERRUPTED, report.getAutomationResult());
@@ -122,7 +122,7 @@ public class WebDriverActionExecutionBaseTest {
         TestScenario testScenario = mock(TestScenario.class);
         when(testScenario.steps()).thenReturn(testScenarioSteps);
         WebDriverAction firstAction = mock(WebDriverAction.class);
-        doThrow(new WebDriverException("Something happened!")).when(firstAction).execute(any(), any());
+        doThrow(new WebDriverException("Something happened!")).when(firstAction).execute(any(), any(), any());
         when(webDriverActionIterator.hasNext()).thenReturn(true, false);
         when(firstAction.expectsHttpRequest()).thenReturn(true);
         PowerMockito.mockStatic(Thread.class);
@@ -143,7 +143,7 @@ public class WebDriverActionExecutionBaseTest {
         when(testScenario.steps()).thenReturn(testScenarioSteps);
         when(webDriverActionIterator.hasNext()).thenReturn(true, false);
         WebDriverAction firstAction = mock(WebDriverAction.class);
-        doThrow(new WebDriverException("Exception occured!")).doNothing().when(firstAction).execute(any(), any());
+        doThrow(new WebDriverException("Exception occured!")).doNothing().when(firstAction).execute(any(), any(), any());
         when(webDriverActionIterator.next()).thenReturn(firstAction);
         ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.SUCCESS, report.getAutomationResult());
@@ -177,7 +177,7 @@ public class WebDriverActionExecutionBaseTest {
         when(testScenario.steps()).thenReturn(testScenarioSteps);
         when(webDriverActionIterator.hasNext()).thenReturn(true, false);
         WebDriverAction firstAction = mock(WebDriverAction.class);
-        doThrow(new WebDriverException("Exception occured!")).when(firstAction).execute(any(), any());
+        doThrow(new WebDriverException("Exception occured!")).when(firstAction).execute(any(), any(), any());
         when(webDriverActionIterator.next()).thenReturn(firstAction);
 
 
@@ -196,11 +196,11 @@ public class WebDriverActionExecutionBaseTest {
         when(testScenario.steps()).thenReturn(testScenarioSteps);
         when(webDriverActionIterator.hasNext()).thenReturn(true, false);
         WebDriverAction firstAction = mock(WebDriverAction.class);
-        doThrow(new WebDriverException("Exception occured!")).when(firstAction).execute(any(), any());
+        doThrow(new WebDriverException("Exception occured!")).when(firstAction).execute(any(), any(), any());
         when(webDriverActionIterator.next()).thenReturn(firstAction);
         ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
         assertEquals(AutomationResult.TIMEOUT, report.getAutomationResult());
-        verify(firstAction, times(maxRetries)).execute(any(), any());
+        verify(firstAction, times(maxRetries)).execute(any(), any(), any());
     }
 
     private ExecutorBuilder getWebDriverActionExecutor() throws IOException, URISyntaxException {

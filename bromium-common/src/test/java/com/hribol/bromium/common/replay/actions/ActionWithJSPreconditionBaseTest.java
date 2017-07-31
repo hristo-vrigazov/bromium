@@ -49,9 +49,7 @@ public class ActionWithJSPreconditionBaseTest {
         WebDriver driver = mock(WebDriver.class);
         EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
         ReplayingState replayingState = mock(ReplayingState.class);
-        when(replayingState.isSatisfied(jsEvent)).thenReturn(false);
-        when(replayingState.getEventSynchronizer()).thenReturn(eventSynchronizer);
-        actionWithJSPreconditionBase.execute(driver, replayingState);
+        actionWithJSPreconditionBase.execute(driver, replayingState, eventSynchronizer);
 
         verify(eventSynchronizer).awaitUntil(any(SynchronizationEvent.class));
     }
@@ -86,9 +84,8 @@ public class ActionWithJSPreconditionBaseTest {
         WebDriver driver = mock(WebDriver.class);
         EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
         ReplayingState replayingState = mock(ReplayingState.class);
-        when(replayingState.getEventSynchronizer()).thenReturn(eventSynchronizer);
         when(replayingState.isSatisfied(jsEvent)).thenReturn(true);
-        actionWithJSPreconditionBase.execute(driver, replayingState);
+        actionWithJSPreconditionBase.execute(driver, replayingState, eventSynchronizer);
 
         verify(eventSynchronizer).awaitUntil(any());
 
@@ -129,9 +126,8 @@ public class ActionWithJSPreconditionBaseTest {
         doThrow(new InterruptedException()).when(eventSynchronizer).awaitUntil(any(SynchronizationEvent.class));
         ReplayingState replayingState = mock(ReplayingState.class);
         when(replayingState.isSatisfied(jsEvent)).thenReturn(false);
-        when(replayingState.getEventSynchronizer()).thenReturn(eventSynchronizer);
         thrown.expect(WebDriverActionExecutionException.class);
-        actionWithJSPreconditionBase.execute(driver, replayingState);
+        actionWithJSPreconditionBase.execute(driver, replayingState, eventSynchronizer);
 
         actionWithJSPreconditionBase = Mockito.spy(actionWithJSPreconditionBase);
         verify(actionWithJSPreconditionBase, never()).executeAfterJSPreconditionHasBeenSatisfied(driver, replayingState);

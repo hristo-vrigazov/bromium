@@ -92,7 +92,7 @@ public class WebDriverActionExecutionBase implements WebDriverActionExecution {
 
         while (i < executor.getMaxRetries()) {
             try {
-                webDriverAction.execute(webDriver, executor.getReplayingState());
+                webDriverAction.execute(webDriver, executor.getReplayingState(), executor.getEventSynchronizer());
                 return;
             } catch (WebDriverException ex) {
                 System.out.println(ex.toString());
