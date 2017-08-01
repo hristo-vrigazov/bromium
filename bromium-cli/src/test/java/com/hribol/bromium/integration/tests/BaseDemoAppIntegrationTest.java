@@ -81,6 +81,10 @@ public abstract class BaseDemoAppIntegrationTest {
         return outContent.toString();
     }
 
+    protected String getOutputOnStdErr() {
+        return errContent.toString();
+    }
+
     protected File createTempFile(String filename) throws IOException {
         return File.createTempFile(filename, "", testResourcesDirectory);
     }

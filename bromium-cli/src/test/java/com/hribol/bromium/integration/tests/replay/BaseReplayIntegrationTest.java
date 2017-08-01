@@ -7,6 +7,7 @@ import org.junit.Before;
 import java.io.IOException;
 
 import static com.hribol.bromium.integration.tests.TestUtils.extractResource;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Created by hvrigazov on 15.07.17.
@@ -37,6 +38,8 @@ public abstract class BaseReplayIntegrationTest extends BaseDemoAppIntegrationTe
         Main.main(args);
         String output = getOutput();
         assertOutput(output);
+        String outputError = getOutputOnStdErr();
+        assertFalse(outputError.contains("SLF4J: Failed to load class \"org.slf4j.impl.StaticLoggerBinder\"."));
     }
 
     protected abstract void assertOutput(String output);
