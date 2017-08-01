@@ -1,6 +1,5 @@
 package com.hribol.bromium.cli;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
@@ -26,9 +25,6 @@ import com.hribol.bromium.common.generation.replay.*;
 import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
 import com.hribol.bromium.common.ProxyDriverIntegrator;
 import com.hribol.bromium.common.record.RecordBrowser;
-import com.hribol.bromium.core.suppliers.BrowserMobProxySupplier;
-import com.hribol.bromium.core.suppliers.DesiredCapabilitiesSupplier;
-import com.hribol.bromium.core.suppliers.SeleniumProxySupplier;
 import com.hribol.bromium.core.utils.GetHtmlFromCurrentHostPredicate;
 import com.hribol.bromium.record.RecordingState;
 import com.hribol.bromium.common.replay.DriverOperations;
@@ -74,7 +70,6 @@ import net.lightbody.bmp.proxy.CaptureType;
 import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.service.DriverService;
