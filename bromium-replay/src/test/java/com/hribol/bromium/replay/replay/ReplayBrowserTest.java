@@ -19,6 +19,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -74,6 +75,17 @@ public class ReplayBrowserTest {
 
         ExecutionReport actualReport = replayBrowser.replay(testCaseSteps);
         assertEquals(expectedReport, actualReport);
+    }
+
+    @Test
+    public void canForceCleanUp() {
+        TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);
+        WebDriverActionExecution webDriverActionExecution = mock(WebDriverActionExecution.class);
+        ReplayBrowser replayBrowser = new ReplayBrowser(testScenarioFactory, webDriverActionExecution);
+
+        replayBrowser.forceCleanUp();
+
+        verify(webDriverActionExecution).forceCleanUp();
     }
 
 }

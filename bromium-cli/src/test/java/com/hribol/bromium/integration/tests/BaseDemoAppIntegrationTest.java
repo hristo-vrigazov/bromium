@@ -3,10 +3,10 @@ package com.hribol.bromium.integration.tests;
 import com.google.common.io.Files;
 import com.hribol.bromium.demo.app.DemoApp;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import static com.hribol.bromium.integration.tests.TestUtils.*;
 
 import java.io.*;
 
@@ -52,11 +52,11 @@ public abstract class BaseDemoAppIntegrationTest {
     private void prepareTestResources() throws IOException {
         testResourcesDirectory = Files.createTempDir();
 
-        chromedriverFile = extractResource("chromedriver");
+        chromedriverFile = extractResource("chromedriver", testResourcesDirectory);
         if (!chromedriverFile.setExecutable(true)) {
             throw new IllegalStateException("Cannot set chrome driver file to executable");
         }
-        configurationFile = extractResource(resourceConfigurationPath);
+        configurationFile = extractResource(resourceConfigurationPath, testResourcesDirectory);
         measurementsFile = createTempFile("measurements.csv");
     }
 
@@ -79,16 +79,6 @@ public abstract class BaseDemoAppIntegrationTest {
 
     protected String getOutput() {
         return outContent.toString();
-    }
-
-    protected File extractResource(String resource) throws IOException {
-        File tempFile = File.createTempFile(resource, "", testResourcesDirectory);
-        InputStream chromeDriverStream = getClass().getResourceAsStream("/" + resource);
-        OutputStream fileOutputStream = new FileOutputStream(tempFile);
-        IOUtils.copy(chromeDriverStream, fileOutputStream);
-        chromeDriverStream.close();
-        fileOutputStream.close();
-        return tempFile;
     }
 
     protected File createTempFile(String filename) throws IOException {

@@ -1,12 +1,15 @@
 package com.hribol.bromium.integration.tests.replay;
 
+import static com.hribol.bromium.integration.tests.TestUtils.AJAX_TEST_CASE;
+import static com.hribol.bromium.integration.tests.TestUtils.DEMO_CONFIGURATION;
+
 /**
  * Created by hvrigazov on 09.07.17.
  */
 public class ReplayAjaxIT extends IntegrationTestAssertingThatStatusIsSuccess {
 
     public ReplayAjaxIT() {
-        super("integration-tests/demo.json", "integration-tests/ajax.json");
+        super(DEMO_CONFIGURATION, AJAX_TEST_CASE);
     }
 
 }

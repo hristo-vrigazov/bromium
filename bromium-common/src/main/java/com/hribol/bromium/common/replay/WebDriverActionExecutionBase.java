@@ -83,6 +83,11 @@ public class WebDriverActionExecutionBase implements WebDriverActionExecution {
         return new ExecutionReport(loadingTimes, driverOperations.getHar(), automationResult);
     }
 
+    @Override
+    public void forceCleanUp() {
+        executor.getDriverOperations().cleanUp();
+    }
+
     private ExecutorBuilder executor;
 
     private AutomationResult automationResult;

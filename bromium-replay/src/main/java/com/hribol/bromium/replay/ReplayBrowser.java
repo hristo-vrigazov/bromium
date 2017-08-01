@@ -42,4 +42,8 @@ public class ReplayBrowser {
         return webDriverActionExecution.execute(testScenario);
     }
 
+    public void forceCleanUp() {
+        webDriverActionExecution.forceCleanUp();
+    }
+
 }
