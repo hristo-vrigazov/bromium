@@ -463,23 +463,6 @@ public class DefaultModule extends AbstractModule {
         return URI.create(baseUrl);
     }
 
-    @CheckedProvides(IOProvider.class)
-    public RecordResponseFilter getRecordResponseFilter(@Named(RECORDING_JAVASCRIPT_CODE) IOProvider<String> injectionCodeProvider,
-                                                        Predicate<HttpRequest> shouldIncludeJavascriptPredicate) throws IOException {
-        return new RecordResponseFilter(injectionCodeProvider.get(), shouldIncludeJavascriptPredicate);
-    }
-
-    @Named(PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY)
-    @Provides
-    public String getPathToDriverExecutableSystemProperty(@Named(BROWSER_TYPE) String browserType) {
-        switch (browserType) {
-            case CHROME:
-                return ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY;
-            default:
-                throw new BrowserTypeNotSupportedException();
-        }
-    }
-
     @CheckedProvides(IOURIProvider.class)
     public ProxyDriverIntegrator getProxyDriverIntegrator(RequestFilter requestFilter,
                                                           IOProvider<ResponseFilter> responseFilterIOURIProvider,
@@ -490,23 +473,6 @@ public class DefaultModule extends AbstractModule {
                                                           @Named(TIMEOUT) int timeout) throws IOException, URISyntaxException {
         return getProxyDriverIntegrator(requestFilter, webDriverSupplier, driverServiceSupplier, pathToDriverExecutable, screen, timeout,
                 responseFilterIOURIProvider.get());
-    }
-
-    private <T extends DriverService> ProxyDriverIntegrator createProxyDriverIntegrator(
-            int timeout,
-            RequestFilter requestFilter,
-            ResponseFilter responseFilter,
-            DriverServiceSupplier<T> driverServiceSupplier,
-            WebDriverSupplier<T> webDriverSupplier,
-            String pathToDriver,
-            String screenToUse) throws IOException {
-        BrowserMobProxy proxy = new BrowserMobProxySupplier(timeout, requestFilter, responseFilter).get();
-        proxy.start(0);
-        Proxy seleniumProxy = new SeleniumProxySupplier(proxy).get();
-        DesiredCapabilities capabilities = new DesiredCapabilitiesSupplier(seleniumProxy).get();
-        T driverService = driverServiceSupplier.getDriverService(pathToDriver, screenToUse);
-        WebDriver driver = webDriverSupplier.get(driverService, capabilities);
-        return new ProxyDriverIntegrator(driver, proxy, driverService);
     }
 
     private ProxyDriverIntegrator getProxyDriverIntegrator(RequestFilter recordRequestFilter,
@@ -573,43 +539,9 @@ public class DefaultModule extends AbstractModule {
     }
 
     @Provides
-    public String getDriverSystemProperty(@Named(BROWSER_TYPE) String browserType) {
-        switch (browserType) {
-            case CHROME:
-                return ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY;
-            default:
-                throw new BrowserTypeNotSupportedException();
-        }
-    }
-
-    public ChromeDriverService getDriverService(@Named(PATH_TO_DRIVER) String pathToDriverExecutable,
-                                          @Named(BROWSER_TYPE) String browserType,
-                                          @Named(SCREEN) String screenToUse) throws IOException {
-        switch (browserType) {
-            case CHROME:
-                System.out.println("Driver service");
-                return new ChromeDriverService.Builder()
-                        .usingDriverExecutable(new File(pathToDriverExecutable))
-                        .usingAnyFreePort()
-                        .withEnvironment(ImmutableMap.of("DISPLAY", screenToUse))
-                        .build();
-            default:
-                throw new BrowserTypeNotSupportedException();
-        }
-    }
-
-    @Provides
     @Singleton
     public EventSynchronizer getEventSynchronizer(@Named(TIMEOUT) Integer timeout) {
         return new SignalizationBasedEventSynchronizer(timeout);
     }
-
-    @CheckedProvides(IOProvider.class)
-    public ReplayResponseFilter getReplayResponseFilter(@Named(REPLAYING_JAVASCRIPT_CODE) IOProvider<String> codeProvider,
-                                                        ReplayingState replayingState,
-                                                        Predicate<HttpRequest> getHtmlFromCurrentHostPredicate) throws IOException {
-        return new ReplayResponseFilter(codeProvider.get(), replayingState, getHtmlFromCurrentHostPredicate);
-    }
-
 }
 

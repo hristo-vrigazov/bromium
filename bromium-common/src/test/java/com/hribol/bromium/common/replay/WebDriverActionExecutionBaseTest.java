@@ -186,6 +186,14 @@ public class WebDriverActionExecutionBaseTest {
     }
 
     @Test
+    public void canForceCleanUp() throws IOException, URISyntaxException {
+        ExecutorBuilder executorBuilder = getWebDriverActionExecutor();
+        WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(executorBuilder);
+        webDriverActionExecutionBase.forceCleanUp();
+        verify(executorBuilder.getDriverOperations()).cleanUp();
+    }
+
+    @Test
     public void ifTooManyAttemtpsActionTimesOut() throws IOException, URISyntaxException {
         int maxRetries = 3;
         WebDriverActionExecutionBase webDriverActionExecutionBase = getWebDriverActionExecutionBase(10, maxRetries);

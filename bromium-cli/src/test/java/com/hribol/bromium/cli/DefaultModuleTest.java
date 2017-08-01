@@ -1,14 +1,14 @@
 package com.hribol.bromium.cli;
 
 import com.google.common.io.Files;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Key;
-import com.google.inject.Module;
+import com.google.inject.*;
+import com.hribol.bromium.cli.commands.RecordCommand;
 import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.core.providers.IOURIProvider;
 import com.hribol.bromium.core.suite.UbuntuVirtualScreenProcessCreator;
+import com.hribol.bromium.core.suppliers.WebDriverSupplier;
 import com.hribol.bromium.replay.ReplayBrowser;
+import com.hribol.bromium.replay.settings.DriverServiceSupplier;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -24,6 +24,7 @@ import static com.hribol.bromium.cli.Main.Commands.RECORD;
 import static com.hribol.bromium.cli.Main.Commands.REPLAY;
 import static com.hribol.bromium.cli.ParsedOptions.*;
 import static com.hribol.bromium.integration.tests.TestUtils.*;
+import static org.junit.Assert.assertTrue;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
 /**
@@ -75,6 +76,50 @@ public class DefaultModuleTest {
 
         // cleanup
         recordBrowser.cleanUp();
+    }
+
+    @Test
+    public void canCreateRecordCommand() throws IOException, URISyntaxException {
+        String command = RECORD;
+        Map<String, Object> opts = new HashMap<>();
+        opts.put(DRIVER, chromedriverFile.getAbsolutePath());
+        opts.put(APPLICATION, configurationFile.getAbsolutePath());
+        opts.put(URL, localhostUrl);
+        opts.put(OUTPUT, "output.json");
+        opts.put(BROWSER, CHROME);
+        opts.put(TIMEOUT, timeoutString);
+        opts.put(SCREEN, screenString);
+        Module module = new DefaultModule(command, opts);
+        Injector injector = Guice.createInjector(module);
+        RecordCommand instance = injector.getInstance(RecordCommand.class);
+    }
+
+    @Test
+    public void invalidBrowserThrowsExceptionWhenDriver() throws IOException, URISyntaxException {
+        String command = RECORD;
+        Map<String, Object> opts = new HashMap<>();
+        opts.put(BROWSER, "asd");
+        Module module = new DefaultModule(command, opts);
+        Injector injector = Guice.createInjector(module);
+        try {
+            WebDriverSupplier instance = injector.getInstance(WebDriverSupplier.class);
+        } catch (ProvisionException e) {
+            assertTrue(e.getCause() instanceof BrowserTypeNotSupportedException);
+        }
+    }
+
+    @Test
+    public void invalidBrowserThrowsExceptionWhenDriverServiceSupplier() throws IOException, URISyntaxException {
+        String command = RECORD;
+        Map<String, Object> opts = new HashMap<>();
+        opts.put(BROWSER, "asd");
+        Module module = new DefaultModule(command, opts);
+        Injector injector = Guice.createInjector(module);
+        try {
+            DriverServiceSupplier instance = injector.getInstance(DriverServiceSupplier.class);
+        } catch (ProvisionException e) {
+            assertTrue(e.getCause() instanceof BrowserTypeNotSupportedException);
+        }
     }
 
     @Test
