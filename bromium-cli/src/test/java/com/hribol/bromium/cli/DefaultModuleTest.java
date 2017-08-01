@@ -4,11 +4,14 @@ import com.google.common.io.Files;
 import com.google.inject.*;
 import com.hribol.bromium.cli.commands.RecordCommand;
 import com.hribol.bromium.common.record.RecordBrowser;
+import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.providers.IOURIProvider;
 import com.hribol.bromium.core.suite.UbuntuVirtualScreenProcessCreator;
 import com.hribol.bromium.core.suppliers.WebDriverSupplier;
 import com.hribol.bromium.replay.ReplayBrowser;
 import com.hribol.bromium.replay.settings.DriverServiceSupplier;
+import net.lightbody.bmp.filters.RequestFilter;
+import net.lightbody.bmp.filters.ResponseFilter;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -24,6 +27,7 @@ import static com.hribol.bromium.cli.Main.Commands.RECORD;
 import static com.hribol.bromium.cli.Main.Commands.REPLAY;
 import static com.hribol.bromium.cli.ParsedOptions.*;
 import static com.hribol.bromium.integration.tests.TestUtils.*;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
@@ -158,10 +162,30 @@ public class DefaultModuleTest {
         Module module = new DefaultModule(command, opts);
         Injector injector = Guice.createInjector(module);
 
-        IOURIProvider<ReplayBrowser> instance = injector.getInstance(new Key<IOURIProvider<ReplayBrowser>>() {});
+        try {
+            RequestFilter instance = injector.getInstance(RequestFilter.class);
+        } catch (ProvisionException e) {
+            assertTrue(e.getCause() instanceof NoSuchCommandException);
+        }
+    }
+
+    @Test
+    public void ifCommmandIsInvalidResponseExceptionIsThrown() throws IOException, URISyntaxException {
+        String command = "invalid";
+        Map<String, Object> opts = new HashMap<>();
+        opts.put(BROWSER, CHROME);
+        opts.put(DRIVER, chromedriverFile.getAbsolutePath());
+        opts.put(APPLICATION, configurationFile.getAbsolutePath());
+        opts.put(URL, localhostUrl);
+        opts.put(CASE, caseFile.getAbsolutePath());
+        opts.put(SCREEN, screenString);
+        opts.put(TIMEOUT, timeoutString);
+        opts.put(PRECISION, precisionString);
+        Module module = new DefaultModule(command, opts);
+        Injector injector = Guice.createInjector(module);
 
         try {
-            instance.get();
+            IOProvider<ResponseFilter> instance = injector.getInstance(new Key<IOProvider<ResponseFilter>>() {});
         } catch (ProvisionException e) {
             assertTrue(e.getCause() instanceof NoSuchCommandException);
         }
