@@ -143,6 +143,30 @@ public class DefaultModuleTest {
         replayBrowser.forceCleanUp();
     }
 
+    @Test
+    public void ifCommmandIsInvalidExceptionIsThrown() throws IOException, URISyntaxException {
+        String command = "invalid";
+        Map<String, Object> opts = new HashMap<>();
+        opts.put(BROWSER, CHROME);
+        opts.put(DRIVER, chromedriverFile.getAbsolutePath());
+        opts.put(APPLICATION, configurationFile.getAbsolutePath());
+        opts.put(URL, localhostUrl);
+        opts.put(CASE, caseFile.getAbsolutePath());
+        opts.put(SCREEN, screenString);
+        opts.put(TIMEOUT, timeoutString);
+        opts.put(PRECISION, precisionString);
+        Module module = new DefaultModule(command, opts);
+        Injector injector = Guice.createInjector(module);
+
+        IOURIProvider<ReplayBrowser> instance = injector.getInstance(new Key<IOURIProvider<ReplayBrowser>>() {});
+
+        try {
+            instance.get();
+        } catch (ProvisionException e) {
+            assertTrue(e.getCause() instanceof NoSuchCommandException);
+        }
+    }
+
     @After
     public void cleanUp() throws IOException {
         FileUtils.deleteDirectory(tempDir);
