@@ -186,6 +186,7 @@ public class DefaultModuleTest {
 
         try {
             IOProvider<ResponseFilter> instance = injector.getInstance(new Key<IOProvider<ResponseFilter>>() {});
+            instance.get();
         } catch (ProvisionException e) {
             assertTrue(e.getCause() instanceof NoSuchCommandException);
         }
