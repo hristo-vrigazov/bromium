@@ -63,6 +63,10 @@
             <artifactId>bromium-demo-app</artifactId>
             <version>0.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+        </dependency>
     </dependencies>
 
     <parent>
