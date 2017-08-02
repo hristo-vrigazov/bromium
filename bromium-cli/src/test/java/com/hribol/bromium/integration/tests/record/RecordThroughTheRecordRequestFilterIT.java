@@ -12,6 +12,7 @@ import com.hribol.bromium.integration.tests.BaseDemoAppIntegrationTest;
 import com.hribol.bromium.record.RecordRequestFilter;
 import com.hribol.bromium.record.RecordingState;
 import io.netty.handler.codec.http.HttpRequest;
+import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
 
@@ -75,12 +76,12 @@ public class RecordThroughTheRecordRequestFilterIT extends BaseDemoAppIntegratio
     private static class ModuleWithMockedPromptUtils extends AbstractModule {
 
         private PromptUtils promptUtils;
-        private RecordRequestFilter recordRequestFilter;
+        private RequestFilter recordRequestFilter;
         private RecordingState recordingState;
 
         private ModuleWithMockedPromptUtils(Injector originalInjector, TestScenarioSteps expected) {
             this.promptUtils = spy(originalInjector.getInstance(PromptUtils.class));
-            this.recordRequestFilter = spy(originalInjector.getInstance(RecordRequestFilter.class));
+            this.recordRequestFilter = spy(originalInjector.getInstance(RequestFilter.class));
             this.recordingState = spy(originalInjector.getInstance(RecordingState.class));
 
             doAnswer(invocationOnMock -> {
@@ -102,7 +103,7 @@ public class RecordThroughTheRecordRequestFilterIT extends BaseDemoAppIntegratio
         protected void configure() {
             bind(PromptUtils.class).toProvider(() -> promptUtils);
             bind(RecordingState.class).toProvider(() -> recordingState);
-            bind(RecordRequestFilter.class).toProvider(() -> recordRequestFilter);
+            bind(RequestFilter.class).toProvider(() -> recordRequestFilter);
         }
     }
 }
