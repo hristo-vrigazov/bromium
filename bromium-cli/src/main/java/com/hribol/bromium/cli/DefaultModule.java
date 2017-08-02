@@ -26,7 +26,7 @@ import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvoc
 import com.hribol.bromium.common.ProxyDriverIntegrator;
 import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.core.utils.GetHtmlFromCurrentHostPredicate;
-import com.hribol.bromium.core.utils.HttpRequestSubmitsEvent;
+import com.hribol.bromium.core.utils.HttpRequestSubmitsEventPredicate;
 import com.hribol.bromium.record.RecordingState;
 import com.hribol.bromium.common.replay.DriverOperations;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
@@ -110,11 +110,13 @@ public class DefaultModule extends AbstractModule {
                 .to(RecordingWebDriverActionsOnly.class);
         bind(new TypeLiteral<FunctionRegistry<NameWebDriverActionConfiguration>>(){})
                 .to(RecorderFunctionRegistry.class);
-        bind(new TypeLiteral<Predicate<HttpRequest>>() {}).to(GetHtmlFromCurrentHostPredicate.class);
+        bind(new TypeLiteral<Predicate<HttpRequest>>() {})
+                .annotatedWith(Names.named(SHOULD_INJECT_JS_PREDICATE))
+                .to(GetHtmlFromCurrentHostPredicate.class);
 
         bind(new TypeLiteral<Predicate<HttpRequest>>() {})
                 .annotatedWith(Names.named(REQUEST_SUBMITS_EVENT_PREDICATE))
-                .to(HttpRequestSubmitsEvent.class);
+                .to(HttpRequestSubmitsEventPredicate.class);
 
         // TODO: other OSes should have a different binding
         bind(VirtualScreenProcessCreator.class).to(UbuntuVirtualScreenProcessCreator.class);
@@ -231,7 +233,7 @@ public class DefaultModule extends AbstractModule {
     @CheckedProvides(IOProvider.class)
     public ResponseFilter getResponseFilter(@Named(COMMAND) String command,
                                             ReplayingState replayingState,
-                                            Predicate<HttpRequest> httpRequestPredicate,
+                                            @Named(SHOULD_INJECT_JS_PREDICATE) Predicate<HttpRequest> httpRequestPredicate,
                                             @Named(RECORDING_JAVASCRIPT_CODE) IOProvider<String>
                                                         recordingJavascriptCodeProvider,
                                             @Named(REPLAYING_JAVASCRIPT_CODE) IOProvider<String>
