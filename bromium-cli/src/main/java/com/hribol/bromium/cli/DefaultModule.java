@@ -370,8 +370,8 @@ public class DefaultModule extends AbstractModule {
     public String getGeneratedRecordJavascript(IOProvider<RecordingJavascriptGenerator> recordingJavascriptGeneratorIOProvider,
                                                IOProvider<ApplicationConfiguration> configurationIOProvider) throws IOException {
         ApplicationConfiguration configuration = configurationIOProvider.get();
-        RecordingJavascriptGenerator replayingJavascriptGenerator = recordingJavascriptGeneratorIOProvider.get();
-        return replayingJavascriptGenerator.generate(configuration);
+        RecordingJavascriptGenerator recordingJavascriptGenerator = recordingJavascriptGeneratorIOProvider.get();
+        return recordingJavascriptGenerator.generate(configuration);
     }
 
     @CheckedProvides(IOProvider.class)
