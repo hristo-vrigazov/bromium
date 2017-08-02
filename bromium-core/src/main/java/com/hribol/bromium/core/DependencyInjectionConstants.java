@@ -35,7 +35,7 @@ public class DependencyInjectionConstants {
 
     public static final String SCREEN_NUMBER = "SCREEN_NUMBER";
     public static final String SCREEN = "SCREEN";
-    public static final String PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY = "PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY";
 
     public static final String COMMAND = "COMMAND";
+    public static final String REQUEST_SUBMITS_EVENT_PREDICATE = "REQUEST_SUBMITS_EVENT_PREDICATE";
 }

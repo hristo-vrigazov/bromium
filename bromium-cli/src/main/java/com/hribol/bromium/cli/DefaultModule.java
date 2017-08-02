@@ -26,6 +26,7 @@ import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvoc
 import com.hribol.bromium.common.ProxyDriverIntegrator;
 import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.core.utils.GetHtmlFromCurrentHostPredicate;
+import com.hribol.bromium.core.utils.HttpRequestSubmitsEvent;
 import com.hribol.bromium.record.RecordingState;
 import com.hribol.bromium.common.replay.DriverOperations;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
@@ -110,6 +111,11 @@ public class DefaultModule extends AbstractModule {
         bind(new TypeLiteral<FunctionRegistry<NameWebDriverActionConfiguration>>(){})
                 .to(RecorderFunctionRegistry.class);
         bind(new TypeLiteral<Predicate<HttpRequest>>() {}).to(GetHtmlFromCurrentHostPredicate.class);
+
+        bind(new TypeLiteral<Predicate<HttpRequest>>() {})
+                .annotatedWith(Names.named(REQUEST_SUBMITS_EVENT_PREDICATE))
+                .to(HttpRequestSubmitsEvent.class);
+
         // TODO: other OSes should have a different binding
         bind(VirtualScreenProcessCreator.class).to(UbuntuVirtualScreenProcessCreator.class);
         bindConstant().annotatedWith(Names.named(RECORD_TEMPLATE_RESOURCE)).to("/record.js");
@@ -209,11 +215,12 @@ public class DefaultModule extends AbstractModule {
 
     @Provides
     public RequestFilter getRequestFilter(@Named(COMMAND) String command,
+                                          @Named(REQUEST_SUBMITS_EVENT_PREDICATE) Predicate<HttpRequest> requestSubmitsEventPredicate,
                                           RecordingState recordingState,
                                           ReplayingState replayingState) {
         switch (command) {
             case RECORD:
-                return new RecordRequestFilter(recordingState);
+                return new RecordRequestFilter(recordingState, requestSubmitsEventPredicate);
             case REPLAY:
                 return new ReplayRequestFilter(replayingState);
             default:
