@@ -25,8 +25,10 @@ import com.hribol.bromium.common.generation.replay.*;
 import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
 import com.hribol.bromium.common.ProxyDriverIntegrator;
 import com.hribol.bromium.common.record.RecordBrowser;
-import com.hribol.bromium.core.utils.GetHtmlFromCurrentHostPredicate;
-import com.hribol.bromium.core.utils.HttpRequestSubmitsEventPredicate;
+import com.hribol.bromium.common.utils.GetHtmlFromCurrentHostPredicate;
+import com.hribol.bromium.common.utils.HttpRequestSubmitsEventPredicate;
+import com.hribol.bromium.common.utils.SplitQueryStringOfRequest;
+import com.hribol.bromium.core.utils.HttpRequestToTestCaseStepConverter;
 import com.hribol.bromium.record.RecordingState;
 import com.hribol.bromium.common.replay.DriverOperations;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
@@ -117,6 +119,8 @@ public class DefaultModule extends AbstractModule {
         bind(new TypeLiteral<Predicate<HttpRequest>>() {})
                 .annotatedWith(Names.named(REQUEST_SUBMITS_EVENT_PREDICATE))
                 .to(HttpRequestSubmitsEventPredicate.class);
+
+        bind(HttpRequestToTestCaseStepConverter.class).to(SplitQueryStringOfRequest.class);
 
         // TODO: other OSes should have a different binding
         bind(VirtualScreenProcessCreator.class).to(UbuntuVirtualScreenProcessCreator.class);
@@ -218,11 +222,12 @@ public class DefaultModule extends AbstractModule {
     @Provides
     public RequestFilter getRequestFilter(@Named(COMMAND) String command,
                                           @Named(REQUEST_SUBMITS_EVENT_PREDICATE) Predicate<HttpRequest> requestSubmitsEventPredicate,
+                                          HttpRequestToTestCaseStepConverter httpRequestToTestCaseStepConverter,
                                           RecordingState recordingState,
                                           ReplayingState replayingState) {
         switch (command) {
             case RECORD:
-                return new RecordRequestFilter(recordingState, requestSubmitsEventPredicate);
+                return new RecordRequestFilter(recordingState, requestSubmitsEventPredicate, httpRequestToTestCaseStepConverter);
             case REPLAY:
                 return new ReplayRequestFilter(replayingState);
             default:
