@@ -3,6 +3,7 @@ package com.hribol.bromium.core.suite;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import static org.junit.Assert.assertTrue;
 
@@ -11,13 +12,18 @@ import static org.junit.Assert.assertTrue;
  */
 public class VirtualScreenProcessCreatorTest {
 
+
     @Test
     public void xvfbIsInstalledAndProcessIsCreated() throws IOException {
         UbuntuVirtualScreenProcessCreator virtualScreenProcessCreator = new UbuntuVirtualScreenProcessCreator();
-        Process process = virtualScreenProcessCreator.createXvfbProcess(0);
-
-        assertTrue(process.isAlive());
-        process.destroy();
+        Optional<Process> processOptional = Optional.empty();
+        try {
+            Process process = virtualScreenProcessCreator.createXvfbProcess(1);
+            processOptional = Optional.of(process);
+            assertTrue(process.isAlive());
+        } finally {
+            processOptional.ifPresent(Process::destroy);
+        }
     }
 
 }
