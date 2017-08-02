@@ -1,4 +1,4 @@
-package com.hribol.bromium.common.generation.record.functions;
+package com.hribol.bromium.common.generation.record.invocations;
 
 import com.hribol.bromium.core.generation.GeneratedInvocation;
 

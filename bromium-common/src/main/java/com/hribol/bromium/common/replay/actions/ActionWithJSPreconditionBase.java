@@ -22,7 +22,6 @@ public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecon
         String hashCodeToWaitFor = String.valueOf(getJSEventToWaitFor().hashCode());
         SynchronizationEvent synchronizationEvent = new JSPrecondition(hashCodeToWaitFor, eventSynchronizer, replayingState);
         try {
-            replayingState.setSynchronizationEvent(synchronizationEvent);
             eventSynchronizer.awaitUntil(synchronizationEvent);
         } catch (InterruptedException | TimeoutException e) {
             throw new WebDriverActionExecutionException("Exception while awaiting JS precondition", e, new InstanceBasedAutomationResultBuilder());

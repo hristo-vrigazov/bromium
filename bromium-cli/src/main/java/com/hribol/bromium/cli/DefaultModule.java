@@ -20,7 +20,7 @@ import com.hribol.bromium.common.generation.helper.StepsAndConfiguration;
 import com.hribol.bromium.common.generation.helper.suppliers.StepAndActionConfigurationSupplier;
 import com.hribol.bromium.common.generation.helper.suppliers.StepAndWebDriverActionConfigurationSupplier;
 import com.hribol.bromium.common.generation.record.*;
-import com.hribol.bromium.common.generation.record.functions.RecorderFunctionInvocation;
+import com.hribol.bromium.common.generation.record.invocations.RecorderFunctionInvocation;
 import com.hribol.bromium.common.generation.replay.*;
 import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
 import com.hribol.bromium.common.ProxyDriverIntegrator;

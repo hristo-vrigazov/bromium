@@ -1,13 +1,8 @@
 package com.hribol.bromium.common.generation.record;
 
 import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
-import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.record.functions.RecorderFunction;
-import com.hribol.bromium.common.generation.record.functions.RecorderFunctionInvocation;
-import com.hribol.bromium.common.generation.replay.BaseReplayFunctionFactory;
-import com.hribol.bromium.common.generation.replay.ReplayFunctionRegistry;
-import com.hribol.bromium.common.generation.replay.functions.ReplayFunction;
-import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
+import com.hribol.bromium.common.generation.record.invocations.RecorderFunctionInvocation;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import org.junit.Test;
 

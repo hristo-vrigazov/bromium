@@ -8,7 +8,7 @@ import com.hribol.bromium.replay.filters.ReplayRequestFilter;
 /**
  * Created by hvrigazov on 05.06.17.
  */
-public class JSPrecondition implements SynchronizationEvent {
+public class JSPrecondition extends SynchronizationEventNotifyingState {
 
     private String eventName;
     private EventSignalizer eventSignalizer;
@@ -17,6 +17,7 @@ public class JSPrecondition implements SynchronizationEvent {
     public JSPrecondition(String eventName,
                           EventSignalizer eventSignalizer,
                           ReplayingState replayingState) {
+        super(replayingState);
         this.eventName = eventName;
         this.eventSignalizer = eventSignalizer;
         this.replayingState = replayingState;

@@ -28,7 +28,7 @@ public class PageLoading implements WebDriverAction {
     }
 
     /**
-     * The name of page loding, which can be injected through the constructor
+     * The name of page loading, which can be injected through the constructor
      * @return the name of the action
      */
     @Override
