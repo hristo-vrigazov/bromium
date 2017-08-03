@@ -12,15 +12,15 @@ import static org.mockito.Mockito.when;
 /**
  * Created by hvrigazov on 02.08.17.
  */
-public class HttpRequestSubmitsEventPredicateTest {
+public class UriContainsSubmitEventUrlPredicateTest {
 
     @Test
     public void ifContainsSubmitUrlThenEventIsSubmitted() {
         String url = SUBMIT_EVENT_URL + "ico";
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn(url);
-        HttpRequestSubmitsEventPredicate httpRequestSubmitsEventPredicate = new HttpRequestSubmitsEventPredicate();
-        assertTrue(httpRequestSubmitsEventPredicate.test(httpRequest));
+        UriContainsSubmitEventUrlPredicate uriContainsSubmitEventUrlPredicate = new UriContainsSubmitEventUrlPredicate();
+        assertTrue(uriContainsSubmitEventUrlPredicate.test(httpRequest));
     }
 
     @Test
@@ -28,8 +28,8 @@ public class HttpRequestSubmitsEventPredicateTest {
         String url = "http://something.com";
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn(url);
-        HttpRequestSubmitsEventPredicate httpRequestSubmitsEventPredicate = new HttpRequestSubmitsEventPredicate();
-        assertFalse(httpRequestSubmitsEventPredicate.test(httpRequest));
+        UriContainsSubmitEventUrlPredicate uriContainsSubmitEventUrlPredicate = new UriContainsSubmitEventUrlPredicate();
+        assertFalse(uriContainsSubmitEventUrlPredicate.test(httpRequest));
     }
 
 

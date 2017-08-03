@@ -26,7 +26,7 @@ import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvoc
 import com.hribol.bromium.common.ProxyDriverIntegrator;
 import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.common.utils.GetHtmlFromCurrentHostPredicate;
-import com.hribol.bromium.common.utils.HttpRequestSubmitsEventPredicate;
+import com.hribol.bromium.common.utils.UriContainsSubmitEventUrlPredicate;
 import com.hribol.bromium.common.utils.SplitQueryStringOfRequest;
 import com.hribol.bromium.core.utils.HttpRequestToTestCaseStepConverter;
 import com.hribol.bromium.record.RecordingState;
@@ -118,7 +118,7 @@ public class DefaultModule extends AbstractModule {
 
         bind(new TypeLiteral<Predicate<HttpRequest>>() {})
                 .annotatedWith(Names.named(REQUEST_SUBMITS_EVENT_PREDICATE))
-                .to(HttpRequestSubmitsEventPredicate.class);
+                .to(UriContainsSubmitEventUrlPredicate.class);
 
         bind(HttpRequestToTestCaseStepConverter.class).to(SplitQueryStringOfRequest.class);
 
