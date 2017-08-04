@@ -1,5 +1,6 @@
 package com.hribol.bromium.record;
 
+import com.hribol.bromium.core.utils.EventDetector;
 import com.hribol.bromium.core.utils.HttpRequestToTestCaseStepConverter;
 import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.util.HttpMessageContents;
@@ -8,8 +9,7 @@ import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
 
 import static com.hribol.bromium.core.utils.Constants.SUBMIT_EVENT_URL;
@@ -30,7 +30,11 @@ public class RecordRequestFilterTest {
         RecordingState recordingState = mock(RecordingState.class);
         HttpRequestToTestCaseStepConverter httpRequestToTestCaseStepConverter = mock(HttpRequestToTestCaseStepConverter.class);
         when(httpRequestToTestCaseStepConverter.convert(httpRequest)).thenReturn(event);
-        RecordRequestFilter requestFilter = new RecordRequestFilter(recordingState, httpRequestPredicate, httpRequestToTestCaseStepConverter);
+        EventDetector eventDetector = mock(EventDetector.class);
+        when(eventDetector.canDetectPredicate()).thenReturn(httpRequestPredicate);
+        when(eventDetector.getConverter()).thenReturn(httpRequestToTestCaseStepConverter);
+        List<EventDetector> eventDetectors = Arrays.asList(eventDetector);
+        RecordRequestFilter requestFilter = new RecordRequestFilter(recordingState, eventDetectors);
         requestFilter.filterRequest(httpRequest, mock(HttpMessageContents.class), mock(HttpMessageInfo.class));
 
         verify(recordingState).storeTestCaseStep(event);
@@ -44,7 +48,11 @@ public class RecordRequestFilterTest {
         Predicate<HttpRequest> httpRequestPredicate = mock(Predicate.class);
         when(httpRequestPredicate.test(httpRequest)).thenReturn(false);
         HttpRequestToTestCaseStepConverter httpRequestToTestCaseStepConverter = mock(HttpRequestToTestCaseStepConverter.class);
-        RecordRequestFilter requestFilter = new RecordRequestFilter(recordingState, httpRequestPredicate, httpRequestToTestCaseStepConverter);
+        EventDetector eventDetector = mock(EventDetector.class);
+        when(eventDetector.canDetectPredicate()).thenReturn(httpRequestPredicate);
+        when(eventDetector.getConverter()).thenReturn(httpRequestToTestCaseStepConverter);
+        List<EventDetector> eventDetectors = Arrays.asList(eventDetector);
+        RecordRequestFilter requestFilter = new RecordRequestFilter(recordingState, eventDetectors);
         requestFilter.filterRequest(httpRequest, mock(HttpMessageContents.class), mock(HttpMessageInfo.class));
         verify(recordingState, never()).storeTestCaseStep(anyMap());
     }
@@ -58,7 +66,11 @@ public class RecordRequestFilterTest {
         when(httpRequestPredicate.test(httpRequest)).thenReturn(true);
         HttpRequestToTestCaseStepConverter httpRequestToTestCaseStepConverter = mock(HttpRequestToTestCaseStepConverter.class);
         when(httpRequestToTestCaseStepConverter.convert(httpRequest)).thenThrow(new MalformedURLException());
-        RecordRequestFilter requestFilter = new RecordRequestFilter(recordingState, httpRequestPredicate, httpRequestToTestCaseStepConverter);
+        EventDetector eventDetector = mock(EventDetector.class);
+        when(eventDetector.canDetectPredicate()).thenReturn(httpRequestPredicate);
+        when(eventDetector.getConverter()).thenReturn(httpRequestToTestCaseStepConverter);
+        List<EventDetector> eventDetectors = Arrays.asList(eventDetector);
+        RecordRequestFilter requestFilter = new RecordRequestFilter(recordingState, eventDetectors);
         requestFilter.filterRequest(httpRequest, mock(HttpMessageContents.class), mock(HttpMessageInfo.class));
         verify(recordingState, never()).storeTestCaseStep(anyMap());
     }

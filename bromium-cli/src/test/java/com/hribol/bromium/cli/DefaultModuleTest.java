@@ -163,7 +163,8 @@ public class DefaultModuleTest {
         Injector injector = Guice.createInjector(module);
 
         try {
-            RequestFilter instance = injector.getInstance(RequestFilter.class);
+            RequestFilter instance = injector.getInstance(
+                    Key.get(new TypeLiteral<IOProvider<RequestFilter>>() {})).get();
         } catch (ProvisionException e) {
             assertTrue(e.getCause() instanceof NoSuchCommandException);
         }

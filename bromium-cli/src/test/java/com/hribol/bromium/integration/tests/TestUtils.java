@@ -5,6 +5,7 @@ import com.hribol.bromium.core.TestScenarioSteps;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
+import java.util.UUID;
 
 /**
  * Created by hvrigazov on 29.07.17.
@@ -18,6 +19,11 @@ public class TestUtils {
     public static final String RACE_HTTP_TEST_CASE = "integration-tests/race-http.json";
     public static final String TYPE_TEXT_TEST_CASE = "integration-tests/text-field.json";
     public static final String CHROMEDRIVER = "chromedriver";
+    public static final String PAGE_LOAD_WITH_SUPPLIED_VALUE = "PAGE_LOAD_WITH_SUPPLIED_VALUE";
+
+    public static String generateRandomJsonFilename() {
+        return UUID.randomUUID().toString() +".json";
+    }
 
     public static TestScenarioSteps exampleTestScenarioSteps() {
         TestScenarioSteps steps = new TestScenarioSteps();

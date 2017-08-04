@@ -164,6 +164,28 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": true,
+            "name": "PAGE_LOAD_WITH_SUPPLIED_VALUE",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "url": {
+                        "expose": false,
+                        "parameterName": "url",
+                        "value": "ajax.html"
+                    }
+                },
+                "webDriverActionType": "PAGE_LOADING"
+            }
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": true,
             "name": "Load page",
             "webDriverAction": {
                 "parametersConfiguration": {

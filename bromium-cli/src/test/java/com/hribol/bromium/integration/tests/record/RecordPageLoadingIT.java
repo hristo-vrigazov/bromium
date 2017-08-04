@@ -1,53 +1,45 @@
 package com.hribol.bromium.integration.tests.record;
 
-import com.google.inject.*;
+import com.google.common.collect.ImmutableMap;
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.util.Modules;
 import com.hribol.bromium.cli.DefaultModule;
-import com.hribol.bromium.cli.Main;
 import com.hribol.bromium.cli.commands.PromptUtils;
 import com.hribol.bromium.cli.commands.RecordCommand;
 import com.hribol.bromium.core.TestScenarioSteps;
-import com.hribol.bromium.core.providers.IOProvider;
+import com.hribol.bromium.core.suppliers.WebDriverSupplier;
 import com.hribol.bromium.core.utils.ConfigurationUtils;
+import com.hribol.bromium.demo.app.DemoApp;
 import com.hribol.bromium.integration.tests.BaseDemoAppIntegrationTest;
-import com.hribol.bromium.record.RecordRequestFilter;
 import com.hribol.bromium.record.RecordingState;
-import io.netty.handler.codec.http.HttpRequest;
-import net.lightbody.bmp.filters.RequestFilter;
-import net.lightbody.bmp.util.HttpMessageContents;
-import net.lightbody.bmp.util.HttpMessageInfo;
-import org.junit.runner.RunWith;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.openqa.selenium.WebDriver;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-import org.powermock.modules.junit4.internal.impl.PowerMockJUnit44RunnerDelegateImpl;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import static com.hribol.bromium.cli.Main.Commands.RECORD;
 import static com.hribol.bromium.cli.ParsedOptions.*;
-import static com.hribol.bromium.core.utils.Constants.SUBMIT_EVENT_URL;
+import static com.hribol.bromium.core.utils.Constants.EVENT;
 import static com.hribol.bromium.integration.tests.TestUtils.DEMO_CONFIGURATION;
-import static com.hribol.bromium.integration.tests.TestUtils.exampleTestScenarioSteps;
+import static com.hribol.bromium.integration.tests.TestUtils.PAGE_LOAD_WITH_SUPPLIED_VALUE;
 import static com.hribol.bromium.integration.tests.TestUtils.generateRandomJsonFilename;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
 /**
- * Created by hvrigazov on 24.07.17.
+ * Created by hvrigazov on 03.08.17.
  */
-public class RecordThroughTheRecordRequestFilterIT extends BaseDemoAppIntegrationTest {
-    public RecordThroughTheRecordRequestFilterIT() {
-        super(DEMO_CONFIGURATION,
-                generateRandomJsonFilename());
+public class RecordPageLoadingIT extends BaseDemoAppIntegrationTest {
+    public RecordPageLoadingIT() {
+        super(DEMO_CONFIGURATION, generateRandomJsonFilename());
     }
 
     @Override
@@ -70,53 +62,56 @@ public class RecordThroughTheRecordRequestFilterIT extends BaseDemoAppIntegratio
         opts.put(SCREEN, screen);
 
         Module defaultModule = new DefaultModule(RECORD, opts);
-        TestScenarioSteps expected = exampleTestScenarioSteps();
-
         Injector originalInjector = Guice.createInjector(defaultModule);
-
-        Module mockedPromptUtilsModule = new ModuleWithMockedPromptUtils(originalInjector, expected);
-
-        Injector injector = Guice.createInjector(Modules.override(defaultModule).with(mockedPromptUtilsModule));
+        Module moduleWithDriverSpy = new ModuleWithDriverSpy(originalInjector, demoApp.getBaseUrl());
+        Injector injector = Guice.createInjector(Modules.override(defaultModule).with(moduleWithDriverSpy));
 
         RecordCommand recordCommand = injector.getInstance(RecordCommand.class);
         recordCommand.run();
+
+        TestScenarioSteps expected = new TestScenarioSteps();
+        expected.add(ImmutableMap.of(EVENT, PAGE_LOAD_WITH_SUPPLIED_VALUE));
 
         TestScenarioSteps actual = ConfigurationUtils.readSteps(outputFile.getAbsolutePath());
         assertEquals(expected, actual);
     }
 
-    private static class ModuleWithMockedPromptUtils extends AbstractModule {
+    private static class ModuleWithDriverSpy extends AbstractModule {
 
+        private WebDriverSupplier webDriverSupplier;
         private PromptUtils promptUtils;
-        private RequestFilter recordRequestFilter;
         private RecordingState recordingState;
 
-        private ModuleWithMockedPromptUtils(Injector originalInjector, TestScenarioSteps expected) throws IOException {
-            this.promptUtils = spy(originalInjector.getInstance(PromptUtils.class));
-            this.recordRequestFilter = spy(originalInjector.getInstance(
-                    Key.get(new TypeLiteral<IOProvider<RequestFilter>>() {})).get());
+        private WebDriver webDriver;
+
+        @SuppressWarnings("unchecked")
+        public ModuleWithDriverSpy(Injector originalInjector, String baseUrl) {
+            this.webDriverSupplier = spy(originalInjector.getInstance(WebDriverSupplier.class));
             this.recordingState = spy(originalInjector.getInstance(RecordingState.class));
+            this.promptUtils = spy(originalInjector.getInstance(PromptUtils.class));
 
             doAnswer(invocationOnMock -> {
-                HttpMessageContents httpMessageContents = mock(HttpMessageContents.class);
-                HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
+                Object driver = invocationOnMock.callRealMethod();
+                setWebDriver((WebDriver) driver);
+                return driver;
+            }).when(webDriverSupplier).get(any(), any());
 
-                for (Map<String, String> testCaseStep: expected) {
-                    String queryString = ConfigurationUtils.toQueryString(testCaseStep);
-                    HttpRequest httpRequest = mock(HttpRequest.class);
-                    when(httpRequest.getUri()).thenReturn(SUBMIT_EVENT_URL + queryString);
-                    recordRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
-                }
-
+            doAnswer(invocationOnMock -> {
+                webDriver.get(baseUrl + "ajax.html");
+                Thread.sleep(2000);
                 return null;
             }).when(promptUtils).promptForRecording();
         }
 
         @Override
         protected void configure() {
+            bind(WebDriverSupplier.class).toProvider(() -> webDriverSupplier);
             bind(PromptUtils.class).toProvider(() -> promptUtils);
             bind(RecordingState.class).toProvider(() -> recordingState);
-            bind(RequestFilter.class).toProvider(() -> recordRequestFilter);
+        }
+
+        public void setWebDriver(WebDriver webDriver) {
+            this.webDriver = spy(webDriver);
         }
     }
 }
