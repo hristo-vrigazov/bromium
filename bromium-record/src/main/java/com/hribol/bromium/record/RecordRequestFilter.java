@@ -12,6 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 /**
@@ -32,10 +33,14 @@ public class RecordRequestFilter implements RequestFilter {
         for (EventDetector eventDetector: eventDetectors) {
             if (eventDetector.canDetectPredicate().test(httpRequest)) {
                 try {
-                    Map<String, String> map = eventDetector.getConverter().convert(httpRequest);
-                    recordingState.storeTestCaseStep(map);
-                    System.out.println(map);
-                    return null;
+                    Optional<Map<String, String>> optionalEvent = eventDetector.getConverter().convert(httpRequest);
+
+                    if (optionalEvent.isPresent()) {
+                        recordingState.storeTestCaseStep(optionalEvent.get());
+                        System.out.println(optionalEvent);
+                        return null;
+                    }
+
                 } catch (UnsupportedEncodingException | MalformedURLException e) {
                     e.printStackTrace();
                 }

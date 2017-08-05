@@ -29,7 +29,7 @@ public class RecordRequestFilterTest {
         when(httpRequestPredicate.test(httpRequest)).thenReturn(true);
         RecordingState recordingState = mock(RecordingState.class);
         HttpRequestToTestCaseStepConverter httpRequestToTestCaseStepConverter = mock(HttpRequestToTestCaseStepConverter.class);
-        when(httpRequestToTestCaseStepConverter.convert(httpRequest)).thenReturn(event);
+        when(httpRequestToTestCaseStepConverter.convert(httpRequest)).thenReturn(Optional.ofNullable(event));
         EventDetector eventDetector = mock(EventDetector.class);
         when(eventDetector.canDetectPredicate()).thenReturn(httpRequestPredicate);
         when(eventDetector.getConverter()).thenReturn(httpRequestToTestCaseStepConverter);

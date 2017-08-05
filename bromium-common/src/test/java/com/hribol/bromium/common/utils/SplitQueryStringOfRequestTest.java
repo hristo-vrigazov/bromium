@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -26,7 +27,9 @@ public class SplitQueryStringOfRequestTest {
         when(httpRequest.getUri()).thenReturn(url.toString());
 
         SplitQueryStringOfRequest splitQueryStringOfRequest = new SplitQueryStringOfRequest();
-        Map<String, String> parameters = splitQueryStringOfRequest.convert(httpRequest);
+        Optional<Map<String, String>> parametersOptional = splitQueryStringOfRequest.convert(httpRequest);
+        assertTrue(parametersOptional.isPresent());
+        Map<String, String> parameters = parametersOptional.get();
         assertTrue(parameters.containsKey("key1"));
         assertEquals("value1", parameters.get("key1"));
         assertTrue(parameters.containsKey("key2"));

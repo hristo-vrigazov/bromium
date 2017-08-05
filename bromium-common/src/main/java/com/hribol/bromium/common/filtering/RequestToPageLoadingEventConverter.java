@@ -11,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static com.hribol.bromium.core.utils.Constants.EVENT;
 import static com.hribol.bromium.core.utils.Constants.URL;
@@ -31,7 +32,7 @@ public class RequestToPageLoadingEventConverter implements HttpRequestToTestCase
     }
 
     @Override
-    public Map<String, String> convert(HttpRequest httpRequest) throws MalformedURLException, UnsupportedEncodingException {
+    public Optional<Map<String, String>> convert(HttpRequest httpRequest) throws MalformedURLException, UnsupportedEncodingException {
         String requestUri = httpRequest.getUri();
 
         if (!requestUri.startsWith(baseUrl)) {
@@ -49,11 +50,11 @@ public class RequestToPageLoadingEventConverter implements HttpRequestToTestCase
             if (!urlParameterConfiguration.isExposed()) {
                 String expectedUrl = baseUrl + urlParameterConfiguration.getValue();
                 if (expectedUrl.equals(requestUri)) {
-                    return ImmutableMap.of(EVENT, applicationActionConfiguration.getName());
+                    return Optional.of(ImmutableMap.of(EVENT, applicationActionConfiguration.getName()));
                 }
             }
         }
 
-        return null;
+        return Optional.empty();
     }
 }

@@ -13,11 +13,13 @@ import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static com.hribol.bromium.core.utils.Constants.EVENT;
 import static com.hribol.bromium.core.utils.Constants.URL;
 import static com.hribol.bromium.core.utils.WebDriverActions.PAGE_LOADING;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 /**
@@ -51,9 +53,10 @@ public class RequestToPageLoadingEventConverterTest {
                 new RequestToPageLoadingEventConverter(BASE_URL, actionsFilter);
 
         Map<String, String> expected = ImmutableMap.of(EVENT, EXAMPLE_EVENT_NAME);
-        Map<String, String> actual = requestToPageLoadingEventConverter.convert(httpRequest);
+        Optional<Map<String, String>> actual = requestToPageLoadingEventConverter.convert(httpRequest);
 
-        assertEquals(expected, actual);
+        assertTrue(actual.isPresent());
+        assertEquals(expected, actual.get());
     }
 
 }
