@@ -115,11 +115,6 @@ public class DefaultModule extends AbstractModule {
                 .annotatedWith(Names.named(SHOULD_INJECT_JS_PREDICATE))
                 .to(GetHtmlFromCurrentHostPredicate.class);
 
-        bind(new TypeLiteral<Predicate<HttpRequest>>() {})
-                .annotatedWith(Names.named(REQUEST_SUBMITS_EVENT_PREDICATE))
-                .to(GetHtmlFromCurrentHostPredicate.class);
-
-
         // TODO: other OSes should have a different binding
         bind(VirtualScreenProcessCreator.class).to(UbuntuVirtualScreenProcessCreator.class);
         bindConstant().annotatedWith(Names.named(RECORD_TEMPLATE_RESOURCE)).to("/record.js");
