@@ -1,9 +1,12 @@
 package com.hribol.bromium.common.utils;
 
+import static com.hribol.bromium.core.DependencyInjectionConstants.BASE_URL;
 import static com.hribol.bromium.core.utils.Constants.EVENT;
 import static com.hribol.bromium.core.utils.Constants.URL;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ParameterConfiguration;
 import com.hribol.bromium.core.utils.ActionsFilter;
@@ -25,9 +28,10 @@ public class RequestToPageLoadingEventConverter implements HttpRequestToTestCase
     private final String baseUrl;
     private List<ApplicationActionConfiguration> applicationActionConfigurations;
 
-    public RequestToPageLoadingEventConverter(String baseUrl, ActionsFilter actionsFilter) {
+    public RequestToPageLoadingEventConverter(String baseUrl,
+                                              ActionsFilter actionsFilter) {
         this.baseUrl = baseUrl;
-        applicationActionConfigurations = actionsFilter.filter(PAGE_LOADING);
+        this.applicationActionConfigurations = actionsFilter.filter(PAGE_LOADING);
     }
 
     @Override

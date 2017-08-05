@@ -40,4 +40,5 @@ public class DependencyInjectionConstants {
     public static final String SHOULD_INJECT_JS_PREDICATE = "SHOULD_INJECT_JS_PREDICATE";
 
     public static final String CONVENTION_EVENT_DETECTOR = "CONVENTION_EVENT_DETECTOR";
+    public static final String PAGE_LOADING_EVENT_DETECTOR = "PAGE_LOADING_EVENT_DETECTOR";
 }

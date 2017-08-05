@@ -168,7 +168,6 @@ public class DefaultModule extends AbstractModule {
         return parsedOptions.getOutputFile();
     }
 
-
     @Provides
     @Named(TIMEOUT)
     public Integer getTimeout(ParsedOptions parsedOptions) {
@@ -219,17 +218,29 @@ public class DefaultModule extends AbstractModule {
         return new EventDetectorImpl(uriContainsSubmitEventUrlPredicate, splitQueryStringOfRequest);
     }
 
+    @CheckedProvides(IOProvider.class)
+    @Named(PAGE_LOADING_EVENT_DETECTOR)
+    public EventDetector getPageLoadingEventDetector(GetHtmlFromCurrentHostPredicate getHtmlFromCurrentHostPredicate,
+                                                     IOProvider<RequestToPageLoadingEventConverter>
+                                                             requestToPageLoadingEventConverterIOProvider) throws IOException {
+        return new EventDetectorImpl(getHtmlFromCurrentHostPredicate,
+                requestToPageLoadingEventConverterIOProvider.get());
+    }
 
-    @Provides
-    public List<EventDetector> getEventDetectors(@Named(CONVENTION_EVENT_DETECTOR) EventDetector conventionEventDetector) {
+
+    @CheckedProvides(IOProvider.class)
+    public List<EventDetector> getEventDetectors(@Named(CONVENTION_EVENT_DETECTOR) EventDetector conventionEventDetector,
+                                                 @Named(PAGE_LOADING_EVENT_DETECTOR) IOProvider<EventDetector>
+                                                         pageLoadingEventDetectorIOProvider) throws IOException {
         List<EventDetector> eventDetectors = new ArrayList<>();
         eventDetectors.add(conventionEventDetector);
+        eventDetectors.add(pageLoadingEventDetectorIOProvider.get());
         return eventDetectors;
     }
 
     @CheckedProvides(IOProvider.class)
     public RequestFilter getRequestFilter(@Named(COMMAND) String command,
-                                          Provider<List<EventDetector>> eventDetectorListProvider,
+                                          IOProvider<List<EventDetector>> eventDetectorListProvider,
                                           Provider<RecordingState> recordingStateProvider,
                                           Provider<ReplayingState> replayingStateProvider) throws IOException {
         switch (command) {
@@ -571,7 +582,7 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOProvider.class)
-    public HttpRequestToTestCaseStepConverter getHttpRequestToTestCaseStepConverter(@Named(BASE_URL) String baseUrl,
+    public RequestToPageLoadingEventConverter getHttpRequestToTestCaseStepConverter(@Named(BASE_URL) String baseUrl,
                                                                                     IOProvider<ActionsFilter> actionsFilterIOProvider) throws IOException {
         return new RequestToPageLoadingEventConverter(baseUrl, actionsFilterIOProvider.get());
     }
