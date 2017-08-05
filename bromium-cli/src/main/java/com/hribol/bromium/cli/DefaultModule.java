@@ -26,9 +26,7 @@ import com.hribol.bromium.common.utils.GetHtmlFromCurrentHostPredicate;
 import com.hribol.bromium.common.utils.RequestToPageLoadingEventConverter;
 import com.hribol.bromium.common.utils.UriContainsSubmitEventUrlPredicate;
 import com.hribol.bromium.common.utils.SplitQueryStringOfRequest;
-import com.hribol.bromium.core.utils.ActionsFilter;
-import com.hribol.bromium.core.utils.EventDetector;
-import com.hribol.bromium.core.utils.HttpRequestToTestCaseStepConverter;
+import com.hribol.bromium.core.utils.*;
 import com.hribol.bromium.record.RecordingState;
 import com.hribol.bromium.common.replay.DriverOperations;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
@@ -49,7 +47,6 @@ import com.hribol.bromium.core.suite.UbuntuVirtualScreenProcessCreator;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.core.suppliers.WebDriverSupplier;
 import com.hribol.bromium.core.synchronization.EventSynchronizer;
-import com.hribol.bromium.core.utils.JavascriptInjector;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
 import com.hribol.bromium.core.utils.parsing.StepsReader;
 import com.hribol.bromium.record.RecordRequestFilter;
@@ -221,8 +218,18 @@ public class DefaultModule extends AbstractModule {
     }
 
     @Provides
-    public List<EventDetector> getEventDetectors() {
-        return new ArrayList<>();
+    @Named(CONVENTION_EVENT_DETECTOR)
+    public EventDetector getConventionBasedEventDetector(UriContainsSubmitEventUrlPredicate uriContainsSubmitEventUrlPredicate,
+                                                         SplitQueryStringOfRequest splitQueryStringOfRequest) {
+        return new EventDetectorImpl(uriContainsSubmitEventUrlPredicate, splitQueryStringOfRequest);
+    }
+
+
+    @Provides
+    public List<EventDetector> getEventDetectors(@Named(CONVENTION_EVENT_DETECTOR) EventDetector conventionEventDetector) {
+        List<EventDetector> eventDetectors = new ArrayList<>();
+        eventDetectors.add(conventionEventDetector);
+        return eventDetectors;
     }
 
     @CheckedProvides(IOProvider.class)
