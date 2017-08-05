@@ -35,6 +35,7 @@ public class RecordRequestFilter implements RequestFilter {
                     Map<String, String> map = eventDetector.getConverter().convert(httpRequest);
                     recordingState.storeTestCaseStep(map);
                     System.out.println(map);
+                    return null;
                 } catch (UnsupportedEncodingException | MalformedURLException e) {
                     e.printStackTrace();
                 }
