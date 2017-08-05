@@ -1,6 +1,7 @@
 package com.hribol.bromium.common.utils;
 
 import com.google.common.collect.ImmutableMap;
+import com.hribol.bromium.common.filtering.RequestToPageLoadingEventConverter;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ParameterConfiguration;
 import com.hribol.bromium.core.utils.ActionsFilter;
@@ -9,7 +10,6 @@ import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -18,9 +18,7 @@ import static com.hribol.bromium.core.utils.Constants.EVENT;
 import static com.hribol.bromium.core.utils.Constants.URL;
 import static com.hribol.bromium.core.utils.WebDriverActions.PAGE_LOADING;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by hvrigazov on 03.08.17.

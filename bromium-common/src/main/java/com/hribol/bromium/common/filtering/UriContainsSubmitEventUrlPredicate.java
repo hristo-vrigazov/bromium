@@ -1,4 +1,4 @@
-package com.hribol.bromium.common.utils;
+package com.hribol.bromium.common.filtering;
 
 import io.netty.handler.codec.http.HttpRequest;
 

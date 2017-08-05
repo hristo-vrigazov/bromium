@@ -41,4 +41,8 @@ public class DependencyInjectionConstants {
 
     public static final String CONVENTION_EVENT_DETECTOR = "CONVENTION_EVENT_DETECTOR";
     public static final String PAGE_LOADING_EVENT_DETECTOR = "PAGE_LOADING_EVENT_DETECTOR";
+
+    public static final String CONVENTION_EVENT_DETECTOR_PREDICATE = "CONVENTION_EVENT_DETECTOR_PREDICATE";
+    public static final String CONVENTION_EVENT_DETECTOR_CONVERTOR = "CONVENTION_EVENT_DETECTOR_CONVERTOR";
+
 }

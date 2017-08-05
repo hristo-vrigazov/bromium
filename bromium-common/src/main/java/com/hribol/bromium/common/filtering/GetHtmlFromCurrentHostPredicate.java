@@ -1,4 +1,4 @@
-package com.hribol.bromium.common.utils;
+package com.hribol.bromium.common.filtering;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;

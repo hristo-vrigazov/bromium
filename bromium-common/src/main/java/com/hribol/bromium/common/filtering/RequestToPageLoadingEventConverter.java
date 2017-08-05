@@ -1,12 +1,6 @@
-package com.hribol.bromium.common.utils;
-
-import static com.hribol.bromium.core.DependencyInjectionConstants.BASE_URL;
-import static com.hribol.bromium.core.utils.Constants.EVENT;
-import static com.hribol.bromium.core.utils.Constants.URL;
+package com.hribol.bromium.common.filtering;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ParameterConfiguration;
 import com.hribol.bromium.core.utils.ActionsFilter;
@@ -18,6 +12,8 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
 
+import static com.hribol.bromium.core.utils.Constants.EVENT;
+import static com.hribol.bromium.core.utils.Constants.URL;
 import static com.hribol.bromium.core.utils.WebDriverActions.PAGE_LOADING;
 
 /**

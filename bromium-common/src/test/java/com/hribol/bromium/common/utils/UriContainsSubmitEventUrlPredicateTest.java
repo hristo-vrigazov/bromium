@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.utils;
 
+import com.hribol.bromium.common.filtering.UriContainsSubmitEventUrlPredicate;
 import io.netty.handler.codec.http.HttpRequest;
 import org.junit.Test;
 

@@ -8,6 +8,10 @@ import com.google.inject.throwingproviders.ThrowingProviderBinder;
 import com.hribol.bromium.browsers.chrome.base.ChromeDriverSupplier;
 import com.hribol.bromium.browsers.chrome.replay.ChromeDriverServiceSupplier;
 import com.hribol.bromium.common.builder.JsCollector;
+import com.hribol.bromium.common.filtering.GetHtmlFromCurrentHostPredicate;
+import com.hribol.bromium.common.filtering.RequestToPageLoadingEventConverter;
+import com.hribol.bromium.common.filtering.SplitQueryStringOfRequest;
+import com.hribol.bromium.common.filtering.UriContainsSubmitEventUrlPredicate;
 import com.hribol.bromium.common.generation.common.EmptyFunction;
 import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
 import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
@@ -22,10 +26,6 @@ import com.hribol.bromium.common.generation.replay.*;
 import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
 import com.hribol.bromium.common.ProxyDriverIntegrator;
 import com.hribol.bromium.common.record.RecordBrowser;
-import com.hribol.bromium.common.utils.GetHtmlFromCurrentHostPredicate;
-import com.hribol.bromium.common.utils.RequestToPageLoadingEventConverter;
-import com.hribol.bromium.common.utils.UriContainsSubmitEventUrlPredicate;
-import com.hribol.bromium.common.utils.SplitQueryStringOfRequest;
 import com.hribol.bromium.core.utils.*;
 import com.hribol.bromium.record.RecordingState;
 import com.hribol.bromium.common.replay.DriverOperations;
@@ -96,6 +96,9 @@ public class DefaultModule extends AbstractModule {
     private String command;
     private Map<String, Object> opts;
 
+    private TypeLiteral<JavascriptGenerator<NameWebDriverActionConfiguration>>
+            javascriptGeneratorByNameAndWebDriverActionConfiguration = new TypeLiteral<JavascriptGenerator<NameWebDriverActionConfiguration>>() {};
+
     public DefaultModule(String command, Map<String, Object> opts) {
         this.command = command;
         this.opts = opts;
@@ -105,7 +108,7 @@ public class DefaultModule extends AbstractModule {
     protected void configure() {
         bind(BaseRecorderFunctionFactory.class).to(PredefinedRecorderFunctionFactory.class);
         bind(FunctionRegistry.class).to(RecorderFunctionRegistry.class);
-        bind(new TypeLiteral<JavascriptGenerator<NameWebDriverActionConfiguration>>() {})
+        bind(javascriptGeneratorByNameAndWebDriverActionConfiguration)
                 .to(new TypeLiteral<IncludeInvokeGenerator<NameWebDriverActionConfiguration>>() {});
         bind(new TypeLiteral<JavascriptGenerator<ApplicationActionConfiguration>>(){})
                 .to(RecordingWebDriverActionsOnly.class);
@@ -114,6 +117,15 @@ public class DefaultModule extends AbstractModule {
         bind(new TypeLiteral<Predicate<HttpRequest>>() {})
                 .annotatedWith(Names.named(SHOULD_INJECT_JS_PREDICATE))
                 .to(GetHtmlFromCurrentHostPredicate.class);
+
+        bind(new TypeLiteral<Predicate<HttpRequest>>() {})
+                .annotatedWith(Names.named(CONVENTION_EVENT_DETECTOR_PREDICATE))
+                .to(UriContainsSubmitEventUrlPredicate.class);
+
+        bind(HttpRequestToTestCaseStepConverter.class)
+                .annotatedWith(Names.named(CONVENTION_EVENT_DETECTOR_CONVERTOR))
+                .to(SplitQueryStringOfRequest.class);
+
 
         // TODO: other OSes should have a different binding
         bind(VirtualScreenProcessCreator.class).to(UbuntuVirtualScreenProcessCreator.class);
@@ -195,7 +207,7 @@ public class DefaultModule extends AbstractModule {
     @CheckedProvides(IOProvider.class)
     public ApplicationConfiguration getApplicationConfiguration(ApplicationConfigurationParser applicationConfigurationParser,
                                                                 @Named(CONFIGURATION_INPUT_STREAM)
-                                                                        IOProvider<InputStream> fileInputStreamProvider) throws IOException {
+                                                                IOProvider<InputStream> fileInputStreamProvider) throws IOException {
         InputStream inputStream = fileInputStreamProvider.get();
         return applicationConfigurationParser.parseApplicationConfiguration(inputStream);
     }
@@ -213,9 +225,11 @@ public class DefaultModule extends AbstractModule {
 
     @Provides
     @Named(CONVENTION_EVENT_DETECTOR)
-    public EventDetector getConventionBasedEventDetector(UriContainsSubmitEventUrlPredicate uriContainsSubmitEventUrlPredicate,
-                                                         SplitQueryStringOfRequest splitQueryStringOfRequest) {
-        return new EventDetectorImpl(uriContainsSubmitEventUrlPredicate, splitQueryStringOfRequest);
+    public EventDetector getConventionBasedEventDetector(@Named(CONVENTION_EVENT_DETECTOR_PREDICATE)
+                                                         Predicate<HttpRequest> detectorPredicate,
+                                                         @Named(CONVENTION_EVENT_DETECTOR_CONVERTOR)
+                                                         HttpRequestToTestCaseStepConverter detectorConverter) {
+        return new EventDetectorImpl(detectorPredicate, detectorConverter);
     }
 
     @CheckedProvides(IOProvider.class)
