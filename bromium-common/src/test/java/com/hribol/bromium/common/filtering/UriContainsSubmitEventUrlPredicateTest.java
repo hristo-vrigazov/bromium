@@ -1,4 +1,4 @@
-package com.hribol.bromium.common.utils;
+package com.hribol.bromium.common.filtering;
 
 import com.hribol.bromium.common.filtering.UriContainsSubmitEventUrlPredicate;
 import io.netty.handler.codec.http.HttpRequest;

@@ -1,6 +1,5 @@
-package com.hribol.bromium.common.utils;
+package com.hribol.bromium.common.filtering;
 
-import com.hribol.bromium.common.filtering.GetHtmlFromCurrentHostPredicate;
 import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.HttpRequest;
