@@ -530,6 +530,7 @@ public class DefaultModule extends AbstractModule {
                                                            ResponseFilter responseFilter) throws IOException {
         BrowserMobProxy proxy = createBrowserMobProxy(timeout, recordRequestFilter, responseFilter);
         proxy.start(0);
+        System.out.println("Proxy running on port " + proxy.getPort());
         Proxy seleniumProxy = createSeleniumProxy(proxy);
         DesiredCapabilities desiredCapabilities = createDesiredCapabilities(seleniumProxy);
         DriverService driverService = driverServiceSupplier.getDriverService(pathToDriverExecutable, screen);

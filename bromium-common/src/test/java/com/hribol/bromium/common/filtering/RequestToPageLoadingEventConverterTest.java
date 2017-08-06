@@ -31,10 +31,11 @@ public class RequestToPageLoadingEventConverterTest {
     private final String EXPECTED_URL = BASE_URL + EXAMPLE_CONTINUATION;
     private final String WRONG_URL = "http://something/" + EXAMPLE_CONTINUATION;
     private final String EXAMPLE_EVENT_NAME = "Load page with supplied value";
+    private final String URL_THAT_IS_NOT_EQUAL_TO_EXPECTED = BASE_URL + EXAMPLE_CONTINUATION + "?p=2";
 
     @Test
     public void ifEventWithSuppliedValueMatchesTheUriThenEventIsReturned() throws MalformedURLException, UnsupportedEncodingException {
-        ActionsFilter actionsFilter = createMocks();
+        ActionsFilter actionsFilter = createMocks(false);
 
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn(EXPECTED_URL);
@@ -54,7 +55,7 @@ public class RequestToPageLoadingEventConverterTest {
 
     @Test
     public void exceptionIsThrownIfBaseUrlDoesNotMatch() throws MalformedURLException, UnsupportedEncodingException {
-        ActionsFilter actionsFilter = createMocks();
+        ActionsFilter actionsFilter = createMocks(false);
 
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn(WRONG_URL);
@@ -68,7 +69,7 @@ public class RequestToPageLoadingEventConverterTest {
 
     @Test
     public void ifNoPageLoadingActions_OptionalEmptyIsReturned() throws MalformedURLException, UnsupportedEncodingException {
-        ActionsFilter actionsFilter = createMocks();
+        ActionsFilter actionsFilter = createMocks(false);
         when(actionsFilter.filter(PAGE_LOADING)).thenReturn(new ArrayList<>());
 
         HttpRequest httpRequest = mock(HttpRequest.class);
@@ -83,9 +84,42 @@ public class RequestToPageLoadingEventConverterTest {
         assertEquals(expected, actual);
     }
 
-    private ActionsFilter createMocks() {
+    @Test
+    public void ifActionIsNotExposedButTheUrlIsDifferentThenEmptyOptionalIsReturned() throws MalformedURLException, UnsupportedEncodingException {
+        ActionsFilter actionsFilter = createMocks(false);
+
+        HttpRequest httpRequest = mock(HttpRequest.class);
+        when(httpRequest.getUri()).thenReturn(URL_THAT_IS_NOT_EQUAL_TO_EXPECTED);
+
+        RequestToPageLoadingEventConverter requestToPageLoadingEventConverter =
+                new RequestToPageLoadingEventConverter(BASE_URL, actionsFilter);
+
+        Optional<Map<String, String>> expected = Optional.empty();
+        Optional<Map<String, String>> actual = requestToPageLoadingEventConverter.convert(httpRequest);
+
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
+    public void ifActionIsExposedThenEmptyOptionalIsReturned() throws MalformedURLException, UnsupportedEncodingException {
+        ActionsFilter actionsFilter = createMocks(true);
+
+        HttpRequest httpRequest = mock(HttpRequest.class);
+        when(httpRequest.getUri()).thenReturn(EXPECTED_URL);
+
+        RequestToPageLoadingEventConverter requestToPageLoadingEventConverter =
+                new RequestToPageLoadingEventConverter(BASE_URL, actionsFilter);
+
+        Optional<Map<String, String>> expected = Optional.empty();
+        Optional<Map<String, String>> actual = requestToPageLoadingEventConverter.convert(httpRequest);
+
+        assertEquals(expected, actual);
+    }
+
+    private ActionsFilter createMocks(boolean actionExposed) {
         ParameterConfiguration parameterConfiguration = mock(ParameterConfiguration.class);
-        when(parameterConfiguration.isExposed()).thenReturn(false);
+        when(parameterConfiguration.isExposed()).thenReturn(actionExposed);
         when(parameterConfiguration.getValue()).thenReturn(EXAMPLE_CONTINUATION);
 
         ApplicationActionConfiguration applicationActionConfiguration = mock(ApplicationActionConfiguration.class, RETURNS_DEEP_STUBS);
