@@ -30,6 +30,7 @@ public class DemoApp {
             "dynamic.html",
             "race-http.html",
             "text-field.html",
+            "index.html"
     };
 
     private int port;

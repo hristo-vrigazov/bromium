@@ -19,7 +19,12 @@ public class TestUtils {
     public static final String RACE_HTTP_TEST_CASE = "integration-tests/race-http.json";
     public static final String TYPE_TEXT_TEST_CASE = "integration-tests/text-field.json";
     public static final String CHROMEDRIVER = "chromedriver";
-    public static final String PAGE_LOAD_WITH_SUPPLIED_VALUE = "Load /ajax.html page";
+    public static final String PAGE_LOAD_AJAX = "Load /ajax.html page";
+    public static final String PAGE_LOAD_INDEX = "Load /index.html page";
+
+    public static final String AJAX_DEMO_ID = "ajax-demo";
+    public static final String AJAX_DEMO_LINK = "ajax-demo-link";
+
 
     public static String generateRandomJsonFilename() {
         return UUID.randomUUID().toString() +".json";
