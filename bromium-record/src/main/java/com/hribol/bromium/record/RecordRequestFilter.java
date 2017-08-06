@@ -36,8 +36,9 @@ public class RecordRequestFilter implements RequestFilter {
                     Optional<Map<String, String>> optionalEvent = eventDetector.getConverter().convert(httpRequest);
 
                     if (optionalEvent.isPresent()) {
-                        recordingState.storeTestCaseStep(optionalEvent.get());
-                        System.out.println(optionalEvent);
+                        Map<String, String> event = optionalEvent.get();
+                        recordingState.storeTestCaseStep(event);
+                        System.out.println(event);
                         return null;
                     }
 

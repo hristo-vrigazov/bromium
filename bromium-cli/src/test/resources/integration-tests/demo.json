@@ -164,7 +164,7 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": true,
-            "name": "PAGE_LOAD_WITH_SUPPLIED_VALUE",
+            "name": "Load /ajax.html page",
             "webDriverAction": {
                 "parametersConfiguration": {
                     "url": {
