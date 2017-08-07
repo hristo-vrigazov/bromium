@@ -21,6 +21,7 @@ public class TestUtils {
     public static final String CHROMEDRIVER = "chromedriver";
     public static final String PAGE_LOAD_AJAX = "Load /ajax.html page";
     public static final String PAGE_LOAD_INDEX = "Load /index.html page";
+    public static final String CLICK_LINK_TO_AJAX_DEMO_PAGE = "Click link to Ajax Demo page";
 
     public static final String AJAX_DEMO_ID = "ajax-demo";
     public static final String AJAX_DEMO_LINK = "ajax-demo-link";

@@ -70,6 +70,7 @@ public class DoesNotRecordClickingOnLinksIT extends BaseDemoAppIntegrationTest {
 
         TestScenarioSteps expected = new TestScenarioSteps();
         expected.add(ImmutableMap.of(EVENT, PAGE_LOAD_INDEX));
+        expected.add(ImmutableMap.of(EVENT, CLICK_LINK_TO_AJAX_DEMO_PAGE));
 
         TestScenarioSteps actual = ConfigurationUtils.readSteps(outputFile.getAbsolutePath());
         assertEquals(expected, actual);
