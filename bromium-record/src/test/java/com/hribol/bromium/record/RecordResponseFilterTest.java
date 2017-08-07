@@ -18,7 +18,7 @@ public class RecordResponseFilterTest {
 
     private final String injectionCode = "<script>function() {}</script>";
     private final String htmlContent = "<html><head></head><body></body></html>";
-    private final String expected = htmlContent + injectionCode;
+    private final String expected = injectionCode + htmlContent;
 
     private HttpMessageContents httpMessageContents;
 
