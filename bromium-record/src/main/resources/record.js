@@ -2,6 +2,11 @@ var Arrive=function(a,b,c){"use strict";function l(a,b,c){e.addMethod(b,c,a.unbi
 
 window.bromium = {};
 
+window.bromium.conventionConstants = {
+    SUBMIT_URL: "http://bromium-submit-event.com/?",
+    LINK_INTERCEPTOR_MARKER: "bromium-js-click"
+};
+
 window.convertParametersToQueryString = function (data) {
     return Object.keys(data).map(function (key) {
         return [key, data[key]].map(encodeURIComponent).join("=")
@@ -11,10 +16,21 @@ window.convertParametersToQueryString = function (data) {
 window.bromium.notifyEvent = function(parameters) {
     var queryString = convertParametersToQueryString(parameters);
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://bromium-submit-event.com/?" + queryString);
+    xhr.open("GET", bromium.conventionConstants.SUBMIT_URL + queryString);
     xhr.send();
 };
+
+window.bromium.shouldInterceptHyperLink = new RegExp(location.host);
 
 var options = {
     existing: true
 };
+
+document.arrive('a', options, function () {
+    this.addEventListener("click", function(e) {
+        if (bromium.shouldInterceptHyperLink.test(this.href)) {
+            // console.log('A link that I should intercept was clicked');
+            this.href += bromium.conventionConstants.LINK_INTERCEPTOR_MARKER
+        }
+    });
+});

@@ -1,16 +1,15 @@
 package com.hribol.bromium.integration.tests.record;
 
-import com.google.inject.*;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.util.Modules;
 import com.hribol.bromium.cli.DefaultModule;
-import com.hribol.bromium.cli.commands.PromptUtils;
 import com.hribol.bromium.cli.commands.RecordCommand;
 import com.hribol.bromium.core.TestScenarioSteps;
-import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.utils.ConfigurationUtils;
 import com.hribol.bromium.integration.tests.BaseDemoAppIntegrationTest;
 import com.hribol.bromium.integration.tests.simulation.RecordingSimulatorModule;
-import com.hribol.bromium.record.RecordingState;
 import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.util.HttpMessageContents;
@@ -25,12 +24,11 @@ import java.util.function.Supplier;
 
 import static com.hribol.bromium.cli.Main.Commands.RECORD;
 import static com.hribol.bromium.cli.ParsedOptions.*;
-import static com.hribol.bromium.core.utils.Constants.SUBMIT_EVENT_URL;
-import static com.hribol.bromium.integration.tests.TestUtils.DEMO_CONFIGURATION;
-import static com.hribol.bromium.integration.tests.TestUtils.exampleTestScenarioSteps;
-import static com.hribol.bromium.integration.tests.TestUtils.generateRandomJsonFilename;
+import static com.hribol.bromium.core.ConventionConstants.SUBMIT_EVENT_URL;
+import static com.hribol.bromium.integration.tests.TestUtils.*;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
 /**

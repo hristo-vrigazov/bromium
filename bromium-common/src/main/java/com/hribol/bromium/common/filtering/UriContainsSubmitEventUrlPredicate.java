@@ -4,7 +4,7 @@ import io.netty.handler.codec.http.HttpRequest;
 
 import java.util.function.Predicate;
 
-import static com.hribol.bromium.core.utils.Constants.SUBMIT_EVENT_URL;
+import static com.hribol.bromium.core.ConventionConstants.SUBMIT_EVENT_URL;
 
 /**
  * Created by hvrigazov on 02.08.17.

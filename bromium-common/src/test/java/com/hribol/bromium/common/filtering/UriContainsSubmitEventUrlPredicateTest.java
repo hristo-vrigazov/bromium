@@ -1,10 +1,9 @@
 package com.hribol.bromium.common.filtering;
 
-import com.hribol.bromium.common.filtering.UriContainsSubmitEventUrlPredicate;
 import io.netty.handler.codec.http.HttpRequest;
 import org.junit.Test;
 
-import static com.hribol.bromium.core.utils.Constants.SUBMIT_EVENT_URL;
+import static com.hribol.bromium.core.ConventionConstants.SUBMIT_EVENT_URL;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;

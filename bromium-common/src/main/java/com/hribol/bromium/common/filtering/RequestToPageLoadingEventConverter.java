@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ParameterConfiguration;
 import com.hribol.bromium.core.utils.ActionsFilter;
+import com.hribol.bromium.core.utils.Constants;
 import com.hribol.bromium.core.utils.HttpRequestToTestCaseStepConverter;
 import io.netty.handler.codec.http.HttpRequest;
 
@@ -13,8 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static com.hribol.bromium.core.ConventionConstants.LINK_INTERCEPTOR_MARKER;
 import static com.hribol.bromium.core.utils.Constants.EVENT;
-import static com.hribol.bromium.core.utils.Constants.URL;
 import static com.hribol.bromium.core.utils.WebDriverActions.PAGE_LOADING;
 
 /**
@@ -39,11 +40,16 @@ public class RequestToPageLoadingEventConverter implements HttpRequestToTestCase
             throw new IllegalArgumentException("I am not responsible for this request URL: " + requestUri);
         }
 
+        if (requestUri.endsWith(LINK_INTERCEPTOR_MARKER)) {
+            httpRequest.setUri(requestUri.split(LINK_INTERCEPTOR_MARKER)[0]);
+            return Optional.empty();
+        }
+
         for (ApplicationActionConfiguration applicationActionConfiguration: applicationActionConfigurations) {
             ParameterConfiguration urlParameterConfiguration = applicationActionConfiguration
                     .getWebDriverAction()
                     .getParametersConfiguration()
-                    .get(URL);
+                    .get(Constants.URL);
 
             // first the easy case; if the value is hardcoded in the configuration
             // and the current url matches, then we have found the action

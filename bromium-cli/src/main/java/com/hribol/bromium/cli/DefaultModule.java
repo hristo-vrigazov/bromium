@@ -279,7 +279,7 @@ public class DefaultModule extends AbstractModule {
             case RECORD:
                 return new RecordResponseFilter(recordingJavascriptCodeProvider.get(), httpRequestPredicate);
             case REPLAY:
-                return new ReplayResponseFilter(replayingJavascriptCodeProvider.get(), replayingState,httpRequestPredicate);
+                return new ReplayResponseFilter(replayingJavascriptCodeProvider.get(), replayingState, httpRequestPredicate);
             default:
                 throw new NoSuchCommandException();
         }
@@ -447,7 +447,9 @@ public class DefaultModule extends AbstractModule {
     @Named(RECORDING_JAVASCRIPT_CODE)
     public String getRecordingJavascriptCode(@Named(RECORDING_JAVASCRIPT_INJECTOR)
                                                      IOProvider<JavascriptInjector> javascriptInjectorIOProvider) throws IOException {
-        return javascriptInjectorIOProvider.get().getInjectionCode();
+        String generatedJavascriptCode = javascriptInjectorIOProvider.get().getInjectionCode();
+        System.out.println(generatedJavascriptCode);
+        return generatedJavascriptCode;
     }
 
 

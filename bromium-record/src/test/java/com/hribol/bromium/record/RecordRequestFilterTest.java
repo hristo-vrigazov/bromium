@@ -12,7 +12,7 @@ import java.net.MalformedURLException;
 import java.util.*;
 import java.util.function.Predicate;
 
-import static com.hribol.bromium.core.utils.Constants.SUBMIT_EVENT_URL;
+import static com.hribol.bromium.core.ConventionConstants.SUBMIT_EVENT_URL;
 import static org.mockito.Mockito.*;
 
 /**
