@@ -1,5 +1,6 @@
 package com.hribol.bromium.core.utils;
 
+import com.hribol.bromium.core.ConventionConstants;
 import com.hribol.bromium.core.DependencyInjectionConstants;
 import org.junit.Test;
 
@@ -17,5 +18,6 @@ public class DummyTest {
         assertNotNull(new Constants());
         assertNotNull(new WebDriverActions());
         assertNotNull(new DependencyInjectionConstants());
+        assertNotNull(new ConventionConstants());
     }
 }

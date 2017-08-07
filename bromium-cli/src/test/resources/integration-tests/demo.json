@@ -31,6 +31,28 @@
                 "parametersConfiguration": {},
                 "webDriverActionType": "NOTHING"
             },
+            "expectsHttpRequest": true,
+            "name": "Click link to Ajax Demo page",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "cssSelector": {
+                        "expose": false,
+                        "parameterName": "cssSelector",
+                        "value": "#ajax-demo-link"
+                    }
+                },
+                "webDriverActionType": "CLICK_CSS_SELECTOR"
+            }
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
             "expectsHttpRequest": false,
             "name": "Click Ajax created button",
             "webDriverAction": {
