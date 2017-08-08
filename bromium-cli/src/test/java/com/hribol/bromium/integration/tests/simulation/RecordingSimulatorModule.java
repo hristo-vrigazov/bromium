@@ -7,6 +7,7 @@ import com.google.inject.TypeLiteral;
 import com.hribol.bromium.cli.commands.PromptUtils;
 import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.suppliers.WebDriverSupplier;
+import com.hribol.bromium.integration.tests.record.SimulatorRunnable;
 import com.hribol.bromium.record.RecordingState;
 import net.lightbody.bmp.filters.RequestFilter;
 import org.openqa.selenium.WebDriver;
@@ -81,9 +82,9 @@ public class RecordingSimulatorModule extends AbstractModule {
      * Executes a callback when the user is prompted for recording
      * @param runnable
      */
-    public void whenPromptedForRecordingRunnable(Runnable runnable) {
+    public void whenPromptedForRecordingRunnable(SimulatorRunnable runnable) {
         doAnswer(invocationOnMock -> {
-            runnable.run();
+            runnable.run(this);
             return null;
         }).when(promptUtils).promptForRecording();
     }

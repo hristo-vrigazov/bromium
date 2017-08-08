@@ -1,12 +1,20 @@
 package com.hribol.bromium.integration.tests.record;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
+import com.hribol.bromium.cli.DefaultModule;
+import com.hribol.bromium.cli.commands.RecordCommand;
 import com.hribol.bromium.integration.tests.BaseDemoAppIntegrationTest;
+import com.hribol.bromium.integration.tests.simulation.RecordingSimulatorModule;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.hribol.bromium.cli.Main.Commands.RECORD;
 import static com.hribol.bromium.cli.ParsedOptions.*;
 import static com.hribol.bromium.integration.tests.TestUtils.DEMO_CONFIGURATION;
 import static com.hribol.bromium.integration.tests.TestUtils.generateRandomJsonFilename;
@@ -15,11 +23,13 @@ import static org.openqa.selenium.remote.BrowserType.CHROME;
 /**
  * Created by hvrigazov on 08.08.17.
  */
-public abstract class BaseRecordIntegrationTest extends BaseDemoAppIntegrationTest {
+public abstract class BaseRecordIntegrationTest extends BaseDemoAppIntegrationTest implements SimulatorRunnable {
     public BaseRecordIntegrationTest() {
         super(DEMO_CONFIGURATION,
                 generateRandomJsonFilename());
     }
+
+    protected Map<String, Object> opts = new HashMap<>();
 
     @Override
     public void runTest() throws IOException {
@@ -31,7 +41,6 @@ public abstract class BaseRecordIntegrationTest extends BaseDemoAppIntegrationTe
          * -o bromium-core/src/test/resources/dynamic-testCase.json
          */
         File outputFile = createTempFile(pathToTestCase);
-        Map<String, Object> opts = new HashMap<>();
         opts.put(DRIVER, chromedriverFile.getAbsolutePath());
         opts.put(APPLICATION, configurationFile.getAbsolutePath());
         opts.put(URL, demoApp.getBaseUrl());
@@ -39,8 +48,15 @@ public abstract class BaseRecordIntegrationTest extends BaseDemoAppIntegrationTe
         opts.put(BROWSER, CHROME);
         opts.put(TIMEOUT, String.valueOf(10));
         opts.put(SCREEN, screen);
-        doRunTest(opts);
+        Module defaultModule = new DefaultModule(RECORD, opts);
+        Injector originalInjector = Guice.createInjector(defaultModule);
+        RecordingSimulatorModule recordingSimulatorModule = new RecordingSimulatorModule(originalInjector);
+        recordingSimulatorModule.whenPromptedForRecordingRunnable(this);
+        Injector injector = Guice.createInjector(Modules.override(defaultModule).with(recordingSimulatorModule));
+        RecordCommand recordCommand = injector.getInstance(RecordCommand.class);
+        recordCommand.run();
+        verifyAssertions(opts);
     }
 
-    protected abstract void doRunTest(Map<String, Object> opts) throws IOException;
+    protected abstract void verifyAssertions(Map<String, Object> opts) throws IOException;
 }

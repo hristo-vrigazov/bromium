@@ -37,16 +37,7 @@ import static org.openqa.selenium.remote.BrowserType.CHROME;
 public class RecordExposedPageLoadingIT extends BaseRecordIntegrationTest {
 
     @Override
-    public void doRunTest(Map<String, Object> opts) throws IOException {
-        Module defaultModule = new DefaultModule(RECORD, opts);
-        Injector originalInjector = Guice.createInjector(defaultModule);
-        RecordingSimulatorModule recordingSimulatorModule = new RecordingSimulatorModule(originalInjector);
-        RunnableWhenPrompted runnableWhenPrompted = new RunnableWhenPrompted(recordingSimulatorModule::getWebDriver, demoApp.getBaseUrl());
-        recordingSimulatorModule.whenPromptedForRecordingRunnable(runnableWhenPrompted);
-        Injector injector = Guice.createInjector(Modules.override(defaultModule).with(recordingSimulatorModule));
-        RecordCommand recordCommand = injector.getInstance(RecordCommand.class);
-        recordCommand.run();
-
+    public void verifyAssertions(Map<String, Object> opts) throws IOException {
         TestScenarioSteps expected = new TestScenarioSteps();
         expected.add(ImmutableMap.of(
                 EVENT, PAGE_LOAD,
@@ -56,22 +47,13 @@ public class RecordExposedPageLoadingIT extends BaseRecordIntegrationTest {
         assertEquals(expected, actual);
     }
 
-    private static class RunnableWhenPrompted implements Runnable {
-
-        private Supplier<WebDriver> driverSupplier;
-        private String baseUrl;
-
-        private RunnableWhenPrompted(Supplier<WebDriver> driverSupplier, String baseUrl) {
-            this.driverSupplier = driverSupplier;
-            this.baseUrl = baseUrl;
-        }
-
-        @Override
-        public void run() {
-            WebDriver driver = driverSupplier.get();
-            WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
-            driver.get(baseUrl + "dynamic.html");
-            webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.id(CREATE_DYNAMIC_ID)));
-        }
+    @Override
+    public void run(RecordingSimulatorModule recordingSimulatorModule) {
+        String baseUrl = (String) opts.get(URL);
+        WebDriver driver = recordingSimulatorModule.getWebDriver();
+        WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
+        driver.get(baseUrl + "dynamic.html");
+        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.id(CREATE_DYNAMIC_ID)));
     }
+
 }
