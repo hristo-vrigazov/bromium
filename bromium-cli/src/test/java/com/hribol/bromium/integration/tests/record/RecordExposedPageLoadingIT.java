@@ -34,30 +34,13 @@ import static org.openqa.selenium.remote.BrowserType.CHROME;
 /**
  * Created by hvrigazov on 08.08.17.
  */
-public class RecordExposedPageLoadingIT extends BaseDemoAppIntegrationTest {
+public class RecordExposedPageLoadingIT extends BaseRecordIntegrationTest {
     public RecordExposedPageLoadingIT() {
         super(DEMO_CONFIGURATION, generateRandomJsonFilename());
     }
 
     @Override
-    public void runTest() throws IOException {
-        /**
-         * record
-         * -d ./bromium-chrome/bromium-chrome-base/src/test/resources/chromedriver
-         * -a /home/hvrigazov/bromium-data/demo-app/configurations/demo.json
-         * -u http://localhost:3000
-         * -o bromium-core/src/test/resources/dynamic-testCase.json
-         */
-        File outputFile = createTempFile(pathToTestCase);
-        Map<String, Object> opts = new HashMap<>();
-        opts.put(DRIVER, chromedriverFile.getAbsolutePath());
-        opts.put(APPLICATION, configurationFile.getAbsolutePath());
-        opts.put(ParsedOptions.URL, demoApp.getBaseUrl());
-        opts.put(OUTPUT, outputFile.getAbsolutePath());
-        opts.put(BROWSER, CHROME);
-        opts.put(TIMEOUT, String.valueOf(10));
-        opts.put(SCREEN, screen);
-
+    public void doRunTest(Map<String, Object> opts) throws IOException {
         Module defaultModule = new DefaultModule(RECORD, opts);
         Injector originalInjector = Guice.createInjector(defaultModule);
         RecordingSimulatorModule recordingSimulatorModule = new RecordingSimulatorModule(originalInjector);
@@ -72,7 +55,7 @@ public class RecordExposedPageLoadingIT extends BaseDemoAppIntegrationTest {
                 EVENT, PAGE_LOAD,
                 ALIAS_URL, DYNAMIC_DEMO_PAGE));
 
-        TestScenarioSteps actual = ConfigurationUtils.readSteps(outputFile.getAbsolutePath());
+        TestScenarioSteps actual = ConfigurationUtils.readSteps((String) opts.get(OUTPUT));
         assertEquals(expected, actual);
     }
 
