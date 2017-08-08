@@ -1,7 +1,7 @@
 [
 	{
 		"event": "Load page",
-		"url": "dynamic.html"
+		"alias-url": "dynamic.html"
 	},
     {
         "event": "Click dynamic button"

@@ -1,7 +1,7 @@
 [
 	{
 		"event": "Load page",
-		"url": "race-http.html"
+		"alias-url": "race-http.html"
 	},
     {
         "event": "Click on race demo button"
