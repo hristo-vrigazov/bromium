@@ -14,6 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.*;
 
+import static com.hribol.bromium.core.ConventionConstants.LINK_INTERCEPTOR_MARKER;
 import static com.hribol.bromium.core.utils.Constants.EVENT;
 import static com.hribol.bromium.core.utils.Constants.URL;
 import static com.hribol.bromium.core.utils.WebDriverActions.PAGE_LOADING;
@@ -91,6 +92,22 @@ public class RequestToPageLoadingEventConverterTest {
 
         HttpRequest httpRequest = mock(HttpRequest.class);
         when(httpRequest.getUri()).thenReturn(URL_THAT_IS_NOT_EQUAL_TO_EXPECTED);
+
+        RequestToPageLoadingEventConverter requestToPageLoadingEventConverter =
+                new RequestToPageLoadingEventConverter(BASE_URL, actionsFilter);
+
+        Optional<Map<String, String>> expected = Optional.empty();
+        Optional<Map<String, String>> actual = requestToPageLoadingEventConverter.convert(httpRequest);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void ifUrlEndsInInterceptorMarkerUriIsRewrittenAndEmptyEventIsReturned() throws MalformedURLException, UnsupportedEncodingException {
+        ActionsFilter actionsFilter = createMocks(false);
+
+        HttpRequest httpRequest = mock(HttpRequest.class);
+        when(httpRequest.getUri()).thenReturn(EXPECTED_URL + LINK_INTERCEPTOR_MARKER);
 
         RequestToPageLoadingEventConverter requestToPageLoadingEventConverter =
                 new RequestToPageLoadingEventConverter(BASE_URL, actionsFilter);
