@@ -35,9 +35,6 @@ import static org.openqa.selenium.remote.BrowserType.CHROME;
  * Created by hvrigazov on 06.08.17.
  */
 public class DoesNotRecordClickingOnLinksIT extends BaseRecordIntegrationTest {
-    public DoesNotRecordClickingOnLinksIT() {
-        super(DEMO_CONFIGURATION, generateRandomJsonFilename());
-    }
 
     @Override
     public void doRunTest(Map<String, Object> opts) throws IOException {

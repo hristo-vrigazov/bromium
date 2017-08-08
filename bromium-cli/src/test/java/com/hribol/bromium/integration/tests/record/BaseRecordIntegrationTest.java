@@ -8,14 +8,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.hribol.bromium.cli.ParsedOptions.*;
+import static com.hribol.bromium.integration.tests.TestUtils.DEMO_CONFIGURATION;
+import static com.hribol.bromium.integration.tests.TestUtils.generateRandomJsonFilename;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
 /**
  * Created by hvrigazov on 08.08.17.
  */
 public abstract class BaseRecordIntegrationTest extends BaseDemoAppIntegrationTest {
-    public BaseRecordIntegrationTest(String resourceConfigurationPath, String pathToTestCase) {
-        super(resourceConfigurationPath, pathToTestCase);
+    public BaseRecordIntegrationTest() {
+        super(DEMO_CONFIGURATION,
+                generateRandomJsonFilename());
     }
 
     @Override

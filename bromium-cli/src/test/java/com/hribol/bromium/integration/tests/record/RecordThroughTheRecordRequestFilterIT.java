@@ -8,37 +8,29 @@ import com.hribol.bromium.cli.DefaultModule;
 import com.hribol.bromium.cli.commands.RecordCommand;
 import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.utils.ConfigurationUtils;
-import com.hribol.bromium.integration.tests.BaseDemoAppIntegrationTest;
 import com.hribol.bromium.integration.tests.simulation.RecordingSimulatorModule;
 import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
 import static com.hribol.bromium.cli.Main.Commands.RECORD;
-import static com.hribol.bromium.cli.ParsedOptions.*;
+import static com.hribol.bromium.cli.ParsedOptions.OUTPUT;
 import static com.hribol.bromium.core.ConventionConstants.SUBMIT_EVENT_URL;
 import static com.hribol.bromium.integration.tests.TestUtils.*;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.openqa.selenium.remote.BrowserType.CHROME;
 
 /**
  * Created by hvrigazov on 24.07.17.
  */
 public class RecordThroughTheRecordRequestFilterIT extends BaseRecordIntegrationTest {
-    public RecordThroughTheRecordRequestFilterIT() {
-        super(DEMO_CONFIGURATION,
-                generateRandomJsonFilename());
-    }
 
     @Override
     protected void doRunTest(Map<String, Object> opts) throws IOException {

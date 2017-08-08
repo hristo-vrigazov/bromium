@@ -33,9 +33,6 @@ import static org.openqa.selenium.remote.BrowserType.CHROME;
  * Created by hvrigazov on 03.08.17.
  */
 public class RecordNotExposedPageLoadingIT extends BaseRecordIntegrationTest {
-    public RecordNotExposedPageLoadingIT() {
-        super(DEMO_CONFIGURATION, generateRandomJsonFilename());
-    }
 
     @Override
     public void doRunTest(Map<String, Object> opts) throws IOException {
