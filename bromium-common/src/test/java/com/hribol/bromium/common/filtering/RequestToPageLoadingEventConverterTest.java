@@ -31,6 +31,7 @@ public class RequestToPageLoadingEventConverterTest {
     private final String EXPECTED_URL = BASE_URL + EXAMPLE_CONTINUATION;
     private final String WRONG_URL = "http://something/" + EXAMPLE_CONTINUATION;
     private final String EXAMPLE_EVENT_NAME = "Load page with supplied value";
+    private final String ALIAS_PARAMETER = "ALIAS_PARAMETER";
     private final String URL_THAT_IS_NOT_EQUAL_TO_EXPECTED = BASE_URL + EXAMPLE_CONTINUATION + "?p=2";
 
     @Test
@@ -111,7 +112,10 @@ public class RequestToPageLoadingEventConverterTest {
         RequestToPageLoadingEventConverter requestToPageLoadingEventConverter =
                 new RequestToPageLoadingEventConverter(BASE_URL, actionsFilter);
 
-        Optional<Map<String, String>> expected = Optional.empty();
+        Optional<Map<String, String>> expected = Optional.of(ImmutableMap.of(
+                EVENT, EXAMPLE_EVENT_NAME,
+                ALIAS_PARAMETER, EXAMPLE_CONTINUATION
+        ));
         Optional<Map<String, String>> actual = requestToPageLoadingEventConverter.convert(httpRequest);
 
         assertEquals(expected, actual);
@@ -121,6 +125,7 @@ public class RequestToPageLoadingEventConverterTest {
         ParameterConfiguration parameterConfiguration = mock(ParameterConfiguration.class);
         when(parameterConfiguration.isExposed()).thenReturn(actionExposed);
         when(parameterConfiguration.getValue()).thenReturn(EXAMPLE_CONTINUATION);
+        when(parameterConfiguration.getAlias()).thenReturn(ALIAS_PARAMETER);
 
         ApplicationActionConfiguration applicationActionConfiguration = mock(ApplicationActionConfiguration.class, RETURNS_DEEP_STUBS);
         when(applicationActionConfiguration.getName()).thenReturn(EXAMPLE_EVENT_NAME);
