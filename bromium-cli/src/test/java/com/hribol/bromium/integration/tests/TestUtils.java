@@ -21,11 +21,14 @@ public class TestUtils {
     public static final String CHROMEDRIVER = "chromedriver";
     public static final String PAGE_LOAD_AJAX = "Load /ajax.html page";
     public static final String PAGE_LOAD_INDEX = "Load /index.html page";
+    public static final String PAGE_LOAD = "Load page";
     public static final String CLICK_LINK_TO_AJAX_DEMO_PAGE = "Click link to Ajax Demo page";
 
     public static final String AJAX_DEMO_ID = "ajax-demo";
     public static final String AJAX_DEMO_LINK = "ajax-demo-link";
-
+    public static final String CREATE_DYNAMIC_ID = "create-dynamic";
+    public static final String DYNAMIC_DEMO_PAGE = "dynamic.html";
+    public static final String ALIAS_URL = "alias-url";
 
     public static String generateRandomJsonFilename() {
         return UUID.randomUUID().toString() +".json";

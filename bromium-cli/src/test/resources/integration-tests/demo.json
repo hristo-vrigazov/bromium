@@ -236,7 +236,7 @@
                     "url": {
                         "expose": true,
                         "parameterName": "url",
-                        "alias": "url"
+                        "alias": "alias-url"
                     }
                 },
                 "webDriverActionType": "PAGE_LOADING"
