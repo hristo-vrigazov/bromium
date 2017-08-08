@@ -10,14 +10,16 @@ import static com.hribol.bromium.core.utils.Constants.NO_HTTP_REQUESTS_IN_QUEUE;
 /**
  * Created by hvrigazov on 03.06.17.
  */
-public class NoHttpRequestsInQueue implements SynchronizationEvent {
+public class NoHttpRequestsInQueue extends SynchronizationEventNotifyingState {
 
     private ReplayingState replayingState;
     private EventSignalizer eventSignalizer;
 
     public NoHttpRequestsInQueue(ReplayingState replayingState, EventSignalizer eventSignalizer) {
+        super(replayingState);
         this.replayingState = replayingState;
         this.eventSignalizer = eventSignalizer;
+        this.replayingState.setSynchronizationEvent(this);
     }
 
     @Override

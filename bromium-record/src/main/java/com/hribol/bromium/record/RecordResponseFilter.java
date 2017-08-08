@@ -25,7 +25,7 @@ public class RecordResponseFilter implements ResponseFilter {
     @Override
     public void filterResponse(HttpResponse httpResponse, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
         if (shouldInjectJavascriptPredicate.test(httpMessageInfo.getOriginalRequest())) {
-            httpMessageContents.setTextContents(httpMessageContents.getTextContents() + injectionCode);
+            httpMessageContents.setTextContents(injectionCode + httpMessageContents.getTextContents());
         }
     }
 }

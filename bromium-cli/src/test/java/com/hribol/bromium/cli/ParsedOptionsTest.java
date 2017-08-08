@@ -20,7 +20,7 @@ public class ParsedOptionsTest {
 
         String pathToDriver = "/chromedriver";
         String pathToJs = "/runTest-whatever.js";
-        String url = "http://runTest";
+        String url = "http://runTest/";
         String browserType = CHROME;
         String outputFile = "output.json";
         Integer timeout = 10;

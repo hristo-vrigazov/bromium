@@ -35,7 +35,14 @@ public class DependencyInjectionConstants {
 
     public static final String SCREEN_NUMBER = "SCREEN_NUMBER";
     public static final String SCREEN = "SCREEN";
-    public static final String PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY = "PATH_TO_DRIVER_EXECUTABLE_SYSTEM_PROPERTY";
 
     public static final String COMMAND = "COMMAND";
+    public static final String SHOULD_INJECT_JS_PREDICATE = "SHOULD_INJECT_JS_PREDICATE";
+
+    public static final String CONVENTION_EVENT_DETECTOR = "CONVENTION_EVENT_DETECTOR";
+    public static final String PAGE_LOADING_EVENT_DETECTOR = "PAGE_LOADING_EVENT_DETECTOR";
+
+    public static final String CONVENTION_EVENT_DETECTOR_PREDICATE = "CONVENTION_EVENT_DETECTOR_PREDICATE";
+    public static final String CONVENTION_EVENT_DETECTOR_CONVERTOR = "CONVENTION_EVENT_DETECTOR_CONVERTOR";
+
 }

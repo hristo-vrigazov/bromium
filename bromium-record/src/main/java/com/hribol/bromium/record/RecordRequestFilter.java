@@ -1,7 +1,7 @@
 package com.hribol.bromium.record;
 
-import com.google.inject.Inject;
-import com.hribol.bromium.core.utils.ConfigurationUtils;
+import com.hribol.bromium.core.utils.EventDetector;
+import com.hribol.bromium.core.utils.HttpRequestToTestCaseStepConverter;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.filters.RequestFilter;
@@ -10,33 +10,44 @@ import net.lightbody.bmp.util.HttpMessageInfo;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.List;
 import java.util.Map;
-
-import static com.hribol.bromium.core.utils.Constants.SUBMIT_EVENT_URL;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 /**
  * Created by hvrigazov on 22.04.17.
  */
 public class RecordRequestFilter implements RequestFilter {
     private RecordingState recordingState;
+    private List<EventDetector> eventDetectors;
 
-    @Inject
-    public RecordRequestFilter(RecordingState recordingState) {
+    public RecordRequestFilter(RecordingState recordingState,
+                               List<EventDetector> eventDetectors) {
         this.recordingState = recordingState;
+        this.eventDetectors = eventDetectors;
     }
 
     @Override
     public HttpResponse filterRequest(HttpRequest httpRequest, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
-        if (httpRequest.getUri().contains(SUBMIT_EVENT_URL)) {
-            try {
-                Map<String, String> map = ConfigurationUtils.splitQuery(new URL(httpRequest.getUri()));
-                recordingState.storeTestCaseStep(map);
-                System.out.println(map);
-            } catch (UnsupportedEncodingException | MalformedURLException e) {
-                e.printStackTrace();
+        for (EventDetector eventDetector: eventDetectors) {
+            if (eventDetector.canDetectPredicate().test(httpRequest)) {
+                try {
+                    Optional<Map<String, String>> optionalEvent = eventDetector.getConverter().convert(httpRequest);
+
+                    if (optionalEvent.isPresent()) {
+                        Map<String, String> event = optionalEvent.get();
+                        recordingState.storeTestCaseStep(event);
+                        System.out.println(event);
+                        return null;
+                    }
+
+                } catch (UnsupportedEncodingException | MalformedURLException e) {
+                    e.printStackTrace();
+                }
             }
         }
+
         return null;
     }
 

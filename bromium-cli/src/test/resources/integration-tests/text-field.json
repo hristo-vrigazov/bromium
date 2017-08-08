@@ -1,7 +1,7 @@
 [
   {
     "event": "Load page",
-    "url": "text-field.html"
+    "alias-url": "text-field.html"
   },
   {
     "event": "Type text in name input",

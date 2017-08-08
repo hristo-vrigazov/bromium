@@ -45,7 +45,11 @@ public class ParsedOptions {
     }
 
     public String getBaseUrl() {
-        return getString(URL);
+        String originalUrl = getString(URL);
+        if (!originalUrl.endsWith("/")) {
+            return originalUrl + "/";
+        }
+        return originalUrl;
     }
 
     public String getBrowserType() {

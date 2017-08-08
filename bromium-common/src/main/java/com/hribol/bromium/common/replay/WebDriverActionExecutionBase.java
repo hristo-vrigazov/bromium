@@ -48,7 +48,6 @@ public class WebDriverActionExecutionBase implements WebDriverActionExecution {
                 System.out.println("Executing " + webDriverAction.getName());
                 try {
                     SynchronizationEvent synchronizationEvent = executor.noHttpRequestsInQueue();
-                    executor.getReplayingState().setSynchronizationEvent(synchronizationEvent);
                     executor.getEventSynchronizer().awaitUntil(synchronizationEvent);
                 } catch (InterruptedException | java.util.concurrent.TimeoutException e) {
                     throw executor.webDriverActionExecutionException("Exception during execution", e);

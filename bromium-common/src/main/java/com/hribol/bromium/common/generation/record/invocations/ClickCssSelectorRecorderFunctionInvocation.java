@@ -1,7 +1,5 @@
 package com.hribol.bromium.common.generation.record.invocations;
 
-import com.hribol.bromium.common.generation.record.functions.RecorderFunctionInvocation;
-
 import java.text.MessageFormat;
 
 import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CSS_SELECTOR;

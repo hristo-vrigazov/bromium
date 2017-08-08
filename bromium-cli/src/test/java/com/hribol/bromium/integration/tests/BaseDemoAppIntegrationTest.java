@@ -30,6 +30,10 @@ public abstract class BaseDemoAppIntegrationTest {
     protected String resourceConfigurationPath;
     protected String pathToTestCase;
 
+    public BaseDemoAppIntegrationTest(String resourceConfigurationPath, String pathToTestCase) {
+        this(resourceConfigurationPath, pathToTestCase, System.getProperty("screenNumber", "1"));
+    }
+
     public BaseDemoAppIntegrationTest(String resourceConfigurationPath, String pathToTestCase, String screen) {
         this.resourceConfigurationPath = resourceConfigurationPath;
         this.pathToTestCase = pathToTestCase;

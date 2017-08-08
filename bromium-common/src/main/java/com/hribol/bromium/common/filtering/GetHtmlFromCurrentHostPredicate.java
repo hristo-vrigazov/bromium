@@ -1,7 +1,8 @@
-package com.hribol.bromium.core.utils;
+package com.hribol.bromium.common.filtering;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import com.hribol.bromium.core.utils.Constants;
 import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.HttpRequest;
 

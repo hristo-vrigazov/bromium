@@ -1,7 +1,7 @@
 [
 	{
 		"event": "Load page",
-		"url": "ajax.html"
+		"alias-url": "ajax.html"
 	},
     {
         "event": "Click Ajax Demo button"
