@@ -6,6 +6,8 @@ import com.google.inject.Module;
 import com.google.inject.util.Modules;
 import com.hribol.bromium.cli.DefaultModule;
 import com.hribol.bromium.cli.commands.RecordCommand;
+import com.hribol.bromium.core.TestScenarioSteps;
+import com.hribol.bromium.core.utils.ConfigurationUtils;
 import com.hribol.bromium.integration.tests.BaseDemoAppIntegrationTest;
 import com.hribol.bromium.integration.tests.simulation.RecordingSimulatorModule;
 
@@ -55,8 +57,12 @@ public abstract class BaseRecordIntegrationTest extends BaseDemoAppIntegrationTe
         Injector injector = Guice.createInjector(Modules.override(defaultModule).with(recordingSimulatorModule));
         RecordCommand recordCommand = injector.getInstance(RecordCommand.class);
         recordCommand.run();
-        verifyAssertions(opts);
+        verifyAssertions();
     }
 
-    protected abstract void verifyAssertions(Map<String, Object> opts) throws IOException;
+    protected abstract void verifyAssertions() throws IOException;
+
+    protected TestScenarioSteps getActualSteps() throws IOException {
+        return ConfigurationUtils.readSteps((String) opts.get(OUTPUT));
+    }
 }

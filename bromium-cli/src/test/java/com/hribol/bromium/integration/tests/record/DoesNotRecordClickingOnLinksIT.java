@@ -37,12 +37,12 @@ import static org.openqa.selenium.remote.BrowserType.CHROME;
 public class DoesNotRecordClickingOnLinksIT extends BaseRecordIntegrationTest {
 
     @Override
-    public void verifyAssertions(Map<String, Object> opts) throws IOException {
+    public void verifyAssertions() throws IOException {
         TestScenarioSteps expected = new TestScenarioSteps();
         expected.add(ImmutableMap.of(EVENT, PAGE_LOAD_INDEX));
         expected.add(ImmutableMap.of(EVENT, CLICK_LINK_TO_AJAX_DEMO_PAGE));
 
-        TestScenarioSteps actual = ConfigurationUtils.readSteps((String) opts.get(OUTPUT));
+        TestScenarioSteps actual = getActualSteps();
         assertEquals(expected, actual);
     }
 

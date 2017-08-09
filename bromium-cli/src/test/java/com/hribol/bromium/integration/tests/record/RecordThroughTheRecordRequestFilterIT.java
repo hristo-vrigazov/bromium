@@ -26,8 +26,8 @@ public class RecordThroughTheRecordRequestFilterIT extends BaseRecordIntegration
     private TestScenarioSteps expected = exampleTestScenarioSteps();
 
     @Override
-    protected void verifyAssertions(Map<String, Object> opts) throws IOException {
-        TestScenarioSteps actual = ConfigurationUtils.readSteps((String) opts.get(OUTPUT));
+    protected void verifyAssertions() throws IOException {
+        TestScenarioSteps actual = getActualSteps();
         assertEquals(expected, actual);
     }
 

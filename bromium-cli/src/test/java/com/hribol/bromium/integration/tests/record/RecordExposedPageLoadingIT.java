@@ -37,13 +37,13 @@ import static org.openqa.selenium.remote.BrowserType.CHROME;
 public class RecordExposedPageLoadingIT extends BaseRecordIntegrationTest {
 
     @Override
-    public void verifyAssertions(Map<String, Object> opts) throws IOException {
+    public void verifyAssertions() throws IOException {
         TestScenarioSteps expected = new TestScenarioSteps();
         expected.add(ImmutableMap.of(
                 EVENT, PAGE_LOAD,
                 ALIAS_URL, DYNAMIC_DEMO_PAGE));
 
-        TestScenarioSteps actual = ConfigurationUtils.readSteps((String) opts.get(OUTPUT));
+        TestScenarioSteps actual = getActualSteps();
         assertEquals(expected, actual);
     }
 
