@@ -19,12 +19,12 @@ public class TypeTextInElementFoundByCssSelectorRecorderFunction implements Reco
     public TypeTextInElementFoundByCssSelectorRecorderFunction(JsCollector jsCollector) {
         this.functionDeclarationCode = jsCollector
                 .declareFunction(TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR)
-                .withParameters(CSS_SELECTOR, EVENT_NAME)
+                .withParameters(CSS_SELECTOR, EVENT_NAME, TEXT)
                 .startBody()
                 .whenCssSelectorArrives(CSS_SELECTOR)
                 .attachListenerForEvent(CHANGE)
                 .startCollectingParameters(PARAMETERS)
-                .parameter(EVENT, EVENT_NAME)
+                .parameterWithConstantKey(EVENT, EVENT_NAME)
                 .parameter(TEXT, INPUT_VALUE)
                 .buildParameters()
                 .notifyBromium(PARAMETERS)
@@ -46,6 +46,10 @@ public class TypeTextInElementFoundByCssSelectorRecorderFunction implements Reco
                 .get(CSS_SELECTOR)
                 .getValue();
         String eventName = generationInformation.getEventName();
-        return new TypeTextInElementFoundByCssSelectorRecorderFunctionInvocation(cssSelector, eventName);
+        String textAlias = generationInformation.getWebDriverActionConfiguration()
+                .getParametersConfiguration()
+                .get(TEXT)
+                .getAlias();
+        return new TypeTextInElementFoundByCssSelectorRecorderFunctionInvocation(cssSelector, eventName, textAlias);
     }
 }

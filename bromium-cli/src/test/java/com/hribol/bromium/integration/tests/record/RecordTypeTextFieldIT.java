@@ -10,11 +10,8 @@ import org.openqa.selenium.WebDriver;
 import java.io.IOException;
 
 import static com.hribol.bromium.core.utils.Constants.EVENT;
-import static com.hribol.bromium.core.utils.Constants.TEXT;
-import static com.hribol.bromium.integration.tests.TestUtils.ALIAS_URL;
-import static com.hribol.bromium.integration.tests.TestUtils.DONE_ID;
+import static com.hribol.bromium.integration.tests.TestUtils.*;
 import static com.hribol.bromium.integration.tests.TestUtils.Pages.TYPE_TEXT_DEMO_PAGE;
-import static com.hribol.bromium.integration.tests.TestUtils.TEXT_FIELD_ID;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -32,7 +29,7 @@ public class RecordTypeTextFieldIT extends BaseRecordIntegrationTest {
                 ALIAS_URL, TestUtils.Pages.TYPE_TEXT_DEMO_PAGE));
         testScenarioSteps.add(ImmutableMap.of(
                 EVENT, TestUtils.Events.TYPE_TEXT_IN_NAME_INPUT,
-                TEXT, EXAMPLE_TEXT));
+                ALIAS_TEXT, EXAMPLE_TEXT));
 
         TestScenarioSteps actualSteps = getActualSteps();
         assertEquals(testScenarioSteps, actualSteps);

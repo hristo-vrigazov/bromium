@@ -45,6 +45,8 @@ public class TestUtils {
     public static final String TEXT_FIELD_ID = "name-input";
     public static final String DONE_ID = "done";
     public static final String ALIAS_URL = "alias-url";
+    public static final String ALIAS_TEXT = "alias-text";
+
 
     public static String generateRandomJsonFilename() {
         return UUID.randomUUID().toString() +".json";

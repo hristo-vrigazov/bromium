@@ -27,7 +27,7 @@ public class ClickCssSelectorRecorderFunction implements RecorderFunction {
                 .whenCssSelectorArrives(CSS_SELECTOR)
                 .attachListenerForEvent(CLICK)
                 .startCollectingParameters(PARAMETERS)
-                .parameter(EVENT, EVENT_NAME)
+                .parameterWithConstantKey(EVENT, EVENT_NAME)
                 .buildParameters()
                 .notifyBromium(PARAMETERS)
                 .endListener()

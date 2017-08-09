@@ -11,21 +11,24 @@ public class TypeTextInElementFoundByCssSelectorRecorderFunctionInvocation imple
 
     private String cssSelector;
     private String eventName;
+    private String textAlias;
 
-    public TypeTextInElementFoundByCssSelectorRecorderFunctionInvocation(String cssSelector, String eventName) {
+    public TypeTextInElementFoundByCssSelectorRecorderFunctionInvocation(String cssSelector, String eventName, String textAlias) {
         this.cssSelector = cssSelector;
         this.eventName = eventName;
+        this.textAlias = textAlias;
     }
 
     @Override
     public String getJavascriptCode() {
         return MessageFormat.format(
                 "\n" +
-                        "{0}(\"{1}\", \"{2}\")" +
+                        "{0}(\"{1}\", \"{2}\", \"{3}\")" +
                         "\n",
                 TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR,
                 cssSelector,
-                eventName
+                eventName,
+                textAlias
         );
     }
 }

@@ -17,11 +17,12 @@ public class JsParameterCollectorBuilderTest {
 
         jsParameterCollectorBuilder
                 .parameter("key1", "value1")
-                .parameter("key2", "value2")
+                .parameterWithConstantKey("key2", "value2")
                 .buildParameters();
 
-        verify(jsEventListenerBodyBuilder).write("\t\t\tvar params = {\n" +
-                "\t\t\t\tkey1: value1,key2: value2,\n" +
-                "\t\t\t};\n");
+        verify(jsEventListenerBodyBuilder).write("\t\t\tvar params = {};\n" +
+                "\t\t\t\tparams[key1] = value1;\n" +
+                "\t\t\t\tparams[\"key2\"] = value2;\n" +
+                "\t\t\t\t");
     }
 }

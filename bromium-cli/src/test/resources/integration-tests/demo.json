@@ -263,7 +263,7 @@
                     "text": {
                         "expose": true,
                         "parameterName": "text",
-                        "alias": "text"
+                        "alias": "alias-text"
                     }
                 },
                 "webDriverActionType": "TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR"
