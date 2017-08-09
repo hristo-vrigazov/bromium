@@ -1,33 +1,31 @@
 package com.hribol.bromium.common.generation.record.functions;
 
-import com.google.inject.Inject;
+import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.record.invocations.RecorderFunctionInvocation;
-import com.hribol.bromium.core.config.WebDriverActionConfiguration;
-import com.hribol.bromium.common.builder.JsCollector;
-import com.hribol.bromium.common.generation.record.invocations.ClickCssSelectorRecorderFunctionInvocation;
+import com.hribol.bromium.common.generation.record.invocations.TypeTextInElementFoundByCssSelectorRecorderFunctionInvocation;
 
-import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CSS_SELECTOR;
+import static com.hribol.bromium.common.builder.JsFunctionNames.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR;
 import static com.hribol.bromium.core.utils.Constants.*;
-import static com.hribol.bromium.core.utils.JsEvents.CLICK;
+import static com.hribol.bromium.core.utils.JsEvents.CHANGE;
 
 /**
- * Created by hvrigazov on 08.06.17.
+ * Created by hvrigazov on 09.08.17.
  */
-public class ClickCssSelectorRecorderFunction implements RecorderFunction {
+public class TypeTextInElementFoundByCssSelectorRecorderFunction implements RecorderFunction {
 
     private String functionDeclarationCode;
 
-    @Inject
-    public ClickCssSelectorRecorderFunction(JsCollector jsCollector) {
+    public TypeTextInElementFoundByCssSelectorRecorderFunction(JsCollector jsCollector) {
         this.functionDeclarationCode = jsCollector
-                .declareFunction(CLICK_CSS_SELECTOR)
+                .declareFunction(TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR)
                 .withParameters(CSS_SELECTOR, EVENT_NAME)
                 .startBody()
                 .whenCssSelectorArrives(CSS_SELECTOR)
-                .attachListenerForEvent(CLICK)
+                .attachListenerForEvent(CHANGE)
                 .startCollectingParameters(PARAMETERS)
                 .parameter(EVENT, EVENT_NAME)
+                .parameter(TEXT, INPUT_VALUE)
                 .buildParameters()
                 .notifyBromium(PARAMETERS)
                 .endListener()
@@ -43,14 +41,11 @@ public class ClickCssSelectorRecorderFunction implements RecorderFunction {
 
     @Override
     public RecorderFunctionInvocation getInvocation(NameWebDriverActionConfiguration generationInformation) {
-        String eventName = generationInformation.getEventName();
-        WebDriverActionConfiguration webDriverActionConfiguration = generationInformation.getWebDriverActionConfiguration();
-
-        String cssSelector = webDriverActionConfiguration
+        String cssSelector = generationInformation.getWebDriverActionConfiguration()
                 .getParametersConfiguration()
                 .get(CSS_SELECTOR)
                 .getValue();
-
-        return new ClickCssSelectorRecorderFunctionInvocation(cssSelector, eventName);
+        String eventName = generationInformation.getEventName();
+        return new TypeTextInElementFoundByCssSelectorRecorderFunctionInvocation(cssSelector, eventName);
     }
 }

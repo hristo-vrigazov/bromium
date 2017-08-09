@@ -25,7 +25,7 @@ public class RecordExposedPageLoadingIT extends BaseRecordIntegrationTest {
         TestScenarioSteps expected = new TestScenarioSteps();
         expected.add(ImmutableMap.of(
                 EVENT, Events.PAGE_LOAD,
-                ALIAS_URL, DYNAMIC_DEMO_PAGE));
+                ALIAS_URL, Pages.DYNAMIC_DEMO_PAGE));
 
         TestScenarioSteps actual = getActualSteps();
         assertEquals(expected, actual);

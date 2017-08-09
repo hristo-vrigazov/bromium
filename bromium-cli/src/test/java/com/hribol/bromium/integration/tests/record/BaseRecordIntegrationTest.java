@@ -18,7 +18,7 @@ import java.util.Map;
 
 import static com.hribol.bromium.cli.Main.Commands.RECORD;
 import static com.hribol.bromium.cli.ParsedOptions.*;
-import static com.hribol.bromium.integration.tests.TestUtils.DEMO_CONFIGURATION;
+import static com.hribol.bromium.integration.tests.TestUtils.Resources.DEMO_CONFIGURATION;
 import static com.hribol.bromium.integration.tests.TestUtils.generateRandomJsonFilename;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 

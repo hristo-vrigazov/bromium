@@ -23,7 +23,7 @@ public class RecordClickCssSelectorIT extends BaseRecordIntegrationTest {
     @Override
     protected void verifyAssertions() throws IOException {
         TestScenarioSteps testScenarioSteps = new TestScenarioSteps();
-        testScenarioSteps.add(ImmutableMap.of(EVENT, Events.PAGE_LOAD, ALIAS_URL, DYNAMIC_DEMO_PAGE));
+        testScenarioSteps.add(ImmutableMap.of(EVENT, Events.PAGE_LOAD, ALIAS_URL, Pages.DYNAMIC_DEMO_PAGE));
         testScenarioSteps.add(ImmutableMap.of(EVENT, Events.CLICK_DYNAMIC_BUTTON));
 
         TestScenarioSteps actualSteps = getActualSteps();
@@ -35,7 +35,7 @@ public class RecordClickCssSelectorIT extends BaseRecordIntegrationTest {
         String baseUrl = (String) opts.get(URL);
         WebDriver driver = recordingSimulatorModule.getWebDriver();
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        driver.get(baseUrl + DYNAMIC_DEMO_PAGE);
+        driver.get(baseUrl + Pages.DYNAMIC_DEMO_PAGE);
         driver.findElement(By.id(CREATE_DYNAMIC_ID)).click();
 
         wait.until(ExpectedConditions.elementToBeClickable(By.id(LATE_CREATION_ID)));
