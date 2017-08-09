@@ -9,8 +9,11 @@ import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
 import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CSS_SELECTOR;
+import static com.hribol.bromium.core.utils.Constants.*;
+import static com.hribol.bromium.core.utils.Constants.EVENT_NAME;
+import static com.hribol.bromium.core.utils.Constants.PARAMETERS;
+import static com.hribol.bromium.core.utils.JsEvents.CLICK;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
@@ -79,14 +82,14 @@ public class ClickCssSelectorRecorderFunctionTest {
 
             when(jsCollector
                     .declareFunction(CLICK_CSS_SELECTOR)
-                    .withParameters(CSS_SELECTOR, "eventName")
+                    .withParameters(CSS_SELECTOR, EVENT_NAME)
                     .startBody()
-                    .whenCssSelectorArrives("cssSelector")
-                    .attachListenerForEvent("click")
-                    .startCollectingParameters("parameters")
-                    .parameter("event", "eventName")
+                    .whenCssSelectorArrives(CSS_SELECTOR)
+                    .attachListenerForEvent(CLICK)
+                    .startCollectingParameters(PARAMETERS)
+                    .parameterWithConstantKey(EVENT, EVENT_NAME)
                     .buildParameters()
-                    .notifyBromium("parameters")
+                    .notifyBromium(PARAMETERS)
                     .endListener()
                     .endArriveHandler()
                     .endBody()
