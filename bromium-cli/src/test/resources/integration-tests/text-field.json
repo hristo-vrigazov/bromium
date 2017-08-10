@@ -5,6 +5,6 @@
   },
   {
     "event": "Type text in name input",
-    "text": "something"
+    "alias-text": "something"
   }
 ]

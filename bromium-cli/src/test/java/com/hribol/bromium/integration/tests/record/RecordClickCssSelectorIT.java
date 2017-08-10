@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
 
-import static com.hribol.bromium.cli.ParsedOptions.*;
+import static com.hribol.bromium.cli.ParsedOptions.URL;
 import static com.hribol.bromium.core.utils.Constants.EVENT;
 import static com.hribol.bromium.integration.tests.TestUtils.*;
 import static org.junit.Assert.assertEquals;
@@ -18,26 +18,27 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by hvrigazov on 08.08.17.
  */
-public class RecordExposedPageLoadingIT extends BaseRecordIntegrationTest {
+public class RecordClickCssSelectorIT extends BaseRecordIntegrationTest {
 
     @Override
-    public void verifyAssertions() throws IOException {
-        TestScenarioSteps expected = new TestScenarioSteps();
-        expected.add(ImmutableMap.of(
-                EVENT, Events.PAGE_LOAD,
-                ALIAS_URL, Pages.DYNAMIC_DEMO_PAGE));
+    protected void verifyAssertions() throws IOException {
+        TestScenarioSteps testScenarioSteps = new TestScenarioSteps();
+        testScenarioSteps.add(ImmutableMap.of(EVENT, Events.PAGE_LOAD, ALIAS_URL, Pages.DYNAMIC_DEMO_PAGE));
+        testScenarioSteps.add(ImmutableMap.of(EVENT, Events.CLICK_DYNAMIC_BUTTON));
 
-        TestScenarioSteps actual = getActualSteps();
-        assertEquals(expected, actual);
+        TestScenarioSteps actualSteps = getActualSteps();
+        assertEquals(testScenarioSteps, actualSteps);
     }
 
     @Override
     public void run(RecordingSimulatorModule recordingSimulatorModule) {
         String baseUrl = (String) opts.get(URL);
         WebDriver driver = recordingSimulatorModule.getWebDriver();
-        WebDriverWait webDriverWait = new WebDriverWait(driver, 10);
-        driver.get(baseUrl + "dynamic.html");
-        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.id(CREATE_DYNAMIC_ID)));
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        driver.get(baseUrl + Pages.DYNAMIC_DEMO_PAGE);
+        driver.findElement(By.id(CREATE_DYNAMIC_ID)).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.id(LATE_CREATION_ID)));
     }
 
 }

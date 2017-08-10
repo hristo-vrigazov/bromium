@@ -53,13 +53,13 @@ public class DefaultModuleTest {
     @Before
     public void prepareResources() throws IOException {
         tempDir = Files.createTempDir();
-        configurationFile = extractResource(DEMO_CONFIGURATION, tempDir);
+        configurationFile = extractResource(Resources.DEMO_CONFIGURATION, tempDir);
         chromedriverFile = extractResource(CHROMEDRIVER, tempDir);
         if (!chromedriverFile.setExecutable(true)) {
             throw new IllegalStateException("Cannot set chrome driver file to executable");
         }
         virtualScreenProcess = new UbuntuVirtualScreenProcessCreator().createXvfbProcess(screen);
-        caseFile = extractResource(DYNAMIC_TEST_CASE, tempDir);
+        caseFile = extractResource(Resources.DYNAMIC_TEST_CASE, tempDir);
     }
 
     @Test

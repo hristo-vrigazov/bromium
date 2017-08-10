@@ -7,8 +7,9 @@ import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.record.invocations.ClickCssSelectorRecorderFunctionInvocation;
 
-import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
 import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CSS_SELECTOR;
+import static com.hribol.bromium.core.utils.Constants.*;
+import static com.hribol.bromium.core.utils.JsEvents.CLICK;
 
 /**
  * Created by hvrigazov on 08.06.17.
@@ -21,14 +22,14 @@ public class ClickCssSelectorRecorderFunction implements RecorderFunction {
     public ClickCssSelectorRecorderFunction(JsCollector jsCollector) {
         this.functionDeclarationCode = jsCollector
                 .declareFunction(CLICK_CSS_SELECTOR)
-                .withParameters(CSS_SELECTOR, "eventName")
+                .withParameters(CSS_SELECTOR, EVENT_NAME)
                 .startBody()
                 .whenCssSelectorArrives(CSS_SELECTOR)
-                .attachListenerForEvent("click")
-                .startCollectingParameters("parameters")
-                .parameter("event", "eventName")
+                .attachListenerForEvent(CLICK)
+                .startCollectingParameters(PARAMETERS)
+                .parameterWithConstantKey(EVENT, EVENT_NAME)
                 .buildParameters()
-                .notifyBromium("parameters")
+                .notifyBromium(PARAMETERS)
                 .endListener()
                 .endArriveHandler()
                 .endBody()
