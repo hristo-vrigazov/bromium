@@ -19,5 +19,6 @@ public class DummyTest {
         assertNotNull(new WebDriverActions());
         assertNotNull(new DependencyInjectionConstants());
         assertNotNull(new ConventionConstants());
+        assertNotNull(new JsEvents());
     }
 }

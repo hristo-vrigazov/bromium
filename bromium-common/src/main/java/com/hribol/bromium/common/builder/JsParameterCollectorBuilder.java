@@ -14,7 +14,7 @@ public class JsParameterCollectorBuilder {
         this.parameters = parameters;
         this.parent = parent;
         this.stringBuilder = new StringBuilder();
-        String toBeAdded = MessageFormat.format("\t\t\tvar {0} = '{}';\n\t\t\t\t", parameters);
+        String toBeAdded = MessageFormat.format("\t\t\tvar {0} = '{}';\n\t\t\t", parameters);
         stringBuilder.append(toBeAdded);
     }
 
@@ -26,7 +26,7 @@ public class JsParameterCollectorBuilder {
 
 
     public JsParameterCollectorBuilder parameterWithConstantKey(String parameter, String value) {
-        String rowToBeAdded = MessageFormat.format("{0}[\"{1}\"] = {2};\n\t\t\t\t", parameters, parameter, value);
+        String rowToBeAdded = MessageFormat.format("{0}[\"{1}\"] = {2};\n", parameters, parameter, value);
         stringBuilder.append(rowToBeAdded);
         return this;
     }
