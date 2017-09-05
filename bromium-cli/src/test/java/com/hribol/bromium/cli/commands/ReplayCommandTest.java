@@ -9,6 +9,7 @@ import com.hribol.bromium.replay.report.AutomationResult;
 import com.hribol.bromium.replay.report.ExecutionReport;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -21,9 +22,10 @@ public class ReplayCommandTest {
 
     private PromptUtils promptUtils = mock(PromptUtils.class, RETURNS_DEEP_STUBS);
     private ReplayBrowser replayBrowser = mock(ReplayBrowser.class);
-    private ExecutionReport executionReport = mock(ExecutionReport.class);
+    private ExecutionReport executionReport = mock(ExecutionReport.class, RETURNS_DEEP_STUBS);
     private IOURIProvider<ReplayBrowser> replayBrowserProvider = mock(IOURIProvider.class);
     private IOProvider<TestScenarioSteps> stepsProvider = mock(IOProvider.class);
+    private File measurementsFile = mock(File.class);
 
     @Test
     public void executesStepsWithTheSuppliedBrowser() throws IOException, URISyntaxException {
@@ -41,7 +43,7 @@ public class ReplayCommandTest {
         when(replayBrowser.replay(steps)).thenReturn(executionReport);
 
         ReplayCommand replayCommand = new ReplayCommand(promptUtils, replayBrowserProvider, stepsProvider,
-                virtualScreenProcessCreator, screenNumber);
+                virtualScreenProcessCreator, screenNumber, measurementsFile);
 
         replayCommand.run();
         verify(replayBrowser).replay(steps);
@@ -61,7 +63,7 @@ public class ReplayCommandTest {
         when(replayBrowser.replay(steps)).thenReturn(executionReport);
 
         ReplayCommand replayCommand = new ReplayCommand(promptUtils, replayBrowserProvider, stepsProvider,
-                virtualScreenProcessCreator, screenNumber);
+                virtualScreenProcessCreator, screenNumber, measurementsFile);
 
         replayCommand.run();
         verify(replayBrowser).replay(steps);
@@ -83,7 +85,7 @@ public class ReplayCommandTest {
 
 
         ReplayCommand replayCommand = new ReplayCommand(promptUtils, replayBrowserProvider, stepsProvider,
-                virtualScreenProcessCreator, screenNumber);
+                virtualScreenProcessCreator, screenNumber, measurementsFile);
 
         replayCommand.run();
 

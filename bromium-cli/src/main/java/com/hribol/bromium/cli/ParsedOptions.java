@@ -19,6 +19,7 @@ public class ParsedOptions {
     public static final String CASE = "--case";
     public static final String PRECISION = "--precision";
     public static final String SCREEN = "--screen";
+    public static final String MEASUREMENTS = "--measurements";
 
     public ParsedOptions(Map<String, Object> opts) {
         this.opts = opts;
@@ -50,6 +51,10 @@ public class ParsedOptions {
             return originalUrl + "/";
         }
         return originalUrl;
+    }
+
+    public String getMeasurements() {
+        return getString(MEASUREMENTS);
     }
 
     public String getBrowserType() {

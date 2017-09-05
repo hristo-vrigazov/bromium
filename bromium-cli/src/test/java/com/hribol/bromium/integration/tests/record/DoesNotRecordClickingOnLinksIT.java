@@ -41,6 +41,11 @@ public class DoesNotRecordClickingOnLinksIT extends BaseRecordIntegrationTest {
         By byId = By.id(AJAX_DEMO_LINK);
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(byId));
         webDriver.findElement(byId).click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -86,6 +86,7 @@ import java.util.function.Supplier;
 
 import static com.hribol.bromium.cli.Main.Commands.RECORD;
 import static com.hribol.bromium.cli.Main.Commands.REPLAY;
+import static com.hribol.bromium.cli.ParsedOptions.MEASUREMENTS;
 import static com.hribol.bromium.core.DependencyInjectionConstants.*;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
@@ -196,6 +197,12 @@ public class DefaultModule extends AbstractModule {
     @Named(CONFIGURATION_FILE)
     public File getConfigurationFile(ParsedOptions parsedOptions) {
         return new File(parsedOptions.getPathToApplicationConfiguration());
+    }
+
+    @Provides
+    @Named(MEASUREMENTS)
+    public File getMeasurementsFile(ParsedOptions parsedOptions) {
+        return new File(parsedOptions.getMeasurements());
     }
 
     @CheckedProvides(IOProvider.class)
