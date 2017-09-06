@@ -26,6 +26,7 @@ public class ParsedOptionsTest {
         Integer timeout = 10;
         String application = "app.json";
         String testCase = "case.json";
+        String measurements = "measurements.csv";
         Integer precision = 500;
         Integer screen = 1;
 
@@ -39,6 +40,7 @@ public class ParsedOptionsTest {
         opts.put(CASE, testCase);
         opts.put(PRECISION, String.valueOf(precision));
         opts.put(SCREEN, String.valueOf(screen));
+        opts.put(MEASUREMENTS, measurements);
 
         ParsedOptions parsedOptions = new ParsedOptions(opts);
 
@@ -52,5 +54,6 @@ public class ParsedOptionsTest {
         assertEquals(testCase, parsedOptions.getPathToTestCase());
         assertEquals(precision, parsedOptions.getMeasurementsPrecisionMilli());
         assertEquals(screen, parsedOptions.getScreenNumber());
+        assertEquals(measurements, parsedOptions.getMeasurements());
     }
 }

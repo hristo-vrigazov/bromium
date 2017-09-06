@@ -26,6 +26,7 @@ public class ReplayCommandTest {
     private IOURIProvider<ReplayBrowser> replayBrowserProvider = mock(IOURIProvider.class);
     private IOProvider<TestScenarioSteps> stepsProvider = mock(IOProvider.class);
     private File measurementsFile = mock(File.class);
+    private File harFile = mock(File.class);
 
     @Test
     public void executesStepsWithTheSuppliedBrowser() throws IOException, URISyntaxException {
@@ -43,7 +44,7 @@ public class ReplayCommandTest {
         when(replayBrowser.replay(steps)).thenReturn(executionReport);
 
         ReplayCommand replayCommand = new ReplayCommand(promptUtils, replayBrowserProvider, stepsProvider,
-                virtualScreenProcessCreator, screenNumber, measurementsFile);
+                virtualScreenProcessCreator, screenNumber, measurementsFile, harFile);
 
         replayCommand.run();
         verify(replayBrowser).replay(steps);
@@ -63,7 +64,7 @@ public class ReplayCommandTest {
         when(replayBrowser.replay(steps)).thenReturn(executionReport);
 
         ReplayCommand replayCommand = new ReplayCommand(promptUtils, replayBrowserProvider, stepsProvider,
-                virtualScreenProcessCreator, screenNumber, measurementsFile);
+                virtualScreenProcessCreator, screenNumber, measurementsFile, harFile);
 
         replayCommand.run();
         verify(replayBrowser).replay(steps);
@@ -85,7 +86,7 @@ public class ReplayCommandTest {
 
 
         ReplayCommand replayCommand = new ReplayCommand(promptUtils, replayBrowserProvider, stepsProvider,
-                virtualScreenProcessCreator, screenNumber, measurementsFile);
+                virtualScreenProcessCreator, screenNumber, measurementsFile, harFile);
 
         replayCommand.run();
 

@@ -45,4 +45,7 @@ public class DependencyInjectionConstants {
     public static final String CONVENTION_EVENT_DETECTOR_PREDICATE = "CONVENTION_EVENT_DETECTOR_PREDICATE";
     public static final String CONVENTION_EVENT_DETECTOR_CONVERTOR = "CONVENTION_EVENT_DETECTOR_CONVERTOR";
 
+    public static final String HAR_FILE = "HAR_FILE";
+
+
 }

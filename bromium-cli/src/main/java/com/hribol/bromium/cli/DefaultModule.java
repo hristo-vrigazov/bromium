@@ -77,6 +77,7 @@ import org.openqa.selenium.remote.service.DriverService;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -88,6 +89,7 @@ import static com.hribol.bromium.cli.Main.Commands.RECORD;
 import static com.hribol.bromium.cli.Main.Commands.REPLAY;
 import static com.hribol.bromium.cli.ParsedOptions.MEASUREMENTS;
 import static com.hribol.bromium.core.DependencyInjectionConstants.*;
+import static com.hribol.bromium.core.utils.Constants.HAR_EXTENSION;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
 /**
@@ -203,6 +205,12 @@ public class DefaultModule extends AbstractModule {
     @Named(MEASUREMENTS)
     public File getMeasurementsFile(ParsedOptions parsedOptions) {
         return new File(parsedOptions.getMeasurements());
+    }
+
+    @Provides
+    @Named(HAR_FILE)
+    public File getHarFile(ParsedOptions parsedOptions) {
+        return new File(parsedOptions.getMeasurements() + HAR_EXTENSION);
     }
 
     @CheckedProvides(IOProvider.class)

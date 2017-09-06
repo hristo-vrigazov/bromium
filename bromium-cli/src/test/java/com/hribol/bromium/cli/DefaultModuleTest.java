@@ -193,6 +193,15 @@ public class DefaultModuleTest {
         }
     }
 
+    @Test
+    public void canSupplyMeasurementsFile() {
+        String measurementsFile = "measurements.csv";
+        Map<String, Object> opts = new HashMap<>();
+        opts.put(MEASUREMENTS, measurementsFile);
+        Module module = new DefaultModule(REPLAY, opts);
+        Injector injector = Guice.createInjector(module);
+    }
+
     @After
     public void cleanUp() throws IOException {
         FileUtils.deleteDirectory(tempDir);

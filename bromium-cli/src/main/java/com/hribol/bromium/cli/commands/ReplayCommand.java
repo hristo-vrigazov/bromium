@@ -15,6 +15,7 @@ import java.net.URISyntaxException;
 import java.util.Optional;
 
 import static com.hribol.bromium.cli.ParsedOptions.MEASUREMENTS;
+import static com.hribol.bromium.core.DependencyInjectionConstants.HAR_FILE;
 import static com.hribol.bromium.core.DependencyInjectionConstants.SCREEN_NUMBER;
 
 /**
@@ -28,6 +29,7 @@ public class ReplayCommand implements Command {
     private VirtualScreenProcessCreator virtualScreenProcessCreator;
     private Integer screenNumber;
     private File measurementsFile;
+    private File harFile;
 
     @Inject
     public ReplayCommand(PromptUtils promptUtils,
@@ -35,13 +37,15 @@ public class ReplayCommand implements Command {
                          IOProvider<TestScenarioSteps> stepsProvider,
                          VirtualScreenProcessCreator virtualScreenProcessCreator,
                          @Named(SCREEN_NUMBER) Integer screenNumber,
-                         @Named(MEASUREMENTS) File measurementsFile) {
+                         @Named(MEASUREMENTS) File measurementsFile,
+                         @Named(HAR_FILE) File harFile) {
         this.promptUtils = promptUtils;
         this.replayBrowserProvider = replayBrowserProvider;
         this.stepsProvider = stepsProvider;
         this.virtualScreenProcessCreator = virtualScreenProcessCreator;
         this.screenNumber = screenNumber;
         this.measurementsFile = measurementsFile;
+        this.harFile = harFile;
     }
 
     @Override
@@ -57,7 +61,7 @@ public class ReplayCommand implements Command {
 
             ExecutionReport executionReport = replayBrowser.replay(testCaseSteps);
             executionReport.getLoadingTimes().dump(measurementsFile);
-            executionReport.getHar().writeTo(new File(measurementsFile.getAbsolutePath() + ".har"));
+            executionReport.getHar().writeTo(harFile);
             System.out.println(executionReport.getAutomationResult());
         } catch (IOException | URISyntaxException e) {
             promptUtils.getTextIO().getTextTerminal().println(e.getMessage());
