@@ -2,6 +2,7 @@ package com.hribol.bromium.cli;
 
 import com.google.common.io.Files;
 import com.google.inject.*;
+import com.google.inject.name.Names;
 import com.hribol.bromium.cli.commands.RecordCommand;
 import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.core.providers.IOProvider;
@@ -26,7 +27,11 @@ import java.util.Map;
 import static com.hribol.bromium.cli.Main.Commands.RECORD;
 import static com.hribol.bromium.cli.Main.Commands.REPLAY;
 import static com.hribol.bromium.cli.ParsedOptions.*;
+import static com.hribol.bromium.core.DependencyInjectionConstants.HAR_FILE;
+import static com.hribol.bromium.core.DependencyInjectionConstants.MEASUREMENTS_FILE;
+import static com.hribol.bromium.core.utils.Constants.HAR_EXTENSION;
 import static com.hribol.bromium.integration.tests.TestUtils.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
@@ -200,6 +205,12 @@ public class DefaultModuleTest {
         opts.put(MEASUREMENTS, measurementsFile);
         Module module = new DefaultModule(REPLAY, opts);
         Injector injector = Guice.createInjector(module);
+
+        File actualMeasurementsFile = injector.getInstance(Key.get(File.class, Names.named(MEASUREMENTS_FILE)));
+        assertEquals(measurementsFile, actualMeasurementsFile.getName());
+
+        File actualHarFile = injector.getInstance(Key.get(File.class, Names.named(HAR_FILE)));
+        assertEquals(measurementsFile + HAR_EXTENSION, actualHarFile.getName());
     }
 
     @After

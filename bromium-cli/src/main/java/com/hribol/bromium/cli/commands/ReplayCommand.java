@@ -16,6 +16,7 @@ import java.util.Optional;
 
 import static com.hribol.bromium.cli.ParsedOptions.MEASUREMENTS;
 import static com.hribol.bromium.core.DependencyInjectionConstants.HAR_FILE;
+import static com.hribol.bromium.core.DependencyInjectionConstants.MEASUREMENTS_FILE;
 import static com.hribol.bromium.core.DependencyInjectionConstants.SCREEN_NUMBER;
 
 /**
@@ -37,7 +38,7 @@ public class ReplayCommand implements Command {
                          IOProvider<TestScenarioSteps> stepsProvider,
                          VirtualScreenProcessCreator virtualScreenProcessCreator,
                          @Named(SCREEN_NUMBER) Integer screenNumber,
-                         @Named(MEASUREMENTS) File measurementsFile,
+                         @Named(MEASUREMENTS_FILE) File measurementsFile,
                          @Named(HAR_FILE) File harFile) {
         this.promptUtils = promptUtils;
         this.replayBrowserProvider = replayBrowserProvider;

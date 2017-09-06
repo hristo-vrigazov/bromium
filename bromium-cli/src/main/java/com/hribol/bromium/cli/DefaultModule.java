@@ -202,7 +202,7 @@ public class DefaultModule extends AbstractModule {
     }
 
     @Provides
-    @Named(MEASUREMENTS)
+    @Named(MEASUREMENTS_FILE)
     public File getMeasurementsFile(ParsedOptions parsedOptions) {
         return new File(parsedOptions.getMeasurements());
     }
