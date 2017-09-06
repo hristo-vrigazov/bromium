@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.Writer;
 
 /**
- * Created by hvrigazov on 03.07.17.
+ * Dumps an {@link ApplicationConfiguration} into a file
  */
 public class ApplicationConfigurationDumper {
 

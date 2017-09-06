@@ -1,7 +1,7 @@
 package com.hribol.bromium.core.synchronization;
 
 /**
- * Created by hvrigazov on 03.06.17.
+ * Classes which implement this can await and signalize events.
  */
 public interface EventSynchronizer extends EventAwaiter, EventSignalizer {
 }

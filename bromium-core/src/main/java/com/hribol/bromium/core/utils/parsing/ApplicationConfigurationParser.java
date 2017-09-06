@@ -12,7 +12,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Created by hvrigazov on 03.07.17.
+ * Parses an {@link ApplicationConfiguration}
  */
 public class ApplicationConfigurationParser {
 

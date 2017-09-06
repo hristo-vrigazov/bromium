@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 /**
- * Created by hvrigazov on 08.07.17.
+ * Guice provider that can throw either {@link IOException} or {@link URISyntaxException}
  */
 public interface IOURIProvider<T> extends CheckedProvider<T> {
     @Override

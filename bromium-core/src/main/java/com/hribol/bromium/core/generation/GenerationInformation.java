@@ -1,7 +1,8 @@
 package com.hribol.bromium.core.generation;
 
 /**
- * Created by hvrigazov on 01.07.17.
+ * A marker interface for classes which can be used as an information
+ * to generate functions.
  */
 public interface GenerationInformation {
 }

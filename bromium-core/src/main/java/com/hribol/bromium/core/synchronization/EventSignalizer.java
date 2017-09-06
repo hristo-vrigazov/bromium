@@ -1,8 +1,14 @@
 package com.hribol.bromium.core.synchronization;
 
 /**
- * Created by hvrigazov on 03.06.17.
+ * Classes that implement this interface can signalize that a given {@link SynchronizationEvent}
+ * has happened
  */
 public interface EventSignalizer {
+
+    /**
+     * Signalizes that event has happened
+     * @param synchronizationEvent - the event which is signalized
+     */
     void signalizeEvent(SynchronizationEvent synchronizationEvent);
 }
