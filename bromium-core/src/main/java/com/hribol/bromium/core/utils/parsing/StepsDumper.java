@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.Writer;
 
 /**
- * Created by hvrigazov on 19.07.17.
+ * Dumps recorded {@link TestScenarioSteps}
  */
 public class StepsDumper {
 

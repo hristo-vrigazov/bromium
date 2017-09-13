@@ -1,10 +1,12 @@
 package com.hribol.bromium.replay.execution.scenario;
 
 import com.hribol.bromium.core.TestScenarioSteps;
+import com.hribol.bromium.core.utils.parsing.StepsReader;
 import com.hribol.bromium.replay.execution.application.ApplicationAction;
 import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.core.utils.ConfigurationUtils;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -16,14 +18,18 @@ import java.util.Map;
 public class TestScenarioFactory {
 
     private ApplicationActionFactory applicationActionFactory;
+    private StepsReader stepsReader;
 
-    public TestScenarioFactory(ApplicationActionFactory applicationActionFactory) {
+    public TestScenarioFactory(ApplicationActionFactory applicationActionFactory, StepsReader stepsReader) {
         this.applicationActionFactory = applicationActionFactory;
+        this.stepsReader = stepsReader;
     }
 
     public TestScenario createFromFile(String pathToSerializedTest) throws IOException {
-        TestScenarioSteps testCaseSteps = ConfigurationUtils.readSteps(pathToSerializedTest);
-        return createFromTestCaseSteps(testCaseSteps);
+        try (InputStream fileInputStream = new FileInputStream(pathToSerializedTest)) {
+            TestScenarioSteps testCaseSteps = stepsReader.readSteps(fileInputStream);
+            return createFromTestCaseSteps(testCaseSteps);
+        }
     }
 
     public TestScenario createFromTestCaseSteps(TestScenarioSteps testCaseSteps) {
@@ -41,7 +47,7 @@ public class TestScenarioFactory {
     }
 
     public TestScenario createFromInputStream(InputStream inputStream) throws IOException {
-        TestScenarioSteps testCaseSteps = ConfigurationUtils.readSteps(inputStream);
+        TestScenarioSteps testCaseSteps = stepsReader.readSteps(inputStream);
         return createFromTestCaseSteps(testCaseSteps);
     }
 }

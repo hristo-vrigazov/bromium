@@ -312,9 +312,10 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOProvider.class)
-    public TestScenarioFactory getTestScenarioFactory(IOProvider<ApplicationActionFactory> applicationActionFactoryIOProvider) throws IOException {
+    public TestScenarioFactory getTestScenarioFactory(IOProvider<ApplicationActionFactory> applicationActionFactoryIOProvider,
+                                                      StepsReader stepsReader) throws IOException {
         ApplicationActionFactory applicationActionFactory = applicationActionFactoryIOProvider.get();
-        return new TestScenarioFactory(applicationActionFactory);
+        return new TestScenarioFactory(applicationActionFactory, stepsReader);
     }
 
     @Provides

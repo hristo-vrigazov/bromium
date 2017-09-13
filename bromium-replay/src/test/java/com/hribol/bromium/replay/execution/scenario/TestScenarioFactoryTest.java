@@ -1,6 +1,7 @@
 package com.hribol.bromium.replay.execution.scenario;
 
 import com.hribol.bromium.core.TestScenarioSteps;
+import com.hribol.bromium.core.utils.parsing.StepsReader;
 import com.hribol.bromium.replay.execution.application.ApplicationAction;
 import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.actions.WebDriverAction;
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -35,7 +37,9 @@ public class TestScenarioFactoryTest {
 
         createMock(applicationActionFactory, testCaseSteps);
 
-        TestScenarioFactory testScenarioFactory = new TestScenarioFactory(applicationActionFactory);
+        StepsReader stepsReader = mock(StepsReader.class);
+        when(stepsReader.readSteps(any())).thenReturn(testCaseSteps);
+        TestScenarioFactory testScenarioFactory = new TestScenarioFactory(applicationActionFactory, stepsReader);
         TestScenario testScenario = testScenarioFactory.createFromFile(pathToTestCase);
 
         assertEquals(testCaseSteps.size(), testScenario.getActions().size());
@@ -55,7 +59,9 @@ public class TestScenarioFactoryTest {
 
         createMock(applicationActionFactory, testCaseSteps);
 
-        TestScenarioFactory testScenarioFactory = new TestScenarioFactory(applicationActionFactory);
+        StepsReader stepsReader = mock(StepsReader.class);
+        when(stepsReader.readSteps(fileInputStream)).thenReturn(testCaseSteps);
+        TestScenarioFactory testScenarioFactory = new TestScenarioFactory(applicationActionFactory, stepsReader);
         TestScenario testScenario = testScenarioFactory.createFromInputStream(fileInputStream);
 
         assertEquals(testCaseSteps.size(), testScenario.getActions().size());
