@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Utilities for reading {@link ApplicationConfiguration}
+ * Utilities for query strings
  */
 public class ConfigurationUtils {
 

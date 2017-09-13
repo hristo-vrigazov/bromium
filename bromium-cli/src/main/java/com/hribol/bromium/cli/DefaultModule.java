@@ -436,31 +436,31 @@ public class DefaultModule extends AbstractModule {
 
     @CheckedProvides(IOProvider.class)
     @Named(REPLAYING_JAVASCRIPT_INJECTOR)
-    public JavascriptInjector getReplayingJavascriptInjector(@Named(GENERATED_REPLAY_JAVASCRIPT)
+    public JavascriptInjectionPreparator getReplayingJavascriptInjector(@Named(GENERATED_REPLAY_JAVASCRIPT)
                                                                 IOProvider<String> generatedReplayJavascript) throws IOException {
         String generatedCode = generatedReplayJavascript.get();
-        return new JavascriptInjector(new StringReader(generatedCode));
+        return new JavascriptInjectionPreparator(new StringReader(generatedCode));
     }
 
     @CheckedProvides(IOProvider.class)
     @Named(RECORDING_JAVASCRIPT_INJECTOR)
-    public JavascriptInjector getRecordingJavascriptInjector(@Named(GENERATED_RECORD_JAVASCRIPT)
+    public JavascriptInjectionPreparator getRecordingJavascriptInjector(@Named(GENERATED_RECORD_JAVASCRIPT)
                                                             IOProvider<String> generatedRecordJavascript) throws IOException {
         String generatedCode = generatedRecordJavascript.get();
-        return new JavascriptInjector(new StringReader(generatedCode));
+        return new JavascriptInjectionPreparator(new StringReader(generatedCode));
     }
 
     @CheckedProvides(IOProvider.class)
     @Named(REPLAYING_JAVASCRIPT_CODE)
     public String getReplayingJavascriptCode(@Named(REPLAYING_JAVASCRIPT_INJECTOR)
-                                                         IOProvider<JavascriptInjector> javascriptInjectorIOProvider) throws IOException {
+                                                         IOProvider<JavascriptInjectionPreparator> javascriptInjectorIOProvider) throws IOException {
         return javascriptInjectorIOProvider.get().getInjectionCode();
     }
 
     @CheckedProvides(IOProvider.class)
     @Named(RECORDING_JAVASCRIPT_CODE)
     public String getRecordingJavascriptCode(@Named(RECORDING_JAVASCRIPT_INJECTOR)
-                                                     IOProvider<JavascriptInjector> javascriptInjectorIOProvider) throws IOException {
+                                                     IOProvider<JavascriptInjectionPreparator> javascriptInjectorIOProvider) throws IOException {
         String generatedJavascriptCode = javascriptInjectorIOProvider.get().getInjectionCode();
         System.out.println(generatedJavascriptCode);
         return generatedJavascriptCode;
