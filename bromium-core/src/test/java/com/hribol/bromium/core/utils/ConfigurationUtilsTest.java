@@ -20,18 +20,6 @@ import static org.junit.Assert.assertTrue;
 public class ConfigurationUtilsTest {
 
     @Test
-    public void canReadSteps() throws IOException {
-        String filename = getClass().getResource("/testCase.json").getFile();
-
-        TestScenarioSteps testCaseSteps = ConfigurationUtils.readSteps(filename);
-
-        Map<String, String> firstStep = testCaseSteps.get(0);
-        String firstEvent = firstStep.get("event");
-
-        assertEquals("Load initial page", firstEvent);
-    }
-
-    @Test
     public void canSplitQueryUrl() throws MalformedURLException, UnsupportedEncodingException {
         URL url = new URL("http://www.tenniskafe.com/query?key1=value1&key2=value2");
         ConfigurationUtils configurationUtils = new ConfigurationUtils();

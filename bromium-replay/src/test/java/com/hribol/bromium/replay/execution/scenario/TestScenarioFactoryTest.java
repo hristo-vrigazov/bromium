@@ -1,5 +1,6 @@
 package com.hribol.bromium.replay.execution.scenario;
 
+import com.google.common.collect.ImmutableMap;
 import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.utils.parsing.StepsReader;
 import com.hribol.bromium.replay.execution.application.ApplicationAction;
@@ -33,7 +34,7 @@ public class TestScenarioFactoryTest {
         when(initialPageLoading.getWebdriverAction()).thenReturn(Optional.of(pageLoadingWebDriverAction));
         ApplicationActionFactory applicationActionFactory = mock(ApplicationActionFactory.class);
 
-        TestScenarioSteps testCaseSteps = ConfigurationUtils.readSteps(pathToTestCase);
+        TestScenarioSteps testCaseSteps = createExpectedSteps();
 
         createMock(applicationActionFactory, testCaseSteps);
 
@@ -48,23 +49,35 @@ public class TestScenarioFactoryTest {
     @Test
     public void canCreateScenarioFromInput() throws IOException {
         String pathToTestCase = getClass().getResource("/testCase.json").getFile();
-        FileInputStream fileInputStream = new FileInputStream(pathToTestCase);
+        try (FileInputStream fileInputStream = new FileInputStream(pathToTestCase)) {
+            WebDriverAction pageLoadingWebDriverAction = mock(WebDriverAction.class);
+            ApplicationAction initialPageLoading = mock(ApplicationAction.class);
+            when(initialPageLoading.getWebdriverAction()).thenReturn(Optional.of(pageLoadingWebDriverAction));
+            ApplicationActionFactory applicationActionFactory = mock(ApplicationActionFactory.class);
 
-        WebDriverAction pageLoadingWebDriverAction = mock(WebDriverAction.class);
-        ApplicationAction initialPageLoading = mock(ApplicationAction.class);
-        when(initialPageLoading.getWebdriverAction()).thenReturn(Optional.of(pageLoadingWebDriverAction));
-        ApplicationActionFactory applicationActionFactory = mock(ApplicationActionFactory.class);
+            TestScenarioSteps testCaseSteps = createExpectedSteps();
 
-        TestScenarioSteps testCaseSteps = ConfigurationUtils.readSteps(pathToTestCase);
+            createMock(applicationActionFactory, testCaseSteps);
 
-        createMock(applicationActionFactory, testCaseSteps);
+            StepsReader stepsReader = mock(StepsReader.class);
+            when(stepsReader.readSteps(fileInputStream)).thenReturn(testCaseSteps);
+            TestScenarioFactory testScenarioFactory = new TestScenarioFactory(applicationActionFactory, stepsReader);
+            TestScenario testScenario = testScenarioFactory.createFromInputStream(fileInputStream);
 
-        StepsReader stepsReader = mock(StepsReader.class);
-        when(stepsReader.readSteps(fileInputStream)).thenReturn(testCaseSteps);
-        TestScenarioFactory testScenarioFactory = new TestScenarioFactory(applicationActionFactory, stepsReader);
-        TestScenario testScenario = testScenarioFactory.createFromInputStream(fileInputStream);
+            assertEquals(testCaseSteps.size(), testScenario.getActions().size());
+        }
+    }
 
-        assertEquals(testCaseSteps.size(), testScenario.getActions().size());
+    private TestScenarioSteps createExpectedSteps() {
+        TestScenarioSteps testScenarioSteps = new TestScenarioSteps();
+        testScenarioSteps.add(createExpectedEventWithText("Григор Димитров"));
+        testScenarioSteps.add(createExpectedEventWithText("Тенис оказион"));
+        testScenarioSteps.add(createExpectedEventWithText("Любопитно"));
+        return testScenarioSteps;
+    }
+
+    private Map<String, String> createExpectedEventWithText(String text) {
+        return ImmutableMap.of("text", text, "event", "clickMegaMenu");
     }
 
     private void createMock(ApplicationActionFactory applicationActionFactory, TestScenarioSteps testCaseSteps) {
