@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 /**
  * Responsible for supplying a list of {@link ApplicationActionConfiguration} that are
- * of given type - one of the constants in {@link WebDriverActions} or custom action.
+ * of given type - one of the constants in {@link WebDriverActions} or a custom action.
  */
 public class ActionsFilter {
 

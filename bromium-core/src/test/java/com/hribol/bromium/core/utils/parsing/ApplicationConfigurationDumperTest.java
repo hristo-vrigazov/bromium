@@ -4,7 +4,6 @@ import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.config.ParameterConfiguration;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
-import com.hribol.bromium.core.utils.ConfigurationUtils;
 import org.junit.Test;
 
 import java.io.File;

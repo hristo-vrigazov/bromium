@@ -5,7 +5,7 @@ import io.netty.handler.codec.http.HttpRequest;
 import java.util.function.Predicate;
 
 /**
- * Created by hvrigazov on 04.08.17.
+ * A default implementation of {@link EventDetector} for convenience.
  */
 public class EventDetectorImpl implements EventDetector {
 

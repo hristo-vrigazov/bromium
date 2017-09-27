@@ -4,12 +4,10 @@ import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.utils.parsing.StepsReader;
 import com.hribol.bromium.replay.execution.application.ApplicationAction;
 import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
-import com.hribol.bromium.core.utils.ConfigurationUtils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Map;
 
 /**

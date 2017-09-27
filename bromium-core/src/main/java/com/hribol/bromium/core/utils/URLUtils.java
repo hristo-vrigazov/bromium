@@ -1,7 +1,5 @@
 package com.hribol.bromium.core.utils;
 
-import com.hribol.bromium.core.config.ApplicationConfiguration;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -9,10 +7,16 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Utilities for query strings
+ * Utilities for URLs
  */
-public class ConfigurationUtils {
+public class URLUtils {
 
+    /**
+     * Splits the query string of a given URL
+     * @param url
+     * @return
+     * @throws UnsupportedEncodingException
+     */
     public static Map<String, String> splitQuery(URL url) throws UnsupportedEncodingException {
         Map<String, String> queryPairs = new LinkedHashMap<>();
         String query = url.getQuery();
@@ -24,6 +28,11 @@ public class ConfigurationUtils {
         return queryPairs;
     }
 
+    /**
+     * Converts a map to a query string
+     * @param params the map to be converted
+     * @return the query string, no encoding happens
+     */
     public static String toQueryString(Map<String, String> params) {
         return params.entrySet().stream()
                 .map(p -> p.getKey() + "=" + p.getValue())

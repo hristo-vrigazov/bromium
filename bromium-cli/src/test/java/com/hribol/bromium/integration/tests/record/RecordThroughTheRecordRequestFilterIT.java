@@ -1,7 +1,7 @@
 package com.hribol.bromium.integration.tests.record;
 
 import com.hribol.bromium.core.TestScenarioSteps;
-import com.hribol.bromium.core.utils.ConfigurationUtils;
+import com.hribol.bromium.core.utils.URLUtils;
 import com.hribol.bromium.integration.tests.simulation.RecordingSimulatorModule;
 import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.filters.RequestFilter;
@@ -11,7 +11,6 @@ import net.lightbody.bmp.util.HttpMessageInfo;
 import java.io.IOException;
 import java.util.Map;
 
-import static com.hribol.bromium.cli.ParsedOptions.OUTPUT;
 import static com.hribol.bromium.core.ConventionConstants.SUBMIT_EVENT_URL;
 import static com.hribol.bromium.integration.tests.TestUtils.exampleTestScenarioSteps;
 import static org.junit.Assert.assertEquals;
@@ -38,7 +37,7 @@ public class RecordThroughTheRecordRequestFilterIT extends BaseRecordIntegration
         HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class);
 
         for (Map<String, String> testCaseStep: expected) {
-            String queryString = ConfigurationUtils.toQueryString(testCaseStep);
+            String queryString = URLUtils.toQueryString(testCaseStep);
             HttpRequest httpRequest = mock(HttpRequest.class);
             when(httpRequest.getUri()).thenReturn(SUBMIT_EVENT_URL + queryString);
             recordRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);

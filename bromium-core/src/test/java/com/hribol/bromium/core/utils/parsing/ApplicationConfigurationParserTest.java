@@ -1,7 +1,6 @@
 package com.hribol.bromium.core.utils.parsing;
 
 import com.hribol.bromium.core.config.ApplicationConfiguration;
-import com.hribol.bromium.core.utils.ConfigurationUtils;
 import org.junit.Test;
 
 import java.io.File;

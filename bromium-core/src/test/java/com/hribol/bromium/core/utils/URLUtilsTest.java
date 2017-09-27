@@ -1,14 +1,11 @@
 package com.hribol.bromium.core.utils;
 
 import com.google.common.collect.ImmutableMap;
-import com.hribol.bromium.core.TestScenarioSteps;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -17,13 +14,13 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by hvrigazov on 21.04.17.
  */
-public class ConfigurationUtilsTest {
+public class URLUtilsTest {
 
     @Test
     public void canSplitQueryUrl() throws MalformedURLException, UnsupportedEncodingException {
         URL url = new URL("http://www.tenniskafe.com/query?key1=value1&key2=value2");
-        ConfigurationUtils configurationUtils = new ConfigurationUtils();
-        Map<String, String> parameters = ConfigurationUtils.splitQuery(url);
+        URLUtils URLUtils = new URLUtils();
+        Map<String, String> parameters = URLUtils.splitQuery(url);
 
         assertTrue(parameters.containsKey("key1"));
         assertEquals("value1", parameters.get("key1"));
@@ -35,7 +32,7 @@ public class ConfigurationUtilsTest {
     public void canConstructQueryString() {
         Map<String, String> map = ImmutableMap.of("k1", "v1", "k2", "v2");
         String expected = "?k1=v1&k2=v2";
-        String actual = ConfigurationUtils.toQueryString(map);
+        String actual = URLUtils.toQueryString(map);
         assertEquals(expected, actual);
     }
 }
