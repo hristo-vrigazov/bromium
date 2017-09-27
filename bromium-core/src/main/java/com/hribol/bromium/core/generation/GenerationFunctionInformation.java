@@ -8,7 +8,7 @@ public interface GenerationFunctionInformation {
 
     /**
      * Supplies a string which uniquely identifies the generation information.
-     * @return
+     * @return the key which uniquely identifies the generation information.
      */
     String getKey();
 }

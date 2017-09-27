@@ -19,8 +19,8 @@ public class ActionsFilter {
 
     /**
      * Filters the actions supplied in the constructor that are of a given type
-     * @param webDriverActionType
-     * @return
+     * @param webDriverActionType the type on which we want to filter
+     * @return a list of the configurations that are of this file
      */
     public List<ApplicationActionConfiguration> filter(String webDriverActionType) {
         return applicationActionConfigurations.stream()

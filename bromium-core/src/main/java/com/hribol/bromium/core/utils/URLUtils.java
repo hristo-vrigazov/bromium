@@ -14,8 +14,8 @@ public class URLUtils {
     /**
      * Splits the query string of a given URL
      * @param url
-     * @return
-     * @throws UnsupportedEncodingException
+     * @return the map of key value pairs of the query string
+     * @throws UnsupportedEncodingException if when decoding we specify an encoding that is not supported.
      */
     public static Map<String, String> splitQuery(URL url) throws UnsupportedEncodingException {
         Map<String, String> queryPairs = new LinkedHashMap<>();

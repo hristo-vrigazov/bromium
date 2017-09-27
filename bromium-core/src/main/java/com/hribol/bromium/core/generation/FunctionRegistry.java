@@ -8,7 +8,7 @@ public interface FunctionRegistry<T extends RegistryInformation> extends Javascr
 
     /**
      * Adds an entry to the registy.
-     * @param registerEntry
+     * @param registerEntry the entry that should be added to the registry
      */
     void register(T registerEntry);
 }
