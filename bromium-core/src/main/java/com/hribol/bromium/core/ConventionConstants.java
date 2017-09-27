@@ -1,7 +1,8 @@
 package com.hribol.bromium.core;
 
 /**
- * Created by hvrigazov on 06.08.17.
+ * Constants that are used as conventions to synchronize between the javascript in the browser
+ * and in proxy filters
  */
 public class ConventionConstants {
     public final static String SUBMIT_EVENT_URL = "http://bromium-submit-event.com/";

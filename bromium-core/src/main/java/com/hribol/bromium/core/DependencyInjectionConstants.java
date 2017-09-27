@@ -1,7 +1,7 @@
 package com.hribol.bromium.core;
 
 /**
- * Created by hvrigazov on 05.07.17.
+ * Constants used for naming in Guice configurations.
  */
 public class DependencyInjectionConstants {
     public static final String RECORD_TEMPLATE_RESOURCE = "RECORD_TEMPLATE_RESOURCE";

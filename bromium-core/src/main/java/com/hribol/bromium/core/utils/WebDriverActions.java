@@ -1,7 +1,7 @@
 package com.hribol.bromium.core.utils;
 
 /**
- * Created by hvrigazov on 08.06.17.
+ * List of names of a predefined web driver actions
  */
 public class WebDriverActions {
     public static final String CLICK_CSS_SELECTOR = "CLICK_CSS_SELECTOR";
