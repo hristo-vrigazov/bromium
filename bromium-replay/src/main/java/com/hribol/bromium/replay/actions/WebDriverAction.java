@@ -20,6 +20,8 @@ public interface WebDriverAction {
      * the action. For example, <code>driver.findElement(By.id("someid")).click()</code>
      * would be an implementation of an action called ClickId for example.
      * @param driver the instance of driver through which the action will be executed
+     * @param replayingState the current state of the replay
+     * @param eventSynchronizer the object which will be used for synchronization
      */
     void execute(WebDriver driver, ReplayingState replayingState, EventSynchronizer eventSynchronizer);
 
