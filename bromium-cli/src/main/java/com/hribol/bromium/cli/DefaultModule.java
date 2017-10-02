@@ -30,7 +30,7 @@ import com.hribol.bromium.core.utils.*;
 import com.hribol.bromium.record.RecordingState;
 import com.hribol.bromium.common.replay.DriverOperations;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
-import com.hribol.bromium.common.replay.WebDriverActionExecutionBase;
+import com.hribol.bromium.common.replay.WebDriverActionExecutorBase;
 import com.hribol.bromium.common.replay.factory.DefaultApplicationActionFactory;
 import com.hribol.bromium.common.replay.factory.PredefinedWebDriverActionFactory;
 import com.hribol.bromium.common.replay.factory.TestCaseStepToApplicationActionConverter;
@@ -53,7 +53,7 @@ import com.hribol.bromium.record.RecordRequestFilter;
 import com.hribol.bromium.record.RecordResponseFilter;
 import com.hribol.bromium.replay.ReplayBrowser;
 import com.hribol.bromium.replay.ReplayingState;
-import com.hribol.bromium.replay.execution.WebDriverActionExecution;
+import com.hribol.bromium.replay.execution.WebDriverActionExecutor;
 import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
@@ -505,13 +505,13 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOURIProvider.class)
-    public WebDriverActionExecution getWebDriverActionExecution(IOURIProvider<ExecutorBuilder> executorBuilderIOProvider) throws IOException, URISyntaxException {
-        return new WebDriverActionExecutionBase(executorBuilderIOProvider.get());
+    public WebDriverActionExecutor getWebDriverActionExecution(IOURIProvider<ExecutorBuilder> executorBuilderIOProvider) throws IOException, URISyntaxException {
+        return new WebDriverActionExecutorBase(executorBuilderIOProvider.get());
     }
 
     @CheckedProvides(IOURIProvider.class)
     public ReplayBrowser getReplayBrowser(IOProvider<TestScenarioFactory> testScenarioFactoryIOProvider,
-                                          IOURIProvider<WebDriverActionExecution> execution) throws IOException, URISyntaxException {
+                                          IOURIProvider<WebDriverActionExecutor> execution) throws IOException, URISyntaxException {
         return new ReplayBrowser(testScenarioFactoryIOProvider.get(), execution.get());
     }
 

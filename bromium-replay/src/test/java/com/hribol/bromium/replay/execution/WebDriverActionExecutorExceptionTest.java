@@ -10,7 +10,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by hvrigazov on 14.06.17.
  */
-public class WebDriverActionExecutionExceptionTest {
+public class WebDriverActionExecutorExceptionTest {
 
     @Test
     public void returnsTheCorrectAutomationResult() {

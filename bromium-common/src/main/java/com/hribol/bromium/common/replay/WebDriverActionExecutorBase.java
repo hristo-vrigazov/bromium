@@ -1,6 +1,6 @@
 package com.hribol.bromium.common.replay;
 import com.hribol.bromium.replay.actions.WebDriverAction;
-import com.hribol.bromium.replay.execution.WebDriverActionExecution;
+import com.hribol.bromium.replay.execution.WebDriverActionExecutor;
 import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
 import com.hribol.bromium.core.synchronization.SynchronizationEvent;
@@ -21,9 +21,9 @@ import java.util.concurrent.*;
 /**
  * Created by hvrigazov on 16.03.17.
  */
-public class WebDriverActionExecutionBase implements WebDriverActionExecution {
+public class WebDriverActionExecutorBase implements WebDriverActionExecutor {
 
-    public WebDriverActionExecutionBase(ExecutorBuilder executor) throws IOException, URISyntaxException {
+    public WebDriverActionExecutorBase(ExecutorBuilder executor) throws IOException, URISyntaxException {
         this.executor = executor;
         this.automationResult = AutomationResult.NOT_STARTED;
     }

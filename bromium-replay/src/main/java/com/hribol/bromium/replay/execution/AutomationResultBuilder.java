@@ -3,8 +3,13 @@ package com.hribol.bromium.replay.execution;
 import com.hribol.bromium.replay.report.AutomationResult;
 
 /**
- * Created by hvrigazov on 20.05.17.
+ * Creates a descriptive {@link AutomationResult} by a given {@link Throwable}
  */
 public interface AutomationResultBuilder {
+    /**
+     * Creates a descriptive {@link AutomationResult} by a given {@link Throwable}
+     * @param throwable the exception
+     * @return the descriptive {@link AutomationResult}
+     */
     AutomationResult buildAutomationResult(Throwable throwable);
 }
