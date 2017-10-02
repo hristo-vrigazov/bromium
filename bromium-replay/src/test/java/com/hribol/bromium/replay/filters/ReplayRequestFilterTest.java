@@ -6,6 +6,10 @@ import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static com.hribol.bromium.core.utils.Constants.CONDITION_NOT_SATISFIED_URL;
 import static com.hribol.bromium.core.utils.Constants.CONDITION_SATISFIED_URL;
 import static org.mockito.Mockito.*;
@@ -23,56 +27,39 @@ public class ReplayRequestFilterTest {
 
     HttpRequest httpRequest = mock(HttpRequest.class);
 
-    private final String RANDOM_URL = "http://something.com";
-
-    private final String EXAMPLE_INVALID_SATISFIED_URL = "bla" + CONDITION_SATISFIED_URL + "bla";
-
-    private final String EXAMPLE_INVALID_NOT_SATISFIED_URL = "bla" + CONDITION_NOT_SATISFIED_URL + "bla";
-
     private final String EXAMPLE_CONDITION = "9890013";
 
-    private final String EXAMPLE_CONDITION_SATISFIED_URL = CONDITION_SATISFIED_URL + "?" + EXAMPLE_CONDITION;
+    private final String RANDOM_URL = "http://something.com/?" + EXAMPLE_CONDITION;
 
-    private final String EXAMPLE_CONDITION_NOT_SATISFIED_URL = CONDITION_NOT_SATISFIED_URL + "?" + EXAMPLE_CONDITION;
+
+    StateConditionsUpdater stateConditionsUpdater = mock(StateConditionsUpdater.class);
 
     @Test
-    public void invokesHttpUnlockAndAddsRequestToQueue() {
+    public void invokesConditionsUpdatersThatShouldAndDoesNotThoseWhoShouldNot() {
         baseTest(RANDOM_URL);
-        verify(replayingState).addHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
-        verify(replayingState, never()).setConditionSatisfied(EXAMPLE_CONDITION);
-        verify(replayingState, never()).setConditionNotSatisfied(EXAMPLE_CONDITION);
-    }
-
-    @Test
-    public void invokesEventSatisfied() {
-        baseTest(EXAMPLE_CONDITION_SATISFIED_URL);
-        verify(replayingState).setConditionSatisfied(EXAMPLE_CONDITION);
-    }
-
-    @Test
-    public void invokesEventNotSatisfied() {
-        baseTest(EXAMPLE_CONDITION_NOT_SATISFIED_URL);
-        verify(replayingState).setConditionNotSatisfied(EXAMPLE_CONDITION);
-    }
-
-    @Test
-    public void ifURLIsNotValidButContainsSatisfiedConditionNothingIsCalled() {
-        baseTest(EXAMPLE_INVALID_SATISFIED_URL);
-        verify(replayingState, never()).setConditionSatisfied(EXAMPLE_CONDITION);
-        verify(replayingState, never()).setConditionNotSatisfied(EXAMPLE_CONDITION);
-    }
-
-    @Test
-    public void ifURLIsNotValidButContainsNotSatisfiedConditionNothingIsCalled() {
-        baseTest(EXAMPLE_INVALID_NOT_SATISFIED_URL);
-        verify(replayingState, never()).setConditionSatisfied(EXAMPLE_CONDITION);
-        verify(replayingState, never()).setConditionNotSatisfied(EXAMPLE_CONDITION);
+        verify(stateConditionsUpdater).update(replayingState, EXAMPLE_CONDITION);
     }
 
     private void baseTest(String url) {
         when(httpRequest.getUri()).thenReturn(url);
-        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(replayingState);
+        ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(replayingState, getConditionUpdaters());
         replayRequestFilter.filterRequest(httpRequest, httpMessageContents, httpMessageInfo);
     }
 
+    private List<ConditionsUpdater> getConditionUpdaters() {
+        return Arrays.asList(getConditionsUpdaterThatShouldNotBe(), getConditionsUpdaterThatShouldBeTriggered());
+    }
+
+    private ConditionsUpdater getConditionsUpdaterThatShouldNotBe() {
+        ConditionsUpdater conditionsUpdater = mock(ConditionsUpdater.class);
+        when(conditionsUpdater.shouldUpdate()).thenReturn(request -> false);
+        return conditionsUpdater;
+    }
+
+    private ConditionsUpdater getConditionsUpdaterThatShouldBeTriggered() {
+        ConditionsUpdater conditionsUpdater = mock(ConditionsUpdater.class);
+        when(conditionsUpdater.shouldUpdate()).thenReturn(request -> true);
+        when(conditionsUpdater.updater()).thenReturn(stateConditionsUpdater);
+        return conditionsUpdater;
+    }
 }

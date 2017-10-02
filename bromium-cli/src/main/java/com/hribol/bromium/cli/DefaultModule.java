@@ -11,7 +11,7 @@ import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.filtering.GetHtmlFromCurrentHostPredicate;
 import com.hribol.bromium.common.filtering.RequestToPageLoadingEventConverter;
 import com.hribol.bromium.common.filtering.SplitQueryStringOfRequest;
-import com.hribol.bromium.common.filtering.UriContainsSubmitEventUrlPredicate;
+import com.hribol.bromium.common.filtering.UriContainsStringPredicate;
 import com.hribol.bromium.common.generation.common.EmptyFunction;
 import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
 import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
@@ -57,6 +57,7 @@ import com.hribol.bromium.replay.execution.WebDriverActionExecutor;
 import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
+import com.hribol.bromium.replay.filters.ConditionsUpdater;
 import com.hribol.bromium.replay.filters.ReplayRequestFilter;
 import com.hribol.bromium.replay.filters.ReplayResponseFilter;
 import com.hribol.bromium.replay.settings.DriverServiceSupplier;
@@ -86,7 +87,9 @@ import java.util.function.Supplier;
 
 import static com.hribol.bromium.cli.Main.Commands.RECORD;
 import static com.hribol.bromium.cli.Main.Commands.REPLAY;
+import static com.hribol.bromium.core.ConventionConstants.SUBMIT_EVENT_URL;
 import static com.hribol.bromium.core.DependencyInjectionConstants.*;
+import static com.hribol.bromium.core.utils.Constants.CONDITION_SATISFIED_URL;
 import static com.hribol.bromium.core.utils.Constants.HAR_EXTENSION;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
@@ -119,10 +122,6 @@ public class DefaultModule extends AbstractModule {
                 .annotatedWith(Names.named(SHOULD_INJECT_JS_PREDICATE))
                 .to(GetHtmlFromCurrentHostPredicate.class);
 
-        bind(new TypeLiteral<Predicate<HttpRequest>>() {})
-                .annotatedWith(Names.named(CONVENTION_EVENT_DETECTOR_PREDICATE))
-                .to(UriContainsSubmitEventUrlPredicate.class);
-
         bind(HttpRequestToTestCaseStepConverter.class)
                 .annotatedWith(Names.named(CONVENTION_EVENT_DETECTOR_CONVERTOR))
                 .to(SplitQueryStringOfRequest.class);
@@ -138,6 +137,12 @@ public class DefaultModule extends AbstractModule {
         bind(ReplayingState.class).in(Singleton.class);
 
         install(ThrowingProviderBinder.forModule(this));
+    }
+
+    @Provides
+    @Named(CONVENTION_EVENT_DETECTOR_PREDICATE)
+    public Predicate<HttpRequest> getConventionEventDetectorPredicate() {
+        return new UriContainsStringPredicate(SUBMIT_EVENT_URL);
     }
 
     @Provides
@@ -266,16 +271,45 @@ public class DefaultModule extends AbstractModule {
         return eventDetectors;
     }
 
+    @Provides
+    @Named(CONDITION_SATISFIED_PREDICATE)
+    public Predicate<HttpRequest> getConditionSatisfiedPredicate() {
+        return new UriContainsStringPredicate(CONDITION_SATISFIED_URL);
+    }
+
+    @Provides
+    @Named(CONDITION_NOT_SATISFIED_PREDICATE)
+    public Predicate<HttpRequest> getConditionNotSatisfiedPredicate() {
+        return new UriContainsStringPredicate(CONDITION_NOT_SATISFIED_PREDICATE);
+    }
+
+    @Provides
+    public List<ConditionsUpdater> getConditionsUpdaters(@Named(CONDITION_SATISFIED_PREDICATE)
+                                                         Predicate<HttpRequest> conditionSatisfiedPredicate,
+                                                         @Named(CONDITION_NOT_SATISFIED_PREDICATE)
+                                                         Predicate<HttpRequest> conditionNotSatisfiedPredicate) {
+        List<ConditionsUpdater> conditionsUpdaters = new ArrayList<>();
+        conditionsUpdaters.add(new ConditionsUpdater(conditionSatisfiedPredicate, this::setConditionSatisfied));
+        conditionsUpdaters.add(new ConditionsUpdater(conditionNotSatisfiedPredicate, ReplayingState::setConditionNotSatisfied));
+        return conditionsUpdaters;
+    }
+
+    public void setConditionSatisfied(ReplayingState replayingState, String event) {
+        replayingState.setConditionSatisfied(event);
+        replayingState.signalizeIfSynchronizationEventIsSatisfied();
+    }
+
     @CheckedProvides(IOProvider.class)
     public RequestFilter getRequestFilter(@Named(COMMAND) String command,
                                           IOProvider<List<EventDetector>> eventDetectorListProvider,
                                           Provider<RecordingState> recordingStateProvider,
-                                          Provider<ReplayingState> replayingStateProvider) throws IOException {
+                                          Provider<ReplayingState> replayingStateProvider,
+                                          Provider<List<ConditionsUpdater>> conditionsUpdaters) throws IOException {
         switch (command) {
             case RECORD:
                 return new RecordRequestFilter(recordingStateProvider.get(), eventDetectorListProvider.get());
             case REPLAY:
-                return new ReplayRequestFilter(replayingStateProvider.get());
+                return new ReplayRequestFilter(replayingStateProvider.get(), conditionsUpdaters.get());
             default:
                 throw new NoSuchCommandException();
         }

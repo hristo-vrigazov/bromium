@@ -10,6 +10,7 @@ import net.lightbody.bmp.util.HttpMessageInfo;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import static com.hribol.bromium.core.utils.Constants.CONDITION_NOT_SATISFIED_URL;
 import static com.hribol.bromium.core.utils.Constants.CONDITION_SATISFIED_URL;
@@ -19,10 +20,12 @@ import static com.hribol.bromium.core.utils.Constants.CONDITION_SATISFIED_URL;
  */
 public class ReplayRequestFilter implements RequestFilter {
     private final ReplayingState replayingState;
+    private List<ConditionsUpdater> conditionsUpdaters;
 
     @Inject
-    public ReplayRequestFilter(ReplayingState replayingState) {
+    public ReplayRequestFilter(ReplayingState replayingState, List<ConditionsUpdater> conditionsUpdaters) {
         this.replayingState = replayingState;
+        this.conditionsUpdaters = conditionsUpdaters;
     }
 
     @Override
@@ -30,24 +33,15 @@ public class ReplayRequestFilter implements RequestFilter {
         replayingState.addHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
         replayingState.setHttpLock(false);
 
-        if (httpRequest.getUri().contains(CONDITION_SATISFIED_URL)) {
-            try {
-                URL url = new URL(httpRequest.getUri());
-                String event = url.getQuery();
-                replayingState.setConditionSatisfied(event);
-                replayingState.signalizeIfSynchronizationEventIsSatisfied();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (httpRequest.getUri().contains(CONDITION_NOT_SATISFIED_URL)) {
-            try {
-                URL url = new URL(httpRequest.getUri());
-                String event = url.getQuery();
-                replayingState.setConditionNotSatisfied(event);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
+        for (ConditionsUpdater conditionsUpdater: conditionsUpdaters) {
+            if (conditionsUpdater.shouldUpdate().test(httpRequest)) {
+                try {
+                    URL url = new URL(httpRequest.getUri());
+                    String event = url.getQuery();
+                    conditionsUpdater.updater().update(replayingState, event);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
