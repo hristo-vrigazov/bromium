@@ -9,11 +9,14 @@ import com.hribol.bromium.replay.report.ExecutionReport;
  */
 public interface WebDriverActionExecutor {
     /**
-     *
-     * @param testScenario
-     * @return
+     * Executes a test scenario
+     * @param testScenario the scenario to be executed
+     * @return the report of the execution
      */
     ExecutionReport execute(TestScenario testScenario);
 
+    /**
+     * Force clean up: tear down web driver and proxy
+     */
     void forceCleanUp();
 }
