@@ -16,12 +16,18 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 /**
- * Created by hvrigazov on 22.04.17.
+ * A request filter which by given a list of {@link EventDetector}s, stores those events which are detected on a given
+ * {@link HttpRequest} into {@link RecordingState}
  */
 public class RecordRequestFilter implements RequestFilter {
     private RecordingState recordingState;
     private List<EventDetector> eventDetectors;
 
+    /**
+     * Constructs a new record request filter
+     * @param recordingState the state which will be used to store the events.
+     * @param eventDetectors a list of detectors which can fire for a given {@link HttpRequest}
+     */
     public RecordRequestFilter(RecordingState recordingState,
                                List<EventDetector> eventDetectors) {
         this.recordingState = recordingState;
