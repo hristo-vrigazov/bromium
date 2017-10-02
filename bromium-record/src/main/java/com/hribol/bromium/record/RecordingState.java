@@ -11,10 +11,18 @@ import java.util.Map;
 public class RecordingState {
     private TestScenarioSteps testScenarioSteps = new TestScenarioSteps();
 
+    /**
+     * Stores a given test case step
+     * @param testCaseStep the step to be stored
+     */
     public void storeTestCaseStep(Map<String, String> testCaseStep) {
         testScenarioSteps.add(testCaseStep);
     }
 
+    /**
+     * Gets the list of all the {@link TestScenarioSteps} that are currently stored
+     * @return the list of all the {@link TestScenarioSteps} that are currently stored
+     */
     public TestScenarioSteps getTestScenarioSteps() {
         return testScenarioSteps;
     }
