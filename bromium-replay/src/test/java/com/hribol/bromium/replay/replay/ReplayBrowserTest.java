@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 public class ReplayBrowserTest {
 
     @Test
-    public void replayFromFileInvokesExecutionExecuteMethod() throws InterruptedException, IOException, URISyntaxException {
+    public void replayFromFileInvokesExecutionExecuteMethod() throws IOException {
         TestScenario testScenario = mock(TestScenario.class);
         WebDriverActionExecutor webDriverActionExecutor = mock(WebDriverActionExecutor.class);
         TestScenarioFactory testScenarioFactory = mock(TestScenarioFactory.class);

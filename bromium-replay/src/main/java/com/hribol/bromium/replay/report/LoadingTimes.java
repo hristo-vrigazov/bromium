@@ -24,6 +24,12 @@ public class LoadingTimes {
         return new LoadingTimes(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     }
 
+    /**
+     * Creates new encapsulation of times for loading between different actions
+     * @param actions action names
+     * @param waitingTimes time waited between actions
+     * @param actionTimestamps timestamps of actions
+     */
     public LoadingTimes(List<String> actions, List<Long> waitingTimes, List<Date> actionTimestamps) {
         this.waitingTimes = waitingTimes;
         this.actions = actions;
