@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * Created by hvrigazov on 19.03.17.
+ * Represents an encapsulation of all the dependencies an {@link ActionExecutor} needs to execute a scenario
  */
 public class ExecutorDependencies {
     private static final String DRIVER_EXECUTABLE = "DRIVER_EXECUTABLE";

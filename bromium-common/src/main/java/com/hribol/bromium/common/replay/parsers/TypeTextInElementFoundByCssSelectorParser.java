@@ -11,7 +11,7 @@ import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.parsers.WebDriverActionParameterParser;
 
 /**
- * Created by hvrigazov on 12.05.17.
+ * A parser for {@link TypeTextInElementFoundByCssSelector}
  */
 public class TypeTextInElementFoundByCssSelectorParser implements WebDriverActionParameterParser {
     @Override

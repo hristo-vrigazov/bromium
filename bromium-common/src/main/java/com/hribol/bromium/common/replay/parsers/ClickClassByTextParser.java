@@ -7,13 +7,13 @@ import com.hribol.bromium.replay.parsers.WebDriverActionParameterParser;
 import java.util.Map;
 
 import static com.hribol.bromium.core.utils.Constants.EVENT;
+import static com.hribol.bromium.core.utils.Constants.TEXT;
 
 /**
  * A parser for {@link ClickClassByText}
  */
 public class ClickClassByTextParser implements WebDriverActionParameterParser {
 
-    private final String TEXT = "text";
     private final String initialCollectorClass = "initialCollectorClass";
 
     @Override

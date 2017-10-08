@@ -12,7 +12,7 @@ import static com.hribol.bromium.core.utils.Constants.TEXT;
 import static com.hribol.bromium.core.utils.Constants.TIMEOUT;
 
 /**
- * Created by hvrigazov on 18.05.17.
+ * A parser for {@link TextOfElementFoundByCssSelectorToBe}
  */
 public class TextOfElementFoundByCssSelectorToBeParser implements WebDriverActionParameterParser {
 

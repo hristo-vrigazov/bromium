@@ -10,7 +10,7 @@ import static com.hribol.bromium.core.utils.Constants.EVENT;
 import static com.hribol.bromium.core.utils.Constants.URL;
 
 /**
- * Created by hvrigazov on 13.05.17.
+ * A parser for {@link PageLoading} events
  */
 public class PageLoadingParser implements WebDriverActionParameterParser {
 

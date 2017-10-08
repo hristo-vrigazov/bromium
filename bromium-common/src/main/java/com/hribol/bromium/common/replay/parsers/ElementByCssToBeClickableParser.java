@@ -11,9 +11,10 @@ import static com.hribol.bromium.core.utils.Constants.EVENT;
 import static com.hribol.bromium.core.utils.Constants.TIMEOUT;
 
 /**
- * Created by hvrigazov on 18.05.17.
+ * A parser for {@link ElementByCssToBeClickable}
  */
 public class ElementByCssToBeClickableParser implements WebDriverActionParameterParser {
+
     @Override
     public WebDriverAction create(Map<String, String> parameters, boolean expectHttpRequest) {
         String cssSelector = parameters.get(CSS_SELECTOR);
