@@ -6,7 +6,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- * Created by hvrigazov on 09.07.17.
+ * An example HTTP endpoint that waits for 2 seconds on purpose to demonstrate
+ * the case when Selenium fails, but Bromium does not
  */
 @Path("/")
 public class Resource {

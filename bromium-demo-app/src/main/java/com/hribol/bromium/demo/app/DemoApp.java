@@ -19,7 +19,8 @@ import java.io.InputStream;
 import java.nio.file.Paths;
 
 /**
- * Created by hvrigazov on 14.07.17.
+ * A demo app used in integration tests or as a standalone demo, demonstrating
+ * common problems solved with Bromium.
  */
 public class DemoApp {
 
