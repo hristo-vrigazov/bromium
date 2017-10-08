@@ -23,7 +23,7 @@ import java.util.concurrent.*;
  */
 public class ActionExecutor implements WebDriverActionExecutor {
 
-    public ActionExecutor(ExecutorBuilder dependencies) throws IOException, URISyntaxException {
+    public ActionExecutor(ExecutorDependencies dependencies) throws IOException, URISyntaxException {
         this.dependencies = dependencies;
         this.automationResult = AutomationResult.NOT_STARTED;
     }
@@ -87,7 +87,7 @@ public class ActionExecutor implements WebDriverActionExecutor {
         dependencies.getDriverOperations().cleanUp();
     }
 
-    private ExecutorBuilder dependencies;
+    private ExecutorDependencies dependencies;
 
     private AutomationResult automationResult;
 

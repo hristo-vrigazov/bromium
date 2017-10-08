@@ -157,19 +157,19 @@ public class ActionExecutorTest {
 
         ReplayingState replayingState = mock(ReplayingState.class);
         DriverOperations driverOperations = mock(DriverOperations.class);
-        ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
-        when(executorBuilder.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
-        when(executorBuilder.getEventSynchronizer()).thenReturn(eventSynchronizer);
-        when(executorBuilder.getReplayingState()).thenReturn(replayingState);
-        when(executorBuilder.getDriverOperations()).thenReturn(driverOperations);
+        ExecutorDependencies executorDependencies = mock(ExecutorDependencies.class);
+        when(executorDependencies.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
+        when(executorDependencies.getEventSynchronizer()).thenReturn(eventSynchronizer);
+        when(executorDependencies.getReplayingState()).thenReturn(replayingState);
+        when(executorDependencies.getDriverOperations()).thenReturn(driverOperations);
         doAnswer(invocationOnMock -> {
             Object[] arguments = invocationOnMock.getArguments();
             String message = (String) arguments[0];
             Throwable throwable = (Throwable) arguments[1];
             return new WebDriverActionExecutionException(message, throwable, getAutomationResultBuilder());
-        }).when(executorBuilder).webDriverActionExecutionException(anyString(), any(Throwable.class));
+        }).when(executorDependencies).webDriverActionExecutionException(anyString(), any(Throwable.class));
 
-        ActionExecutor webDriverActionExecutionBase = getWebDriverActionExecutionBase(executorBuilder);
+        ActionExecutor webDriverActionExecutionBase = getWebDriverActionExecutionBase(executorDependencies);
         Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
         TestScenarioActions testScenarioSteps = mock(TestScenarioActions.class);
         when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
@@ -187,10 +187,10 @@ public class ActionExecutorTest {
 
     @Test
     public void canForceCleanUp() throws IOException, URISyntaxException {
-        ExecutorBuilder executorBuilder = getWebDriverActionExecutor();
-        ActionExecutor webDriverActionExecutionBase = getWebDriverActionExecutionBase(executorBuilder);
+        ExecutorDependencies executorDependencies = getWebDriverActionExecutor();
+        ActionExecutor webDriverActionExecutionBase = getWebDriverActionExecutionBase(executorDependencies);
         webDriverActionExecutionBase.forceCleanUp();
-        verify(executorBuilder.getDriverOperations()).cleanUp();
+        verify(executorDependencies.getDriverOperations()).cleanUp();
     }
 
     @Test
@@ -211,12 +211,12 @@ public class ActionExecutorTest {
         verify(firstAction, times(maxRetries)).execute(any(), any(), any());
     }
 
-    private ExecutorBuilder getWebDriverActionExecutor() throws IOException, URISyntaxException {
+    private ExecutorDependencies getWebDriverActionExecutor() throws IOException, URISyntaxException {
         return getWebDriverActionExecutor(10);
     }
 
-    private ActionExecutor getWebDriverActionExecutionBase(ExecutorBuilder executorBuilder) throws IOException, URISyntaxException {
-        return new ActionExecutor(executorBuilder);
+    private ActionExecutor getWebDriverActionExecutionBase(ExecutorDependencies executorDependencies) throws IOException, URISyntaxException {
+        return new ActionExecutor(executorDependencies);
     }
 
     private ActionExecutor getWebDriverActionExecutionBase(int timeout) throws IOException, URISyntaxException {
@@ -231,34 +231,34 @@ public class ActionExecutorTest {
         return getWebDriverActionExecutionBase(getWebDriverActionExecutor(timeout, maxRetries));
     }
 
-    private ExecutorBuilder getWebDriverActionExecutor(int timeout) throws IOException, URISyntaxException {
+    private ExecutorDependencies getWebDriverActionExecutor(int timeout) throws IOException, URISyntaxException {
         return getWebDriverActionExecutor(timeout, 10);
     }
 
-    private ExecutorBuilder getWebDriverActionExecutor(int timeout, int maxRetries) throws IOException, URISyntaxException {
+    private ExecutorDependencies getWebDriverActionExecutor(int timeout, int maxRetries) throws IOException, URISyntaxException {
         AutomationResultBuilder automationResultBuilder = getAutomationResultBuilder();
         ReplayingState replayingState = mock(ReplayingState.class);
         NoHttpRequestsInQueue noHttpRequestsInQueue = mock(NoHttpRequestsInQueue.class);
         EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
-        ExecutorBuilder executorBuilder = mock(ExecutorBuilder.class);
+        ExecutorDependencies executorDependencies = mock(ExecutorDependencies.class);
         DriverOperations driverOperations = mock(DriverOperations.class);
-        when(executorBuilder.getBaseURL()).thenReturn(baseURI);
-        when(executorBuilder.getMeasurementsPrecisionMilli()).thenReturn(precision);
-        when(executorBuilder.getTimeout()).thenReturn(timeout);
-        when(executorBuilder.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
-        when(executorBuilder.getMaxRetries()).thenReturn(maxRetries);
-        when(executorBuilder.getAutomationResultBuilder()).thenReturn(automationResultBuilder);
-        when(executorBuilder.noHttpRequestsInQueue()).thenReturn(noHttpRequestsInQueue);
-        when(executorBuilder.getReplayingState()).thenReturn(replayingState);
-        when(executorBuilder.getEventSynchronizer()).thenReturn(eventSynchronizer);
-        when(executorBuilder.getDriverOperations()).thenReturn(driverOperations);
+        when(executorDependencies.getBaseURL()).thenReturn(baseURI);
+        when(executorDependencies.getMeasurementsPrecisionMilli()).thenReturn(precision);
+        when(executorDependencies.getTimeout()).thenReturn(timeout);
+        when(executorDependencies.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
+        when(executorDependencies.getMaxRetries()).thenReturn(maxRetries);
+        when(executorDependencies.getAutomationResultBuilder()).thenReturn(automationResultBuilder);
+        when(executorDependencies.noHttpRequestsInQueue()).thenReturn(noHttpRequestsInQueue);
+        when(executorDependencies.getReplayingState()).thenReturn(replayingState);
+        when(executorDependencies.getEventSynchronizer()).thenReturn(eventSynchronizer);
+        when(executorDependencies.getDriverOperations()).thenReturn(driverOperations);
         doAnswer(invocationOnMock -> {
             Object[] arguments = invocationOnMock.getArguments();
             String message = (String) arguments[0];
             Throwable throwable = (Throwable) arguments[1];
             return new WebDriverActionExecutionException(message, throwable, automationResultBuilder);
-        }).when(executorBuilder).webDriverActionExecutionException(anyString(), any(Throwable.class));
-        return executorBuilder;
+        }).when(executorDependencies).webDriverActionExecutionException(anyString(), any(Throwable.class));
+        return executorDependencies;
     }
 
     private AutomationResultBuilder getAutomationResultBuilder() {

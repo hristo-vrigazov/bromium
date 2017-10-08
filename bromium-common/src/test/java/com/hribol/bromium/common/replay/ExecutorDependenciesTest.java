@@ -19,7 +19,7 @@ import static org.mockito.Mockito.mock;
 /**
  * Created by hvrigazov on 23.04.17.
  */
-public class ExecutorBuilderTest {
+public class ExecutorDependenciesTest {
 
     @Test
     public void correctlyBuildsConfiguration() throws IOException, URISyntaxException {
@@ -37,7 +37,7 @@ public class ExecutorBuilderTest {
 
         EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
 
-        ExecutorBuilder executorBuilder = new ExecutorBuilder()
+        ExecutorDependencies executorDependencies = new ExecutorDependencies()
                 .pathToDriverExecutable(pathToDriverExecutable)
                 .baseURL(baseURI)
                 .measurementsPrecisionInMilliseconds(precision)
@@ -51,22 +51,22 @@ public class ExecutorBuilderTest {
                 .replayingState(replayingState)
                 .driverOperations(driverOperations);
 
-        assertEquals(pathToDriverExecutable, executorBuilder.getPathToDriverExecutable());
-        assertEquals(baseURI, executorBuilder.getBaseURL());
-        assertEquals(precision, executorBuilder.getMeasurementsPrecisionMilli());
-        assertEquals(precision, executorBuilder.getMeasurementsPrecisionMilli());
-        assertEquals(timeout, executorBuilder.getTimeout());
-        assertEquals(timeout, executorBuilder.getTimeout());
-        assertEquals(maxRetries, executorBuilder.getMaxRetries());
-        assertEquals(maxRetries, executorBuilder.getMaxRetries());
-        assertEquals(automationResultBuilder, executorBuilder.getAutomationResultBuilder());
-        assertEquals(javascriptJsInjectionCode, executorBuilder.getJavascriptInjectionCode());
-        assertEquals(eventSynchronizer, executorBuilder.getEventSynchronizer());
-        assertNotNull(executorBuilder.noHttpRequestsInQueue());
-        assertEquals(screenToUse, executorBuilder.getScreenToUse());
-        assertEquals(screenNumber, executorBuilder.getScreenNumber());
-        assertEquals(replayingState, executorBuilder.getReplayingState());
-        assertEquals(driverOperations, executorBuilder.getDriverOperations());
+        assertEquals(pathToDriverExecutable, executorDependencies.getPathToDriverExecutable());
+        assertEquals(baseURI, executorDependencies.getBaseURL());
+        assertEquals(precision, executorDependencies.getMeasurementsPrecisionMilli());
+        assertEquals(precision, executorDependencies.getMeasurementsPrecisionMilli());
+        assertEquals(timeout, executorDependencies.getTimeout());
+        assertEquals(timeout, executorDependencies.getTimeout());
+        assertEquals(maxRetries, executorDependencies.getMaxRetries());
+        assertEquals(maxRetries, executorDependencies.getMaxRetries());
+        assertEquals(automationResultBuilder, executorDependencies.getAutomationResultBuilder());
+        assertEquals(javascriptJsInjectionCode, executorDependencies.getJavascriptInjectionCode());
+        assertEquals(eventSynchronizer, executorDependencies.getEventSynchronizer());
+        assertNotNull(executorDependencies.noHttpRequestsInQueue());
+        assertEquals(screenToUse, executorDependencies.getScreenToUse());
+        assertEquals(screenNumber, executorDependencies.getScreenNumber());
+        assertEquals(replayingState, executorDependencies.getReplayingState());
+        assertEquals(driverOperations, executorDependencies.getDriverOperations());
     }
 
     @Rule
@@ -78,30 +78,30 @@ public class ExecutorBuilderTest {
         int precision = 500;
         int timeout = 10;
 
-        ExecutorBuilder executorBuilder = new ExecutorBuilder()
+        ExecutorDependencies executorDependencies = new ExecutorDependencies()
                 .pathToDriverExecutable(pathToDriverExecutable)
                 .measurementsPrecisionInMilliseconds(precision)
                 .timeoutInSeconds(timeout);
 
         expectedException.expect(IllegalStateException.class);
-        executorBuilder.getBaseURL();
+        executorDependencies.getBaseURL();
     }
 
     @Test
     public void throwsExceptionIfDriverIsNotSet() throws IOException {
-        ExecutorBuilder executorBuilder = new ExecutorBuilder();
+        ExecutorDependencies executorDependencies = new ExecutorDependencies();
         expectedException.expect(IOException.class);
-        executorBuilder.getPathToDriverExecutable();
+        executorDependencies.getPathToDriverExecutable();
     }
 
     @Test
     public void canGetDefaults() {
-        ExecutorBuilder executorBuilder = new ExecutorBuilder();
-        assertEquals(10, executorBuilder.getTimeout());
-        assertEquals(500, executorBuilder.getMeasurementsPrecisionMilli());
-        assertEquals(50, executorBuilder.getMaxRetries());
-        assertNotNull(executorBuilder.getAutomationResultBuilder());
-        assertNotNull(executorBuilder.getEventSynchronizer());
-        assertNotNull(executorBuilder.webDriverActionExecutionException("Something happened", mock(Throwable.class)));
+        ExecutorDependencies executorDependencies = new ExecutorDependencies();
+        assertEquals(10, executorDependencies.getTimeout());
+        assertEquals(500, executorDependencies.getMeasurementsPrecisionMilli());
+        assertEquals(50, executorDependencies.getMaxRetries());
+        assertNotNull(executorDependencies.getAutomationResultBuilder());
+        assertNotNull(executorDependencies.getEventSynchronizer());
+        assertNotNull(executorDependencies.webDriverActionExecutionException("Something happened", mock(Throwable.class)));
     }
 }

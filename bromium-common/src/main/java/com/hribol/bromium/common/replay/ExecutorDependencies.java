@@ -13,7 +13,7 @@ import java.util.Optional;
 /**
  * Created by hvrigazov on 19.03.17.
  */
-public class ExecutorBuilder {
+public class ExecutorDependencies {
     private static final String DRIVER_EXECUTABLE = "DRIVER_EXECUTABLE";
     private Integer maxRetries;
     private String pathToDriverExecutable;
@@ -28,42 +28,42 @@ public class ExecutorBuilder {
     private ReplayingState replayingState;
     private DriverOperations driverOperations;
 
-    public ExecutorBuilder pathToDriverExecutable(String pathToDriverExecutable) {
+    public ExecutorDependencies pathToDriverExecutable(String pathToDriverExecutable) {
         this.pathToDriverExecutable = pathToDriverExecutable;
         return this;
     }
 
-    public ExecutorBuilder javascriptInjectionCode(String javascriptInjectionCode) {
+    public ExecutorDependencies javascriptInjectionCode(String javascriptInjectionCode) {
         this.javascriptInjectionCode = javascriptInjectionCode;
         return this;
     }
 
-    public ExecutorBuilder timeoutInSeconds(Integer timeout) {
+    public ExecutorDependencies timeoutInSeconds(Integer timeout) {
         this.timeout = timeout;
         return this;
     }
 
-    public ExecutorBuilder measurementsPrecisionInMilliseconds(Integer measurementsPrecisionMilli) {
+    public ExecutorDependencies measurementsPrecisionInMilliseconds(Integer measurementsPrecisionMilli) {
         this.measurementsPrecisionMilli = measurementsPrecisionMilli;
         return this;
     }
 
-    public ExecutorBuilder maxRetries(Integer maxRetries) {
+    public ExecutorDependencies maxRetries(Integer maxRetries) {
         this.maxRetries = maxRetries;
         return this;
     }
 
-    public ExecutorBuilder baseURL(String baseURL) {
+    public ExecutorDependencies baseURL(String baseURL) {
         this.baseURL = baseURL;
         return this;
     }
 
-    public ExecutorBuilder automationResultBuilder(AutomationResultBuilder automationResultBuilder) {
+    public ExecutorDependencies automationResultBuilder(AutomationResultBuilder automationResultBuilder) {
         this.automationResultBuilder = automationResultBuilder;
         return this;
     }
 
-    public ExecutorBuilder eventSynchronizer(EventSynchronizer eventSynchronizer) {
+    public ExecutorDependencies eventSynchronizer(EventSynchronizer eventSynchronizer) {
         this.eventSynchronizer = eventSynchronizer;
         return this;
     }
@@ -139,7 +139,7 @@ public class ExecutorBuilder {
         return new WebDriverActionExecutionException(message, e, getAutomationResultBuilder());
     }
 
-    public ExecutorBuilder screenToUse(String screen) {
+    public ExecutorDependencies screenToUse(String screen) {
         this.screenToUse = screen;
         return this;
     }
@@ -148,7 +148,7 @@ public class ExecutorBuilder {
         return screenToUse;
     }
 
-    public ExecutorBuilder screenNumber(int screen) {
+    public ExecutorDependencies screenNumber(int screen) {
         this.screenNumber = screen;
         return this;
     }
@@ -157,7 +157,7 @@ public class ExecutorBuilder {
         return screenNumber;
     }
 
-    public ExecutorBuilder replayingState(ReplayingState replayingState) {
+    public ExecutorDependencies replayingState(ReplayingState replayingState) {
         this.replayingState = replayingState;
         return this;
     }
@@ -170,7 +170,7 @@ public class ExecutorBuilder {
         return driverOperations;
     }
 
-    public ExecutorBuilder driverOperations(DriverOperations driverOperations) {
+    public ExecutorDependencies driverOperations(DriverOperations driverOperations) {
         this.driverOperations = driverOperations;
         return this;
     }

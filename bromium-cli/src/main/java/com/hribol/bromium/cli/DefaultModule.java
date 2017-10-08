@@ -29,7 +29,7 @@ import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.core.utils.*;
 import com.hribol.bromium.record.RecordingState;
 import com.hribol.bromium.common.replay.DriverOperations;
-import com.hribol.bromium.common.replay.ExecutorBuilder;
+import com.hribol.bromium.common.replay.ExecutorDependencies;
 import com.hribol.bromium.common.replay.ActionExecutor;
 import com.hribol.bromium.common.replay.factory.DefaultApplicationActionFactory;
 import com.hribol.bromium.common.replay.factory.PredefinedWebDriverActionFactory;
@@ -503,19 +503,19 @@ public class DefaultModule extends AbstractModule {
 
 
     @CheckedProvides(IOURIProvider.class)
-    public ExecutorBuilder getExecutorBuilder(ExecutorBuilder executorBuilder,
-                                              @Named(TIMEOUT) int timeout,
-                                              @Named(BASE_URL) String baseUrl,
-                                              @Named(REPLAYING_JAVASCRIPT_CODE) IOProvider<String>
+    public ExecutorDependencies getExecutorBuilder(ExecutorDependencies executorDependencies,
+                                                   @Named(TIMEOUT) int timeout,
+                                                   @Named(BASE_URL) String baseUrl,
+                                                   @Named(REPLAYING_JAVASCRIPT_CODE) IOProvider<String>
                                                           replayingJavascriptCodeProvider,
-                                              @Named(SCREEN) String screen,
-                                              @Named(SCREEN_NUMBER) int screenNumber,
-                                              @Named(PATH_TO_DRIVER) String pathToDriver,
-                                              @Named(MEASUREMENTS_PRECISION_MILLI) int measurementsPrecisionMilli,
-                                              EventSynchronizer eventSynchronizer,
-                                              ReplayingState replayingState,
-                                              IOURIProvider<DriverOperations> driverOperationsIOURIProvider) throws IOException, URISyntaxException {
-        return executorBuilder
+                                                   @Named(SCREEN) String screen,
+                                                   @Named(SCREEN_NUMBER) int screenNumber,
+                                                   @Named(PATH_TO_DRIVER) String pathToDriver,
+                                                   @Named(MEASUREMENTS_PRECISION_MILLI) int measurementsPrecisionMilli,
+                                                   EventSynchronizer eventSynchronizer,
+                                                   ReplayingState replayingState,
+                                                   IOURIProvider<DriverOperations> driverOperationsIOURIProvider) throws IOException, URISyntaxException {
+        return executorDependencies
                 .pathToDriverExecutable(pathToDriver)
                 .baseURL(baseUrl)
                 .timeoutInSeconds(timeout)
@@ -539,7 +539,7 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOURIProvider.class)
-    public WebDriverActionExecutor getWebDriverActionExecution(IOURIProvider<ExecutorBuilder> executorBuilderIOProvider) throws IOException, URISyntaxException {
+    public WebDriverActionExecutor getWebDriverActionExecution(IOURIProvider<ExecutorDependencies> executorBuilderIOProvider) throws IOException, URISyntaxException {
         return new ActionExecutor(executorBuilderIOProvider.get());
     }
 
