@@ -30,7 +30,7 @@ import com.hribol.bromium.core.utils.*;
 import com.hribol.bromium.record.RecordingState;
 import com.hribol.bromium.common.replay.DriverOperations;
 import com.hribol.bromium.common.replay.ExecutorBuilder;
-import com.hribol.bromium.common.replay.WebDriverActionExecutorBase;
+import com.hribol.bromium.common.replay.ActionExecutor;
 import com.hribol.bromium.common.replay.factory.DefaultApplicationActionFactory;
 import com.hribol.bromium.common.replay.factory.PredefinedWebDriverActionFactory;
 import com.hribol.bromium.common.replay.factory.TestCaseStepToApplicationActionConverter;
@@ -540,7 +540,7 @@ public class DefaultModule extends AbstractModule {
 
     @CheckedProvides(IOURIProvider.class)
     public WebDriverActionExecutor getWebDriverActionExecution(IOURIProvider<ExecutorBuilder> executorBuilderIOProvider) throws IOException, URISyntaxException {
-        return new WebDriverActionExecutorBase(executorBuilderIOProvider.get());
+        return new ActionExecutor(executorBuilderIOProvider.get());
     }
 
     @CheckedProvides(IOURIProvider.class)

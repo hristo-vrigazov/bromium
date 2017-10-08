@@ -19,11 +19,11 @@ import java.util.List;
 import java.util.concurrent.*;
 
 /**
- * Created by hvrigazov on 16.03.17.
+ * A default implementation of {@link WebDriverActionExecutor}
  */
-public class WebDriverActionExecutorBase implements WebDriverActionExecutor {
+public class ActionExecutor implements WebDriverActionExecutor {
 
-    public WebDriverActionExecutorBase(ExecutorBuilder executor) throws IOException, URISyntaxException {
+    public ActionExecutor(ExecutorBuilder executor) throws IOException, URISyntaxException {
         this.executor = executor;
         this.automationResult = AutomationResult.NOT_STARTED;
     }
