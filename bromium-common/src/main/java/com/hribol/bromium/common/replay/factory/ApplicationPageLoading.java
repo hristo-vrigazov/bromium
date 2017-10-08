@@ -14,6 +14,11 @@ public class ApplicationPageLoading implements ApplicationAction {
     private String url;
     private String eventName;
 
+    /**
+     * Creates a new page loading in an application
+     * @param url the url to be loaded
+     * @param eventName the event name to appear in the logs
+     */
     public ApplicationPageLoading(String url, String eventName) {
         this.url = url;
         this.eventName = eventName;
