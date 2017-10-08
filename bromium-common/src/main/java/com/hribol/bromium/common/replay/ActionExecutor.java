@@ -23,14 +23,14 @@ import java.util.concurrent.*;
  */
 public class ActionExecutor implements WebDriverActionExecutor {
 
-    public ActionExecutor(ExecutorBuilder executor) throws IOException, URISyntaxException {
-        this.executor = executor;
+    public ActionExecutor(ExecutorBuilder dependencies) throws IOException, URISyntaxException {
+        this.dependencies = dependencies;
         this.automationResult = AutomationResult.NOT_STARTED;
     }
 
     @Override
     public ExecutionReport execute(TestScenario testScenario) {
-        DriverOperations driverOperations = executor.getDriverOperations();
+        DriverOperations driverOperations = dependencies.getDriverOperations();
         driverOperations.prepare();
         automationResult = AutomationResult.NOT_STARTED;
         ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -47,22 +47,22 @@ public class ActionExecutor implements WebDriverActionExecutor {
 
                 System.out.println("Executing " + webDriverAction.getName());
                 try {
-                    SynchronizationEvent synchronizationEvent = executor.noHttpRequestsInQueue();
-                    executor.getEventSynchronizer().awaitUntil(synchronizationEvent);
+                    SynchronizationEvent synchronizationEvent = dependencies.noHttpRequestsInQueue();
+                    dependencies.getEventSynchronizer().awaitUntil(synchronizationEvent);
                 } catch (InterruptedException | java.util.concurrent.TimeoutException e) {
-                    throw executor.webDriverActionExecutionException("Exception during execution", e);
+                    throw dependencies.webDriverActionExecutionException("Exception during execution", e);
                 }
 
-                executor.getReplayingState().setHttpLock(webDriverAction.expectsHttpRequest());
+                dependencies.getReplayingState().setHttpLock(webDriverAction.expectsHttpRequest());
 
                 Future<?> future = executorService.submit(() -> executeIgnoringExceptions(driverOperations.getDriver(),
                         webDriverAction));
                 try {
-                    future.get(executor.getTimeout(), TimeUnit.SECONDS);
+                    future.get(dependencies.getTimeout(), TimeUnit.SECONDS);
                 }  catch (java.util.concurrent.TimeoutException | InterruptedException e) {
-                    throw executor.webDriverActionExecutionException("Exception during execution", e);
+                    throw dependencies.webDriverActionExecutionException("Exception during execution", e);
                 } catch (ExecutionException e) {
-                    throw executor.webDriverActionExecutionException("Exception during execution", e.getCause());
+                    throw dependencies.webDriverActionExecutionException("Exception during execution", e.getCause());
                 }
 
                 waitingTimes.add(System.nanoTime() - elapsedTime);
@@ -84,28 +84,28 @@ public class ActionExecutor implements WebDriverActionExecutor {
 
     @Override
     public void forceCleanUp() {
-        executor.getDriverOperations().cleanUp();
+        dependencies.getDriverOperations().cleanUp();
     }
 
-    private ExecutorBuilder executor;
+    private ExecutorBuilder dependencies;
 
     private AutomationResult automationResult;
 
     private void executeIgnoringExceptions(WebDriver webDriver, WebDriverAction webDriverAction) {
         int i = 0;
 
-        while (i < executor.getMaxRetries()) {
+        while (i < dependencies.getMaxRetries()) {
             try {
-                webDriverAction.execute(webDriver, executor.getReplayingState(), executor.getEventSynchronizer());
+                webDriverAction.execute(webDriver, dependencies.getReplayingState(), dependencies.getEventSynchronizer());
                 return;
             } catch (WebDriverException ex) {
                 System.out.println(ex.toString());
                 System.out.println("Could not make it from first try");
                 i++;
                 try {
-                    Thread.sleep(executor.getMeasurementsPrecisionMilli());
+                    Thread.sleep(dependencies.getMeasurementsPrecisionMilli());
                 } catch (InterruptedException e) {
-                    throw executor.webDriverActionExecutionException("Interrupted while waiting to retry", e);
+                    throw dependencies.webDriverActionExecutionException("Interrupted while waiting to retry", e);
                 }
             }
         }
