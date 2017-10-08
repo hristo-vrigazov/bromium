@@ -5,7 +5,7 @@ import com.hribol.bromium.core.generation.GeneratedInvocation;
 import com.hribol.bromium.core.generation.GenerationInformation;
 
 /**
- * Created by hvrigazov on 02.07.17.
+ * Represents an empty function. Used as a default when generating javascript
  */
 public class EmptyFunction implements GeneratedFunction {
     @Override

@@ -6,31 +6,37 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by hvrigazov on 01.07.17.
+ * A base class for all registries that can generate code based on generation information
+ * @param <RegistryInfo> the class which represents the generation information
+ * @param <InvocationClass> the class which represents the generated invocation
+ * @param <InformationClass> the class which represents the function needed for generation
  */
 public class FunctionRegistryBase
-        <T extends RegistryInformation<S>,
-        V extends GeneratedInvocation,
-        S extends GenerationFunctionInformation> implements FunctionRegistry<T> {
-    private Set<GeneratedFunction<T, V>> functions = new HashSet<>();
+        <RegistryInfo extends RegistryInformation<InformationClass>,
+        InvocationClass extends GeneratedInvocation,
+        InformationClass extends GenerationFunctionInformation> implements FunctionRegistry<RegistryInfo> {
+    private Set<GeneratedFunction<RegistryInfo, InvocationClass>> functions = new HashSet<>();
     private Set<GeneratedInvocation> invocations = new HashSet<>();
-    private GeneratedFunctionFactory<GeneratedFunction<T, V>, S> generatedFunctionFactory;
+    private GeneratedFunctionFactory<GeneratedFunction<RegistryInfo, InvocationClass>, InformationClass> generatedFunctionFactory;
 
-    public FunctionRegistryBase(GeneratedFunctionFactory<GeneratedFunction<T, V>, S> generatedFunctionFactory) {
+    public FunctionRegistryBase(GeneratedFunctionFactory<GeneratedFunction<RegistryInfo, InvocationClass>, InformationClass> generatedFunctionFactory) {
         this.generatedFunctionFactory = generatedFunctionFactory;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public String generate(T generationInformation) {
-        S generationFunctionInformation = generationInformation.getGenerationFunctionInformation();
+    public String generate(RegistryInfo generationInformation) {
+        InformationClass generationFunctionInformation = generationInformation.getGenerationFunctionInformation();
         StringBuilder stringBuilder = new StringBuilder();
-        GeneratedFunction<T, V> generatedFunction = generatedFunctionFactory.create(generationFunctionInformation);
+        GeneratedFunction<RegistryInfo, InvocationClass> generatedFunction = generatedFunctionFactory.create(generationFunctionInformation);
 
         if (!functions.contains(generatedFunction)) {
             stringBuilder.append(generatedFunction.getJavascriptCode());
         }
 
-        V recorderFunctionInvocation = generatedFunction.getInvocation(generationInformation);
+        InvocationClass recorderFunctionInvocation = generatedFunction.getInvocation(generationInformation);
         if (!invocations.contains(recorderFunctionInvocation)) {
             stringBuilder.append(recorderFunctionInvocation.getJavascriptCode());
         }
@@ -38,17 +44,20 @@ public class FunctionRegistryBase
         return stringBuilder.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void register(T registerEntry) {
-        S generationFunctionInformation = registerEntry.getGenerationFunctionInformation();
+    public void register(RegistryInfo registerEntry) {
+        InformationClass generationFunctionInformation = registerEntry.getGenerationFunctionInformation();
 
-        GeneratedFunction<T, V> function = generatedFunctionFactory.create(generationFunctionInformation);
+        GeneratedFunction<RegistryInfo, InvocationClass> function = generatedFunctionFactory.create(generationFunctionInformation);
 
         if (!functions.contains(function)) {
             functions.add(function);
         }
 
-        V invocation = function.getInvocation(registerEntry);
+        InvocationClass invocation = function.getInvocation(registerEntry);
         if (!invocations.contains(invocation)) {
             invocations.add(invocation);
         }
