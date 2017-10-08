@@ -4,7 +4,7 @@ import com.hribol.bromium.core.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.ReplayingState;
 
 /**
- * Created by hvrigazov on 02.08.17.
+ * Represents a {@link SynchronizationEvent} which notifies the current {@link ReplayingState}
  */
 public abstract class SynchronizationEventNotifyingState implements SynchronizationEvent {
 

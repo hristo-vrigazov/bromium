@@ -8,7 +8,8 @@ import com.hribol.bromium.replay.filters.ReplayResponseFilter;
 import static com.hribol.bromium.core.utils.Constants.NO_HTTP_REQUESTS_IN_QUEUE;
 
 /**
- * Created by hvrigazov on 03.06.17.
+ * Represent the event when there are no http requests we are currently
+ * waiting for to be completed
  */
 public class NoHttpRequestsInQueue extends SynchronizationEventNotifyingState {
 
@@ -22,16 +23,25 @@ public class NoHttpRequestsInQueue extends SynchronizationEventNotifyingState {
         this.replayingState.setSynchronizationEvent(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
         return NO_HTTP_REQUESTS_IN_QUEUE;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isSatisfied() {
         return replayingState.httpRequestQueueIsEmpty();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void signalizeIsDone() {
         this.eventSignalizer.signalizeEvent(this);
