@@ -1,12 +1,17 @@
 package com.hribol.bromium.common.builder;
 
 /**
- * Created by hvrigazov on 08.06.17.
+ * A builder for declaring functions
  */
 public class JsFunctionDeclarerBuilder {
     private JsCollector jsCollector;
     private StringBuilder stringBuilder;
 
+    /**
+     * Creates a new builder for declaring functions
+     * @param functionName the name of the function
+     * @param jsCollector the collector in which to write the buffer once it's ready
+     */
     public JsFunctionDeclarerBuilder(String functionName, JsCollector jsCollector) {
         this.stringBuilder = new StringBuilder();
         stringBuilder
@@ -15,6 +20,11 @@ public class JsFunctionDeclarerBuilder {
         this.jsCollector = jsCollector;
     }
 
+    /**
+     * Declares parameters of a function
+     * @param parameters the parameters' names
+     * @return this object, used for fluent API
+     */
     public JsFunctionDeclarerBuilder withParameters(String... parameters) {
         stringBuilder.append("(");
         if (parameters.length == 0) {
@@ -33,10 +43,19 @@ public class JsFunctionDeclarerBuilder {
         return this;
     }
 
+    /**
+     * Starts writing the body
+     * @return the object for building the body
+     */
     public JsFunctionBodyBuilder startBody() {
         return new JsFunctionBodyBuilder(this);
     }
 
+    /**
+     * Ends the body and writes the buffer to the parent
+     * @param body the body to be written
+     * @return the parent object, used for fluent API
+     */
     public JsCollector write(String body) {
         stringBuilder.append(body);
         stringBuilder.append("}\n");

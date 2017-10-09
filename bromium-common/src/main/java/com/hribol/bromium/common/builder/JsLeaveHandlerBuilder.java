@@ -3,13 +3,18 @@ package com.hribol.bromium.common.builder;
 import java.text.MessageFormat;
 
 /**
- * Created by hvrigazov on 02.07.17.
+ * Used for building the body of a handler for the case when an element with a given css selector leaves the DOM.
  */
 public class JsLeaveHandlerBuilder {
 
     private StringBuilder stringBuilder;
     private JsFunctionBodyBuilder parent;
 
+    /**
+     * Creates a new object for building the leave handler
+     * @param cssSelector the css selector that the js code should listen for
+     * @param parent the pa
+     */
     public JsLeaveHandlerBuilder(String cssSelector, JsFunctionBodyBuilder parent) {
         this.stringBuilder = new StringBuilder();
         this.parent = parent;
@@ -17,6 +22,10 @@ public class JsLeaveHandlerBuilder {
         stringBuilder.append(formattedMessage);
     }
 
+    /**
+     * Ends the handler and writes to the parent
+     * @return the parent object, used for fluent API
+     */
     public JsFunctionBodyBuilder endLeaveHandler() {
         stringBuilder.append("});\n");
         parent.write(stringBuilder.toString());
