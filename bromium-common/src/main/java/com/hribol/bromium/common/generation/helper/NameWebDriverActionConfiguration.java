@@ -6,7 +6,7 @@ import com.hribol.bromium.core.generation.GenerationInformation;
 import com.hribol.bromium.core.generation.RegistryInformation;
 
 /**
- * Created by hvrigazov on 01.07.17.
+ * Represents a packaged event name and a {@link WebDriverActionConfiguration}
  */
 public class NameWebDriverActionConfiguration implements RegistryInformation<WebDriverActionConfiguration> {
     private String eventName;

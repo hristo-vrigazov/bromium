@@ -6,7 +6,7 @@ import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import java.util.Map;
 
 /**
- * Created by hvrigazov on 02.07.17.
+ * Supplies an instance of {@link StepAndWebDriverActionConfiguration}
  */
 public class StepAndWebDriverActionConfigurationSupplier {
     public StepAndWebDriverActionConfiguration get(Map<String, String> testCaseStep, WebDriverActionConfiguration webDriverActionConfiguration) {

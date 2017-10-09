@@ -7,7 +7,7 @@ import com.hribol.bromium.core.generation.RegistryInformation;
 import java.util.Map;
 
 /**
- * Created by hvrigazov on 02.07.17.
+ * Represents a package of a test case step and {@link WebDriverActionConfiguration}
  */
 public class StepAndWebDriverActionConfiguration implements GenerationInformation, RegistryInformation<WebDriverActionConfiguration> {
     private Map<String, String> testCaseStep;

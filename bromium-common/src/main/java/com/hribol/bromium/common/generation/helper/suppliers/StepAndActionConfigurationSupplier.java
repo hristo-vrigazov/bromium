@@ -6,7 +6,7 @@ import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import java.util.Map;
 
 /**
- * Created by hvrigazov on 02.07.17.
+ * Supplies an instance of {@link StepAndActionConfiguration}
  */
 public class StepAndActionConfigurationSupplier {
     public StepAndActionConfiguration get(Map<String, String> testCaseStep,

@@ -6,7 +6,7 @@ import com.hribol.bromium.core.generation.GenerationInformation;
 import java.util.Map;
 
 /**
- * Created by hvrigazov on 01.07.17.
+ * Represents a package of a test case step and a {@link ApplicationActionConfiguration}
  */
 public class StepAndActionConfiguration implements GenerationInformation {
     private Map<String, String> testCaseStep;
