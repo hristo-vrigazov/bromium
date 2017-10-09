@@ -5,8 +5,8 @@ import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import com.google.inject.throwingproviders.CheckedProvides;
 import com.google.inject.throwingproviders.ThrowingProviderBinder;
-import com.hribol.bromium.common.browsers.ChromeDriverSupplier;
 import com.hribol.bromium.common.browsers.ChromeDriverServiceSupplier;
+import com.hribol.bromium.common.browsers.DriverServiceSupplierBase;
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.filtering.GetHtmlFromCurrentHostPredicate;
 import com.hribol.bromium.common.filtering.RequestToPageLoadingEventConverter;
@@ -71,6 +71,8 @@ import net.lightbody.bmp.proxy.CaptureType;
 import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.service.DriverService;
@@ -594,7 +596,7 @@ public class DefaultModule extends AbstractModule {
     public WebDriverSupplier getInvisibleWebDriverSupplier(@Named(BROWSER_TYPE) String browserType) {
         switch (browserType) {
             case CHROME:
-                return new ChromeDriverSupplier();
+                return (WebDriverSupplier<ChromeDriverService>) ChromeDriver::new;
             default:
                 throw new BrowserTypeNotSupportedException();
         }
