@@ -3,7 +3,7 @@ package com.hribol.bromium.common.builder;
 import java.text.MessageFormat;
 
 /**
- * Created by hvrigazov on 09.06.17.
+ * A builder for a map of parameters
  */
 public class JsParameterCollectorBuilder {
     private String parameters;
@@ -18,19 +18,34 @@ public class JsParameterCollectorBuilder {
         stringBuilder.append(toBeAdded);
     }
 
+    /**
+     * Adds a parameter to the map
+     * @param parameter the variable used as a key
+     * @param value the variable used as a value
+     * @return this object, used for fluent API
+     */
     public JsParameterCollectorBuilder parameter(String parameter, String value) {
         String rowToBeAdded = MessageFormat.format("{0}[{1}] = {2};\n\t\t\t\t", parameters, parameter, value);
         stringBuilder.append(rowToBeAdded);
         return this;
     }
 
-
+    /**
+     * Adds a parameter to the map, the key is a string
+     * @param parameter the string to be used as a key
+     * @param value the variable used as a value
+     * @return this object, used for fluent API
+     */
     public JsParameterCollectorBuilder parameterWithConstantKey(String parameter, String value) {
         String rowToBeAdded = MessageFormat.format("{0}[\"{1}\"] = {2};\n", parameters, parameter, value);
         stringBuilder.append(rowToBeAdded);
         return this;
     }
 
+    /**
+     * Builds parameters and writes buffer to parent
+     * @return the parent object
+     */
     public JsEventListenerBodyBuilder buildParameters() {
         parent.write(stringBuilder.toString());
         return parent;

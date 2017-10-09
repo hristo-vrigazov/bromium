@@ -32,17 +32,32 @@ public class JsLeaveHandlerBuilder {
         return parent;
     }
 
+    /**
+     * Writes to the buffer
+     * @param string the string to be appended
+     * @return this object, used for fluent API
+     */
     public JsLeaveHandlerBuilder write(String string) {
         stringBuilder.append(string);
         return this;
     }
 
+    /**
+     * Adds a call to notify that a condition has been satisfied to bromium
+     * @param hashcode the hashcode of the event to be satisfied
+     * @return this object, used for fluent API
+     */
     public JsLeaveHandlerBuilder notifySatisfiedCondition(String hashcode) {
         String toBeAdded = MessageFormat.format("\t\tbromium.notifySatisfiedCondition({0});\n\t", hashcode);
         stringBuilder.append(toBeAdded);
         return this;
     }
 
+    /**
+     * Adds a call to notify that a condition has not been satisfied to bromium
+     * @param hashcode the hashcode of the event that is not satisfied
+     * @return this object, used for fluent API
+     */
     public JsLeaveHandlerBuilder notifyNotSatisfiedCondition(String hashcode) {
         String toBeAdded = MessageFormat.format("\t\tbromium.notifyNotSatisfiedCondition({0});\n\t", hashcode);
         stringBuilder.append(toBeAdded);
