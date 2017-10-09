@@ -8,7 +8,7 @@ import com.hribol.bromium.core.generation.GeneratedFunction;
 import java.util.function.Supplier;
 
 /**
- * Created by hvrigazov on 02.07.17.
+ * A {@link BaseReplayFunctionFactory} that uses only the predefined actions
  */
 public class PredefinedReplayFunctionFactory extends BaseReplayFunctionFactory {
     public PredefinedReplayFunctionFactory(Supplier<GeneratedFunction<StepAndWebDriverActionConfiguration, ReplayFunctionInvocation>> emptyGeneratedFunctionSupplier,

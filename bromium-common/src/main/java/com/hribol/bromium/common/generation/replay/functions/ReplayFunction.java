@@ -5,8 +5,7 @@ import com.hribol.bromium.core.generation.GeneratedFunction;
 import com.hribol.bromium.core.generation.JavascriptCodeSupplier;
 
 /**
- * Created by hvrigazov on 02.07.17.
+ * Represents a generated replay function
  */
-public interface ReplayFunction extends JavascriptCodeSupplier,
-    GeneratedFunction<StepAndWebDriverActionConfiguration, ReplayFunctionInvocation> {
+public interface ReplayFunction extends GeneratedFunction<StepAndWebDriverActionConfiguration, ReplayFunctionInvocation> {
 }

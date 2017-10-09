@@ -15,7 +15,7 @@ import static com.hribol.bromium.common.generation.replay.functions.Constants.HA
 import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
 
 /**
- * Created by hvrigazov on 02.07.17.
+ * A {@link ReplayFunction} for {@link com.hribol.bromium.common.replay.actions.ClickCssSelector}
  */
 public class ClickCssSelectorReplayFunction implements ReplayFunction {
 

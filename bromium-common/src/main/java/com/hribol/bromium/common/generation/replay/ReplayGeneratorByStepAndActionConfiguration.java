@@ -11,7 +11,7 @@ import com.hribol.bromium.core.generation.JavascriptGenerator;
 import java.util.Map;
 
 /**
- * Created by hvrigazov on 01.07.17.
+ * Generates javascript by given {@link StepAndActionConfiguration}
  */
 public class ReplayGeneratorByStepAndActionConfiguration implements JavascriptGenerator<StepAndActionConfiguration> {
 

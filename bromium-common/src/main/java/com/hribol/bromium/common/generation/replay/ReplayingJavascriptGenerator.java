@@ -15,7 +15,7 @@ import java.util.Optional;
 import static com.hribol.bromium.core.utils.Constants.EVENT;
 
 /**
- * Created by hvrigazov on 01.07.17.
+ * Generates javascript code by given {@link StepsAndConfiguration}
  */
 public class ReplayingJavascriptGenerator implements JavascriptGenerator<StepsAndConfiguration> {
 
