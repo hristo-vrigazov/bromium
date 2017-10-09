@@ -5,8 +5,8 @@ import org.openqa.selenium.remote.service.DriverService;
 import java.io.IOException;
 
 /**
- * Provides a {@link T} - driver service
+ * Provides a driver service
  */
-public interface DriverServiceSupplier<T extends DriverService> {
-    T getDriverService(String pathToDriverExecutable, String screenToUse) throws IOException;
+public interface DriverServiceSupplier {
+    DriverService getDriverService(String pathToDriverExecutable, String screenToUse) throws IOException;
 }
