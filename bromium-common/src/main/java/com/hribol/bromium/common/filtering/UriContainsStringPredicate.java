@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 import static com.hribol.bromium.core.ConventionConstants.SUBMIT_EVENT_URL;
 
 /**
- * Created by hvrigazov on 02.08.17.
+ * A predicate which checks whether the URL of a given {@link HttpRequest} contains given string
  */
 public class UriContainsStringPredicate implements Predicate<HttpRequest> {
 

@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Created by hvrigazov on 02.08.17.
+ * Converts a {@link HttpRequest} by splitting the query part
  */
 public class SplitQueryStringOfRequest implements HttpRequestToTestCaseStepConverter {
     @Override

@@ -19,7 +19,7 @@ import static com.hribol.bromium.core.utils.Constants.EVENT;
 import static com.hribol.bromium.core.utils.WebDriverActions.PAGE_LOADING;
 
 /**
- * Created by hvrigazov on 03.08.17.
+ * Converts {@link HttpRequest} to a page loading action step. Skips the requests marked by the javascript.
  */
 public class RequestToPageLoadingEventConverter implements HttpRequestToTestCaseStepConverter {
 

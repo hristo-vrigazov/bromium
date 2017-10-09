@@ -13,7 +13,8 @@ import static com.hribol.bromium.core.DependencyInjectionConstants.BASE_URI;
 import static io.netty.handler.codec.http.HttpHeaders.Names.ACCEPT;
 
 /**
- * Created by hvrigazov on 30.07.17.
+ * A predicate which checks whether a given {@link HttpRequest} is from the same host as the baseURI, uses GET verb and
+ * accepts html as response
  */
 public class GetHtmlFromCurrentHostPredicate implements Predicate<HttpRequest> {
 
