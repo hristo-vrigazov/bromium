@@ -10,7 +10,7 @@ import static com.hribol.bromium.core.utils.Constants.*;
 import static com.hribol.bromium.core.utils.JsEvents.CHANGE;
 
 /**
- * Created by hvrigazov on 09.08.17.
+ * A {@link RecorderFunction} for {@link com.hribol.bromium.common.replay.actions.TypeTextInElementFoundByCssSelector}
  */
 public class TypeTextInElementFoundByCssSelectorRecorderFunction implements RecorderFunction {
 
