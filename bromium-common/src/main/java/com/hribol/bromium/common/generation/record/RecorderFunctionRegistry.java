@@ -7,7 +7,7 @@ import com.hribol.bromium.common.generation.record.invocations.RecorderFunctionI
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 
 /**
- * Created by hvrigazov on 07.06.17.
+ * Represents a {@link FunctionRegistryBase} for recorder functions
  */
 public class RecorderFunctionRegistry extends FunctionRegistryBase<
         NameWebDriverActionConfiguration,

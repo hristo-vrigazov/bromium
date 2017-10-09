@@ -7,13 +7,19 @@ import com.hribol.bromium.core.generation.JavascriptGenerator;
 import java.util.stream.Collectors;
 
 /**
- * Created by hvrigazov on 07.06.17.
+ * Represents a class which by a given {@link ApplicationConfiguration} generates recording javascript
+ * code.
  */
 public class RecordingJavascriptGenerator implements JavascriptGenerator<ApplicationConfiguration> {
 
     private JavascriptGenerator<ApplicationActionConfiguration> applicationActionGenerator;
     private String baseTemplate;
 
+    /**
+     * Creates a new instance
+     * @param baseTemplate the template to be included in the beginning
+     * @param applicationActionGenerator the generator per action
+     */
     public RecordingJavascriptGenerator(String baseTemplate, JavascriptGenerator<ApplicationActionConfiguration> applicationActionGenerator) {
         this.baseTemplate = baseTemplate;
         this.applicationActionGenerator = applicationActionGenerator;

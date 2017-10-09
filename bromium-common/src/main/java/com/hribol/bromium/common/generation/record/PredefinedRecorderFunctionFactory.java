@@ -9,7 +9,7 @@ import com.hribol.bromium.core.generation.GeneratedFunction;
 import java.util.function.Supplier;
 
 /**
- * Created by hvrigazov on 08.06.17.
+ * A {@link BaseRecorderFunctionFactory} that uses just the predefined actions
  */
 public class PredefinedRecorderFunctionFactory extends BaseRecorderFunctionFactory {
 
