@@ -40,6 +40,12 @@ public class ReplayRequestFilterTest {
         verify(stateConditionsUpdater).update(replayingState, EXAMPLE_CONDITION);
     }
 
+    @Test
+    public void throwsExceptionIfUrlIsMalformed() {
+        baseTest("a" + RANDOM_URL);
+        verify(stateConditionsUpdater, never()).update(replayingState, EXAMPLE_CONDITION);
+    }
+
     private void baseTest(String url) {
         when(httpRequest.getUri()).thenReturn(url);
         ReplayRequestFilter replayRequestFilter = new ReplayRequestFilter(replayingState, getConditionUpdaters());
