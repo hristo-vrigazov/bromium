@@ -80,13 +80,43 @@ test case will be outputted.
 * Run `bromium replay` with the configuration and the test case from the previous step. This will output an execution report
 consisting of performance data, timestamps of actions, result of the test, etc. If want to do this programmatically and 
 not from the terminal, you can use the `ReplayBrowser` class and it's method `replay` to get the same data.
+* When your test requires a new action or assertion, edit your configuration file and it, or run `bromium update` for a
+wizard to guide you through the process.
+* When there is a new version of your app, copy your configuration and replace the implementations for the actions or 
+run `bromium version` for a wizard to guide you through the process. You can now record on ne version and replay it on
+any other version.
 
 ## How is it different from
 * Selenium
+
+Bromium uses Selenium under the hood, but it adds more features and makes it faster to develop, because we assume that
+you are using Selenium for application testing. Selenium does not include any synchronization logic, which makes tests
+unstable if one does not write a reliable one of his own.
+
 * Apache JMeter
+
+Bromium uses actual interaction with the browser and records every HTTP request as well as action timestamps 
+(perceived speed), making it possible to measure more complicated scenarios that the ones possible with JMeter.
+
 * Selenium IDE and other recording test tools
 
+Selenium IDE records test cases on an HTML level, not on your application level. If I click on an element, it would record
+for example that the third div was clicked. Bromium would record that as an action in your application in the way you defined
+it, for example `Click the third row`, which would give you an executable test immediately after recording.
+
 ## Planned features
+
+* Dockerize test runs, which would make it possible to execute headless test runs even on Windows
+* Replace the configuration json with a beautiful DSL which can be used in editor with autocomplete, go to reference etc.
+There is a prototype for this and will soon be ready.
+* Parallel execution of test runs from one JVM.
+* Distributed test runner on multiple machines.
+* Add more actions
+* Maven integration
+* Jira plugin
+* Basic performance data analyzer and comparator
+* Chrome plugin for defining and debugging actions in the browser
+* Support browsers other than Chrome
 
 ## Contributing
 * General questions - gitter
