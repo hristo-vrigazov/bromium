@@ -9,7 +9,7 @@ import org.beryx.textio.TextIO;
 import java.io.IOException;
 
 /**
- * Created by hvrigazov on 11.04.17.
+ * A command for updating a configuration
  */
 public class UpdateCommand implements Command {
     private TextIO textIO;

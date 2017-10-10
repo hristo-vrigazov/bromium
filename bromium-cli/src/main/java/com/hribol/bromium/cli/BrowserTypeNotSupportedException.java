@@ -1,7 +1,7 @@
 package com.hribol.bromium.cli;
 
 /**
- * Created by hvrigazov on 26.07.17.
+ * Throw this when the user selects a browser that is not yet supported
  */
 public class BrowserTypeNotSupportedException extends IllegalArgumentException {
 

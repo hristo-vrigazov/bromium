@@ -9,7 +9,7 @@ import java.io.IOException;
 
 
 /**
- * Created by hvrigazov on 11.04.17.
+ * A command for creating a configuration
  */
 public class InitCommand implements Command {
     private TextIO textIO;

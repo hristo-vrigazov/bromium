@@ -11,7 +11,7 @@ import org.beryx.textio.TextIoFactory;
 import java.util.*;
 
 /**
- * Created by hvrigazov on 11.04.17.
+ * Utilities for prompting the user
  */
 public class PromptUtils {
 

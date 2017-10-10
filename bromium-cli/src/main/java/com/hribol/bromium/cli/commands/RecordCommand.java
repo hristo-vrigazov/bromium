@@ -17,7 +17,7 @@ import java.util.Optional;
 import static com.hribol.bromium.core.DependencyInjectionConstants.*;
 
 /**
- * Created by hvrigazov on 11.04.17.
+ * A command for recording
  */
 public class RecordCommand implements Command {
 

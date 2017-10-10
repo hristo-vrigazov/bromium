@@ -16,7 +16,7 @@ import java.util.function.Supplier;
 import static com.hribol.bromium.cli.Main.Commands.*;
 
 /**
- * Created by hvrigazov on 14.03.17.
+ * Entry point to the application
  */
 public class Main {
 

@@ -97,7 +97,7 @@ import static com.hribol.bromium.core.utils.Constants.HAR_EXTENSION;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
 /**
- * Created by hvrigazov on 09.06.17.
+ * Guice module used for creation of the dependency graph
  */
 public class DefaultModule extends AbstractModule {
     private String command;

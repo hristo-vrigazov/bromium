@@ -1,7 +1,7 @@
 package com.hribol.bromium.cli.commands;
 
 /**
- * Created by hvrigazov on 11.04.17.
+ * Represents a command from the command line
  */
 public interface Command extends Runnable {
 }

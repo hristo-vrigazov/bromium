@@ -20,7 +20,7 @@ import static com.hribol.bromium.core.DependencyInjectionConstants.MEASUREMENTS_
 import static com.hribol.bromium.core.DependencyInjectionConstants.SCREEN_NUMBER;
 
 /**
- * Created by hvrigazov on 08.07.17.
+ * A command for replaying a test scenario
  */
 public class ReplayCommand implements Command {
 
