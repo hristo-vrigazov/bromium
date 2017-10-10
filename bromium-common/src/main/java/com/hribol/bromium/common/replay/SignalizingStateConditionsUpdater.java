@@ -4,7 +4,8 @@ import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.filters.StateConditionsUpdater;
 
 /**
- * Created by hvrigazov on 10.10.17.
+ * Updates a condition by setting it to satisfied and signalizes if the current
+ * synchronization event that we are waiting for is satisfied
  */
 public class SignalizingStateConditionsUpdater implements StateConditionsUpdater {
     @Override
