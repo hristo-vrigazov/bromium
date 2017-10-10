@@ -37,10 +37,10 @@ public class Main {
             Docopt docopt = new Docopt(doc);
             Map<String, Object> opts = docopt
                     .withVersion("bromium 0.1")
+                    .withHelp(true)
                     .withExit(false)
                     .parse(args);
 
-            System.out.println(opts);
             Map<String, Supplier<Command>> commandToHandler = getCommands();
             String selectedCommand = commandToHandler
                     .keySet()

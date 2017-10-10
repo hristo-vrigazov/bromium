@@ -104,8 +104,9 @@ Selenium IDE records test cases on an HTML level, not on your application level.
 for example that the third div was clicked. Bromium would record that as an action in your application in the way you defined
 it, for example `Click the third row`, which would give you an executable test immediately after recording.
 
-## Planned features
+## Planned 
 
+* Deploy to Maven central
 * Dockerize test runs, which would make it possible to execute headless test runs even on Windows
 * Replace the configuration json with a beautiful DSL which can be used in editor with autocomplete, go to reference etc.
 There is a prototype for this and will soon be ready.
