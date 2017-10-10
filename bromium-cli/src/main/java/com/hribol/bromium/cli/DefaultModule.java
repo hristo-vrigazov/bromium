@@ -27,6 +27,7 @@ import com.hribol.bromium.common.generation.replay.*;
 import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
 import com.hribol.bromium.common.ProxyDriverIntegrator;
 import com.hribol.bromium.common.record.RecordBrowser;
+import com.hribol.bromium.common.replay.SignalizingStateConditionsUpdater;
 import com.hribol.bromium.core.utils.*;
 import com.hribol.bromium.record.RecordingState;
 import com.hribol.bromium.common.replay.DriverOperations;
@@ -292,14 +293,9 @@ public class DefaultModule extends AbstractModule {
                                                          @Named(CONDITION_NOT_SATISFIED_PREDICATE)
                                                          Predicate<HttpRequest> conditionNotSatisfiedPredicate) {
         List<ConditionsUpdater> conditionsUpdaters = new ArrayList<>();
-        conditionsUpdaters.add(new ConditionsUpdater(conditionSatisfiedPredicate, this::setConditionSatisfied));
+        conditionsUpdaters.add(new ConditionsUpdater(conditionSatisfiedPredicate, new SignalizingStateConditionsUpdater()));
         conditionsUpdaters.add(new ConditionsUpdater(conditionNotSatisfiedPredicate, ReplayingState::setConditionNotSatisfied));
         return conditionsUpdaters;
-    }
-
-    public void setConditionSatisfied(ReplayingState replayingState, String event) {
-        replayingState.setConditionSatisfied(event);
-        replayingState.signalizeIfSynchronizationEventIsSatisfied();
     }
 
     @CheckedProvides(IOProvider.class)
