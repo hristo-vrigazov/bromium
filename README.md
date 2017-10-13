@@ -19,41 +19,15 @@ For example, trying to click on an element that is not there yet.
 
 ## Features
 * Declarative way of describing your actions and how they translate to browser actions for different versions of your app. 
-For example:
-```
-{
-    "expectsHttpRequest": true,
-    "name": "Click on login button",
-    "webDriverAction": {
-        "parametersConfiguration": {
-            "cssSelector": {
-                "expose": false,
-                "parameterName": "cssSelector",
-                "value": "#login"
-            }
-        },
-        "webDriverActionType": "CLICK_CSS_SELECTOR"
-    }
-}
-```
+For example (this is bromium-dsl, but currently only JSON is supported):
+
+![Example Bromium DSL app](examples/bromium.dsl.png)
+
 This defines an action named `Click on login button` which translates to clicking the element with id `login`. If for example
-in another version we cannot locate the element by id, but by class, the configuration would look like this:
-```
-{
-    "expectsHttpRequest": true,
-    "name": "Click on login button",
-    "webDriverAction": {
-        "parametersConfiguration": {
-            "cssSelector": {
-                "expose": false,
-                "parameterName": "cssSelector",
-                "value": ".login"
-            }
-        },
-        "webDriverActionType": "CLICK_CSS_SELECTOR"
-    }
-}
-```
+in another version we cannot locate the element by id, but by class, and leave the other actions unchanged, the configuration would look like this:
+
+![Example Bromium DSL inherit](examples/bromium.dsl.inherit.png)
+
 Now if we execute a test with the step `Click on login button`, it would execute it correctly in any of the two versions.
 This makes your end-to-end tests version-independent. 
 
@@ -70,12 +44,12 @@ it is basically a format for storing HTTP requests/responses with response times
 
 * Execute tests either on your screen or in headless mode (invisible mode).
 
-* Very flexible architecture based on `Guice` and dependency injection.
+* Very flexible architecture based on `Guice` and dependency injection, easily extensible.
 
 ## What is the recommended test development process with Bromium
-* Define your initial application actions in a json file. You can run `bromium init` to have a wizard guide you through the 
-process.
-* Run `bromium record` with the configuration created, execute the test case yourself. After the run, a json with your
+* Define your initial application actions in a file like the one above or in a json file. You can run `bromium init` to 
+have a wizard guide you through the process.
+* Run `bromium record` with the configuration created, execute the test case yourself. After the run, a json file with your
 test case will be outputted.
 * Run `bromium replay` with the configuration and the test case from the previous step. This will output an execution report
 consisting of performance data, timestamps of actions, result of the test, etc. If want to do this programmatically and 
@@ -96,7 +70,9 @@ unstable if one does not write a reliable one of his own.
 * Apache JMeter
 
 Bromium uses actual interaction with the browser and records every HTTP request as well as action timestamps 
-(perceived speed), making it possible to measure more complicated scenarios that the ones possible with JMeter.
+(perceived speed), making it possible to measure more complicated scenarios that the ones possible with JMeter. JMeter
+is better for example for performance testing of REST APIs, while Bromium is more suitable for integration tests and
+UI performance tests.
 
 * Selenium IDE and other recording test tools
 
@@ -106,13 +82,13 @@ it, for example `Click the third row`, which would give you an executable test i
 
 ## Planned 
 
+* Add more actions
 * Deploy to Maven central
 * Dockerize test runs, which would make it possible to execute headless test runs even on Windows
 * Replace the configuration json with a beautiful DSL which can be used in editor with autocomplete, go to reference etc.
 There is a prototype for this and will soon be ready.
 * Parallel execution of test runs from one JVM.
 * Distributed test runner on multiple machines.
-* Add more actions
 * Maven integration
 * Jira plugin
 * Basic performance data analyzer and comparator
@@ -120,9 +96,9 @@ There is a prototype for this and will soon be ready.
 * Support browsers other than Chrome
 
 ## Contributing
-* General questions - gitter
+* General questions - gitter 
 * Bugs, feature requests, etc. - github issues
-* Development - instructions
+* Development - instructions, TODO
 
 ## How does it work?
 
