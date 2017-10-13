@@ -12,7 +12,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Created by hvrigazov on 03.06.17.
+ * A class which synchronizes events by signalizing. This is the opposite of a polling-based approach.
  */
 public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
 
@@ -29,6 +29,9 @@ public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
         this.lock = lock;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void awaitUntil(SynchronizationEvent synchronizationEvent) throws InterruptedException, TimeoutException {
         System.out.println("Before await " + synchronizationEvent.isSatisfied());
@@ -53,6 +56,9 @@ public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void signalizeEvent(SynchronizationEvent synchronizationEvent) {
         try {

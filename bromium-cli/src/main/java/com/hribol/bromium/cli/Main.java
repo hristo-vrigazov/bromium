@@ -16,7 +16,7 @@ import java.util.function.Supplier;
 import static com.hribol.bromium.cli.Main.Commands.*;
 
 /**
- * Created by hvrigazov on 14.03.17.
+ * Entry point to the application
  */
 public class Main {
 
@@ -37,10 +37,10 @@ public class Main {
             Docopt docopt = new Docopt(doc);
             Map<String, Object> opts = docopt
                     .withVersion("bromium 0.1")
+                    .withHelp(true)
                     .withExit(false)
                     .parse(args);
 
-            System.out.println(opts);
             Map<String, Supplier<Command>> commandToHandler = getCommands();
             String selectedCommand = commandToHandler
                     .keySet()

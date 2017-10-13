@@ -6,18 +6,23 @@ import com.hribol.bromium.core.generation.JavascriptGenerator;
 import com.hribol.bromium.core.generation.RegistryInformation;
 
 /**
- * Created by hvrigazov on 07.06.17.
+ * Represents a {@link JavascriptGenerator} which generates code by a given {@link RegistryInfo} and then registers the
+ * {@link RegistryInfo} to a given {@link FunctionRegistry}
+ * @param <RegistryInfo> the info needed for registration
  */
-public class IncludeInvokeGenerator<T extends RegistryInformation> implements JavascriptGenerator<T> {
-    private FunctionRegistry<T> recorderFunctionRegistry;
+public class IncludeInvokeGenerator<RegistryInfo extends RegistryInformation> implements JavascriptGenerator<RegistryInfo> {
+    private FunctionRegistry<RegistryInfo> recorderFunctionRegistry;
 
     @Inject
-    public IncludeInvokeGenerator(FunctionRegistry<T> recorderFunctionRegistry) {
+    public IncludeInvokeGenerator(FunctionRegistry<RegistryInfo> recorderFunctionRegistry) {
         this.recorderFunctionRegistry = recorderFunctionRegistry;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public String generate(T generationInformation) {
+    public String generate(RegistryInfo generationInformation) {
         String getRecordingCode = recorderFunctionRegistry.generate(generationInformation);
         recorderFunctionRegistry.register(generationInformation);
         return getRecordingCode;

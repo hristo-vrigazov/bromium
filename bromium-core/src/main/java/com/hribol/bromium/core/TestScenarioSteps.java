@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * Created by hvrigazov on 19.07.17.
+ * Domain specific wrapper
  */
 public class TestScenarioSteps extends ArrayList<Map<String, String>> {
 }

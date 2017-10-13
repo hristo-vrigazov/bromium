@@ -9,10 +9,16 @@ import java.io.IOException;
 import java.io.Writer;
 
 /**
- * Created by hvrigazov on 19.07.17.
+ * Dumps recorded {@link TestScenarioSteps}
  */
 public class StepsDumper {
 
+    /**
+     * Dumps recorded {@link TestScenarioSteps}
+     * @param testScenarioSteps The steps that will be dumped
+     * @param outputFile The file that we should output the steps to
+     * @throws IOException
+     */
     public void dump(TestScenarioSteps testScenarioSteps, String outputFile) throws IOException {
         Writer writer = new FileWriter(outputFile);
         Gson gson = new GsonBuilder().create();

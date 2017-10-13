@@ -7,12 +7,14 @@ import com.google.inject.util.Modules;
 import com.hribol.bromium.cli.DefaultModule;
 import com.hribol.bromium.cli.commands.RecordCommand;
 import com.hribol.bromium.core.TestScenarioSteps;
-import com.hribol.bromium.core.utils.ConfigurationUtils;
+import com.hribol.bromium.core.utils.parsing.StepsReader;
 import com.hribol.bromium.integration.tests.BaseDemoAppIntegrationTest;
 import com.hribol.bromium.integration.tests.simulation.RecordingSimulatorModule;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,6 +65,9 @@ public abstract class BaseRecordIntegrationTest extends BaseDemoAppIntegrationTe
     protected abstract void verifyAssertions() throws IOException;
 
     protected TestScenarioSteps getActualSteps() throws IOException {
-        return ConfigurationUtils.readSteps((String) opts.get(OUTPUT));
+        String filename = (String) opts.get(OUTPUT);
+        try (InputStream inputStream = new FileInputStream(filename)) {
+            return new StepsReader().readSteps(inputStream);
+        }
     }
 }

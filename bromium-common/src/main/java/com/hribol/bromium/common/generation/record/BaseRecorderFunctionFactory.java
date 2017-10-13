@@ -16,7 +16,8 @@ import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CSS_SELECTOR;
 import static com.hribol.bromium.core.utils.WebDriverActions.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR;
 
 /**
- * Created by hvrigazov on 08.06.17.
+ * Represents a factory for creating recorder functions which can be extended through the
+ * {@link #addCustom()} method.
  */
 public abstract class BaseRecorderFunctionFactory extends
         FunctionFactoryBase<GeneratedFunction<NameWebDriverActionConfiguration, RecorderFunctionInvocation>, WebDriverActionConfiguration> {
@@ -25,8 +26,6 @@ public abstract class BaseRecorderFunctionFactory extends
                                        JsCollector jsCollector) {
         super(emptyGeneratedFunctionSupplier, jsCollector);
     }
-
-    protected abstract void addCustom();
 
     @Override
     protected void addPredefined() {

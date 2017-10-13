@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by hvrigazov on 01.07.17.
+ * Represents a package of {@link TestScenarioSteps} and {@link ApplicationConfiguration}
  */
 public class StepsAndConfiguration implements GenerationInformation {
     private TestScenarioSteps testCaseSteps;

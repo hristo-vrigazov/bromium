@@ -3,7 +3,8 @@ package com.hribol.bromium.cli;
 import java.util.Map;
 
 /**
- * Created by hvrigazov on 08.07.17.
+ * Represents the options from the command line and provides methods for
+ * accessing them
  */
 public class ParsedOptions {
 

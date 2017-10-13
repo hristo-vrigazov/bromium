@@ -1,6 +1,6 @@
 package com.hribol.bromium.common.filtering;
 
-import com.hribol.bromium.core.utils.ConfigurationUtils;
+import com.hribol.bromium.core.utils.URLUtils;
 import com.hribol.bromium.core.utils.HttpRequestToTestCaseStepConverter;
 import io.netty.handler.codec.http.HttpRequest;
 
@@ -11,11 +11,11 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Created by hvrigazov on 02.08.17.
+ * Converts a {@link HttpRequest} by splitting the query part
  */
 public class SplitQueryStringOfRequest implements HttpRequestToTestCaseStepConverter {
     @Override
     public Optional<Map<String, String>> convert(HttpRequest httpRequest) throws MalformedURLException, UnsupportedEncodingException {
-        return Optional.of(ConfigurationUtils.splitQuery(new URL(httpRequest.getUri())));
+        return Optional.of(URLUtils.splitQuery(new URL(httpRequest.getUri())));
     }
 }

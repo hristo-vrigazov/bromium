@@ -1,7 +1,7 @@
 package com.hribol.bromium.replay.report;
 
 /**
- * Created by hvrigazov on 16.03.17.
+ * Represent the result from a test execution
  */
 public enum AutomationResult {
     NO_VIRTUAL_SCREEN,

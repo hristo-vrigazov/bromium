@@ -9,7 +9,7 @@ import org.beryx.textio.TextIO;
 import java.io.IOException;
 
 /**
- * Created by hvrigazov on 12.04.17.
+ * A command for creating a new version of an application
  */
 public class VersionCommand implements Command {
     private TextIO textIO;

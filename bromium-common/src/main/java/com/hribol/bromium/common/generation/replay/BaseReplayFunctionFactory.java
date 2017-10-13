@@ -13,7 +13,8 @@ import java.util.function.Supplier;
 import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CSS_SELECTOR;
 
 /**
- * Created by hvrigazov on 02.07.17.
+ * Represents a base factory for creating replay functions which can be extended through the
+ * {@link #addCustom()} method.
  */
 public abstract class BaseReplayFunctionFactory extends
         FunctionFactoryBase<
@@ -25,8 +26,6 @@ public abstract class BaseReplayFunctionFactory extends
                                      JsCollector jsCollector) {
         super(emptyGeneratedFunctionSupplier, jsCollector);
     }
-
-    protected abstract void addCustom();
 
     @Override
     protected void addPredefined() {

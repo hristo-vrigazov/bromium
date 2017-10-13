@@ -7,7 +7,7 @@ import com.hribol.bromium.core.generation.GeneratedFunction;
 import com.hribol.bromium.core.generation.JavascriptCodeSupplier;
 
 /**
- * Created by hvrigazov on 07.06.17.
+ * Represents a programmatically generated function used in recording
  */
-public interface RecorderFunction extends JavascriptCodeSupplier, GeneratedFunction<NameWebDriverActionConfiguration, RecorderFunctionInvocation> {
+public interface RecorderFunction extends GeneratedFunction<NameWebDriverActionConfiguration, RecorderFunctionInvocation> {
 }

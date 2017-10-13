@@ -1,7 +1,7 @@
 package com.hribol.bromium.core.suite;
 
 /**
- * Created by hvrigazov on 06.05.17.
+ * Base class for virtual screen process creators that use :1, :2 etc. as representing screens.
  */
 public abstract class VirtualScreenProcessCreatorBase implements VirtualScreenProcessCreator {
 

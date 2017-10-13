@@ -13,7 +13,9 @@ import org.openqa.selenium.WebDriver;
 import java.util.concurrent.TimeoutException;
 
 /**
- * Created by hvrigazov on 21.05.17.
+ * A base class for all actions that need a js condition to be satisfied before they can be executed.
+ * An example would be a click on an element with an id, the js condition would be that the element is present
+ * in the DOM.
  */
 public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecondition, WebDriverAction {
 
@@ -30,6 +32,11 @@ public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecon
         executeAfterJSPreconditionHasBeenSatisfied(driver, replayingState);
     }
 
+    /**
+     * The code to be executed after the condition was satisfied. The meat of the action
+     * @param driver the driver instance
+     * @param replayingState the current state of the replaying
+     */
     public abstract void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState);
 
 }

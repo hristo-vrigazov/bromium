@@ -4,7 +4,7 @@ import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfigurat
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 
 /**
- * Created by hvrigazov on 03.07.17.
+ * Supplies an instance of {@link NameWebDriverActionConfiguration}
  */
 public class NameWebDriverActionConfigurationSupplier {
 

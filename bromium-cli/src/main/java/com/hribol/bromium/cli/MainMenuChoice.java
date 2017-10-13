@@ -1,7 +1,7 @@
 package com.hribol.bromium.cli;
 
 /**
- * Created by hvrigazov on 17.03.17.
+ * Represents a choice that the user can select when adding an action
  */
 public enum MainMenuChoice {
     ASSERTION,

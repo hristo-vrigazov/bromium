@@ -14,7 +14,6 @@ import static com.hribol.bromium.core.utils.Constants.EVENT;
  */
 public class ClickCssSelectorParser implements WebDriverActionParameterParser {
 
-
     @Override
     public WebDriverAction create(Map<String, String> parameters, boolean expectHttpRequest) {
         String cssSelector = parameters.get(CSS_SELECTOR);

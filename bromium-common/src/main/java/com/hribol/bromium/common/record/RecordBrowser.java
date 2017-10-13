@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.function.Supplier;
 
 /**
- * Created by hvrigazov on 09.03.17.
+ * A class that can start recording, expose the {@link TestScenarioSteps} and clean up.
  */
 public class RecordBrowser {
 

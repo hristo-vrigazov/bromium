@@ -1,7 +1,6 @@
 package com.hribol.bromium.core.utils.parsing;
 
 import com.hribol.bromium.core.config.ApplicationConfiguration;
-import com.hribol.bromium.core.utils.ConfigurationUtils;
 import org.junit.Test;
 
 import java.io.File;
@@ -9,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by hvrigazov on 03.07.17.

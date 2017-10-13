@@ -9,13 +9,19 @@ import net.lightbody.bmp.util.HttpMessageInfo;
 import java.util.function.Predicate;
 
 /**
- * Created by hvrigazov on 22.04.17.
+ * A response filter which by given predicate which accepts a {@link HttpRequest} as a parameter, injects a given
+ * javascript injection code to the {@link HttpResponse}.
  */
 public class RecordResponseFilter implements ResponseFilter {
 
     private String injectionCode;
     private Predicate<HttpRequest> shouldInjectJavascriptPredicate;
 
+    /**
+     * Constructs a new {@link RecordResponseFilter}
+     * @param injectionCode the injection code to be included in the http request
+     * @param shouldInjectJavascriptPredicate the predicate which indicates whether the code should be injected
+     */
     public RecordResponseFilter(String injectionCode,
                                 Predicate<HttpRequest> shouldInjectJavascriptPredicate) {
         this.injectionCode = injectionCode;

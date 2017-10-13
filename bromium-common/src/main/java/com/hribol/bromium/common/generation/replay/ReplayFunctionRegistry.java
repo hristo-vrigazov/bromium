@@ -6,7 +6,7 @@ import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvoc
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 
 /**
- * Created by hvrigazov on 02.07.17.
+ * A {@link com.hribol.bromium.core.generation.FunctionRegistry} for {@link com.hribol.bromium.common.generation.replay.functions.ReplayFunction}
  */
 public class ReplayFunctionRegistry extends FunctionRegistryBase<
         StepAndWebDriverActionConfiguration,

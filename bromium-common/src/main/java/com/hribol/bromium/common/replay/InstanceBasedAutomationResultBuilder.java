@@ -7,9 +7,15 @@ import com.hribol.bromium.replay.report.AutomationResult;
 import java.util.concurrent.TimeoutException;
 
 /**
- * Created by hvrigazov on 20.05.17.
+ * Builds a feasible {@link AutomationResult} based on the instance of the {@link Throwable}
  */
 public class InstanceBasedAutomationResultBuilder implements AutomationResultBuilder {
+
+    /**
+     * Builds a feasible {@link AutomationResult} based on the instance of the {@link Throwable}
+     * @param throwable the exception. The instance of the class will be used to return the correct {@link AutomationResult}
+     * @return the correct {@link AutomationResult}
+     */
     @Override
     public AutomationResult buildAutomationResult(Throwable throwable) {
         if (throwable instanceof AssertionError) {

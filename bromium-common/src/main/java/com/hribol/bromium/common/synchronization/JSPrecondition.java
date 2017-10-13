@@ -6,7 +6,8 @@ import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.filters.ReplayRequestFilter;
 
 /**
- * Created by hvrigazov on 05.06.17.
+ * Represents a synchronization event within the browser, i.e in the javascript code.
+ * Example would be a precondition until an element with id "example" in the DOM is present
  */
 public class JSPrecondition extends SynchronizationEventNotifyingState {
 
@@ -23,16 +24,25 @@ public class JSPrecondition extends SynchronizationEventNotifyingState {
         this.replayingState = replayingState;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
         return eventName;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isSatisfied() {
         return replayingState.isSatisfied(eventName);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void signalizeIsDone() {
         eventSignalizer.signalizeEvent(this);

@@ -1,7 +1,7 @@
 package com.hribol.bromium.core.utils;
 
 /**
- * Created by hvrigazov on 09.08.17.
+ * Common js events
  */
 public class JsEvents {
     public static final String CLICK = "click";

@@ -1,7 +1,7 @@
 package com.hribol.bromium.common.builder;
 
 /**
- * Created by hvrigazov on 08.06.17.
+ * Name of functions used in javascript generation
  */
 public class JsFunctionNames {
     public static final String CLICK_CSS_SELECTOR = "ClickCssSelector";

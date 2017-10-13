@@ -5,13 +5,14 @@ import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import com.google.inject.throwingproviders.CheckedProvides;
 import com.google.inject.throwingproviders.ThrowingProviderBinder;
-import com.hribol.bromium.browsers.chrome.base.ChromeDriverSupplier;
-import com.hribol.bromium.browsers.chrome.replay.ChromeDriverServiceSupplier;
+import com.hribol.bromium.common.browsers.ChromeDriverServiceSupplier;
+import com.hribol.bromium.common.browsers.ChromeDriverSupplier;
+import com.hribol.bromium.common.browsers.DriverServiceSupplierBase;
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.filtering.GetHtmlFromCurrentHostPredicate;
 import com.hribol.bromium.common.filtering.RequestToPageLoadingEventConverter;
 import com.hribol.bromium.common.filtering.SplitQueryStringOfRequest;
-import com.hribol.bromium.common.filtering.UriContainsSubmitEventUrlPredicate;
+import com.hribol.bromium.common.filtering.UriContainsStringPredicate;
 import com.hribol.bromium.common.generation.common.EmptyFunction;
 import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
 import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
@@ -26,11 +27,12 @@ import com.hribol.bromium.common.generation.replay.*;
 import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
 import com.hribol.bromium.common.ProxyDriverIntegrator;
 import com.hribol.bromium.common.record.RecordBrowser;
+import com.hribol.bromium.common.replay.SignalizingStateConditionsUpdater;
 import com.hribol.bromium.core.utils.*;
 import com.hribol.bromium.record.RecordingState;
 import com.hribol.bromium.common.replay.DriverOperations;
-import com.hribol.bromium.common.replay.ExecutorBuilder;
-import com.hribol.bromium.common.replay.WebDriverActionExecutionBase;
+import com.hribol.bromium.common.replay.ExecutorDependencies;
+import com.hribol.bromium.common.replay.ActionExecutor;
 import com.hribol.bromium.common.replay.factory.DefaultApplicationActionFactory;
 import com.hribol.bromium.common.replay.factory.PredefinedWebDriverActionFactory;
 import com.hribol.bromium.common.replay.factory.TestCaseStepToApplicationActionConverter;
@@ -53,10 +55,11 @@ import com.hribol.bromium.record.RecordRequestFilter;
 import com.hribol.bromium.record.RecordResponseFilter;
 import com.hribol.bromium.replay.ReplayBrowser;
 import com.hribol.bromium.replay.ReplayingState;
-import com.hribol.bromium.replay.execution.WebDriverActionExecution;
+import com.hribol.bromium.replay.execution.WebDriverActionExecutor;
 import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
+import com.hribol.bromium.replay.filters.ConditionsUpdater;
 import com.hribol.bromium.replay.filters.ReplayRequestFilter;
 import com.hribol.bromium.replay.filters.ReplayResponseFilter;
 import com.hribol.bromium.replay.settings.DriverServiceSupplier;
@@ -70,6 +73,8 @@ import net.lightbody.bmp.proxy.CaptureType;
 import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.service.DriverService;
@@ -77,7 +82,6 @@ import org.openqa.selenium.remote.service.DriverService;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -87,13 +91,14 @@ import java.util.function.Supplier;
 
 import static com.hribol.bromium.cli.Main.Commands.RECORD;
 import static com.hribol.bromium.cli.Main.Commands.REPLAY;
-import static com.hribol.bromium.cli.ParsedOptions.MEASUREMENTS;
+import static com.hribol.bromium.core.ConventionConstants.SUBMIT_EVENT_URL;
 import static com.hribol.bromium.core.DependencyInjectionConstants.*;
+import static com.hribol.bromium.core.utils.Constants.CONDITION_SATISFIED_URL;
 import static com.hribol.bromium.core.utils.Constants.HAR_EXTENSION;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
 /**
- * Created by hvrigazov on 09.06.17.
+ * Guice module used for creation of the dependency graph
  */
 public class DefaultModule extends AbstractModule {
     private String command;
@@ -121,10 +126,6 @@ public class DefaultModule extends AbstractModule {
                 .annotatedWith(Names.named(SHOULD_INJECT_JS_PREDICATE))
                 .to(GetHtmlFromCurrentHostPredicate.class);
 
-        bind(new TypeLiteral<Predicate<HttpRequest>>() {})
-                .annotatedWith(Names.named(CONVENTION_EVENT_DETECTOR_PREDICATE))
-                .to(UriContainsSubmitEventUrlPredicate.class);
-
         bind(HttpRequestToTestCaseStepConverter.class)
                 .annotatedWith(Names.named(CONVENTION_EVENT_DETECTOR_CONVERTOR))
                 .to(SplitQueryStringOfRequest.class);
@@ -140,6 +141,12 @@ public class DefaultModule extends AbstractModule {
         bind(ReplayingState.class).in(Singleton.class);
 
         install(ThrowingProviderBinder.forModule(this));
+    }
+
+    @Provides
+    @Named(CONVENTION_EVENT_DETECTOR_PREDICATE)
+    public Predicate<HttpRequest> getConventionEventDetectorPredicate() {
+        return new UriContainsStringPredicate(SUBMIT_EVENT_URL);
     }
 
     @Provides
@@ -223,8 +230,9 @@ public class DefaultModule extends AbstractModule {
     public ApplicationConfiguration getApplicationConfiguration(ApplicationConfigurationParser applicationConfigurationParser,
                                                                 @Named(CONFIGURATION_INPUT_STREAM)
                                                                 IOProvider<InputStream> fileInputStreamProvider) throws IOException {
-        InputStream inputStream = fileInputStreamProvider.get();
-        return applicationConfigurationParser.parseApplicationConfiguration(inputStream);
+        try (InputStream inputStream = fileInputStreamProvider.get()) {
+            return applicationConfigurationParser.parseApplicationConfiguration(inputStream);
+        }
     }
 
     @Provides
@@ -267,16 +275,40 @@ public class DefaultModule extends AbstractModule {
         return eventDetectors;
     }
 
+    @Provides
+    @Named(CONDITION_SATISFIED_PREDICATE)
+    public Predicate<HttpRequest> getConditionSatisfiedPredicate() {
+        return new UriContainsStringPredicate(CONDITION_SATISFIED_URL);
+    }
+
+    @Provides
+    @Named(CONDITION_NOT_SATISFIED_PREDICATE)
+    public Predicate<HttpRequest> getConditionNotSatisfiedPredicate() {
+        return new UriContainsStringPredicate(CONDITION_NOT_SATISFIED_PREDICATE);
+    }
+
+    @Provides
+    public List<ConditionsUpdater> getConditionsUpdaters(@Named(CONDITION_SATISFIED_PREDICATE)
+                                                         Predicate<HttpRequest> conditionSatisfiedPredicate,
+                                                         @Named(CONDITION_NOT_SATISFIED_PREDICATE)
+                                                         Predicate<HttpRequest> conditionNotSatisfiedPredicate) {
+        List<ConditionsUpdater> conditionsUpdaters = new ArrayList<>();
+        conditionsUpdaters.add(new ConditionsUpdater(conditionSatisfiedPredicate, new SignalizingStateConditionsUpdater()));
+        conditionsUpdaters.add(new ConditionsUpdater(conditionNotSatisfiedPredicate, ReplayingState::setConditionNotSatisfied));
+        return conditionsUpdaters;
+    }
+
     @CheckedProvides(IOProvider.class)
     public RequestFilter getRequestFilter(@Named(COMMAND) String command,
                                           IOProvider<List<EventDetector>> eventDetectorListProvider,
                                           Provider<RecordingState> recordingStateProvider,
-                                          Provider<ReplayingState> replayingStateProvider) throws IOException {
+                                          Provider<ReplayingState> replayingStateProvider,
+                                          Provider<List<ConditionsUpdater>> conditionsUpdaters) throws IOException {
         switch (command) {
             case RECORD:
                 return new RecordRequestFilter(recordingStateProvider.get(), eventDetectorListProvider.get());
             case REPLAY:
-                return new ReplayRequestFilter(replayingStateProvider.get());
+                return new ReplayRequestFilter(replayingStateProvider.get(), conditionsUpdaters.get());
             default:
                 throw new NoSuchCommandException();
         }
@@ -314,9 +346,10 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOProvider.class)
-    public TestScenarioFactory getTestScenarioFactory(IOProvider<ApplicationActionFactory> applicationActionFactoryIOProvider) throws IOException {
+    public TestScenarioFactory getTestScenarioFactory(IOProvider<ApplicationActionFactory> applicationActionFactoryIOProvider,
+                                                      StepsReader stepsReader) throws IOException {
         ApplicationActionFactory applicationActionFactory = applicationActionFactoryIOProvider.get();
-        return new TestScenarioFactory(applicationActionFactory);
+        return new TestScenarioFactory(applicationActionFactory, stepsReader);
     }
 
     @Provides
@@ -437,31 +470,31 @@ public class DefaultModule extends AbstractModule {
 
     @CheckedProvides(IOProvider.class)
     @Named(REPLAYING_JAVASCRIPT_INJECTOR)
-    public JavascriptInjector getReplayingJavascriptInjector(@Named(GENERATED_REPLAY_JAVASCRIPT)
+    public JavascriptInjectionPreparator getReplayingJavascriptInjector(@Named(GENERATED_REPLAY_JAVASCRIPT)
                                                                 IOProvider<String> generatedReplayJavascript) throws IOException {
         String generatedCode = generatedReplayJavascript.get();
-        return new JavascriptInjector(new StringReader(generatedCode));
+        return new JavascriptInjectionPreparator(new StringReader(generatedCode));
     }
 
     @CheckedProvides(IOProvider.class)
     @Named(RECORDING_JAVASCRIPT_INJECTOR)
-    public JavascriptInjector getRecordingJavascriptInjector(@Named(GENERATED_RECORD_JAVASCRIPT)
+    public JavascriptInjectionPreparator getRecordingJavascriptInjector(@Named(GENERATED_RECORD_JAVASCRIPT)
                                                             IOProvider<String> generatedRecordJavascript) throws IOException {
         String generatedCode = generatedRecordJavascript.get();
-        return new JavascriptInjector(new StringReader(generatedCode));
+        return new JavascriptInjectionPreparator(new StringReader(generatedCode));
     }
 
     @CheckedProvides(IOProvider.class)
     @Named(REPLAYING_JAVASCRIPT_CODE)
     public String getReplayingJavascriptCode(@Named(REPLAYING_JAVASCRIPT_INJECTOR)
-                                                         IOProvider<JavascriptInjector> javascriptInjectorIOProvider) throws IOException {
+                                                         IOProvider<JavascriptInjectionPreparator> javascriptInjectorIOProvider) throws IOException {
         return javascriptInjectorIOProvider.get().getInjectionCode();
     }
 
     @CheckedProvides(IOProvider.class)
     @Named(RECORDING_JAVASCRIPT_CODE)
     public String getRecordingJavascriptCode(@Named(RECORDING_JAVASCRIPT_INJECTOR)
-                                                     IOProvider<JavascriptInjector> javascriptInjectorIOProvider) throws IOException {
+                                                     IOProvider<JavascriptInjectionPreparator> javascriptInjectorIOProvider) throws IOException {
         String generatedJavascriptCode = javascriptInjectorIOProvider.get().getInjectionCode();
         System.out.println(generatedJavascriptCode);
         return generatedJavascriptCode;
@@ -469,19 +502,19 @@ public class DefaultModule extends AbstractModule {
 
 
     @CheckedProvides(IOURIProvider.class)
-    public ExecutorBuilder getExecutorBuilder(ExecutorBuilder executorBuilder,
-                                              @Named(TIMEOUT) int timeout,
-                                              @Named(BASE_URL) String baseUrl,
-                                              @Named(REPLAYING_JAVASCRIPT_CODE) IOProvider<String>
+    public ExecutorDependencies getExecutorBuilder(ExecutorDependencies executorDependencies,
+                                                   @Named(TIMEOUT) int timeout,
+                                                   @Named(BASE_URL) String baseUrl,
+                                                   @Named(REPLAYING_JAVASCRIPT_CODE) IOProvider<String>
                                                           replayingJavascriptCodeProvider,
-                                              @Named(SCREEN) String screen,
-                                              @Named(SCREEN_NUMBER) int screenNumber,
-                                              @Named(PATH_TO_DRIVER) String pathToDriver,
-                                              @Named(MEASUREMENTS_PRECISION_MILLI) int measurementsPrecisionMilli,
-                                              EventSynchronizer eventSynchronizer,
-                                              ReplayingState replayingState,
-                                              IOURIProvider<DriverOperations> driverOperationsIOURIProvider) throws IOException, URISyntaxException {
-        return executorBuilder
+                                                   @Named(SCREEN) String screen,
+                                                   @Named(SCREEN_NUMBER) int screenNumber,
+                                                   @Named(PATH_TO_DRIVER) String pathToDriver,
+                                                   @Named(MEASUREMENTS_PRECISION_MILLI) int measurementsPrecisionMilli,
+                                                   EventSynchronizer eventSynchronizer,
+                                                   ReplayingState replayingState,
+                                                   IOURIProvider<DriverOperations> driverOperationsIOURIProvider) throws IOException, URISyntaxException {
+        return executorDependencies
                 .pathToDriverExecutable(pathToDriver)
                 .baseURL(baseUrl)
                 .timeoutInSeconds(timeout)
@@ -505,13 +538,13 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOURIProvider.class)
-    public WebDriverActionExecution getWebDriverActionExecution(IOURIProvider<ExecutorBuilder> executorBuilderIOProvider) throws IOException, URISyntaxException {
-        return new WebDriverActionExecutionBase(executorBuilderIOProvider.get());
+    public WebDriverActionExecutor getWebDriverActionExecution(IOURIProvider<ExecutorDependencies> executorBuilderIOProvider) throws IOException, URISyntaxException {
+        return new ActionExecutor(executorBuilderIOProvider.get());
     }
 
     @CheckedProvides(IOURIProvider.class)
     public ReplayBrowser getReplayBrowser(IOProvider<TestScenarioFactory> testScenarioFactoryIOProvider,
-                                          IOURIProvider<WebDriverActionExecution> execution) throws IOException, URISyntaxException {
+                                          IOURIProvider<WebDriverActionExecutor> execution) throws IOException, URISyntaxException {
         return new ReplayBrowser(testScenarioFactoryIOProvider.get(), execution.get());
     }
 

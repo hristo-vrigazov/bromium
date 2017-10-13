@@ -5,7 +5,7 @@ import java.text.MessageFormat;
 import static com.hribol.bromium.common.builder.JsFunctionNames.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR;
 
 /**
- * Created by hvrigazov on 09.08.17.
+ * Represents a recorder function invocation for {@link com.hribol.bromium.common.replay.actions.TypeTextInElementFoundByCssSelector}
  */
 public class TypeTextInElementFoundByCssSelectorRecorderFunctionInvocation implements RecorderFunctionInvocation {
 

@@ -7,7 +7,8 @@ import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
 
 /**
- * Created by hvrigazov on 07.06.17.
+ * Represents a javascript generator by an {@link ApplicationActionConfiguration}, which takes into account
+ * the {@link com.hribol.bromium.core.config.WebDriverActionConfiguration} only for generation.
  */
 public class RecordingWebDriverActionsOnly implements JavascriptGenerator<ApplicationActionConfiguration> {
     private JavascriptGenerator<NameWebDriverActionConfiguration>  webDriverActionGenerator;

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * Created by hvrigazov on 18.05.17.
+ * Waits until the text of an element found by a css selector is equal to the given one. Polling-based
  */
 public class TextOfElementFoundByCssSelectorToBe implements WebDriverAction {
 

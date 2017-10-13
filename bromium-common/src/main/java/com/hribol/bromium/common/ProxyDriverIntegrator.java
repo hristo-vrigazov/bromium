@@ -6,13 +6,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.service.DriverService;
 
 /**
- * Created by hvrigazov on 27.07.17.
+ * Represents a driver, a proxy and a driver service that are connected together
  */
 public class ProxyDriverIntegrator {
     private WebDriver driver;
     private BrowserMobProxy proxy;
     private DriverService driverService;
 
+    /**
+     * Creates a new object that holds  a driver, a proxy and a driver service that are connected together
+     * @param driver the driver
+     * @param proxy the proxy that the driver uses
+     * @param driverService the driver service that is used for connecting to the virtual screen
+     */
     public ProxyDriverIntegrator(WebDriver driver, BrowserMobProxy proxy, DriverService driverService) {
         this.driver = driver;
         this.proxy = proxy;

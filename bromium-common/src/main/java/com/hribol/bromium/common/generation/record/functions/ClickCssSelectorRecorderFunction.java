@@ -12,7 +12,7 @@ import static com.hribol.bromium.core.utils.Constants.*;
 import static com.hribol.bromium.core.utils.JsEvents.CLICK;
 
 /**
- * Created by hvrigazov on 08.06.17.
+ * A {@link RecorderFunction} for {@link com.hribol.bromium.common.replay.actions.ClickCssSelector}
  */
 public class ClickCssSelectorRecorderFunction implements RecorderFunction {
 

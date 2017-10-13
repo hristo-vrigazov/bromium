@@ -13,7 +13,7 @@ import static com.hribol.bromium.core.DependencyInjectionConstants.BASE_URI;
 import static com.hribol.bromium.core.utils.Constants.NO_HTTP_REQUESTS_IN_QUEUE;
 
 /**
- * Created by hvrigazov on 30.07.17.
+ * Represents the state that will be persistent during one replay
  */
 public class ReplayingState {
     private Set<String> conditionsSatisfied;
@@ -22,6 +22,10 @@ public class ReplayingState {
     private Set<HttpRequest> httpRequestQueue;
     private List<String> whiteListHttp;
 
+    /**
+     * Creates new replaying state
+     * @param baseUri the base uri for building the whitelisted http urls
+     */
     @Inject
     public ReplayingState(@Named(BASE_URI) URI baseUri) {
         this.synchronizationEventOptional = Optional.empty();
@@ -38,27 +42,51 @@ public class ReplayingState {
         return whiteListHttp;
     }
 
+    /**
+     * Returns whether the given event is currently satisfied
+     * @param event the event
+     * @return whether the given event is currently satisfied
+     */
     public boolean isSatisfied(String event) {
         return conditionsSatisfied.contains(event);
     }
 
+    /**
+     * Sets the event on which we are trying to synchronize
+     * @param synchronizationEventOptional the event on which we are trying to synchronize
+     */
     public void setSynchronizationEvent(SynchronizationEvent synchronizationEventOptional) {
         this.synchronizationEventOptional = Optional.of(synchronizationEventOptional);
     }
 
+    /**
+     * Sets the http lock
+     * @param lock the http lock new value
+     */
     public void setHttpLock(boolean lock) {
         this.httpLock = lock;
     }
 
+    /**
+     * Returns whether the state is currently http locked
+     * @return whether the state is currently http locked
+     */
     public boolean isHttpLocked() {
         return this.httpLock;
     }
 
+    /**
+     * Sets condition as satisfied
+     * @param condition the condition
+     */
     public void setConditionSatisfied(String condition) {
         this.conditionsSatisfied.add(condition);
         System.out.println("Satisfied " + condition);
     }
 
+    /**
+     * Check if event is satisfied and if it is, signalize it
+     */
     public void signalizeIfSynchronizationEventIsSatisfied() {
         if (synchronizationEventOptional.isPresent() && isSatisfied(synchronizationEventOptional.get().getName())) {
             synchronizationEventOptional.get().signalizeIsDone();
@@ -66,11 +94,19 @@ public class ReplayingState {
         }
     }
 
+    /**
+     * Sets condition as not satisfied
+     * @param condition the condition
+     */
     public void setConditionNotSatisfied(String condition) {
         conditionsSatisfied.remove(condition);
         System.out.println("Not Satisfied " + condition);
     }
 
+    /**
+     * Adds http request to the queue
+     * @param httpRequest
+     */
     public void addHttpRequestToQueue(HttpRequest httpRequest) {
         if (!inWhiteList(httpRequest.getUri())) {
             return;
@@ -84,10 +120,17 @@ public class ReplayingState {
         return whiteListHttp.stream().anyMatch(url::contains);
     }
 
+    /**
+     * whether there are any http requests in the queue
+     * @return whether there are any http requests in the queue
+     */
     public boolean httpRequestQueueIsEmpty() {
         return httpRequestQueue.isEmpty();
     }
 
+    /**
+     * Signalizes if here are no http requests in queue
+     */
     public void signalizeIfNoHttpQueriesInQueue() {
         if (httpRequestQueueIsEmpty() && synchronizationEventOptional.isPresent()) {
             SynchronizationEvent synchronizationEvent = synchronizationEventOptional.get();
@@ -98,6 +141,10 @@ public class ReplayingState {
         }
     }
 
+    /**
+     * Removes an http request from the queue
+     * @param httpRequest the request to be removed
+     */
     public void removeHttpRequestFromQueue(HttpRequest httpRequest) {
         if (!inWhiteList(httpRequest.getUri())) {
             return;

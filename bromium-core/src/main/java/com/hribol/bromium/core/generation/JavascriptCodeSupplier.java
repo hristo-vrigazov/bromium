@@ -1,8 +1,12 @@
 package com.hribol.bromium.core.generation;
 
 /**
- * Created by hvrigazov on 07.06.17.
+ * Provides javascript code
  */
 public interface JavascriptCodeSupplier {
+    /**
+     *
+     * @return the javascript code
+     */
     String getJavascriptCode();
 }

@@ -7,7 +7,7 @@ import java.text.MessageFormat;
 import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CSS_SELECTOR;
 
 /**
- * Created by hvrigazov on 02.07.17.
+ * Represents an invocation of a {@link ClickCssSelectorReplayInvocation}
  */
 public class ClickCssSelectorReplayInvocation implements ReplayFunctionInvocation {
     private String cssSelector;

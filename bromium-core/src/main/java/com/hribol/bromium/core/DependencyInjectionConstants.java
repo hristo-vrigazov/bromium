@@ -1,7 +1,7 @@
 package com.hribol.bromium.core;
 
 /**
- * Created by hvrigazov on 05.07.17.
+ * Constants used for naming in Guice configurations.
  */
 public class DependencyInjectionConstants {
     public static final String RECORD_TEMPLATE_RESOURCE = "RECORD_TEMPLATE_RESOURCE";
@@ -47,6 +47,10 @@ public class DependencyInjectionConstants {
 
     public static final String HAR_FILE = "HAR_FILE";
     public static final String MEASUREMENTS_FILE = "MEASUREMENTS_FILE";
+
+    public static final String CONDITION_SATISFIED_PREDICATE = "CONDITION_SATISFIED_PREDICATE";
+    public static final String CONDITION_NOT_SATISFIED_PREDICATE = "CONDITION_NOT_SATISFIED_PREDICATE";
+
 
 
 }

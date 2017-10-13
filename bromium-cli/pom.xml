@@ -21,9 +21,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>bromium-chrome-replay</artifactId>
-            <version>${project.version}</version>
+            <groupId>com.hribol.bromium</groupId>
+            <artifactId>bromium-common</artifactId>
+            <version>0.1</version>
         </dependency>
         <dependency>
             <groupId>org.beryx</groupId>

@@ -5,7 +5,7 @@ import java.text.MessageFormat;
 import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CSS_SELECTOR;
 
 /**
- * Created by hvrigazov on 08.06.17.
+ * Represents an invocation of a recorder function for {@link com.hribol.bromium.common.replay.actions.ClickCssSelector}
  */
 public class ClickCssSelectorRecorderFunctionInvocation implements RecorderFunctionInvocation {
     private String cssSelector;

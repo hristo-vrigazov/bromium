@@ -1,7 +1,7 @@
 package com.hribol.bromium.cli;
 
 /**
- * Created by hvrigazov on 30.07.17.
+ * Throw this exception when the user selects a command that does not exist
  */
 public class NoSuchCommandException extends IllegalArgumentException {
 

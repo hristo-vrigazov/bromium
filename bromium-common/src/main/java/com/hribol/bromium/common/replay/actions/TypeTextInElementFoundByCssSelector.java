@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
- * Created by hvrigazov on 12.05.17.
+ * Types text in an element found by a css selector. Clears the field first.
  */
 public class TypeTextInElementFoundByCssSelector implements WebDriverAction {
 

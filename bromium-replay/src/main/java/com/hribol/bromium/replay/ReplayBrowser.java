@@ -1,8 +1,7 @@
 package com.hribol.bromium.replay;
 
 import com.hribol.bromium.core.TestScenarioSteps;
-import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
-import com.hribol.bromium.replay.execution.WebDriverActionExecution;
+import com.hribol.bromium.replay.execution.WebDriverActionExecutor;
 import com.hribol.bromium.replay.execution.scenario.TestScenario;
 import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
 import com.hribol.bromium.replay.report.ExecutionReport;
@@ -10,40 +9,63 @@ import com.hribol.bromium.replay.report.ExecutionReport;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Map;
 
 /**
- * Created by hvrigazov on 15.03.17.
+ * Represent a replay browser - which by given factory for creating test scenarios and an executor,
+ * executes the provided steps
  */
 public class ReplayBrowser {
 
-    private final WebDriverActionExecution webDriverActionExecution;
+    private final WebDriverActionExecutor webDriverActionExecutor;
     private final TestScenarioFactory testScenarioFactory;
 
-    public ReplayBrowser(TestScenarioFactory testScenarioFactory, WebDriverActionExecution execution) {
+    /**
+     * Creates a new instance
+     * @param testScenarioFactory the factory for creating {@link TestScenarioSteps}
+     * @param execution the executor needed for executing {@link TestScenario}
+     */
+    public ReplayBrowser(TestScenarioFactory testScenarioFactory, WebDriverActionExecutor execution) {
         this.testScenarioFactory = testScenarioFactory;
-        this.webDriverActionExecution = execution;
+        this.webDriverActionExecutor = execution;
     }
 
+    /**
+     * Replays the given steps
+     * @param steps the test steps in raw format
+     * @return a report of the execution
+     */
     public ExecutionReport replay(TestScenarioSteps steps) {
         TestScenario testScenario = testScenarioFactory.createFromTestCaseSteps(steps);
-        return webDriverActionExecution.execute(testScenario);
+        return webDriverActionExecutor.execute(testScenario);
     }
 
-    public ExecutionReport replay(String pathToSerializedTest)
-            throws InterruptedException, IOException, URISyntaxException {
+    /**
+     * Replays given steps from file
+     * @param pathToSerializedTest the path to the test in serialized form
+     * @return a report of the execution
+     * @throws IOException - if exception occurs while reading from file
+     */
+    public ExecutionReport replay(String pathToSerializedTest) throws IOException {
         TestScenario testScenario = testScenarioFactory.createFromFile(pathToSerializedTest);
-        return webDriverActionExecution.execute(testScenario);
+        return webDriverActionExecutor.execute(testScenario);
     }
 
-    public ExecutionReport replay(InputStream inputStream) throws IOException, URISyntaxException, InterruptedException {
+    /**
+     * Replays given steps from an input stream
+     * @param inputStream the input stream which contains the steps in serialized form
+     * @return a report of the execution
+     * @throws IOException if exception occurs while reading from the input stream
+     */
+    public ExecutionReport replay(InputStream inputStream) throws IOException {
         TestScenario testScenario = testScenarioFactory.createFromInputStream(inputStream);
-        return webDriverActionExecution.execute(testScenario);
+        return webDriverActionExecutor.execute(testScenario);
     }
 
+    /**
+     * Tear down web driver and proxy
+     */
     public void forceCleanUp() {
-        webDriverActionExecution.forceCleanUp();
+        webDriverActionExecutor.forceCleanUp();
     }
 
 }
