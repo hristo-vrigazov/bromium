@@ -18,6 +18,8 @@ For example, trying to click on an element that is not there yet.
 
 ## Simple example
 
+TODO
+
 ## Features
 * Declarative way of describing your actions and how they translate to browser actions for different versions of your app. 
 For example (this is bromium-dsl, but currently only JSON is supported):
@@ -97,8 +99,8 @@ There is a prototype for this and will soon be ready.
 * Support browsers other than Chrome
 
 ## Contributing
-* General questions - gitter 
-* Bugs, feature requests, etc. - github issues
+* General questions - [gitter](https://gitter.im/hribol-bromium/Lobby) 
+* Bugs, feature requests, etc. - TODO
 * Development - instructions, TODO
 
 ## How does it work?
