@@ -1,7 +1,6 @@
 # Bromium
 
 [![Join the chat at https://gitter.im/hribol-bromium/Lobby](https://badges.gitter.im/hribol-bromium/Lobby.svg)](https://gitter.im/hribol-bromium/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 [![Build Status](https://travis-ci.org/hristo-vrigazov/bromium.svg?branch=master)](https://travis-ci.org/hristo-vrigazov/bromium)
 [![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
 [![Coverage Status](https://coveralls.io/repos/github/hristo-vrigazov/bromium/badge.svg?branch=master)](https://coveralls.io/github/hristo-vrigazov/bromium?branch=master)
