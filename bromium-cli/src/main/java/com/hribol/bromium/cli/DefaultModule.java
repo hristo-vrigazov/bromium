@@ -28,6 +28,7 @@ import com.hribol.bromium.common.ProxyDriverIntegrator;
 import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.common.replay.SignalizingStateConditionsUpdater;
 import com.hribol.bromium.core.utils.*;
+import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
 import com.hribol.bromium.record.RecordingState;
 import com.hribol.bromium.common.replay.DriverOperations;
 import com.hribol.bromium.common.replay.ExecutorDependencies;
@@ -127,6 +128,7 @@ public class DefaultModule extends AbstractModule {
                 .annotatedWith(Names.named(CONVENTION_EVENT_DETECTOR_CONVERTOR))
                 .to(SplitQueryStringOfRequest.class);
 
+        bind(ApplicationConfigurationParser.class).to(JsonApplicationConfigurationParser.class);
 
         // TODO: other OSes should have a different binding
         bind(VirtualScreenProcessCreator.class).to(UbuntuVirtualScreenProcessCreator.class);
@@ -224,7 +226,7 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOProvider.class)
-    public ApplicationConfiguration getApplicationConfiguration(JsonApplicationConfigurationParser applicationConfigurationParser,
+    public ApplicationConfiguration getApplicationConfiguration(ApplicationConfigurationParser applicationConfigurationParser,
                                                                 @Named(CONFIGURATION_INPUT_STREAM)
                                                                 IOProvider<InputStream> fileInputStreamProvider) throws IOException {
         try (InputStream inputStream = fileInputStreamProvider.get()) {
