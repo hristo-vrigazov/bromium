@@ -3,7 +3,7 @@ package com.hribol.bromium.cli.commands;
 import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationDumper;
-import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
+import com.hribol.bromium.core.utils.parsing.JsonApplicationConfigurationParser;
 import org.beryx.textio.StringInputReader;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextTerminal;
@@ -62,7 +62,7 @@ public class VersionCommandTest {
         TextIO textIO;
         PromptUtils promptUtils;
         ApplicationConfiguration applicationConfiguration;
-        ApplicationConfigurationParser applicationConfigurationParser;
+        JsonApplicationConfigurationParser applicationConfigurationParser;
         ApplicationConfigurationDumper applicationConfigurationDumper;
         IOProvider<ApplicationConfiguration> applicationConfigurationIOProvider;
 
@@ -87,7 +87,7 @@ public class VersionCommandTest {
 
             when(applicationConfigurationIOProvider.get()).thenReturn(applicationConfiguration);
 
-            applicationConfigurationParser = mock(ApplicationConfigurationParser.class);
+            applicationConfigurationParser = mock(JsonApplicationConfigurationParser.class);
             when(applicationConfigurationParser.parseApplicationConfiguration(inputFilename))
                     .thenReturn(applicationConfiguration);
             applicationConfigurationDumper = mock(ApplicationConfigurationDumper.class);

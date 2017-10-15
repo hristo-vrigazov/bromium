@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * Parses an {@link ApplicationConfiguration}
  */
-public class ApplicationConfigurationParser {
+public class JsonApplicationConfigurationParser {
 
     /**
      * Parses an {@link ApplicationConfiguration} from a file. The {@link FileInputStream} that is created
