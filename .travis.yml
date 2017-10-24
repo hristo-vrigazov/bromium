@@ -13,5 +13,6 @@ addons:
       - google-chrome-stable
 
 before_install:
-  - sudo apt-get install eclipse
+  - "Xvfb :1 -screen 0 1360x1024x24 &"
+  - "export DISPLAY=:1"
 install: cd com.hribol.bromium.dsl.parent && mvn clean install && cd .. && mvn clean install coveralls:report
