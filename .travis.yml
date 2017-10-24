@@ -12,4 +12,6 @@ addons:
     packages:
       - google-chrome-stable
 
+before_install:
+  - sudo apt-get install eclipse
 install: cd com.hribol.bromium.dsl.parent && mvn clean install && cd .. && mvn clean install coveralls:report
