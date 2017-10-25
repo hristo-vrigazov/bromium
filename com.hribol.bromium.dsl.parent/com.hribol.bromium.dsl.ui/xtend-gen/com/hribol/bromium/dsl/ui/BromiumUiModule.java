@@ -5,15 +5,13 @@ package com.hribol.bromium.dsl.ui;
 
 import com.hribol.bromium.dsl.ui.AbstractBromiumUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
  */
-@FinalFieldsConstructor
 @SuppressWarnings("all")
 public class BromiumUiModule extends AbstractBromiumUiModule {
-  public BromiumUiModule(final AbstractUIPlugin arg0) {
-    super(arg0);
+  public BromiumUiModule(final AbstractUIPlugin plugin) {
+    super(plugin);
   }
 }
