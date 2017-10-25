@@ -19,3 +19,4 @@ bromium-core/src/test/resources/dynamic-testCase.json
 .metadata
 *.xtendbin
 *._trace
+.recommenders
