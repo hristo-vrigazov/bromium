@@ -227,11 +227,10 @@ public class DefaultModule extends AbstractModule {
 
     @CheckedProvides(IOProvider.class)
     public ApplicationConfiguration getApplicationConfiguration(ApplicationConfigurationParser applicationConfigurationParser,
-                                                                @Named(CONFIGURATION_INPUT_STREAM)
-                                                                IOProvider<InputStream> fileInputStreamProvider) throws IOException {
-        try (InputStream inputStream = fileInputStreamProvider.get()) {
-            return applicationConfigurationParser.parseApplicationConfiguration(inputStream);
-        }
+                                                                @Named(CONFIGURATION_FILE)
+                                                                Provider<File> fileProvider) throws IOException {
+        File inputStream = fileProvider.get();
+        return applicationConfigurationParser.parseApplicationConfiguration(inputStream);
     }
 
     @Provides

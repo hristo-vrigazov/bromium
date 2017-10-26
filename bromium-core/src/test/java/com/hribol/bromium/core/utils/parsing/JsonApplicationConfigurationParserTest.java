@@ -40,17 +40,4 @@ public class JsonApplicationConfigurationParserTest {
         assertEquals("tenniskafe", applicationConfiguration.getApplicationName());
     }
 
-    @Test
-    public void canReadApplicationConfigurationFromInputStream() throws IOException {
-        String filename = getClass().getResource("/tenniskafe.json").getFile();
-        File file = new File(filename);
-        FileInputStream fileInputStream = new FileInputStream(file);
-
-        JsonApplicationConfigurationParser applicationConfigurationParser = new JsonApplicationConfigurationParser();
-
-        ApplicationConfiguration applicationConfiguration = applicationConfigurationParser
-                .parseApplicationConfiguration(fileInputStream);
-
-        assertEquals("tenniskafe", applicationConfiguration.getApplicationName());
-    }
 }

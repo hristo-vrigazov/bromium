@@ -23,11 +23,7 @@ public class JsonApplicationConfigurationParser implements ApplicationConfigurat
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ApplicationConfiguration parseApplicationConfiguration(InputStream inputStream) throws IOException {
+    private ApplicationConfiguration parseApplicationConfiguration(InputStream inputStream) throws IOException {
         Gson gson = new GsonBuilder().create();
         String configuration = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
         return gson.fromJson(configuration, ApplicationConfiguration.class);

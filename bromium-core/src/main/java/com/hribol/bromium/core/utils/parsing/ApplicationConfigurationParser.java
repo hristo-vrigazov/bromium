@@ -26,13 +26,6 @@ public interface ApplicationConfigurationParser {
      */
     ApplicationConfiguration parseApplicationConfiguration(File file) throws IOException;
 
-    /**
-     * Parses an {@link ApplicationConfiguration} from an input stream. Does not close the input stream
-     * @param inputStream the input stream
-     * @return the parsed application configuration
-     * @throws IOException
-     */
-    ApplicationConfiguration parseApplicationConfiguration(InputStream inputStream) throws IOException;
 
     /**
      * Parses an {@link ApplicationConfiguration} from an filename.
