@@ -1,4 +1,4 @@
-package com.hribol.bromium.core.utils.parsing;
+package com.hribol.bromium.core.parsing;
 
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;

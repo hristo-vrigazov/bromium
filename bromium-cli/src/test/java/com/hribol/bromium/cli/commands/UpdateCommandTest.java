@@ -2,7 +2,7 @@ package com.hribol.bromium.cli.commands;
 
 import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
-import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationDumper;
+import com.hribol.bromium.core.parsing.ApplicationConfigurationDumper;
 import org.beryx.textio.StringInputReader;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextTerminal;

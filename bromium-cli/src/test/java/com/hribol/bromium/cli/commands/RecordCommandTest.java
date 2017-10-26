@@ -3,7 +3,7 @@ package com.hribol.bromium.cli.commands;
 import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
-import com.hribol.bromium.core.utils.parsing.StepsDumper;
+import com.hribol.bromium.core.parsing.StepsDumper;
 import org.junit.Test;
 
 import java.io.IOException;

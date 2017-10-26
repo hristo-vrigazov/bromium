@@ -1,4 +1,4 @@
-package com.hribol.bromium.core.utils.parsing;
+package com.hribol.bromium.core.parsing;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

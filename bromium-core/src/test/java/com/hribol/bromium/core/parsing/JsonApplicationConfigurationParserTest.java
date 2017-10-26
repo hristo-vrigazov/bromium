@@ -1,10 +1,9 @@
-package com.hribol.bromium.core.utils.parsing;
+package com.hribol.bromium.core.parsing;
 
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;

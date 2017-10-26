@@ -1,14 +1,12 @@
 package com.hribol.bromium.cli.commands;
 
-import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.providers.IOURIProvider;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
-import com.hribol.bromium.core.utils.parsing.StepsDumper;
+import com.hribol.bromium.core.parsing.StepsDumper;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

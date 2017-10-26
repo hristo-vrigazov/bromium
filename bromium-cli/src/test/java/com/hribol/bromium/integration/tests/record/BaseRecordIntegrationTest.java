@@ -7,7 +7,7 @@ import com.google.inject.util.Modules;
 import com.hribol.bromium.cli.DefaultModule;
 import com.hribol.bromium.cli.commands.RecordCommand;
 import com.hribol.bromium.core.TestScenarioSteps;
-import com.hribol.bromium.core.utils.parsing.StepsReader;
+import com.hribol.bromium.core.parsing.StepsReader;
 import com.hribol.bromium.integration.tests.BaseDemoAppIntegrationTest;
 import com.hribol.bromium.integration.tests.simulation.RecordingSimulatorModule;
 

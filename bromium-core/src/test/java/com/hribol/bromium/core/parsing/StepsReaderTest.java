@@ -1,12 +1,10 @@
-package com.hribol.bromium.core.utils.parsing;
+package com.hribol.bromium.core.parsing;
 
 import com.hribol.bromium.core.TestScenarioSteps;
 import org.junit.Test;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Map;
 
 import static com.hribol.bromium.core.utils.Constants.EVENT;
