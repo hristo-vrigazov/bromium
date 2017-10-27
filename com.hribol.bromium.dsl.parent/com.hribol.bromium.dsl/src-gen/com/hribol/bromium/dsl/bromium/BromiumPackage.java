@@ -123,13 +123,22 @@ public interface BromiumPackage extends EPackage
   int APPLICATION_ACTION = 1;
 
   /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int APPLICATION_ACTION__NAME = 0;
+
+  /**
    * The feature id for the '<em><b>Action Definition</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int APPLICATION_ACTION__ACTION_DEFINITION = 0;
+  int APPLICATION_ACTION__ACTION_DEFINITION = 1;
 
   /**
    * The feature id for the '<em><b>Precondition</b></em>' containment reference.
@@ -138,7 +147,7 @@ public interface BromiumPackage extends EPackage
    * @generated
    * @ordered
    */
-  int APPLICATION_ACTION__PRECONDITION = 1;
+  int APPLICATION_ACTION__PRECONDITION = 2;
 
   /**
    * The feature id for the '<em><b>Web Driver Action</b></em>' containment reference.
@@ -147,7 +156,7 @@ public interface BromiumPackage extends EPackage
    * @generated
    * @ordered
    */
-  int APPLICATION_ACTION__WEB_DRIVER_ACTION = 2;
+  int APPLICATION_ACTION__WEB_DRIVER_ACTION = 3;
 
   /**
    * The feature id for the '<em><b>Postcondition</b></em>' containment reference.
@@ -156,7 +165,7 @@ public interface BromiumPackage extends EPackage
    * @generated
    * @ordered
    */
-  int APPLICATION_ACTION__POSTCONDITION = 3;
+  int APPLICATION_ACTION__POSTCONDITION = 4;
 
   /**
    * The feature id for the '<em><b>Expect Http Request</b></em>' attribute.
@@ -165,7 +174,7 @@ public interface BromiumPackage extends EPackage
    * @generated
    * @ordered
    */
-  int APPLICATION_ACTION__EXPECT_HTTP_REQUEST = 4;
+  int APPLICATION_ACTION__EXPECT_HTTP_REQUEST = 5;
 
   /**
    * The number of structural features of the '<em>Application Action</em>' class.
@@ -174,7 +183,7 @@ public interface BromiumPackage extends EPackage
    * @generated
    * @ordered
    */
-  int APPLICATION_ACTION_FEATURE_COUNT = 5;
+  int APPLICATION_ACTION_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ActionDefinitionImpl <em>Action Definition</em>}' class.
@@ -577,6 +586,17 @@ public interface BromiumPackage extends EPackage
   EClass getApplicationAction();
 
   /**
+   * Returns the meta object for the attribute '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ApplicationAction#getName()
+   * @see #getApplicationAction()
+   * @generated
+   */
+  EAttribute getApplicationAction_Name();
+
+  /**
    * Returns the meta object for the containment reference list '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getActionDefinition <em>Action Definition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -969,6 +989,14 @@ public interface BromiumPackage extends EPackage
      * @generated
      */
     EClass APPLICATION_ACTION = eINSTANCE.getApplicationAction();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute APPLICATION_ACTION__NAME = eINSTANCE.getApplicationAction_Name();
 
     /**
      * The meta object literal for the '<em><b>Action Definition</b></em>' containment reference list feature.

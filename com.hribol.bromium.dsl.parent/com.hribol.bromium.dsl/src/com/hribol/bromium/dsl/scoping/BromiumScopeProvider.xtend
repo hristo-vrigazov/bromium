@@ -3,6 +3,8 @@
  */
 package com.hribol.bromium.dsl.scoping
 
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EReference
 
 /**
  * This class contains custom scoping description.
@@ -11,5 +13,9 @@ package com.hribol.bromium.dsl.scoping
  * on how and when to use it.
  */
 class BromiumScopeProvider extends AbstractBromiumScopeProvider {
+
+	override getScope(EObject context, EReference reference) {
+	    return super.getScope(context, reference);
+	}
 
 }

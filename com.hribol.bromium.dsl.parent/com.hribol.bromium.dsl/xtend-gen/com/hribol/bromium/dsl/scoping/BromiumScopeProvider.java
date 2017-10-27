@@ -4,6 +4,9 @@
 package com.hribol.bromium.dsl.scoping;
 
 import com.hribol.bromium.dsl.scoping.AbstractBromiumScopeProvider;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.scoping.IScope;
 
 /**
  * This class contains custom scoping description.
@@ -13,4 +16,8 @@ import com.hribol.bromium.dsl.scoping.AbstractBromiumScopeProvider;
  */
 @SuppressWarnings("all")
 public class BromiumScopeProvider extends AbstractBromiumScopeProvider {
+  @Override
+  public IScope getScope(final EObject context, final EReference reference) {
+    return super.getScope(context, reference);
+  }
 }

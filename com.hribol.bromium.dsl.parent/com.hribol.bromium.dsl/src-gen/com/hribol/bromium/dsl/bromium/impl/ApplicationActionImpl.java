@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getActionDefinition <em>Action Definition</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getPrecondition <em>Precondition</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getWebDriverAction <em>Web Driver Action</em>}</li>
@@ -45,6 +46,26 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class ApplicationActionImpl extends MinimalEObjectImpl.Container implements ApplicationAction
 {
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getActionDefinition() <em>Action Definition</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -124,6 +145,29 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
   protected EClass eStaticClass()
   {
     return BromiumPackage.Literals.APPLICATION_ACTION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.APPLICATION_ACTION__NAME, oldName, name));
   }
 
   /**
@@ -339,6 +383,8 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
+      case BromiumPackage.APPLICATION_ACTION__NAME:
+        return getName();
       case BromiumPackage.APPLICATION_ACTION__ACTION_DEFINITION:
         return getActionDefinition();
       case BromiumPackage.APPLICATION_ACTION__PRECONDITION:
@@ -364,6 +410,9 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
+      case BromiumPackage.APPLICATION_ACTION__NAME:
+        setName((String)newValue);
+        return;
       case BromiumPackage.APPLICATION_ACTION__ACTION_DEFINITION:
         getActionDefinition().clear();
         getActionDefinition().addAll((Collection<? extends ActionDefinition>)newValue);
@@ -394,6 +443,9 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
+      case BromiumPackage.APPLICATION_ACTION__NAME:
+        setName(NAME_EDEFAULT);
+        return;
       case BromiumPackage.APPLICATION_ACTION__ACTION_DEFINITION:
         getActionDefinition().clear();
         return;
@@ -423,6 +475,8 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
+      case BromiumPackage.APPLICATION_ACTION__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case BromiumPackage.APPLICATION_ACTION__ACTION_DEFINITION:
         return actionDefinition != null && !actionDefinition.isEmpty();
       case BromiumPackage.APPLICATION_ACTION__PRECONDITION:
@@ -448,7 +502,9 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (expectHttpRequest: ");
+    result.append(" (name: ");
+    result.append(name);
+    result.append(", expectHttpRequest: ");
     result.append(expectHttpRequest);
     result.append(')');
     return result.toString();

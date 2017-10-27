@@ -89,16 +89,10 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     ActionDefinition returns ActionDefinition
 	 *
 	 * Constraint:
-	 *     parameter=ExposedParameter
+	 *     parameter=ExposedParameter?
 	 */
 	protected void sequence_ActionDefinition(ISerializationContext context, ActionDefinition semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.ACTION_DEFINITION__PARAMETER) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.ACTION_DEFINITION__PARAMETER));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getActionDefinitionAccess().getParameterExposedParameterParserRuleCall_1_0(), semanticObject.getParameter());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -108,6 +102,7 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *
 	 * Constraint:
 	 *     (
+	 *         name=ID 
 	 *         actionDefinition+=ActionDefinition* 
 	 *         precondition=Precondition? 
 	 *         webDriverAction=WebDriverAction 

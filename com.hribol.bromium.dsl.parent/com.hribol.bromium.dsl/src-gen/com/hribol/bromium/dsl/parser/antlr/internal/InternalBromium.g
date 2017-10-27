@@ -195,16 +195,38 @@ ruleApplicationAction returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='action'
+		otherlv_0='id'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getApplicationActionAccess().getActionKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getApplicationActionAccess().getIdKeyword_0());
+		}
+		(
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getApplicationActionAccess().getNameIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getApplicationActionRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		otherlv_2='syntax'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getApplicationActionAccess().getSyntaxKeyword_2());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getApplicationActionAccess().getActionDefinitionActionDefinitionParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getApplicationActionAccess().getActionDefinitionActionDefinitionParserRuleCall_3_0());
 				}
-				lv_actionDefinition_1_0=ruleActionDefinition
+				lv_actionDefinition_3_0=ruleActionDefinition
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getApplicationActionRule());
@@ -212,7 +234,7 @@ ruleApplicationAction returns [EObject current=null]
 					add(
 						$current,
 						"actionDefinition",
-						lv_actionDefinition_1_0,
+						lv_actionDefinition_3_0,
 						"com.hribol.bromium.dsl.Bromium.ActionDefinition");
 					afterParserOrEnumRuleCall();
 				}
@@ -221,9 +243,9 @@ ruleApplicationAction returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getApplicationActionAccess().getPreconditionPreconditionParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getApplicationActionAccess().getPreconditionPreconditionParserRuleCall_4_0());
 				}
-				lv_precondition_2_0=rulePrecondition
+				lv_precondition_4_0=rulePrecondition
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getApplicationActionRule());
@@ -231,7 +253,7 @@ ruleApplicationAction returns [EObject current=null]
 					set(
 						$current,
 						"precondition",
-						lv_precondition_2_0,
+						lv_precondition_4_0,
 						"com.hribol.bromium.dsl.Bromium.Precondition");
 					afterParserOrEnumRuleCall();
 				}
@@ -240,9 +262,9 @@ ruleApplicationAction returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getApplicationActionAccess().getWebDriverActionWebDriverActionParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getApplicationActionAccess().getWebDriverActionWebDriverActionParserRuleCall_5_0());
 				}
-				lv_webDriverAction_3_0=ruleWebDriverAction
+				lv_webDriverAction_5_0=ruleWebDriverAction
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getApplicationActionRule());
@@ -250,7 +272,7 @@ ruleApplicationAction returns [EObject current=null]
 					set(
 						$current,
 						"webDriverAction",
-						lv_webDriverAction_3_0,
+						lv_webDriverAction_5_0,
 						"com.hribol.bromium.dsl.Bromium.WebDriverAction");
 					afterParserOrEnumRuleCall();
 				}
@@ -259,9 +281,9 @@ ruleApplicationAction returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getApplicationActionAccess().getPostconditionPostconditionParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getApplicationActionAccess().getPostconditionPostconditionParserRuleCall_6_0());
 				}
-				lv_postcondition_4_0=rulePostcondition
+				lv_postcondition_6_0=rulePostcondition
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getApplicationActionRule());
@@ -269,7 +291,7 @@ ruleApplicationAction returns [EObject current=null]
 					set(
 						$current,
 						"postcondition",
-						lv_postcondition_4_0,
+						lv_postcondition_6_0,
 						"com.hribol.bromium.dsl.Bromium.Postcondition");
 					afterParserOrEnumRuleCall();
 				}
@@ -278,9 +300,9 @@ ruleApplicationAction returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getApplicationActionAccess().getExpectHttpRequestExpectHttpRequestParserRuleCall_5_0());
+					newCompositeNode(grammarAccess.getApplicationActionAccess().getExpectHttpRequestExpectHttpRequestParserRuleCall_7_0());
 				}
-				lv_expectHttpRequest_5_0=ruleExpectHttpRequest
+				lv_expectHttpRequest_7_0=ruleExpectHttpRequest
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getApplicationActionRule());
@@ -288,7 +310,7 @@ ruleApplicationAction returns [EObject current=null]
 					set(
 						$current,
 						"expectHttpRequest",
-						lv_expectHttpRequest_5_0,
+						lv_expectHttpRequest_7_0,
 						"com.hribol.bromium.dsl.Bromium.ExpectHttpRequest");
 					afterParserOrEnumRuleCall();
 				}
@@ -313,16 +335,23 @@ ruleActionDefinition returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		this_STRING_0=RULE_STRING
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getActionDefinitionAccess().getActionDefinitionAction_0(),
+					$current);
+			}
+		)
+		this_STRING_1=RULE_STRING
 		{
-			newLeafNode(this_STRING_0, grammarAccess.getActionDefinitionAccess().getSTRINGTerminalRuleCall_0());
+			newLeafNode(this_STRING_1, grammarAccess.getActionDefinitionAccess().getSTRINGTerminalRuleCall_1());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getActionDefinitionAccess().getParameterExposedParameterParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getActionDefinitionAccess().getParameterExposedParameterParserRuleCall_2_0());
 				}
-				lv_parameter_1_0=ruleExposedParameter
+				lv_parameter_2_0=ruleExposedParameter
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getActionDefinitionRule());
@@ -330,7 +359,7 @@ ruleActionDefinition returns [EObject current=null]
 					set(
 						$current,
 						"parameter",
-						lv_parameter_1_0,
+						lv_parameter_2_0,
 						"com.hribol.bromium.dsl.Bromium.ExposedParameter");
 					afterParserOrEnumRuleCall();
 				}

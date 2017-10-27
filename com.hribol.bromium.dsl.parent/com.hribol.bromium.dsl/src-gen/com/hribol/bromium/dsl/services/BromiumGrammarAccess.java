@@ -6,6 +6,7 @@ package com.hribol.bromium.dsl.services;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
@@ -101,85 +102,102 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	public class ApplicationActionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.ApplicationAction");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cActionKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cActionDefinitionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cActionDefinitionActionDefinitionParserRuleCall_1_0 = (RuleCall)cActionDefinitionAssignment_1.eContents().get(0);
-		private final Assignment cPreconditionAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cPreconditionPreconditionParserRuleCall_2_0 = (RuleCall)cPreconditionAssignment_2.eContents().get(0);
-		private final Assignment cWebDriverActionAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cWebDriverActionWebDriverActionParserRuleCall_3_0 = (RuleCall)cWebDriverActionAssignment_3.eContents().get(0);
-		private final Assignment cPostconditionAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cPostconditionPostconditionParserRuleCall_4_0 = (RuleCall)cPostconditionAssignment_4.eContents().get(0);
-		private final Assignment cExpectHttpRequestAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cExpectHttpRequestExpectHttpRequestParserRuleCall_5_0 = (RuleCall)cExpectHttpRequestAssignment_5.eContents().get(0);
+		private final Keyword cIdKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cSyntaxKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cActionDefinitionAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cActionDefinitionActionDefinitionParserRuleCall_3_0 = (RuleCall)cActionDefinitionAssignment_3.eContents().get(0);
+		private final Assignment cPreconditionAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cPreconditionPreconditionParserRuleCall_4_0 = (RuleCall)cPreconditionAssignment_4.eContents().get(0);
+		private final Assignment cWebDriverActionAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cWebDriverActionWebDriverActionParserRuleCall_5_0 = (RuleCall)cWebDriverActionAssignment_5.eContents().get(0);
+		private final Assignment cPostconditionAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cPostconditionPostconditionParserRuleCall_6_0 = (RuleCall)cPostconditionAssignment_6.eContents().get(0);
+		private final Assignment cExpectHttpRequestAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cExpectHttpRequestExpectHttpRequestParserRuleCall_7_0 = (RuleCall)cExpectHttpRequestAssignment_7.eContents().get(0);
 		
 		//ApplicationAction:
-		//	'action' actionDefinition+=ActionDefinition*
+		//	'id' name=ID
+		//	'syntax' actionDefinition+=ActionDefinition*
 		//	precondition=Precondition?
 		//	webDriverAction=WebDriverAction
 		//	postcondition=Postcondition?
 		//	expectHttpRequest=ExpectHttpRequest;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'action' actionDefinition+=ActionDefinition* precondition=Precondition? webDriverAction=WebDriverAction
+		//'id' name=ID 'syntax' actionDefinition+=ActionDefinition* precondition=Precondition? webDriverAction=WebDriverAction
 		//postcondition=Postcondition? expectHttpRequest=ExpectHttpRequest
 		public Group getGroup() { return cGroup; }
 		
-		//'action'
-		public Keyword getActionKeyword_0() { return cActionKeyword_0; }
+		//'id'
+		public Keyword getIdKeyword_0() { return cIdKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//'syntax'
+		public Keyword getSyntaxKeyword_2() { return cSyntaxKeyword_2; }
 		
 		//actionDefinition+=ActionDefinition*
-		public Assignment getActionDefinitionAssignment_1() { return cActionDefinitionAssignment_1; }
+		public Assignment getActionDefinitionAssignment_3() { return cActionDefinitionAssignment_3; }
 		
 		//ActionDefinition
-		public RuleCall getActionDefinitionActionDefinitionParserRuleCall_1_0() { return cActionDefinitionActionDefinitionParserRuleCall_1_0; }
+		public RuleCall getActionDefinitionActionDefinitionParserRuleCall_3_0() { return cActionDefinitionActionDefinitionParserRuleCall_3_0; }
 		
 		//precondition=Precondition?
-		public Assignment getPreconditionAssignment_2() { return cPreconditionAssignment_2; }
+		public Assignment getPreconditionAssignment_4() { return cPreconditionAssignment_4; }
 		
 		//Precondition
-		public RuleCall getPreconditionPreconditionParserRuleCall_2_0() { return cPreconditionPreconditionParserRuleCall_2_0; }
+		public RuleCall getPreconditionPreconditionParserRuleCall_4_0() { return cPreconditionPreconditionParserRuleCall_4_0; }
 		
 		//webDriverAction=WebDriverAction
-		public Assignment getWebDriverActionAssignment_3() { return cWebDriverActionAssignment_3; }
+		public Assignment getWebDriverActionAssignment_5() { return cWebDriverActionAssignment_5; }
 		
 		//WebDriverAction
-		public RuleCall getWebDriverActionWebDriverActionParserRuleCall_3_0() { return cWebDriverActionWebDriverActionParserRuleCall_3_0; }
+		public RuleCall getWebDriverActionWebDriverActionParserRuleCall_5_0() { return cWebDriverActionWebDriverActionParserRuleCall_5_0; }
 		
 		//postcondition=Postcondition?
-		public Assignment getPostconditionAssignment_4() { return cPostconditionAssignment_4; }
+		public Assignment getPostconditionAssignment_6() { return cPostconditionAssignment_6; }
 		
 		//Postcondition
-		public RuleCall getPostconditionPostconditionParserRuleCall_4_0() { return cPostconditionPostconditionParserRuleCall_4_0; }
+		public RuleCall getPostconditionPostconditionParserRuleCall_6_0() { return cPostconditionPostconditionParserRuleCall_6_0; }
 		
 		//expectHttpRequest=ExpectHttpRequest
-		public Assignment getExpectHttpRequestAssignment_5() { return cExpectHttpRequestAssignment_5; }
+		public Assignment getExpectHttpRequestAssignment_7() { return cExpectHttpRequestAssignment_7; }
 		
 		//ExpectHttpRequest
-		public RuleCall getExpectHttpRequestExpectHttpRequestParserRuleCall_5_0() { return cExpectHttpRequestExpectHttpRequestParserRuleCall_5_0; }
+		public RuleCall getExpectHttpRequestExpectHttpRequestParserRuleCall_7_0() { return cExpectHttpRequestExpectHttpRequestParserRuleCall_7_0; }
 	}
 	public class ActionDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.ActionDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cSTRINGTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Assignment cParameterAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cParameterExposedParameterParserRuleCall_1_0 = (RuleCall)cParameterAssignment_1.eContents().get(0);
+		private final Action cActionDefinitionAction_0 = (Action)cGroup.eContents().get(0);
+		private final RuleCall cSTRINGTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Assignment cParameterAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cParameterExposedParameterParserRuleCall_2_0 = (RuleCall)cParameterAssignment_2.eContents().get(0);
 		
 		//ActionDefinition:
-		//	STRING parameter=ExposedParameter?;
+		//	{ActionDefinition} STRING parameter=ExposedParameter?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//STRING parameter=ExposedParameter?
+		//{ActionDefinition} STRING parameter=ExposedParameter?
 		public Group getGroup() { return cGroup; }
 		
+		//{ActionDefinition}
+		public Action getActionDefinitionAction_0() { return cActionDefinitionAction_0; }
+		
 		//STRING
-		public RuleCall getSTRINGTerminalRuleCall_0() { return cSTRINGTerminalRuleCall_0; }
+		public RuleCall getSTRINGTerminalRuleCall_1() { return cSTRINGTerminalRuleCall_1; }
 		
 		//parameter=ExposedParameter?
-		public Assignment getParameterAssignment_1() { return cParameterAssignment_1; }
+		public Assignment getParameterAssignment_2() { return cParameterAssignment_2; }
 		
 		//ExposedParameter
-		public RuleCall getParameterExposedParameterParserRuleCall_1_0() { return cParameterExposedParameterParserRuleCall_1_0; }
+		public RuleCall getParameterExposedParameterParserRuleCall_2_0() { return cParameterExposedParameterParserRuleCall_2_0; }
 	}
 	public class WebDriverActionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.WebDriverAction");
@@ -646,7 +664,8 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ApplicationAction:
-	//	'action' actionDefinition+=ActionDefinition*
+	//	'id' name=ID
+	//	'syntax' actionDefinition+=ActionDefinition*
 	//	precondition=Precondition?
 	//	webDriverAction=WebDriverAction
 	//	postcondition=Postcondition?
@@ -660,7 +679,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ActionDefinition:
-	//	STRING parameter=ExposedParameter?;
+	//	{ActionDefinition} STRING parameter=ExposedParameter?;
 	public ActionDefinitionElements getActionDefinitionAccess() {
 		return pActionDefinition;
 	}

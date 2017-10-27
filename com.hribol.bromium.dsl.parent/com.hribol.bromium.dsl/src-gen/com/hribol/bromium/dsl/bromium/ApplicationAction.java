@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getName <em>Name</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getActionDefinition <em>Action Definition</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getPrecondition <em>Precondition</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getWebDriverAction <em>Web Driver Action</em>}</li>
@@ -29,6 +30,32 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ApplicationAction extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Name</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getApplicationAction_Name()
+   * @model
+   * @generated
+   */
+  String getName();
+
+  /**
+   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getName <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
+   * @generated
+   */
+  void setName(String value);
+
   /**
    * Returns the value of the '<em><b>Action Definition</b></em>' containment reference list.
    * The list contents are of type {@link com.hribol.bromium.dsl.bromium.ActionDefinition}.

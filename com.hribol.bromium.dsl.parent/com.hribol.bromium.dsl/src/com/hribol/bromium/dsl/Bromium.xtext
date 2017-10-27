@@ -12,7 +12,8 @@ Model:
 ;
 
 ApplicationAction:
-	'action' actionDefinition+=ActionDefinition*
+	'id' name=ID
+	'syntax' actionDefinition+=ActionDefinition*
 	(precondition=Precondition)?
 	webDriverAction=WebDriverAction
 	(postcondition=Postcondition)?

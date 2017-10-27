@@ -253,9 +253,9 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getApplicationAction_ActionDefinition()
+  public EAttribute getApplicationAction_Name()
   {
-    return (EReference)applicationActionEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)applicationActionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -263,7 +263,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getApplicationAction_Precondition()
+  public EReference getApplicationAction_ActionDefinition()
   {
     return (EReference)applicationActionEClass.getEStructuralFeatures().get(1);
   }
@@ -273,7 +273,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getApplicationAction_WebDriverAction()
+  public EReference getApplicationAction_Precondition()
   {
     return (EReference)applicationActionEClass.getEStructuralFeatures().get(2);
   }
@@ -283,7 +283,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getApplicationAction_Postcondition()
+  public EReference getApplicationAction_WebDriverAction()
   {
     return (EReference)applicationActionEClass.getEStructuralFeatures().get(3);
   }
@@ -293,9 +293,19 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getApplicationAction_Postcondition()
+  {
+    return (EReference)applicationActionEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EAttribute getApplicationAction_ExpectHttpRequest()
   {
-    return (EAttribute)applicationActionEClass.getEStructuralFeatures().get(4);
+    return (EAttribute)applicationActionEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -585,6 +595,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     createEReference(modelEClass, MODEL__ACTIONS);
 
     applicationActionEClass = createEClass(APPLICATION_ACTION);
+    createEAttribute(applicationActionEClass, APPLICATION_ACTION__NAME);
     createEReference(applicationActionEClass, APPLICATION_ACTION__ACTION_DEFINITION);
     createEReference(applicationActionEClass, APPLICATION_ACTION__PRECONDITION);
     createEReference(applicationActionEClass, APPLICATION_ACTION__WEB_DRIVER_ACTION);
@@ -670,6 +681,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     initEReference(getModel_Actions(), this.getApplicationAction(), null, "actions", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(applicationActionEClass, ApplicationAction.class, "ApplicationAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getApplicationAction_Name(), ecorePackage.getEString(), "name", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getApplicationAction_ActionDefinition(), this.getActionDefinition(), null, "actionDefinition", null, 0, -1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getApplicationAction_Precondition(), this.getPrecondition(), null, "precondition", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getApplicationAction_WebDriverAction(), this.getWebDriverAction(), null, "webDriverAction", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

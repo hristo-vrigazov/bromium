@@ -13,6 +13,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//Model/actions"/>
     </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//ApplicationAction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//ApplicationAction/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ApplicationAction/actionDefinition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ApplicationAction/precondition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ApplicationAction/webDriverAction"/>
