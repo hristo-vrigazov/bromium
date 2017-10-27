@@ -9,7 +9,6 @@ Model:
 	'actions' '{' 
 		actions+=ApplicationAction*
 	'}'
-			
 ;
 
 ApplicationAction:
@@ -21,7 +20,7 @@ ApplicationAction:
 ;
 
 ActionDefinition:
-	 STRING (parameter=ExposedParameter)?
+	 {ActionDefinition} STRING (parameter=ExposedParameter)?
 ;
 
 WebDriverAction:

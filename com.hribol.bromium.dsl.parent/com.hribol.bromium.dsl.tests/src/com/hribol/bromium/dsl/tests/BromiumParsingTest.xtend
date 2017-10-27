@@ -19,6 +19,27 @@ class BromiumParsingTest {
 	ParseHelper<Model> parseHelper
 	
 	@Test
+	def void scopingOfExposedParameters() {
+		val result = parseHelper.parse('''
+			name 'Example name'
+			version '8.2.5'
+			actions {
+			    action 'Type ' content 'into username field'
+				type content in element with css selector '#login' 
+				do not expect http request
+				
+				action 'Click on login button'
+				click on element with css selector content
+				do not expect http request
+				
+			}
+		''')
+		
+		Assert.assertNotNull(result)
+		Assert.assertFalse(result.eResource.errors.isEmpty)
+	}
+	
+	@Test
 	def void loadModel() {
 		val result = parseHelper.parse('''
 			name 'Demo app'

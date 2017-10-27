@@ -23,6 +23,48 @@ public class BromiumParsingTest {
   private ParseHelper<Model> parseHelper;
   
   @Test
+  public void scopingOfExposedParameters() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("name \'Example name\'");
+      _builder.newLine();
+      _builder.append("version \'8.2.5\'");
+      _builder.newLine();
+      _builder.append("actions {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("action \'Type \' content \'into username field\'");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("type content in element with css selector \'#login\' ");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("do not expect http request");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("action \'Click on login button\'");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("click on element with css selector content");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("do not expect http request");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final Model result = this.parseHelper.parse(_builder);
+      Assert.assertNotNull(result);
+      Assert.assertFalse(result.eResource().getErrors().isEmpty());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void loadModel() {
     try {
       StringConcatenation _builder = new StringConcatenation();
