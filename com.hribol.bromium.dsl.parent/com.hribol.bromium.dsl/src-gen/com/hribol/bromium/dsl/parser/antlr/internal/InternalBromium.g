@@ -201,22 +201,23 @@ ruleApplicationAction returns [EObject current=null]
 		}
 		(
 			(
-				lv_actionId_1_0=RULE_STRING
 				{
-					newLeafNode(lv_actionId_1_0, grammarAccess.getApplicationActionAccess().getActionIdSTRINGTerminalRuleCall_1_0());
+					newCompositeNode(grammarAccess.getApplicationActionAccess().getActionDefinitionActionDefinitionParserRuleCall_1_0());
 				}
+				lv_actionDefinition_1_0=ruleActionDefinition
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getApplicationActionRule());
+						$current = createModelElementForParent(grammarAccess.getApplicationActionRule());
 					}
-					setWithLastConsumed(
+					add(
 						$current,
-						"actionId",
-						lv_actionId_1_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
+						"actionDefinition",
+						lv_actionDefinition_1_0,
+						"com.hribol.bromium.dsl.Bromium.ActionDefinition");
+					afterParserOrEnumRuleCall();
 				}
 			)
-		)
+		)*
 		(
 			(
 				{
@@ -293,6 +294,48 @@ ruleApplicationAction returns [EObject current=null]
 				}
 			)
 		)
+	)
+;
+
+// Entry rule entryRuleActionDefinition
+entryRuleActionDefinition returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getActionDefinitionRule()); }
+	iv_ruleActionDefinition=ruleActionDefinition
+	{ $current=$iv_ruleActionDefinition.current; }
+	EOF;
+
+// Rule ActionDefinition
+ruleActionDefinition returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		this_STRING_0=RULE_STRING
+		{
+			newLeafNode(this_STRING_0, grammarAccess.getActionDefinitionAccess().getSTRINGTerminalRuleCall_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getActionDefinitionAccess().getParameterExposedParameterParserRuleCall_1_0());
+				}
+				lv_parameter_1_0=ruleExposedParameter
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getActionDefinitionRule());
+					}
+					set(
+						$current,
+						"parameter",
+						lv_parameter_1_0,
+						"com.hribol.bromium.dsl.Bromium.ExposedParameter");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
 	)
 ;
 
@@ -522,19 +565,20 @@ ruleElementWithIdIsPresent returns [EObject current=null]
 		}
 		(
 			(
-				lv_cssSelector_4_0=RULE_STRING
 				{
-					newLeafNode(lv_cssSelector_4_0, grammarAccess.getElementWithIdIsPresentAccess().getCssSelectorSTRINGTerminalRuleCall_4_0());
+					newCompositeNode(grammarAccess.getElementWithIdIsPresentAccess().getCssSelectorParameterValueParserRuleCall_4_0());
 				}
+				lv_cssSelector_4_0=ruleParameterValue
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getElementWithIdIsPresentRule());
+						$current = createModelElementForParent(grammarAccess.getElementWithIdIsPresentRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"cssSelector",
 						lv_cssSelector_4_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
+						"com.hribol.bromium.dsl.Bromium.ParameterValue");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -591,19 +635,20 @@ ruleClickOnElementWithId returns [EObject current=null]
 		}
 		(
 			(
-				lv_cssSelector_6_0=RULE_STRING
 				{
-					newLeafNode(lv_cssSelector_6_0, grammarAccess.getClickOnElementWithIdAccess().getCssSelectorSTRINGTerminalRuleCall_6_0());
+					newCompositeNode(grammarAccess.getClickOnElementWithIdAccess().getCssSelectorParameterValueParserRuleCall_6_0());
 				}
+				lv_cssSelector_6_0=ruleParameterValue
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getClickOnElementWithIdRule());
+						$current = createModelElementForParent(grammarAccess.getClickOnElementWithIdRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"cssSelector",
 						lv_cssSelector_6_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
+						"com.hribol.bromium.dsl.Bromium.ParameterValue");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -677,19 +722,20 @@ ruleTypeTextInElementFoundByCssSelector returns [EObject current=null]
 		}
 		(
 			(
-				lv_text_1_0=RULE_STRING
 				{
-					newLeafNode(lv_text_1_0, grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTextSTRINGTerminalRuleCall_1_0());
+					newCompositeNode(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTextParameterValueParserRuleCall_1_0());
 				}
+				lv_text_1_0=ruleParameterValue
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getTypeTextInElementFoundByCssSelectorRule());
+						$current = createModelElementForParent(grammarAccess.getTypeTextInElementFoundByCssSelectorRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"text",
 						lv_text_1_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
+						"com.hribol.bromium.dsl.Bromium.ParameterValue");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -715,21 +761,108 @@ ruleTypeTextInElementFoundByCssSelector returns [EObject current=null]
 		}
 		(
 			(
-				lv_cssSelector_7_0=RULE_STRING
 				{
-					newLeafNode(lv_cssSelector_7_0, grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getCssSelectorSTRINGTerminalRuleCall_7_0());
+					newCompositeNode(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getCssSelectorParameterValueParserRuleCall_7_0());
 				}
+				lv_cssSelector_7_0=ruleParameterValue
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getTypeTextInElementFoundByCssSelectorRule());
+						$current = createModelElementForParent(grammarAccess.getTypeTextInElementFoundByCssSelectorRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"cssSelector",
 						lv_cssSelector_7_0,
+						"com.hribol.bromium.dsl.Bromium.ParameterValue");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleParameterValue
+entryRuleParameterValue returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getParameterValueRule()); }
+	iv_ruleParameterValue=ruleParameterValue
+	{ $current=$iv_ruleParameterValue.current; }
+	EOF;
+
+// Rule ParameterValue
+ruleParameterValue returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_content_0_0=RULE_STRING
+				{
+					newLeafNode(lv_content_0_0, grammarAccess.getParameterValueAccess().getContentSTRINGTerminalRuleCall_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getParameterValueRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"content",
+						lv_content_0_0,
 						"org.eclipse.xtext.common.Terminals.STRING");
 				}
 			)
+		)
+		    |
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getParameterValueRule());
+					}
+				}
+				otherlv_1=RULE_ID
+				{
+					newLeafNode(otherlv_1, grammarAccess.getParameterValueAccess().getExposedParameterExposedParameterCrossReference_1_0());
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleExposedParameter
+entryRuleExposedParameter returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getExposedParameterRule()); }
+	iv_ruleExposedParameter=ruleExposedParameter
+	{ $current=$iv_ruleExposedParameter.current; }
+	EOF;
+
+// Rule ExposedParameter
+ruleExposedParameter returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			lv_name_0_0=RULE_ID
+			{
+				newLeafNode(lv_name_0_0, grammarAccess.getExposedParameterAccess().getNameIDTerminalRuleCall_0());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getExposedParameterRule());
+				}
+				setWithLastConsumed(
+					$current,
+					"name",
+					lv_name_0_0,
+					"org.eclipse.xtext.common.Terminals.ID");
+			}
 		)
 	)
 ;

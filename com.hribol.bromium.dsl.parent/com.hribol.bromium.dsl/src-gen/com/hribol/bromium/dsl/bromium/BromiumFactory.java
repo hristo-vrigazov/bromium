@@ -42,6 +42,15 @@ public interface BromiumFactory extends EFactory
   ApplicationAction createApplicationAction();
 
   /**
+   * Returns a new object of class '<em>Action Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Action Definition</em>'.
+   * @generated
+   */
+  ActionDefinition createActionDefinition();
+
+  /**
    * Returns a new object of class '<em>Web Driver Action</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -103,6 +112,24 @@ public interface BromiumFactory extends EFactory
    * @generated
    */
   TypeTextInElementFoundByCssSelector createTypeTextInElementFoundByCssSelector();
+
+  /**
+   * Returns a new object of class '<em>Parameter Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parameter Value</em>'.
+   * @generated
+   */
+  ParameterValue createParameterValue();
+
+  /**
+   * Returns a new object of class '<em>Exposed Parameter</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Exposed Parameter</em>'.
+   * @generated
+   */
+  ExposedParameter createExposedParameter();
 
   /**
    * Returns a new object of class '<em>Three Dotted Version</em>'.

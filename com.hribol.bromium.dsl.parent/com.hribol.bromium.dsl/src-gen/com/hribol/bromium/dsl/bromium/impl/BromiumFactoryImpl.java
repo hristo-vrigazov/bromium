@@ -67,6 +67,7 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
     {
       case BromiumPackage.MODEL: return createModel();
       case BromiumPackage.APPLICATION_ACTION: return createApplicationAction();
+      case BromiumPackage.ACTION_DEFINITION: return createActionDefinition();
       case BromiumPackage.WEB_DRIVER_ACTION: return createWebDriverAction();
       case BromiumPackage.PRECONDITION: return createPrecondition();
       case BromiumPackage.POSTCONDITION: return createPostcondition();
@@ -74,6 +75,8 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
       case BromiumPackage.CLICK_ON_ELEMENT_WITH_ID: return createClickOnElementWithId();
       case BromiumPackage.PAGE_LOAD: return createPageLoad();
       case BromiumPackage.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR: return createTypeTextInElementFoundByCssSelector();
+      case BromiumPackage.PARAMETER_VALUE: return createParameterValue();
+      case BromiumPackage.EXPOSED_PARAMETER: return createExposedParameter();
       case BromiumPackage.THREE_DOTTED_VERSION: return createThreeDottedVersion();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -100,6 +103,17 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
   {
     ApplicationActionImpl applicationAction = new ApplicationActionImpl();
     return applicationAction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ActionDefinition createActionDefinition()
+  {
+    ActionDefinitionImpl actionDefinition = new ActionDefinitionImpl();
+    return actionDefinition;
   }
 
   /**
@@ -177,6 +191,28 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
   {
     TypeTextInElementFoundByCssSelectorImpl typeTextInElementFoundByCssSelector = new TypeTextInElementFoundByCssSelectorImpl();
     return typeTextInElementFoundByCssSelector;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ParameterValue createParameterValue()
+  {
+    ParameterValueImpl parameterValue = new ParameterValueImpl();
+    return parameterValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ExposedParameter createExposedParameter()
+  {
+    ExposedParameterImpl exposedParameter = new ExposedParameterImpl();
+    return exposedParameter;
   }
 
   /**

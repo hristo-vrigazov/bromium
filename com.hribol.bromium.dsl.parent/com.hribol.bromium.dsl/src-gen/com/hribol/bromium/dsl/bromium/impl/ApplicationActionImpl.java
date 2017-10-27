@@ -3,20 +3,28 @@
  */
 package com.hribol.bromium.dsl.bromium.impl;
 
+import com.hribol.bromium.dsl.bromium.ActionDefinition;
 import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.Postcondition;
 import com.hribol.bromium.dsl.bromium.Precondition;
 import com.hribol.bromium.dsl.bromium.WebDriverAction;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,7 +34,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getActionId <em>Action Id</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getActionDefinition <em>Action Definition</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getPrecondition <em>Precondition</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getWebDriverAction <em>Web Driver Action</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getPostcondition <em>Postcondition</em>}</li>
@@ -38,24 +46,14 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 public class ApplicationActionImpl extends MinimalEObjectImpl.Container implements ApplicationAction
 {
   /**
-   * The default value of the '{@link #getActionId() <em>Action Id</em>}' attribute.
+   * The cached value of the '{@link #getActionDefinition() <em>Action Definition</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getActionId()
+   * @see #getActionDefinition()
    * @generated
    * @ordered
    */
-  protected static final String ACTION_ID_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getActionId() <em>Action Id</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getActionId()
-   * @generated
-   * @ordered
-   */
-  protected String actionId = ACTION_ID_EDEFAULT;
+  protected EList<ActionDefinition> actionDefinition;
 
   /**
    * The cached value of the '{@link #getPrecondition() <em>Precondition</em>}' containment reference.
@@ -133,22 +131,13 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getActionId()
+  public EList<ActionDefinition> getActionDefinition()
   {
-    return actionId;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setActionId(String newActionId)
-  {
-    String oldActionId = actionId;
-    actionId = newActionId;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.APPLICATION_ACTION__ACTION_ID, oldActionId, actionId));
+    if (actionDefinition == null)
+    {
+      actionDefinition = new EObjectContainmentEList<ActionDefinition>(ActionDefinition.class, this, BromiumPackage.APPLICATION_ACTION__ACTION_DEFINITION);
+    }
+    return actionDefinition;
   }
 
   /**
@@ -328,6 +317,8 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
+      case BromiumPackage.APPLICATION_ACTION__ACTION_DEFINITION:
+        return ((InternalEList<?>)getActionDefinition()).basicRemove(otherEnd, msgs);
       case BromiumPackage.APPLICATION_ACTION__PRECONDITION:
         return basicSetPrecondition(null, msgs);
       case BromiumPackage.APPLICATION_ACTION__WEB_DRIVER_ACTION:
@@ -348,8 +339,8 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case BromiumPackage.APPLICATION_ACTION__ACTION_ID:
-        return getActionId();
+      case BromiumPackage.APPLICATION_ACTION__ACTION_DEFINITION:
+        return getActionDefinition();
       case BromiumPackage.APPLICATION_ACTION__PRECONDITION:
         return getPrecondition();
       case BromiumPackage.APPLICATION_ACTION__WEB_DRIVER_ACTION:
@@ -367,13 +358,15 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case BromiumPackage.APPLICATION_ACTION__ACTION_ID:
-        setActionId((String)newValue);
+      case BromiumPackage.APPLICATION_ACTION__ACTION_DEFINITION:
+        getActionDefinition().clear();
+        getActionDefinition().addAll((Collection<? extends ActionDefinition>)newValue);
         return;
       case BromiumPackage.APPLICATION_ACTION__PRECONDITION:
         setPrecondition((Precondition)newValue);
@@ -401,8 +394,8 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case BromiumPackage.APPLICATION_ACTION__ACTION_ID:
-        setActionId(ACTION_ID_EDEFAULT);
+      case BromiumPackage.APPLICATION_ACTION__ACTION_DEFINITION:
+        getActionDefinition().clear();
         return;
       case BromiumPackage.APPLICATION_ACTION__PRECONDITION:
         setPrecondition((Precondition)null);
@@ -430,8 +423,8 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case BromiumPackage.APPLICATION_ACTION__ACTION_ID:
-        return ACTION_ID_EDEFAULT == null ? actionId != null : !ACTION_ID_EDEFAULT.equals(actionId);
+      case BromiumPackage.APPLICATION_ACTION__ACTION_DEFINITION:
+        return actionDefinition != null && !actionDefinition.isEmpty();
       case BromiumPackage.APPLICATION_ACTION__PRECONDITION:
         return precondition != null;
       case BromiumPackage.APPLICATION_ACTION__WEB_DRIVER_ACTION:
@@ -455,9 +448,7 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (actionId: ");
-    result.append(actionId);
-    result.append(", expectHttpRequest: ");
+    result.append(" (expectHttpRequest: ");
     result.append(expectHttpRequest);
     result.append(')');
     return result.toString();

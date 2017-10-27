@@ -86,6 +86,11 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
         return createApplicationActionAdapter();
       }
       @Override
+      public Adapter caseActionDefinition(ActionDefinition object)
+      {
+        return createActionDefinitionAdapter();
+      }
+      @Override
       public Adapter caseWebDriverAction(WebDriverAction object)
       {
         return createWebDriverActionAdapter();
@@ -119,6 +124,16 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
       public Adapter caseTypeTextInElementFoundByCssSelector(TypeTextInElementFoundByCssSelector object)
       {
         return createTypeTextInElementFoundByCssSelectorAdapter();
+      }
+      @Override
+      public Adapter caseParameterValue(ParameterValue object)
+      {
+        return createParameterValueAdapter();
+      }
+      @Override
+      public Adapter caseExposedParameter(ExposedParameter object)
+      {
+        return createExposedParameterAdapter();
       }
       @Override
       public Adapter caseThreeDottedVersion(ThreeDottedVersion object)
@@ -173,6 +188,21 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createApplicationActionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.ActionDefinition <em>Action Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see com.hribol.bromium.dsl.bromium.ActionDefinition
+   * @generated
+   */
+  public Adapter createActionDefinitionAdapter()
   {
     return null;
   }
@@ -278,6 +308,36 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createTypeTextInElementFoundByCssSelectorAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.ParameterValue <em>Parameter Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see com.hribol.bromium.dsl.bromium.ParameterValue
+   * @generated
+   */
+  public Adapter createParameterValueAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.ExposedParameter <em>Exposed Parameter</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see com.hribol.bromium.dsl.bromium.ExposedParameter
+   * @generated
+   */
+  public Adapter createExposedParameterAdapter()
   {
     return null;
   }

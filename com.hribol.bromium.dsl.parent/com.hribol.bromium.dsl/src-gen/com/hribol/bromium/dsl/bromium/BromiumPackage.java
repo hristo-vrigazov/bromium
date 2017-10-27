@@ -123,13 +123,13 @@ public interface BromiumPackage extends EPackage
   int APPLICATION_ACTION = 1;
 
   /**
-   * The feature id for the '<em><b>Action Id</b></em>' attribute.
+   * The feature id for the '<em><b>Action Definition</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int APPLICATION_ACTION__ACTION_ID = 0;
+  int APPLICATION_ACTION__ACTION_DEFINITION = 0;
 
   /**
    * The feature id for the '<em><b>Precondition</b></em>' containment reference.
@@ -177,6 +177,34 @@ public interface BromiumPackage extends EPackage
   int APPLICATION_ACTION_FEATURE_COUNT = 5;
 
   /**
+   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ActionDefinitionImpl <em>Action Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see com.hribol.bromium.dsl.bromium.impl.ActionDefinitionImpl
+   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getActionDefinition()
+   * @generated
+   */
+  int ACTION_DEFINITION = 2;
+
+  /**
+   * The feature id for the '<em><b>Parameter</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION_DEFINITION__PARAMETER = 0;
+
+  /**
+   * The number of structural features of the '<em>Action Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION_DEFINITION_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.WebDriverActionImpl <em>Web Driver Action</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -184,7 +212,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getWebDriverAction()
    * @generated
    */
-  int WEB_DRIVER_ACTION = 2;
+  int WEB_DRIVER_ACTION = 3;
 
   /**
    * The number of structural features of the '<em>Web Driver Action</em>' class.
@@ -203,7 +231,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getPrecondition()
    * @generated
    */
-  int PRECONDITION = 3;
+  int PRECONDITION = 4;
 
   /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
@@ -231,7 +259,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getPostcondition()
    * @generated
    */
-  int POSTCONDITION = 4;
+  int POSTCONDITION = 5;
 
   /**
    * The feature id for the '<em><b>Postcondition</b></em>' containment reference.
@@ -259,10 +287,10 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getElementWithIdIsPresent()
    * @generated
    */
-  int ELEMENT_WITH_ID_IS_PRESENT = 5;
+  int ELEMENT_WITH_ID_IS_PRESENT = 6;
 
   /**
-   * The feature id for the '<em><b>Css Selector</b></em>' attribute.
+   * The feature id for the '<em><b>Css Selector</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -287,10 +315,10 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getClickOnElementWithId()
    * @generated
    */
-  int CLICK_ON_ELEMENT_WITH_ID = 6;
+  int CLICK_ON_ELEMENT_WITH_ID = 7;
 
   /**
-   * The feature id for the '<em><b>Css Selector</b></em>' attribute.
+   * The feature id for the '<em><b>Css Selector</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -315,7 +343,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getPageLoad()
    * @generated
    */
-  int PAGE_LOAD = 7;
+  int PAGE_LOAD = 8;
 
   /**
    * The feature id for the '<em><b>Subpath</b></em>' attribute.
@@ -343,10 +371,10 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getTypeTextInElementFoundByCssSelector()
    * @generated
    */
-  int TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR = 8;
+  int TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR = 9;
 
   /**
-   * The feature id for the '<em><b>Text</b></em>' attribute.
+   * The feature id for the '<em><b>Text</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -355,7 +383,7 @@ public interface BromiumPackage extends EPackage
   int TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR__TEXT = WEB_DRIVER_ACTION_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Css Selector</b></em>' attribute.
+   * The feature id for the '<em><b>Css Selector</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -373,6 +401,71 @@ public interface BromiumPackage extends EPackage
   int TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR_FEATURE_COUNT = WEB_DRIVER_ACTION_FEATURE_COUNT + 2;
 
   /**
+   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ParameterValueImpl <em>Parameter Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see com.hribol.bromium.dsl.bromium.impl.ParameterValueImpl
+   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getParameterValue()
+   * @generated
+   */
+  int PARAMETER_VALUE = 10;
+
+  /**
+   * The feature id for the '<em><b>Content</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETER_VALUE__CONTENT = 0;
+
+  /**
+   * The feature id for the '<em><b>Exposed Parameter</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETER_VALUE__EXPOSED_PARAMETER = 1;
+
+  /**
+   * The number of structural features of the '<em>Parameter Value</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETER_VALUE_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ExposedParameterImpl <em>Exposed Parameter</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see com.hribol.bromium.dsl.bromium.impl.ExposedParameterImpl
+   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getExposedParameter()
+   * @generated
+   */
+  int EXPOSED_PARAMETER = 11;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPOSED_PARAMETER__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Exposed Parameter</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPOSED_PARAMETER_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ThreeDottedVersionImpl <em>Three Dotted Version</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -380,7 +473,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getThreeDottedVersion()
    * @generated
    */
-  int THREE_DOTTED_VERSION = 9;
+  int THREE_DOTTED_VERSION = 12;
 
   /**
    * The feature id for the '<em><b>Big</b></em>' attribute.
@@ -484,15 +577,15 @@ public interface BromiumPackage extends EPackage
   EClass getApplicationAction();
 
   /**
-   * Returns the meta object for the attribute '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getActionId <em>Action Id</em>}'.
+   * Returns the meta object for the containment reference list '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getActionDefinition <em>Action Definition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Action Id</em>'.
-   * @see com.hribol.bromium.dsl.bromium.ApplicationAction#getActionId()
+   * @return the meta object for the containment reference list '<em>Action Definition</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ApplicationAction#getActionDefinition()
    * @see #getApplicationAction()
    * @generated
    */
-  EAttribute getApplicationAction_ActionId();
+  EReference getApplicationAction_ActionDefinition();
 
   /**
    * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getPrecondition <em>Precondition</em>}'.
@@ -537,6 +630,27 @@ public interface BromiumPackage extends EPackage
    * @generated
    */
   EAttribute getApplicationAction_ExpectHttpRequest();
+
+  /**
+   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ActionDefinition <em>Action Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Action Definition</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ActionDefinition
+   * @generated
+   */
+  EClass getActionDefinition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.ActionDefinition#getParameter <em>Parameter</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Parameter</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ActionDefinition#getParameter()
+   * @see #getActionDefinition()
+   * @generated
+   */
+  EReference getActionDefinition_Parameter();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.WebDriverAction <em>Web Driver Action</em>}'.
@@ -601,15 +715,15 @@ public interface BromiumPackage extends EPackage
   EClass getElementWithIdIsPresent();
 
   /**
-   * Returns the meta object for the attribute '{@link com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent#getCssSelector <em>Css Selector</em>}'.
+   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent#getCssSelector <em>Css Selector</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Css Selector</em>'.
+   * @return the meta object for the containment reference '<em>Css Selector</em>'.
    * @see com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent#getCssSelector()
    * @see #getElementWithIdIsPresent()
    * @generated
    */
-  EAttribute getElementWithIdIsPresent_CssSelector();
+  EReference getElementWithIdIsPresent_CssSelector();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ClickOnElementWithId <em>Click On Element With Id</em>}'.
@@ -622,15 +736,15 @@ public interface BromiumPackage extends EPackage
   EClass getClickOnElementWithId();
 
   /**
-   * Returns the meta object for the attribute '{@link com.hribol.bromium.dsl.bromium.ClickOnElementWithId#getCssSelector <em>Css Selector</em>}'.
+   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.ClickOnElementWithId#getCssSelector <em>Css Selector</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Css Selector</em>'.
+   * @return the meta object for the containment reference '<em>Css Selector</em>'.
    * @see com.hribol.bromium.dsl.bromium.ClickOnElementWithId#getCssSelector()
    * @see #getClickOnElementWithId()
    * @generated
    */
-  EAttribute getClickOnElementWithId_CssSelector();
+  EReference getClickOnElementWithId_CssSelector();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.PageLoad <em>Page Load</em>}'.
@@ -664,26 +778,79 @@ public interface BromiumPackage extends EPackage
   EClass getTypeTextInElementFoundByCssSelector();
 
   /**
-   * Returns the meta object for the attribute '{@link com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector#getText <em>Text</em>}'.
+   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector#getText <em>Text</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Text</em>'.
+   * @return the meta object for the containment reference '<em>Text</em>'.
    * @see com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector#getText()
    * @see #getTypeTextInElementFoundByCssSelector()
    * @generated
    */
-  EAttribute getTypeTextInElementFoundByCssSelector_Text();
+  EReference getTypeTextInElementFoundByCssSelector_Text();
 
   /**
-   * Returns the meta object for the attribute '{@link com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector#getCssSelector <em>Css Selector</em>}'.
+   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector#getCssSelector <em>Css Selector</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Css Selector</em>'.
+   * @return the meta object for the containment reference '<em>Css Selector</em>'.
    * @see com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector#getCssSelector()
    * @see #getTypeTextInElementFoundByCssSelector()
    * @generated
    */
-  EAttribute getTypeTextInElementFoundByCssSelector_CssSelector();
+  EReference getTypeTextInElementFoundByCssSelector_CssSelector();
+
+  /**
+   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ParameterValue <em>Parameter Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Parameter Value</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ParameterValue
+   * @generated
+   */
+  EClass getParameterValue();
+
+  /**
+   * Returns the meta object for the attribute '{@link com.hribol.bromium.dsl.bromium.ParameterValue#getContent <em>Content</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Content</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ParameterValue#getContent()
+   * @see #getParameterValue()
+   * @generated
+   */
+  EAttribute getParameterValue_Content();
+
+  /**
+   * Returns the meta object for the reference '{@link com.hribol.bromium.dsl.bromium.ParameterValue#getExposedParameter <em>Exposed Parameter</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Exposed Parameter</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ParameterValue#getExposedParameter()
+   * @see #getParameterValue()
+   * @generated
+   */
+  EReference getParameterValue_ExposedParameter();
+
+  /**
+   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ExposedParameter <em>Exposed Parameter</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Exposed Parameter</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ExposedParameter
+   * @generated
+   */
+  EClass getExposedParameter();
+
+  /**
+   * Returns the meta object for the attribute '{@link com.hribol.bromium.dsl.bromium.ExposedParameter#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ExposedParameter#getName()
+   * @see #getExposedParameter()
+   * @generated
+   */
+  EAttribute getExposedParameter_Name();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ThreeDottedVersion <em>Three Dotted Version</em>}'.
@@ -804,12 +971,12 @@ public interface BromiumPackage extends EPackage
     EClass APPLICATION_ACTION = eINSTANCE.getApplicationAction();
 
     /**
-     * The meta object literal for the '<em><b>Action Id</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Action Definition</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute APPLICATION_ACTION__ACTION_ID = eINSTANCE.getApplicationAction_ActionId();
+    EReference APPLICATION_ACTION__ACTION_DEFINITION = eINSTANCE.getApplicationAction_ActionDefinition();
 
     /**
      * The meta object literal for the '<em><b>Precondition</b></em>' containment reference feature.
@@ -842,6 +1009,24 @@ public interface BromiumPackage extends EPackage
      * @generated
      */
     EAttribute APPLICATION_ACTION__EXPECT_HTTP_REQUEST = eINSTANCE.getApplicationAction_ExpectHttpRequest();
+
+    /**
+     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ActionDefinitionImpl <em>Action Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.hribol.bromium.dsl.bromium.impl.ActionDefinitionImpl
+     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getActionDefinition()
+     * @generated
+     */
+    EClass ACTION_DEFINITION = eINSTANCE.getActionDefinition();
+
+    /**
+     * The meta object literal for the '<em><b>Parameter</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTION_DEFINITION__PARAMETER = eINSTANCE.getActionDefinition_Parameter();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.WebDriverActionImpl <em>Web Driver Action</em>}' class.
@@ -900,12 +1085,12 @@ public interface BromiumPackage extends EPackage
     EClass ELEMENT_WITH_ID_IS_PRESENT = eINSTANCE.getElementWithIdIsPresent();
 
     /**
-     * The meta object literal for the '<em><b>Css Selector</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Css Selector</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR = eINSTANCE.getElementWithIdIsPresent_CssSelector();
+    EReference ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR = eINSTANCE.getElementWithIdIsPresent_CssSelector();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ClickOnElementWithIdImpl <em>Click On Element With Id</em>}' class.
@@ -918,12 +1103,12 @@ public interface BromiumPackage extends EPackage
     EClass CLICK_ON_ELEMENT_WITH_ID = eINSTANCE.getClickOnElementWithId();
 
     /**
-     * The meta object literal for the '<em><b>Css Selector</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Css Selector</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR = eINSTANCE.getClickOnElementWithId_CssSelector();
+    EReference CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR = eINSTANCE.getClickOnElementWithId_CssSelector();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.PageLoadImpl <em>Page Load</em>}' class.
@@ -954,20 +1139,64 @@ public interface BromiumPackage extends EPackage
     EClass TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR = eINSTANCE.getTypeTextInElementFoundByCssSelector();
 
     /**
-     * The meta object literal for the '<em><b>Text</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Text</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR__TEXT = eINSTANCE.getTypeTextInElementFoundByCssSelector_Text();
+    EReference TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR__TEXT = eINSTANCE.getTypeTextInElementFoundByCssSelector_Text();
 
     /**
-     * The meta object literal for the '<em><b>Css Selector</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Css Selector</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR__CSS_SELECTOR = eINSTANCE.getTypeTextInElementFoundByCssSelector_CssSelector();
+    EReference TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR__CSS_SELECTOR = eINSTANCE.getTypeTextInElementFoundByCssSelector_CssSelector();
+
+    /**
+     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ParameterValueImpl <em>Parameter Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.hribol.bromium.dsl.bromium.impl.ParameterValueImpl
+     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getParameterValue()
+     * @generated
+     */
+    EClass PARAMETER_VALUE = eINSTANCE.getParameterValue();
+
+    /**
+     * The meta object literal for the '<em><b>Content</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PARAMETER_VALUE__CONTENT = eINSTANCE.getParameterValue_Content();
+
+    /**
+     * The meta object literal for the '<em><b>Exposed Parameter</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PARAMETER_VALUE__EXPOSED_PARAMETER = eINSTANCE.getParameterValue_ExposedParameter();
+
+    /**
+     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ExposedParameterImpl <em>Exposed Parameter</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.hribol.bromium.dsl.bromium.impl.ExposedParameterImpl
+     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getExposedParameter()
+     * @generated
+     */
+    EClass EXPOSED_PARAMETER = eINSTANCE.getExposedParameter();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EXPOSED_PARAMETER__NAME = eINSTANCE.getExposedParameter_Name();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ThreeDottedVersionImpl <em>Three Dotted Version</em>}' class.

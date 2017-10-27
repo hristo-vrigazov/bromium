@@ -3,6 +3,8 @@
  */
 package com.hribol.bromium.dsl.bromium;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -14,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getActionId <em>Action Id</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getActionDefinition <em>Action Definition</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getPrecondition <em>Precondition</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getWebDriverAction <em>Web Driver Action</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getPostcondition <em>Postcondition</em>}</li>
@@ -28,30 +30,20 @@ import org.eclipse.emf.ecore.EObject;
 public interface ApplicationAction extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Action Id</b></em>' attribute.
+   * Returns the value of the '<em><b>Action Definition</b></em>' containment reference list.
+   * The list contents are of type {@link com.hribol.bromium.dsl.bromium.ActionDefinition}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Action Id</em>' attribute isn't clear,
+   * If the meaning of the '<em>Action Definition</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Action Id</em>' attribute.
-   * @see #setActionId(String)
-   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getApplicationAction_ActionId()
-   * @model
+   * @return the value of the '<em>Action Definition</em>' containment reference list.
+   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getApplicationAction_ActionDefinition()
+   * @model containment="true"
    * @generated
    */
-  String getActionId();
-
-  /**
-   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getActionId <em>Action Id</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Action Id</em>' attribute.
-   * @see #getActionId()
-   * @generated
-   */
-  void setActionId(String value);
+  EList<ActionDefinition> getActionDefinition();
 
   /**
    * Returns the value of the '<em><b>Precondition</b></em>' containment reference.

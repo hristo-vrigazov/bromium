@@ -23,9 +23,9 @@ public class BromiumProposalProvider extends AbstractBromiumProposalProvider {
   }
   
   @Override
-  public void complete_ApplicationAction(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+  public void complete_ExpectHttpRequest(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     acceptor.accept(this.createCompletionProposal("do not expect http request", context));
     acceptor.accept(this.createCompletionProposal("do expect http request", context));
-    super.complete_ApplicationAction(model, ruleCall, context, acceptor);
+    super.complete_ExpectHttpRequest(model, ruleCall, context, acceptor);
   }
 }

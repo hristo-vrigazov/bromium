@@ -24,55 +24,55 @@ package com.hribol.bromium.dsl.bromium;
 public interface TypeTextInElementFoundByCssSelector extends WebDriverAction
 {
   /**
-   * Returns the value of the '<em><b>Text</b></em>' attribute.
+   * Returns the value of the '<em><b>Text</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Text</em>' attribute isn't clear,
+   * If the meaning of the '<em>Text</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Text</em>' attribute.
-   * @see #setText(String)
+   * @return the value of the '<em>Text</em>' containment reference.
+   * @see #setText(ParameterValue)
    * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getTypeTextInElementFoundByCssSelector_Text()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getText();
+  ParameterValue getText();
 
   /**
-   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector#getText <em>Text</em>}' attribute.
+   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector#getText <em>Text</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Text</em>' attribute.
+   * @param value the new value of the '<em>Text</em>' containment reference.
    * @see #getText()
    * @generated
    */
-  void setText(String value);
+  void setText(ParameterValue value);
 
   /**
-   * Returns the value of the '<em><b>Css Selector</b></em>' attribute.
+   * Returns the value of the '<em><b>Css Selector</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Css Selector</em>' attribute isn't clear,
+   * If the meaning of the '<em>Css Selector</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Css Selector</em>' attribute.
-   * @see #setCssSelector(String)
+   * @return the value of the '<em>Css Selector</em>' containment reference.
+   * @see #setCssSelector(ParameterValue)
    * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getTypeTextInElementFoundByCssSelector_CssSelector()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getCssSelector();
+  ParameterValue getCssSelector();
 
   /**
-   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector#getCssSelector <em>Css Selector</em>}' attribute.
+   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector#getCssSelector <em>Css Selector</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Css Selector</em>' attribute.
+   * @param value the new value of the '<em>Css Selector</em>' containment reference.
    * @see #getCssSelector()
    * @generated
    */
-  void setCssSelector(String value);
+  void setCssSelector(ParameterValue value);
 
 } // TypeTextInElementFoundByCssSelector

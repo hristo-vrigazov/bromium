@@ -13,11 +13,15 @@ Model:
 ;
 
 ApplicationAction:
-	'action' actionId=STRING
+	'action' actionDefinition+=ActionDefinition*
 	(precondition=Precondition)?
 	webDriverAction=WebDriverAction
 	(postcondition=Postcondition)?
 	expectHttpRequest=ExpectHttpRequest
+;
+
+ActionDefinition:
+	 STRING (parameter=ExposedParameter)?
 ;
 
 WebDriverAction:
@@ -41,11 +45,19 @@ ExpectHttpRequest:
 
 
 // TODO: syntactic sugar for CSS selectors
-ElementWithIdIsPresent: 'element' 'with' 'css' 'selector' cssSelector=STRING 'is' 'clickable';
-ClickOnElementWithId: 'click' 'on' 'element' 'with' 'css' 'selector' cssSelector=STRING;
+ElementWithIdIsPresent: 'element' 'with' 'css' 'selector' cssSelector=ParameterValue 'is' 'clickable';
+ClickOnElementWithId: 'click' 'on' 'element' 'with' 'css' 'selector' cssSelector=ParameterValue;
 PageLoad: 'load' 'page' subpath=STRING;
-TypeTextInElementFoundByCssSelector: 'type' text=STRING 'in' 'element' 'with' 'css' 'selector'
-	cssSelector=STRING
+TypeTextInElementFoundByCssSelector: 'type' text=ParameterValue 
+'in' 'element' 'with' 'css' 'selector' cssSelector=ParameterValue
+;
+
+ParameterValue:
+	content=STRING | exposedParameter=[ExposedParameter]
+;
+
+ExposedParameter:
+	name=ID
 ;
 
 // TODO: include ThreeDotted version as well

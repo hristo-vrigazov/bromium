@@ -3,13 +3,16 @@
  */
 package com.hribol.bromium.dsl.bromium.impl;
 
+import com.hribol.bromium.dsl.bromium.ActionDefinition;
 import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.BromiumFactory;
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.ClickOnElementWithId;
 import com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent;
+import com.hribol.bromium.dsl.bromium.ExposedParameter;
 import com.hribol.bromium.dsl.bromium.Model;
 import com.hribol.bromium.dsl.bromium.PageLoad;
+import com.hribol.bromium.dsl.bromium.ParameterValue;
 import com.hribol.bromium.dsl.bromium.Postcondition;
 import com.hribol.bromium.dsl.bromium.Precondition;
 import com.hribol.bromium.dsl.bromium.ThreeDottedVersion;
@@ -44,6 +47,13 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * @generated
    */
   private EClass applicationActionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass actionDefinitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -93,6 +103,20 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * @generated
    */
   private EClass typeTextInElementFoundByCssSelectorEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass parameterValueEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass exposedParameterEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -229,9 +253,9 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getApplicationAction_ActionId()
+  public EReference getApplicationAction_ActionDefinition()
   {
-    return (EAttribute)applicationActionEClass.getEStructuralFeatures().get(0);
+    return (EReference)applicationActionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -272,6 +296,26 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
   public EAttribute getApplicationAction_ExpectHttpRequest()
   {
     return (EAttribute)applicationActionEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getActionDefinition()
+  {
+    return actionDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getActionDefinition_Parameter()
+  {
+    return (EReference)actionDefinitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -339,9 +383,9 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getElementWithIdIsPresent_CssSelector()
+  public EReference getElementWithIdIsPresent_CssSelector()
   {
-    return (EAttribute)elementWithIdIsPresentEClass.getEStructuralFeatures().get(0);
+    return (EReference)elementWithIdIsPresentEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -359,9 +403,9 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getClickOnElementWithId_CssSelector()
+  public EReference getClickOnElementWithId_CssSelector()
   {
-    return (EAttribute)clickOnElementWithIdEClass.getEStructuralFeatures().get(0);
+    return (EReference)clickOnElementWithIdEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -399,9 +443,9 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTypeTextInElementFoundByCssSelector_Text()
+  public EReference getTypeTextInElementFoundByCssSelector_Text()
   {
-    return (EAttribute)typeTextInElementFoundByCssSelectorEClass.getEStructuralFeatures().get(0);
+    return (EReference)typeTextInElementFoundByCssSelectorEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -409,9 +453,59 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTypeTextInElementFoundByCssSelector_CssSelector()
+  public EReference getTypeTextInElementFoundByCssSelector_CssSelector()
   {
-    return (EAttribute)typeTextInElementFoundByCssSelectorEClass.getEStructuralFeatures().get(1);
+    return (EReference)typeTextInElementFoundByCssSelectorEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getParameterValue()
+  {
+    return parameterValueEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getParameterValue_Content()
+  {
+    return (EAttribute)parameterValueEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getParameterValue_ExposedParameter()
+  {
+    return (EReference)parameterValueEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getExposedParameter()
+  {
+    return exposedParameterEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getExposedParameter_Name()
+  {
+    return (EAttribute)exposedParameterEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -491,11 +585,14 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     createEReference(modelEClass, MODEL__ACTIONS);
 
     applicationActionEClass = createEClass(APPLICATION_ACTION);
-    createEAttribute(applicationActionEClass, APPLICATION_ACTION__ACTION_ID);
+    createEReference(applicationActionEClass, APPLICATION_ACTION__ACTION_DEFINITION);
     createEReference(applicationActionEClass, APPLICATION_ACTION__PRECONDITION);
     createEReference(applicationActionEClass, APPLICATION_ACTION__WEB_DRIVER_ACTION);
     createEReference(applicationActionEClass, APPLICATION_ACTION__POSTCONDITION);
     createEAttribute(applicationActionEClass, APPLICATION_ACTION__EXPECT_HTTP_REQUEST);
+
+    actionDefinitionEClass = createEClass(ACTION_DEFINITION);
+    createEReference(actionDefinitionEClass, ACTION_DEFINITION__PARAMETER);
 
     webDriverActionEClass = createEClass(WEB_DRIVER_ACTION);
 
@@ -506,17 +603,24 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     createEReference(postconditionEClass, POSTCONDITION__POSTCONDITION);
 
     elementWithIdIsPresentEClass = createEClass(ELEMENT_WITH_ID_IS_PRESENT);
-    createEAttribute(elementWithIdIsPresentEClass, ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR);
+    createEReference(elementWithIdIsPresentEClass, ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR);
 
     clickOnElementWithIdEClass = createEClass(CLICK_ON_ELEMENT_WITH_ID);
-    createEAttribute(clickOnElementWithIdEClass, CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR);
+    createEReference(clickOnElementWithIdEClass, CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR);
 
     pageLoadEClass = createEClass(PAGE_LOAD);
     createEAttribute(pageLoadEClass, PAGE_LOAD__SUBPATH);
 
     typeTextInElementFoundByCssSelectorEClass = createEClass(TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR);
-    createEAttribute(typeTextInElementFoundByCssSelectorEClass, TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR__TEXT);
-    createEAttribute(typeTextInElementFoundByCssSelectorEClass, TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR__CSS_SELECTOR);
+    createEReference(typeTextInElementFoundByCssSelectorEClass, TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR__TEXT);
+    createEReference(typeTextInElementFoundByCssSelectorEClass, TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR__CSS_SELECTOR);
+
+    parameterValueEClass = createEClass(PARAMETER_VALUE);
+    createEAttribute(parameterValueEClass, PARAMETER_VALUE__CONTENT);
+    createEReference(parameterValueEClass, PARAMETER_VALUE__EXPOSED_PARAMETER);
+
+    exposedParameterEClass = createEClass(EXPOSED_PARAMETER);
+    createEAttribute(exposedParameterEClass, EXPOSED_PARAMETER__NAME);
 
     threeDottedVersionEClass = createEClass(THREE_DOTTED_VERSION);
     createEAttribute(threeDottedVersionEClass, THREE_DOTTED_VERSION__BIG);
@@ -566,11 +670,14 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     initEReference(getModel_Actions(), this.getApplicationAction(), null, "actions", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(applicationActionEClass, ApplicationAction.class, "ApplicationAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getApplicationAction_ActionId(), ecorePackage.getEString(), "actionId", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getApplicationAction_ActionDefinition(), this.getActionDefinition(), null, "actionDefinition", null, 0, -1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getApplicationAction_Precondition(), this.getPrecondition(), null, "precondition", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getApplicationAction_WebDriverAction(), this.getWebDriverAction(), null, "webDriverAction", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getApplicationAction_Postcondition(), this.getPostcondition(), null, "postcondition", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getApplicationAction_ExpectHttpRequest(), ecorePackage.getEString(), "expectHttpRequest", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(actionDefinitionEClass, ActionDefinition.class, "ActionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getActionDefinition_Parameter(), this.getExposedParameter(), null, "parameter", null, 0, 1, ActionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(webDriverActionEClass, WebDriverAction.class, "WebDriverAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -581,17 +688,24 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     initEReference(getPostcondition_Postcondition(), this.getWebDriverAction(), null, "postcondition", null, 0, 1, Postcondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(elementWithIdIsPresentEClass, ElementWithIdIsPresent.class, "ElementWithIdIsPresent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getElementWithIdIsPresent_CssSelector(), ecorePackage.getEString(), "cssSelector", null, 0, 1, ElementWithIdIsPresent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getElementWithIdIsPresent_CssSelector(), this.getParameterValue(), null, "cssSelector", null, 0, 1, ElementWithIdIsPresent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(clickOnElementWithIdEClass, ClickOnElementWithId.class, "ClickOnElementWithId", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getClickOnElementWithId_CssSelector(), ecorePackage.getEString(), "cssSelector", null, 0, 1, ClickOnElementWithId.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getClickOnElementWithId_CssSelector(), this.getParameterValue(), null, "cssSelector", null, 0, 1, ClickOnElementWithId.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(pageLoadEClass, PageLoad.class, "PageLoad", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getPageLoad_Subpath(), ecorePackage.getEString(), "subpath", null, 0, 1, PageLoad.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeTextInElementFoundByCssSelectorEClass, TypeTextInElementFoundByCssSelector.class, "TypeTextInElementFoundByCssSelector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTypeTextInElementFoundByCssSelector_Text(), ecorePackage.getEString(), "text", null, 0, 1, TypeTextInElementFoundByCssSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getTypeTextInElementFoundByCssSelector_CssSelector(), ecorePackage.getEString(), "cssSelector", null, 0, 1, TypeTextInElementFoundByCssSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTypeTextInElementFoundByCssSelector_Text(), this.getParameterValue(), null, "text", null, 0, 1, TypeTextInElementFoundByCssSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTypeTextInElementFoundByCssSelector_CssSelector(), this.getParameterValue(), null, "cssSelector", null, 0, 1, TypeTextInElementFoundByCssSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(parameterValueEClass, ParameterValue.class, "ParameterValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getParameterValue_Content(), ecorePackage.getEString(), "content", null, 0, 1, ParameterValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getParameterValue_ExposedParameter(), this.getExposedParameter(), null, "exposedParameter", null, 0, 1, ParameterValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(exposedParameterEClass, ExposedParameter.class, "ExposedParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getExposedParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, ExposedParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(threeDottedVersionEClass, ThreeDottedVersion.class, "ThreeDottedVersion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getThreeDottedVersion_Big(), ecorePackage.getEInt(), "big", null, 0, 1, ThreeDottedVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

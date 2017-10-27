@@ -4,12 +4,15 @@
 package com.hribol.bromium.dsl.serializer;
 
 import com.google.inject.Inject;
+import com.hribol.bromium.dsl.bromium.ActionDefinition;
 import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.ClickOnElementWithId;
 import com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent;
+import com.hribol.bromium.dsl.bromium.ExposedParameter;
 import com.hribol.bromium.dsl.bromium.Model;
 import com.hribol.bromium.dsl.bromium.PageLoad;
+import com.hribol.bromium.dsl.bromium.ParameterValue;
 import com.hribol.bromium.dsl.bromium.Postcondition;
 import com.hribol.bromium.dsl.bromium.Precondition;
 import com.hribol.bromium.dsl.bromium.ThreeDottedVersion;
@@ -40,6 +43,9 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == BromiumPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case BromiumPackage.ACTION_DEFINITION:
+				sequence_ActionDefinition(context, (ActionDefinition) semanticObject); 
+				return; 
 			case BromiumPackage.APPLICATION_ACTION:
 				sequence_ApplicationAction(context, (ApplicationAction) semanticObject); 
 				return; 
@@ -49,11 +55,17 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 			case BromiumPackage.ELEMENT_WITH_ID_IS_PRESENT:
 				sequence_ElementWithIdIsPresent(context, (ElementWithIdIsPresent) semanticObject); 
 				return; 
+			case BromiumPackage.EXPOSED_PARAMETER:
+				sequence_ExposedParameter(context, (ExposedParameter) semanticObject); 
+				return; 
 			case BromiumPackage.MODEL:
 				sequence_Model(context, (Model) semanticObject); 
 				return; 
 			case BromiumPackage.PAGE_LOAD:
 				sequence_PageLoad(context, (PageLoad) semanticObject); 
+				return; 
+			case BromiumPackage.PARAMETER_VALUE:
+				sequence_ParameterValue(context, (ParameterValue) semanticObject); 
 				return; 
 			case BromiumPackage.POSTCONDITION:
 				sequence_Postcondition(context, (Postcondition) semanticObject); 
@@ -74,10 +86,34 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	
 	/**
 	 * Contexts:
+	 *     ActionDefinition returns ActionDefinition
+	 *
+	 * Constraint:
+	 *     parameter=ExposedParameter
+	 */
+	protected void sequence_ActionDefinition(ISerializationContext context, ActionDefinition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.ACTION_DEFINITION__PARAMETER) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.ACTION_DEFINITION__PARAMETER));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getActionDefinitionAccess().getParameterExposedParameterParserRuleCall_1_0(), semanticObject.getParameter());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     ApplicationAction returns ApplicationAction
 	 *
 	 * Constraint:
-	 *     (actionId=STRING precondition=Precondition? webDriverAction=WebDriverAction postcondition=Postcondition? expectHttpRequest=ExpectHttpRequest)
+	 *     (
+	 *         actionDefinition+=ActionDefinition* 
+	 *         precondition=Precondition? 
+	 *         webDriverAction=WebDriverAction 
+	 *         postcondition=Postcondition? 
+	 *         expectHttpRequest=ExpectHttpRequest
+	 *     )
 	 */
 	protected void sequence_ApplicationAction(ISerializationContext context, ApplicationAction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -90,7 +126,7 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     ClickOnElementWithId returns ClickOnElementWithId
 	 *
 	 * Constraint:
-	 *     cssSelector=STRING
+	 *     cssSelector=ParameterValue
 	 */
 	protected void sequence_ClickOnElementWithId(ISerializationContext context, ClickOnElementWithId semanticObject) {
 		if (errorAcceptor != null) {
@@ -98,7 +134,7 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getClickOnElementWithIdAccess().getCssSelectorSTRINGTerminalRuleCall_6_0(), semanticObject.getCssSelector());
+		feeder.accept(grammarAccess.getClickOnElementWithIdAccess().getCssSelectorParameterValueParserRuleCall_6_0(), semanticObject.getCssSelector());
 		feeder.finish();
 	}
 	
@@ -109,7 +145,7 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     ElementWithIdIsPresent returns ElementWithIdIsPresent
 	 *
 	 * Constraint:
-	 *     cssSelector=STRING
+	 *     cssSelector=ParameterValue
 	 */
 	protected void sequence_ElementWithIdIsPresent(ISerializationContext context, ElementWithIdIsPresent semanticObject) {
 		if (errorAcceptor != null) {
@@ -117,7 +153,25 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getElementWithIdIsPresentAccess().getCssSelectorSTRINGTerminalRuleCall_4_0(), semanticObject.getCssSelector());
+		feeder.accept(grammarAccess.getElementWithIdIsPresentAccess().getCssSelectorParameterValueParserRuleCall_4_0(), semanticObject.getCssSelector());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ExposedParameter returns ExposedParameter
+	 *
+	 * Constraint:
+	 *     name=ID
+	 */
+	protected void sequence_ExposedParameter(ISerializationContext context, ExposedParameter semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.EXPOSED_PARAMETER__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.EXPOSED_PARAMETER__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getExposedParameterAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
@@ -150,6 +204,18 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getPageLoadAccess().getSubpathSTRINGTerminalRuleCall_2_0(), semanticObject.getSubpath());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ParameterValue returns ParameterValue
+	 *
+	 * Constraint:
+	 *     (content=STRING | exposedParameter=[ExposedParameter|ID])
+	 */
+	protected void sequence_ParameterValue(ISerializationContext context, ParameterValue semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -219,7 +285,7 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     TypeTextInElementFoundByCssSelector returns TypeTextInElementFoundByCssSelector
 	 *
 	 * Constraint:
-	 *     (text=STRING cssSelector=STRING)
+	 *     (text=ParameterValue cssSelector=ParameterValue)
 	 */
 	protected void sequence_TypeTextInElementFoundByCssSelector(ISerializationContext context, TypeTextInElementFoundByCssSelector semanticObject) {
 		if (errorAcceptor != null) {
@@ -229,8 +295,8 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR__CSS_SELECTOR));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTextSTRINGTerminalRuleCall_1_0(), semanticObject.getText());
-		feeder.accept(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getCssSelectorSTRINGTerminalRuleCall_7_0(), semanticObject.getCssSelector());
+		feeder.accept(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTextParameterValueParserRuleCall_1_0(), semanticObject.getText());
+		feeder.accept(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getCssSelectorParameterValueParserRuleCall_7_0(), semanticObject.getCssSelector());
 		feeder.finish();
 	}
 	

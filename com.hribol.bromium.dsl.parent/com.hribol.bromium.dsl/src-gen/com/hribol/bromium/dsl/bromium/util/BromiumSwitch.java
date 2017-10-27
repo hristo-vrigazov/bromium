@@ -87,6 +87,13 @@ public class BromiumSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case BromiumPackage.ACTION_DEFINITION:
+      {
+        ActionDefinition actionDefinition = (ActionDefinition)theEObject;
+        T result = caseActionDefinition(actionDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case BromiumPackage.WEB_DRIVER_ACTION:
       {
         WebDriverAction webDriverAction = (WebDriverAction)theEObject;
@@ -140,6 +147,20 @@ public class BromiumSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case BromiumPackage.PARAMETER_VALUE:
+      {
+        ParameterValue parameterValue = (ParameterValue)theEObject;
+        T result = caseParameterValue(parameterValue);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BromiumPackage.EXPOSED_PARAMETER:
+      {
+        ExposedParameter exposedParameter = (ExposedParameter)theEObject;
+        T result = caseExposedParameter(exposedParameter);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case BromiumPackage.THREE_DOTTED_VERSION:
       {
         ThreeDottedVersion threeDottedVersion = (ThreeDottedVersion)theEObject;
@@ -179,6 +200,22 @@ public class BromiumSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseApplicationAction(ApplicationAction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Action Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Action Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseActionDefinition(ActionDefinition object)
   {
     return null;
   }
@@ -291,6 +328,38 @@ public class BromiumSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseTypeTextInElementFoundByCssSelector(TypeTextInElementFoundByCssSelector object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parameter Value</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parameter Value</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParameterValue(ParameterValue object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Exposed Parameter</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Exposed Parameter</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseExposedParameter(ExposedParameter object)
   {
     return null;
   }

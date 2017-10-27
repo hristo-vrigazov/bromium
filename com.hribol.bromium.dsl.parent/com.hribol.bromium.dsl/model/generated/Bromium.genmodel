@@ -13,11 +13,14 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//Model/actions"/>
     </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//ApplicationAction">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//ApplicationAction/actionId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ApplicationAction/actionDefinition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ApplicationAction/precondition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ApplicationAction/webDriverAction"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ApplicationAction/postcondition"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//ApplicationAction/expectHttpRequest"/>
+    </genClasses>
+    <genClasses ecoreClass="Bromium.ecore#//ActionDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ActionDefinition/parameter"/>
     </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//WebDriverAction"/>
     <genClasses ecoreClass="Bromium.ecore#//Precondition">
@@ -27,17 +30,24 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//Postcondition/postcondition"/>
     </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//ElementWithIdIsPresent">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//ElementWithIdIsPresent/cssSelector"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ElementWithIdIsPresent/cssSelector"/>
     </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//ClickOnElementWithId">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//ClickOnElementWithId/cssSelector"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ClickOnElementWithId/cssSelector"/>
     </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//PageLoad">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//PageLoad/subpath"/>
     </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//TypeTextInElementFoundByCssSelector">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//TypeTextInElementFoundByCssSelector/text"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//TypeTextInElementFoundByCssSelector/cssSelector"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//TypeTextInElementFoundByCssSelector/text"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//TypeTextInElementFoundByCssSelector/cssSelector"/>
+    </genClasses>
+    <genClasses ecoreClass="Bromium.ecore#//ParameterValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//ParameterValue/content"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bromium.ecore#//ParameterValue/exposedParameter"/>
+    </genClasses>
+    <genClasses ecoreClass="Bromium.ecore#//ExposedParameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//ExposedParameter/name"/>
     </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//ThreeDottedVersion">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//ThreeDottedVersion/big"/>

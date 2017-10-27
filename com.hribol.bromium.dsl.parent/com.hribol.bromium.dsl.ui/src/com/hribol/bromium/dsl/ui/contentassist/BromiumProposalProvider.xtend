@@ -21,10 +21,10 @@ class BromiumProposalProvider extends AbstractBromiumProposalProvider {
 		super.complete_WebDriverAction(model, ruleCall, context, acceptor);
 	}
 	
-	override void complete_ApplicationAction(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	override void complete_ExpectHttpRequest(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		acceptor.accept(createCompletionProposal("do not expect http request", context));
 		acceptor.accept(createCompletionProposal("do expect http request", context));
-		super.complete_ApplicationAction(model, ruleCall, context, acceptor);
+		super.complete_ExpectHttpRequest(model, ruleCall, context, acceptor);
 	}
 	
 }

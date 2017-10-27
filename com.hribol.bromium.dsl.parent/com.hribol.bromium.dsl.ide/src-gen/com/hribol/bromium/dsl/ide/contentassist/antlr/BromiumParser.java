@@ -32,9 +32,11 @@ public class BromiumParser extends AbstractContentAssistParser {
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getWebDriverActionAccess().getAlternatives(), "rule__WebDriverAction__Alternatives");
+					put(grammarAccess.getParameterValueAccess().getAlternatives(), "rule__ParameterValue__Alternatives");
 					put(grammarAccess.getModelAccess().getGroup(), "rule__Model__Group__0");
 					put(grammarAccess.getModelAccess().getGroup_4(), "rule__Model__Group_4__0");
 					put(grammarAccess.getApplicationActionAccess().getGroup(), "rule__ApplicationAction__Group__0");
+					put(grammarAccess.getActionDefinitionAccess().getGroup(), "rule__ActionDefinition__Group__0");
 					put(grammarAccess.getPreconditionAccess().getGroup(), "rule__Precondition__Group__0");
 					put(grammarAccess.getPostconditionAccess().getGroup(), "rule__Postcondition__Group__0");
 					put(grammarAccess.getExpectHttpRequestAccess().getGroup(), "rule__ExpectHttpRequest__Group__0");
@@ -47,11 +49,12 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getModelAccess().getVersionAssignment_3(), "rule__Model__VersionAssignment_3");
 					put(grammarAccess.getModelAccess().getBaseVersionAssignment_4_1(), "rule__Model__BaseVersionAssignment_4_1");
 					put(grammarAccess.getModelAccess().getActionsAssignment_7(), "rule__Model__ActionsAssignment_7");
-					put(grammarAccess.getApplicationActionAccess().getActionIdAssignment_1(), "rule__ApplicationAction__ActionIdAssignment_1");
+					put(grammarAccess.getApplicationActionAccess().getActionDefinitionAssignment_1(), "rule__ApplicationAction__ActionDefinitionAssignment_1");
 					put(grammarAccess.getApplicationActionAccess().getPreconditionAssignment_2(), "rule__ApplicationAction__PreconditionAssignment_2");
 					put(grammarAccess.getApplicationActionAccess().getWebDriverActionAssignment_3(), "rule__ApplicationAction__WebDriverActionAssignment_3");
 					put(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_4(), "rule__ApplicationAction__PostconditionAssignment_4");
 					put(grammarAccess.getApplicationActionAccess().getExpectHttpRequestAssignment_5(), "rule__ApplicationAction__ExpectHttpRequestAssignment_5");
+					put(grammarAccess.getActionDefinitionAccess().getParameterAssignment_1(), "rule__ActionDefinition__ParameterAssignment_1");
 					put(grammarAccess.getPreconditionAccess().getActionAssignment_1(), "rule__Precondition__ActionAssignment_1");
 					put(grammarAccess.getPostconditionAccess().getPostconditionAssignment_3(), "rule__Postcondition__PostconditionAssignment_3");
 					put(grammarAccess.getElementWithIdIsPresentAccess().getCssSelectorAssignment_4(), "rule__ElementWithIdIsPresent__CssSelectorAssignment_4");
@@ -59,6 +62,9 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPageLoadAccess().getSubpathAssignment_2(), "rule__PageLoad__SubpathAssignment_2");
 					put(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTextAssignment_1(), "rule__TypeTextInElementFoundByCssSelector__TextAssignment_1");
 					put(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getCssSelectorAssignment_7(), "rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7");
+					put(grammarAccess.getParameterValueAccess().getContentAssignment_0(), "rule__ParameterValue__ContentAssignment_0");
+					put(grammarAccess.getParameterValueAccess().getExposedParameterAssignment_1(), "rule__ParameterValue__ExposedParameterAssignment_1");
+					put(grammarAccess.getExposedParameterAccess().getNameAssignment(), "rule__ExposedParameter__NameAssignment");
 					put(grammarAccess.getThreeDottedVersionAccess().getBigAssignment_0(), "rule__ThreeDottedVersion__BigAssignment_0");
 					put(grammarAccess.getThreeDottedVersionAccess().getMediumAssignment_2(), "rule__ThreeDottedVersion__MediumAssignment_2");
 					put(grammarAccess.getThreeDottedVersionAccess().getSmallAssignment_4(), "rule__ThreeDottedVersion__SmallAssignment_4");

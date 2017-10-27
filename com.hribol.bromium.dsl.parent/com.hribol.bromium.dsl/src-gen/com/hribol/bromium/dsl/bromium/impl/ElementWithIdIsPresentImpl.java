@@ -5,10 +5,13 @@ package com.hribol.bromium.dsl.bromium.impl;
 
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent;
+import com.hribol.bromium.dsl.bromium.ParameterValue;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -28,24 +31,14 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 public class ElementWithIdIsPresentImpl extends WebDriverActionImpl implements ElementWithIdIsPresent
 {
   /**
-   * The default value of the '{@link #getCssSelector() <em>Css Selector</em>}' attribute.
+   * The cached value of the '{@link #getCssSelector() <em>Css Selector</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getCssSelector()
    * @generated
    * @ordered
    */
-  protected static final String CSS_SELECTOR_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getCssSelector() <em>Css Selector</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getCssSelector()
-   * @generated
-   * @ordered
-   */
-  protected String cssSelector = CSS_SELECTOR_EDEFAULT;
+  protected ParameterValue cssSelector;
 
   /**
    * <!-- begin-user-doc -->
@@ -73,7 +66,7 @@ public class ElementWithIdIsPresentImpl extends WebDriverActionImpl implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getCssSelector()
+  public ParameterValue getCssSelector()
   {
     return cssSelector;
   }
@@ -83,12 +76,53 @@ public class ElementWithIdIsPresentImpl extends WebDriverActionImpl implements E
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setCssSelector(String newCssSelector)
+  public NotificationChain basicSetCssSelector(ParameterValue newCssSelector, NotificationChain msgs)
   {
-    String oldCssSelector = cssSelector;
+    ParameterValue oldCssSelector = cssSelector;
     cssSelector = newCssSelector;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR, oldCssSelector, cssSelector));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BromiumPackage.ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR, oldCssSelector, newCssSelector);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setCssSelector(ParameterValue newCssSelector)
+  {
+    if (newCssSelector != cssSelector)
+    {
+      NotificationChain msgs = null;
+      if (cssSelector != null)
+        msgs = ((InternalEObject)cssSelector).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR, null, msgs);
+      if (newCssSelector != null)
+        msgs = ((InternalEObject)newCssSelector).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR, null, msgs);
+      msgs = basicSetCssSelector(newCssSelector, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR, newCssSelector, newCssSelector));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case BromiumPackage.ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR:
+        return basicSetCssSelector(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -118,7 +152,7 @@ public class ElementWithIdIsPresentImpl extends WebDriverActionImpl implements E
     switch (featureID)
     {
       case BromiumPackage.ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR:
-        setCssSelector((String)newValue);
+        setCssSelector((ParameterValue)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -135,7 +169,7 @@ public class ElementWithIdIsPresentImpl extends WebDriverActionImpl implements E
     switch (featureID)
     {
       case BromiumPackage.ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR:
-        setCssSelector(CSS_SELECTOR_EDEFAULT);
+        setCssSelector((ParameterValue)null);
         return;
     }
     super.eUnset(featureID);
@@ -152,26 +186,9 @@ public class ElementWithIdIsPresentImpl extends WebDriverActionImpl implements E
     switch (featureID)
     {
       case BromiumPackage.ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR:
-        return CSS_SELECTOR_EDEFAULT == null ? cssSelector != null : !CSS_SELECTOR_EDEFAULT.equals(cssSelector);
+        return cssSelector != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (cssSelector: ");
-    result.append(cssSelector);
-    result.append(')');
-    return result.toString();
   }
 
 } //ElementWithIdIsPresentImpl
