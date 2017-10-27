@@ -68,6 +68,8 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
       case BromiumPackage.MODEL: return createModel();
       case BromiumPackage.APPLICATION_ACTION: return createApplicationAction();
       case BromiumPackage.WEB_DRIVER_ACTION: return createWebDriverAction();
+      case BromiumPackage.PRECONDITION: return createPrecondition();
+      case BromiumPackage.POSTCONDITION: return createPostcondition();
       case BromiumPackage.ELEMENT_WITH_ID_IS_PRESENT: return createElementWithIdIsPresent();
       case BromiumPackage.CLICK_ON_ELEMENT_WITH_ID: return createClickOnElementWithId();
       case BromiumPackage.PAGE_LOAD: return createPageLoad();
@@ -109,6 +111,28 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
   {
     WebDriverActionImpl webDriverAction = new WebDriverActionImpl();
     return webDriverAction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Precondition createPrecondition()
+  {
+    PreconditionImpl precondition = new PreconditionImpl();
+    return precondition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Postcondition createPostcondition()
+  {
+    PostconditionImpl postcondition = new PostconditionImpl();
+    return postcondition;
   }
 
   /**

@@ -124,6 +124,81 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+// Entry rule entryRulePrecondition
+entryRulePrecondition
+:
+{ before(grammarAccess.getPreconditionRule()); }
+	 rulePrecondition
+{ after(grammarAccess.getPreconditionRule()); } 
+	 EOF 
+;
+
+// Rule Precondition
+rulePrecondition 
+	@init {
+		int stackSize = keepStackSize();
+	}
+	:
+	(
+		{ before(grammarAccess.getPreconditionAccess().getGroup()); }
+		(rule__Precondition__Group__0)
+		{ after(grammarAccess.getPreconditionAccess().getGroup()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+// Entry rule entryRulePostcondition
+entryRulePostcondition
+:
+{ before(grammarAccess.getPostconditionRule()); }
+	 rulePostcondition
+{ after(grammarAccess.getPostconditionRule()); } 
+	 EOF 
+;
+
+// Rule Postcondition
+rulePostcondition 
+	@init {
+		int stackSize = keepStackSize();
+	}
+	:
+	(
+		{ before(grammarAccess.getPostconditionAccess().getGroup()); }
+		(rule__Postcondition__Group__0)
+		{ after(grammarAccess.getPostconditionAccess().getGroup()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+// Entry rule entryRuleExpectHttpRequest
+entryRuleExpectHttpRequest
+:
+{ before(grammarAccess.getExpectHttpRequestRule()); }
+	 ruleExpectHttpRequest
+{ after(grammarAccess.getExpectHttpRequestRule()); } 
+	 EOF 
+;
+
+// Rule ExpectHttpRequest
+ruleExpectHttpRequest 
+	@init {
+		int stackSize = keepStackSize();
+	}
+	:
+	(
+		{ before(grammarAccess.getExpectHttpRequestAccess().getGroup()); }
+		(rule__ExpectHttpRequest__Group__0)
+		{ after(grammarAccess.getExpectHttpRequestAccess().getGroup()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 // Entry rule entryRuleElementWithIdIsPresent
 entryRuleElementWithIdIsPresent
 :
@@ -651,9 +726,9 @@ rule__ApplicationAction__Group__2__Impl
 	}
 :
 (
-	{ before(grammarAccess.getApplicationActionAccess().getGroup_2()); }
-	(rule__ApplicationAction__Group_2__0)?
-	{ after(grammarAccess.getApplicationActionAccess().getGroup_2()); }
+	{ before(grammarAccess.getApplicationActionAccess().getPreconditionAssignment_2()); }
+	(rule__ApplicationAction__PreconditionAssignment_2)?
+	{ after(grammarAccess.getApplicationActionAccess().getPreconditionAssignment_2()); }
 )
 ;
 finally {
@@ -705,9 +780,9 @@ rule__ApplicationAction__Group__4__Impl
 	}
 :
 (
-	{ before(grammarAccess.getApplicationActionAccess().getGroup_4()); }
-	(rule__ApplicationAction__Group_4__0)?
-	{ after(grammarAccess.getApplicationActionAccess().getGroup_4()); }
+	{ before(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_4()); }
+	(rule__ApplicationAction__PostconditionAssignment_4)?
+	{ after(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_4()); }
 )
 ;
 finally {
@@ -731,9 +806,9 @@ rule__ApplicationAction__Group__5__Impl
 	}
 :
 (
-	{ before(grammarAccess.getApplicationActionAccess().getGroup_5()); }
-	(rule__ApplicationAction__Group_5__0)?
-	{ after(grammarAccess.getApplicationActionAccess().getGroup_5()); }
+	{ before(grammarAccess.getApplicationActionAccess().getExpectHttpRequestAssignment_5()); }
+	(rule__ApplicationAction__ExpectHttpRequestAssignment_5)
+	{ after(grammarAccess.getApplicationActionAccess().getExpectHttpRequestAssignment_5()); }
 )
 ;
 finally {
@@ -741,53 +816,53 @@ finally {
 }
 
 
-rule__ApplicationAction__Group_2__0
+rule__Precondition__Group__0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ApplicationAction__Group_2__0__Impl
-	rule__ApplicationAction__Group_2__1
+	rule__Precondition__Group__0__Impl
+	rule__Precondition__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_2__0__Impl
+rule__Precondition__Group__0__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getApplicationActionAccess().getWhenKeyword_2_0()); }
+	{ before(grammarAccess.getPreconditionAccess().getWhenKeyword_0()); }
 	'when'
-	{ after(grammarAccess.getApplicationActionAccess().getWhenKeyword_2_0()); }
+	{ after(grammarAccess.getPreconditionAccess().getWhenKeyword_0()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_2__1
+rule__Precondition__Group__1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ApplicationAction__Group_2__1__Impl
+	rule__Precondition__Group__1__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_2__1__Impl
+rule__Precondition__Group__1__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getApplicationActionAccess().getPreconditionAssignment_2_1()); }
-	(rule__ApplicationAction__PreconditionAssignment_2_1)
-	{ after(grammarAccess.getApplicationActionAccess().getPreconditionAssignment_2_1()); }
+	{ before(grammarAccess.getPreconditionAccess().getActionAssignment_1()); }
+	(rule__Precondition__ActionAssignment_1)
+	{ after(grammarAccess.getPreconditionAccess().getActionAssignment_1()); }
 )
 ;
 finally {
@@ -795,107 +870,107 @@ finally {
 }
 
 
-rule__ApplicationAction__Group_4__0
+rule__Postcondition__Group__0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ApplicationAction__Group_4__0__Impl
-	rule__ApplicationAction__Group_4__1
+	rule__Postcondition__Group__0__Impl
+	rule__Postcondition__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_4__0__Impl
+rule__Postcondition__Group__0__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getApplicationActionAccess().getThenKeyword_4_0()); }
+	{ before(grammarAccess.getPostconditionAccess().getThenKeyword_0()); }
 	'then'
-	{ after(grammarAccess.getApplicationActionAccess().getThenKeyword_4_0()); }
+	{ after(grammarAccess.getPostconditionAccess().getThenKeyword_0()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_4__1
+rule__Postcondition__Group__1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ApplicationAction__Group_4__1__Impl
-	rule__ApplicationAction__Group_4__2
+	rule__Postcondition__Group__1__Impl
+	rule__Postcondition__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_4__1__Impl
+rule__Postcondition__Group__1__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getApplicationActionAccess().getMakeKeyword_4_1()); }
+	{ before(grammarAccess.getPostconditionAccess().getMakeKeyword_1()); }
 	'make'
-	{ after(grammarAccess.getApplicationActionAccess().getMakeKeyword_4_1()); }
+	{ after(grammarAccess.getPostconditionAccess().getMakeKeyword_1()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_4__2
+rule__Postcondition__Group__2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ApplicationAction__Group_4__2__Impl
-	rule__ApplicationAction__Group_4__3
+	rule__Postcondition__Group__2__Impl
+	rule__Postcondition__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_4__2__Impl
+rule__Postcondition__Group__2__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getApplicationActionAccess().getSureKeyword_4_2()); }
+	{ before(grammarAccess.getPostconditionAccess().getSureKeyword_2()); }
 	'sure'
-	{ after(grammarAccess.getApplicationActionAccess().getSureKeyword_4_2()); }
+	{ after(grammarAccess.getPostconditionAccess().getSureKeyword_2()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_4__3
+rule__Postcondition__Group__3
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ApplicationAction__Group_4__3__Impl
+	rule__Postcondition__Group__3__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_4__3__Impl
+rule__Postcondition__Group__3__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_4_3()); }
-	(rule__ApplicationAction__PostconditionAssignment_4_3)
-	{ after(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_4_3()); }
+	{ before(grammarAccess.getPostconditionAccess().getPostconditionAssignment_3()); }
+	(rule__Postcondition__PostconditionAssignment_3)
+	{ after(grammarAccess.getPostconditionAccess().getPostconditionAssignment_3()); }
 )
 ;
 finally {
@@ -903,134 +978,134 @@ finally {
 }
 
 
-rule__ApplicationAction__Group_5__0
+rule__ExpectHttpRequest__Group__0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ApplicationAction__Group_5__0__Impl
-	rule__ApplicationAction__Group_5__1
+	rule__ExpectHttpRequest__Group__0__Impl
+	rule__ExpectHttpRequest__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_5__0__Impl
+rule__ExpectHttpRequest__Group__0__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getApplicationActionAccess().getDoKeyword_5_0()); }
+	{ before(grammarAccess.getExpectHttpRequestAccess().getDoKeyword_0()); }
 	'do'
-	{ after(grammarAccess.getApplicationActionAccess().getDoKeyword_5_0()); }
+	{ after(grammarAccess.getExpectHttpRequestAccess().getDoKeyword_0()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_5__1
+rule__ExpectHttpRequest__Group__1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ApplicationAction__Group_5__1__Impl
-	rule__ApplicationAction__Group_5__2
+	rule__ExpectHttpRequest__Group__1__Impl
+	rule__ExpectHttpRequest__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_5__1__Impl
+rule__ExpectHttpRequest__Group__1__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getApplicationActionAccess().getNotKeyword_5_1()); }
+	{ before(grammarAccess.getExpectHttpRequestAccess().getNotKeyword_1()); }
 	('not')?
-	{ after(grammarAccess.getApplicationActionAccess().getNotKeyword_5_1()); }
+	{ after(grammarAccess.getExpectHttpRequestAccess().getNotKeyword_1()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_5__2
+rule__ExpectHttpRequest__Group__2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ApplicationAction__Group_5__2__Impl
-	rule__ApplicationAction__Group_5__3
+	rule__ExpectHttpRequest__Group__2__Impl
+	rule__ExpectHttpRequest__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_5__2__Impl
+rule__ExpectHttpRequest__Group__2__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getApplicationActionAccess().getExpectKeyword_5_2()); }
+	{ before(grammarAccess.getExpectHttpRequestAccess().getExpectKeyword_2()); }
 	'expect'
-	{ after(grammarAccess.getApplicationActionAccess().getExpectKeyword_5_2()); }
+	{ after(grammarAccess.getExpectHttpRequestAccess().getExpectKeyword_2()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_5__3
+rule__ExpectHttpRequest__Group__3
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ApplicationAction__Group_5__3__Impl
-	rule__ApplicationAction__Group_5__4
+	rule__ExpectHttpRequest__Group__3__Impl
+	rule__ExpectHttpRequest__Group__4
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_5__3__Impl
+rule__ExpectHttpRequest__Group__3__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getApplicationActionAccess().getHttpKeyword_5_3()); }
+	{ before(grammarAccess.getExpectHttpRequestAccess().getHttpKeyword_3()); }
 	'http'
-	{ after(grammarAccess.getApplicationActionAccess().getHttpKeyword_5_3()); }
+	{ after(grammarAccess.getExpectHttpRequestAccess().getHttpKeyword_3()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_5__4
+rule__ExpectHttpRequest__Group__4
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ApplicationAction__Group_5__4__Impl
+	rule__ExpectHttpRequest__Group__4__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__Group_5__4__Impl
+rule__ExpectHttpRequest__Group__4__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getApplicationActionAccess().getRequestKeyword_5_4()); }
+	{ before(grammarAccess.getExpectHttpRequestAccess().getRequestKeyword_4()); }
 	'request'
-	{ after(grammarAccess.getApplicationActionAccess().getRequestKeyword_5_4()); }
+	{ after(grammarAccess.getExpectHttpRequestAccess().getRequestKeyword_4()); }
 )
 ;
 finally {
@@ -1788,15 +1863,15 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__PreconditionAssignment_2_1
+rule__ApplicationAction__PreconditionAssignment_2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getApplicationActionAccess().getPreconditionWebDriverActionParserRuleCall_2_1_0()); }
-		ruleWebDriverAction
-		{ after(grammarAccess.getApplicationActionAccess().getPreconditionWebDriverActionParserRuleCall_2_1_0()); }
+		{ before(grammarAccess.getApplicationActionAccess().getPreconditionPreconditionParserRuleCall_2_0()); }
+		rulePrecondition
+		{ after(grammarAccess.getApplicationActionAccess().getPreconditionPreconditionParserRuleCall_2_0()); }
 	)
 ;
 finally {
@@ -1818,15 +1893,60 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__PostconditionAssignment_4_3
+rule__ApplicationAction__PostconditionAssignment_4
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getApplicationActionAccess().getPostconditionWebDriverActionParserRuleCall_4_3_0()); }
+		{ before(grammarAccess.getApplicationActionAccess().getPostconditionPostconditionParserRuleCall_4_0()); }
+		rulePostcondition
+		{ after(grammarAccess.getApplicationActionAccess().getPostconditionPostconditionParserRuleCall_4_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ApplicationAction__ExpectHttpRequestAssignment_5
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getApplicationActionAccess().getExpectHttpRequestExpectHttpRequestParserRuleCall_5_0()); }
+		ruleExpectHttpRequest
+		{ after(grammarAccess.getApplicationActionAccess().getExpectHttpRequestExpectHttpRequestParserRuleCall_5_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Precondition__ActionAssignment_1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getPreconditionAccess().getActionWebDriverActionParserRuleCall_1_0()); }
 		ruleWebDriverAction
-		{ after(grammarAccess.getApplicationActionAccess().getPostconditionWebDriverActionParserRuleCall_4_3_0()); }
+		{ after(grammarAccess.getPreconditionAccess().getActionWebDriverActionParserRuleCall_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Postcondition__PostconditionAssignment_3
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getPostconditionAccess().getPostconditionWebDriverActionParserRuleCall_3_0()); }
+		ruleWebDriverAction
+		{ after(grammarAccess.getPostconditionAccess().getPostconditionWebDriverActionParserRuleCall_3_0()); }
 	)
 ;
 finally {

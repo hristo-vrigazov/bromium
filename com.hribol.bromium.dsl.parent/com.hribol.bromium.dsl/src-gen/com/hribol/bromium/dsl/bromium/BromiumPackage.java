@@ -159,13 +159,22 @@ public interface BromiumPackage extends EPackage
   int APPLICATION_ACTION__POSTCONDITION = 3;
 
   /**
+   * The feature id for the '<em><b>Expect Http Request</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int APPLICATION_ACTION__EXPECT_HTTP_REQUEST = 4;
+
+  /**
    * The number of structural features of the '<em>Application Action</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int APPLICATION_ACTION_FEATURE_COUNT = 4;
+  int APPLICATION_ACTION_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.WebDriverActionImpl <em>Web Driver Action</em>}' class.
@@ -187,6 +196,62 @@ public interface BromiumPackage extends EPackage
   int WEB_DRIVER_ACTION_FEATURE_COUNT = 0;
 
   /**
+   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.PreconditionImpl <em>Precondition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see com.hribol.bromium.dsl.bromium.impl.PreconditionImpl
+   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getPrecondition()
+   * @generated
+   */
+  int PRECONDITION = 3;
+
+  /**
+   * The feature id for the '<em><b>Action</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PRECONDITION__ACTION = 0;
+
+  /**
+   * The number of structural features of the '<em>Precondition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PRECONDITION_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.PostconditionImpl <em>Postcondition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see com.hribol.bromium.dsl.bromium.impl.PostconditionImpl
+   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getPostcondition()
+   * @generated
+   */
+  int POSTCONDITION = 4;
+
+  /**
+   * The feature id for the '<em><b>Postcondition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int POSTCONDITION__POSTCONDITION = 0;
+
+  /**
+   * The number of structural features of the '<em>Postcondition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int POSTCONDITION_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ElementWithIdIsPresentImpl <em>Element With Id Is Present</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -194,7 +259,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getElementWithIdIsPresent()
    * @generated
    */
-  int ELEMENT_WITH_ID_IS_PRESENT = 3;
+  int ELEMENT_WITH_ID_IS_PRESENT = 5;
 
   /**
    * The feature id for the '<em><b>Css Selector</b></em>' attribute.
@@ -222,7 +287,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getClickOnElementWithId()
    * @generated
    */
-  int CLICK_ON_ELEMENT_WITH_ID = 4;
+  int CLICK_ON_ELEMENT_WITH_ID = 6;
 
   /**
    * The feature id for the '<em><b>Css Selector</b></em>' attribute.
@@ -250,7 +315,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getPageLoad()
    * @generated
    */
-  int PAGE_LOAD = 5;
+  int PAGE_LOAD = 7;
 
   /**
    * The feature id for the '<em><b>Subpath</b></em>' attribute.
@@ -278,7 +343,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getTypeTextInElementFoundByCssSelector()
    * @generated
    */
-  int TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR = 6;
+  int TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR = 8;
 
   /**
    * The feature id for the '<em><b>Text</b></em>' attribute.
@@ -315,7 +380,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getThreeDottedVersion()
    * @generated
    */
-  int THREE_DOTTED_VERSION = 7;
+  int THREE_DOTTED_VERSION = 9;
 
   /**
    * The feature id for the '<em><b>Big</b></em>' attribute.
@@ -463,6 +528,17 @@ public interface BromiumPackage extends EPackage
   EReference getApplicationAction_Postcondition();
 
   /**
+   * Returns the meta object for the attribute '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getExpectHttpRequest <em>Expect Http Request</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Expect Http Request</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ApplicationAction#getExpectHttpRequest()
+   * @see #getApplicationAction()
+   * @generated
+   */
+  EAttribute getApplicationAction_ExpectHttpRequest();
+
+  /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.WebDriverAction <em>Web Driver Action</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -471,6 +547,48 @@ public interface BromiumPackage extends EPackage
    * @generated
    */
   EClass getWebDriverAction();
+
+  /**
+   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.Precondition <em>Precondition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Precondition</em>'.
+   * @see com.hribol.bromium.dsl.bromium.Precondition
+   * @generated
+   */
+  EClass getPrecondition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.Precondition#getAction <em>Action</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Action</em>'.
+   * @see com.hribol.bromium.dsl.bromium.Precondition#getAction()
+   * @see #getPrecondition()
+   * @generated
+   */
+  EReference getPrecondition_Action();
+
+  /**
+   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.Postcondition <em>Postcondition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Postcondition</em>'.
+   * @see com.hribol.bromium.dsl.bromium.Postcondition
+   * @generated
+   */
+  EClass getPostcondition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.Postcondition#getPostcondition <em>Postcondition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Postcondition</em>'.
+   * @see com.hribol.bromium.dsl.bromium.Postcondition#getPostcondition()
+   * @see #getPostcondition()
+   * @generated
+   */
+  EReference getPostcondition_Postcondition();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent <em>Element With Id Is Present</em>}'.
@@ -718,6 +836,14 @@ public interface BromiumPackage extends EPackage
     EReference APPLICATION_ACTION__POSTCONDITION = eINSTANCE.getApplicationAction_Postcondition();
 
     /**
+     * The meta object literal for the '<em><b>Expect Http Request</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute APPLICATION_ACTION__EXPECT_HTTP_REQUEST = eINSTANCE.getApplicationAction_ExpectHttpRequest();
+
+    /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.WebDriverActionImpl <em>Web Driver Action</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -726,6 +852,42 @@ public interface BromiumPackage extends EPackage
      * @generated
      */
     EClass WEB_DRIVER_ACTION = eINSTANCE.getWebDriverAction();
+
+    /**
+     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.PreconditionImpl <em>Precondition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.hribol.bromium.dsl.bromium.impl.PreconditionImpl
+     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getPrecondition()
+     * @generated
+     */
+    EClass PRECONDITION = eINSTANCE.getPrecondition();
+
+    /**
+     * The meta object literal for the '<em><b>Action</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PRECONDITION__ACTION = eINSTANCE.getPrecondition_Action();
+
+    /**
+     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.PostconditionImpl <em>Postcondition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.hribol.bromium.dsl.bromium.impl.PostconditionImpl
+     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getPostcondition()
+     * @generated
+     */
+    EClass POSTCONDITION = eINSTANCE.getPostcondition();
+
+    /**
+     * The meta object literal for the '<em><b>Postcondition</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference POSTCONDITION__POSTCONDITION = eINSTANCE.getPostcondition_Postcondition();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ElementWithIdIsPresentImpl <em>Element With Id Is Present</em>}' class.

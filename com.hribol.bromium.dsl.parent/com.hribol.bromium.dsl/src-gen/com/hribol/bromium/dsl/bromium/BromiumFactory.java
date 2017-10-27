@@ -51,6 +51,24 @@ public interface BromiumFactory extends EFactory
   WebDriverAction createWebDriverAction();
 
   /**
+   * Returns a new object of class '<em>Precondition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Precondition</em>'.
+   * @generated
+   */
+  Precondition createPrecondition();
+
+  /**
+   * Returns a new object of class '<em>Postcondition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Postcondition</em>'.
+   * @generated
+   */
+  Postcondition createPostcondition();
+
+  /**
    * Returns a new object of class '<em>Element With Id Is Present</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

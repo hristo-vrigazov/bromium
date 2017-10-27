@@ -10,6 +10,8 @@ import com.hribol.bromium.dsl.bromium.ClickOnElementWithId;
 import com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent;
 import com.hribol.bromium.dsl.bromium.Model;
 import com.hribol.bromium.dsl.bromium.PageLoad;
+import com.hribol.bromium.dsl.bromium.Postcondition;
+import com.hribol.bromium.dsl.bromium.Precondition;
 import com.hribol.bromium.dsl.bromium.ThreeDottedVersion;
 import com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector;
 import com.hribol.bromium.dsl.services.BromiumGrammarAccess;
@@ -53,6 +55,12 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 			case BromiumPackage.PAGE_LOAD:
 				sequence_PageLoad(context, (PageLoad) semanticObject); 
 				return; 
+			case BromiumPackage.POSTCONDITION:
+				sequence_Postcondition(context, (Postcondition) semanticObject); 
+				return; 
+			case BromiumPackage.PRECONDITION:
+				sequence_Precondition(context, (Precondition) semanticObject); 
+				return; 
 			case BromiumPackage.THREE_DOTTED_VERSION:
 				sequence_ThreeDottedVersion(context, (ThreeDottedVersion) semanticObject); 
 				return; 
@@ -69,7 +77,7 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     ApplicationAction returns ApplicationAction
 	 *
 	 * Constraint:
-	 *     (actionId=STRING precondition=WebDriverAction? webDriverAction=WebDriverAction postcondition=WebDriverAction?)
+	 *     (actionId=STRING precondition=Precondition? webDriverAction=WebDriverAction postcondition=Postcondition? expectHttpRequest=ExpectHttpRequest)
 	 */
 	protected void sequence_ApplicationAction(ISerializationContext context, ApplicationAction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -141,6 +149,42 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getPageLoadAccess().getSubpathSTRINGTerminalRuleCall_2_0(), semanticObject.getSubpath());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Postcondition returns Postcondition
+	 *
+	 * Constraint:
+	 *     postcondition=WebDriverAction
+	 */
+	protected void sequence_Postcondition(ISerializationContext context, Postcondition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.POSTCONDITION__POSTCONDITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.POSTCONDITION__POSTCONDITION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getPostconditionAccess().getPostconditionWebDriverActionParserRuleCall_3_0(), semanticObject.getPostcondition());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Precondition returns Precondition
+	 *
+	 * Constraint:
+	 *     action=WebDriverAction
+	 */
+	protected void sequence_Precondition(ISerializationContext context, Precondition semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.PRECONDITION__ACTION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.PRECONDITION__ACTION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getPreconditionAccess().getActionWebDriverActionParserRuleCall_1_0(), semanticObject.getAction());
 		feeder.finish();
 	}
 	

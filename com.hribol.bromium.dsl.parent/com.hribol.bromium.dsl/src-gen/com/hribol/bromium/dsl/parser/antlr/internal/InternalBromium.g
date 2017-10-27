@@ -218,28 +218,22 @@ ruleApplicationAction returns [EObject current=null]
 			)
 		)
 		(
-			otherlv_2='when'
-			{
-				newLeafNode(otherlv_2, grammarAccess.getApplicationActionAccess().getWhenKeyword_2_0());
-			}
 			(
-				(
-					{
-						newCompositeNode(grammarAccess.getApplicationActionAccess().getPreconditionWebDriverActionParserRuleCall_2_1_0());
+				{
+					newCompositeNode(grammarAccess.getApplicationActionAccess().getPreconditionPreconditionParserRuleCall_2_0());
+				}
+				lv_precondition_2_0=rulePrecondition
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getApplicationActionRule());
 					}
-					lv_precondition_3_0=ruleWebDriverAction
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getApplicationActionRule());
-						}
-						set(
-							$current,
-							"precondition",
-							lv_precondition_3_0,
-							"com.hribol.bromium.dsl.Bromium.WebDriverAction");
-						afterParserOrEnumRuleCall();
-					}
-				)
+					set(
+						$current,
+						"precondition",
+						lv_precondition_2_0,
+						"com.hribol.bromium.dsl.Bromium.Precondition");
+					afterParserOrEnumRuleCall();
+				}
 			)
 		)?
 		(
@@ -247,7 +241,7 @@ ruleApplicationAction returns [EObject current=null]
 				{
 					newCompositeNode(grammarAccess.getApplicationActionAccess().getWebDriverActionWebDriverActionParserRuleCall_3_0());
 				}
-				lv_webDriverAction_4_0=ruleWebDriverAction
+				lv_webDriverAction_3_0=ruleWebDriverAction
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getApplicationActionRule());
@@ -255,69 +249,50 @@ ruleApplicationAction returns [EObject current=null]
 					set(
 						$current,
 						"webDriverAction",
-						lv_webDriverAction_4_0,
+						lv_webDriverAction_3_0,
 						"com.hribol.bromium.dsl.Bromium.WebDriverAction");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
 		(
-			otherlv_5='then'
-			{
-				newLeafNode(otherlv_5, grammarAccess.getApplicationActionAccess().getThenKeyword_4_0());
-			}
-			otherlv_6='make'
-			{
-				newLeafNode(otherlv_6, grammarAccess.getApplicationActionAccess().getMakeKeyword_4_1());
-			}
-			otherlv_7='sure'
-			{
-				newLeafNode(otherlv_7, grammarAccess.getApplicationActionAccess().getSureKeyword_4_2());
-			}
 			(
-				(
-					{
-						newCompositeNode(grammarAccess.getApplicationActionAccess().getPostconditionWebDriverActionParserRuleCall_4_3_0());
+				{
+					newCompositeNode(grammarAccess.getApplicationActionAccess().getPostconditionPostconditionParserRuleCall_4_0());
+				}
+				lv_postcondition_4_0=rulePostcondition
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getApplicationActionRule());
 					}
-					lv_postcondition_8_0=ruleWebDriverAction
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getApplicationActionRule());
-						}
-						set(
-							$current,
-							"postcondition",
-							lv_postcondition_8_0,
-							"com.hribol.bromium.dsl.Bromium.WebDriverAction");
-						afterParserOrEnumRuleCall();
-					}
-				)
+					set(
+						$current,
+						"postcondition",
+						lv_postcondition_4_0,
+						"com.hribol.bromium.dsl.Bromium.Postcondition");
+					afterParserOrEnumRuleCall();
+				}
 			)
 		)?
 		(
-			otherlv_9='do'
-			{
-				newLeafNode(otherlv_9, grammarAccess.getApplicationActionAccess().getDoKeyword_5_0());
-			}
 			(
-				otherlv_10='not'
 				{
-					newLeafNode(otherlv_10, grammarAccess.getApplicationActionAccess().getNotKeyword_5_1());
+					newCompositeNode(grammarAccess.getApplicationActionAccess().getExpectHttpRequestExpectHttpRequestParserRuleCall_5_0());
 				}
-			)?
-			otherlv_11='expect'
-			{
-				newLeafNode(otherlv_11, grammarAccess.getApplicationActionAccess().getExpectKeyword_5_2());
-			}
-			otherlv_12='http'
-			{
-				newLeafNode(otherlv_12, grammarAccess.getApplicationActionAccess().getHttpKeyword_5_3());
-			}
-			otherlv_13='request'
-			{
-				newLeafNode(otherlv_13, grammarAccess.getApplicationActionAccess().getRequestKeyword_5_4());
-			}
-		)?
+				lv_expectHttpRequest_5_0=ruleExpectHttpRequest
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getApplicationActionRule());
+					}
+					set(
+						$current,
+						"expectHttpRequest",
+						lv_expectHttpRequest_5_0,
+						"com.hribol.bromium.dsl.Bromium.ExpectHttpRequest");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
 	)
 ;
 
@@ -371,6 +346,144 @@ ruleWebDriverAction returns [EObject current=null]
 		{
 			$current = $this_TypeTextInElementFoundByCssSelector_3.current;
 			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRulePrecondition
+entryRulePrecondition returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getPreconditionRule()); }
+	iv_rulePrecondition=rulePrecondition
+	{ $current=$iv_rulePrecondition.current; }
+	EOF;
+
+// Rule Precondition
+rulePrecondition returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='when'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getPreconditionAccess().getWhenKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getPreconditionAccess().getActionWebDriverActionParserRuleCall_1_0());
+				}
+				lv_action_1_0=ruleWebDriverAction
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getPreconditionRule());
+					}
+					set(
+						$current,
+						"action",
+						lv_action_1_0,
+						"com.hribol.bromium.dsl.Bromium.WebDriverAction");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRulePostcondition
+entryRulePostcondition returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getPostconditionRule()); }
+	iv_rulePostcondition=rulePostcondition
+	{ $current=$iv_rulePostcondition.current; }
+	EOF;
+
+// Rule Postcondition
+rulePostcondition returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='then'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getPostconditionAccess().getThenKeyword_0());
+		}
+		otherlv_1='make'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getPostconditionAccess().getMakeKeyword_1());
+		}
+		otherlv_2='sure'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getPostconditionAccess().getSureKeyword_2());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getPostconditionAccess().getPostconditionWebDriverActionParserRuleCall_3_0());
+				}
+				lv_postcondition_3_0=ruleWebDriverAction
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getPostconditionRule());
+					}
+					set(
+						$current,
+						"postcondition",
+						lv_postcondition_3_0,
+						"com.hribol.bromium.dsl.Bromium.WebDriverAction");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleExpectHttpRequest
+entryRuleExpectHttpRequest returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getExpectHttpRequestRule()); }
+	iv_ruleExpectHttpRequest=ruleExpectHttpRequest
+	{ $current=$iv_ruleExpectHttpRequest.current.getText(); }
+	EOF;
+
+// Rule ExpectHttpRequest
+ruleExpectHttpRequest returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		kw='do'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getExpectHttpRequestAccess().getDoKeyword_0());
+		}
+		(
+			kw='not'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getExpectHttpRequestAccess().getNotKeyword_1());
+			}
+		)?
+		kw='expect'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getExpectHttpRequestAccess().getExpectKeyword_2());
+		}
+		kw='http'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getExpectHttpRequestAccess().getHttpKeyword_3());
+		}
+		kw='request'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getExpectHttpRequestAccess().getRequestKeyword_4());
 		}
 	)
 ;

@@ -5,6 +5,8 @@ package com.hribol.bromium.dsl.bromium.impl;
 
 import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
+import com.hribol.bromium.dsl.bromium.Postcondition;
+import com.hribol.bromium.dsl.bromium.Precondition;
 import com.hribol.bromium.dsl.bromium.WebDriverAction;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -28,6 +30,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getPrecondition <em>Precondition</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getWebDriverAction <em>Web Driver Action</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getPostcondition <em>Postcondition</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getExpectHttpRequest <em>Expect Http Request</em>}</li>
  * </ul>
  *
  * @generated
@@ -62,7 +65,7 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
    * @generated
    * @ordered
    */
-  protected WebDriverAction precondition;
+  protected Precondition precondition;
 
   /**
    * The cached value of the '{@link #getWebDriverAction() <em>Web Driver Action</em>}' containment reference.
@@ -82,7 +85,27 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
    * @generated
    * @ordered
    */
-  protected WebDriverAction postcondition;
+  protected Postcondition postcondition;
+
+  /**
+   * The default value of the '{@link #getExpectHttpRequest() <em>Expect Http Request</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getExpectHttpRequest()
+   * @generated
+   * @ordered
+   */
+  protected static final String EXPECT_HTTP_REQUEST_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getExpectHttpRequest() <em>Expect Http Request</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getExpectHttpRequest()
+   * @generated
+   * @ordered
+   */
+  protected String expectHttpRequest = EXPECT_HTTP_REQUEST_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -133,7 +156,7 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public WebDriverAction getPrecondition()
+  public Precondition getPrecondition()
   {
     return precondition;
   }
@@ -143,9 +166,9 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetPrecondition(WebDriverAction newPrecondition, NotificationChain msgs)
+  public NotificationChain basicSetPrecondition(Precondition newPrecondition, NotificationChain msgs)
   {
-    WebDriverAction oldPrecondition = precondition;
+    Precondition oldPrecondition = precondition;
     precondition = newPrecondition;
     if (eNotificationRequired())
     {
@@ -160,7 +183,7 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPrecondition(WebDriverAction newPrecondition)
+  public void setPrecondition(Precondition newPrecondition)
   {
     if (newPrecondition != precondition)
     {
@@ -229,7 +252,7 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public WebDriverAction getPostcondition()
+  public Postcondition getPostcondition()
   {
     return postcondition;
   }
@@ -239,9 +262,9 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetPostcondition(WebDriverAction newPostcondition, NotificationChain msgs)
+  public NotificationChain basicSetPostcondition(Postcondition newPostcondition, NotificationChain msgs)
   {
-    WebDriverAction oldPostcondition = postcondition;
+    Postcondition oldPostcondition = postcondition;
     postcondition = newPostcondition;
     if (eNotificationRequired())
     {
@@ -256,7 +279,7 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPostcondition(WebDriverAction newPostcondition)
+  public void setPostcondition(Postcondition newPostcondition)
   {
     if (newPostcondition != postcondition)
     {
@@ -270,6 +293,29 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
     }
     else if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.APPLICATION_ACTION__POSTCONDITION, newPostcondition, newPostcondition));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getExpectHttpRequest()
+  {
+    return expectHttpRequest;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setExpectHttpRequest(String newExpectHttpRequest)
+  {
+    String oldExpectHttpRequest = expectHttpRequest;
+    expectHttpRequest = newExpectHttpRequest;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST, oldExpectHttpRequest, expectHttpRequest));
   }
 
   /**
@@ -310,6 +356,8 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
         return getWebDriverAction();
       case BromiumPackage.APPLICATION_ACTION__POSTCONDITION:
         return getPostcondition();
+      case BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST:
+        return getExpectHttpRequest();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -328,13 +376,16 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
         setActionId((String)newValue);
         return;
       case BromiumPackage.APPLICATION_ACTION__PRECONDITION:
-        setPrecondition((WebDriverAction)newValue);
+        setPrecondition((Precondition)newValue);
         return;
       case BromiumPackage.APPLICATION_ACTION__WEB_DRIVER_ACTION:
         setWebDriverAction((WebDriverAction)newValue);
         return;
       case BromiumPackage.APPLICATION_ACTION__POSTCONDITION:
-        setPostcondition((WebDriverAction)newValue);
+        setPostcondition((Postcondition)newValue);
+        return;
+      case BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST:
+        setExpectHttpRequest((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -354,13 +405,16 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
         setActionId(ACTION_ID_EDEFAULT);
         return;
       case BromiumPackage.APPLICATION_ACTION__PRECONDITION:
-        setPrecondition((WebDriverAction)null);
+        setPrecondition((Precondition)null);
         return;
       case BromiumPackage.APPLICATION_ACTION__WEB_DRIVER_ACTION:
         setWebDriverAction((WebDriverAction)null);
         return;
       case BromiumPackage.APPLICATION_ACTION__POSTCONDITION:
-        setPostcondition((WebDriverAction)null);
+        setPostcondition((Postcondition)null);
+        return;
+      case BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST:
+        setExpectHttpRequest(EXPECT_HTTP_REQUEST_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -384,6 +438,8 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
         return webDriverAction != null;
       case BromiumPackage.APPLICATION_ACTION__POSTCONDITION:
         return postcondition != null;
+      case BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST:
+        return EXPECT_HTTP_REQUEST_EDEFAULT == null ? expectHttpRequest != null : !EXPECT_HTTP_REQUEST_EDEFAULT.equals(expectHttpRequest);
     }
     return super.eIsSet(featureID);
   }
@@ -401,6 +457,8 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (actionId: ");
     result.append(actionId);
+    result.append(", expectHttpRequest: ");
+    result.append(expectHttpRequest);
     result.append(')');
     return result.toString();
   }

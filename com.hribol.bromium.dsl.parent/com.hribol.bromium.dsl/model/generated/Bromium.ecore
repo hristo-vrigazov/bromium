@@ -10,14 +10,23 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ApplicationAction">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="actionId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="precondition" eType="#//WebDriverAction"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="precondition" eType="#//Precondition"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="webDriverAction" eType="#//WebDriverAction"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="postcondition" eType="#//Postcondition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expectHttpRequest" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WebDriverAction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Precondition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//WebDriverAction"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Postcondition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="postcondition" eType="#//WebDriverAction"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="WebDriverAction"/>
   <eClassifiers xsi:type="ecore:EClass" name="ElementWithIdIsPresent" eSuperTypes="#//WebDriverAction">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cssSelector" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>

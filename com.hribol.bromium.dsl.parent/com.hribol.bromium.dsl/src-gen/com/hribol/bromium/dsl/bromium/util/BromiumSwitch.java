@@ -94,6 +94,20 @@ public class BromiumSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case BromiumPackage.PRECONDITION:
+      {
+        Precondition precondition = (Precondition)theEObject;
+        T result = casePrecondition(precondition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BromiumPackage.POSTCONDITION:
+      {
+        Postcondition postcondition = (Postcondition)theEObject;
+        T result = casePostcondition(postcondition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case BromiumPackage.ELEMENT_WITH_ID_IS_PRESENT:
       {
         ElementWithIdIsPresent elementWithIdIsPresent = (ElementWithIdIsPresent)theEObject;
@@ -181,6 +195,38 @@ public class BromiumSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseWebDriverAction(WebDriverAction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Precondition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Precondition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePrecondition(Precondition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Postcondition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Postcondition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePostcondition(Postcondition object)
   {
     return null;
   }

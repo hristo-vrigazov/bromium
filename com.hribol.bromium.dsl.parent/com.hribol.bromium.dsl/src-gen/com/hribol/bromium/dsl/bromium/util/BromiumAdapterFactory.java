@@ -91,6 +91,16 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
         return createWebDriverActionAdapter();
       }
       @Override
+      public Adapter casePrecondition(Precondition object)
+      {
+        return createPreconditionAdapter();
+      }
+      @Override
+      public Adapter casePostcondition(Postcondition object)
+      {
+        return createPostconditionAdapter();
+      }
+      @Override
       public Adapter caseElementWithIdIsPresent(ElementWithIdIsPresent object)
       {
         return createElementWithIdIsPresentAdapter();
@@ -178,6 +188,36 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createWebDriverActionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.Precondition <em>Precondition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see com.hribol.bromium.dsl.bromium.Precondition
+   * @generated
+   */
+  public Adapter createPreconditionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.Postcondition <em>Postcondition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see com.hribol.bromium.dsl.bromium.Postcondition
+   * @generated
+   */
+  public Adapter createPostconditionAdapter()
   {
     return null;
   }

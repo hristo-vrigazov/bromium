@@ -103,33 +103,25 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cActionKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cActionIdAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cActionIdSTRINGTerminalRuleCall_1_0 = (RuleCall)cActionIdAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cWhenKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cPreconditionAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cPreconditionWebDriverActionParserRuleCall_2_1_0 = (RuleCall)cPreconditionAssignment_2_1.eContents().get(0);
+		private final Assignment cPreconditionAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cPreconditionPreconditionParserRuleCall_2_0 = (RuleCall)cPreconditionAssignment_2.eContents().get(0);
 		private final Assignment cWebDriverActionAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cWebDriverActionWebDriverActionParserRuleCall_3_0 = (RuleCall)cWebDriverActionAssignment_3.eContents().get(0);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cThenKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Keyword cMakeKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
-		private final Keyword cSureKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
-		private final Assignment cPostconditionAssignment_4_3 = (Assignment)cGroup_4.eContents().get(3);
-		private final RuleCall cPostconditionWebDriverActionParserRuleCall_4_3_0 = (RuleCall)cPostconditionAssignment_4_3.eContents().get(0);
-		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Keyword cDoKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Keyword cNotKeyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
-		private final Keyword cExpectKeyword_5_2 = (Keyword)cGroup_5.eContents().get(2);
-		private final Keyword cHttpKeyword_5_3 = (Keyword)cGroup_5.eContents().get(3);
-		private final Keyword cRequestKeyword_5_4 = (Keyword)cGroup_5.eContents().get(4);
+		private final Assignment cPostconditionAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cPostconditionPostconditionParserRuleCall_4_0 = (RuleCall)cPostconditionAssignment_4.eContents().get(0);
+		private final Assignment cExpectHttpRequestAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cExpectHttpRequestExpectHttpRequestParserRuleCall_5_0 = (RuleCall)cExpectHttpRequestAssignment_5.eContents().get(0);
 		
 		//ApplicationAction:
-		//	'action' actionId=STRING ('when' precondition=WebDriverAction)?
-		//	webDriverAction=WebDriverAction ('then' 'make' 'sure' postcondition=WebDriverAction)? ('do' 'not'? 'expect' 'http'
-		//	'request')?;
+		//	'action' actionId=STRING
+		//	precondition=Precondition?
+		//	webDriverAction=WebDriverAction
+		//	postcondition=Postcondition?
+		//	expectHttpRequest=ExpectHttpRequest;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'action' actionId=STRING ('when' precondition=WebDriverAction)? webDriverAction=WebDriverAction ('then' 'make' 'sure'
-		//postcondition=WebDriverAction)? ('do' 'not'? 'expect' 'http' 'request')?
+		//'action' actionId=STRING precondition=Precondition? webDriverAction=WebDriverAction postcondition=Postcondition?
+		//expectHttpRequest=ExpectHttpRequest
 		public Group getGroup() { return cGroup; }
 		
 		//'action'
@@ -141,17 +133,11 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getActionIdSTRINGTerminalRuleCall_1_0() { return cActionIdSTRINGTerminalRuleCall_1_0; }
 		
-		//('when' precondition=WebDriverAction)?
-		public Group getGroup_2() { return cGroup_2; }
+		//precondition=Precondition?
+		public Assignment getPreconditionAssignment_2() { return cPreconditionAssignment_2; }
 		
-		//'when'
-		public Keyword getWhenKeyword_2_0() { return cWhenKeyword_2_0; }
-		
-		//precondition=WebDriverAction
-		public Assignment getPreconditionAssignment_2_1() { return cPreconditionAssignment_2_1; }
-		
-		//WebDriverAction
-		public RuleCall getPreconditionWebDriverActionParserRuleCall_2_1_0() { return cPreconditionWebDriverActionParserRuleCall_2_1_0; }
+		//Precondition
+		public RuleCall getPreconditionPreconditionParserRuleCall_2_0() { return cPreconditionPreconditionParserRuleCall_2_0; }
 		
 		//webDriverAction=WebDriverAction
 		public Assignment getWebDriverActionAssignment_3() { return cWebDriverActionAssignment_3; }
@@ -159,41 +145,17 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		//WebDriverAction
 		public RuleCall getWebDriverActionWebDriverActionParserRuleCall_3_0() { return cWebDriverActionWebDriverActionParserRuleCall_3_0; }
 		
-		//('then' 'make' 'sure' postcondition=WebDriverAction)?
-		public Group getGroup_4() { return cGroup_4; }
+		//postcondition=Postcondition?
+		public Assignment getPostconditionAssignment_4() { return cPostconditionAssignment_4; }
 		
-		//'then'
-		public Keyword getThenKeyword_4_0() { return cThenKeyword_4_0; }
+		//Postcondition
+		public RuleCall getPostconditionPostconditionParserRuleCall_4_0() { return cPostconditionPostconditionParserRuleCall_4_0; }
 		
-		//'make'
-		public Keyword getMakeKeyword_4_1() { return cMakeKeyword_4_1; }
+		//expectHttpRequest=ExpectHttpRequest
+		public Assignment getExpectHttpRequestAssignment_5() { return cExpectHttpRequestAssignment_5; }
 		
-		//'sure'
-		public Keyword getSureKeyword_4_2() { return cSureKeyword_4_2; }
-		
-		//postcondition=WebDriverAction
-		public Assignment getPostconditionAssignment_4_3() { return cPostconditionAssignment_4_3; }
-		
-		//WebDriverAction
-		public RuleCall getPostconditionWebDriverActionParserRuleCall_4_3_0() { return cPostconditionWebDriverActionParserRuleCall_4_3_0; }
-		
-		//('do' 'not'? 'expect' 'http' 'request')?
-		public Group getGroup_5() { return cGroup_5; }
-		
-		//'do'
-		public Keyword getDoKeyword_5_0() { return cDoKeyword_5_0; }
-		
-		//'not'?
-		public Keyword getNotKeyword_5_1() { return cNotKeyword_5_1; }
-		
-		//'expect'
-		public Keyword getExpectKeyword_5_2() { return cExpectKeyword_5_2; }
-		
-		//'http'
-		public Keyword getHttpKeyword_5_3() { return cHttpKeyword_5_3; }
-		
-		//'request'
-		public Keyword getRequestKeyword_5_4() { return cRequestKeyword_5_4; }
+		//ExpectHttpRequest
+		public RuleCall getExpectHttpRequestExpectHttpRequestParserRuleCall_5_0() { return cExpectHttpRequestExpectHttpRequestParserRuleCall_5_0; }
 	}
 	public class WebDriverActionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.WebDriverAction");
@@ -221,6 +183,91 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//TypeTextInElementFoundByCssSelector
 		public RuleCall getTypeTextInElementFoundByCssSelectorParserRuleCall_3() { return cTypeTextInElementFoundByCssSelectorParserRuleCall_3; }
+	}
+	public class PreconditionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.Precondition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cWhenKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cActionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cActionWebDriverActionParserRuleCall_1_0 = (RuleCall)cActionAssignment_1.eContents().get(0);
+		
+		//Precondition:
+		//	'when' action=WebDriverAction;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'when' action=WebDriverAction
+		public Group getGroup() { return cGroup; }
+		
+		//'when'
+		public Keyword getWhenKeyword_0() { return cWhenKeyword_0; }
+		
+		//action=WebDriverAction
+		public Assignment getActionAssignment_1() { return cActionAssignment_1; }
+		
+		//WebDriverAction
+		public RuleCall getActionWebDriverActionParserRuleCall_1_0() { return cActionWebDriverActionParserRuleCall_1_0; }
+	}
+	public class PostconditionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.Postcondition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cThenKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cMakeKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cSureKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cPostconditionAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cPostconditionWebDriverActionParserRuleCall_3_0 = (RuleCall)cPostconditionAssignment_3.eContents().get(0);
+		
+		//Postcondition:
+		//	'then' 'make' 'sure' postcondition=WebDriverAction;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'then' 'make' 'sure' postcondition=WebDriverAction
+		public Group getGroup() { return cGroup; }
+		
+		//'then'
+		public Keyword getThenKeyword_0() { return cThenKeyword_0; }
+		
+		//'make'
+		public Keyword getMakeKeyword_1() { return cMakeKeyword_1; }
+		
+		//'sure'
+		public Keyword getSureKeyword_2() { return cSureKeyword_2; }
+		
+		//postcondition=WebDriverAction
+		public Assignment getPostconditionAssignment_3() { return cPostconditionAssignment_3; }
+		
+		//WebDriverAction
+		public RuleCall getPostconditionWebDriverActionParserRuleCall_3_0() { return cPostconditionWebDriverActionParserRuleCall_3_0; }
+	}
+	public class ExpectHttpRequestElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.ExpectHttpRequest");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cDoKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cNotKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cExpectKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cHttpKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cRequestKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//ExpectHttpRequest:
+		//	'do' 'not'? 'expect' 'http' 'request';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'do' 'not'? 'expect' 'http' 'request'
+		public Group getGroup() { return cGroup; }
+		
+		//'do'
+		public Keyword getDoKeyword_0() { return cDoKeyword_0; }
+		
+		//'not'?
+		public Keyword getNotKeyword_1() { return cNotKeyword_1; }
+		
+		//'expect'
+		public Keyword getExpectKeyword_2() { return cExpectKeyword_2; }
+		
+		//'http'
+		public Keyword getHttpKeyword_3() { return cHttpKeyword_3; }
+		
+		//'request'
+		public Keyword getRequestKeyword_4() { return cRequestKeyword_4; }
 	}
 	public class ElementWithIdIsPresentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.ElementWithIdIsPresent");
@@ -448,6 +495,9 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	private final ModelElements pModel;
 	private final ApplicationActionElements pApplicationAction;
 	private final WebDriverActionElements pWebDriverAction;
+	private final PreconditionElements pPrecondition;
+	private final PostconditionElements pPostcondition;
+	private final ExpectHttpRequestElements pExpectHttpRequest;
 	private final ElementWithIdIsPresentElements pElementWithIdIsPresent;
 	private final ClickOnElementWithIdElements pClickOnElementWithId;
 	private final PageLoadElements pPageLoad;
@@ -467,6 +517,9 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		this.pModel = new ModelElements();
 		this.pApplicationAction = new ApplicationActionElements();
 		this.pWebDriverAction = new WebDriverActionElements();
+		this.pPrecondition = new PreconditionElements();
+		this.pPostcondition = new PostconditionElements();
+		this.pExpectHttpRequest = new ExpectHttpRequestElements();
 		this.pElementWithIdIsPresent = new ElementWithIdIsPresentElements();
 		this.pClickOnElementWithId = new ClickOnElementWithIdElements();
 		this.pPageLoad = new PageLoadElements();
@@ -517,9 +570,11 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ApplicationAction:
-	//	'action' actionId=STRING ('when' precondition=WebDriverAction)?
-	//	webDriverAction=WebDriverAction ('then' 'make' 'sure' postcondition=WebDriverAction)? ('do' 'not'? 'expect' 'http'
-	//	'request')?;
+	//	'action' actionId=STRING
+	//	precondition=Precondition?
+	//	webDriverAction=WebDriverAction
+	//	postcondition=Postcondition?
+	//	expectHttpRequest=ExpectHttpRequest;
 	public ApplicationActionElements getApplicationActionAccess() {
 		return pApplicationAction;
 	}
@@ -536,6 +591,36 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getWebDriverActionRule() {
 		return getWebDriverActionAccess().getRule();
+	}
+	
+	//Precondition:
+	//	'when' action=WebDriverAction;
+	public PreconditionElements getPreconditionAccess() {
+		return pPrecondition;
+	}
+	
+	public ParserRule getPreconditionRule() {
+		return getPreconditionAccess().getRule();
+	}
+	
+	//Postcondition:
+	//	'then' 'make' 'sure' postcondition=WebDriverAction;
+	public PostconditionElements getPostconditionAccess() {
+		return pPostcondition;
+	}
+	
+	public ParserRule getPostconditionRule() {
+		return getPostconditionAccess().getRule();
+	}
+	
+	//ExpectHttpRequest:
+	//	'do' 'not'? 'expect' 'http' 'request';
+	public ExpectHttpRequestElements getExpectHttpRequestAccess() {
+		return pExpectHttpRequest;
+	}
+	
+	public ParserRule getExpectHttpRequestRule() {
+		return getExpectHttpRequestAccess().getRule();
 	}
 	
 	//// TODO: syntactic sugar for CSS selectors

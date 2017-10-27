@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getPrecondition <em>Precondition</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getWebDriverAction <em>Web Driver Action</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getPostcondition <em>Postcondition</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getExpectHttpRequest <em>Expect Http Request</em>}</li>
  * </ul>
  *
  * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getApplicationAction()
@@ -61,12 +62,12 @@ public interface ApplicationAction extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Precondition</em>' containment reference.
-   * @see #setPrecondition(WebDriverAction)
+   * @see #setPrecondition(Precondition)
    * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getApplicationAction_Precondition()
    * @model containment="true"
    * @generated
    */
-  WebDriverAction getPrecondition();
+  Precondition getPrecondition();
 
   /**
    * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getPrecondition <em>Precondition</em>}' containment reference.
@@ -76,7 +77,7 @@ public interface ApplicationAction extends EObject
    * @see #getPrecondition()
    * @generated
    */
-  void setPrecondition(WebDriverAction value);
+  void setPrecondition(Precondition value);
 
   /**
    * Returns the value of the '<em><b>Web Driver Action</b></em>' containment reference.
@@ -113,12 +114,12 @@ public interface ApplicationAction extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Postcondition</em>' containment reference.
-   * @see #setPostcondition(WebDriverAction)
+   * @see #setPostcondition(Postcondition)
    * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getApplicationAction_Postcondition()
    * @model containment="true"
    * @generated
    */
-  WebDriverAction getPostcondition();
+  Postcondition getPostcondition();
 
   /**
    * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getPostcondition <em>Postcondition</em>}' containment reference.
@@ -128,6 +129,32 @@ public interface ApplicationAction extends EObject
    * @see #getPostcondition()
    * @generated
    */
-  void setPostcondition(WebDriverAction value);
+  void setPostcondition(Postcondition value);
+
+  /**
+   * Returns the value of the '<em><b>Expect Http Request</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Expect Http Request</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Expect Http Request</em>' attribute.
+   * @see #setExpectHttpRequest(String)
+   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getApplicationAction_ExpectHttpRequest()
+   * @model
+   * @generated
+   */
+  String getExpectHttpRequest();
+
+  /**
+   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getExpectHttpRequest <em>Expect Http Request</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Expect Http Request</em>' attribute.
+   * @see #getExpectHttpRequest()
+   * @generated
+   */
+  void setExpectHttpRequest(String value);
 
 } // ApplicationAction

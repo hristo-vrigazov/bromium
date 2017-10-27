@@ -3,15 +3,28 @@
  */
 package com.hribol.bromium.dsl.ui;
 
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
 import com.hribol.bromium.dsl.ui.AbstractBromiumUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
  */
 @SuppressWarnings("all")
 public class BromiumUiModule extends AbstractBromiumUiModule {
+  private AbstractUIPlugin plugin;
+  
   public BromiumUiModule(final AbstractUIPlugin plugin) {
     super(plugin);
+    this.plugin = plugin;
+  }
+  
+  @Override
+  public void configure(final Binder binder) {
+    super.configure(binder);
+    binder.<String>bind(String.class).annotatedWith(
+      Names.named(XtextContentAssistProcessor.COMPLETION_AUTO_ACTIVATION_CHARS)).toInstance("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.");
   }
 }

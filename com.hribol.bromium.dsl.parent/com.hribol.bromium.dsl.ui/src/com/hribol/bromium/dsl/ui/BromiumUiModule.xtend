@@ -3,9 +3,10 @@
  */
 package com.hribol.bromium.dsl.ui
 
-import javax.xml.bind.Binder
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import com.google.inject.Binder
+import com.google.inject.name.Names
 import org.eclipse.ui.plugin.AbstractUIPlugin
+import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
@@ -13,8 +14,19 @@ import org.eclipse.ui.plugin.AbstractUIPlugin
 //@FinalFieldsConstructor
 class BromiumUiModule extends AbstractBromiumUiModule {
 	
+	private AbstractUIPlugin plugin;
+	
 	new(AbstractUIPlugin plugin) {
 		super(plugin)
+		this.plugin = plugin
+	}
+	
+	override void configure(Binder binder) {
+		super.configure(binder);
+		binder.bind(typeof(String))
+			.annotatedWith(Names.named(
+			(XtextContentAssistProcessor.COMPLETION_AUTO_ACTIVATION_CHARS)))
+			.toInstance("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.");
 	}
 
 }

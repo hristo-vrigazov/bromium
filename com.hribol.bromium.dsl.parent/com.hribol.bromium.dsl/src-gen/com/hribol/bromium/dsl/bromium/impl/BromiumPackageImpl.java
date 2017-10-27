@@ -10,6 +10,8 @@ import com.hribol.bromium.dsl.bromium.ClickOnElementWithId;
 import com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent;
 import com.hribol.bromium.dsl.bromium.Model;
 import com.hribol.bromium.dsl.bromium.PageLoad;
+import com.hribol.bromium.dsl.bromium.Postcondition;
+import com.hribol.bromium.dsl.bromium.Precondition;
 import com.hribol.bromium.dsl.bromium.ThreeDottedVersion;
 import com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector;
 import com.hribol.bromium.dsl.bromium.WebDriverAction;
@@ -49,6 +51,20 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * @generated
    */
   private EClass webDriverActionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass preconditionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass postconditionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -253,9 +269,59 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getApplicationAction_ExpectHttpRequest()
+  {
+    return (EAttribute)applicationActionEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getWebDriverAction()
   {
     return webDriverActionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPrecondition()
+  {
+    return preconditionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPrecondition_Action()
+  {
+    return (EReference)preconditionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPostcondition()
+  {
+    return postconditionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPostcondition_Postcondition()
+  {
+    return (EReference)postconditionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -429,8 +495,15 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     createEReference(applicationActionEClass, APPLICATION_ACTION__PRECONDITION);
     createEReference(applicationActionEClass, APPLICATION_ACTION__WEB_DRIVER_ACTION);
     createEReference(applicationActionEClass, APPLICATION_ACTION__POSTCONDITION);
+    createEAttribute(applicationActionEClass, APPLICATION_ACTION__EXPECT_HTTP_REQUEST);
 
     webDriverActionEClass = createEClass(WEB_DRIVER_ACTION);
+
+    preconditionEClass = createEClass(PRECONDITION);
+    createEReference(preconditionEClass, PRECONDITION__ACTION);
+
+    postconditionEClass = createEClass(POSTCONDITION);
+    createEReference(postconditionEClass, POSTCONDITION__POSTCONDITION);
 
     elementWithIdIsPresentEClass = createEClass(ELEMENT_WITH_ID_IS_PRESENT);
     createEAttribute(elementWithIdIsPresentEClass, ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR);
@@ -494,11 +567,18 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
 
     initEClass(applicationActionEClass, ApplicationAction.class, "ApplicationAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getApplicationAction_ActionId(), ecorePackage.getEString(), "actionId", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getApplicationAction_Precondition(), this.getWebDriverAction(), null, "precondition", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getApplicationAction_Precondition(), this.getPrecondition(), null, "precondition", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getApplicationAction_WebDriverAction(), this.getWebDriverAction(), null, "webDriverAction", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getApplicationAction_Postcondition(), this.getWebDriverAction(), null, "postcondition", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getApplicationAction_Postcondition(), this.getPostcondition(), null, "postcondition", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getApplicationAction_ExpectHttpRequest(), ecorePackage.getEString(), "expectHttpRequest", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(webDriverActionEClass, WebDriverAction.class, "WebDriverAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(preconditionEClass, Precondition.class, "Precondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPrecondition_Action(), this.getWebDriverAction(), null, "action", null, 0, 1, Precondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(postconditionEClass, Postcondition.class, "Postcondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPostcondition_Postcondition(), this.getWebDriverAction(), null, "postcondition", null, 0, 1, Postcondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(elementWithIdIsPresentEClass, ElementWithIdIsPresent.class, "ElementWithIdIsPresent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getElementWithIdIsPresent_CssSelector(), ecorePackage.getEString(), "cssSelector", null, 0, 1, ElementWithIdIsPresent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

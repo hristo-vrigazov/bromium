@@ -14,10 +14,10 @@ Model:
 
 ApplicationAction:
 	'action' actionId=STRING
-	('when' precondition=WebDriverAction)?
+	(precondition=Precondition)?
 	webDriverAction=WebDriverAction
-	('then' 'make' 'sure' postcondition=WebDriverAction)?
-	('do' 'not'? 'expect' 'http' 'request')?
+	(postcondition=Postcondition)?
+	expectHttpRequest=ExpectHttpRequest
 ;
 
 WebDriverAction:
@@ -25,6 +25,18 @@ WebDriverAction:
 	ClickOnElementWithId |
 	PageLoad |
 	TypeTextInElementFoundByCssSelector
+;
+
+Precondition:
+	('when' action=WebDriverAction)
+;
+
+Postcondition:
+	('then' 'make' 'sure' postcondition=WebDriverAction)
+;
+
+ExpectHttpRequest:
+	('do' 'not'? 'expect' 'http' 'request')
 ;
 
 
