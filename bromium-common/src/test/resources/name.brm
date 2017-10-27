@@ -1,0 +1,5 @@
+name "Example name"
+version "8.2.5"
+actions {
+
+}
