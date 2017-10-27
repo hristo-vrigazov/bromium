@@ -36,8 +36,8 @@ TypeTextInElementFoundByCssSelector: 'type' text=STRING 'in' 'element' 'with' 'c
 	cssSelector=STRING
 ;
 
-Version:
-	ThreeDottedVersion | STRING;
+// TODO: include ThreeDotted version as well
+Version: STRING;
 
 ThreeDottedVersion:
 	big=INT '.' medium=INT '.' small=INT
