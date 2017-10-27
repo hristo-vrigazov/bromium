@@ -28,7 +28,7 @@ public class BromiumParsingTest {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("name \'Demo app\'");
       _builder.newLine();
-      _builder.append("version 0.1.0");
+      _builder.append("version \'0.1.0\'");
       _builder.newLine();
       _builder.append("actions {");
       _builder.newLine();

@@ -104,20 +104,19 @@ ruleModel returns [EObject current=null]
 		}
 		(
 			(
+				lv_version_3_0=RULE_STRING
 				{
-					newCompositeNode(grammarAccess.getModelAccess().getVersionVersionParserRuleCall_3_0());
+					newLeafNode(lv_version_3_0, grammarAccess.getModelAccess().getVersionSTRINGTerminalRuleCall_3_0());
 				}
-				lv_version_3_0=ruleVersion
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getModelRule());
+						$current = createModelElement(grammarAccess.getModelRule());
 					}
-					set(
+					setWithLastConsumed(
 						$current,
 						"version",
 						lv_version_3_0,
-						"com.hribol.bromium.dsl.Bromium.Version");
-					afterParserOrEnumRuleCall();
+						"org.eclipse.xtext.common.Terminals.STRING");
 				}
 			)
 		)

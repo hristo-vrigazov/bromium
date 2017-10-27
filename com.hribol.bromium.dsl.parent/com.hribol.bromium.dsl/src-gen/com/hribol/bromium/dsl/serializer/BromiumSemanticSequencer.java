@@ -119,7 +119,7 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     Model returns Model
 	 *
 	 * Constraint:
-	 *     (name=STRING version=Version baseVersion=Version? actions+=ApplicationAction*)
+	 *     (name=STRING version=STRING baseVersion=Version? actions+=ApplicationAction*)
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

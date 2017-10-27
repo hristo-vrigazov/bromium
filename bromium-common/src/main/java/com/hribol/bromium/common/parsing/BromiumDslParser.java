@@ -45,7 +45,7 @@ public class BromiumDslParser implements ApplicationConfigurationParser {
 
         ApplicationConfiguration applicationConfiguration = new ApplicationConfiguration();
         applicationConfiguration.setApplicationName(model.getName());
-        applicationConfiguration.setVersion(model.getVersion().toString());
+        applicationConfiguration.setVersion(model.getVersion());
         return applicationConfiguration;
     }
 

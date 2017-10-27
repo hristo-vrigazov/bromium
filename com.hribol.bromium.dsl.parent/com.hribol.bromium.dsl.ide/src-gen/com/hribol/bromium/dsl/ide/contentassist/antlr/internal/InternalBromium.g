@@ -1734,9 +1734,9 @@ rule__Model__VersionAssignment_3
 	}
 :
 	(
-		{ before(grammarAccess.getModelAccess().getVersionVersionParserRuleCall_3_0()); }
-		ruleVersion
-		{ after(grammarAccess.getModelAccess().getVersionVersionParserRuleCall_3_0()); }
+		{ before(grammarAccess.getModelAccess().getVersionSTRINGTerminalRuleCall_3_0()); }
+		RULE_STRING
+		{ after(grammarAccess.getModelAccess().getVersionSTRINGTerminalRuleCall_3_0()); }
 	)
 ;
 finally {

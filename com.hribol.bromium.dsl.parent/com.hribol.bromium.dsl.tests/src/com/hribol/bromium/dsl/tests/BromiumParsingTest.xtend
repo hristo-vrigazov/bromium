@@ -22,7 +22,7 @@ class BromiumParsingTest {
 	def void loadModel() {
 		val result = parseHelper.parse('''
 			name 'Demo app'
-			version 0.1.0
+			version '0.1.0'
 			actions {
 				action 'Load login page'
 				load page '/login'

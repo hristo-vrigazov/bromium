@@ -5045,25 +5045,21 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Model__VersionAssignment_3"
-    // InternalBromium.g:1731:1: rule__Model__VersionAssignment_3 : ( ruleVersion ) ;
+    // InternalBromium.g:1731:1: rule__Model__VersionAssignment_3 : ( RULE_STRING ) ;
     public final void rule__Model__VersionAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1735:1: ( ( ruleVersion ) )
-            // InternalBromium.g:1736:2: ( ruleVersion )
+            // InternalBromium.g:1735:1: ( ( RULE_STRING ) )
+            // InternalBromium.g:1736:2: ( RULE_STRING )
             {
-            // InternalBromium.g:1736:2: ( ruleVersion )
-            // InternalBromium.g:1737:3: ruleVersion
+            // InternalBromium.g:1736:2: ( RULE_STRING )
+            // InternalBromium.g:1737:3: RULE_STRING
             {
-             before(grammarAccess.getModelAccess().getVersionVersionParserRuleCall_3_0()); 
-            pushFollow(FOLLOW_2);
-            ruleVersion();
-
-            state._fsp--;
-
-             after(grammarAccess.getModelAccess().getVersionVersionParserRuleCall_3_0()); 
+             before(grammarAccess.getModelAccess().getVersionSTRINGTerminalRuleCall_3_0()); 
+            match(input,RULE_STRING,FOLLOW_2); 
+             after(grammarAccess.getModelAccess().getVersionSTRINGTerminalRuleCall_3_0()); 
 
             }
 

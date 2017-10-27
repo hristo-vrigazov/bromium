@@ -4,7 +4,7 @@ generate bromium "http://www.hribol.com/bromium/dsl/Bromium"
 
 Model:
 	'name' name=STRING
-	'version' version=Version
+	'version' version=STRING
 	('from' baseVersion=Version)?
 	'actions' '{' 
 		actions+=ApplicationAction*

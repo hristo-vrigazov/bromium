@@ -30,7 +30,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameSTRINGTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cVersionKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cVersionAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cVersionVersionParserRuleCall_3_0 = (RuleCall)cVersionAssignment_3.eContents().get(0);
+		private final RuleCall cVersionSTRINGTerminalRuleCall_3_0 = (RuleCall)cVersionAssignment_3.eContents().get(0);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Keyword cFromKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
 		private final Assignment cBaseVersionAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
@@ -43,13 +43,13 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Model:
 		//	'name' name=STRING
-		//	'version' version=Version ('from' baseVersion=Version)?
+		//	'version' version=STRING ('from' baseVersion=Version)?
 		//	'actions' '{'
 		//	actions+=ApplicationAction*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'name' name=STRING 'version' version=Version ('from' baseVersion=Version)? 'actions' '{' actions+=ApplicationAction* '}'
+		//'name' name=STRING 'version' version=STRING ('from' baseVersion=Version)? 'actions' '{' actions+=ApplicationAction* '}'
 		public Group getGroup() { return cGroup; }
 		
 		//'name'
@@ -64,11 +64,11 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		//'version'
 		public Keyword getVersionKeyword_2() { return cVersionKeyword_2; }
 		
-		//version=Version
+		//version=STRING
 		public Assignment getVersionAssignment_3() { return cVersionAssignment_3; }
 		
-		//Version
-		public RuleCall getVersionVersionParserRuleCall_3_0() { return cVersionVersionParserRuleCall_3_0; }
+		//STRING
+		public RuleCall getVersionSTRINGTerminalRuleCall_3_0() { return cVersionSTRINGTerminalRuleCall_3_0; }
 		
 		//('from' baseVersion=Version)?
 		public Group getGroup_4() { return cGroup_4; }
@@ -504,7 +504,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//Model:
 	//	'name' name=STRING
-	//	'version' version=Version ('from' baseVersion=Version)?
+	//	'version' version=STRING ('from' baseVersion=Version)?
 	//	'actions' '{'
 	//	actions+=ApplicationAction*
 	//	'}';
