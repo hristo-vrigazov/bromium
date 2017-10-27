@@ -1,4 +1,3 @@
-'.'=39
 'action'=17
 'actions'=14
 'click'=33
@@ -28,8 +27,8 @@
 '{'=15
 '}'=16
 RULE_ANY_OTHER=10
-RULE_ID=6
-RULE_INT=5
+RULE_ID=5
+RULE_INT=6
 RULE_ML_COMMENT=7
 RULE_SL_COMMENT=8
 RULE_STRING=4
@@ -62,4 +61,3 @@ T__35=35
 T__36=36
 T__37=37
 T__38=38
-T__39=39

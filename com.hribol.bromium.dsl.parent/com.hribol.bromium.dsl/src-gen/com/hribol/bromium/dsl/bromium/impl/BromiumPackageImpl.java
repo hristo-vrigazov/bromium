@@ -12,7 +12,6 @@ import com.hribol.bromium.dsl.bromium.Model;
 import com.hribol.bromium.dsl.bromium.PageLoad;
 import com.hribol.bromium.dsl.bromium.ThreeDottedVersion;
 import com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector;
-import com.hribol.bromium.dsl.bromium.Version;
 import com.hribol.bromium.dsl.bromium.WebDriverAction;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -78,13 +77,6 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * @generated
    */
   private EClass typeTextInElementFoundByCssSelectorEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass versionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -181,9 +173,9 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Version()
+  public EAttribute getModel_Version()
   {
-    return (EReference)modelEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -191,9 +183,9 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_BaseVersion()
+  public EAttribute getModel_BaseVersion()
   {
-    return (EReference)modelEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)modelEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -361,16 +353,6 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getVersion()
-  {
-    return versionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getThreeDottedVersion()
   {
     return threeDottedVersionEClass;
@@ -438,8 +420,8 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     // Create classes and their features
     modelEClass = createEClass(MODEL);
     createEAttribute(modelEClass, MODEL__NAME);
-    createEReference(modelEClass, MODEL__VERSION);
-    createEReference(modelEClass, MODEL__BASE_VERSION);
+    createEAttribute(modelEClass, MODEL__VERSION);
+    createEAttribute(modelEClass, MODEL__BASE_VERSION);
     createEReference(modelEClass, MODEL__ACTIONS);
 
     applicationActionEClass = createEClass(APPLICATION_ACTION);
@@ -462,8 +444,6 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     typeTextInElementFoundByCssSelectorEClass = createEClass(TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR);
     createEAttribute(typeTextInElementFoundByCssSelectorEClass, TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR__TEXT);
     createEAttribute(typeTextInElementFoundByCssSelectorEClass, TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR__CSS_SELECTOR);
-
-    versionEClass = createEClass(VERSION);
 
     threeDottedVersionEClass = createEClass(THREE_DOTTED_VERSION);
     createEAttribute(threeDottedVersionEClass, THREE_DOTTED_VERSION__BIG);
@@ -504,13 +484,12 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     clickOnElementWithIdEClass.getESuperTypes().add(this.getWebDriverAction());
     pageLoadEClass.getESuperTypes().add(this.getWebDriverAction());
     typeTextInElementFoundByCssSelectorEClass.getESuperTypes().add(this.getWebDriverAction());
-    threeDottedVersionEClass.getESuperTypes().add(this.getVersion());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getModel_Version(), this.getVersion(), null, "version", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getModel_BaseVersion(), this.getVersion(), null, "baseVersion", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Version(), ecorePackage.getEString(), "version", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_BaseVersion(), ecorePackage.getEString(), "baseVersion", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_Actions(), this.getApplicationAction(), null, "actions", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(applicationActionEClass, ApplicationAction.class, "ApplicationAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -533,8 +512,6 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     initEClass(typeTextInElementFoundByCssSelectorEClass, TypeTextInElementFoundByCssSelector.class, "TypeTextInElementFoundByCssSelector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getTypeTextInElementFoundByCssSelector_Text(), ecorePackage.getEString(), "text", null, 0, 1, TypeTextInElementFoundByCssSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTypeTextInElementFoundByCssSelector_CssSelector(), ecorePackage.getEString(), "cssSelector", null, 0, 1, TypeTextInElementFoundByCssSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(versionEClass, Version.class, "Version", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(threeDottedVersionEClass, ThreeDottedVersion.class, "ThreeDottedVersion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getThreeDottedVersion_Big(), ecorePackage.getEInt(), "big", null, 0, 1, ThreeDottedVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

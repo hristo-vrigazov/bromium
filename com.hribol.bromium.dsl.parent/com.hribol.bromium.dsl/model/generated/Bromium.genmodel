@@ -8,8 +8,8 @@
       fileExtensions="brm" ecorePackage="Bromium.ecore#/">
     <genClasses ecoreClass="Bromium.ecore#//Model">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//Model/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//Model/version"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//Model/baseVersion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//Model/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//Model/baseVersion"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//Model/actions"/>
     </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//ApplicationAction">
@@ -32,7 +32,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//TypeTextInElementFoundByCssSelector/text"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//TypeTextInElementFoundByCssSelector/cssSelector"/>
     </genClasses>
-    <genClasses ecoreClass="Bromium.ecore#//Version"/>
     <genClasses ecoreClass="Bromium.ecore#//ThreeDottedVersion">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//ThreeDottedVersion/big"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//ThreeDottedVersion/medium"/>

@@ -6,7 +6,6 @@ package com.hribol.bromium.dsl.bromium.impl;
 import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.Model;
-import com.hribol.bromium.dsl.bromium.Version;
 
 import java.util.Collection;
 
@@ -63,24 +62,44 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getVersion() <em>Version</em>}' containment reference.
+   * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getVersion()
    * @generated
    * @ordered
    */
-  protected Version version;
+  protected static final String VERSION_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getBaseVersion() <em>Base Version</em>}' containment reference.
+   * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getVersion()
+   * @generated
+   * @ordered
+   */
+  protected String version = VERSION_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getBaseVersion() <em>Base Version</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getBaseVersion()
    * @generated
    * @ordered
    */
-  protected Version baseVersion;
+  protected static final String BASE_VERSION_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getBaseVersion() <em>Base Version</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getBaseVersion()
+   * @generated
+   * @ordered
+   */
+  protected String baseVersion = BASE_VERSION_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference list.
@@ -141,7 +160,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public Version getVersion()
+  public String getVersion()
   {
     return version;
   }
@@ -151,16 +170,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetVersion(Version newVersion, NotificationChain msgs)
+  public void setVersion(String newVersion)
   {
-    Version oldVersion = version;
+    String oldVersion = version;
     version = newVersion;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BromiumPackage.MODEL__VERSION, oldVersion, newVersion);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
+      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.MODEL__VERSION, oldVersion, version));
   }
 
   /**
@@ -168,28 +183,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setVersion(Version newVersion)
-  {
-    if (newVersion != version)
-    {
-      NotificationChain msgs = null;
-      if (version != null)
-        msgs = ((InternalEObject)version).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.MODEL__VERSION, null, msgs);
-      if (newVersion != null)
-        msgs = ((InternalEObject)newVersion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.MODEL__VERSION, null, msgs);
-      msgs = basicSetVersion(newVersion, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.MODEL__VERSION, newVersion, newVersion));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Version getBaseVersion()
+  public String getBaseVersion()
   {
     return baseVersion;
   }
@@ -199,37 +193,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetBaseVersion(Version newBaseVersion, NotificationChain msgs)
+  public void setBaseVersion(String newBaseVersion)
   {
-    Version oldBaseVersion = baseVersion;
+    String oldBaseVersion = baseVersion;
     baseVersion = newBaseVersion;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BromiumPackage.MODEL__BASE_VERSION, oldBaseVersion, newBaseVersion);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setBaseVersion(Version newBaseVersion)
-  {
-    if (newBaseVersion != baseVersion)
-    {
-      NotificationChain msgs = null;
-      if (baseVersion != null)
-        msgs = ((InternalEObject)baseVersion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.MODEL__BASE_VERSION, null, msgs);
-      if (newBaseVersion != null)
-        msgs = ((InternalEObject)newBaseVersion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.MODEL__BASE_VERSION, null, msgs);
-      msgs = basicSetBaseVersion(newBaseVersion, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.MODEL__BASE_VERSION, newBaseVersion, newBaseVersion));
+      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.MODEL__BASE_VERSION, oldBaseVersion, baseVersion));
   }
 
   /**
@@ -256,10 +225,6 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case BromiumPackage.MODEL__VERSION:
-        return basicSetVersion(null, msgs);
-      case BromiumPackage.MODEL__BASE_VERSION:
-        return basicSetBaseVersion(null, msgs);
       case BromiumPackage.MODEL__ACTIONS:
         return ((InternalEList<?>)getActions()).basicRemove(otherEnd, msgs);
     }
@@ -303,10 +268,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         setName((String)newValue);
         return;
       case BromiumPackage.MODEL__VERSION:
-        setVersion((Version)newValue);
+        setVersion((String)newValue);
         return;
       case BromiumPackage.MODEL__BASE_VERSION:
-        setBaseVersion((Version)newValue);
+        setBaseVersion((String)newValue);
         return;
       case BromiumPackage.MODEL__ACTIONS:
         getActions().clear();
@@ -330,10 +295,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         setName(NAME_EDEFAULT);
         return;
       case BromiumPackage.MODEL__VERSION:
-        setVersion((Version)null);
+        setVersion(VERSION_EDEFAULT);
         return;
       case BromiumPackage.MODEL__BASE_VERSION:
-        setBaseVersion((Version)null);
+        setBaseVersion(BASE_VERSION_EDEFAULT);
         return;
       case BromiumPackage.MODEL__ACTIONS:
         getActions().clear();
@@ -355,9 +320,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case BromiumPackage.MODEL__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case BromiumPackage.MODEL__VERSION:
-        return version != null;
+        return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
       case BromiumPackage.MODEL__BASE_VERSION:
-        return baseVersion != null;
+        return BASE_VERSION_EDEFAULT == null ? baseVersion != null : !BASE_VERSION_EDEFAULT.equals(baseVersion);
       case BromiumPackage.MODEL__ACTIONS:
         return actions != null && !actions.isEmpty();
     }
@@ -377,6 +342,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
+    result.append(", version: ");
+    result.append(version);
+    result.append(", baseVersion: ");
+    result.append(baseVersion);
     result.append(')');
     return result.toString();
   }

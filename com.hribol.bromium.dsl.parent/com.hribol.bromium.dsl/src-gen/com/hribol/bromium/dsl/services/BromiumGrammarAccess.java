@@ -390,22 +390,15 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	public class VersionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.Version");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cThreeDottedVersionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cSTRINGTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cSTRINGTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
+		//// TODO: include ThreeDotted version as well
 		//Version:
-		//	ThreeDottedVersion | STRING;
+		//	STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ThreeDottedVersion | STRING
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//ThreeDottedVersion
-		public RuleCall getThreeDottedVersionParserRuleCall_0() { return cThreeDottedVersionParserRuleCall_0; }
-		
 		//STRING
-		public RuleCall getSTRINGTerminalRuleCall_1() { return cSTRINGTerminalRuleCall_1; }
+		public RuleCall getSTRINGTerminalRuleCall() { return cSTRINGTerminalRuleCall; }
 	}
 	public class ThreeDottedVersionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.ThreeDottedVersion");
@@ -587,8 +580,9 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		return getTypeTextInElementFoundByCssSelectorAccess().getRule();
 	}
 	
+	//// TODO: include ThreeDotted version as well
 	//Version:
-	//	ThreeDottedVersion | STRING;
+	//	STRING;
 	public VersionElements getVersionAccess() {
 		return pVersion;
 	}

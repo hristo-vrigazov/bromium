@@ -3,6 +3,7 @@
  */
 package com.hribol.bromium.dsl.bromium;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,7 +23,7 @@ package com.hribol.bromium.dsl.bromium;
  * @model
  * @generated
  */
-public interface ThreeDottedVersion extends Version
+public interface ThreeDottedVersion extends EObject
 {
   /**
    * Returns the value of the '<em><b>Big</b></em>' attribute.

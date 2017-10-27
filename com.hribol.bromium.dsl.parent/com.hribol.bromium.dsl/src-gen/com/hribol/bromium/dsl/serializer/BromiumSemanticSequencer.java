@@ -147,7 +147,6 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	
 	/**
 	 * Contexts:
-	 *     Version returns ThreeDottedVersion
 	 *     ThreeDottedVersion returns ThreeDottedVersion
 	 *
 	 * Constraint:

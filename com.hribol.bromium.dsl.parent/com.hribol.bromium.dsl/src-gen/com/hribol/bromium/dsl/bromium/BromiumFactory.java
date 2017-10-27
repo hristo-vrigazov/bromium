@@ -87,15 +87,6 @@ public interface BromiumFactory extends EFactory
   TypeTextInElementFoundByCssSelector createTypeTextInElementFoundByCssSelector();
 
   /**
-   * Returns a new object of class '<em>Version</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Version</em>'.
-   * @generated
-   */
-  Version createVersion();
-
-  /**
    * Returns a new object of class '<em>Three Dotted Version</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

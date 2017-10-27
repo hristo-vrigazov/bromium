@@ -623,116 +623,27 @@ ruleTypeTextInElementFoundByCssSelector returns [EObject current=null]
 ;
 
 // Entry rule entryRuleVersion
-entryRuleVersion returns [EObject current=null]:
+entryRuleVersion returns [String current=null]:
 	{ newCompositeNode(grammarAccess.getVersionRule()); }
 	iv_ruleVersion=ruleVersion
-	{ $current=$iv_ruleVersion.current; }
+	{ $current=$iv_ruleVersion.current.getText(); }
 	EOF;
 
 // Rule Version
-ruleVersion returns [EObject current=null]
+ruleVersion returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 @init {
 	enterRule();
 }
 @after {
 	leaveRule();
 }:
-	(
-		{
-			newCompositeNode(grammarAccess.getVersionAccess().getThreeDottedVersionParserRuleCall_0());
-		}
-		this_ThreeDottedVersion_0=ruleThreeDottedVersion
-		{
-			$current = $this_ThreeDottedVersion_0.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		this_STRING_1=RULE_STRING
-		{
-			newLeafNode(this_STRING_1, grammarAccess.getVersionAccess().getSTRINGTerminalRuleCall_1());
-		}
-	)
-;
-
-// Entry rule entryRuleThreeDottedVersion
-entryRuleThreeDottedVersion returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getThreeDottedVersionRule()); }
-	iv_ruleThreeDottedVersion=ruleThreeDottedVersion
-	{ $current=$iv_ruleThreeDottedVersion.current; }
-	EOF;
-
-// Rule ThreeDottedVersion
-ruleThreeDottedVersion returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			(
-				lv_big_0_0=RULE_INT
-				{
-					newLeafNode(lv_big_0_0, grammarAccess.getThreeDottedVersionAccess().getBigINTTerminalRuleCall_0_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getThreeDottedVersionRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"big",
-						lv_big_0_0,
-						"org.eclipse.xtext.common.Terminals.INT");
-				}
-			)
-		)
-		otherlv_1='.'
-		{
-			newLeafNode(otherlv_1, grammarAccess.getThreeDottedVersionAccess().getFullStopKeyword_1());
-		}
-		(
-			(
-				lv_medium_2_0=RULE_INT
-				{
-					newLeafNode(lv_medium_2_0, grammarAccess.getThreeDottedVersionAccess().getMediumINTTerminalRuleCall_2_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getThreeDottedVersionRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"medium",
-						lv_medium_2_0,
-						"org.eclipse.xtext.common.Terminals.INT");
-				}
-			)
-		)
-		otherlv_3='.'
-		{
-			newLeafNode(otherlv_3, grammarAccess.getThreeDottedVersionAccess().getFullStopKeyword_3());
-		}
-		(
-			(
-				lv_small_4_0=RULE_INT
-				{
-					newLeafNode(lv_small_4_0, grammarAccess.getThreeDottedVersionAccess().getSmallINTTerminalRuleCall_4_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getThreeDottedVersionRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"small",
-						lv_small_4_0,
-						"org.eclipse.xtext.common.Terminals.INT");
-				}
-			)
-		)
-	)
+	this_STRING_0=RULE_STRING
+	{
+		$current.merge(this_STRING_0);
+	}
+	{
+		newLeafNode(this_STRING_0, grammarAccess.getVersionAccess().getSTRINGTerminalRuleCall());
+	}
 ;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;

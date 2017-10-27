@@ -77,7 +77,7 @@ public interface BromiumPackage extends EPackage
   int MODEL__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Version</b></em>' containment reference.
+   * The feature id for the '<em><b>Version</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -86,7 +86,7 @@ public interface BromiumPackage extends EPackage
   int MODEL__VERSION = 1;
 
   /**
-   * The feature id for the '<em><b>Base Version</b></em>' containment reference.
+   * The feature id for the '<em><b>Base Version</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -308,25 +308,6 @@ public interface BromiumPackage extends EPackage
   int TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR_FEATURE_COUNT = WEB_DRIVER_ACTION_FEATURE_COUNT + 2;
 
   /**
-   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.VersionImpl <em>Version</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see com.hribol.bromium.dsl.bromium.impl.VersionImpl
-   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getVersion()
-   * @generated
-   */
-  int VERSION = 7;
-
-  /**
-   * The number of structural features of the '<em>Version</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VERSION_FEATURE_COUNT = 0;
-
-  /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ThreeDottedVersionImpl <em>Three Dotted Version</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -334,7 +315,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getThreeDottedVersion()
    * @generated
    */
-  int THREE_DOTTED_VERSION = 8;
+  int THREE_DOTTED_VERSION = 7;
 
   /**
    * The feature id for the '<em><b>Big</b></em>' attribute.
@@ -343,7 +324,7 @@ public interface BromiumPackage extends EPackage
    * @generated
    * @ordered
    */
-  int THREE_DOTTED_VERSION__BIG = VERSION_FEATURE_COUNT + 0;
+  int THREE_DOTTED_VERSION__BIG = 0;
 
   /**
    * The feature id for the '<em><b>Medium</b></em>' attribute.
@@ -352,7 +333,7 @@ public interface BromiumPackage extends EPackage
    * @generated
    * @ordered
    */
-  int THREE_DOTTED_VERSION__MEDIUM = VERSION_FEATURE_COUNT + 1;
+  int THREE_DOTTED_VERSION__MEDIUM = 1;
 
   /**
    * The feature id for the '<em><b>Small</b></em>' attribute.
@@ -361,7 +342,7 @@ public interface BromiumPackage extends EPackage
    * @generated
    * @ordered
    */
-  int THREE_DOTTED_VERSION__SMALL = VERSION_FEATURE_COUNT + 2;
+  int THREE_DOTTED_VERSION__SMALL = 2;
 
   /**
    * The number of structural features of the '<em>Three Dotted Version</em>' class.
@@ -370,7 +351,7 @@ public interface BromiumPackage extends EPackage
    * @generated
    * @ordered
    */
-  int THREE_DOTTED_VERSION_FEATURE_COUNT = VERSION_FEATURE_COUNT + 3;
+  int THREE_DOTTED_VERSION_FEATURE_COUNT = 3;
 
 
   /**
@@ -395,26 +376,26 @@ public interface BromiumPackage extends EPackage
   EAttribute getModel_Name();
 
   /**
-   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.Model#getVersion <em>Version</em>}'.
+   * Returns the meta object for the attribute '{@link com.hribol.bromium.dsl.bromium.Model#getVersion <em>Version</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Version</em>'.
+   * @return the meta object for the attribute '<em>Version</em>'.
    * @see com.hribol.bromium.dsl.bromium.Model#getVersion()
    * @see #getModel()
    * @generated
    */
-  EReference getModel_Version();
+  EAttribute getModel_Version();
 
   /**
-   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.Model#getBaseVersion <em>Base Version</em>}'.
+   * Returns the meta object for the attribute '{@link com.hribol.bromium.dsl.bromium.Model#getBaseVersion <em>Base Version</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Base Version</em>'.
+   * @return the meta object for the attribute '<em>Base Version</em>'.
    * @see com.hribol.bromium.dsl.bromium.Model#getBaseVersion()
    * @see #getModel()
    * @generated
    */
-  EReference getModel_BaseVersion();
+  EAttribute getModel_BaseVersion();
 
   /**
    * Returns the meta object for the containment reference list '{@link com.hribol.bromium.dsl.bromium.Model#getActions <em>Actions</em>}'.
@@ -587,16 +568,6 @@ public interface BromiumPackage extends EPackage
   EAttribute getTypeTextInElementFoundByCssSelector_CssSelector();
 
   /**
-   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.Version <em>Version</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Version</em>'.
-   * @see com.hribol.bromium.dsl.bromium.Version
-   * @generated
-   */
-  EClass getVersion();
-
-  /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ThreeDottedVersion <em>Three Dotted Version</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -681,20 +652,20 @@ public interface BromiumPackage extends EPackage
     EAttribute MODEL__NAME = eINSTANCE.getModel_Name();
 
     /**
-     * The meta object literal for the '<em><b>Version</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference MODEL__VERSION = eINSTANCE.getModel_Version();
+    EAttribute MODEL__VERSION = eINSTANCE.getModel_Version();
 
     /**
-     * The meta object literal for the '<em><b>Base Version</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Base Version</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference MODEL__BASE_VERSION = eINSTANCE.getModel_BaseVersion();
+    EAttribute MODEL__BASE_VERSION = eINSTANCE.getModel_BaseVersion();
 
     /**
      * The meta object literal for the '<em><b>Actions</b></em>' containment reference list feature.
@@ -835,16 +806,6 @@ public interface BromiumPackage extends EPackage
      * @generated
      */
     EAttribute TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR__CSS_SELECTOR = eINSTANCE.getTypeTextInElementFoundByCssSelector_CssSelector();
-
-    /**
-     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.VersionImpl <em>Version</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see com.hribol.bromium.dsl.bromium.impl.VersionImpl
-     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getVersion()
-     * @generated
-     */
-    EClass VERSION = eINSTANCE.getVersion();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ThreeDottedVersionImpl <em>Three Dotted Version</em>}' class.

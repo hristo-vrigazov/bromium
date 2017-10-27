@@ -72,7 +72,6 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
       case BromiumPackage.CLICK_ON_ELEMENT_WITH_ID: return createClickOnElementWithId();
       case BromiumPackage.PAGE_LOAD: return createPageLoad();
       case BromiumPackage.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR: return createTypeTextInElementFoundByCssSelector();
-      case BromiumPackage.VERSION: return createVersion();
       case BromiumPackage.THREE_DOTTED_VERSION: return createThreeDottedVersion();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -154,17 +153,6 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
   {
     TypeTextInElementFoundByCssSelectorImpl typeTextInElementFoundByCssSelector = new TypeTextInElementFoundByCssSelectorImpl();
     return typeTextInElementFoundByCssSelector;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Version createVersion()
-  {
-    VersionImpl version = new VersionImpl();
-    return version;
   }
 
   /**

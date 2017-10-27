@@ -55,56 +55,56 @@ public interface Model extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Version</b></em>' containment reference.
+   * Returns the value of the '<em><b>Version</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Version</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Version</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Version</em>' containment reference.
-   * @see #setVersion(Version)
+   * @return the value of the '<em>Version</em>' attribute.
+   * @see #setVersion(String)
    * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getModel_Version()
-   * @model containment="true"
+   * @model
    * @generated
    */
-  Version getVersion();
+  String getVersion();
 
   /**
-   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.Model#getVersion <em>Version</em>}' containment reference.
+   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.Model#getVersion <em>Version</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Version</em>' containment reference.
+   * @param value the new value of the '<em>Version</em>' attribute.
    * @see #getVersion()
    * @generated
    */
-  void setVersion(Version value);
+  void setVersion(String value);
 
   /**
-   * Returns the value of the '<em><b>Base Version</b></em>' containment reference.
+   * Returns the value of the '<em><b>Base Version</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Base Version</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Base Version</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Base Version</em>' containment reference.
-   * @see #setBaseVersion(Version)
+   * @return the value of the '<em>Base Version</em>' attribute.
+   * @see #setBaseVersion(String)
    * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getModel_BaseVersion()
-   * @model containment="true"
+   * @model
    * @generated
    */
-  Version getBaseVersion();
+  String getBaseVersion();
 
   /**
-   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.Model#getBaseVersion <em>Base Version</em>}' containment reference.
+   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.Model#getBaseVersion <em>Base Version</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Base Version</em>' containment reference.
+   * @param value the new value of the '<em>Base Version</em>' attribute.
    * @see #getBaseVersion()
    * @generated
    */
-  void setBaseVersion(Version value);
+  void setBaseVersion(String value);
 
   /**
    * Returns the value of the '<em><b>Actions</b></em>' containment reference list.
