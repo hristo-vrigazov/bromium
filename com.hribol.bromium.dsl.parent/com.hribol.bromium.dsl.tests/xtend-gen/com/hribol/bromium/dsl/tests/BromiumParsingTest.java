@@ -6,10 +6,15 @@ package com.hribol.bromium.dsl.tests;
 import com.google.inject.Inject;
 import com.hribol.bromium.dsl.bromium.Model;
 import com.hribol.bromium.dsl.tests.BromiumInjectorProvider;
+import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,6 +26,9 @@ import org.junit.runner.RunWith;
 public class BromiumParsingTest {
   @Inject
   private ParseHelper<Model> parseHelper;
+  
+  @Inject
+  private IResourceValidator validator;
   
   @Test
   public void scopingOfExposedParameters() {
@@ -63,8 +71,8 @@ public class BromiumParsingTest {
       _builder.append("}");
       _builder.newLine();
       final Model result = this.parseHelper.parse(_builder);
-      Assert.assertNotNull(result);
-      Assert.assertFalse(result.eResource().getErrors().isEmpty());
+      final List<Issue> issues = this.validator.validate(result.eResource(), CheckMode.ALL, CancelIndicator.NullImpl);
+      Assert.assertFalse(issues.isEmpty());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

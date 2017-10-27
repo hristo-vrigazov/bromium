@@ -11,12 +11,20 @@ import org.eclipse.xtext.testing.util.ParseHelper
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtext.validation.IResourceValidator
+import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.validation.CheckMode
+import java.util.List
+import org.eclipse.xtext.validation.Issue
 
 @RunWith(XtextRunner)
 @InjectWith(BromiumInjectorProvider)
 class BromiumParsingTest {
 	@Inject
 	ParseHelper<Model> parseHelper
+	
+	@Inject
+	IResourceValidator validator
 	
 	@Test
 	def void scopingOfExposedParameters() {
@@ -37,8 +45,10 @@ class BromiumParsingTest {
 			}
 		''')
 		
-		Assert.assertNotNull(result)
-		Assert.assertFalse(result.eResource.errors.isEmpty)
+		
+		val issues = validator.validate(result.eResource, CheckMode.ALL, CancelIndicator.NullImpl)
+	
+		Assert.assertFalse(issues.empty)
 	}
 	
 	@Test
