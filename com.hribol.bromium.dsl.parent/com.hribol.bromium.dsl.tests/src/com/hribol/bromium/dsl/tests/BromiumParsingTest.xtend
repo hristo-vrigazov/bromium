@@ -24,11 +24,13 @@ class BromiumParsingTest {
 			name 'Example name'
 			version '8.2.5'
 			actions {
-			    action 'Type ' content 'into username field'
+				id typeIntoUsernameField
+			    syntax 'Type ' content 'into username field'
 				type content in element with css selector '#login' 
 				do not expect http request
 				
-				action 'Click on login button'
+				id clickOnLoginButton
+				syntax 'Click on login button'
 				click on element with css selector content
 				do not expect http request
 				
@@ -45,19 +47,23 @@ class BromiumParsingTest {
 			name 'Demo app'
 			version '0.1.0'
 			actions {
-				action 'Load login page'
+				id loadLoginPage
+				syntax 'Load login page'
 				load page '/login'
 				do expect http request
 			
-				action 'Type username'
+				id typeUsername
+				syntax 'Type username'
 				type "admin" in element with css selector "#user"
 				do not expect http request
 			
-				action 'Type password'
+				id typePassword
+				syntax 'Type password'
 				type "admin" in element with css selector "#pass"
 				do not expect http request
 			
-				action 'Click login button'
+				id clickLoginButton
+				syntax 'Click login button'
 				click on element with css selector "#login"
 				do expect http request
 			}
