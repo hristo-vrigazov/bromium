@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by hvrigazov on 19.07.17.
  */
-public class StepsDumperTest {
+public class JsonStepsDumperTest {
 
     @Test
     public void dumpsSteps() throws IOException {
@@ -22,7 +22,7 @@ public class StepsDumperTest {
         String outputFilename = "tmp.json";
         testScenarioSteps.add(testStep);
 
-        StepsDumper stepsDumper = new StepsDumper();
+        StepsDumper stepsDumper = new JsonStepsDumper();
 
         stepsDumper.dump(testScenarioSteps, outputFilename);
 

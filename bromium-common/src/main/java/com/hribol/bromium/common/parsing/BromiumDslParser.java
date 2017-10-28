@@ -4,7 +4,6 @@ import com.google.inject.Injector;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.parsing.ApplicationConfigurationParser;
 import com.hribol.bromium.dsl.BromiumStandaloneSetup;
-import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.Model;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -19,7 +18,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by hvrigazov on 26.10.17.
+ * Parses an application configuration written in Bromium DSL language
  */
 public class BromiumDslParser implements ApplicationConfigurationParser {
 

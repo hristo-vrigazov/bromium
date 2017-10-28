@@ -27,8 +27,8 @@ import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvoc
 import com.hribol.bromium.common.ProxyDriverIntegrator;
 import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.common.replay.SignalizingStateConditionsUpdater;
+import com.hribol.bromium.core.parsing.*;
 import com.hribol.bromium.core.utils.*;
-import com.hribol.bromium.core.parsing.ApplicationConfigurationParser;
 import com.hribol.bromium.record.RecordingState;
 import com.hribol.bromium.common.replay.DriverOperations;
 import com.hribol.bromium.common.replay.ExecutorDependencies;
@@ -49,8 +49,6 @@ import com.hribol.bromium.core.suite.UbuntuVirtualScreenProcessCreator;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.core.suppliers.WebDriverSupplier;
 import com.hribol.bromium.core.synchronization.EventSynchronizer;
-import com.hribol.bromium.core.parsing.JsonApplicationConfigurationParser;
-import com.hribol.bromium.core.parsing.StepsReader;
 import com.hribol.bromium.record.RecordRequestFilter;
 import com.hribol.bromium.record.RecordResponseFilter;
 import com.hribol.bromium.replay.ReplayBrowser;
@@ -129,6 +127,7 @@ public class DefaultModule extends AbstractModule {
                 .to(SplitQueryStringOfRequest.class);
 
         bind(ApplicationConfigurationParser.class).to(JsonApplicationConfigurationParser.class);
+        bind(StepsDumper.class).to(JsonStepsDumper.class);
 
         // TODO: other OSes should have a different binding
         bind(VirtualScreenProcessCreator.class).to(UbuntuVirtualScreenProcessCreator.class);
