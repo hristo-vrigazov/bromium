@@ -3,7 +3,6 @@
  */
 package com.hribol.bromium.dsl.bromium.impl;
 
-import com.hribol.bromium.dsl.bromium.ActionDefinition;
 import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.BromiumFactory;
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
@@ -15,6 +14,7 @@ import com.hribol.bromium.dsl.bromium.PageLoad;
 import com.hribol.bromium.dsl.bromium.ParameterValue;
 import com.hribol.bromium.dsl.bromium.Postcondition;
 import com.hribol.bromium.dsl.bromium.Precondition;
+import com.hribol.bromium.dsl.bromium.SyntaxDefinition;
 import com.hribol.bromium.dsl.bromium.ThreeDottedVersion;
 import com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector;
 import com.hribol.bromium.dsl.bromium.WebDriverAction;
@@ -53,7 +53,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass actionDefinitionEClass = null;
+  private EClass syntaxDefinitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -263,7 +263,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getApplicationAction_ActionDefinition()
+  public EReference getApplicationAction_SyntaxDefinitions()
   {
     return (EReference)applicationActionEClass.getEStructuralFeatures().get(1);
   }
@@ -313,9 +313,9 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getActionDefinition()
+  public EClass getSyntaxDefinition()
   {
-    return actionDefinitionEClass;
+    return syntaxDefinitionEClass;
   }
 
   /**
@@ -323,9 +323,19 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getActionDefinition_Parameter()
+  public EAttribute getSyntaxDefinition_Content()
   {
-    return (EReference)actionDefinitionEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)syntaxDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSyntaxDefinition_Parameter()
+  {
+    return (EReference)syntaxDefinitionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -596,14 +606,15 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
 
     applicationActionEClass = createEClass(APPLICATION_ACTION);
     createEAttribute(applicationActionEClass, APPLICATION_ACTION__NAME);
-    createEReference(applicationActionEClass, APPLICATION_ACTION__ACTION_DEFINITION);
+    createEReference(applicationActionEClass, APPLICATION_ACTION__SYNTAX_DEFINITIONS);
     createEReference(applicationActionEClass, APPLICATION_ACTION__PRECONDITION);
     createEReference(applicationActionEClass, APPLICATION_ACTION__WEB_DRIVER_ACTION);
     createEReference(applicationActionEClass, APPLICATION_ACTION__POSTCONDITION);
     createEAttribute(applicationActionEClass, APPLICATION_ACTION__EXPECT_HTTP_REQUEST);
 
-    actionDefinitionEClass = createEClass(ACTION_DEFINITION);
-    createEReference(actionDefinitionEClass, ACTION_DEFINITION__PARAMETER);
+    syntaxDefinitionEClass = createEClass(SYNTAX_DEFINITION);
+    createEAttribute(syntaxDefinitionEClass, SYNTAX_DEFINITION__CONTENT);
+    createEReference(syntaxDefinitionEClass, SYNTAX_DEFINITION__PARAMETER);
 
     webDriverActionEClass = createEClass(WEB_DRIVER_ACTION);
 
@@ -682,14 +693,15 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
 
     initEClass(applicationActionEClass, ApplicationAction.class, "ApplicationAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getApplicationAction_Name(), ecorePackage.getEString(), "name", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getApplicationAction_ActionDefinition(), this.getActionDefinition(), null, "actionDefinition", null, 0, -1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getApplicationAction_SyntaxDefinitions(), this.getSyntaxDefinition(), null, "syntaxDefinitions", null, 0, -1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getApplicationAction_Precondition(), this.getPrecondition(), null, "precondition", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getApplicationAction_WebDriverAction(), this.getWebDriverAction(), null, "webDriverAction", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getApplicationAction_Postcondition(), this.getPostcondition(), null, "postcondition", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getApplicationAction_ExpectHttpRequest(), ecorePackage.getEString(), "expectHttpRequest", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(actionDefinitionEClass, ActionDefinition.class, "ActionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getActionDefinition_Parameter(), this.getExposedParameter(), null, "parameter", null, 0, 1, ActionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(syntaxDefinitionEClass, SyntaxDefinition.class, "SyntaxDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSyntaxDefinition_Content(), ecorePackage.getEString(), "content", null, 0, 1, SyntaxDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSyntaxDefinition_Parameter(), this.getExposedParameter(), null, "parameter", null, 0, 1, SyntaxDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(webDriverActionEClass, WebDriverAction.class, "WebDriverAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

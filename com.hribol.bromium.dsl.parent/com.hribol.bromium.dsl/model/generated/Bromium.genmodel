@@ -14,14 +14,15 @@
     </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//ApplicationAction">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//ApplicationAction/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ApplicationAction/actionDefinition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ApplicationAction/syntaxDefinitions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ApplicationAction/precondition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ApplicationAction/webDriverAction"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ApplicationAction/postcondition"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//ApplicationAction/expectHttpRequest"/>
     </genClasses>
-    <genClasses ecoreClass="Bromium.ecore#//ActionDefinition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ActionDefinition/parameter"/>
+    <genClasses ecoreClass="Bromium.ecore#//SyntaxDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//SyntaxDefinition/content"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//SyntaxDefinition/parameter"/>
     </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//WebDriverAction"/>
     <genClasses ecoreClass="Bromium.ecore#//Precondition">

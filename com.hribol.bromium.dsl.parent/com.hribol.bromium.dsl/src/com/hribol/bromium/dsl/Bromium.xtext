@@ -13,15 +13,15 @@ Model:
 
 ApplicationAction:
 	'id' name=ID
-	'syntax' actionDefinition+=ActionDefinition*
+	'syntax' syntaxDefinitions+=SyntaxDefinition*
 	(precondition=Precondition)?
 	webDriverAction=WebDriverAction
 	(postcondition=Postcondition)?
 	expectHttpRequest=ExpectHttpRequest
 ;
 
-ActionDefinition:
-	 {ActionDefinition} STRING (parameter=ExposedParameter)?
+SyntaxDefinition:
+	 {SyntaxDefinition} content=STRING (parameter=ExposedParameter)?
 ;
 
 WebDriverAction:

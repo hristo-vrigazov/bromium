@@ -86,9 +86,9 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
         return createApplicationActionAdapter();
       }
       @Override
-      public Adapter caseActionDefinition(ActionDefinition object)
+      public Adapter caseSyntaxDefinition(SyntaxDefinition object)
       {
-        return createActionDefinitionAdapter();
+        return createSyntaxDefinitionAdapter();
       }
       @Override
       public Adapter caseWebDriverAction(WebDriverAction object)
@@ -193,16 +193,16 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.ActionDefinition <em>Action Definition</em>}'.
+   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.SyntaxDefinition <em>Syntax Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see com.hribol.bromium.dsl.bromium.ActionDefinition
+   * @see com.hribol.bromium.dsl.bromium.SyntaxDefinition
    * @generated
    */
-  public Adapter createActionDefinitionAdapter()
+  public Adapter createSyntaxDefinitionAdapter()
   {
     return null;
   }

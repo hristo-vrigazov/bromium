@@ -1,11 +1,13 @@
 package com.hribol.bromium.common.parsing;
 
+import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.parsing.ApplicationConfigurationParser;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -27,6 +29,15 @@ public class BromiumDslParserTest {
 
         assertEquals(EXAMPLE_NAME, applicationConfiguration.getApplicationName());
         assertEquals(EXAMPLE_VERSION, applicationConfiguration.getVersion());
+    }
+
+    @Test
+    public void parsesActionsWithExposedParameters() throws IOException {
+        File file = new File(getClass().getResource("/actions.brm").getFile());
+
+        ApplicationConfigurationParser parser = new BromiumDslParser();
+
+        ApplicationConfiguration applicationConfiguration = parser.parseApplicationConfiguration(file);
     }
 
 }

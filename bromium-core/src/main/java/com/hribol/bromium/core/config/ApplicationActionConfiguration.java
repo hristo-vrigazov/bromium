@@ -2,6 +2,8 @@ package com.hribol.bromium.core.config;
 
 import com.hribol.bromium.core.generation.GenerationInformation;
 
+import java.util.List;
+
 /**
  * A configuration of an action, which is usually contained
  * in the application configuration file. It is used
@@ -13,6 +15,8 @@ public class ApplicationActionConfiguration implements GenerationInformation {
     private WebDriverActionConfiguration webDriverAction;
     private WebDriverActionConfiguration conditionAfterExecution;
     private boolean expectsHttpRequest;
+
+    private List<SyntaxDefinitionConfiguration> syntaxDefinitionConfigurationList;
 
     /**
      * @return the name of the application action
@@ -94,4 +98,13 @@ public class ApplicationActionConfiguration implements GenerationInformation {
     public void setExpectsHttpRequest(boolean expectsHttpRequest) {
         this.expectsHttpRequest = expectsHttpRequest;
     }
+
+    /**
+     * Gets a list of syntax definition configurations
+     * @return a list of syntax definition configurations
+     */
+    public List<SyntaxDefinitionConfiguration> getSyntaxDefinitionConfigurationList() {
+        return syntaxDefinitionConfigurationList;
+    }
+
 }

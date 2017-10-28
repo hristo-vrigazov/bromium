@@ -67,7 +67,7 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
     {
       case BromiumPackage.MODEL: return createModel();
       case BromiumPackage.APPLICATION_ACTION: return createApplicationAction();
-      case BromiumPackage.ACTION_DEFINITION: return createActionDefinition();
+      case BromiumPackage.SYNTAX_DEFINITION: return createSyntaxDefinition();
       case BromiumPackage.WEB_DRIVER_ACTION: return createWebDriverAction();
       case BromiumPackage.PRECONDITION: return createPrecondition();
       case BromiumPackage.POSTCONDITION: return createPostcondition();
@@ -110,10 +110,10 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ActionDefinition createActionDefinition()
+  public SyntaxDefinition createSyntaxDefinition()
   {
-    ActionDefinitionImpl actionDefinition = new ActionDefinitionImpl();
-    return actionDefinition;
+    SyntaxDefinitionImpl syntaxDefinition = new SyntaxDefinitionImpl();
+    return syntaxDefinition;
   }
 
   /**

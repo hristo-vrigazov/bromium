@@ -36,7 +36,7 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getModelAccess().getGroup(), "rule__Model__Group__0");
 					put(grammarAccess.getModelAccess().getGroup_4(), "rule__Model__Group_4__0");
 					put(grammarAccess.getApplicationActionAccess().getGroup(), "rule__ApplicationAction__Group__0");
-					put(grammarAccess.getActionDefinitionAccess().getGroup(), "rule__ActionDefinition__Group__0");
+					put(grammarAccess.getSyntaxDefinitionAccess().getGroup(), "rule__SyntaxDefinition__Group__0");
 					put(grammarAccess.getPreconditionAccess().getGroup(), "rule__Precondition__Group__0");
 					put(grammarAccess.getPostconditionAccess().getGroup(), "rule__Postcondition__Group__0");
 					put(grammarAccess.getExpectHttpRequestAccess().getGroup(), "rule__ExpectHttpRequest__Group__0");
@@ -50,12 +50,13 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getModelAccess().getBaseVersionAssignment_4_1(), "rule__Model__BaseVersionAssignment_4_1");
 					put(grammarAccess.getModelAccess().getActionsAssignment_7(), "rule__Model__ActionsAssignment_7");
 					put(grammarAccess.getApplicationActionAccess().getNameAssignment_1(), "rule__ApplicationAction__NameAssignment_1");
-					put(grammarAccess.getApplicationActionAccess().getActionDefinitionAssignment_3(), "rule__ApplicationAction__ActionDefinitionAssignment_3");
+					put(grammarAccess.getApplicationActionAccess().getSyntaxDefinitionsAssignment_3(), "rule__ApplicationAction__SyntaxDefinitionsAssignment_3");
 					put(grammarAccess.getApplicationActionAccess().getPreconditionAssignment_4(), "rule__ApplicationAction__PreconditionAssignment_4");
 					put(grammarAccess.getApplicationActionAccess().getWebDriverActionAssignment_5(), "rule__ApplicationAction__WebDriverActionAssignment_5");
 					put(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_6(), "rule__ApplicationAction__PostconditionAssignment_6");
 					put(grammarAccess.getApplicationActionAccess().getExpectHttpRequestAssignment_7(), "rule__ApplicationAction__ExpectHttpRequestAssignment_7");
-					put(grammarAccess.getActionDefinitionAccess().getParameterAssignment_2(), "rule__ActionDefinition__ParameterAssignment_2");
+					put(grammarAccess.getSyntaxDefinitionAccess().getContentAssignment_1(), "rule__SyntaxDefinition__ContentAssignment_1");
+					put(grammarAccess.getSyntaxDefinitionAccess().getParameterAssignment_2(), "rule__SyntaxDefinition__ParameterAssignment_2");
 					put(grammarAccess.getPreconditionAccess().getActionAssignment_1(), "rule__Precondition__ActionAssignment_1");
 					put(grammarAccess.getPostconditionAccess().getPostconditionAssignment_3(), "rule__Postcondition__PostconditionAssignment_3");
 					put(grammarAccess.getElementWithIdIsPresentAccess().getCssSelectorAssignment_4(), "rule__ElementWithIdIsPresent__CssSelectorAssignment_4");

@@ -87,10 +87,10 @@ public class BromiumSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case BromiumPackage.ACTION_DEFINITION:
+      case BromiumPackage.SYNTAX_DEFINITION:
       {
-        ActionDefinition actionDefinition = (ActionDefinition)theEObject;
-        T result = caseActionDefinition(actionDefinition);
+        SyntaxDefinition syntaxDefinition = (SyntaxDefinition)theEObject;
+        T result = caseSyntaxDefinition(syntaxDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -205,17 +205,17 @@ public class BromiumSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Action Definition</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Syntax Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Action Definition</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Syntax Definition</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseActionDefinition(ActionDefinition object)
+  public T caseSyntaxDefinition(SyntaxDefinition object)
   {
     return null;
   }

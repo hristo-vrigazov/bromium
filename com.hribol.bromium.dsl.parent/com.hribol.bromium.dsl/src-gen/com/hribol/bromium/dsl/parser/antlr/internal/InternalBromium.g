@@ -224,18 +224,18 @@ ruleApplicationAction returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getApplicationActionAccess().getActionDefinitionActionDefinitionParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getApplicationActionAccess().getSyntaxDefinitionsSyntaxDefinitionParserRuleCall_3_0());
 				}
-				lv_actionDefinition_3_0=ruleActionDefinition
+				lv_syntaxDefinitions_3_0=ruleSyntaxDefinition
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getApplicationActionRule());
 					}
 					add(
 						$current,
-						"actionDefinition",
-						lv_actionDefinition_3_0,
-						"com.hribol.bromium.dsl.Bromium.ActionDefinition");
+						"syntaxDefinitions",
+						lv_syntaxDefinitions_3_0,
+						"com.hribol.bromium.dsl.Bromium.SyntaxDefinition");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -319,15 +319,15 @@ ruleApplicationAction returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleActionDefinition
-entryRuleActionDefinition returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getActionDefinitionRule()); }
-	iv_ruleActionDefinition=ruleActionDefinition
-	{ $current=$iv_ruleActionDefinition.current; }
+// Entry rule entryRuleSyntaxDefinition
+entryRuleSyntaxDefinition returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getSyntaxDefinitionRule()); }
+	iv_ruleSyntaxDefinition=ruleSyntaxDefinition
+	{ $current=$iv_ruleSyntaxDefinition.current; }
 	EOF;
 
-// Rule ActionDefinition
-ruleActionDefinition returns [EObject current=null]
+// Rule SyntaxDefinition
+ruleSyntaxDefinition returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -338,23 +338,37 @@ ruleActionDefinition returns [EObject current=null]
 		(
 			{
 				$current = forceCreateModelElement(
-					grammarAccess.getActionDefinitionAccess().getActionDefinitionAction_0(),
+					grammarAccess.getSyntaxDefinitionAccess().getSyntaxDefinitionAction_0(),
 					$current);
 			}
 		)
-		this_STRING_1=RULE_STRING
-		{
-			newLeafNode(this_STRING_1, grammarAccess.getActionDefinitionAccess().getSTRINGTerminalRuleCall_1());
-		}
+		(
+			(
+				lv_content_1_0=RULE_STRING
+				{
+					newLeafNode(lv_content_1_0, grammarAccess.getSyntaxDefinitionAccess().getContentSTRINGTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getSyntaxDefinitionRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"content",
+						lv_content_1_0,
+						"org.eclipse.xtext.common.Terminals.STRING");
+				}
+			)
+		)
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getActionDefinitionAccess().getParameterExposedParameterParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getSyntaxDefinitionAccess().getParameterExposedParameterParserRuleCall_2_0());
 				}
 				lv_parameter_2_0=ruleExposedParameter
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getActionDefinitionRule());
+						$current = createModelElementForParent(grammarAccess.getSyntaxDefinitionRule());
 					}
 					set(
 						$current,

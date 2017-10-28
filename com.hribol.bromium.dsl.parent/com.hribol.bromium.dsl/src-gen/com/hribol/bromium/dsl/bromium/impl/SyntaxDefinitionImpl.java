@@ -3,9 +3,9 @@
  */
 package com.hribol.bromium.dsl.bromium.impl;
 
-import com.hribol.bromium.dsl.bromium.ActionDefinition;
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.ExposedParameter;
+import com.hribol.bromium.dsl.bromium.SyntaxDefinition;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -18,19 +18,40 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Action Definition</b></em>'.
+ * An implementation of the model object '<em><b>Syntax Definition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ActionDefinitionImpl#getParameter <em>Parameter</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.impl.SyntaxDefinitionImpl#getContent <em>Content</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.impl.SyntaxDefinitionImpl#getParameter <em>Parameter</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ActionDefinitionImpl extends MinimalEObjectImpl.Container implements ActionDefinition
+public class SyntaxDefinitionImpl extends MinimalEObjectImpl.Container implements SyntaxDefinition
 {
+  /**
+   * The default value of the '{@link #getContent() <em>Content</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getContent()
+   * @generated
+   * @ordered
+   */
+  protected static final String CONTENT_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getContent() <em>Content</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getContent()
+   * @generated
+   * @ordered
+   */
+  protected String content = CONTENT_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getParameter() <em>Parameter</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -46,7 +67,7 @@ public class ActionDefinitionImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ActionDefinitionImpl()
+  protected SyntaxDefinitionImpl()
   {
     super();
   }
@@ -59,7 +80,30 @@ public class ActionDefinitionImpl extends MinimalEObjectImpl.Container implement
   @Override
   protected EClass eStaticClass()
   {
-    return BromiumPackage.Literals.ACTION_DEFINITION;
+    return BromiumPackage.Literals.SYNTAX_DEFINITION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getContent()
+  {
+    return content;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setContent(String newContent)
+  {
+    String oldContent = content;
+    content = newContent;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.SYNTAX_DEFINITION__CONTENT, oldContent, content));
   }
 
   /**
@@ -83,7 +127,7 @@ public class ActionDefinitionImpl extends MinimalEObjectImpl.Container implement
     parameter = newParameter;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BromiumPackage.ACTION_DEFINITION__PARAMETER, oldParameter, newParameter);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BromiumPackage.SYNTAX_DEFINITION__PARAMETER, oldParameter, newParameter);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -100,14 +144,14 @@ public class ActionDefinitionImpl extends MinimalEObjectImpl.Container implement
     {
       NotificationChain msgs = null;
       if (parameter != null)
-        msgs = ((InternalEObject)parameter).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.ACTION_DEFINITION__PARAMETER, null, msgs);
+        msgs = ((InternalEObject)parameter).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.SYNTAX_DEFINITION__PARAMETER, null, msgs);
       if (newParameter != null)
-        msgs = ((InternalEObject)newParameter).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.ACTION_DEFINITION__PARAMETER, null, msgs);
+        msgs = ((InternalEObject)newParameter).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.SYNTAX_DEFINITION__PARAMETER, null, msgs);
       msgs = basicSetParameter(newParameter, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.ACTION_DEFINITION__PARAMETER, newParameter, newParameter));
+      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.SYNTAX_DEFINITION__PARAMETER, newParameter, newParameter));
   }
 
   /**
@@ -120,7 +164,7 @@ public class ActionDefinitionImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case BromiumPackage.ACTION_DEFINITION__PARAMETER:
+      case BromiumPackage.SYNTAX_DEFINITION__PARAMETER:
         return basicSetParameter(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -136,7 +180,9 @@ public class ActionDefinitionImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case BromiumPackage.ACTION_DEFINITION__PARAMETER:
+      case BromiumPackage.SYNTAX_DEFINITION__CONTENT:
+        return getContent();
+      case BromiumPackage.SYNTAX_DEFINITION__PARAMETER:
         return getParameter();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -152,7 +198,10 @@ public class ActionDefinitionImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case BromiumPackage.ACTION_DEFINITION__PARAMETER:
+      case BromiumPackage.SYNTAX_DEFINITION__CONTENT:
+        setContent((String)newValue);
+        return;
+      case BromiumPackage.SYNTAX_DEFINITION__PARAMETER:
         setParameter((ExposedParameter)newValue);
         return;
     }
@@ -169,7 +218,10 @@ public class ActionDefinitionImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case BromiumPackage.ACTION_DEFINITION__PARAMETER:
+      case BromiumPackage.SYNTAX_DEFINITION__CONTENT:
+        setContent(CONTENT_EDEFAULT);
+        return;
+      case BromiumPackage.SYNTAX_DEFINITION__PARAMETER:
         setParameter((ExposedParameter)null);
         return;
     }
@@ -186,10 +238,29 @@ public class ActionDefinitionImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case BromiumPackage.ACTION_DEFINITION__PARAMETER:
+      case BromiumPackage.SYNTAX_DEFINITION__CONTENT:
+        return CONTENT_EDEFAULT == null ? content != null : !CONTENT_EDEFAULT.equals(content);
+      case BromiumPackage.SYNTAX_DEFINITION__PARAMETER:
         return parameter != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //ActionDefinitionImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (content: ");
+    result.append(content);
+    result.append(')');
+    return result.toString();
+  }
+
+} //SyntaxDefinitionImpl

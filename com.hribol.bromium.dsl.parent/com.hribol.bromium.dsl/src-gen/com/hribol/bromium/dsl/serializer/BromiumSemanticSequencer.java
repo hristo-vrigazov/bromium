@@ -4,7 +4,6 @@
 package com.hribol.bromium.dsl.serializer;
 
 import com.google.inject.Inject;
-import com.hribol.bromium.dsl.bromium.ActionDefinition;
 import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.ClickOnElementWithId;
@@ -15,6 +14,7 @@ import com.hribol.bromium.dsl.bromium.PageLoad;
 import com.hribol.bromium.dsl.bromium.ParameterValue;
 import com.hribol.bromium.dsl.bromium.Postcondition;
 import com.hribol.bromium.dsl.bromium.Precondition;
+import com.hribol.bromium.dsl.bromium.SyntaxDefinition;
 import com.hribol.bromium.dsl.bromium.ThreeDottedVersion;
 import com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector;
 import com.hribol.bromium.dsl.services.BromiumGrammarAccess;
@@ -43,9 +43,6 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == BromiumPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case BromiumPackage.ACTION_DEFINITION:
-				sequence_ActionDefinition(context, (ActionDefinition) semanticObject); 
-				return; 
 			case BromiumPackage.APPLICATION_ACTION:
 				sequence_ApplicationAction(context, (ApplicationAction) semanticObject); 
 				return; 
@@ -73,6 +70,9 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 			case BromiumPackage.PRECONDITION:
 				sequence_Precondition(context, (Precondition) semanticObject); 
 				return; 
+			case BromiumPackage.SYNTAX_DEFINITION:
+				sequence_SyntaxDefinition(context, (SyntaxDefinition) semanticObject); 
+				return; 
 			case BromiumPackage.THREE_DOTTED_VERSION:
 				sequence_ThreeDottedVersion(context, (ThreeDottedVersion) semanticObject); 
 				return; 
@@ -86,24 +86,12 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	
 	/**
 	 * Contexts:
-	 *     ActionDefinition returns ActionDefinition
-	 *
-	 * Constraint:
-	 *     parameter=ExposedParameter?
-	 */
-	protected void sequence_ActionDefinition(ISerializationContext context, ActionDefinition semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     ApplicationAction returns ApplicationAction
 	 *
 	 * Constraint:
 	 *     (
 	 *         name=ID 
-	 *         actionDefinition+=ActionDefinition* 
+	 *         syntaxDefinitions+=SyntaxDefinition* 
 	 *         precondition=Precondition? 
 	 *         webDriverAction=WebDriverAction 
 	 *         postcondition=Postcondition? 
@@ -247,6 +235,18 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getPreconditionAccess().getActionWebDriverActionParserRuleCall_1_0(), semanticObject.getAction());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     SyntaxDefinition returns SyntaxDefinition
+	 *
+	 * Constraint:
+	 *     (content=STRING parameter=ExposedParameter?)
+	 */
+	protected void sequence_SyntaxDefinition(ISerializationContext context, SyntaxDefinition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

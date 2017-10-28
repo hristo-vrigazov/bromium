@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getName <em>Name</em>}</li>
- *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getActionDefinition <em>Action Definition</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getSyntaxDefinitions <em>Syntax Definitions</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getPrecondition <em>Precondition</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getWebDriverAction <em>Web Driver Action</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getPostcondition <em>Postcondition</em>}</li>
@@ -57,20 +57,20 @@ public interface ApplicationAction extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Action Definition</b></em>' containment reference list.
-   * The list contents are of type {@link com.hribol.bromium.dsl.bromium.ActionDefinition}.
+   * Returns the value of the '<em><b>Syntax Definitions</b></em>' containment reference list.
+   * The list contents are of type {@link com.hribol.bromium.dsl.bromium.SyntaxDefinition}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Action Definition</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Syntax Definitions</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Action Definition</em>' containment reference list.
-   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getApplicationAction_ActionDefinition()
+   * @return the value of the '<em>Syntax Definitions</em>' containment reference list.
+   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getApplicationAction_SyntaxDefinitions()
    * @model containment="true"
    * @generated
    */
-  EList<ActionDefinition> getActionDefinition();
+  EList<SyntaxDefinition> getSyntaxDefinitions();
 
   /**
    * Returns the value of the '<em><b>Precondition</b></em>' containment reference.

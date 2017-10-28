@@ -132,13 +132,13 @@ public interface BromiumPackage extends EPackage
   int APPLICATION_ACTION__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Action Definition</b></em>' containment reference list.
+   * The feature id for the '<em><b>Syntax Definitions</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int APPLICATION_ACTION__ACTION_DEFINITION = 1;
+  int APPLICATION_ACTION__SYNTAX_DEFINITIONS = 1;
 
   /**
    * The feature id for the '<em><b>Precondition</b></em>' containment reference.
@@ -186,14 +186,23 @@ public interface BromiumPackage extends EPackage
   int APPLICATION_ACTION_FEATURE_COUNT = 6;
 
   /**
-   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ActionDefinitionImpl <em>Action Definition</em>}' class.
+   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.SyntaxDefinitionImpl <em>Syntax Definition</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see com.hribol.bromium.dsl.bromium.impl.ActionDefinitionImpl
-   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getActionDefinition()
+   * @see com.hribol.bromium.dsl.bromium.impl.SyntaxDefinitionImpl
+   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getSyntaxDefinition()
    * @generated
    */
-  int ACTION_DEFINITION = 2;
+  int SYNTAX_DEFINITION = 2;
+
+  /**
+   * The feature id for the '<em><b>Content</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYNTAX_DEFINITION__CONTENT = 0;
 
   /**
    * The feature id for the '<em><b>Parameter</b></em>' containment reference.
@@ -202,16 +211,16 @@ public interface BromiumPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACTION_DEFINITION__PARAMETER = 0;
+  int SYNTAX_DEFINITION__PARAMETER = 1;
 
   /**
-   * The number of structural features of the '<em>Action Definition</em>' class.
+   * The number of structural features of the '<em>Syntax Definition</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTION_DEFINITION_FEATURE_COUNT = 1;
+  int SYNTAX_DEFINITION_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.WebDriverActionImpl <em>Web Driver Action</em>}' class.
@@ -597,15 +606,15 @@ public interface BromiumPackage extends EPackage
   EAttribute getApplicationAction_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getActionDefinition <em>Action Definition</em>}'.
+   * Returns the meta object for the containment reference list '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getSyntaxDefinitions <em>Syntax Definitions</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Action Definition</em>'.
-   * @see com.hribol.bromium.dsl.bromium.ApplicationAction#getActionDefinition()
+   * @return the meta object for the containment reference list '<em>Syntax Definitions</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ApplicationAction#getSyntaxDefinitions()
    * @see #getApplicationAction()
    * @generated
    */
-  EReference getApplicationAction_ActionDefinition();
+  EReference getApplicationAction_SyntaxDefinitions();
 
   /**
    * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getPrecondition <em>Precondition</em>}'.
@@ -652,25 +661,36 @@ public interface BromiumPackage extends EPackage
   EAttribute getApplicationAction_ExpectHttpRequest();
 
   /**
-   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ActionDefinition <em>Action Definition</em>}'.
+   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.SyntaxDefinition <em>Syntax Definition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Action Definition</em>'.
-   * @see com.hribol.bromium.dsl.bromium.ActionDefinition
+   * @return the meta object for class '<em>Syntax Definition</em>'.
+   * @see com.hribol.bromium.dsl.bromium.SyntaxDefinition
    * @generated
    */
-  EClass getActionDefinition();
+  EClass getSyntaxDefinition();
 
   /**
-   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.ActionDefinition#getParameter <em>Parameter</em>}'.
+   * Returns the meta object for the attribute '{@link com.hribol.bromium.dsl.bromium.SyntaxDefinition#getContent <em>Content</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Content</em>'.
+   * @see com.hribol.bromium.dsl.bromium.SyntaxDefinition#getContent()
+   * @see #getSyntaxDefinition()
+   * @generated
+   */
+  EAttribute getSyntaxDefinition_Content();
+
+  /**
+   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.SyntaxDefinition#getParameter <em>Parameter</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Parameter</em>'.
-   * @see com.hribol.bromium.dsl.bromium.ActionDefinition#getParameter()
-   * @see #getActionDefinition()
+   * @see com.hribol.bromium.dsl.bromium.SyntaxDefinition#getParameter()
+   * @see #getSyntaxDefinition()
    * @generated
    */
-  EReference getActionDefinition_Parameter();
+  EReference getSyntaxDefinition_Parameter();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.WebDriverAction <em>Web Driver Action</em>}'.
@@ -999,12 +1019,12 @@ public interface BromiumPackage extends EPackage
     EAttribute APPLICATION_ACTION__NAME = eINSTANCE.getApplicationAction_Name();
 
     /**
-     * The meta object literal for the '<em><b>Action Definition</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Syntax Definitions</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference APPLICATION_ACTION__ACTION_DEFINITION = eINSTANCE.getApplicationAction_ActionDefinition();
+    EReference APPLICATION_ACTION__SYNTAX_DEFINITIONS = eINSTANCE.getApplicationAction_SyntaxDefinitions();
 
     /**
      * The meta object literal for the '<em><b>Precondition</b></em>' containment reference feature.
@@ -1039,14 +1059,22 @@ public interface BromiumPackage extends EPackage
     EAttribute APPLICATION_ACTION__EXPECT_HTTP_REQUEST = eINSTANCE.getApplicationAction_ExpectHttpRequest();
 
     /**
-     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ActionDefinitionImpl <em>Action Definition</em>}' class.
+     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.SyntaxDefinitionImpl <em>Syntax Definition</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see com.hribol.bromium.dsl.bromium.impl.ActionDefinitionImpl
-     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getActionDefinition()
+     * @see com.hribol.bromium.dsl.bromium.impl.SyntaxDefinitionImpl
+     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getSyntaxDefinition()
      * @generated
      */
-    EClass ACTION_DEFINITION = eINSTANCE.getActionDefinition();
+    EClass SYNTAX_DEFINITION = eINSTANCE.getSyntaxDefinition();
+
+    /**
+     * The meta object literal for the '<em><b>Content</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SYNTAX_DEFINITION__CONTENT = eINSTANCE.getSyntaxDefinition_Content();
 
     /**
      * The meta object literal for the '<em><b>Parameter</b></em>' containment reference feature.
@@ -1054,7 +1082,7 @@ public interface BromiumPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ACTION_DEFINITION__PARAMETER = eINSTANCE.getActionDefinition_Parameter();
+    EReference SYNTAX_DEFINITION__PARAMETER = eINSTANCE.getSyntaxDefinition_Parameter();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.WebDriverActionImpl <em>Web Driver Action</em>}' class.

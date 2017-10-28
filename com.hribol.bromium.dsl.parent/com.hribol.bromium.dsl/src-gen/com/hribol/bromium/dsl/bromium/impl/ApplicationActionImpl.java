@@ -3,11 +3,11 @@
  */
 package com.hribol.bromium.dsl.bromium.impl;
 
-import com.hribol.bromium.dsl.bromium.ActionDefinition;
 import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.Postcondition;
 import com.hribol.bromium.dsl.bromium.Precondition;
+import com.hribol.bromium.dsl.bromium.SyntaxDefinition;
 import com.hribol.bromium.dsl.bromium.WebDriverAction;
 
 import java.util.Collection;
@@ -35,7 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getName <em>Name</em>}</li>
- *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getActionDefinition <em>Action Definition</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getSyntaxDefinitions <em>Syntax Definitions</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getPrecondition <em>Precondition</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getWebDriverAction <em>Web Driver Action</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getPostcondition <em>Postcondition</em>}</li>
@@ -67,14 +67,14 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getActionDefinition() <em>Action Definition</em>}' containment reference list.
+   * The cached value of the '{@link #getSyntaxDefinitions() <em>Syntax Definitions</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getActionDefinition()
+   * @see #getSyntaxDefinitions()
    * @generated
    * @ordered
    */
-  protected EList<ActionDefinition> actionDefinition;
+  protected EList<SyntaxDefinition> syntaxDefinitions;
 
   /**
    * The cached value of the '{@link #getPrecondition() <em>Precondition</em>}' containment reference.
@@ -175,13 +175,13 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ActionDefinition> getActionDefinition()
+  public EList<SyntaxDefinition> getSyntaxDefinitions()
   {
-    if (actionDefinition == null)
+    if (syntaxDefinitions == null)
     {
-      actionDefinition = new EObjectContainmentEList<ActionDefinition>(ActionDefinition.class, this, BromiumPackage.APPLICATION_ACTION__ACTION_DEFINITION);
+      syntaxDefinitions = new EObjectContainmentEList<SyntaxDefinition>(SyntaxDefinition.class, this, BromiumPackage.APPLICATION_ACTION__SYNTAX_DEFINITIONS);
     }
-    return actionDefinition;
+    return syntaxDefinitions;
   }
 
   /**
@@ -361,8 +361,8 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case BromiumPackage.APPLICATION_ACTION__ACTION_DEFINITION:
-        return ((InternalEList<?>)getActionDefinition()).basicRemove(otherEnd, msgs);
+      case BromiumPackage.APPLICATION_ACTION__SYNTAX_DEFINITIONS:
+        return ((InternalEList<?>)getSyntaxDefinitions()).basicRemove(otherEnd, msgs);
       case BromiumPackage.APPLICATION_ACTION__PRECONDITION:
         return basicSetPrecondition(null, msgs);
       case BromiumPackage.APPLICATION_ACTION__WEB_DRIVER_ACTION:
@@ -385,8 +385,8 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
     {
       case BromiumPackage.APPLICATION_ACTION__NAME:
         return getName();
-      case BromiumPackage.APPLICATION_ACTION__ACTION_DEFINITION:
-        return getActionDefinition();
+      case BromiumPackage.APPLICATION_ACTION__SYNTAX_DEFINITIONS:
+        return getSyntaxDefinitions();
       case BromiumPackage.APPLICATION_ACTION__PRECONDITION:
         return getPrecondition();
       case BromiumPackage.APPLICATION_ACTION__WEB_DRIVER_ACTION:
@@ -413,9 +413,9 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
       case BromiumPackage.APPLICATION_ACTION__NAME:
         setName((String)newValue);
         return;
-      case BromiumPackage.APPLICATION_ACTION__ACTION_DEFINITION:
-        getActionDefinition().clear();
-        getActionDefinition().addAll((Collection<? extends ActionDefinition>)newValue);
+      case BromiumPackage.APPLICATION_ACTION__SYNTAX_DEFINITIONS:
+        getSyntaxDefinitions().clear();
+        getSyntaxDefinitions().addAll((Collection<? extends SyntaxDefinition>)newValue);
         return;
       case BromiumPackage.APPLICATION_ACTION__PRECONDITION:
         setPrecondition((Precondition)newValue);
@@ -446,8 +446,8 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
       case BromiumPackage.APPLICATION_ACTION__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case BromiumPackage.APPLICATION_ACTION__ACTION_DEFINITION:
-        getActionDefinition().clear();
+      case BromiumPackage.APPLICATION_ACTION__SYNTAX_DEFINITIONS:
+        getSyntaxDefinitions().clear();
         return;
       case BromiumPackage.APPLICATION_ACTION__PRECONDITION:
         setPrecondition((Precondition)null);
@@ -477,8 +477,8 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
     {
       case BromiumPackage.APPLICATION_ACTION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case BromiumPackage.APPLICATION_ACTION__ACTION_DEFINITION:
-        return actionDefinition != null && !actionDefinition.isEmpty();
+      case BromiumPackage.APPLICATION_ACTION__SYNTAX_DEFINITIONS:
+        return syntaxDefinitions != null && !syntaxDefinitions.isEmpty();
       case BromiumPackage.APPLICATION_ACTION__PRECONDITION:
         return precondition != null;
       case BromiumPackage.APPLICATION_ACTION__WEB_DRIVER_ACTION:

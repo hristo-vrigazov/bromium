@@ -42,13 +42,13 @@ public interface BromiumFactory extends EFactory
   ApplicationAction createApplicationAction();
 
   /**
-   * Returns a new object of class '<em>Action Definition</em>'.
+   * Returns a new object of class '<em>Syntax Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Action Definition</em>'.
+   * @return a new object of class '<em>Syntax Definition</em>'.
    * @generated
    */
-  ActionDefinition createActionDefinition();
+  SyntaxDefinition createSyntaxDefinition();
 
   /**
    * Returns a new object of class '<em>Web Driver Action</em>'.

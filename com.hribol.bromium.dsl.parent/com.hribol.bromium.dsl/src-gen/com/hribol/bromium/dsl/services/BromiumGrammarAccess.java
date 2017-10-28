@@ -106,8 +106,8 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cSyntaxKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cActionDefinitionAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cActionDefinitionActionDefinitionParserRuleCall_3_0 = (RuleCall)cActionDefinitionAssignment_3.eContents().get(0);
+		private final Assignment cSyntaxDefinitionsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cSyntaxDefinitionsSyntaxDefinitionParserRuleCall_3_0 = (RuleCall)cSyntaxDefinitionsAssignment_3.eContents().get(0);
 		private final Assignment cPreconditionAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cPreconditionPreconditionParserRuleCall_4_0 = (RuleCall)cPreconditionAssignment_4.eContents().get(0);
 		private final Assignment cWebDriverActionAssignment_5 = (Assignment)cGroup.eContents().get(5);
@@ -119,14 +119,14 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ApplicationAction:
 		//	'id' name=ID
-		//	'syntax' actionDefinition+=ActionDefinition*
+		//	'syntax' syntaxDefinitions+=SyntaxDefinition*
 		//	precondition=Precondition?
 		//	webDriverAction=WebDriverAction
 		//	postcondition=Postcondition?
 		//	expectHttpRequest=ExpectHttpRequest;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'id' name=ID 'syntax' actionDefinition+=ActionDefinition* precondition=Precondition? webDriverAction=WebDriverAction
+		//'id' name=ID 'syntax' syntaxDefinitions+=SyntaxDefinition* precondition=Precondition? webDriverAction=WebDriverAction
 		//postcondition=Postcondition? expectHttpRequest=ExpectHttpRequest
 		public Group getGroup() { return cGroup; }
 		
@@ -142,11 +142,11 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		//'syntax'
 		public Keyword getSyntaxKeyword_2() { return cSyntaxKeyword_2; }
 		
-		//actionDefinition+=ActionDefinition*
-		public Assignment getActionDefinitionAssignment_3() { return cActionDefinitionAssignment_3; }
+		//syntaxDefinitions+=SyntaxDefinition*
+		public Assignment getSyntaxDefinitionsAssignment_3() { return cSyntaxDefinitionsAssignment_3; }
 		
-		//ActionDefinition
-		public RuleCall getActionDefinitionActionDefinitionParserRuleCall_3_0() { return cActionDefinitionActionDefinitionParserRuleCall_3_0; }
+		//SyntaxDefinition
+		public RuleCall getSyntaxDefinitionsSyntaxDefinitionParserRuleCall_3_0() { return cSyntaxDefinitionsSyntaxDefinitionParserRuleCall_3_0; }
 		
 		//precondition=Precondition?
 		public Assignment getPreconditionAssignment_4() { return cPreconditionAssignment_4; }
@@ -172,26 +172,30 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpectHttpRequest
 		public RuleCall getExpectHttpRequestExpectHttpRequestParserRuleCall_7_0() { return cExpectHttpRequestExpectHttpRequestParserRuleCall_7_0; }
 	}
-	public class ActionDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.ActionDefinition");
+	public class SyntaxDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.SyntaxDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cActionDefinitionAction_0 = (Action)cGroup.eContents().get(0);
-		private final RuleCall cSTRINGTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Action cSyntaxDefinitionAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cContentAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cContentSTRINGTerminalRuleCall_1_0 = (RuleCall)cContentAssignment_1.eContents().get(0);
 		private final Assignment cParameterAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cParameterExposedParameterParserRuleCall_2_0 = (RuleCall)cParameterAssignment_2.eContents().get(0);
 		
-		//ActionDefinition:
-		//	{ActionDefinition} STRING parameter=ExposedParameter?;
+		//SyntaxDefinition:
+		//	{SyntaxDefinition} content=STRING parameter=ExposedParameter?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ActionDefinition} STRING parameter=ExposedParameter?
+		//{SyntaxDefinition} content=STRING parameter=ExposedParameter?
 		public Group getGroup() { return cGroup; }
 		
-		//{ActionDefinition}
-		public Action getActionDefinitionAction_0() { return cActionDefinitionAction_0; }
+		//{SyntaxDefinition}
+		public Action getSyntaxDefinitionAction_0() { return cSyntaxDefinitionAction_0; }
+		
+		//content=STRING
+		public Assignment getContentAssignment_1() { return cContentAssignment_1; }
 		
 		//STRING
-		public RuleCall getSTRINGTerminalRuleCall_1() { return cSTRINGTerminalRuleCall_1; }
+		public RuleCall getContentSTRINGTerminalRuleCall_1_0() { return cContentSTRINGTerminalRuleCall_1_0; }
 		
 		//parameter=ExposedParameter?
 		public Assignment getParameterAssignment_2() { return cParameterAssignment_2; }
@@ -582,7 +586,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private final ModelElements pModel;
 	private final ApplicationActionElements pApplicationAction;
-	private final ActionDefinitionElements pActionDefinition;
+	private final SyntaxDefinitionElements pSyntaxDefinition;
 	private final WebDriverActionElements pWebDriverAction;
 	private final PreconditionElements pPrecondition;
 	private final PostconditionElements pPostcondition;
@@ -607,7 +611,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
 		this.pApplicationAction = new ApplicationActionElements();
-		this.pActionDefinition = new ActionDefinitionElements();
+		this.pSyntaxDefinition = new SyntaxDefinitionElements();
 		this.pWebDriverAction = new WebDriverActionElements();
 		this.pPrecondition = new PreconditionElements();
 		this.pPostcondition = new PostconditionElements();
@@ -665,7 +669,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//ApplicationAction:
 	//	'id' name=ID
-	//	'syntax' actionDefinition+=ActionDefinition*
+	//	'syntax' syntaxDefinitions+=SyntaxDefinition*
 	//	precondition=Precondition?
 	//	webDriverAction=WebDriverAction
 	//	postcondition=Postcondition?
@@ -678,14 +682,14 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		return getApplicationActionAccess().getRule();
 	}
 	
-	//ActionDefinition:
-	//	{ActionDefinition} STRING parameter=ExposedParameter?;
-	public ActionDefinitionElements getActionDefinitionAccess() {
-		return pActionDefinition;
+	//SyntaxDefinition:
+	//	{SyntaxDefinition} content=STRING parameter=ExposedParameter?;
+	public SyntaxDefinitionElements getSyntaxDefinitionAccess() {
+		return pSyntaxDefinition;
 	}
 	
-	public ParserRule getActionDefinitionRule() {
-		return getActionDefinitionAccess().getRule();
+	public ParserRule getSyntaxDefinitionRule() {
+		return getSyntaxDefinitionAccess().getRule();
 	}
 	
 	//WebDriverAction:
