@@ -26,10 +26,15 @@ public class DslStepsDumperTest {
     public static final String loadPageActionName = "loadPage";
     public static final String typeInNameInputActionName = "typeInNameInput";
     public static final String clickLoginButtonActionName = "clickLoginButtonActionName";
+    public static final String typeInPasswordActionName = "typeInPasswordInput";
+
     public static final String outputFilename = "tmp.json";
 
     public static final String aliasUrl = "alias-url";
     public static final String aliasUrlValue = "text-field.html";
+
+    public static final String aliasPassword = "alias-password";
+
 
     public static final String aliasText = "alias-text";
     public static final String aliasTextValue = "admin";
@@ -99,6 +104,12 @@ public class DslStepsDumperTest {
         return actionConfigurationMap;
     }
 
+    public static Map<String, ApplicationActionConfiguration> createConfigurationinishingWithExposedParameter() {
+        Map<String, ApplicationActionConfiguration> actionConfigurationMap = new HashMap<>();
+        actionConfigurationMap.put(typeInPasswordActionName, getTypeInPasswordType());
+        return actionConfigurationMap;
+    }
+
     public static ApplicationActionConfiguration getTypeIntoTextFieldAction() {
         SyntaxDefinitionConfiguration typeSyntax = mock(SyntaxDefinitionConfiguration.class);
         when(typeSyntax.getContent()).thenReturn("Type");
@@ -139,6 +150,19 @@ public class DslStepsDumperTest {
         SyntaxDefinitionConfiguration syntaxDefinitionConfiguration = mock(SyntaxDefinitionConfiguration.class);
         when(syntaxDefinitionConfiguration.getContent()).thenReturn("Click login button");
         when(syntaxDefinitionConfiguration.getExposedParameter()).thenReturn(null);
+
+        List<SyntaxDefinitionConfiguration> syntaxDefinitionConfigurations = new ArrayList<>();
+        syntaxDefinitionConfigurations.add(syntaxDefinitionConfiguration);
+
+        ApplicationActionConfiguration action = mock(ApplicationActionConfiguration.class);
+        when(action.getSyntaxDefinitionConfigurationList()).thenReturn(syntaxDefinitionConfigurations);
+        return action;
+    }
+
+    public static ApplicationActionConfiguration getTypeInPasswordType() {
+        SyntaxDefinitionConfiguration syntaxDefinitionConfiguration = mock(SyntaxDefinitionConfiguration.class);
+        when(syntaxDefinitionConfiguration.getContent()).thenReturn("Type in password input ");
+        when(syntaxDefinitionConfiguration.getExposedParameter()).thenReturn(aliasPassword);
 
         List<SyntaxDefinitionConfiguration> syntaxDefinitionConfigurations = new ArrayList<>();
         syntaxDefinitionConfigurations.add(syntaxDefinitionConfiguration);

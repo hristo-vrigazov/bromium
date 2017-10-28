@@ -1,11 +1,11 @@
 package com.hribol.bromium.common.parsing;
 
 import com.hribol.bromium.core.TestScenarioSteps;
-import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.parsing.StepsReader;
 import org.junit.Test;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,15 +34,26 @@ public class DslStepsReaderTest {
 
     @Test
     public void canParseStepsWithNoParametersInThem() throws IOException {
-        File file = new File(getClass().getResource("/actionsWithoutParameters.txt").getFile());
-        InputStream inputStream = new FileInputStream(file);
+        InputStream stream = new ByteArrayInputStream("clickLoginButtonActionName: Click login button ".getBytes(StandardCharsets.UTF_8.name()));
 
         StepsReader stepsReader = new DslStepsReader(createNoAliasesMockConfiguration());
 
-        TestScenarioSteps testScenarioSteps = stepsReader.readSteps(inputStream);
+        TestScenarioSteps testScenarioSteps = stepsReader.readSteps(stream);
 
         assertEquals(1, testScenarioSteps.size());
         assertEquals(clickLoginButton(), testScenarioSteps.get(0));
+    }
+
+    @Test
+    public void canParseStepsThatFinishWithParameters() throws IOException {
+        InputStream stream = new ByteArrayInputStream("typeInPasswordInput: Type in password input admin".getBytes(StandardCharsets.UTF_8.name()));
+
+        StepsReader stepsReader = new DslStepsReader(createConfigurationinishingWithExposedParameter());
+
+        TestScenarioSteps testScenarioSteps = stepsReader.readSteps(stream);
+
+        assertEquals(1, testScenarioSteps.size());
+        assertEquals(typeInPasswordField(), testScenarioSteps.get(0));
     }
 
     private Map<String, String> typeInNameInputStep() {
@@ -63,6 +74,13 @@ public class DslStepsReaderTest {
         Map<String, String> clickLoginButton = new HashMap<>();
         clickLoginButton.put(EVENT, clickLoginButtonActionName);
         return clickLoginButton;
+    }
+
+    private Map<String, String> typeInPasswordField() {
+        Map<String, String> step = new HashMap<>();
+        step.put(EVENT, typeInPasswordActionName);
+        step.put(aliasPassword, "admin");
+        return step;
     }
 
 
