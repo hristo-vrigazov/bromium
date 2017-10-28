@@ -1,0 +1,102 @@
+package com.hribol.bromium.common.parsing;
+
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
+import com.hribol.bromium.core.TestScenarioSteps;
+import com.hribol.bromium.core.config.ApplicationActionConfiguration;
+import com.hribol.bromium.core.config.SyntaxDefinitionConfiguration;
+import com.hribol.bromium.core.parsing.StepsDumper;
+import org.junit.Test;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+
+import static com.hribol.bromium.core.utils.Constants.EVENT;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+/**
+ * Created by hvrigazov on 28.10.17.
+ */
+public class DslStepsDumperTest {
+
+    private static final String loadPageActionName = "loadPage";
+    private static final String typeInNameInputActionName = "typeInNameInput";
+
+    private static final String aliasUrl = "alias-url";
+    private static final String aliasUrlValue = "text-field.html";
+
+    private static final String aliasText = "alias-text";
+    private static final String aliasTextValue = "admin";
+
+    @Test
+    public void dumpsStepsReplacingAliases() throws IOException {
+        Map<String, String> firstStep = new HashMap<>();
+        firstStep.put(EVENT, loadPageActionName);
+        firstStep.put(aliasUrl, aliasUrlValue);
+
+        Map<String, String> secondStep = new HashMap<>();
+        secondStep.put(EVENT, typeInNameInputActionName);
+        secondStep.put(aliasText, aliasTextValue);
+
+        TestScenarioSteps testScenarioSteps = new TestScenarioSteps();
+        testScenarioSteps.add(firstStep);
+        testScenarioSteps.add(secondStep);
+
+        String outputFilename = "tmp.json";
+        File outputFile = new File(outputFilename);
+
+        Map<String, ApplicationActionConfiguration> actionConfigurationMap = createMockConfiguration();
+
+        StepsDumper stepsDumper = new DslStepsDumper(actionConfigurationMap);
+
+        stepsDumper.dump(testScenarioSteps, outputFilename);
+
+        List<String> lines = Files.readLines(outputFile, Charsets.UTF_8);
+        assertEquals("Load text-field.html page ", lines.get(0));
+        assertEquals("Type admin in name input ", lines.get(1));
+
+        assertTrue(outputFile.delete());
+    }
+
+    private Map<String, ApplicationActionConfiguration> createMockConfiguration() {
+        SyntaxDefinitionConfiguration loadSyntax = mock(SyntaxDefinitionConfiguration.class);
+        when(loadSyntax.getContent()).thenReturn("Load");
+        when(loadSyntax.getExposedParameter()).thenReturn(aliasUrl);
+
+        SyntaxDefinitionConfiguration finishLoadSyntax = mock(SyntaxDefinitionConfiguration.class);
+        when(finishLoadSyntax.getContent()).thenReturn("page");
+        when(finishLoadSyntax.getExposedParameter()).thenReturn(null);
+
+        List<SyntaxDefinitionConfiguration> loadPageSyntaxDefinitions = new ArrayList<>();
+        loadPageSyntaxDefinitions.add(loadSyntax);
+        loadPageSyntaxDefinitions.add(finishLoadSyntax);
+
+        ApplicationActionConfiguration loadPageAction = mock(ApplicationActionConfiguration.class);
+        when(loadPageAction.getSyntaxDefinitionConfigurationList()).thenReturn(loadPageSyntaxDefinitions);
+
+        SyntaxDefinitionConfiguration typeSyntax = mock(SyntaxDefinitionConfiguration.class);
+        when(typeSyntax.getContent()).thenReturn("Type");
+        when(typeSyntax.getExposedParameter()).thenReturn(aliasText);
+
+        SyntaxDefinitionConfiguration finishTypeSyntax = mock(SyntaxDefinitionConfiguration.class);
+        when(finishTypeSyntax.getContent()).thenReturn("in name input");
+        when(finishTypeSyntax.getExposedParameter()).thenReturn(null);
+
+        List<SyntaxDefinitionConfiguration> typeIntoTextFieldSyntaxDefinition = new ArrayList<>();
+        typeIntoTextFieldSyntaxDefinition.add(typeSyntax);
+        typeIntoTextFieldSyntaxDefinition.add(finishTypeSyntax);
+
+        ApplicationActionConfiguration typeIntoTextFieldAction = mock(ApplicationActionConfiguration.class);
+        when(typeIntoTextFieldAction.getSyntaxDefinitionConfigurationList()).thenReturn(typeIntoTextFieldSyntaxDefinition);
+
+        Map<String, ApplicationActionConfiguration> actionConfigurationMap = new HashMap<>();
+        actionConfigurationMap.put(loadPageActionName, loadPageAction);
+        actionConfigurationMap.put(typeInNameInputActionName, typeIntoTextFieldAction);
+        return actionConfigurationMap;
+    }
+
+}

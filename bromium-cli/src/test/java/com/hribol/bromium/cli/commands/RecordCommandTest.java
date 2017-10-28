@@ -43,7 +43,7 @@ public class RecordCommandTest {
                     throw new IOException("Terrible exception happened!");
                 },
                 virtualScreenProcessCreator,
-                stepsDumper
+                () -> stepsDumper
         );
         recordCommand.run();
 
@@ -61,7 +61,7 @@ public class RecordCommandTest {
                     throw new URISyntaxException("", "");
                 },
                 virtualScreenProcessCreator,
-                stepsDumper
+                () -> stepsDumper
         );
         recordCommand.run();
 
@@ -83,7 +83,7 @@ public class RecordCommandTest {
                 promptUtils,
                 () -> recordBrowser,
                 virtualScreenProcessCreator,
-                stepsDumper
+                () -> stepsDumper
         );
         recordCommand.run();
 

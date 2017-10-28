@@ -25,6 +25,7 @@ import com.hribol.bromium.common.generation.record.invocations.RecorderFunctionI
 import com.hribol.bromium.common.generation.replay.*;
 import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
 import com.hribol.bromium.common.ProxyDriverIntegrator;
+import com.hribol.bromium.common.parsing.DslStepsDumper;
 import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.common.replay.SignalizingStateConditionsUpdater;
 import com.hribol.bromium.core.parsing.*;
@@ -79,6 +80,7 @@ import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -127,7 +129,6 @@ public class DefaultModule extends AbstractModule {
                 .to(SplitQueryStringOfRequest.class);
 
         bind(ApplicationConfigurationParser.class).to(JsonApplicationConfigurationParser.class);
-        bind(StepsDumper.class).to(JsonStepsDumper.class);
 
         // TODO: other OSes should have a different binding
         bind(VirtualScreenProcessCreator.class).to(UbuntuVirtualScreenProcessCreator.class);
@@ -139,6 +140,20 @@ public class DefaultModule extends AbstractModule {
         bind(ReplayingState.class).in(Singleton.class);
 
         install(ThrowingProviderBinder.forModule(this));
+    }
+
+    @CheckedProvides(IOProvider.class)
+    public Map<String, ApplicationActionConfiguration> getNameToActionConfigurationMap(IOProvider<ApplicationConfiguration> configurationIOProvider) throws IOException {
+        Map<String, ApplicationActionConfiguration> actionConfigurationMap = new HashMap<>();
+        for (ApplicationActionConfiguration applicationActionConfiguration: configurationIOProvider.get().getApplicationActionConfigurationList()) {
+            actionConfigurationMap.put(applicationActionConfiguration.getName(), applicationActionConfiguration);
+        }
+        return actionConfigurationMap;
+    }
+
+    @CheckedProvides(IOProvider.class)
+    public StepsDumper getStepsDumper(IOProvider<Map<String, ApplicationActionConfiguration>> configurationIOProvider) throws IOException {
+        return new DslStepsDumper(configurationIOProvider.get());
     }
 
     @Provides

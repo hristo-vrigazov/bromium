@@ -240,7 +240,16 @@
                     }
                 },
                 "webDriverActionType": "PAGE_LOADING"
-            }
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Load",
+                    "exposedParameter": "alias-url"
+                },
+                {
+                    "content": "page"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -267,7 +276,16 @@
                     }
                 },
                 "webDriverActionType": "TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR"
-            }
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Type",
+                    "exposedParameter": "alias-text"
+                },
+                {
+                    "content": "in name input"
+                }
+            ]
         }
     ],
     "applicationName": "Demo app for Bromium vs Selenium",
