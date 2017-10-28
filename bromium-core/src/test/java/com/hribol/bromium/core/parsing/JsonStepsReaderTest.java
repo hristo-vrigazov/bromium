@@ -13,12 +13,12 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by hvrigazov on 08.07.17.
  */
-public class StepsReaderTest {
+public class JsonStepsReaderTest {
 
     @Test
     public void readsStepsFromInputStream() throws IOException {
         InputStream testCaseInputStream = getClass().getResourceAsStream("/testCase.json");
-        StepsReader stepsReader = new StepsReader();
+        JsonStepsReader stepsReader = new JsonStepsReader();
         TestScenarioSteps steps = stepsReader.readSteps(testCaseInputStream);
 
         Map<String, String> firstStep = steps.get(0);

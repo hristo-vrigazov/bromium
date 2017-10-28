@@ -230,7 +230,7 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": true,
-            "name": "Load page",
+            "name": "loadPage",
             "webDriverAction": {
                 "parametersConfiguration": {
                     "url": {
@@ -261,7 +261,7 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": true,
-            "name": "Type text in name input",
+            "name": "typeTextInNameInput",
             "webDriverAction": {
                 "parametersConfiguration": {
                     "cssSelector": {

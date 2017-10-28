@@ -7,7 +7,7 @@ import com.google.inject.util.Modules;
 import com.hribol.bromium.cli.DefaultModule;
 import com.hribol.bromium.cli.commands.RecordCommand;
 import com.hribol.bromium.core.TestScenarioSteps;
-import com.hribol.bromium.core.parsing.StepsReader;
+import com.hribol.bromium.core.parsing.JsonStepsReader;
 import com.hribol.bromium.integration.tests.BaseDemoAppIntegrationTest;
 import com.hribol.bromium.integration.tests.simulation.RecordingSimulatorModule;
 
@@ -67,7 +67,7 @@ public abstract class BaseRecordIntegrationTest extends BaseDemoAppIntegrationTe
     protected TestScenarioSteps getActualSteps() throws IOException {
         String filename = (String) opts.get(OUTPUT);
         try (InputStream inputStream = new FileInputStream(filename)) {
-            return new StepsReader().readSteps(inputStream);
+            return new JsonStepsReader().readSteps(inputStream);
         }
     }
 }

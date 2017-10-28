@@ -30,6 +30,7 @@ public class DslStepsDumper implements StepsDumper {
             for (Map<String, String> step : testScenarioSteps) {
                 List<SyntaxDefinitionConfiguration> syntaxDefinitions = actionConfigurations.get(step.get(EVENT)).getSyntaxDefinitionConfigurationList();
                 StringBuilder lineBuilder = new StringBuilder();
+                lineBuilder.append(step.get(EVENT)).append(": ");
 
                 for (SyntaxDefinitionConfiguration syntaxDefinition: syntaxDefinitions) {
                     if (syntaxDefinition.getContent() != null) {

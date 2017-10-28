@@ -58,8 +58,8 @@ public class DslStepsDumperTest {
 
         List<String> lines = Files.readLines(outputFile, Charsets.UTF_8);
         assertEquals(2, lines.size());
-        assertEquals("Load text-field.html page ", lines.get(0));
-        assertEquals("Type admin in name input ", lines.get(1));
+        assertEquals("loadPage: Load text-field.html page ", lines.get(0));
+        assertEquals("typeInNameInput: Type admin in name input ", lines.get(1));
 
         assertTrue(outputFile.delete());
     }
@@ -81,7 +81,7 @@ public class DslStepsDumperTest {
 
         List<String> lines = Files.readLines(outputFile, Charsets.UTF_8);
         assertEquals(1, lines.size());
-        assertEquals("Click login button ", lines.get(0));
+        assertEquals("clickLoginButtonActionName: Click login button ", lines.get(0));
         assertTrue(outputFile.delete());
 
     }

@@ -156,6 +156,11 @@ public class DefaultModule extends AbstractModule {
         return new DslStepsDumper(configurationIOProvider.get());
     }
 
+    @CheckedProvides(IOProvider.class)
+    public StepsReader getStepsReader() {
+        return new JsonStepsReader();
+    }
+
     @Provides
     @Named(CONVENTION_EVENT_DETECTOR_PREDICATE)
     public Predicate<HttpRequest> getConventionEventDetectorPredicate() {
@@ -359,9 +364,9 @@ public class DefaultModule extends AbstractModule {
 
     @CheckedProvides(IOProvider.class)
     public TestScenarioFactory getTestScenarioFactory(IOProvider<ApplicationActionFactory> applicationActionFactoryIOProvider,
-                                                      StepsReader stepsReader) throws IOException {
+                                                      IOProvider<StepsReader> stepsReaderIOProvider) throws IOException {
         ApplicationActionFactory applicationActionFactory = applicationActionFactoryIOProvider.get();
-        return new TestScenarioFactory(applicationActionFactory, stepsReader);
+        return new TestScenarioFactory(applicationActionFactory, stepsReaderIOProvider.get());
     }
 
     @Provides
@@ -377,10 +382,10 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOProvider.class)
-    public TestScenarioSteps getTestCaseSteps(StepsReader stepsReader,
+    public TestScenarioSteps getTestCaseSteps(IOProvider<StepsReader> stepsReaderIOProvider,
                                               @Named(TEST_CASE_INPUT_STREAM) IOProvider<InputStream> testCaseInputStreamProvider)
             throws IOException {
-        return stepsReader.readSteps(testCaseInputStreamProvider.get());
+        return stepsReaderIOProvider.get().readSteps(testCaseInputStreamProvider.get());
     }
 
     @CheckedProvides(IOProvider.class)

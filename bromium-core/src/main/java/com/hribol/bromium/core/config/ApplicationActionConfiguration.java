@@ -2,6 +2,7 @@ package com.hribol.bromium.core.config;
 
 import com.hribol.bromium.core.generation.GenerationInformation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,10 @@ public class ApplicationActionConfiguration implements GenerationInformation {
     private boolean expectsHttpRequest;
 
     private List<SyntaxDefinitionConfiguration> syntaxDefinitionConfigurationList;
+
+    public ApplicationActionConfiguration() {
+        this.syntaxDefinitionConfigurationList = new ArrayList<>();
+    }
 
     /**
      * @return the name of the application action
@@ -105,6 +110,14 @@ public class ApplicationActionConfiguration implements GenerationInformation {
      */
     public List<SyntaxDefinitionConfiguration> getSyntaxDefinitionConfigurationList() {
         return syntaxDefinitionConfigurationList;
+    }
+
+    /**
+     * Adds a given syntax definition to the configuration
+     * @param syntaxDefinitionConfiguration the configuration to be added
+     */
+    public void addSyntaxDefinition(SyntaxDefinitionConfiguration syntaxDefinitionConfiguration) {
+       syntaxDefinitionConfigurationList.add(syntaxDefinitionConfiguration);
     }
 
 }
