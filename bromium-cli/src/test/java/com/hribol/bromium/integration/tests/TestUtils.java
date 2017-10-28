@@ -15,7 +15,7 @@ public class TestUtils {
     public static class Events {
         public static final String PAGE_LOAD_INDEX = "Load /index.html page";
         public static final String PAGE_LOAD_AJAX = "Load /ajax.html page";
-        public static final String PAGE_LOAD = "Load page";
+        public static final String PAGE_LOAD = "loadPage";
         public static final String CLICK_LINK_TO_AJAX_DEMO_PAGE = "Click link to Ajax Demo page";
         public static final String CLICK_DYNAMIC_BUTTON = "Click dynamic button";
         public static final String TYPE_TEXT_IN_NAME_INPUT = "Type text in name input";

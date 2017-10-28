@@ -26,6 +26,7 @@ import com.hribol.bromium.common.generation.replay.*;
 import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
 import com.hribol.bromium.common.ProxyDriverIntegrator;
 import com.hribol.bromium.common.parsing.DslStepsDumper;
+import com.hribol.bromium.common.parsing.DslStepsReader;
 import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.common.replay.SignalizingStateConditionsUpdater;
 import com.hribol.bromium.core.parsing.*;
@@ -157,8 +158,8 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOProvider.class)
-    public StepsReader getStepsReader() {
-        return new JsonStepsReader();
+    public StepsReader getStepsReader(IOProvider<Map<String, ApplicationActionConfiguration>> configurationIOProvider) throws IOException {
+        return new DslStepsReader(configurationIOProvider.get());
     }
 
     @Provides
