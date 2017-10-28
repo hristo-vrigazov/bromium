@@ -60,7 +60,16 @@ public class DslStepsReader implements StepsReader {
                 step.put(exposedParameterKey, exposedParameterValue);
             }
 
-            // TODO: add till last to cover the case when we finish with exposed parameter
+            int last = checkpoints.size() - 1;
+            int exposedParameterStartIndex = checkpoints.get(last) + syntaxDefinitionConfigurationList.get(last).getContent().length();
+            if (exposedParameterStartIndex < actionInvocation.length() - 1) {
+                int exposedParameterEndIndex = actionInvocation.length();
+                String exposedParameterKey = syntaxDefinitionConfigurationList.get(last).getExposedParameter();
+                String exposedParameterValue = actionInvocation
+                        .substring(exposedParameterStartIndex, exposedParameterEndIndex)
+                        .trim();
+                step.put(exposedParameterKey, exposedParameterValue);
+            }
 
             testScenarioSteps.add(step);
         }
