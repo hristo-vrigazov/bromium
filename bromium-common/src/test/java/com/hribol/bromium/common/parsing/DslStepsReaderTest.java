@@ -32,6 +32,19 @@ public class DslStepsReaderTest {
         assertEquals(typeInNameInputStep(), testScenarioSteps.get(1));
     }
 
+    @Test
+    public void canParseStepsWithNoParametersInThem() throws IOException {
+        File file = new File(getClass().getResource("/actionsWithoutParameters.txt").getFile());
+        InputStream inputStream = new FileInputStream(file);
+
+        StepsReader stepsReader = new DslStepsReader(createNoAliasesMockConfiguration());
+
+        TestScenarioSteps testScenarioSteps = stepsReader.readSteps(inputStream);
+
+        assertEquals(1, testScenarioSteps.size());
+        assertEquals(clickLoginButton(), testScenarioSteps.get(0));
+    }
+
     private Map<String, String> typeInNameInputStep() {
         Map<String, String> typeStep = new HashMap<>();
         typeStep.put(EVENT, typeInNameInputActionName);
@@ -44,6 +57,12 @@ public class DslStepsReaderTest {
         pageStep.put(EVENT, "loadPage");
         pageStep.put(aliasUrl, "text-field.html");
         return pageStep;
+    }
+
+    private Map<String, String> clickLoginButton() {
+        Map<String, String> clickLoginButton = new HashMap<>();
+        clickLoginButton.put(EVENT, clickLoginButtonActionName);
+        return clickLoginButton;
     }
 
 
