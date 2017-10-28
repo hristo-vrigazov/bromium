@@ -23,16 +23,16 @@ import static org.mockito.Mockito.when;
  */
 public class DslStepsDumperTest {
 
-    private static final String loadPageActionName = "loadPage";
-    private static final String typeInNameInputActionName = "typeInNameInput";
-    private static final String clickLoginButtonActionName = "clickLoginButtonActionName";
-    private static final String outputFilename = "tmp.json";
+    public static final String loadPageActionName = "loadPage";
+    public static final String typeInNameInputActionName = "typeInNameInput";
+    public static final String clickLoginButtonActionName = "clickLoginButtonActionName";
+    public static final String outputFilename = "tmp.json";
 
-    private static final String aliasUrl = "alias-url";
-    private static final String aliasUrlValue = "text-field.html";
+    public static final String aliasUrl = "alias-url";
+    public static final String aliasUrlValue = "text-field.html";
 
-    private static final String aliasText = "alias-text";
-    private static final String aliasTextValue = "admin";
+    public static final String aliasText = "alias-text";
+    public static final String aliasTextValue = "admin";
 
 
     @Test
@@ -86,20 +86,20 @@ public class DslStepsDumperTest {
 
     }
 
-    private Map<String, ApplicationActionConfiguration> createNoAliasesMockConfiguration() {
+    public static Map<String, ApplicationActionConfiguration> createNoAliasesMockConfiguration() {
         Map<String, ApplicationActionConfiguration> actionConfigurationMap = new HashMap<>();
         actionConfigurationMap.put(clickLoginButtonActionName, getClickLoginButtonAction());
         return actionConfigurationMap;
     }
 
-    private Map<String, ApplicationActionConfiguration> createAliasesMockConfiguration() {
+    public static Map<String, ApplicationActionConfiguration> createAliasesMockConfiguration() {
         Map<String, ApplicationActionConfiguration> actionConfigurationMap = new HashMap<>();
         actionConfigurationMap.put(loadPageActionName, getLoadPageAction());
         actionConfigurationMap.put(typeInNameInputActionName, getTypeIntoTextFieldAction());
         return actionConfigurationMap;
     }
 
-    private ApplicationActionConfiguration getTypeIntoTextFieldAction() {
+    public static ApplicationActionConfiguration getTypeIntoTextFieldAction() {
         SyntaxDefinitionConfiguration typeSyntax = mock(SyntaxDefinitionConfiguration.class);
         when(typeSyntax.getContent()).thenReturn("Type");
         when(typeSyntax.getExposedParameter()).thenReturn(aliasText);
@@ -117,7 +117,7 @@ public class DslStepsDumperTest {
         return typeIntoTextFieldAction;
     }
 
-    private ApplicationActionConfiguration getLoadPageAction() {
+    public static ApplicationActionConfiguration getLoadPageAction() {
         SyntaxDefinitionConfiguration loadSyntax = mock(SyntaxDefinitionConfiguration.class);
         when(loadSyntax.getContent()).thenReturn("Load");
         when(loadSyntax.getExposedParameter()).thenReturn(aliasUrl);
@@ -135,7 +135,7 @@ public class DslStepsDumperTest {
         return loadPageAction;
     }
 
-    public ApplicationActionConfiguration getClickLoginButtonAction() {
+    public static ApplicationActionConfiguration getClickLoginButtonAction() {
         SyntaxDefinitionConfiguration syntaxDefinitionConfiguration = mock(SyntaxDefinitionConfiguration.class);
         when(syntaxDefinitionConfiguration.getContent()).thenReturn("Click login button");
         when(syntaxDefinitionConfiguration.getExposedParameter()).thenReturn(null);

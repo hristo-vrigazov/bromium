@@ -1,0 +1,2 @@
+loadPage: Load text-field.html page
+typeInNameInput: Type admin in name input
