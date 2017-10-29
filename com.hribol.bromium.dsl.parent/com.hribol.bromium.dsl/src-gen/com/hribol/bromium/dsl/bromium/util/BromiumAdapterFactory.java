@@ -111,9 +111,9 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
         return createElementWithIdIsPresentAdapter();
       }
       @Override
-      public Adapter caseClickOnElementWithId(ClickOnElementWithId object)
+      public Adapter caseClickCssSelector(ClickCssSelector object)
       {
-        return createClickOnElementWithIdAdapter();
+        return createClickCssSelectorAdapter();
       }
       @Override
       public Adapter casePageLoad(PageLoad object)
@@ -268,16 +268,16 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.ClickOnElementWithId <em>Click On Element With Id</em>}'.
+   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.ClickCssSelector <em>Click Css Selector</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see com.hribol.bromium.dsl.bromium.ClickOnElementWithId
+   * @see com.hribol.bromium.dsl.bromium.ClickCssSelector
    * @generated
    */
-  public Adapter createClickOnElementWithIdAdapter()
+  public Adapter createClickCssSelectorAdapter()
   {
     return null;
   }

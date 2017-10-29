@@ -408,11 +408,11 @@ ruleWebDriverAction returns [EObject current=null]
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getWebDriverActionAccess().getClickOnElementWithIdParserRuleCall_1());
+			newCompositeNode(grammarAccess.getWebDriverActionAccess().getClickCssSelectorParserRuleCall_1());
 		}
-		this_ClickOnElementWithId_1=ruleClickOnElementWithId
+		this_ClickCssSelector_1=ruleClickCssSelector
 		{
-			$current = $this_ClickOnElementWithId_1.current;
+			$current = $this_ClickCssSelector_1.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
@@ -636,15 +636,15 @@ ruleElementWithIdIsPresent returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleClickOnElementWithId
-entryRuleClickOnElementWithId returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getClickOnElementWithIdRule()); }
-	iv_ruleClickOnElementWithId=ruleClickOnElementWithId
-	{ $current=$iv_ruleClickOnElementWithId.current; }
+// Entry rule entryRuleClickCssSelector
+entryRuleClickCssSelector returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getClickCssSelectorRule()); }
+	iv_ruleClickCssSelector=ruleClickCssSelector
+	{ $current=$iv_ruleClickCssSelector.current; }
 	EOF;
 
-// Rule ClickOnElementWithId
-ruleClickOnElementWithId returns [EObject current=null]
+// Rule ClickCssSelector
+ruleClickCssSelector returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -654,37 +654,37 @@ ruleClickOnElementWithId returns [EObject current=null]
 	(
 		otherlv_0='click'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getClickOnElementWithIdAccess().getClickKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getClickCssSelectorAccess().getClickKeyword_0());
 		}
 		otherlv_1='on'
 		{
-			newLeafNode(otherlv_1, grammarAccess.getClickOnElementWithIdAccess().getOnKeyword_1());
+			newLeafNode(otherlv_1, grammarAccess.getClickCssSelectorAccess().getOnKeyword_1());
 		}
 		otherlv_2='element'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getClickOnElementWithIdAccess().getElementKeyword_2());
+			newLeafNode(otherlv_2, grammarAccess.getClickCssSelectorAccess().getElementKeyword_2());
 		}
 		otherlv_3='with'
 		{
-			newLeafNode(otherlv_3, grammarAccess.getClickOnElementWithIdAccess().getWithKeyword_3());
+			newLeafNode(otherlv_3, grammarAccess.getClickCssSelectorAccess().getWithKeyword_3());
 		}
 		otherlv_4='css'
 		{
-			newLeafNode(otherlv_4, grammarAccess.getClickOnElementWithIdAccess().getCssKeyword_4());
+			newLeafNode(otherlv_4, grammarAccess.getClickCssSelectorAccess().getCssKeyword_4());
 		}
 		otherlv_5='selector'
 		{
-			newLeafNode(otherlv_5, grammarAccess.getClickOnElementWithIdAccess().getSelectorKeyword_5());
+			newLeafNode(otherlv_5, grammarAccess.getClickCssSelectorAccess().getSelectorKeyword_5());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getClickOnElementWithIdAccess().getCssSelectorParameterValueParserRuleCall_6_0());
+					newCompositeNode(grammarAccess.getClickCssSelectorAccess().getCssSelectorParameterValueParserRuleCall_6_0());
 				}
 				lv_cssSelector_6_0=ruleParameterValue
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getClickOnElementWithIdRule());
+						$current = createModelElementForParent(grammarAccess.getClickCssSelectorRule());
 					}
 					set(
 						$current,

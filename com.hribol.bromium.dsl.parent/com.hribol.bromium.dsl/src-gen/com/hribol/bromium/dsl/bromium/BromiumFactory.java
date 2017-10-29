@@ -87,13 +87,13 @@ public interface BromiumFactory extends EFactory
   ElementWithIdIsPresent createElementWithIdIsPresent();
 
   /**
-   * Returns a new object of class '<em>Click On Element With Id</em>'.
+   * Returns a new object of class '<em>Click Css Selector</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Click On Element With Id</em>'.
+   * @return a new object of class '<em>Click Css Selector</em>'.
    * @generated
    */
-  ClickOnElementWithId createClickOnElementWithId();
+  ClickCssSelector createClickCssSelector();
 
   /**
    * Returns a new object of class '<em>Page Load</em>'.

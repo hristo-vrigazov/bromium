@@ -72,7 +72,7 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
       case BromiumPackage.PRECONDITION: return createPrecondition();
       case BromiumPackage.POSTCONDITION: return createPostcondition();
       case BromiumPackage.ELEMENT_WITH_ID_IS_PRESENT: return createElementWithIdIsPresent();
-      case BromiumPackage.CLICK_ON_ELEMENT_WITH_ID: return createClickOnElementWithId();
+      case BromiumPackage.CLICK_CSS_SELECTOR: return createClickCssSelector();
       case BromiumPackage.PAGE_LOAD: return createPageLoad();
       case BromiumPackage.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR: return createTypeTextInElementFoundByCssSelector();
       case BromiumPackage.PARAMETER_VALUE: return createParameterValue();
@@ -165,10 +165,10 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ClickOnElementWithId createClickOnElementWithId()
+  public ClickCssSelector createClickCssSelector()
   {
-    ClickOnElementWithIdImpl clickOnElementWithId = new ClickOnElementWithIdImpl();
-    return clickOnElementWithId;
+    ClickCssSelectorImpl clickCssSelector = new ClickCssSelectorImpl();
+    return clickCssSelector;
   }
 
   /**

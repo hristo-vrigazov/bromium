@@ -6,7 +6,7 @@ package com.hribol.bromium.dsl.bromium.impl;
 import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.BromiumFactory;
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
-import com.hribol.bromium.dsl.bromium.ClickOnElementWithId;
+import com.hribol.bromium.dsl.bromium.ClickCssSelector;
 import com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent;
 import com.hribol.bromium.dsl.bromium.ExposedParameter;
 import com.hribol.bromium.dsl.bromium.Model;
@@ -88,7 +88,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass clickOnElementWithIdEClass = null;
+  private EClass clickCssSelectorEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -413,9 +413,9 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getClickOnElementWithId()
+  public EClass getClickCssSelector()
   {
-    return clickOnElementWithIdEClass;
+    return clickCssSelectorEClass;
   }
 
   /**
@@ -423,9 +423,9 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getClickOnElementWithId_CssSelector()
+  public EReference getClickCssSelector_CssSelector()
   {
-    return (EReference)clickOnElementWithIdEClass.getEStructuralFeatures().get(0);
+    return (EReference)clickCssSelectorEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -627,8 +627,8 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     elementWithIdIsPresentEClass = createEClass(ELEMENT_WITH_ID_IS_PRESENT);
     createEReference(elementWithIdIsPresentEClass, ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR);
 
-    clickOnElementWithIdEClass = createEClass(CLICK_ON_ELEMENT_WITH_ID);
-    createEReference(clickOnElementWithIdEClass, CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR);
+    clickCssSelectorEClass = createEClass(CLICK_CSS_SELECTOR);
+    createEReference(clickCssSelectorEClass, CLICK_CSS_SELECTOR__CSS_SELECTOR);
 
     pageLoadEClass = createEClass(PAGE_LOAD);
     createEAttribute(pageLoadEClass, PAGE_LOAD__SUBPATH);
@@ -680,7 +680,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
 
     // Add supertypes to classes
     elementWithIdIsPresentEClass.getESuperTypes().add(this.getWebDriverAction());
-    clickOnElementWithIdEClass.getESuperTypes().add(this.getWebDriverAction());
+    clickCssSelectorEClass.getESuperTypes().add(this.getWebDriverAction());
     pageLoadEClass.getESuperTypes().add(this.getWebDriverAction());
     typeTextInElementFoundByCssSelectorEClass.getESuperTypes().add(this.getWebDriverAction());
 
@@ -714,8 +714,8 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     initEClass(elementWithIdIsPresentEClass, ElementWithIdIsPresent.class, "ElementWithIdIsPresent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getElementWithIdIsPresent_CssSelector(), this.getParameterValue(), null, "cssSelector", null, 0, 1, ElementWithIdIsPresent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(clickOnElementWithIdEClass, ClickOnElementWithId.class, "ClickOnElementWithId", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getClickOnElementWithId_CssSelector(), this.getParameterValue(), null, "cssSelector", null, 0, 1, ClickOnElementWithId.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(clickCssSelectorEClass, ClickCssSelector.class, "ClickCssSelector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getClickCssSelector_CssSelector(), this.getParameterValue(), null, "cssSelector", null, 0, 1, ClickCssSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(pageLoadEClass, PageLoad.class, "PageLoad", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getPageLoad_Subpath(), ecorePackage.getEString(), "subpath", null, 0, 1, PageLoad.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

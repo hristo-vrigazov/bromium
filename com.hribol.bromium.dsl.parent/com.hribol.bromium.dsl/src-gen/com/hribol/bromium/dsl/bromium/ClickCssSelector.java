@@ -6,21 +6,21 @@ package com.hribol.bromium.dsl.bromium;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Click On Element With Id</b></em>'.
+ * A representation of the model object '<em><b>Click Css Selector</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link com.hribol.bromium.dsl.bromium.ClickOnElementWithId#getCssSelector <em>Css Selector</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.ClickCssSelector#getCssSelector <em>Css Selector</em>}</li>
  * </ul>
  *
- * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getClickOnElementWithId()
+ * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getClickCssSelector()
  * @model
  * @generated
  */
-public interface ClickOnElementWithId extends WebDriverAction
+public interface ClickCssSelector extends WebDriverAction
 {
   /**
    * Returns the value of the '<em><b>Css Selector</b></em>' containment reference.
@@ -32,14 +32,14 @@ public interface ClickOnElementWithId extends WebDriverAction
    * <!-- end-user-doc -->
    * @return the value of the '<em>Css Selector</em>' containment reference.
    * @see #setCssSelector(ParameterValue)
-   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getClickOnElementWithId_CssSelector()
+   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getClickCssSelector_CssSelector()
    * @model containment="true"
    * @generated
    */
   ParameterValue getCssSelector();
 
   /**
-   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.ClickOnElementWithId#getCssSelector <em>Css Selector</em>}' containment reference.
+   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.ClickCssSelector#getCssSelector <em>Css Selector</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Css Selector</em>' containment reference.
@@ -48,4 +48,4 @@ public interface ClickOnElementWithId extends WebDriverAction
    */
   void setCssSelector(ParameterValue value);
 
-} // ClickOnElementWithId
+} // ClickCssSelector

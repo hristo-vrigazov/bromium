@@ -123,11 +123,11 @@ public class BromiumSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case BromiumPackage.CLICK_ON_ELEMENT_WITH_ID:
+      case BromiumPackage.CLICK_CSS_SELECTOR:
       {
-        ClickOnElementWithId clickOnElementWithId = (ClickOnElementWithId)theEObject;
-        T result = caseClickOnElementWithId(clickOnElementWithId);
-        if (result == null) result = caseWebDriverAction(clickOnElementWithId);
+        ClickCssSelector clickCssSelector = (ClickCssSelector)theEObject;
+        T result = caseClickCssSelector(clickCssSelector);
+        if (result == null) result = caseWebDriverAction(clickCssSelector);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -285,17 +285,17 @@ public class BromiumSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Click On Element With Id</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Click Css Selector</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Click On Element With Id</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Click Css Selector</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseClickOnElementWithId(ClickOnElementWithId object)
+  public T caseClickCssSelector(ClickCssSelector object)
   {
     return null;
   }

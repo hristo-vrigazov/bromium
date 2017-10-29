@@ -207,22 +207,22 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.WebDriverAction");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cElementWithIdIsPresentParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cClickOnElementWithIdParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cClickCssSelectorParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cPageLoadParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cTypeTextInElementFoundByCssSelectorParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//WebDriverAction:
-		//	ElementWithIdIsPresent | ClickOnElementWithId | PageLoad | TypeTextInElementFoundByCssSelector;
+		//	ElementWithIdIsPresent | ClickCssSelector | PageLoad | TypeTextInElementFoundByCssSelector;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ElementWithIdIsPresent | ClickOnElementWithId | PageLoad | TypeTextInElementFoundByCssSelector
+		//ElementWithIdIsPresent | ClickCssSelector | PageLoad | TypeTextInElementFoundByCssSelector
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ElementWithIdIsPresent
 		public RuleCall getElementWithIdIsPresentParserRuleCall_0() { return cElementWithIdIsPresentParserRuleCall_0; }
 		
-		//ClickOnElementWithId
-		public RuleCall getClickOnElementWithIdParserRuleCall_1() { return cClickOnElementWithIdParserRuleCall_1; }
+		//ClickCssSelector
+		public RuleCall getClickCssSelectorParserRuleCall_1() { return cClickCssSelectorParserRuleCall_1; }
 		
 		//PageLoad
 		public RuleCall getPageLoadParserRuleCall_2() { return cPageLoadParserRuleCall_2; }
@@ -359,8 +359,8 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		//'clickable'
 		public Keyword getClickableKeyword_6() { return cClickableKeyword_6; }
 	}
-	public class ClickOnElementWithIdElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.ClickOnElementWithId");
+	public class ClickCssSelectorElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.ClickCssSelector");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cClickKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cOnKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -371,7 +371,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cCssSelectorAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cCssSelectorParameterValueParserRuleCall_6_0 = (RuleCall)cCssSelectorAssignment_6.eContents().get(0);
 		
-		//ClickOnElementWithId:
+		//ClickCssSelector:
 		//	'click' 'on' 'element' 'with' 'css' 'selector' cssSelector=ParameterValue;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -592,7 +592,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	private final PostconditionElements pPostcondition;
 	private final ExpectHttpRequestElements pExpectHttpRequest;
 	private final ElementWithIdIsPresentElements pElementWithIdIsPresent;
-	private final ClickOnElementWithIdElements pClickOnElementWithId;
+	private final ClickCssSelectorElements pClickCssSelector;
 	private final PageLoadElements pPageLoad;
 	private final TypeTextInElementFoundByCssSelectorElements pTypeTextInElementFoundByCssSelector;
 	private final ParameterValueElements pParameterValue;
@@ -617,7 +617,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		this.pPostcondition = new PostconditionElements();
 		this.pExpectHttpRequest = new ExpectHttpRequestElements();
 		this.pElementWithIdIsPresent = new ElementWithIdIsPresentElements();
-		this.pClickOnElementWithId = new ClickOnElementWithIdElements();
+		this.pClickCssSelector = new ClickCssSelectorElements();
 		this.pPageLoad = new PageLoadElements();
 		this.pTypeTextInElementFoundByCssSelector = new TypeTextInElementFoundByCssSelectorElements();
 		this.pParameterValue = new ParameterValueElements();
@@ -693,7 +693,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//WebDriverAction:
-	//	ElementWithIdIsPresent | ClickOnElementWithId | PageLoad | TypeTextInElementFoundByCssSelector;
+	//	ElementWithIdIsPresent | ClickCssSelector | PageLoad | TypeTextInElementFoundByCssSelector;
 	public WebDriverActionElements getWebDriverActionAccess() {
 		return pWebDriverAction;
 	}
@@ -743,14 +743,14 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		return getElementWithIdIsPresentAccess().getRule();
 	}
 	
-	//ClickOnElementWithId:
+	//ClickCssSelector:
 	//	'click' 'on' 'element' 'with' 'css' 'selector' cssSelector=ParameterValue;
-	public ClickOnElementWithIdElements getClickOnElementWithIdAccess() {
-		return pClickOnElementWithId;
+	public ClickCssSelectorElements getClickCssSelectorAccess() {
+		return pClickCssSelector;
 	}
 	
-	public ParserRule getClickOnElementWithIdRule() {
-		return getClickOnElementWithIdAccess().getRule();
+	public ParserRule getClickCssSelectorRule() {
+		return getClickCssSelectorAccess().getRule();
 	}
 	
 	//PageLoad:

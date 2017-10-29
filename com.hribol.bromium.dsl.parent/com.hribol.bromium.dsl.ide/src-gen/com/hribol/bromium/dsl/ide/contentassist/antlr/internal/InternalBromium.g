@@ -249,25 +249,25 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-// Entry rule entryRuleClickOnElementWithId
-entryRuleClickOnElementWithId
+// Entry rule entryRuleClickCssSelector
+entryRuleClickCssSelector
 :
-{ before(grammarAccess.getClickOnElementWithIdRule()); }
-	 ruleClickOnElementWithId
-{ after(grammarAccess.getClickOnElementWithIdRule()); } 
+{ before(grammarAccess.getClickCssSelectorRule()); }
+	 ruleClickCssSelector
+{ after(grammarAccess.getClickCssSelectorRule()); } 
 	 EOF 
 ;
 
-// Rule ClickOnElementWithId
-ruleClickOnElementWithId 
+// Rule ClickCssSelector
+ruleClickCssSelector 
 	@init {
 		int stackSize = keepStackSize();
 	}
 	:
 	(
-		{ before(grammarAccess.getClickOnElementWithIdAccess().getGroup()); }
-		(rule__ClickOnElementWithId__Group__0)
-		{ after(grammarAccess.getClickOnElementWithIdAccess().getGroup()); }
+		{ before(grammarAccess.getClickCssSelectorAccess().getGroup()); }
+		(rule__ClickCssSelector__Group__0)
+		{ after(grammarAccess.getClickCssSelectorAccess().getGroup()); }
 	)
 ;
 finally {
@@ -411,9 +411,9 @@ rule__WebDriverAction__Alternatives
 	)
 	|
 	(
-		{ before(grammarAccess.getWebDriverActionAccess().getClickOnElementWithIdParserRuleCall_1()); }
-		ruleClickOnElementWithId
-		{ after(grammarAccess.getWebDriverActionAccess().getClickOnElementWithIdParserRuleCall_1()); }
+		{ before(grammarAccess.getWebDriverActionAccess().getClickCssSelectorParserRuleCall_1()); }
+		ruleClickCssSelector
+		{ after(grammarAccess.getWebDriverActionAccess().getClickCssSelectorParserRuleCall_1()); }
 	)
 	|
 	(
@@ -1533,188 +1533,188 @@ finally {
 }
 
 
-rule__ClickOnElementWithId__Group__0
+rule__ClickCssSelector__Group__0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ClickOnElementWithId__Group__0__Impl
-	rule__ClickOnElementWithId__Group__1
+	rule__ClickCssSelector__Group__0__Impl
+	rule__ClickCssSelector__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClickOnElementWithId__Group__0__Impl
+rule__ClickCssSelector__Group__0__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getClickOnElementWithIdAccess().getClickKeyword_0()); }
+	{ before(grammarAccess.getClickCssSelectorAccess().getClickKeyword_0()); }
 	'click'
-	{ after(grammarAccess.getClickOnElementWithIdAccess().getClickKeyword_0()); }
+	{ after(grammarAccess.getClickCssSelectorAccess().getClickKeyword_0()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClickOnElementWithId__Group__1
+rule__ClickCssSelector__Group__1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ClickOnElementWithId__Group__1__Impl
-	rule__ClickOnElementWithId__Group__2
+	rule__ClickCssSelector__Group__1__Impl
+	rule__ClickCssSelector__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClickOnElementWithId__Group__1__Impl
+rule__ClickCssSelector__Group__1__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getClickOnElementWithIdAccess().getOnKeyword_1()); }
+	{ before(grammarAccess.getClickCssSelectorAccess().getOnKeyword_1()); }
 	'on'
-	{ after(grammarAccess.getClickOnElementWithIdAccess().getOnKeyword_1()); }
+	{ after(grammarAccess.getClickCssSelectorAccess().getOnKeyword_1()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClickOnElementWithId__Group__2
+rule__ClickCssSelector__Group__2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ClickOnElementWithId__Group__2__Impl
-	rule__ClickOnElementWithId__Group__3
+	rule__ClickCssSelector__Group__2__Impl
+	rule__ClickCssSelector__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClickOnElementWithId__Group__2__Impl
+rule__ClickCssSelector__Group__2__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getClickOnElementWithIdAccess().getElementKeyword_2()); }
+	{ before(grammarAccess.getClickCssSelectorAccess().getElementKeyword_2()); }
 	'element'
-	{ after(grammarAccess.getClickOnElementWithIdAccess().getElementKeyword_2()); }
+	{ after(grammarAccess.getClickCssSelectorAccess().getElementKeyword_2()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClickOnElementWithId__Group__3
+rule__ClickCssSelector__Group__3
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ClickOnElementWithId__Group__3__Impl
-	rule__ClickOnElementWithId__Group__4
+	rule__ClickCssSelector__Group__3__Impl
+	rule__ClickCssSelector__Group__4
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClickOnElementWithId__Group__3__Impl
+rule__ClickCssSelector__Group__3__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getClickOnElementWithIdAccess().getWithKeyword_3()); }
+	{ before(grammarAccess.getClickCssSelectorAccess().getWithKeyword_3()); }
 	'with'
-	{ after(grammarAccess.getClickOnElementWithIdAccess().getWithKeyword_3()); }
+	{ after(grammarAccess.getClickCssSelectorAccess().getWithKeyword_3()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClickOnElementWithId__Group__4
+rule__ClickCssSelector__Group__4
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ClickOnElementWithId__Group__4__Impl
-	rule__ClickOnElementWithId__Group__5
+	rule__ClickCssSelector__Group__4__Impl
+	rule__ClickCssSelector__Group__5
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClickOnElementWithId__Group__4__Impl
+rule__ClickCssSelector__Group__4__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getClickOnElementWithIdAccess().getCssKeyword_4()); }
+	{ before(grammarAccess.getClickCssSelectorAccess().getCssKeyword_4()); }
 	'css'
-	{ after(grammarAccess.getClickOnElementWithIdAccess().getCssKeyword_4()); }
+	{ after(grammarAccess.getClickCssSelectorAccess().getCssKeyword_4()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClickOnElementWithId__Group__5
+rule__ClickCssSelector__Group__5
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ClickOnElementWithId__Group__5__Impl
-	rule__ClickOnElementWithId__Group__6
+	rule__ClickCssSelector__Group__5__Impl
+	rule__ClickCssSelector__Group__6
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClickOnElementWithId__Group__5__Impl
+rule__ClickCssSelector__Group__5__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getClickOnElementWithIdAccess().getSelectorKeyword_5()); }
+	{ before(grammarAccess.getClickCssSelectorAccess().getSelectorKeyword_5()); }
 	'selector'
-	{ after(grammarAccess.getClickOnElementWithIdAccess().getSelectorKeyword_5()); }
+	{ after(grammarAccess.getClickCssSelectorAccess().getSelectorKeyword_5()); }
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClickOnElementWithId__Group__6
+rule__ClickCssSelector__Group__6
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__ClickOnElementWithId__Group__6__Impl
+	rule__ClickCssSelector__Group__6__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClickOnElementWithId__Group__6__Impl
+rule__ClickCssSelector__Group__6__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getClickOnElementWithIdAccess().getCssSelectorAssignment_6()); }
-	(rule__ClickOnElementWithId__CssSelectorAssignment_6)
-	{ after(grammarAccess.getClickOnElementWithIdAccess().getCssSelectorAssignment_6()); }
+	{ before(grammarAccess.getClickCssSelectorAccess().getCssSelectorAssignment_6()); }
+	(rule__ClickCssSelector__CssSelectorAssignment_6)
+	{ after(grammarAccess.getClickCssSelectorAccess().getCssSelectorAssignment_6()); }
 )
 ;
 finally {
@@ -2244,15 +2244,15 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClickOnElementWithId__CssSelectorAssignment_6
+rule__ClickCssSelector__CssSelectorAssignment_6
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getClickOnElementWithIdAccess().getCssSelectorParameterValueParserRuleCall_6_0()); }
+		{ before(grammarAccess.getClickCssSelectorAccess().getCssSelectorParameterValueParserRuleCall_6_0()); }
 		ruleParameterValue
-		{ after(grammarAccess.getClickOnElementWithIdAccess().getCssSelectorParameterValueParserRuleCall_6_0()); }
+		{ after(grammarAccess.getClickCssSelectorAccess().getCssSelectorParameterValueParserRuleCall_6_0()); }
 	)
 ;
 finally {

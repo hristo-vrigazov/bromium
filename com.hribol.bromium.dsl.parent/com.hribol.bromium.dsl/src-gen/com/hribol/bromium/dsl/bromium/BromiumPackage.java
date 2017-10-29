@@ -326,14 +326,14 @@ public interface BromiumPackage extends EPackage
   int ELEMENT_WITH_ID_IS_PRESENT_FEATURE_COUNT = WEB_DRIVER_ACTION_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ClickOnElementWithIdImpl <em>Click On Element With Id</em>}' class.
+   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ClickCssSelectorImpl <em>Click Css Selector</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see com.hribol.bromium.dsl.bromium.impl.ClickOnElementWithIdImpl
-   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getClickOnElementWithId()
+   * @see com.hribol.bromium.dsl.bromium.impl.ClickCssSelectorImpl
+   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getClickCssSelector()
    * @generated
    */
-  int CLICK_ON_ELEMENT_WITH_ID = 7;
+  int CLICK_CSS_SELECTOR = 7;
 
   /**
    * The feature id for the '<em><b>Css Selector</b></em>' containment reference.
@@ -342,16 +342,16 @@ public interface BromiumPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR = WEB_DRIVER_ACTION_FEATURE_COUNT + 0;
+  int CLICK_CSS_SELECTOR__CSS_SELECTOR = WEB_DRIVER_ACTION_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Click On Element With Id</em>' class.
+   * The number of structural features of the '<em>Click Css Selector</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CLICK_ON_ELEMENT_WITH_ID_FEATURE_COUNT = WEB_DRIVER_ACTION_FEATURE_COUNT + 1;
+  int CLICK_CSS_SELECTOR_FEATURE_COUNT = WEB_DRIVER_ACTION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.PageLoadImpl <em>Page Load</em>}' class.
@@ -766,25 +766,25 @@ public interface BromiumPackage extends EPackage
   EReference getElementWithIdIsPresent_CssSelector();
 
   /**
-   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ClickOnElementWithId <em>Click On Element With Id</em>}'.
+   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ClickCssSelector <em>Click Css Selector</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Click On Element With Id</em>'.
-   * @see com.hribol.bromium.dsl.bromium.ClickOnElementWithId
+   * @return the meta object for class '<em>Click Css Selector</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ClickCssSelector
    * @generated
    */
-  EClass getClickOnElementWithId();
+  EClass getClickCssSelector();
 
   /**
-   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.ClickOnElementWithId#getCssSelector <em>Css Selector</em>}'.
+   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.ClickCssSelector#getCssSelector <em>Css Selector</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Css Selector</em>'.
-   * @see com.hribol.bromium.dsl.bromium.ClickOnElementWithId#getCssSelector()
-   * @see #getClickOnElementWithId()
+   * @see com.hribol.bromium.dsl.bromium.ClickCssSelector#getCssSelector()
+   * @see #getClickCssSelector()
    * @generated
    */
-  EReference getClickOnElementWithId_CssSelector();
+  EReference getClickCssSelector_CssSelector();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.PageLoad <em>Page Load</em>}'.
@@ -1149,14 +1149,14 @@ public interface BromiumPackage extends EPackage
     EReference ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR = eINSTANCE.getElementWithIdIsPresent_CssSelector();
 
     /**
-     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ClickOnElementWithIdImpl <em>Click On Element With Id</em>}' class.
+     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ClickCssSelectorImpl <em>Click Css Selector</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see com.hribol.bromium.dsl.bromium.impl.ClickOnElementWithIdImpl
-     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getClickOnElementWithId()
+     * @see com.hribol.bromium.dsl.bromium.impl.ClickCssSelectorImpl
+     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getClickCssSelector()
      * @generated
      */
-    EClass CLICK_ON_ELEMENT_WITH_ID = eINSTANCE.getClickOnElementWithId();
+    EClass CLICK_CSS_SELECTOR = eINSTANCE.getClickCssSelector();
 
     /**
      * The meta object literal for the '<em><b>Css Selector</b></em>' containment reference feature.
@@ -1164,7 +1164,7 @@ public interface BromiumPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR = eINSTANCE.getClickOnElementWithId_CssSelector();
+    EReference CLICK_CSS_SELECTOR__CSS_SELECTOR = eINSTANCE.getClickCssSelector_CssSelector();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.PageLoadImpl <em>Page Load</em>}' class.

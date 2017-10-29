@@ -26,7 +26,7 @@ SyntaxDefinition:
 
 WebDriverAction:
 	ElementWithIdIsPresent |
-	ClickOnElementWithId |
+	ClickCssSelector |
 	PageLoad |
 	TypeTextInElementFoundByCssSelector
 ;
@@ -46,7 +46,7 @@ ExpectHttpRequest:
 
 // TODO: syntactic sugar for CSS selectors
 ElementWithIdIsPresent: 'element' 'with' 'css' 'selector' cssSelector=ParameterValue 'is' 'clickable';
-ClickOnElementWithId: 'click' 'on' 'element' 'with' 'css' 'selector' cssSelector=ParameterValue;
+ClickCssSelector: 'click' 'on' 'element' 'with' 'css' 'selector' cssSelector=ParameterValue;
 PageLoad: 'load' 'page' subpath=STRING;
 TypeTextInElementFoundByCssSelector: 'type' text=ParameterValue 
 'in' 'element' 'with' 'css' 'selector' cssSelector=ParameterValue

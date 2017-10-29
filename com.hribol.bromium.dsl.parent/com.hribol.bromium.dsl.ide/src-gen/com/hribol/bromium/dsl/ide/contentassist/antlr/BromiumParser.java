@@ -41,7 +41,7 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPostconditionAccess().getGroup(), "rule__Postcondition__Group__0");
 					put(grammarAccess.getExpectHttpRequestAccess().getGroup(), "rule__ExpectHttpRequest__Group__0");
 					put(grammarAccess.getElementWithIdIsPresentAccess().getGroup(), "rule__ElementWithIdIsPresent__Group__0");
-					put(grammarAccess.getClickOnElementWithIdAccess().getGroup(), "rule__ClickOnElementWithId__Group__0");
+					put(grammarAccess.getClickCssSelectorAccess().getGroup(), "rule__ClickCssSelector__Group__0");
 					put(grammarAccess.getPageLoadAccess().getGroup(), "rule__PageLoad__Group__0");
 					put(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getGroup(), "rule__TypeTextInElementFoundByCssSelector__Group__0");
 					put(grammarAccess.getThreeDottedVersionAccess().getGroup(), "rule__ThreeDottedVersion__Group__0");
@@ -60,7 +60,7 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPreconditionAccess().getActionAssignment_1(), "rule__Precondition__ActionAssignment_1");
 					put(grammarAccess.getPostconditionAccess().getPostconditionAssignment_3(), "rule__Postcondition__PostconditionAssignment_3");
 					put(grammarAccess.getElementWithIdIsPresentAccess().getCssSelectorAssignment_4(), "rule__ElementWithIdIsPresent__CssSelectorAssignment_4");
-					put(grammarAccess.getClickOnElementWithIdAccess().getCssSelectorAssignment_6(), "rule__ClickOnElementWithId__CssSelectorAssignment_6");
+					put(grammarAccess.getClickCssSelectorAccess().getCssSelectorAssignment_6(), "rule__ClickCssSelector__CssSelectorAssignment_6");
 					put(grammarAccess.getPageLoadAccess().getSubpathAssignment_2(), "rule__PageLoad__SubpathAssignment_2");
 					put(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTextAssignment_1(), "rule__TypeTextInElementFoundByCssSelector__TextAssignment_1");
 					put(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getCssSelectorAssignment_7(), "rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7");

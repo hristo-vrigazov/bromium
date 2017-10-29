@@ -4,7 +4,7 @@
 package com.hribol.bromium.dsl.bromium.impl;
 
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
-import com.hribol.bromium.dsl.bromium.ClickOnElementWithId;
+import com.hribol.bromium.dsl.bromium.ClickCssSelector;
 import com.hribol.bromium.dsl.bromium.ParameterValue;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -17,18 +17,18 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Click On Element With Id</b></em>'.
+ * An implementation of the model object '<em><b>Click Css Selector</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ClickOnElementWithIdImpl#getCssSelector <em>Css Selector</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ClickCssSelectorImpl#getCssSelector <em>Css Selector</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ClickOnElementWithIdImpl extends WebDriverActionImpl implements ClickOnElementWithId
+public class ClickCssSelectorImpl extends WebDriverActionImpl implements ClickCssSelector
 {
   /**
    * The cached value of the '{@link #getCssSelector() <em>Css Selector</em>}' containment reference.
@@ -45,7 +45,7 @@ public class ClickOnElementWithIdImpl extends WebDriverActionImpl implements Cli
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ClickOnElementWithIdImpl()
+  protected ClickCssSelectorImpl()
   {
     super();
   }
@@ -58,7 +58,7 @@ public class ClickOnElementWithIdImpl extends WebDriverActionImpl implements Cli
   @Override
   protected EClass eStaticClass()
   {
-    return BromiumPackage.Literals.CLICK_ON_ELEMENT_WITH_ID;
+    return BromiumPackage.Literals.CLICK_CSS_SELECTOR;
   }
 
   /**
@@ -82,7 +82,7 @@ public class ClickOnElementWithIdImpl extends WebDriverActionImpl implements Cli
     cssSelector = newCssSelector;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BromiumPackage.CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR, oldCssSelector, newCssSelector);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BromiumPackage.CLICK_CSS_SELECTOR__CSS_SELECTOR, oldCssSelector, newCssSelector);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -99,14 +99,14 @@ public class ClickOnElementWithIdImpl extends WebDriverActionImpl implements Cli
     {
       NotificationChain msgs = null;
       if (cssSelector != null)
-        msgs = ((InternalEObject)cssSelector).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR, null, msgs);
+        msgs = ((InternalEObject)cssSelector).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.CLICK_CSS_SELECTOR__CSS_SELECTOR, null, msgs);
       if (newCssSelector != null)
-        msgs = ((InternalEObject)newCssSelector).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR, null, msgs);
+        msgs = ((InternalEObject)newCssSelector).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.CLICK_CSS_SELECTOR__CSS_SELECTOR, null, msgs);
       msgs = basicSetCssSelector(newCssSelector, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR, newCssSelector, newCssSelector));
+      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.CLICK_CSS_SELECTOR__CSS_SELECTOR, newCssSelector, newCssSelector));
   }
 
   /**
@@ -119,7 +119,7 @@ public class ClickOnElementWithIdImpl extends WebDriverActionImpl implements Cli
   {
     switch (featureID)
     {
-      case BromiumPackage.CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR:
+      case BromiumPackage.CLICK_CSS_SELECTOR__CSS_SELECTOR:
         return basicSetCssSelector(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -135,7 +135,7 @@ public class ClickOnElementWithIdImpl extends WebDriverActionImpl implements Cli
   {
     switch (featureID)
     {
-      case BromiumPackage.CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR:
+      case BromiumPackage.CLICK_CSS_SELECTOR__CSS_SELECTOR:
         return getCssSelector();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -151,7 +151,7 @@ public class ClickOnElementWithIdImpl extends WebDriverActionImpl implements Cli
   {
     switch (featureID)
     {
-      case BromiumPackage.CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR:
+      case BromiumPackage.CLICK_CSS_SELECTOR__CSS_SELECTOR:
         setCssSelector((ParameterValue)newValue);
         return;
     }
@@ -168,7 +168,7 @@ public class ClickOnElementWithIdImpl extends WebDriverActionImpl implements Cli
   {
     switch (featureID)
     {
-      case BromiumPackage.CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR:
+      case BromiumPackage.CLICK_CSS_SELECTOR__CSS_SELECTOR:
         setCssSelector((ParameterValue)null);
         return;
     }
@@ -185,10 +185,10 @@ public class ClickOnElementWithIdImpl extends WebDriverActionImpl implements Cli
   {
     switch (featureID)
     {
-      case BromiumPackage.CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR:
+      case BromiumPackage.CLICK_CSS_SELECTOR__CSS_SELECTOR:
         return cssSelector != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //ClickOnElementWithIdImpl
+} //ClickCssSelectorImpl

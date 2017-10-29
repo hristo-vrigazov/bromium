@@ -6,7 +6,7 @@ package com.hribol.bromium.dsl.serializer;
 import com.google.inject.Inject;
 import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
-import com.hribol.bromium.dsl.bromium.ClickOnElementWithId;
+import com.hribol.bromium.dsl.bromium.ClickCssSelector;
 import com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent;
 import com.hribol.bromium.dsl.bromium.ExposedParameter;
 import com.hribol.bromium.dsl.bromium.Model;
@@ -46,8 +46,8 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 			case BromiumPackage.APPLICATION_ACTION:
 				sequence_ApplicationAction(context, (ApplicationAction) semanticObject); 
 				return; 
-			case BromiumPackage.CLICK_ON_ELEMENT_WITH_ID:
-				sequence_ClickOnElementWithId(context, (ClickOnElementWithId) semanticObject); 
+			case BromiumPackage.CLICK_CSS_SELECTOR:
+				sequence_ClickCssSelector(context, (ClickCssSelector) semanticObject); 
 				return; 
 			case BromiumPackage.ELEMENT_WITH_ID_IS_PRESENT:
 				sequence_ElementWithIdIsPresent(context, (ElementWithIdIsPresent) semanticObject); 
@@ -105,19 +105,19 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	
 	/**
 	 * Contexts:
-	 *     WebDriverAction returns ClickOnElementWithId
-	 *     ClickOnElementWithId returns ClickOnElementWithId
+	 *     WebDriverAction returns ClickCssSelector
+	 *     ClickCssSelector returns ClickCssSelector
 	 *
 	 * Constraint:
 	 *     cssSelector=ParameterValue
 	 */
-	protected void sequence_ClickOnElementWithId(ISerializationContext context, ClickOnElementWithId semanticObject) {
+	protected void sequence_ClickCssSelector(ISerializationContext context, ClickCssSelector semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.CLICK_ON_ELEMENT_WITH_ID__CSS_SELECTOR));
+			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.CLICK_CSS_SELECTOR__CSS_SELECTOR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.CLICK_CSS_SELECTOR__CSS_SELECTOR));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getClickOnElementWithIdAccess().getCssSelectorParameterValueParserRuleCall_6_0(), semanticObject.getCssSelector());
+		feeder.accept(grammarAccess.getClickCssSelectorAccess().getCssSelectorParameterValueParserRuleCall_6_0(), semanticObject.getCssSelector());
 		feeder.finish();
 	}
 	

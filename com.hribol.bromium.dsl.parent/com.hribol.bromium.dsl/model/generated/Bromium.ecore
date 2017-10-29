@@ -38,7 +38,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="cssSelector" eType="#//ParameterValue"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ClickOnElementWithId" eSuperTypes="#//WebDriverAction">
+  <eClassifiers xsi:type="ecore:EClass" name="ClickCssSelector" eSuperTypes="#//WebDriverAction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="cssSelector" eType="#//ParameterValue"
         containment="true"/>
   </eClassifiers>
