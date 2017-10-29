@@ -24,7 +24,7 @@ public abstract class ElementArrivedReplayInvocationTest {
         ReplayFunctionInvocation replayFunctionInvocation = provider.get(cssSelector, hashCode);
 
         assertEquals("\n" +
-                        functionName + "(\"#ico\", \"1283\")\n",
+                        functionName + "(\"#ico\", \"1283\");\n",
                 replayFunctionInvocation.getJavascriptCode());
     }
 

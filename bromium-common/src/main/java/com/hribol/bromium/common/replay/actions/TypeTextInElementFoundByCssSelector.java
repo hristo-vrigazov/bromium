@@ -7,7 +7,8 @@ import org.openqa.selenium.WebElement;
 
 import java.text.MessageFormat;
 
-import static com.hribol.bromium.core.utils.WebDriverActions.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR;
+import static com.hribol.bromium.common.builder.JsFunctionNames.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR;
+
 
 /**
  * Types text in an element found by a css selector. Clears the field first.

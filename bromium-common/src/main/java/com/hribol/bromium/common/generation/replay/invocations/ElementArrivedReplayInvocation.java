@@ -20,7 +20,7 @@ public class ElementArrivedReplayInvocation implements ReplayFunctionInvocation 
     public String getJavascriptCode() {
         return MessageFormat.format(
                 "\n" +
-                        "{0}(\"{1}\", \"{2}\")" +
+                        "{0}(\"{1}\", \"{2}\");" +
                         "\n",
                 functionName,
                 cssSelector,
