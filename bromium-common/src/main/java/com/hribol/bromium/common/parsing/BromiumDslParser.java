@@ -38,7 +38,7 @@ public class BromiumDslParser implements ApplicationConfigurationParser {
         List<Issue> issues = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
 
         if (!issues.isEmpty()) {
-            throw new IllegalStateException("Invalid bromium configuration. " + issues);
+            throw new IllegalStateException("Invalid bromium configuration. Issues: " + issues);
         }
 
         Model model = (Model) resource.getAllContents().next();

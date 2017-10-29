@@ -7,6 +7,8 @@ import org.apache.commons.io.IOUtils;
 import java.io.*;
 import java.util.UUID;
 
+import static com.hribol.bromium.core.utils.Constants.EVENT;
+
 /**
  * Created by hvrigazov on 29.07.17.
  */
@@ -19,6 +21,9 @@ public class TestUtils {
         public static final String CLICK_LINK_TO_AJAX_DEMO_PAGE = "clickLinkToAjaxDemoPage";
         public static final String CLICK_DYNAMIC_BUTTON = "clickDynamicButton";
         public static final String TYPE_TEXT_IN_NAME_INPUT = "typeTextInNameInput";
+        public static final String CLICK_AJAX_DEMO_BUTTON = "clickAjaxDemoButton";
+        public static final String CLICK_DESTROY_AJAX_CREATED_BUTTON = "clickDestroyAjaxCreatedButton";
+
     }
 
     public static class Pages {
@@ -55,16 +60,13 @@ public class TestUtils {
     public static TestScenarioSteps exampleTestScenarioSteps() {
         TestScenarioSteps steps = new TestScenarioSteps();
         steps.add(ImmutableMap.of(
-                "event", "mockEvent1",
-                "text", "mockText"));
+                EVENT, Events.PAGE_LOAD_AJAX));
 
         steps.add(ImmutableMap.of(
-                "event", "mockEvent2",
-                "text", "mockText"));
+                EVENT, Events.CLICK_AJAX_DEMO_BUTTON));
 
         steps.add(ImmutableMap.of(
-                "event", "mockEvent1",
-                "text", "mockText1"));
+                EVENT, Events.CLICK_DESTROY_AJAX_CREATED_BUTTON));
 
         return steps;
     }

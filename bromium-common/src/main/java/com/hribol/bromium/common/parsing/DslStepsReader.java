@@ -41,6 +41,9 @@ public class DslStepsReader implements StepsReader {
             String actionName = split[0];
             step.put(EVENT, actionName);
             ApplicationActionConfiguration actionConfiguration = actionConfigurations.get(actionName);
+            if (actionConfiguration == null) {
+                throw new IllegalStateException("The action " + actionName + " is not present in the configuration!");
+            }
             List<SyntaxDefinitionConfiguration> syntaxDefinitionConfigurationList = actionConfiguration.getSyntaxDefinitionConfigurationList();
 
             String actionInvocation = split[1];
