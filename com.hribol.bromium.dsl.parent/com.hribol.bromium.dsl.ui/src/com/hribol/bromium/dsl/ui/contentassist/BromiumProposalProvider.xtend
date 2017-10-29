@@ -13,10 +13,15 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
  * on how to customize the content assistant.
  */
 class BromiumProposalProvider extends AbstractBromiumProposalProvider {
-	
+    
+    override void complete_Postcondition(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+    	acceptor.accept(createCompletionProposal("then make sure", context));
+    	super.complete_Precondition(model, ruleCall, context, acceptor);
+    }
     
     override void complete_WebDriverAction(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		acceptor.accept(createCompletionProposal("click on element with css selector",context));
+		acceptor.accept(createCompletionProposal("click on element with css selector", context));
+		acceptor.accept(createCompletionProposal("element with css selector 'cssSelector' is clickable",context));
 		acceptor.accept(createCompletionProposal("type 'text' in element with css selector 'selector'", context));
 		super.complete_WebDriverAction(model, ruleCall, context, acceptor);
 	}

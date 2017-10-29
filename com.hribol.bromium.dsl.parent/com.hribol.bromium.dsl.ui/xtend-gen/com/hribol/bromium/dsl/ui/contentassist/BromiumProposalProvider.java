@@ -16,8 +16,15 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 @SuppressWarnings("all")
 public class BromiumProposalProvider extends AbstractBromiumProposalProvider {
   @Override
+  public void complete_Postcondition(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+    acceptor.accept(this.createCompletionProposal("then make sure", context));
+    super.complete_Precondition(model, ruleCall, context, acceptor);
+  }
+  
+  @Override
   public void complete_WebDriverAction(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     acceptor.accept(this.createCompletionProposal("click on element with css selector", context));
+    acceptor.accept(this.createCompletionProposal("element with css selector \'cssSelector\' is clickable", context));
     acceptor.accept(this.createCompletionProposal("type \'text\' in element with css selector \'selector\'", context));
     super.complete_WebDriverAction(model, ruleCall, context, acceptor);
   }
