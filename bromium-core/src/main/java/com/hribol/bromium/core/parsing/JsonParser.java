@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-public class JsonApplicationConfigurationParser implements ApplicationConfigurationParser {
+public class JsonParser implements ApplicationConfigurationParser {
 
     /**
      * {@inheritDoc}

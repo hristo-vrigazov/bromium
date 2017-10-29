@@ -20,12 +20,12 @@ import java.util.List;
 /**
  * Parses an application configuration written in Bromium DSL language
  */
-public class BromiumDslParser implements ApplicationConfigurationParser {
+public class DslParser implements ApplicationConfigurationParser {
 
     private ResourceSet resourceSet;
     private IResourceValidator validator;
 
-    public BromiumDslParser() {
+    public DslParser() {
         Injector injector = new BromiumStandaloneSetup().createInjectorAndDoEMFRegistration();
         resourceSet = injector.getInstance(ResourceSet.class);
         validator = injector.getInstance(IResourceValidator.class);

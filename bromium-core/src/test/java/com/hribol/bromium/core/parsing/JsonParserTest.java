@@ -12,14 +12,14 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by hvrigazov on 03.07.17.
  */
-public class JsonApplicationConfigurationParserTest {
+public class JsonParserTest {
 
     @Test
     public void canReadApplicationConfigurationFromFile() throws IOException {
         String filename = getClass().getResource("/tenniskafe.json").getFile();
         File file = new File(filename);
 
-        JsonApplicationConfigurationParser applicationConfigurationParser = new JsonApplicationConfigurationParser();
+        JsonParser applicationConfigurationParser = new JsonParser();
 
         ApplicationConfiguration applicationConfiguration = applicationConfigurationParser.parseApplicationConfiguration(file);
 
@@ -31,7 +31,7 @@ public class JsonApplicationConfigurationParserTest {
     public void canReadApplicationConfigurationFromFileName() throws IOException {
         String filename = getClass().getResource("/tenniskafe.json").getFile();
 
-        JsonApplicationConfigurationParser applicationConfigurationParser = new JsonApplicationConfigurationParser();
+        JsonParser applicationConfigurationParser = new JsonParser();
 
         ApplicationConfiguration applicationConfiguration = applicationConfigurationParser
                 .parseApplicationConfiguration(filename);
