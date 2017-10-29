@@ -1,7 +1,5 @@
 package com.hribol.bromium.common.generation.replay.invocations;
 
-import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
-
 import java.text.MessageFormat;
 
 import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CSS_SELECTOR;

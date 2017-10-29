@@ -23,7 +23,7 @@ import com.hribol.bromium.common.generation.helper.suppliers.StepAndWebDriverAct
 import com.hribol.bromium.common.generation.record.*;
 import com.hribol.bromium.common.generation.record.invocations.RecorderFunctionInvocation;
 import com.hribol.bromium.common.generation.replay.*;
-import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
+import com.hribol.bromium.common.generation.replay.invocations.ReplayFunctionInvocation;
 import com.hribol.bromium.common.ProxyDriverIntegrator;
 import com.hribol.bromium.common.parsing.DslStepsDumper;
 import com.hribol.bromium.common.parsing.DslStepsReader;

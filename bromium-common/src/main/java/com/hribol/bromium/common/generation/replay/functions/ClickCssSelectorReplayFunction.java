@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.replay.invocations.ClickCssSelectorReplayInvocation;
+import com.hribol.bromium.common.generation.replay.invocations.ReplayFunctionInvocation;
 import com.hribol.bromium.core.config.ParameterConfiguration;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.core.utils.WebDriverActions;

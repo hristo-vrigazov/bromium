@@ -4,7 +4,7 @@ import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.common.FunctionFactoryBase;
 import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.replay.functions.ClickCssSelectorReplayFunction;
-import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
+import com.hribol.bromium.common.generation.replay.invocations.ReplayFunctionInvocation;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.core.generation.GeneratedFunction;
 
