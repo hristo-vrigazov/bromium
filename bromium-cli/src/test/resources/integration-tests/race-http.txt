@@ -1,0 +1,3 @@
+loadPage: Load race-http.html page
+clickOnRaceDemoButton: Click on race demo button
+clickAjaxCreatedButton: Click Ajax created button

@@ -13,12 +13,12 @@ import java.util.UUID;
 public class TestUtils {
 
     public static class Events {
-        public static final String PAGE_LOAD_INDEX = "Load /index.html page";
-        public static final String PAGE_LOAD_AJAX = "Load /ajax.html page";
+        public static final String PAGE_LOAD_INDEX = "loadIndexPage";
+        public static final String PAGE_LOAD_AJAX = "loadAjaxPage";
         public static final String PAGE_LOAD = "loadPage";
-        public static final String CLICK_LINK_TO_AJAX_DEMO_PAGE = "Click link to Ajax Demo page";
-        public static final String CLICK_DYNAMIC_BUTTON = "Click dynamic button";
-        public static final String TYPE_TEXT_IN_NAME_INPUT = "Type text in name input";
+        public static final String CLICK_LINK_TO_AJAX_DEMO_PAGE = "clickLinkToAjaxDemoPage";
+        public static final String CLICK_DYNAMIC_BUTTON = "clickDynamicButton";
+        public static final String TYPE_TEXT_IN_NAME_INPUT = "typeTextInNameInput";
     }
 
     public static class Pages {
@@ -28,10 +28,10 @@ public class TestUtils {
 
     public static class Resources {
         public static final String DEMO_CONFIGURATION = "integration-tests/demo.json";
-        public static final String DYNAMIC_TEST_CASE = "integration-tests/dynamic.json";
-        public static final String AJAX_TEST_CASE = "integration-tests/ajax.json";
-        public static final String RACE_HTTP_TEST_CASE = "integration-tests/race-http.json";
-        public static final String TYPE_TEXT_TEST_CASE = "integration-tests/text-field.json";
+        public static final String DYNAMIC_TEST_CASE = "integration-tests/dynamic.txt";
+        public static final String AJAX_TEST_CASE = "integration-tests/ajax.txt";
+        public static final String RACE_HTTP_TEST_CASE = "integration-tests/race-http.txt";
+        public static final String TYPE_TEXT_TEST_CASE = "integration-tests/text-field.txt";
     }
 
     public static final String SCREEN_SYSTEM_PROPERTY = "screenNumber";

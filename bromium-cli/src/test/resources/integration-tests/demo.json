@@ -10,7 +10,7 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": true,
-            "name": "Click Ajax Demo button",
+            "name": "clickAjaxDemoButton",
             "webDriverAction": {
                 "parametersConfiguration": {
                     "cssSelector": {
@@ -20,7 +20,12 @@
                     }
                 },
                 "webDriverActionType": "CLICK_CSS_SELECTOR"
-            }
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click Ajax Demo button"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -32,7 +37,7 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": true,
-            "name": "Click link to Ajax Demo page",
+            "name": "clickLinkToAjaxDemoPage",
             "webDriverAction": {
                 "parametersConfiguration": {
                     "cssSelector": {
@@ -42,7 +47,12 @@
                     }
                 },
                 "webDriverActionType": "CLICK_CSS_SELECTOR"
-            }
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click link to Ajax Demo page"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -54,7 +64,7 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": false,
-            "name": "Click Ajax created button",
+            "name": "clickAjaxCreatedButton",
             "webDriverAction": {
                 "parametersConfiguration": {
                     "cssSelector": {
@@ -64,7 +74,12 @@
                     }
                 },
                 "webDriverActionType": "CLICK_CSS_SELECTOR"
-            }
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click Ajax created button"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -76,7 +91,7 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": false,
-            "name": "Click destroy ajax created button",
+            "name": "clickDestroyAjaxCreatedButton",
             "webDriverAction": {
                 "parametersConfiguration": {
                     "cssSelector": {
@@ -86,7 +101,12 @@
                     }
                 },
                 "webDriverActionType": "CLICK_CSS_SELECTOR"
-            }
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click destroy ajax created button"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -98,7 +118,7 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": false,
-            "name": "Click dynamic button",
+            "name": "clickDynamicButton",
             "webDriverAction": {
                 "parametersConfiguration": {
                     "cssSelector": {
@@ -108,7 +128,12 @@
                     }
                 },
                 "webDriverActionType": "CLICK_CSS_SELECTOR"
-            }
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click dynamic button"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -120,7 +145,7 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": false,
-            "name": "Click dynamically created button",
+            "name": "clickDynamicallyCreatedButton",
             "webDriverAction": {
                 "parametersConfiguration": {
                     "cssSelector": {
@@ -130,7 +155,12 @@
                     }
                 },
                 "webDriverActionType": "CLICK_CSS_SELECTOR"
-            }
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click dynamically created button"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -142,7 +172,7 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": false,
-            "name": "Click delete dynamically created button",
+            "name": "clickDeleteDynamicallyCreatedButton",
             "webDriverAction": {
                 "parametersConfiguration": {
                     "cssSelector": {
@@ -152,7 +182,12 @@
                     }
                 },
                 "webDriverActionType": "CLICK_CSS_SELECTOR"
-            }
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click delete dynamically created button"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -164,7 +199,7 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": false,
-            "name": "Click on race demo button",
+            "name": "clickRaceDemoButton",
             "webDriverAction": {
                 "parametersConfiguration": {
                     "cssSelector": {
@@ -174,7 +209,12 @@
                     }
                 },
                 "webDriverActionType": "CLICK_CSS_SELECTOR"
-            }
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click on race demo button"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -186,7 +226,7 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": true,
-            "name": "Load /ajax.html page",
+            "name": "loadAjaxPage",
             "webDriverAction": {
                 "parametersConfiguration": {
                     "url": {
@@ -196,7 +236,12 @@
                     }
                 },
                 "webDriverActionType": "PAGE_LOADING"
-            }
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Load /ajax.html page"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -208,7 +253,7 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": true,
-            "name": "Load /index.html page",
+            "name": "loadIndexPage",
             "webDriverAction": {
                 "parametersConfiguration": {
                     "url": {
@@ -218,7 +263,12 @@
                     }
                 },
                 "webDriverActionType": "PAGE_LOADING"
-            }
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Load /ajax.html page"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {

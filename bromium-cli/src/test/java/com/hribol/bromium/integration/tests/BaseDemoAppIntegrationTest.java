@@ -31,7 +31,7 @@ public abstract class BaseDemoAppIntegrationTest {
     protected String pathToTestCase;
 
     public BaseDemoAppIntegrationTest(String resourceConfigurationPath, String pathToTestCase) {
-        this(resourceConfigurationPath, pathToTestCase, System.getProperty("screenNumber", "1"));
+        this(resourceConfigurationPath, pathToTestCase, System.getProperty(SCREEN_SYSTEM_PROPERTY, "1"));
     }
 
     public BaseDemoAppIntegrationTest(String resourceConfigurationPath, String pathToTestCase, String screen) {

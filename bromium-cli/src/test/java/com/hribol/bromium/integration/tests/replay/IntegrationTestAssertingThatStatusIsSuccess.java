@@ -1,5 +1,6 @@
 package com.hribol.bromium.integration.tests.replay;
 
+import static com.hribol.bromium.integration.tests.TestUtils.SCREEN_SYSTEM_PROPERTY;
 import static com.hribol.bromium.replay.report.AutomationResult.SUCCESS;
 import static org.junit.Assert.assertEquals;
 
@@ -9,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class IntegrationTestAssertingThatStatusIsSuccess extends BaseReplayIntegrationTest {
     public IntegrationTestAssertingThatStatusIsSuccess(String resourceConfigurationPath,
                                                        String resouceCasePath) {
-        super(resourceConfigurationPath, resouceCasePath, System.getProperty("screenNumber", "1"));
+        super(resourceConfigurationPath, resouceCasePath, System.getProperty(SCREEN_SYSTEM_PROPERTY, "1"));
     }
 
     @Override

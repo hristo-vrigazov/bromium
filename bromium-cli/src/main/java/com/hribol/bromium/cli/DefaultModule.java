@@ -249,8 +249,8 @@ public class DefaultModule extends AbstractModule {
     public ApplicationConfiguration getApplicationConfiguration(ApplicationConfigurationParser applicationConfigurationParser,
                                                                 @Named(CONFIGURATION_FILE)
                                                                 Provider<File> fileProvider) throws IOException {
-        File inputStream = fileProvider.get();
-        return applicationConfigurationParser.parseApplicationConfiguration(inputStream);
+        File file = fileProvider.get();
+        return applicationConfigurationParser.parseApplicationConfiguration(file);
     }
 
     @Provides
