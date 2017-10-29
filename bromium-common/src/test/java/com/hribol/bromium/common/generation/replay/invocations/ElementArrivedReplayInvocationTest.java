@@ -12,7 +12,7 @@ public abstract class ElementArrivedReplayInvocationTest {
     private String functionName;
     private ElementArrivedReplayInvocationProvider provider;
 
-    public ElementArrivedReplayInvocationTest(String functionName, ElementArrivedReplayInvocationProvider provider) {
+    protected ElementArrivedReplayInvocationTest(String functionName, ElementArrivedReplayInvocationProvider provider) {
         this.functionName = functionName;
         this.provider = provider;
     }
