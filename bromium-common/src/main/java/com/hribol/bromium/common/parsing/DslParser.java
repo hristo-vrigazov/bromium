@@ -5,6 +5,7 @@ import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.parsing.ApplicationConfigurationParser;
 import com.hribol.bromium.dsl.BromiumStandaloneSetup;
 import com.hribol.bromium.dsl.bromium.Model;
+import com.hribol.bromium.dsl.bromium.impl.ModelImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -42,6 +43,8 @@ public class DslParser implements ApplicationConfigurationParser {
         }
 
         Model model = (Model) resource.getAllContents().next();
+
+
 
         ApplicationConfiguration applicationConfiguration = new ApplicationConfiguration();
         applicationConfiguration.setApplicationName(model.getName());

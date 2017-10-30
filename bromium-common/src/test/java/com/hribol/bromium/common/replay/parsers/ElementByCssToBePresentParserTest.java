@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by hvrigazov on 21.05.17.
  */
-public class ElementByCssToBeClickableParserTest {
+public class ElementByCssToBePresentParserTest {
 
     @Test
     public void canCreateActionCorrectly() {

@@ -1,6 +1,6 @@
 package com.hribol.bromium.common.replay.parsers;
 
-import com.hribol.bromium.common.replay.actions.ElementByCssToBeClickable;
+import com.hribol.bromium.common.replay.actions.ElementByCssToBePresent;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.parsers.WebDriverActionParameterParser;
 
@@ -11,7 +11,7 @@ import static com.hribol.bromium.core.utils.Constants.EVENT;
 import static com.hribol.bromium.core.utils.Constants.TIMEOUT;
 
 /**
- * A parser for {@link ElementByCssToBeClickable}
+ * A parser for {@link ElementByCssToBePresent}
  */
 public class ElementByCssToBeClickableParser implements WebDriverActionParameterParser {
 
@@ -20,6 +20,6 @@ public class ElementByCssToBeClickableParser implements WebDriverActionParameter
         String cssSelector = parameters.get(CSS_SELECTOR);
         String eventName = parameters.get(EVENT);
         Integer timeout = Integer.parseInt(parameters.get(TIMEOUT));
-        return new ElementByCssToBeClickable(cssSelector, eventName, timeout);
+        return new ElementByCssToBePresent(cssSelector, eventName);
     }
 }
