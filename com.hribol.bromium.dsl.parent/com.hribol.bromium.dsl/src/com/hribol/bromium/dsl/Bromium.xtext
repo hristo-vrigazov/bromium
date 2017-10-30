@@ -45,7 +45,7 @@ ExpectHttpRequest:
 
 
 // TODO: syntactic sugar for CSS selectors
-ElementWithIdIsPresent: 'element' 'with' 'css' 'selector' cssSelector=ParameterValue 'is' 'clickable';
+ElementWithIdIsPresent: 'element' 'with' 'css' 'selector' cssSelector=ParameterValue 'is' 'present';
 ClickCssSelector: 'click' 'on' 'element' 'with' 'css' 'selector' cssSelector=ParameterValue;
 PageLoad: 'load' 'page' subpath=STRING;
 TypeTextInElementFoundByCssSelector: 'type' text=ParameterValue 

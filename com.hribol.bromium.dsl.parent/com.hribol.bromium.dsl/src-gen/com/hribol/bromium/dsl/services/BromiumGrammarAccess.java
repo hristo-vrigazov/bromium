@@ -325,14 +325,14 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cCssSelectorAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cCssSelectorParameterValueParserRuleCall_4_0 = (RuleCall)cCssSelectorAssignment_4.eContents().get(0);
 		private final Keyword cIsKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Keyword cClickableKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Keyword cPresentKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//// TODO: syntactic sugar for CSS selectors
 		//ElementWithIdIsPresent:
-		//	'element' 'with' 'css' 'selector' cssSelector=ParameterValue 'is' 'clickable';
+		//	'element' 'with' 'css' 'selector' cssSelector=ParameterValue 'is' 'present';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'element' 'with' 'css' 'selector' cssSelector=ParameterValue 'is' 'clickable'
+		//'element' 'with' 'css' 'selector' cssSelector=ParameterValue 'is' 'present'
 		public Group getGroup() { return cGroup; }
 		
 		//'element'
@@ -356,8 +356,8 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		//'is'
 		public Keyword getIsKeyword_5() { return cIsKeyword_5; }
 		
-		//'clickable'
-		public Keyword getClickableKeyword_6() { return cClickableKeyword_6; }
+		//'present'
+		public Keyword getPresentKeyword_6() { return cPresentKeyword_6; }
 	}
 	public class ClickCssSelectorElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.ClickCssSelector");
@@ -734,7 +734,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//// TODO: syntactic sugar for CSS selectors
 	//ElementWithIdIsPresent:
-	//	'element' 'with' 'css' 'selector' cssSelector=ParameterValue 'is' 'clickable';
+	//	'element' 'with' 'css' 'selector' cssSelector=ParameterValue 'is' 'present';
 	public ElementWithIdIsPresentElements getElementWithIdIsPresentAccess() {
 		return pElementWithIdIsPresent;
 	}

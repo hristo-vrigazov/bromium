@@ -1523,9 +1523,9 @@ rule__ElementWithIdIsPresent__Group__6__Impl
 	}
 :
 (
-	{ before(grammarAccess.getElementWithIdIsPresentAccess().getClickableKeyword_6()); }
-	'clickable'
-	{ after(grammarAccess.getElementWithIdIsPresentAccess().getClickableKeyword_6()); }
+	{ before(grammarAccess.getElementWithIdIsPresentAccess().getPresentKeyword_6()); }
+	'present'
+	{ after(grammarAccess.getElementWithIdIsPresentAccess().getPresentKeyword_6()); }
 )
 ;
 finally {

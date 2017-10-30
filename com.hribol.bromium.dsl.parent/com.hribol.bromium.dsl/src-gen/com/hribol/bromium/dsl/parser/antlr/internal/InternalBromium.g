@@ -629,9 +629,9 @@ ruleElementWithIdIsPresent returns [EObject current=null]
 		{
 			newLeafNode(otherlv_5, grammarAccess.getElementWithIdIsPresentAccess().getIsKeyword_5());
 		}
-		otherlv_6='clickable'
+		otherlv_6='present'
 		{
-			newLeafNode(otherlv_6, grammarAccess.getElementWithIdIsPresentAccess().getClickableKeyword_6());
+			newLeafNode(otherlv_6, grammarAccess.getElementWithIdIsPresentAccess().getPresentKeyword_6());
 		}
 	)
 ;

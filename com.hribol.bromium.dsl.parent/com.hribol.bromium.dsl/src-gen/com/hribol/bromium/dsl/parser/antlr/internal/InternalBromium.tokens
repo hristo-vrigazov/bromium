@@ -1,6 +1,5 @@
 'actions'=14
 'click'=34
-'clickable'=33
 'css'=30
 'do'=23
 'element'=28
@@ -16,6 +15,7 @@
 'not'=24
 'on'=35
 'page'=37
+'present'=33
 'request'=27
 'selector'=31
 'sure'=22

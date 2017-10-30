@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBromiumParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'name'", "'version'", "'actions'", "'{'", "'}'", "'from'", "'id'", "'syntax'", "'when'", "'then'", "'make'", "'sure'", "'do'", "'not'", "'expect'", "'http'", "'request'", "'element'", "'with'", "'css'", "'selector'", "'is'", "'clickable'", "'click'", "'on'", "'load'", "'page'", "'type'", "'in'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'name'", "'version'", "'actions'", "'{'", "'}'", "'from'", "'id'", "'syntax'", "'when'", "'then'", "'make'", "'sure'", "'do'", "'not'", "'expect'", "'http'", "'request'", "'element'", "'with'", "'css'", "'selector'", "'is'", "'present'", "'click'", "'on'", "'load'", "'page'", "'type'", "'in'"
     };
     public static final int RULE_STRING=4;
     public static final int RULE_SL_COMMENT=8;
@@ -4568,21 +4568,21 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ElementWithIdIsPresent__Group__6__Impl"
-    // InternalBromium.g:1520:1: rule__ElementWithIdIsPresent__Group__6__Impl : ( 'clickable' ) ;
+    // InternalBromium.g:1520:1: rule__ElementWithIdIsPresent__Group__6__Impl : ( 'present' ) ;
     public final void rule__ElementWithIdIsPresent__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1524:1: ( ( 'clickable' ) )
-            // InternalBromium.g:1525:1: ( 'clickable' )
+            // InternalBromium.g:1524:1: ( ( 'present' ) )
+            // InternalBromium.g:1525:1: ( 'present' )
             {
-            // InternalBromium.g:1525:1: ( 'clickable' )
-            // InternalBromium.g:1526:2: 'clickable'
+            // InternalBromium.g:1525:1: ( 'present' )
+            // InternalBromium.g:1526:2: 'present'
             {
-             before(grammarAccess.getElementWithIdIsPresentAccess().getClickableKeyword_6()); 
+             before(grammarAccess.getElementWithIdIsPresentAccess().getPresentKeyword_6()); 
             match(input,33,FOLLOW_2); 
-             after(grammarAccess.getElementWithIdIsPresentAccess().getClickableKeyword_6()); 
+             after(grammarAccess.getElementWithIdIsPresentAccess().getPresentKeyword_6()); 
 
             }
 

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBromiumParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'name'", "'version'", "'from'", "'actions'", "'{'", "'}'", "'id'", "'syntax'", "'when'", "'then'", "'make'", "'sure'", "'do'", "'not'", "'expect'", "'http'", "'request'", "'element'", "'with'", "'css'", "'selector'", "'is'", "'clickable'", "'click'", "'on'", "'load'", "'page'", "'type'", "'in'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'name'", "'version'", "'from'", "'actions'", "'{'", "'}'", "'id'", "'syntax'", "'when'", "'then'", "'make'", "'sure'", "'do'", "'not'", "'expect'", "'http'", "'request'", "'element'", "'with'", "'css'", "'selector'", "'is'", "'present'", "'click'", "'on'", "'load'", "'page'", "'type'", "'in'"
     };
     public static final int RULE_STRING=4;
     public static final int RULE_SL_COMMENT=8;
@@ -1401,7 +1401,7 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleElementWithIdIsPresent"
-    // InternalBromium.g:585:1: ruleElementWithIdIsPresent returns [EObject current=null] : (otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'clickable' ) ;
+    // InternalBromium.g:585:1: ruleElementWithIdIsPresent returns [EObject current=null] : (otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'present' ) ;
     public final EObject ruleElementWithIdIsPresent() throws RecognitionException {
         EObject current = null;
 
@@ -1418,11 +1418,11 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBromium.g:591:2: ( (otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'clickable' ) )
-            // InternalBromium.g:592:2: (otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'clickable' )
+            // InternalBromium.g:591:2: ( (otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'present' ) )
+            // InternalBromium.g:592:2: (otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'present' )
             {
-            // InternalBromium.g:592:2: (otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'clickable' )
-            // InternalBromium.g:593:3: otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'clickable'
+            // InternalBromium.g:592:2: (otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'present' )
+            // InternalBromium.g:593:3: otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'present'
             {
             otherlv_0=(Token)match(input,28,FOLLOW_20); 
 
@@ -1477,7 +1477,7 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
             		
             otherlv_6=(Token)match(input,33,FOLLOW_2); 
 
-            			newLeafNode(otherlv_6, grammarAccess.getElementWithIdIsPresentAccess().getClickableKeyword_6());
+            			newLeafNode(otherlv_6, grammarAccess.getElementWithIdIsPresentAccess().getPresentKeyword_6());
             		
 
             }
