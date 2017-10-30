@@ -39,7 +39,7 @@ public abstract class WebDriverActionFactoryBase implements WebDriverActionFacto
         add(CLICK_CLASS_BY_TEXT, new ClickClassByTextParser());
         add(CLICK_CSS_SELECTOR, new ClickCssSelectorParser());
         add(TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR, new TypeTextInElementFoundByCssSelectorParser());
-        add(ELEMENT_BY_CSS_TO_BE_CLICKABLE, new ElementByCssToBeClickableParser());
+        add(ELEMENT_BY_CSS_TO_BE_PRESENT, new ElementByCssToBePresentParser());
         add(TEXT_OF_ELEMENT_FOUND_BY_CSS_SELECTOR_TO_BE, new TextOfElementFoundByCssSelectorToBeParser());
     }
 

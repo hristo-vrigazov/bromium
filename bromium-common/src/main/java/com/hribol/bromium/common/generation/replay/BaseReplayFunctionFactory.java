@@ -4,6 +4,7 @@ import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.common.FunctionFactoryBase;
 import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.replay.functions.ClickCssSelectorReplayFunction;
+import com.hribol.bromium.common.generation.replay.functions.ElementByCssToBePresentReplayFunction;
 import com.hribol.bromium.common.generation.replay.functions.TypeTextInElementFoundByCssSelectorReplayFunction;
 import com.hribol.bromium.common.generation.replay.invocations.ReplayFunctionInvocation;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
@@ -12,6 +13,7 @@ import com.hribol.bromium.core.generation.GeneratedFunction;
 import java.util.function.Supplier;
 
 import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CSS_SELECTOR;
+import static com.hribol.bromium.core.utils.WebDriverActions.ELEMENT_BY_CSS_TO_BE_PRESENT;
 import static com.hribol.bromium.core.utils.WebDriverActions.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR;
 
 /**
@@ -33,5 +35,6 @@ public abstract class BaseReplayFunctionFactory extends
     protected void addPredefined() {
         add(CLICK_CSS_SELECTOR, new ClickCssSelectorReplayFunction(jsCollector));
         add(TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR, new TypeTextInElementFoundByCssSelectorReplayFunction(jsCollector));
+        add(ELEMENT_BY_CSS_TO_BE_PRESENT, new ElementByCssToBePresentReplayFunction(jsCollector));
     }
 }

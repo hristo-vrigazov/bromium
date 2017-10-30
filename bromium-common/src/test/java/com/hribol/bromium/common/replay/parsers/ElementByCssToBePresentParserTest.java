@@ -22,14 +22,12 @@ public class ElementByCssToBePresentParserTest {
         String eventName = "eventName";
         boolean expectsHttp = false;
         String cssSelector = ".test";
-        int timeout = 10;
 
         Map<String, String> parameters = new HashMap<>();
         parameters.put(EVENT, eventName);
         parameters.put(CSS_SELECTOR, cssSelector);
-        parameters.put(TIMEOUT, String.valueOf(timeout));
 
-        WebDriverActionParameterParser parser = new ElementByCssToBeClickableParser();
+        WebDriverActionParameterParser parser = new ElementByCssToBePresentParser();
 
         WebDriverAction webDriverAction = parser.create(parameters, expectsHttp);
 
