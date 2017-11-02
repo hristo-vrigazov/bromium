@@ -3,7 +3,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Content-Language" content="en-us">
 	<title>Example Web Editor</title>
-	<link rel="stylesheet" type="text/css" href="xtext/2.12.0/xtext-ace.css"/>
+	<link rel="stylesheet" type="text/css" href="xtext/2.13.0/xtext-ace.css"/>
 	<link rel="stylesheet" type="text/css" href="style.css"/>
 	<script src="webjars/requirejs/2.3.2/require.min.js"></script>
 	<script type="text/javascript">
@@ -16,15 +16,24 @@
 			paths: {
 				"jquery": "webjars/jquery/2.2.4/jquery.min",
 				"ace/ext/language_tools": "webjars/ace/1.2.3/src/ext-language_tools",
-				"xtext/xtext-ace": "xtext/2.12.0/xtext-ace"
+				"xtext/xtext-ace": "xtext/2.13.0/xtext-ace"
 			}
 		});
 		require(["webjars/ace/1.2.3/src/ace"], function() {
 			require(["xtext/xtext-ace"], function(xtext) {
-				xtext.createEditor({
+				var editor = xtext.createEditor({
 					baseUrl: baseUrl,
 					syntaxDefinition: "xtext-resources/generated/mode-brm"
 				});
+				
+				editor.setOptions({
+				            enableBasicAutocompletion: true,
+				            enableSnippets: true,
+				            enableLiveAutocompletion: true
+				        });
+				        
+				var session = editor.getSession();
+				editor.setBehavioursEnabled(true);
 			});
 		});
 	</script>

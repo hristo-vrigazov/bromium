@@ -21,3 +21,5 @@ bromium-core/src/test/resources/dynamic-testCase.json
 *._trace
 .recommenders
 generated
+.project
+.launch
