@@ -17,5 +17,6 @@ window.bromium.notifyCondition = function(url, condition) {
 };
 
 var options = {
-    existing: true
+    existing: true,
+    fireOnAttributesModification: true
 };

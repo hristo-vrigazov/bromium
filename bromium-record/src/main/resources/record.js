@@ -23,6 +23,7 @@ window.bromium.notifyEvent = function(parameters) {
 window.bromium.shouldInterceptHyperLink = new RegExp(location.host);
 
 var options = {
+    fireOnAttributesModification: true,
     existing: true
 };
 

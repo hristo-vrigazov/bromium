@@ -343,8 +343,14 @@
                 "webDriverActionType": "NOTHING"
             },
             "conditionBeforeExecution": {
-                "parametersConfiguration": {},
-                "webDriverActionType": "NOTHING"
+                "parametersConfiguration": {
+                    "cssSelector": {
+                        "expose": false,
+                        "parameterName": "cssSelector",
+                        "value": "#edit-toolbar"
+                    }
+                },
+                "webDriverActionType": "ELEMENT_BY_CSS_TO_BE_PRESENT"
             },
             "expectsHttpRequest": true,
             "name": "clickLikeButton",
@@ -361,6 +367,33 @@
             "syntaxDefinitionConfigurationList": [
                 {
                     "content": "Click like button"
+                }
+            ]
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": true,
+            "name": "clickEditButton",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "cssSelector": {
+                        "expose": false,
+                        "parameterName": "cssSelector",
+                        "value": "#edit"
+                    }
+                },
+                "webDriverActionType": "CLICK_CSS_SELECTOR"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click edit button"
                 }
             ]
         }
