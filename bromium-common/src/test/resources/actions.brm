@@ -4,9 +4,9 @@ actions {
 
     id typeUsernameField
     syntax 'Type ' username ' into username field '
-    when element with css selector '#login' is clickable
+    when element with css selector '#login' is present
     type username in element with css selector '#login'
-    then make sure element with css selector '#pass' is clickable
+    then make sure element with css selector '#pass' is present
     do not expect http request
 
     id clickLoginButton
