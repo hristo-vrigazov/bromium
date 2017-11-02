@@ -32,7 +32,7 @@ public class DemoApp {
             "race-http.html",
             "text-field.html",
             "index.html",
-            "presense_example.html"
+            "presence_example.html"
     };
 
     private int port;
