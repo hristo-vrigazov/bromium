@@ -336,6 +336,33 @@
                     "content": "in name input"
                 }
             ]
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": true,
+            "name": "clickLikeButton",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "cssSelector": {
+                        "expose": false,
+                        "parameterName": "cssSelector",
+                        "value": ".like"
+                    }
+                },
+                "webDriverActionType": "CLICK_CSS_SELECTOR"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click like button"
+                }
+            ]
         }
     ],
     "applicationName": "Demo app for Bromium vs Selenium",

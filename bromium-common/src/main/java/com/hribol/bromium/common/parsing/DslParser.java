@@ -45,7 +45,6 @@ public class DslParser implements ApplicationConfigurationParser {
         Model model = (Model) resource.getAllContents().next();
 
 
-
         ApplicationConfiguration applicationConfiguration = new ApplicationConfiguration();
         applicationConfiguration.setApplicationName(model.getName());
         applicationConfiguration.setVersion(model.getVersion());

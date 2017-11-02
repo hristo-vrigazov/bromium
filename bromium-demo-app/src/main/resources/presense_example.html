@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Something</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <h2>Overview page</h2>
+    <button id="edit" onclick="goToEditPage()">Edit</button>
+
+    <br><br>
+
+    <div id="overview-toolbar">
+        <button class="like">Like</button>
+    </div>
+
+    <script>
+        function goToEditPage() {
+            setTimeout(function () {
+                var overviewToolbar = document.getElementById('overview-toolbar');
+                overviewToolbar.id = 'edit-toolbar';
+            }, 2000);
+        }
+    </script>
+</body>

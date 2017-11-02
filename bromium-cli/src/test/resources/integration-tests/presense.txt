@@ -1,0 +1,2 @@
+loadPage: Load presense_example.html page
+clickLikeButton: Click like button
