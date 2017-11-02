@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Something</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+<h2>Overview page</h2>
+<button id="append1" onclick="append1()">Append 1</button>
+
+<br><br>
+
+<p id="text-elem">
+    Something
+</p>
+
+<script>
+    function append1() {
+        setTimeout(function () {
+            var elem = document.getElementById('text-elem');
+            elem.innerHTML += '1';
+        }, 1000);
+    }
+</script>
+</body>

@@ -31,7 +31,8 @@ public class DemoApp {
             "race-http.html",
             "text-field.html",
             "index.html",
-            "presence-example.html"
+            "presence-example.html",
+            "text-to-be.html"
     };
 
     private int port;
