@@ -1,5 +1,6 @@
 package com.hribol.bromium.cli.commands;
 
+import com.hribol.bromium.core.parsing.ApplicationConfigurationParser;
 import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.parsing.ApplicationConfigurationDumper;
@@ -62,7 +63,7 @@ public class VersionCommandTest {
         TextIO textIO;
         PromptUtils promptUtils;
         ApplicationConfiguration applicationConfiguration;
-        JsonParser applicationConfigurationParser;
+        ApplicationConfigurationParser applicationConfigurationParser;
         ApplicationConfigurationDumper applicationConfigurationDumper;
         IOProvider<ApplicationConfiguration> applicationConfigurationIOProvider;
 
@@ -87,7 +88,7 @@ public class VersionCommandTest {
 
             when(applicationConfigurationIOProvider.get()).thenReturn(applicationConfiguration);
 
-            applicationConfigurationParser = mock(JsonParser.class);
+            applicationConfigurationParser = mock(ApplicationConfigurationParser.class);
             when(applicationConfigurationParser.parseApplicationConfiguration(inputFilename))
                     .thenReturn(applicationConfiguration);
             applicationConfigurationDumper = mock(ApplicationConfigurationDumper.class);
