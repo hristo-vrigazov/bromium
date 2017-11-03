@@ -72,6 +72,10 @@
             <groupId>com.hribol.bromium.dsl</groupId>
             <artifactId>com.hribol.bromium.dsl</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
