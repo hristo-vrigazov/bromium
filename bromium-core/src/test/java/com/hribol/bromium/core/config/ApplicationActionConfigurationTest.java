@@ -1,5 +1,6 @@
 package com.hribol.bromium.core.config;
 
+import com.codebox.bean.JavaBeanTester;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -11,26 +12,34 @@ import static org.mockito.Mockito.mock;
 public class ApplicationActionConfigurationTest {
 
     @Test
-    public void applicationActionConfigurationSettersAndGetters() {
-        String name = "name";
-        WebDriverActionConfiguration conditionBeforeExecution = mock(WebDriverActionConfiguration.class);
-        WebDriverActionConfiguration webdriverAction = mock(WebDriverActionConfiguration.class);
-        WebDriverActionConfiguration conditionAfterExecution = mock(WebDriverActionConfiguration.class);
-        boolean expectsHttp = true;
+    public void canAddSyntaxDefinitionConfigurations() {
+        SyntaxDefinitionConfiguration syntaxDefinitionConfiguration = mock(SyntaxDefinitionConfiguration.class);
 
         ApplicationActionConfiguration applicationActionConfiguration = new ApplicationActionConfiguration();
+        applicationActionConfiguration.addSyntaxDefinition(syntaxDefinitionConfiguration);
 
-        applicationActionConfiguration.setName(name);
-        applicationActionConfiguration.setConditionBeforeExecution(conditionBeforeExecution);
-        applicationActionConfiguration.setWebDriverAction(webdriverAction);
-        applicationActionConfiguration.setConditionAfterExecution(conditionAfterExecution);
-        applicationActionConfiguration.setExpectsHttpRequest(expectsHttp);
+        assertEquals(1, applicationActionConfiguration.getSyntaxDefinitionConfigurationList().size());
+        assertEquals(syntaxDefinitionConfiguration, applicationActionConfiguration.getSyntaxDefinitionConfigurationList().get(0));
+    }
 
-        assertEquals(name, applicationActionConfiguration.getName());
-        assertEquals(conditionBeforeExecution, applicationActionConfiguration.getConditionBeforeExecution());
-        assertEquals(webdriverAction, applicationActionConfiguration.getWebDriverAction());
-        assertEquals(conditionAfterExecution, applicationActionConfiguration.getConditionAfterExecution());
-        assertEquals(expectsHttp, applicationActionConfiguration.expectsHttpRequest());
+    @Test
+    public void expectsHttpRequestIsFalseInitially() {
+        ApplicationActionConfiguration applicationActionConfiguration = new ApplicationActionConfiguration();
+
+        assertEquals(false, applicationActionConfiguration.expectsHttpRequest());
+    }
+
+    @Test
+    public void expectsHttpRequestCanBeWritten() {
+        ApplicationActionConfiguration applicationActionConfiguration = new ApplicationActionConfiguration();
+        applicationActionConfiguration.setExpectsHttpRequest(true);
+
+        assertEquals(true, applicationActionConfiguration.expectsHttpRequest());
+    }
+
+    @Test
+    public void testAsBean() {
+        JavaBeanTester.builder(ApplicationActionConfiguration.class).test();
     }
 
 }
