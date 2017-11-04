@@ -54,11 +54,24 @@ public class JsArriveHandlerBuilder {
     /**
      * Notifies that a condition has been satisfied
      * @param hashcode
-     * @return
+     * @return this object, used for fluent API
      */
     public JsArriveHandlerBuilder notifySatisfiedCondition(String hashcode) {
         String toBeAdded = MessageFormat.format("\t\tbromium.notifySatisfiedCondition({0});\n\t", hashcode);
         stringBuilder.append(toBeAdded);
         return this;
     }
+
+    /**
+     * Notifies that a condition has been satisfied when the text of the current element (this) becomes given text
+     * @param textTarget the text that has to be equal to
+     * @param hashCode the name of the hashCodeParameter
+     * @return this object, used for fluent API
+     */
+    public JsArriveHandlerBuilder notifySatisfiedBasedOnText(String textTarget, String hashCode) {
+        String toBeAdded = MessageFormat.format("\t\tbromium.notifySatisfiedBasedOnText(this, {0}, {1});\n\t", textTarget, hashCode);
+        stringBuilder.append(toBeAdded);
+        return this;
+    }
+
 }
