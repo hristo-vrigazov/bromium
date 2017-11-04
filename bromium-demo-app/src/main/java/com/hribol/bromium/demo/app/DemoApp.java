@@ -32,7 +32,8 @@ public class DemoApp {
             "text-field.html",
             "index.html",
             "presence-example.html",
-            "text-to-be.html"
+            "text-to-be.html",
+            "click-class-by-text.html"
     };
 
     private int port;

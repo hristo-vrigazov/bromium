@@ -23,12 +23,15 @@ public class TestUtils {
         public static final String TYPE_TEXT_IN_NAME_INPUT = "typeTextInNameInput";
         public static final String CLICK_AJAX_DEMO_BUTTON = "clickAjaxDemoButton";
         public static final String CLICK_DESTROY_AJAX_CREATED_BUTTON = "clickDestroyAjaxCreatedButton";
+        public static final String CLICK_ON_LISTED_ITEM = "clickOnListedItem";
 
     }
 
     public static class Pages {
         public static final String DYNAMIC_DEMO_PAGE = "dynamic.html";
         public static final String TYPE_TEXT_DEMO_PAGE = "text-field.html";
+        public static final String CLICK_CLASS_BY_TEXT_DEMO_PAGE = "click-class-by-text.html";
+
     }
 
     public static class Resources {
@@ -54,6 +57,8 @@ public class TestUtils {
     public static final String DONE_ID = "done";
     public static final String ALIAS_URL = "alias-url";
     public static final String ALIAS_TEXT = "alias-text";
+    public static final String ITEM_NAME = "itemName";
+    public static final String TARGET = "Target";
 
 
     public static String generateRandomJsonFilename() {

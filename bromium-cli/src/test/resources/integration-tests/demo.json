@@ -478,7 +478,7 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": true,
-            "name": "clickOnOfListedItem",
+            "name": "clickOnListedItem",
             "webDriverAction": {
                 "parametersConfiguration": {
                     "initialCollectorClass": {
