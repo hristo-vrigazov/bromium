@@ -8,20 +8,42 @@
 </head>
 <body>
 <h2>Overview page</h2>
-<button id="append1" onclick="append1()">Append 1</button>
+<button id="upload-button" onclick="startUpload()">Upload</button>
 
 <br><br>
 
 <p id="text-elem">
-    Something
+    Waiting for upload
 </p>
 
+<button id="button-to-be-clicked" onclick="buttonClicked()">
+    Do not click yet
+</button>
+
 <script>
-    function append1() {
+    function startUpload() {
+        var elem = document.getElementById('text-elem');
+        var button = document.getElementById('button-to-be-clicked');
+
+        elem.innerHTML = 'Uploading ... ';
+        button.innerHTML = 'Do not click yet';
+
         setTimeout(function () {
             var elem = document.getElementById('text-elem');
-            elem.innerHTML += '1';
-        }, 1000);
+            elem.innerHTML = 'Done';
+            button.innerHTML = 'Click now';
+        }, 2000);
+    }
+
+    function buttonClicked() {
+        if (document.getElementById('button-to-be-clicked').innerText.indexOf('Do not click yet') !== -1) {
+            alert('You should not click yet!');
+        } else {
+            var success = document.createElement('button');
+            success.id = 'success-indicator';
+            success.innerHTML = 'Success!';
+            document.body.appendChild(success);
+        }
     }
 </script>
 </body>

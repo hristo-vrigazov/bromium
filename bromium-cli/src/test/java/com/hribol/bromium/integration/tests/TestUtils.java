@@ -38,6 +38,8 @@ public class TestUtils {
         public static final String RACE_HTTP_TEST_CASE = "integration-tests/race-http.txt";
         public static final String TYPE_TEXT_TEST_CASE = "integration-tests/text-field.txt";
         public static final String ELEMENT_PRESENCE_TEST_CASE = "integration-tests/presence.txt";
+        public static final String TEXT_TO_BE_TEST_CASE = "integration-tests/text-to-be.txt";
+
     }
 
     public static final String SCREEN_SYSTEM_PROPERTY = "screenNumber";

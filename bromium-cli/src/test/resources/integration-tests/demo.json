@@ -396,6 +396,82 @@
                     "content": "Click edit button"
                 }
             ]
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": true,
+            "name": "clickUploadButton",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "cssSelector": {
+                        "expose": false,
+                        "parameterName": "cssSelector",
+                        "value": "#upload-button"
+                    }
+                },
+                "webDriverActionType": "CLICK_CSS_SELECTOR"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click upload button"
+                }
+            ]
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {
+                    "cssSelector": {
+                        "expose": false,
+                        "parameterName": "cssSelector",
+                        "value": "#success-indicator"
+                    }
+                },
+                "webDriverActionType": "ELEMENT_BY_CSS_TO_BE_PRESENT"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {
+                    "cssSelector": {
+                        "expose": false,
+                        "parameterName": "cssSelector",
+                        "value": "#text-elem"
+                    },
+                    "text": {
+                        "expose": false,
+                        "parameterName": "text",
+                        "value": "Done"
+                    },
+                    "timeout": {
+                        "expose": false,
+                        "parameterName": "timeout",
+                        "value": "5"
+                    }
+                },
+                "webDriverActionType": "TEXT_OF_ELEMENT_FOUND_BY_CSS_SELECTOR_TO_BE"
+            },
+            "expectsHttpRequest": true,
+            "name": "clickButtonAfterTextChanged",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "cssSelector": {
+                        "expose": false,
+                        "parameterName": "cssSelector",
+                        "value": "#button-to-be-clicked"
+                    }
+                },
+                "webDriverActionType": "CLICK_CSS_SELECTOR"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click button after text has changed"
+                }
+            ]
         }
     ],
     "applicationName": "Demo app for Bromium vs Selenium",
