@@ -1,4 +1,4 @@
-package com.hribol.bromium.common.generation.replay.invocations;
+package com.hribol.bromium.common.generation.common;
 
 import org.junit.Test;
 
@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by hvrigazov on 04.11.17.
  */
-public class NormalReplayInvocationTest {
+public class NormalInvocationTest {
 
     private static final String FUNCTION_NAME = "functionName";
     private static final String PARAMETER_1 = "parameter1";
@@ -17,28 +17,28 @@ public class NormalReplayInvocationTest {
 
     @Test
     public void formattingIsCorrectIfNoParameters() {
-        NormalReplayInvocation normalReplayInvocation = new NormalReplayInvocation(FUNCTION_NAME);
+        NormalInvocation normalInvocation = new NormalInvocation(FUNCTION_NAME);
 
         String expected = "\n" + FUNCTION_NAME + "();\n";
-        String actual = normalReplayInvocation.getJavascriptCode();
+        String actual = normalInvocation.getJavascriptCode();
 
         assertEquals(expected, actual);
     }
 
     @Test
     public void formattingIsCorrectIfOneParameter() {
-        NormalReplayInvocation normalReplayInvocation = new NormalReplayInvocation(FUNCTION_NAME, PARAMETER_1);
+        NormalInvocation normalInvocation = new NormalInvocation(FUNCTION_NAME, PARAMETER_1);
         String expected = format("\n{0}(\"{1}\");\n", FUNCTION_NAME, PARAMETER_1);
-        String actual = normalReplayInvocation.getJavascriptCode();
+        String actual = normalInvocation.getJavascriptCode();
 
         assertEquals(expected, actual);
     }
 
     @Test
     public void formattingIsCorrectIfMultipleParameters() {
-        NormalReplayInvocation normalReplayInvocation = new NormalReplayInvocation(FUNCTION_NAME, PARAMETER_1, PARAMETER_2, PARAMETER_3);
+        NormalInvocation normalInvocation = new NormalInvocation(FUNCTION_NAME, PARAMETER_1, PARAMETER_2, PARAMETER_3);
         String expected = format("\n{0}(\"{1}\",\"{2}\",\"{3}\");\n", FUNCTION_NAME, PARAMETER_1, PARAMETER_2, PARAMETER_3);
-        String actual = normalReplayInvocation.getJavascriptCode();
+        String actual = normalInvocation.getJavascriptCode();
 
         assertEquals(expected, actual);
     }
