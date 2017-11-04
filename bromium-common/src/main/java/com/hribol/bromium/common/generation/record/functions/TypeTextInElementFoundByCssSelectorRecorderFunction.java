@@ -21,15 +21,17 @@ public class TypeTextInElementFoundByCssSelectorRecorderFunction implements Reco
                 .declareFunction(TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR)
                 .withParameters(CSS_SELECTOR, EVENT_NAME, TEXT)
                 .startBody()
-                .whenCssSelectorArrives(CSS_SELECTOR)
-                .attachListenerForEvent(CHANGE)
-                .startCollectingParameters(PARAMETERS)
-                .parameterWithConstantKey(EVENT, EVENT_NAME)
-                .parameter(TEXT, INPUT_VALUE)
-                .buildParameters()
-                .notifyBromium(PARAMETERS)
-                .endListener()
-                .endArriveHandler()
+                    .whenCssSelectorArrives(CSS_SELECTOR)
+                        .attachListenerForEvent(CHANGE)
+                            .startCollectingParameters(PARAMETERS)
+                                .parameterWithConstantKey(EVENT, EVENT_NAME)
+                                //TODO: this assumes that the text is always an exposed parameter, but
+                                // we should handle both cases
+                                .parameter(TEXT, INPUT_VALUE)
+                            .buildParameters()
+                            .notifyBromium(PARAMETERS)
+                        .endListener()
+                    .endArriveHandler()
                 .endBody()
                 .build();
     }

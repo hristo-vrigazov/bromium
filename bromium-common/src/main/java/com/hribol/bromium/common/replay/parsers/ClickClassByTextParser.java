@@ -14,11 +14,11 @@ import static com.hribol.bromium.core.utils.Constants.TEXT;
  */
 public class ClickClassByTextParser implements WebDriverActionParameterParser {
 
-    private final String initialCollectorClass = "initialCollectorClass";
+    public static final String INITIAL_COLLECTOR_CLASS = "initialCollectorClass";
 
     @Override
     public WebDriverAction create(Map<String, String> parameters, boolean expectHttpRequest) {
-        String initialCollectorClass = parameters.get(this.initialCollectorClass);
+        String initialCollectorClass = parameters.get(INITIAL_COLLECTOR_CLASS);
         String text = parameters.get(TEXT);
         String eventName = parameters.get(EVENT);
         return new ClickClassByText(initialCollectorClass, text, eventName, expectHttpRequest);

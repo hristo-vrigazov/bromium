@@ -20,5 +20,6 @@ public class Constants {
     public final static String EVENT_NAME = "eventName";
     public final static String PARAMETERS = "parameters";
     public final static String INPUT_VALUE = "this.value";
+    public final static String INNER_TEXT = "this.innerText";
     public final static String HAR_EXTENSION = ".har";
 }

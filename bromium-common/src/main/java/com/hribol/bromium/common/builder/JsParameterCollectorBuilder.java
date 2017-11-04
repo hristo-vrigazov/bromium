@@ -25,7 +25,7 @@ public class JsParameterCollectorBuilder {
      * @return this object, used for fluent API
      */
     public JsParameterCollectorBuilder parameter(String parameter, String value) {
-        String rowToBeAdded = MessageFormat.format("{0}[{1}] = {2};\n\t\t\t\t", parameters, parameter, value);
+        String rowToBeAdded = MessageFormat.format("\t\t{0}[{1}] = {2};\n\t", parameters, parameter, value);
         stringBuilder.append(rowToBeAdded);
         return this;
     }
@@ -37,7 +37,7 @@ public class JsParameterCollectorBuilder {
      * @return this object, used for fluent API
      */
     public JsParameterCollectorBuilder parameterWithConstantKey(String parameter, String value) {
-        String rowToBeAdded = MessageFormat.format("{0}[\"{1}\"] = {2};\n", parameters, parameter, value);
+        String rowToBeAdded = MessageFormat.format("\t{0}[\"{1}\"] = {2};\n\t\t", parameters, parameter, value);
         stringBuilder.append(rowToBeAdded);
         return this;
     }
