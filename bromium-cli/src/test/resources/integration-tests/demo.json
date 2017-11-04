@@ -266,7 +266,7 @@
             },
             "syntaxDefinitionConfigurationList": [
                 {
-                    "content": "Load /ajax.html page"
+                    "content": "Load /index.html page"
                 }
             ]
         },
