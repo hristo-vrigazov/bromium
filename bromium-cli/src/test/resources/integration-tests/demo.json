@@ -446,11 +446,6 @@
                         "expose": false,
                         "parameterName": "text",
                         "value": "Done"
-                    },
-                    "timeout": {
-                        "expose": false,
-                        "parameterName": "timeout",
-                        "value": "5"
                     }
                 },
                 "webDriverActionType": "TEXT_OF_ELEMENT_FOUND_BY_CSS_SELECTOR_TO_BE"

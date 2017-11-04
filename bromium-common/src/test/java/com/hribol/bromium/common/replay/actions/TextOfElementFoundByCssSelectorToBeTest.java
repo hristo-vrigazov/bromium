@@ -46,7 +46,7 @@ public class TextOfElementFoundByCssSelectorToBeTest {
     }
 
     private WebDriverAction getActionBase(String textOfElement) {
-        WebDriverAction webDriverAction = new TextOfElementFoundByCssSelectorToBe(cssSelector, text, eventName, timeout);
+        WebDriverAction webDriverAction = new TextOfElementFoundByCssSelectorToBe(cssSelector, text, eventName);
 
         WebElement webElement = mock(WebElement.class);
         when(webElement.getText()).thenReturn(textOfElement);
