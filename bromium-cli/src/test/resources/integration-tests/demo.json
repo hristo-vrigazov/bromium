@@ -467,6 +467,39 @@
                     "content": "Click button after text has changed"
                 }
             ]
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": true,
+            "name": "clickOnOfListedItem",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "initialCollectorClass": {
+                        "expose": false,
+                        "parameterName": "initialCollectorClass",
+                        "value": "item"
+                    },
+                    "text": {
+                        "expose": true,
+                        "parameterName": "text",
+                        "alias": "itemName"
+                    }
+                },
+                "webDriverActionType": "CLICK_CLASS_BY_TEXT"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click on listed item with text",
+                    "exposedParameter": "itemName"
+                }
+            ]
         }
     ],
     "applicationName": "Demo app for Bromium vs Selenium",
