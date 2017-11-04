@@ -42,6 +42,7 @@ public class TestUtils {
         public static final String TYPE_TEXT_TEST_CASE = "integration-tests/text-field.txt";
         public static final String ELEMENT_PRESENCE_TEST_CASE = "integration-tests/presence.txt";
         public static final String TEXT_TO_BE_TEST_CASE = "integration-tests/text-to-be.txt";
+        public static final String CLICK_CLASS_BY_TEXT_TEST_CASE = "integration-tests/click-class-by-text.txt";
 
     }
 

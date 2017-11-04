@@ -14,12 +14,18 @@ window.bromium.whenTextChanges = function (element, callback) {
 };
 
 window.bromium.notifySatisfiedBasedOnText = function (element, textTarget, condition) {
-  bromium.whenTextChanges(element, function (text) {
-      if (text === textTarget) {
+    if (element.innerText === textTarget) {
+        bromium.notifySatisfiedCondition(condition);
+    } else {
+        bromium.notifyNotSatisfiedCondition(condition);
+    }
+
+    bromium.whenTextChanges(element, function (text) {
+       if (text === textTarget) {
           bromium.notifySatisfiedCondition(condition);
-      } else {
+       } else {
           bromium.notifyNotSatisfiedCondition(condition);
-      }
+       }
   })
 };
 
