@@ -4,7 +4,10 @@ import com.google.common.io.Files;
 import com.google.inject.*;
 import com.google.inject.name.Names;
 import com.hribol.bromium.cli.commands.RecordCommand;
+import com.hribol.bromium.common.parsing.DslStepsDumper;
 import com.hribol.bromium.common.record.RecordBrowser;
+import com.hribol.bromium.core.config.ApplicationActionConfiguration;
+import com.hribol.bromium.core.parsing.StepsDumper;
 import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.providers.IOURIProvider;
 import com.hribol.bromium.core.suite.UbuntuVirtualScreenProcessCreator;
@@ -211,6 +214,20 @@ public class DefaultModuleTest {
 
         File actualHarFile = injector.getInstance(Key.get(File.class, Names.named(HAR_FILE)));
         assertEquals(measurementsFile + HAR_EXTENSION, actualHarFile.getName());
+    }
+
+    @Test
+    public void canCreateStepsDumper() throws IOException {
+        Map<String, Object> opts = new HashMap<>();
+        opts.put(APPLICATION, configurationFile.getAbsolutePath());
+
+        Module module = new DefaultModule(RECORD, opts);
+        Injector injector = Guice.createInjector(module);
+
+        IOProvider<StepsDumper> ioProvider = injector.getInstance(Key.get(new TypeLiteral<IOProvider<StepsDumper>>() {
+        }));
+
+        ioProvider.get();
     }
 
     @After
