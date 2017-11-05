@@ -10,6 +10,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Web Driver Action Condition</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.WebDriverActionCondition#getCssSelector <em>Css Selector</em>}</li>
+ * </ul>
  *
  * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getWebDriverActionCondition()
  * @model
@@ -17,4 +23,30 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface WebDriverActionCondition extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Css Selector</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Css Selector</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Css Selector</em>' containment reference.
+   * @see #setCssSelector(ParameterValue)
+   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getWebDriverActionCondition_CssSelector()
+   * @model containment="true"
+   * @generated
+   */
+  ParameterValue getCssSelector();
+
+  /**
+   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.WebDriverActionCondition#getCssSelector <em>Css Selector</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Css Selector</em>' containment reference.
+   * @see #getCssSelector()
+   * @generated
+   */
+  void setCssSelector(ParameterValue value);
+
 } // WebDriverActionCondition

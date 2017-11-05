@@ -1,4 +1,6 @@
 'actions'=14
+'and'=43
+'class'=42
 'click'=34
 'css'=30
 'do'=23
@@ -13,6 +15,7 @@
 'make'=21
 'name'=11
 'not'=24
+'of'=41
 'on'=35
 'page'=37
 'present'=33
@@ -20,6 +23,7 @@
 'selector'=31
 'sure'=22
 'syntax'=18
+'text'=40
 'then'=20
 'type'=38
 'version'=12
@@ -63,3 +67,7 @@ T__36=36
 T__37=37
 T__38=38
 T__39=39
+T__40=40
+T__41=41
+T__42=42
+T__43=43

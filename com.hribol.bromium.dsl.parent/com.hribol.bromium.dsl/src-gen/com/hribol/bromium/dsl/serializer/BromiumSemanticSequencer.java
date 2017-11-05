@@ -6,6 +6,7 @@ package com.hribol.bromium.dsl.serializer;
 import com.google.inject.Inject;
 import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
+import com.hribol.bromium.dsl.bromium.ClickClassByText;
 import com.hribol.bromium.dsl.bromium.ClickCssSelector;
 import com.hribol.bromium.dsl.bromium.ElementByCssToBePresent;
 import com.hribol.bromium.dsl.bromium.ExpectHttpRequest;
@@ -16,6 +17,7 @@ import com.hribol.bromium.dsl.bromium.ParameterValue;
 import com.hribol.bromium.dsl.bromium.Postcondition;
 import com.hribol.bromium.dsl.bromium.Precondition;
 import com.hribol.bromium.dsl.bromium.SyntaxDefinition;
+import com.hribol.bromium.dsl.bromium.TextOfElementWithCssSelectorToBe;
 import com.hribol.bromium.dsl.bromium.ThreeDottedVersion;
 import com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector;
 import com.hribol.bromium.dsl.services.BromiumGrammarAccess;
@@ -47,6 +49,9 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 			case BromiumPackage.APPLICATION_ACTION:
 				sequence_ApplicationAction(context, (ApplicationAction) semanticObject); 
 				return; 
+			case BromiumPackage.CLICK_CLASS_BY_TEXT:
+				sequence_ClickClassByText(context, (ClickClassByText) semanticObject); 
+				return; 
 			case BromiumPackage.CLICK_CSS_SELECTOR:
 				sequence_ClickCssSelector(context, (ClickCssSelector) semanticObject); 
 				return; 
@@ -76,6 +81,9 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 				return; 
 			case BromiumPackage.SYNTAX_DEFINITION:
 				sequence_SyntaxDefinition(context, (SyntaxDefinition) semanticObject); 
+				return; 
+			case BromiumPackage.TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE:
+				sequence_TextOfElementWithCssSelectorToBe(context, (TextOfElementWithCssSelectorToBe) semanticObject); 
 				return; 
 			case BromiumPackage.THREE_DOTTED_VERSION:
 				sequence_ThreeDottedVersion(context, (ThreeDottedVersion) semanticObject); 
@@ -109,6 +117,28 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	
 	/**
 	 * Contexts:
+	 *     WebDriverAction returns ClickClassByText
+	 *     ClickClassByText returns ClickClassByText
+	 *
+	 * Constraint:
+	 *     (cssClass=ParameterValue text=ParameterValue)
+	 */
+	protected void sequence_ClickClassByText(ISerializationContext context, ClickClassByText semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.CLICK_CLASS_BY_TEXT__CSS_CLASS) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.CLICK_CLASS_BY_TEXT__CSS_CLASS));
+			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.CLICK_CLASS_BY_TEXT__TEXT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.CLICK_CLASS_BY_TEXT__TEXT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getClickClassByTextAccess().getCssClassParameterValueParserRuleCall_5_0(), semanticObject.getCssClass());
+		feeder.accept(grammarAccess.getClickClassByTextAccess().getTextParameterValueParserRuleCall_8_0(), semanticObject.getText());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     WebDriverAction returns ClickCssSelector
 	 *     ClickCssSelector returns ClickCssSelector
 	 *
@@ -136,8 +166,8 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 */
 	protected void sequence_ElementByCssToBePresent(ISerializationContext context, ElementByCssToBePresent semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.ELEMENT_BY_CSS_TO_BE_PRESENT__CSS_SELECTOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.ELEMENT_BY_CSS_TO_BE_PRESENT__CSS_SELECTOR));
+			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getElementByCssToBePresentAccess().getCssSelectorParameterValueParserRuleCall_4_0(), semanticObject.getCssSelector());
@@ -263,6 +293,28 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 */
 	protected void sequence_SyntaxDefinition(ISerializationContext context, SyntaxDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     WebDriverActionCondition returns TextOfElementWithCssSelectorToBe
+	 *     TextOfElementWithCssSelectorToBe returns TextOfElementWithCssSelectorToBe
+	 *
+	 * Constraint:
+	 *     (cssSelector=ParameterValue text=ParameterValue)
+	 */
+	protected void sequence_TextOfElementWithCssSelectorToBe(ISerializationContext context, TextOfElementWithCssSelectorToBe semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR));
+			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__TEXT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__TEXT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getCssSelectorParameterValueParserRuleCall_6_0(), semanticObject.getCssSelector());
+		feeder.accept(grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getTextParameterValueParserRuleCall_8_0(), semanticObject.getText());
+		feeder.finish();
 	}
 	
 	

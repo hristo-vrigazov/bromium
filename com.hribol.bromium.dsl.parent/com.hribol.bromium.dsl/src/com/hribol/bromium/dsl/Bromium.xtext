@@ -25,11 +25,13 @@ SyntaxDefinition:
 ;
 
 WebDriverActionCondition:
-	ElementByCssToBePresent
+	ElementByCssToBePresent |
+	TextOfElementWithCssSelectorToBe
 ;
 
 WebDriverAction:
 	ClickCssSelector |
+	ClickClassByText |
 	PageLoad |
 	TypeTextInElementFoundByCssSelector
 ;
@@ -53,6 +55,13 @@ ClickCssSelector: 'click' 'on' 'element' 'with' 'css' 'selector' cssSelector=Par
 PageLoad: 'load' 'page' subpath=STRING;
 TypeTextInElementFoundByCssSelector: 'type' text=ParameterValue 
 'in' 'element' 'with' 'css' 'selector' cssSelector=ParameterValue
+;
+TextOfElementWithCssSelectorToBe:
+	'text' 'of' 'element' 'with' 'css' 'selector' cssSelector=ParameterValue 'is' text=ParameterValue
+;
+
+ClickClassByText:
+	'click' 'on' 'element' 'with' 'class' cssClass=ParameterValue 'and' 'text' text=ParameterValue
 ;
 
 ParameterValue:

@@ -397,14 +397,25 @@ ruleWebDriverActionCondition returns [EObject current=null]
 @after {
 	leaveRule();
 }:
-	{
-		newCompositeNode(grammarAccess.getWebDriverActionConditionAccess().getElementByCssToBePresentParserRuleCall());
-	}
-	this_ElementByCssToBePresent_0=ruleElementByCssToBePresent
-	{
-		$current = $this_ElementByCssToBePresent_0.current;
-		afterParserOrEnumRuleCall();
-	}
+	(
+		{
+			newCompositeNode(grammarAccess.getWebDriverActionConditionAccess().getElementByCssToBePresentParserRuleCall_0());
+		}
+		this_ElementByCssToBePresent_0=ruleElementByCssToBePresent
+		{
+			$current = $this_ElementByCssToBePresent_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getWebDriverActionConditionAccess().getTextOfElementWithCssSelectorToBeParserRuleCall_1());
+		}
+		this_TextOfElementWithCssSelectorToBe_1=ruleTextOfElementWithCssSelectorToBe
+		{
+			$current = $this_TextOfElementWithCssSelectorToBe_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
 ;
 
 // Entry rule entryRuleWebDriverAction
@@ -433,20 +444,29 @@ ruleWebDriverAction returns [EObject current=null]
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getWebDriverActionAccess().getPageLoadParserRuleCall_1());
+			newCompositeNode(grammarAccess.getWebDriverActionAccess().getClickClassByTextParserRuleCall_1());
 		}
-		this_PageLoad_1=rulePageLoad
+		this_ClickClassByText_1=ruleClickClassByText
 		{
-			$current = $this_PageLoad_1.current;
+			$current = $this_ClickClassByText_1.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getWebDriverActionAccess().getTypeTextInElementFoundByCssSelectorParserRuleCall_2());
+			newCompositeNode(grammarAccess.getWebDriverActionAccess().getPageLoadParserRuleCall_2());
 		}
-		this_TypeTextInElementFoundByCssSelector_2=ruleTypeTextInElementFoundByCssSelector
+		this_PageLoad_2=rulePageLoad
 		{
-			$current = $this_TypeTextInElementFoundByCssSelector_2.current;
+			$current = $this_PageLoad_2.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getWebDriverActionAccess().getTypeTextInElementFoundByCssSelectorParserRuleCall_3());
+		}
+		this_TypeTextInElementFoundByCssSelector_3=ruleTypeTextInElementFoundByCssSelector
+		{
+			$current = $this_TypeTextInElementFoundByCssSelector_3.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -844,6 +864,176 @@ ruleTypeTextInElementFoundByCssSelector returns [EObject current=null]
 						$current,
 						"cssSelector",
 						lv_cssSelector_7_0,
+						"com.hribol.bromium.dsl.Bromium.ParameterValue");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleTextOfElementWithCssSelectorToBe
+entryRuleTextOfElementWithCssSelectorToBe returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getTextOfElementWithCssSelectorToBeRule()); }
+	iv_ruleTextOfElementWithCssSelectorToBe=ruleTextOfElementWithCssSelectorToBe
+	{ $current=$iv_ruleTextOfElementWithCssSelectorToBe.current; }
+	EOF;
+
+// Rule TextOfElementWithCssSelectorToBe
+ruleTextOfElementWithCssSelectorToBe returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='text'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getTextKeyword_0());
+		}
+		otherlv_1='of'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getOfKeyword_1());
+		}
+		otherlv_2='element'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getElementKeyword_2());
+		}
+		otherlv_3='with'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getWithKeyword_3());
+		}
+		otherlv_4='css'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getCssKeyword_4());
+		}
+		otherlv_5='selector'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getSelectorKeyword_5());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getCssSelectorParameterValueParserRuleCall_6_0());
+				}
+				lv_cssSelector_6_0=ruleParameterValue
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getTextOfElementWithCssSelectorToBeRule());
+					}
+					set(
+						$current,
+						"cssSelector",
+						lv_cssSelector_6_0,
+						"com.hribol.bromium.dsl.Bromium.ParameterValue");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_7='is'
+		{
+			newLeafNode(otherlv_7, grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getIsKeyword_7());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getTextParameterValueParserRuleCall_8_0());
+				}
+				lv_text_8_0=ruleParameterValue
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getTextOfElementWithCssSelectorToBeRule());
+					}
+					set(
+						$current,
+						"text",
+						lv_text_8_0,
+						"com.hribol.bromium.dsl.Bromium.ParameterValue");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleClickClassByText
+entryRuleClickClassByText returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getClickClassByTextRule()); }
+	iv_ruleClickClassByText=ruleClickClassByText
+	{ $current=$iv_ruleClickClassByText.current; }
+	EOF;
+
+// Rule ClickClassByText
+ruleClickClassByText returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='click'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getClickClassByTextAccess().getClickKeyword_0());
+		}
+		otherlv_1='on'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getClickClassByTextAccess().getOnKeyword_1());
+		}
+		otherlv_2='element'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getClickClassByTextAccess().getElementKeyword_2());
+		}
+		otherlv_3='with'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getClickClassByTextAccess().getWithKeyword_3());
+		}
+		otherlv_4='class'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getClickClassByTextAccess().getClassKeyword_4());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getClickClassByTextAccess().getCssClassParameterValueParserRuleCall_5_0());
+				}
+				lv_cssClass_5_0=ruleParameterValue
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getClickClassByTextRule());
+					}
+					set(
+						$current,
+						"cssClass",
+						lv_cssClass_5_0,
+						"com.hribol.bromium.dsl.Bromium.ParameterValue");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_6='and'
+		{
+			newLeafNode(otherlv_6, grammarAccess.getClickClassByTextAccess().getAndKeyword_6());
+		}
+		otherlv_7='text'
+		{
+			newLeafNode(otherlv_7, grammarAccess.getClickClassByTextAccess().getTextKeyword_7());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getClickClassByTextAccess().getTextParameterValueParserRuleCall_8_0());
+				}
+				lv_text_8_0=ruleParameterValue
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getClickClassByTextRule());
+					}
+					set(
+						$current,
+						"text",
+						lv_text_8_0,
 						"com.hribol.bromium.dsl.Bromium.ParameterValue");
 					afterParserOrEnumRuleCall();
 				}

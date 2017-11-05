@@ -132,6 +132,24 @@ public interface BromiumFactory extends EFactory
   TypeTextInElementFoundByCssSelector createTypeTextInElementFoundByCssSelector();
 
   /**
+   * Returns a new object of class '<em>Text Of Element With Css Selector To Be</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Text Of Element With Css Selector To Be</em>'.
+   * @generated
+   */
+  TextOfElementWithCssSelectorToBe createTextOfElementWithCssSelectorToBe();
+
+  /**
+   * Returns a new object of class '<em>Click Class By Text</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Click Class By Text</em>'.
+   * @generated
+   */
+  ClickClassByText createClickClassByText();
+
+  /**
    * Returns a new object of class '<em>Parameter Value</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

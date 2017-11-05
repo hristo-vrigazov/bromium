@@ -136,6 +136,16 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
         return createTypeTextInElementFoundByCssSelectorAdapter();
       }
       @Override
+      public Adapter caseTextOfElementWithCssSelectorToBe(TextOfElementWithCssSelectorToBe object)
+      {
+        return createTextOfElementWithCssSelectorToBeAdapter();
+      }
+      @Override
+      public Adapter caseClickClassByText(ClickClassByText object)
+      {
+        return createClickClassByTextAdapter();
+      }
+      @Override
       public Adapter caseParameterValue(ParameterValue object)
       {
         return createParameterValueAdapter();
@@ -348,6 +358,36 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createTypeTextInElementFoundByCssSelectorAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.TextOfElementWithCssSelectorToBe <em>Text Of Element With Css Selector To Be</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see com.hribol.bromium.dsl.bromium.TextOfElementWithCssSelectorToBe
+   * @generated
+   */
+  public Adapter createTextOfElementWithCssSelectorToBeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.ClickClassByText <em>Click Class By Text</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see com.hribol.bromium.dsl.bromium.ClickClassByText
+   * @generated
+   */
+  public Adapter createClickClassByTextAdapter()
   {
     return null;
   }

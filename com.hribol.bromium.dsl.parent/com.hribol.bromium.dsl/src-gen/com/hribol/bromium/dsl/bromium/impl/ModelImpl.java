@@ -29,13 +29,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ModelImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ModelImpl#getVersion <em>Version</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ModelImpl#getBaseVersion <em>Base Version</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ModelImpl#getActions <em>Actions</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

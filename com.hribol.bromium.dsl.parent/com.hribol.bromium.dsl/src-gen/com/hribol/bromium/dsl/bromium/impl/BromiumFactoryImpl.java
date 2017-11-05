@@ -77,6 +77,8 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
       case BromiumPackage.CLICK_CSS_SELECTOR: return createClickCssSelector();
       case BromiumPackage.PAGE_LOAD: return createPageLoad();
       case BromiumPackage.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR: return createTypeTextInElementFoundByCssSelector();
+      case BromiumPackage.TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE: return createTextOfElementWithCssSelectorToBe();
+      case BromiumPackage.CLICK_CLASS_BY_TEXT: return createClickClassByText();
       case BromiumPackage.PARAMETER_VALUE: return createParameterValue();
       case BromiumPackage.EXPOSED_PARAMETER: return createExposedParameter();
       case BromiumPackage.THREE_DOTTED_VERSION: return createThreeDottedVersion();
@@ -215,6 +217,28 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
   {
     TypeTextInElementFoundByCssSelectorImpl typeTextInElementFoundByCssSelector = new TypeTextInElementFoundByCssSelectorImpl();
     return typeTextInElementFoundByCssSelector;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TextOfElementWithCssSelectorToBe createTextOfElementWithCssSelectorToBe()
+  {
+    TextOfElementWithCssSelectorToBeImpl textOfElementWithCssSelectorToBe = new TextOfElementWithCssSelectorToBeImpl();
+    return textOfElementWithCssSelectorToBe;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ClickClassByText createClickClassByText()
+  {
+    ClickClassByTextImpl clickClassByText = new ClickClassByTextImpl();
+    return clickClassByText;
   }
 
   /**

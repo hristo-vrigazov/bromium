@@ -233,13 +233,22 @@ public interface BromiumPackage extends EPackage
   int WEB_DRIVER_ACTION_CONDITION = 3;
 
   /**
+   * The feature id for the '<em><b>Css Selector</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR = 0;
+
+  /**
    * The number of structural features of the '<em>Web Driver Action Condition</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WEB_DRIVER_ACTION_CONDITION_FEATURE_COUNT = 0;
+  int WEB_DRIVER_ACTION_CONDITION_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.WebDriverActionImpl <em>Web Driver Action</em>}' class.
@@ -361,7 +370,7 @@ public interface BromiumPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELEMENT_BY_CSS_TO_BE_PRESENT__CSS_SELECTOR = WEB_DRIVER_ACTION_CONDITION_FEATURE_COUNT + 0;
+  int ELEMENT_BY_CSS_TO_BE_PRESENT__CSS_SELECTOR = WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR;
 
   /**
    * The number of structural features of the '<em>Element By Css To Be Present</em>' class.
@@ -370,7 +379,7 @@ public interface BromiumPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELEMENT_BY_CSS_TO_BE_PRESENT_FEATURE_COUNT = WEB_DRIVER_ACTION_CONDITION_FEATURE_COUNT + 1;
+  int ELEMENT_BY_CSS_TO_BE_PRESENT_FEATURE_COUNT = WEB_DRIVER_ACTION_CONDITION_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ClickCssSelectorImpl <em>Click Css Selector</em>}' class.
@@ -466,6 +475,80 @@ public interface BromiumPackage extends EPackage
   int TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR_FEATURE_COUNT = WEB_DRIVER_ACTION_FEATURE_COUNT + 2;
 
   /**
+   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.TextOfElementWithCssSelectorToBeImpl <em>Text Of Element With Css Selector To Be</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see com.hribol.bromium.dsl.bromium.impl.TextOfElementWithCssSelectorToBeImpl
+   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getTextOfElementWithCssSelectorToBe()
+   * @generated
+   */
+  int TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE = 12;
+
+  /**
+   * The feature id for the '<em><b>Css Selector</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__CSS_SELECTOR = WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR;
+
+  /**
+   * The feature id for the '<em><b>Text</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__TEXT = WEB_DRIVER_ACTION_CONDITION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Text Of Element With Css Selector To Be</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE_FEATURE_COUNT = WEB_DRIVER_ACTION_CONDITION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ClickClassByTextImpl <em>Click Class By Text</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see com.hribol.bromium.dsl.bromium.impl.ClickClassByTextImpl
+   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getClickClassByText()
+   * @generated
+   */
+  int CLICK_CLASS_BY_TEXT = 13;
+
+  /**
+   * The feature id for the '<em><b>Css Class</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLICK_CLASS_BY_TEXT__CSS_CLASS = WEB_DRIVER_ACTION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Text</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLICK_CLASS_BY_TEXT__TEXT = WEB_DRIVER_ACTION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Click Class By Text</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLICK_CLASS_BY_TEXT_FEATURE_COUNT = WEB_DRIVER_ACTION_FEATURE_COUNT + 2;
+
+  /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ParameterValueImpl <em>Parameter Value</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -473,7 +556,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getParameterValue()
    * @generated
    */
-  int PARAMETER_VALUE = 12;
+  int PARAMETER_VALUE = 14;
 
   /**
    * The feature id for the '<em><b>Content</b></em>' attribute.
@@ -510,7 +593,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getExposedParameter()
    * @generated
    */
-  int EXPOSED_PARAMETER = 13;
+  int EXPOSED_PARAMETER = 15;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -538,7 +621,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getThreeDottedVersion()
    * @generated
    */
-  int THREE_DOTTED_VERSION = 14;
+  int THREE_DOTTED_VERSION = 16;
 
   /**
    * The feature id for the '<em><b>Big</b></em>' attribute.
@@ -750,6 +833,17 @@ public interface BromiumPackage extends EPackage
   EClass getWebDriverActionCondition();
 
   /**
+   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.WebDriverActionCondition#getCssSelector <em>Css Selector</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Css Selector</em>'.
+   * @see com.hribol.bromium.dsl.bromium.WebDriverActionCondition#getCssSelector()
+   * @see #getWebDriverActionCondition()
+   * @generated
+   */
+  EReference getWebDriverActionCondition_CssSelector();
+
+  /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.WebDriverAction <em>Web Driver Action</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -833,17 +927,6 @@ public interface BromiumPackage extends EPackage
   EClass getElementByCssToBePresent();
 
   /**
-   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.ElementByCssToBePresent#getCssSelector <em>Css Selector</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Css Selector</em>'.
-   * @see com.hribol.bromium.dsl.bromium.ElementByCssToBePresent#getCssSelector()
-   * @see #getElementByCssToBePresent()
-   * @generated
-   */
-  EReference getElementByCssToBePresent_CssSelector();
-
-  /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ClickCssSelector <em>Click Css Selector</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -916,6 +999,59 @@ public interface BromiumPackage extends EPackage
    * @generated
    */
   EReference getTypeTextInElementFoundByCssSelector_CssSelector();
+
+  /**
+   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.TextOfElementWithCssSelectorToBe <em>Text Of Element With Css Selector To Be</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Text Of Element With Css Selector To Be</em>'.
+   * @see com.hribol.bromium.dsl.bromium.TextOfElementWithCssSelectorToBe
+   * @generated
+   */
+  EClass getTextOfElementWithCssSelectorToBe();
+
+  /**
+   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.TextOfElementWithCssSelectorToBe#getText <em>Text</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Text</em>'.
+   * @see com.hribol.bromium.dsl.bromium.TextOfElementWithCssSelectorToBe#getText()
+   * @see #getTextOfElementWithCssSelectorToBe()
+   * @generated
+   */
+  EReference getTextOfElementWithCssSelectorToBe_Text();
+
+  /**
+   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ClickClassByText <em>Click Class By Text</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Click Class By Text</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ClickClassByText
+   * @generated
+   */
+  EClass getClickClassByText();
+
+  /**
+   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.ClickClassByText#getCssClass <em>Css Class</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Css Class</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ClickClassByText#getCssClass()
+   * @see #getClickClassByText()
+   * @generated
+   */
+  EReference getClickClassByText_CssClass();
+
+  /**
+   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.ClickClassByText#getText <em>Text</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Text</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ClickClassByText#getText()
+   * @see #getClickClassByText()
+   * @generated
+   */
+  EReference getClickClassByText_Text();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ParameterValue <em>Parameter Value</em>}'.
@@ -1173,6 +1309,14 @@ public interface BromiumPackage extends EPackage
     EClass WEB_DRIVER_ACTION_CONDITION = eINSTANCE.getWebDriverActionCondition();
 
     /**
+     * The meta object literal for the '<em><b>Css Selector</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR = eINSTANCE.getWebDriverActionCondition_CssSelector();
+
+    /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.WebDriverActionImpl <em>Web Driver Action</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1247,14 +1391,6 @@ public interface BromiumPackage extends EPackage
     EClass ELEMENT_BY_CSS_TO_BE_PRESENT = eINSTANCE.getElementByCssToBePresent();
 
     /**
-     * The meta object literal for the '<em><b>Css Selector</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ELEMENT_BY_CSS_TO_BE_PRESENT__CSS_SELECTOR = eINSTANCE.getElementByCssToBePresent_CssSelector();
-
-    /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ClickCssSelectorImpl <em>Click Css Selector</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1315,6 +1451,50 @@ public interface BromiumPackage extends EPackage
      * @generated
      */
     EReference TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR__CSS_SELECTOR = eINSTANCE.getTypeTextInElementFoundByCssSelector_CssSelector();
+
+    /**
+     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.TextOfElementWithCssSelectorToBeImpl <em>Text Of Element With Css Selector To Be</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.hribol.bromium.dsl.bromium.impl.TextOfElementWithCssSelectorToBeImpl
+     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getTextOfElementWithCssSelectorToBe()
+     * @generated
+     */
+    EClass TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE = eINSTANCE.getTextOfElementWithCssSelectorToBe();
+
+    /**
+     * The meta object literal for the '<em><b>Text</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__TEXT = eINSTANCE.getTextOfElementWithCssSelectorToBe_Text();
+
+    /**
+     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ClickClassByTextImpl <em>Click Class By Text</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.hribol.bromium.dsl.bromium.impl.ClickClassByTextImpl
+     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getClickClassByText()
+     * @generated
+     */
+    EClass CLICK_CLASS_BY_TEXT = eINSTANCE.getClickClassByText();
+
+    /**
+     * The meta object literal for the '<em><b>Css Class</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CLICK_CLASS_BY_TEXT__CSS_CLASS = eINSTANCE.getClickClassByText_CssClass();
+
+    /**
+     * The meta object literal for the '<em><b>Text</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CLICK_CLASS_BY_TEXT__TEXT = eINSTANCE.getClickClassByText_Text();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ParameterValueImpl <em>Parameter Value</em>}' class.

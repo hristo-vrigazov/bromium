@@ -11,10 +11,10 @@ package com.hribol.bromium.dsl.bromium;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.PageLoad#getSubpath <em>Subpath</em>}</li>
  * </ul>
- * </p>
  *
  * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getPageLoad()
  * @model

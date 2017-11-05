@@ -19,12 +19,12 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ThreeDottedVersionImpl#getBig <em>Big</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ThreeDottedVersionImpl#getMedium <em>Medium</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ThreeDottedVersionImpl#getSmall <em>Small</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -5,7 +5,7 @@ package com.hribol.bromium.dsl.bromium.impl;
 
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.ParameterValue;
-import com.hribol.bromium.dsl.bromium.WebDriverActionCondition;
+import com.hribol.bromium.dsl.bromium.TextOfElementWithCssSelectorToBe;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -14,39 +14,38 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Web Driver Action Condition</b></em>'.
+ * An implementation of the model object '<em><b>Text Of Element With Css Selector To Be</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link com.hribol.bromium.dsl.bromium.impl.WebDriverActionConditionImpl#getCssSelector <em>Css Selector</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.impl.TextOfElementWithCssSelectorToBeImpl#getText <em>Text</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class WebDriverActionConditionImpl extends MinimalEObjectImpl.Container implements WebDriverActionCondition
+public class TextOfElementWithCssSelectorToBeImpl extends WebDriverActionConditionImpl implements TextOfElementWithCssSelectorToBe
 {
   /**
-   * The cached value of the '{@link #getCssSelector() <em>Css Selector</em>}' containment reference.
+   * The cached value of the '{@link #getText() <em>Text</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCssSelector()
+   * @see #getText()
    * @generated
    * @ordered
    */
-  protected ParameterValue cssSelector;
+  protected ParameterValue text;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected WebDriverActionConditionImpl()
+  protected TextOfElementWithCssSelectorToBeImpl()
   {
     super();
   }
@@ -59,7 +58,7 @@ public class WebDriverActionConditionImpl extends MinimalEObjectImpl.Container i
   @Override
   protected EClass eStaticClass()
   {
-    return BromiumPackage.Literals.WEB_DRIVER_ACTION_CONDITION;
+    return BromiumPackage.Literals.TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE;
   }
 
   /**
@@ -67,9 +66,9 @@ public class WebDriverActionConditionImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  public ParameterValue getCssSelector()
+  public ParameterValue getText()
   {
-    return cssSelector;
+    return text;
   }
 
   /**
@@ -77,13 +76,13 @@ public class WebDriverActionConditionImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetCssSelector(ParameterValue newCssSelector, NotificationChain msgs)
+  public NotificationChain basicSetText(ParameterValue newText, NotificationChain msgs)
   {
-    ParameterValue oldCssSelector = cssSelector;
-    cssSelector = newCssSelector;
+    ParameterValue oldText = text;
+    text = newText;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BromiumPackage.WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR, oldCssSelector, newCssSelector);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BromiumPackage.TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__TEXT, oldText, newText);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -94,20 +93,20 @@ public class WebDriverActionConditionImpl extends MinimalEObjectImpl.Container i
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setCssSelector(ParameterValue newCssSelector)
+  public void setText(ParameterValue newText)
   {
-    if (newCssSelector != cssSelector)
+    if (newText != text)
     {
       NotificationChain msgs = null;
-      if (cssSelector != null)
-        msgs = ((InternalEObject)cssSelector).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR, null, msgs);
-      if (newCssSelector != null)
-        msgs = ((InternalEObject)newCssSelector).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR, null, msgs);
-      msgs = basicSetCssSelector(newCssSelector, msgs);
+      if (text != null)
+        msgs = ((InternalEObject)text).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__TEXT, null, msgs);
+      if (newText != null)
+        msgs = ((InternalEObject)newText).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__TEXT, null, msgs);
+      msgs = basicSetText(newText, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR, newCssSelector, newCssSelector));
+      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__TEXT, newText, newText));
   }
 
   /**
@@ -120,8 +119,8 @@ public class WebDriverActionConditionImpl extends MinimalEObjectImpl.Container i
   {
     switch (featureID)
     {
-      case BromiumPackage.WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR:
-        return basicSetCssSelector(null, msgs);
+      case BromiumPackage.TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__TEXT:
+        return basicSetText(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -136,8 +135,8 @@ public class WebDriverActionConditionImpl extends MinimalEObjectImpl.Container i
   {
     switch (featureID)
     {
-      case BromiumPackage.WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR:
-        return getCssSelector();
+      case BromiumPackage.TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__TEXT:
+        return getText();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -152,8 +151,8 @@ public class WebDriverActionConditionImpl extends MinimalEObjectImpl.Container i
   {
     switch (featureID)
     {
-      case BromiumPackage.WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR:
-        setCssSelector((ParameterValue)newValue);
+      case BromiumPackage.TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__TEXT:
+        setText((ParameterValue)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -169,8 +168,8 @@ public class WebDriverActionConditionImpl extends MinimalEObjectImpl.Container i
   {
     switch (featureID)
     {
-      case BromiumPackage.WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR:
-        setCssSelector((ParameterValue)null);
+      case BromiumPackage.TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__TEXT:
+        setText((ParameterValue)null);
         return;
     }
     super.eUnset(featureID);
@@ -186,10 +185,10 @@ public class WebDriverActionConditionImpl extends MinimalEObjectImpl.Container i
   {
     switch (featureID)
     {
-      case BromiumPackage.WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR:
-        return cssSelector != null;
+      case BromiumPackage.TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__TEXT:
+        return text != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //WebDriverActionConditionImpl
+} //TextOfElementWithCssSelectorToBeImpl

@@ -51,7 +51,7 @@ public class BromiumSwitch<T> extends Switch<T>
    * Checks whether this is a switch for the given package.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @parameter ePackage the package in question.
+   * @param ePackage the package in question.
    * @return whether this is a switch for the given package.
    * @generated
    */
@@ -158,6 +158,22 @@ public class BromiumSwitch<T> extends Switch<T>
         TypeTextInElementFoundByCssSelector typeTextInElementFoundByCssSelector = (TypeTextInElementFoundByCssSelector)theEObject;
         T result = caseTypeTextInElementFoundByCssSelector(typeTextInElementFoundByCssSelector);
         if (result == null) result = caseWebDriverAction(typeTextInElementFoundByCssSelector);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BromiumPackage.TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE:
+      {
+        TextOfElementWithCssSelectorToBe textOfElementWithCssSelectorToBe = (TextOfElementWithCssSelectorToBe)theEObject;
+        T result = caseTextOfElementWithCssSelectorToBe(textOfElementWithCssSelectorToBe);
+        if (result == null) result = caseWebDriverActionCondition(textOfElementWithCssSelectorToBe);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BromiumPackage.CLICK_CLASS_BY_TEXT:
+      {
+        ClickClassByText clickClassByText = (ClickClassByText)theEObject;
+        T result = caseClickClassByText(clickClassByText);
+        if (result == null) result = caseWebDriverAction(clickClassByText);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -374,6 +390,38 @@ public class BromiumSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseTypeTextInElementFoundByCssSelector(TypeTextInElementFoundByCssSelector object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Text Of Element With Css Selector To Be</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Text Of Element With Css Selector To Be</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTextOfElementWithCssSelectorToBe(TextOfElementWithCssSelectorToBe object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Click Class By Text</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Click Class By Text</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseClickClassByText(ClickClassByText object)
   {
     return null;
   }

@@ -26,7 +26,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//ExposedParameter"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="WebDriverActionCondition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="WebDriverActionCondition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cssSelector" eType="#//ParameterValue"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WebDriverAction"/>
   <eClassifiers xsi:type="ecore:EClass" name="Precondition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//WebDriverActionCondition"
@@ -39,10 +42,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ExpectHttpRequest">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="not" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ElementByCssToBePresent" eSuperTypes="#//WebDriverActionCondition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="cssSelector" eType="#//ParameterValue"
-        containment="true"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementByCssToBePresent" eSuperTypes="#//WebDriverActionCondition"/>
   <eClassifiers xsi:type="ecore:EClass" name="ClickCssSelector" eSuperTypes="#//WebDriverAction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="cssSelector" eType="#//ParameterValue"
         containment="true"/>
@@ -55,6 +55,16 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="text" eType="#//ParameterValue"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="cssSelector" eType="#//ParameterValue"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TextOfElementWithCssSelectorToBe" eSuperTypes="#//WebDriverActionCondition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="text" eType="#//ParameterValue"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClickClassByText" eSuperTypes="#//WebDriverAction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cssClass" eType="#//ParameterValue"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="text" eType="#//ParameterValue"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterValue">
