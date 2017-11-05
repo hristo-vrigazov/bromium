@@ -2,7 +2,9 @@ package com.hribol.bromium.common.parsing;
 
 import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.parsing.StepsReader;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -47,6 +49,22 @@ public class DslStepsReaderTest {
     @Test
     public void canParseStepsThatFinishWithParameters() throws IOException {
         InputStream stream = new ByteArrayInputStream("typeInPasswordInput: Type in password input admin".getBytes(StandardCharsets.UTF_8.name()));
+
+        StepsReader stepsReader = new DslStepsReader(createConfigurationinishingWithExposedParameter());
+
+        TestScenarioSteps testScenarioSteps = stepsReader.readSteps(stream);
+
+        assertEquals(1, testScenarioSteps.size());
+        assertEquals(typeInPasswordField(), testScenarioSteps.get(0));
+    }
+
+    @Rule
+    public ExpectedException exceptions = ExpectedException.none();
+
+    @Test
+    public void ifUnknownActionIfSendExceptionIsThrown() throws IOException {
+        exceptions.expect(IllegalStateException.class);
+        InputStream stream = new ByteArrayInputStream("something: Type in password input admin".getBytes(StandardCharsets.UTF_8.name()));
 
         StepsReader stepsReader = new DslStepsReader(createConfigurationinishingWithExposedParameter());
 
