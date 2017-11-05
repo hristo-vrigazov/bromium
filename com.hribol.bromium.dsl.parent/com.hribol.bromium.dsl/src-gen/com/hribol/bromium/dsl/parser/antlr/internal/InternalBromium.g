@@ -382,6 +382,31 @@ ruleSyntaxDefinition returns [EObject current=null]
 	)
 ;
 
+// Entry rule entryRuleWebDriverActionCondition
+entryRuleWebDriverActionCondition returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getWebDriverActionConditionRule()); }
+	iv_ruleWebDriverActionCondition=ruleWebDriverActionCondition
+	{ $current=$iv_ruleWebDriverActionCondition.current; }
+	EOF;
+
+// Rule WebDriverActionCondition
+ruleWebDriverActionCondition returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	{
+		newCompositeNode(grammarAccess.getWebDriverActionConditionAccess().getElementByCssToBePresentParserRuleCall());
+	}
+	this_ElementByCssToBePresent_0=ruleElementByCssToBePresent
+	{
+		$current = $this_ElementByCssToBePresent_0.current;
+		afterParserOrEnumRuleCall();
+	}
+;
+
 // Entry rule entryRuleWebDriverAction
 entryRuleWebDriverAction returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getWebDriverActionRule()); }
@@ -399,38 +424,29 @@ ruleWebDriverAction returns [EObject current=null]
 }:
 	(
 		{
-			newCompositeNode(grammarAccess.getWebDriverActionAccess().getElementByCssToBePresentParserRuleCall_0());
+			newCompositeNode(grammarAccess.getWebDriverActionAccess().getClickCssSelectorParserRuleCall_0());
 		}
-		this_ElementByCssToBePresent_0=ruleElementByCssToBePresent
+		this_ClickCssSelector_0=ruleClickCssSelector
 		{
-			$current = $this_ElementByCssToBePresent_0.current;
+			$current = $this_ClickCssSelector_0.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getWebDriverActionAccess().getClickCssSelectorParserRuleCall_1());
+			newCompositeNode(grammarAccess.getWebDriverActionAccess().getPageLoadParserRuleCall_1());
 		}
-		this_ClickCssSelector_1=ruleClickCssSelector
+		this_PageLoad_1=rulePageLoad
 		{
-			$current = $this_ClickCssSelector_1.current;
+			$current = $this_PageLoad_1.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getWebDriverActionAccess().getPageLoadParserRuleCall_2());
+			newCompositeNode(grammarAccess.getWebDriverActionAccess().getTypeTextInElementFoundByCssSelectorParserRuleCall_2());
 		}
-		this_PageLoad_2=rulePageLoad
+		this_TypeTextInElementFoundByCssSelector_2=ruleTypeTextInElementFoundByCssSelector
 		{
-			$current = $this_PageLoad_2.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getWebDriverActionAccess().getTypeTextInElementFoundByCssSelectorParserRuleCall_3());
-		}
-		this_TypeTextInElementFoundByCssSelector_3=ruleTypeTextInElementFoundByCssSelector
-		{
-			$current = $this_TypeTextInElementFoundByCssSelector_3.current;
+			$current = $this_TypeTextInElementFoundByCssSelector_2.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -459,9 +475,9 @@ rulePrecondition returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getPreconditionAccess().getActionWebDriverActionParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getPreconditionAccess().getActionWebDriverActionConditionParserRuleCall_1_0());
 				}
-				lv_action_1_0=ruleWebDriverAction
+				lv_action_1_0=ruleWebDriverActionCondition
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getPreconditionRule());
@@ -470,7 +486,7 @@ rulePrecondition returns [EObject current=null]
 						$current,
 						"action",
 						lv_action_1_0,
-						"com.hribol.bromium.dsl.Bromium.WebDriverAction");
+						"com.hribol.bromium.dsl.Bromium.WebDriverActionCondition");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -509,9 +525,9 @@ rulePostcondition returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getPostconditionAccess().getPostconditionWebDriverActionParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getPostconditionAccess().getPostconditionWebDriverActionConditionParserRuleCall_3_0());
 				}
-				lv_postcondition_3_0=ruleWebDriverAction
+				lv_postcondition_3_0=ruleWebDriverActionCondition
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getPostconditionRule());
@@ -520,7 +536,7 @@ rulePostcondition returns [EObject current=null]
 						$current,
 						"postcondition",
 						lv_postcondition_3_0,
-						"com.hribol.bromium.dsl.Bromium.WebDriverAction");
+						"com.hribol.bromium.dsl.Bromium.WebDriverActionCondition");
 					afterParserOrEnumRuleCall();
 				}
 			)

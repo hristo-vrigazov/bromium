@@ -19,6 +19,7 @@ import com.hribol.bromium.dsl.bromium.SyntaxDefinition;
 import com.hribol.bromium.dsl.bromium.ThreeDottedVersion;
 import com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector;
 import com.hribol.bromium.dsl.bromium.WebDriverAction;
+import com.hribol.bromium.dsl.bromium.WebDriverActionCondition;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -55,6 +56,13 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * @generated
    */
   private EClass syntaxDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass webDriverActionConditionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -344,6 +352,16 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
   public EReference getSyntaxDefinition_Parameter()
   {
     return (EReference)syntaxDefinitionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getWebDriverActionCondition()
+  {
+    return webDriverActionConditionEClass;
   }
 
   /**
@@ -644,6 +662,8 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     createEAttribute(syntaxDefinitionEClass, SYNTAX_DEFINITION__CONTENT);
     createEReference(syntaxDefinitionEClass, SYNTAX_DEFINITION__PARAMETER);
 
+    webDriverActionConditionEClass = createEClass(WEB_DRIVER_ACTION_CONDITION);
+
     webDriverActionEClass = createEClass(WEB_DRIVER_ACTION);
 
     preconditionEClass = createEClass(PRECONDITION);
@@ -710,7 +730,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    elementByCssToBePresentEClass.getESuperTypes().add(this.getWebDriverAction());
+    elementByCssToBePresentEClass.getESuperTypes().add(this.getWebDriverActionCondition());
     clickCssSelectorEClass.getESuperTypes().add(this.getWebDriverAction());
     pageLoadEClass.getESuperTypes().add(this.getWebDriverAction());
     typeTextInElementFoundByCssSelectorEClass.getESuperTypes().add(this.getWebDriverAction());
@@ -734,13 +754,15 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     initEAttribute(getSyntaxDefinition_Content(), ecorePackage.getEString(), "content", null, 0, 1, SyntaxDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSyntaxDefinition_Parameter(), this.getExposedParameter(), null, "parameter", null, 0, 1, SyntaxDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(webDriverActionConditionEClass, WebDriverActionCondition.class, "WebDriverActionCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
     initEClass(webDriverActionEClass, WebDriverAction.class, "WebDriverAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(preconditionEClass, Precondition.class, "Precondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getPrecondition_Action(), this.getWebDriverAction(), null, "action", null, 0, 1, Precondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPrecondition_Action(), this.getWebDriverActionCondition(), null, "action", null, 0, 1, Precondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(postconditionEClass, Postcondition.class, "Postcondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getPostcondition_Postcondition(), this.getWebDriverAction(), null, "postcondition", null, 0, 1, Postcondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPostcondition_Postcondition(), this.getWebDriverActionCondition(), null, "postcondition", null, 0, 1, Postcondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expectHttpRequestEClass, ExpectHttpRequest.class, "ExpectHttpRequest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getExpectHttpRequest_Not(), ecorePackage.getEString(), "not", null, 0, 1, ExpectHttpRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -20,7 +20,7 @@ package com.hribol.bromium.dsl.bromium;
  * @model
  * @generated
  */
-public interface ElementByCssToBePresent extends WebDriverAction
+public interface ElementByCssToBePresent extends WebDriverActionCondition
 {
   /**
    * Returns the value of the '<em><b>Css Selector</b></em>' containment reference.

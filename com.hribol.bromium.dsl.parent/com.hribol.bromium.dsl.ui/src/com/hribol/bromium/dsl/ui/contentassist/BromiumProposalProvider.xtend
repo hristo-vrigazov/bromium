@@ -21,9 +21,14 @@ class BromiumProposalProvider extends AbstractBromiumProposalProvider {
     
     override void complete_WebDriverAction(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		acceptor.accept(createCompletionProposal("click on element with css selector", context));
-		acceptor.accept(createCompletionProposal("element with css selector 'cssSelector' is present",context));
 		acceptor.accept(createCompletionProposal("type 'text' in element with css selector 'selector'", context));
+		acceptor.accept(createCompletionProposal("load page 'subpath'", context));
 		super.complete_WebDriverAction(model, ruleCall, context, acceptor);
+	}
+	
+	override void complete_WebDriverActionCondition(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		acceptor.accept(createCompletionProposal("element with css selector 'selector' is present", context));
+		super.complete_WebDriverActionCondition(model, ruleCall, context, acceptor);
 	}
 	
 	override void complete_ExpectHttpRequest(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

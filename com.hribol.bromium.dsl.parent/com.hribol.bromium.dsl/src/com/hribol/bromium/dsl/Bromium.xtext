@@ -24,19 +24,22 @@ SyntaxDefinition:
 	 {SyntaxDefinition} content=STRING (parameter=ExposedParameter)?
 ;
 
+WebDriverActionCondition:
+	ElementByCssToBePresent
+;
+
 WebDriverAction:
-	ElementByCssToBePresent |
 	ClickCssSelector |
 	PageLoad |
 	TypeTextInElementFoundByCssSelector
 ;
 
 Precondition:
-	('when' action=WebDriverAction)
+	('when' action=WebDriverActionCondition)
 ;
 
 Postcondition:
-	('then' 'make' 'sure' postcondition=WebDriverAction)
+	('then' 'make' 'sure' postcondition=WebDriverActionCondition)
 ;
 
 ExpectHttpRequest:

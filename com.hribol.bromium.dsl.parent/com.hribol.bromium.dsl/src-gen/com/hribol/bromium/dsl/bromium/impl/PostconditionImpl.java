@@ -5,7 +5,7 @@ package com.hribol.bromium.dsl.bromium.impl;
 
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.Postcondition;
-import com.hribol.bromium.dsl.bromium.WebDriverAction;
+import com.hribol.bromium.dsl.bromium.WebDriverActionCondition;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -39,7 +39,7 @@ public class PostconditionImpl extends MinimalEObjectImpl.Container implements P
    * @generated
    * @ordered
    */
-  protected WebDriverAction postcondition;
+  protected WebDriverActionCondition postcondition;
 
   /**
    * <!-- begin-user-doc -->
@@ -67,7 +67,7 @@ public class PostconditionImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
-  public WebDriverAction getPostcondition()
+  public WebDriverActionCondition getPostcondition()
   {
     return postcondition;
   }
@@ -77,9 +77,9 @@ public class PostconditionImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetPostcondition(WebDriverAction newPostcondition, NotificationChain msgs)
+  public NotificationChain basicSetPostcondition(WebDriverActionCondition newPostcondition, NotificationChain msgs)
   {
-    WebDriverAction oldPostcondition = postcondition;
+    WebDriverActionCondition oldPostcondition = postcondition;
     postcondition = newPostcondition;
     if (eNotificationRequired())
     {
@@ -94,7 +94,7 @@ public class PostconditionImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPostcondition(WebDriverAction newPostcondition)
+  public void setPostcondition(WebDriverActionCondition newPostcondition)
   {
     if (newPostcondition != postcondition)
     {
@@ -153,7 +153,7 @@ public class PostconditionImpl extends MinimalEObjectImpl.Container implements P
     switch (featureID)
     {
       case BromiumPackage.POSTCONDITION__POSTCONDITION:
-        setPostcondition((WebDriverAction)newValue);
+        setPostcondition((WebDriverActionCondition)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -170,7 +170,7 @@ public class PostconditionImpl extends MinimalEObjectImpl.Container implements P
     switch (featureID)
     {
       case BromiumPackage.POSTCONDITION__POSTCONDITION:
-        setPostcondition((WebDriverAction)null);
+        setPostcondition((WebDriverActionCondition)null);
         return;
     }
     super.eUnset(featureID);

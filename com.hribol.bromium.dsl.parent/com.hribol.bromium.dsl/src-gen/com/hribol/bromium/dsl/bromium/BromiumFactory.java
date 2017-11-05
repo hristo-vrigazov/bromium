@@ -51,6 +51,15 @@ public interface BromiumFactory extends EFactory
   SyntaxDefinition createSyntaxDefinition();
 
   /**
+   * Returns a new object of class '<em>Web Driver Action Condition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Web Driver Action Condition</em>'.
+   * @generated
+   */
+  WebDriverActionCondition createWebDriverActionCondition();
+
+  /**
    * Returns a new object of class '<em>Web Driver Action</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

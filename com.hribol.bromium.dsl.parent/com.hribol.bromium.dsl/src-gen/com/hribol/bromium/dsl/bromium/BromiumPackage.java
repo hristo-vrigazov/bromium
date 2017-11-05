@@ -223,6 +223,25 @@ public interface BromiumPackage extends EPackage
   int SYNTAX_DEFINITION_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.WebDriverActionConditionImpl <em>Web Driver Action Condition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see com.hribol.bromium.dsl.bromium.impl.WebDriverActionConditionImpl
+   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getWebDriverActionCondition()
+   * @generated
+   */
+  int WEB_DRIVER_ACTION_CONDITION = 3;
+
+  /**
+   * The number of structural features of the '<em>Web Driver Action Condition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WEB_DRIVER_ACTION_CONDITION_FEATURE_COUNT = 0;
+
+  /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.WebDriverActionImpl <em>Web Driver Action</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -230,7 +249,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getWebDriverAction()
    * @generated
    */
-  int WEB_DRIVER_ACTION = 3;
+  int WEB_DRIVER_ACTION = 4;
 
   /**
    * The number of structural features of the '<em>Web Driver Action</em>' class.
@@ -249,7 +268,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getPrecondition()
    * @generated
    */
-  int PRECONDITION = 4;
+  int PRECONDITION = 5;
 
   /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
@@ -277,7 +296,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getPostcondition()
    * @generated
    */
-  int POSTCONDITION = 5;
+  int POSTCONDITION = 6;
 
   /**
    * The feature id for the '<em><b>Postcondition</b></em>' containment reference.
@@ -305,7 +324,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getExpectHttpRequest()
    * @generated
    */
-  int EXPECT_HTTP_REQUEST = 6;
+  int EXPECT_HTTP_REQUEST = 7;
 
   /**
    * The feature id for the '<em><b>Not</b></em>' attribute.
@@ -333,7 +352,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getElementByCssToBePresent()
    * @generated
    */
-  int ELEMENT_BY_CSS_TO_BE_PRESENT = 7;
+  int ELEMENT_BY_CSS_TO_BE_PRESENT = 8;
 
   /**
    * The feature id for the '<em><b>Css Selector</b></em>' containment reference.
@@ -342,7 +361,7 @@ public interface BromiumPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELEMENT_BY_CSS_TO_BE_PRESENT__CSS_SELECTOR = WEB_DRIVER_ACTION_FEATURE_COUNT + 0;
+  int ELEMENT_BY_CSS_TO_BE_PRESENT__CSS_SELECTOR = WEB_DRIVER_ACTION_CONDITION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Element By Css To Be Present</em>' class.
@@ -351,7 +370,7 @@ public interface BromiumPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELEMENT_BY_CSS_TO_BE_PRESENT_FEATURE_COUNT = WEB_DRIVER_ACTION_FEATURE_COUNT + 1;
+  int ELEMENT_BY_CSS_TO_BE_PRESENT_FEATURE_COUNT = WEB_DRIVER_ACTION_CONDITION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ClickCssSelectorImpl <em>Click Css Selector</em>}' class.
@@ -361,7 +380,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getClickCssSelector()
    * @generated
    */
-  int CLICK_CSS_SELECTOR = 8;
+  int CLICK_CSS_SELECTOR = 9;
 
   /**
    * The feature id for the '<em><b>Css Selector</b></em>' containment reference.
@@ -389,7 +408,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getPageLoad()
    * @generated
    */
-  int PAGE_LOAD = 9;
+  int PAGE_LOAD = 10;
 
   /**
    * The feature id for the '<em><b>Subpath</b></em>' attribute.
@@ -417,7 +436,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getTypeTextInElementFoundByCssSelector()
    * @generated
    */
-  int TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR = 10;
+  int TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR = 11;
 
   /**
    * The feature id for the '<em><b>Text</b></em>' containment reference.
@@ -454,7 +473,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getParameterValue()
    * @generated
    */
-  int PARAMETER_VALUE = 11;
+  int PARAMETER_VALUE = 12;
 
   /**
    * The feature id for the '<em><b>Content</b></em>' attribute.
@@ -491,7 +510,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getExposedParameter()
    * @generated
    */
-  int EXPOSED_PARAMETER = 12;
+  int EXPOSED_PARAMETER = 13;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -519,7 +538,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getThreeDottedVersion()
    * @generated
    */
-  int THREE_DOTTED_VERSION = 13;
+  int THREE_DOTTED_VERSION = 14;
 
   /**
    * The feature id for the '<em><b>Big</b></em>' attribute.
@@ -719,6 +738,16 @@ public interface BromiumPackage extends EPackage
    * @generated
    */
   EReference getSyntaxDefinition_Parameter();
+
+  /**
+   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.WebDriverActionCondition <em>Web Driver Action Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Web Driver Action Condition</em>'.
+   * @see com.hribol.bromium.dsl.bromium.WebDriverActionCondition
+   * @generated
+   */
+  EClass getWebDriverActionCondition();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.WebDriverAction <em>Web Driver Action</em>}'.
@@ -1132,6 +1161,16 @@ public interface BromiumPackage extends EPackage
      * @generated
      */
     EReference SYNTAX_DEFINITION__PARAMETER = eINSTANCE.getSyntaxDefinition_Parameter();
+
+    /**
+     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.WebDriverActionConditionImpl <em>Web Driver Action Condition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.hribol.bromium.dsl.bromium.impl.WebDriverActionConditionImpl
+     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getWebDriverActionCondition()
+     * @generated
+     */
+    EClass WEB_DRIVER_ACTION_CONDITION = eINSTANCE.getWebDriverActionCondition();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.WebDriverActionImpl <em>Web Driver Action</em>}' class.

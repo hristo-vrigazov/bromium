@@ -94,6 +94,13 @@ public class BromiumSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case BromiumPackage.WEB_DRIVER_ACTION_CONDITION:
+      {
+        WebDriverActionCondition webDriverActionCondition = (WebDriverActionCondition)theEObject;
+        T result = caseWebDriverActionCondition(webDriverActionCondition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case BromiumPackage.WEB_DRIVER_ACTION:
       {
         WebDriverAction webDriverAction = (WebDriverAction)theEObject;
@@ -126,7 +133,7 @@ public class BromiumSwitch<T> extends Switch<T>
       {
         ElementByCssToBePresent elementByCssToBePresent = (ElementByCssToBePresent)theEObject;
         T result = caseElementByCssToBePresent(elementByCssToBePresent);
-        if (result == null) result = caseWebDriverAction(elementByCssToBePresent);
+        if (result == null) result = caseWebDriverActionCondition(elementByCssToBePresent);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -223,6 +230,22 @@ public class BromiumSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseSyntaxDefinition(SyntaxDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Web Driver Action Condition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Web Driver Action Condition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseWebDriverActionCondition(WebDriverActionCondition object)
   {
     return null;
   }

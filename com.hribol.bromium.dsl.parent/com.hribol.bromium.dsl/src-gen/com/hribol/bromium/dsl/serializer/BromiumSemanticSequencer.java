@@ -128,7 +128,7 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	
 	/**
 	 * Contexts:
-	 *     WebDriverAction returns ElementByCssToBePresent
+	 *     WebDriverActionCondition returns ElementByCssToBePresent
 	 *     ElementByCssToBePresent returns ElementByCssToBePresent
 	 *
 	 * Constraint:
@@ -223,7 +223,7 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     Postcondition returns Postcondition
 	 *
 	 * Constraint:
-	 *     postcondition=WebDriverAction
+	 *     postcondition=WebDriverActionCondition
 	 */
 	protected void sequence_Postcondition(ISerializationContext context, Postcondition semanticObject) {
 		if (errorAcceptor != null) {
@@ -231,7 +231,7 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.POSTCONDITION__POSTCONDITION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPostconditionAccess().getPostconditionWebDriverActionParserRuleCall_3_0(), semanticObject.getPostcondition());
+		feeder.accept(grammarAccess.getPostconditionAccess().getPostconditionWebDriverActionConditionParserRuleCall_3_0(), semanticObject.getPostcondition());
 		feeder.finish();
 	}
 	
@@ -241,7 +241,7 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     Precondition returns Precondition
 	 *
 	 * Constraint:
-	 *     action=WebDriverAction
+	 *     action=WebDriverActionCondition
 	 */
 	protected void sequence_Precondition(ISerializationContext context, Precondition semanticObject) {
 		if (errorAcceptor != null) {
@@ -249,7 +249,7 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.PRECONDITION__ACTION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPreconditionAccess().getActionWebDriverActionParserRuleCall_1_0(), semanticObject.getAction());
+		feeder.accept(grammarAccess.getPreconditionAccess().getActionWebDriverActionConditionParserRuleCall_1_0(), semanticObject.getAction());
 		feeder.finish();
 	}
 	

@@ -32,12 +32,12 @@ public interface Postcondition extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Postcondition</em>' containment reference.
-   * @see #setPostcondition(WebDriverAction)
+   * @see #setPostcondition(WebDriverActionCondition)
    * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getPostcondition_Postcondition()
    * @model containment="true"
    * @generated
    */
-  WebDriverAction getPostcondition();
+  WebDriverActionCondition getPostcondition();
 
   /**
    * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.Postcondition#getPostcondition <em>Postcondition</em>}' containment reference.
@@ -47,6 +47,6 @@ public interface Postcondition extends EObject
    * @see #getPostcondition()
    * @generated
    */
-  void setPostcondition(WebDriverAction value);
+  void setPostcondition(WebDriverActionCondition value);
 
 } // Postcondition

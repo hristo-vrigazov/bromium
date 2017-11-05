@@ -203,55 +203,62 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		//ExposedParameter
 		public RuleCall getParameterExposedParameterParserRuleCall_2_0() { return cParameterExposedParameterParserRuleCall_2_0; }
 	}
+	public class WebDriverActionConditionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.WebDriverActionCondition");
+		private final RuleCall cElementByCssToBePresentParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//WebDriverActionCondition:
+		//	ElementByCssToBePresent;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ElementByCssToBePresent
+		public RuleCall getElementByCssToBePresentParserRuleCall() { return cElementByCssToBePresentParserRuleCall; }
+	}
 	public class WebDriverActionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.WebDriverAction");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cElementByCssToBePresentParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cClickCssSelectorParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cPageLoadParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cTypeTextInElementFoundByCssSelectorParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cClickCssSelectorParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cPageLoadParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cTypeTextInElementFoundByCssSelectorParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//WebDriverAction:
-		//	ElementByCssToBePresent | ClickCssSelector | PageLoad | TypeTextInElementFoundByCssSelector;
+		//	ClickCssSelector | PageLoad | TypeTextInElementFoundByCssSelector;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ElementByCssToBePresent | ClickCssSelector | PageLoad | TypeTextInElementFoundByCssSelector
+		//ClickCssSelector | PageLoad | TypeTextInElementFoundByCssSelector
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//ElementByCssToBePresent
-		public RuleCall getElementByCssToBePresentParserRuleCall_0() { return cElementByCssToBePresentParserRuleCall_0; }
-		
 		//ClickCssSelector
-		public RuleCall getClickCssSelectorParserRuleCall_1() { return cClickCssSelectorParserRuleCall_1; }
+		public RuleCall getClickCssSelectorParserRuleCall_0() { return cClickCssSelectorParserRuleCall_0; }
 		
 		//PageLoad
-		public RuleCall getPageLoadParserRuleCall_2() { return cPageLoadParserRuleCall_2; }
+		public RuleCall getPageLoadParserRuleCall_1() { return cPageLoadParserRuleCall_1; }
 		
 		//TypeTextInElementFoundByCssSelector
-		public RuleCall getTypeTextInElementFoundByCssSelectorParserRuleCall_3() { return cTypeTextInElementFoundByCssSelectorParserRuleCall_3; }
+		public RuleCall getTypeTextInElementFoundByCssSelectorParserRuleCall_2() { return cTypeTextInElementFoundByCssSelectorParserRuleCall_2; }
 	}
 	public class PreconditionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.Precondition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cWhenKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cActionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cActionWebDriverActionParserRuleCall_1_0 = (RuleCall)cActionAssignment_1.eContents().get(0);
+		private final RuleCall cActionWebDriverActionConditionParserRuleCall_1_0 = (RuleCall)cActionAssignment_1.eContents().get(0);
 		
 		//Precondition:
-		//	'when' action=WebDriverAction;
+		//	'when' action=WebDriverActionCondition;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'when' action=WebDriverAction
+		//'when' action=WebDriverActionCondition
 		public Group getGroup() { return cGroup; }
 		
 		//'when'
 		public Keyword getWhenKeyword_0() { return cWhenKeyword_0; }
 		
-		//action=WebDriverAction
+		//action=WebDriverActionCondition
 		public Assignment getActionAssignment_1() { return cActionAssignment_1; }
 		
-		//WebDriverAction
-		public RuleCall getActionWebDriverActionParserRuleCall_1_0() { return cActionWebDriverActionParserRuleCall_1_0; }
+		//WebDriverActionCondition
+		public RuleCall getActionWebDriverActionConditionParserRuleCall_1_0() { return cActionWebDriverActionConditionParserRuleCall_1_0; }
 	}
 	public class PostconditionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.Postcondition");
@@ -260,13 +267,13 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cMakeKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Keyword cSureKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cPostconditionAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cPostconditionWebDriverActionParserRuleCall_3_0 = (RuleCall)cPostconditionAssignment_3.eContents().get(0);
+		private final RuleCall cPostconditionWebDriverActionConditionParserRuleCall_3_0 = (RuleCall)cPostconditionAssignment_3.eContents().get(0);
 		
 		//Postcondition:
-		//	'then' 'make' 'sure' postcondition=WebDriverAction;
+		//	'then' 'make' 'sure' postcondition=WebDriverActionCondition;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'then' 'make' 'sure' postcondition=WebDriverAction
+		//'then' 'make' 'sure' postcondition=WebDriverActionCondition
 		public Group getGroup() { return cGroup; }
 		
 		//'then'
@@ -278,11 +285,11 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		//'sure'
 		public Keyword getSureKeyword_2() { return cSureKeyword_2; }
 		
-		//postcondition=WebDriverAction
+		//postcondition=WebDriverActionCondition
 		public Assignment getPostconditionAssignment_3() { return cPostconditionAssignment_3; }
 		
-		//WebDriverAction
-		public RuleCall getPostconditionWebDriverActionParserRuleCall_3_0() { return cPostconditionWebDriverActionParserRuleCall_3_0; }
+		//WebDriverActionCondition
+		public RuleCall getPostconditionWebDriverActionConditionParserRuleCall_3_0() { return cPostconditionWebDriverActionConditionParserRuleCall_3_0; }
 	}
 	public class ExpectHttpRequestElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.ExpectHttpRequest");
@@ -599,6 +606,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	private final ModelElements pModel;
 	private final ApplicationActionElements pApplicationAction;
 	private final SyntaxDefinitionElements pSyntaxDefinition;
+	private final WebDriverActionConditionElements pWebDriverActionCondition;
 	private final WebDriverActionElements pWebDriverAction;
 	private final PreconditionElements pPrecondition;
 	private final PostconditionElements pPostcondition;
@@ -624,6 +632,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		this.pModel = new ModelElements();
 		this.pApplicationAction = new ApplicationActionElements();
 		this.pSyntaxDefinition = new SyntaxDefinitionElements();
+		this.pWebDriverActionCondition = new WebDriverActionConditionElements();
 		this.pWebDriverAction = new WebDriverActionElements();
 		this.pPrecondition = new PreconditionElements();
 		this.pPostcondition = new PostconditionElements();
@@ -704,8 +713,18 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		return getSyntaxDefinitionAccess().getRule();
 	}
 	
+	//WebDriverActionCondition:
+	//	ElementByCssToBePresent;
+	public WebDriverActionConditionElements getWebDriverActionConditionAccess() {
+		return pWebDriverActionCondition;
+	}
+	
+	public ParserRule getWebDriverActionConditionRule() {
+		return getWebDriverActionConditionAccess().getRule();
+	}
+	
 	//WebDriverAction:
-	//	ElementByCssToBePresent | ClickCssSelector | PageLoad | TypeTextInElementFoundByCssSelector;
+	//	ClickCssSelector | PageLoad | TypeTextInElementFoundByCssSelector;
 	public WebDriverActionElements getWebDriverActionAccess() {
 		return pWebDriverAction;
 	}
@@ -715,7 +734,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Precondition:
-	//	'when' action=WebDriverAction;
+	//	'when' action=WebDriverActionCondition;
 	public PreconditionElements getPreconditionAccess() {
 		return pPrecondition;
 	}
@@ -725,7 +744,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Postcondition:
-	//	'then' 'make' 'sure' postcondition=WebDriverAction;
+	//	'then' 'make' 'sure' postcondition=WebDriverActionCondition;
 	public PostconditionElements getPostconditionAccess() {
 		return pPostcondition;
 	}

@@ -5,7 +5,7 @@ package com.hribol.bromium.dsl.bromium.impl;
 
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.Precondition;
-import com.hribol.bromium.dsl.bromium.WebDriverAction;
+import com.hribol.bromium.dsl.bromium.WebDriverActionCondition;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -39,7 +39,7 @@ public class PreconditionImpl extends MinimalEObjectImpl.Container implements Pr
    * @generated
    * @ordered
    */
-  protected WebDriverAction action;
+  protected WebDriverActionCondition action;
 
   /**
    * <!-- begin-user-doc -->
@@ -67,7 +67,7 @@ public class PreconditionImpl extends MinimalEObjectImpl.Container implements Pr
    * <!-- end-user-doc -->
    * @generated
    */
-  public WebDriverAction getAction()
+  public WebDriverActionCondition getAction()
   {
     return action;
   }
@@ -77,9 +77,9 @@ public class PreconditionImpl extends MinimalEObjectImpl.Container implements Pr
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetAction(WebDriverAction newAction, NotificationChain msgs)
+  public NotificationChain basicSetAction(WebDriverActionCondition newAction, NotificationChain msgs)
   {
-    WebDriverAction oldAction = action;
+    WebDriverActionCondition oldAction = action;
     action = newAction;
     if (eNotificationRequired())
     {
@@ -94,7 +94,7 @@ public class PreconditionImpl extends MinimalEObjectImpl.Container implements Pr
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAction(WebDriverAction newAction)
+  public void setAction(WebDriverActionCondition newAction)
   {
     if (newAction != action)
     {
@@ -153,7 +153,7 @@ public class PreconditionImpl extends MinimalEObjectImpl.Container implements Pr
     switch (featureID)
     {
       case BromiumPackage.PRECONDITION__ACTION:
-        setAction((WebDriverAction)newValue);
+        setAction((WebDriverActionCondition)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -170,7 +170,7 @@ public class PreconditionImpl extends MinimalEObjectImpl.Container implements Pr
     switch (featureID)
     {
       case BromiumPackage.PRECONDITION__ACTION:
-        setAction((WebDriverAction)null);
+        setAction((WebDriverActionCondition)null);
         return;
     }
     super.eUnset(featureID);

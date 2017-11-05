@@ -124,6 +124,31 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+// Entry rule entryRuleWebDriverActionCondition
+entryRuleWebDriverActionCondition
+:
+{ before(grammarAccess.getWebDriverActionConditionRule()); }
+	 ruleWebDriverActionCondition
+{ after(grammarAccess.getWebDriverActionConditionRule()); } 
+	 EOF 
+;
+
+// Rule WebDriverActionCondition
+ruleWebDriverActionCondition 
+	@init {
+		int stackSize = keepStackSize();
+	}
+	:
+	(
+		{ before(grammarAccess.getWebDriverActionConditionAccess().getElementByCssToBePresentParserRuleCall()); }
+		ruleElementByCssToBePresent
+		{ after(grammarAccess.getWebDriverActionConditionAccess().getElementByCssToBePresentParserRuleCall()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 // Entry rule entryRuleWebDriverAction
 entryRuleWebDriverAction
 :
@@ -405,27 +430,21 @@ rule__WebDriverAction__Alternatives
 	}
 :
 	(
-		{ before(grammarAccess.getWebDriverActionAccess().getElementByCssToBePresentParserRuleCall_0()); }
-		ruleElementByCssToBePresent
-		{ after(grammarAccess.getWebDriverActionAccess().getElementByCssToBePresentParserRuleCall_0()); }
-	)
-	|
-	(
-		{ before(grammarAccess.getWebDriverActionAccess().getClickCssSelectorParserRuleCall_1()); }
+		{ before(grammarAccess.getWebDriverActionAccess().getClickCssSelectorParserRuleCall_0()); }
 		ruleClickCssSelector
-		{ after(grammarAccess.getWebDriverActionAccess().getClickCssSelectorParserRuleCall_1()); }
+		{ after(grammarAccess.getWebDriverActionAccess().getClickCssSelectorParserRuleCall_0()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getWebDriverActionAccess().getPageLoadParserRuleCall_2()); }
+		{ before(grammarAccess.getWebDriverActionAccess().getPageLoadParserRuleCall_1()); }
 		rulePageLoad
-		{ after(grammarAccess.getWebDriverActionAccess().getPageLoadParserRuleCall_2()); }
+		{ after(grammarAccess.getWebDriverActionAccess().getPageLoadParserRuleCall_1()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getWebDriverActionAccess().getTypeTextInElementFoundByCssSelectorParserRuleCall_3()); }
+		{ before(grammarAccess.getWebDriverActionAccess().getTypeTextInElementFoundByCssSelectorParserRuleCall_2()); }
 		ruleTypeTextInElementFoundByCssSelector
-		{ after(grammarAccess.getWebDriverActionAccess().getTypeTextInElementFoundByCssSelectorParserRuleCall_3()); }
+		{ after(grammarAccess.getWebDriverActionAccess().getTypeTextInElementFoundByCssSelectorParserRuleCall_2()); }
 	)
 ;
 finally {
@@ -2259,9 +2278,9 @@ rule__Precondition__ActionAssignment_1
 	}
 :
 	(
-		{ before(grammarAccess.getPreconditionAccess().getActionWebDriverActionParserRuleCall_1_0()); }
-		ruleWebDriverAction
-		{ after(grammarAccess.getPreconditionAccess().getActionWebDriverActionParserRuleCall_1_0()); }
+		{ before(grammarAccess.getPreconditionAccess().getActionWebDriverActionConditionParserRuleCall_1_0()); }
+		ruleWebDriverActionCondition
+		{ after(grammarAccess.getPreconditionAccess().getActionWebDriverActionConditionParserRuleCall_1_0()); }
 	)
 ;
 finally {
@@ -2274,9 +2293,9 @@ rule__Postcondition__PostconditionAssignment_3
 	}
 :
 	(
-		{ before(grammarAccess.getPostconditionAccess().getPostconditionWebDriverActionParserRuleCall_3_0()); }
-		ruleWebDriverAction
-		{ after(grammarAccess.getPostconditionAccess().getPostconditionWebDriverActionParserRuleCall_3_0()); }
+		{ before(grammarAccess.getPostconditionAccess().getPostconditionWebDriverActionConditionParserRuleCall_3_0()); }
+		ruleWebDriverActionCondition
+		{ after(grammarAccess.getPostconditionAccess().getPostconditionWebDriverActionConditionParserRuleCall_3_0()); }
 	)
 ;
 finally {

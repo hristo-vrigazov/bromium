@@ -91,6 +91,11 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
         return createSyntaxDefinitionAdapter();
       }
       @Override
+      public Adapter caseWebDriverActionCondition(WebDriverActionCondition object)
+      {
+        return createWebDriverActionConditionAdapter();
+      }
+      @Override
       public Adapter caseWebDriverAction(WebDriverAction object)
       {
         return createWebDriverActionAdapter();
@@ -208,6 +213,21 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createSyntaxDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.WebDriverActionCondition <em>Web Driver Action Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see com.hribol.bromium.dsl.bromium.WebDriverActionCondition
+   * @generated
+   */
+  public Adapter createWebDriverActionConditionAdapter()
   {
     return null;
   }

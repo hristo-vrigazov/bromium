@@ -32,12 +32,12 @@ public interface Precondition extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Action</em>' containment reference.
-   * @see #setAction(WebDriverAction)
+   * @see #setAction(WebDriverActionCondition)
    * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getPrecondition_Action()
    * @model containment="true"
    * @generated
    */
-  WebDriverAction getAction();
+  WebDriverActionCondition getAction();
 
   /**
    * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.Precondition#getAction <em>Action</em>}' containment reference.
@@ -47,6 +47,6 @@ public interface Precondition extends EObject
    * @see #getAction()
    * @generated
    */
-  void setAction(WebDriverAction value);
+  void setAction(WebDriverActionCondition value);
 
 } // Precondition

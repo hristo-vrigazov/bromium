@@ -24,6 +24,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//SyntaxDefinition/content"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//SyntaxDefinition/parameter"/>
     </genClasses>
+    <genClasses ecoreClass="Bromium.ecore#//WebDriverActionCondition"/>
     <genClasses ecoreClass="Bromium.ecore#//WebDriverAction"/>
     <genClasses ecoreClass="Bromium.ecore#//Precondition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//Precondition/action"/>

@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class ElementByCssToBePresentImpl extends WebDriverActionImpl implements ElementByCssToBePresent
+public class ElementByCssToBePresentImpl extends WebDriverActionConditionImpl implements ElementByCssToBePresent
 {
   /**
    * The cached value of the '{@link #getCssSelector() <em>Css Selector</em>}' containment reference.
