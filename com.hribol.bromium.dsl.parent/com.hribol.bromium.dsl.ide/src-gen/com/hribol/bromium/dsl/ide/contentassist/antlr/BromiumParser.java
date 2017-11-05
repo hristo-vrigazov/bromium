@@ -40,7 +40,8 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPreconditionAccess().getGroup(), "rule__Precondition__Group__0");
 					put(grammarAccess.getPostconditionAccess().getGroup(), "rule__Postcondition__Group__0");
 					put(grammarAccess.getExpectHttpRequestAccess().getGroup(), "rule__ExpectHttpRequest__Group__0");
-					put(grammarAccess.getElementWithIdIsPresentAccess().getGroup(), "rule__ElementWithIdIsPresent__Group__0");
+					put(grammarAccess.getExpectHttpRequestAccess().getGroup_1(), "rule__ExpectHttpRequest__Group_1__0");
+					put(grammarAccess.getElementByCssToBePresentAccess().getGroup(), "rule__ElementByCssToBePresent__Group__0");
 					put(grammarAccess.getClickCssSelectorAccess().getGroup(), "rule__ClickCssSelector__Group__0");
 					put(grammarAccess.getPageLoadAccess().getGroup(), "rule__PageLoad__Group__0");
 					put(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getGroup(), "rule__TypeTextInElementFoundByCssSelector__Group__0");
@@ -59,7 +60,8 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSyntaxDefinitionAccess().getParameterAssignment_2(), "rule__SyntaxDefinition__ParameterAssignment_2");
 					put(grammarAccess.getPreconditionAccess().getActionAssignment_1(), "rule__Precondition__ActionAssignment_1");
 					put(grammarAccess.getPostconditionAccess().getPostconditionAssignment_3(), "rule__Postcondition__PostconditionAssignment_3");
-					put(grammarAccess.getElementWithIdIsPresentAccess().getCssSelectorAssignment_4(), "rule__ElementWithIdIsPresent__CssSelectorAssignment_4");
+					put(grammarAccess.getExpectHttpRequestAccess().getNotAssignment_1_1(), "rule__ExpectHttpRequest__NotAssignment_1_1");
+					put(grammarAccess.getElementByCssToBePresentAccess().getCssSelectorAssignment_4(), "rule__ElementByCssToBePresent__CssSelectorAssignment_4");
 					put(grammarAccess.getClickCssSelectorAccess().getCssSelectorAssignment_6(), "rule__ClickCssSelector__CssSelectorAssignment_6");
 					put(grammarAccess.getPageLoadAccess().getSubpathAssignment_2(), "rule__PageLoad__SubpathAssignment_2");
 					put(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTextAssignment_1(), "rule__TypeTextInElementFoundByCssSelector__TextAssignment_1");

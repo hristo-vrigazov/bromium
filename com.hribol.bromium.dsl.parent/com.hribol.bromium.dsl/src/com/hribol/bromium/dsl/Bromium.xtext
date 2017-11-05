@@ -25,7 +25,7 @@ SyntaxDefinition:
 ;
 
 WebDriverAction:
-	ElementWithIdIsPresent |
+	ElementByCssToBePresent |
 	ClickCssSelector |
 	PageLoad |
 	TypeTextInElementFoundByCssSelector
@@ -40,12 +40,12 @@ Postcondition:
 ;
 
 ExpectHttpRequest:
-	('do' 'not'? 'expect' 'http' 'request')
+	{ExpectHttpRequest} ('do' not='not'? 'expect' 'http' 'request')
 ;
 
 
 // TODO: syntactic sugar for CSS selectors
-ElementWithIdIsPresent: 'element' 'with' 'css' 'selector' cssSelector=ParameterValue 'is' 'present';
+ElementByCssToBePresent: 'element' 'with' 'css' 'selector' cssSelector=ParameterValue 'is' 'present';
 ClickCssSelector: 'click' 'on' 'element' 'with' 'css' 'selector' cssSelector=ParameterValue;
 PageLoad: 'load' 'page' subpath=STRING;
 TypeTextInElementFoundByCssSelector: 'type' text=ParameterValue 

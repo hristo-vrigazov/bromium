@@ -106,9 +106,14 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
         return createPostconditionAdapter();
       }
       @Override
-      public Adapter caseElementWithIdIsPresent(ElementWithIdIsPresent object)
+      public Adapter caseExpectHttpRequest(ExpectHttpRequest object)
       {
-        return createElementWithIdIsPresentAdapter();
+        return createExpectHttpRequestAdapter();
+      }
+      @Override
+      public Adapter caseElementByCssToBePresent(ElementByCssToBePresent object)
+      {
+        return createElementByCssToBePresentAdapter();
       }
       @Override
       public Adapter caseClickCssSelector(ClickCssSelector object)
@@ -253,16 +258,31 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent <em>Element With Id Is Present</em>}'.
+   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.ExpectHttpRequest <em>Expect Http Request</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent
+   * @see com.hribol.bromium.dsl.bromium.ExpectHttpRequest
    * @generated
    */
-  public Adapter createElementWithIdIsPresentAdapter()
+  public Adapter createExpectHttpRequestAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.ElementByCssToBePresent <em>Element By Css To Be Present</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see com.hribol.bromium.dsl.bromium.ElementByCssToBePresent
+   * @generated
+   */
+  public Adapter createElementByCssToBePresentAdapter()
   {
     return null;
   }

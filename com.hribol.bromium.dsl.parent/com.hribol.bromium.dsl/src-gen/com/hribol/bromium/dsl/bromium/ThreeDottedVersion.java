@@ -12,12 +12,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
- * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ThreeDottedVersion#getBig <em>Big</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ThreeDottedVersion#getMedium <em>Medium</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ThreeDottedVersion#getSmall <em>Small</em>}</li>
  * </ul>
+ * </p>
  *
  * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getThreeDottedVersion()
  * @model

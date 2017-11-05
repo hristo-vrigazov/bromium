@@ -51,7 +51,7 @@ public class BromiumSwitch<T> extends Switch<T>
    * Checks whether this is a switch for the given package.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param ePackage the package in question.
+   * @parameter ePackage the package in question.
    * @return whether this is a switch for the given package.
    * @generated
    */
@@ -115,11 +115,18 @@ public class BromiumSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case BromiumPackage.ELEMENT_WITH_ID_IS_PRESENT:
+      case BromiumPackage.EXPECT_HTTP_REQUEST:
       {
-        ElementWithIdIsPresent elementWithIdIsPresent = (ElementWithIdIsPresent)theEObject;
-        T result = caseElementWithIdIsPresent(elementWithIdIsPresent);
-        if (result == null) result = caseWebDriverAction(elementWithIdIsPresent);
+        ExpectHttpRequest expectHttpRequest = (ExpectHttpRequest)theEObject;
+        T result = caseExpectHttpRequest(expectHttpRequest);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BromiumPackage.ELEMENT_BY_CSS_TO_BE_PRESENT:
+      {
+        ElementByCssToBePresent elementByCssToBePresent = (ElementByCssToBePresent)theEObject;
+        T result = caseElementByCssToBePresent(elementByCssToBePresent);
+        if (result == null) result = caseWebDriverAction(elementByCssToBePresent);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -269,17 +276,33 @@ public class BromiumSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Element With Id Is Present</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Expect Http Request</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Element With Id Is Present</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Expect Http Request</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseElementWithIdIsPresent(ElementWithIdIsPresent object)
+  public T caseExpectHttpRequest(ExpectHttpRequest object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Element By Css To Be Present</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Element By Css To Be Present</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseElementByCssToBePresent(ElementByCssToBePresent object)
   {
     return null;
   }

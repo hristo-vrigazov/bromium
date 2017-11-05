@@ -7,7 +7,8 @@ import com.google.inject.Inject;
 import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.ClickCssSelector;
-import com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent;
+import com.hribol.bromium.dsl.bromium.ElementByCssToBePresent;
+import com.hribol.bromium.dsl.bromium.ExpectHttpRequest;
 import com.hribol.bromium.dsl.bromium.ExposedParameter;
 import com.hribol.bromium.dsl.bromium.Model;
 import com.hribol.bromium.dsl.bromium.PageLoad;
@@ -49,8 +50,11 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 			case BromiumPackage.CLICK_CSS_SELECTOR:
 				sequence_ClickCssSelector(context, (ClickCssSelector) semanticObject); 
 				return; 
-			case BromiumPackage.ELEMENT_WITH_ID_IS_PRESENT:
-				sequence_ElementWithIdIsPresent(context, (ElementWithIdIsPresent) semanticObject); 
+			case BromiumPackage.ELEMENT_BY_CSS_TO_BE_PRESENT:
+				sequence_ElementByCssToBePresent(context, (ElementByCssToBePresent) semanticObject); 
+				return; 
+			case BromiumPackage.EXPECT_HTTP_REQUEST:
+				sequence_ExpectHttpRequest(context, (ExpectHttpRequest) semanticObject); 
 				return; 
 			case BromiumPackage.EXPOSED_PARAMETER:
 				sequence_ExposedParameter(context, (ExposedParameter) semanticObject); 
@@ -124,20 +128,32 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	
 	/**
 	 * Contexts:
-	 *     WebDriverAction returns ElementWithIdIsPresent
-	 *     ElementWithIdIsPresent returns ElementWithIdIsPresent
+	 *     WebDriverAction returns ElementByCssToBePresent
+	 *     ElementByCssToBePresent returns ElementByCssToBePresent
 	 *
 	 * Constraint:
 	 *     cssSelector=ParameterValue
 	 */
-	protected void sequence_ElementWithIdIsPresent(ISerializationContext context, ElementWithIdIsPresent semanticObject) {
+	protected void sequence_ElementByCssToBePresent(ISerializationContext context, ElementByCssToBePresent semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR));
+			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.ELEMENT_BY_CSS_TO_BE_PRESENT__CSS_SELECTOR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.ELEMENT_BY_CSS_TO_BE_PRESENT__CSS_SELECTOR));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getElementWithIdIsPresentAccess().getCssSelectorParameterValueParserRuleCall_4_0(), semanticObject.getCssSelector());
+		feeder.accept(grammarAccess.getElementByCssToBePresentAccess().getCssSelectorParameterValueParserRuleCall_4_0(), semanticObject.getCssSelector());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ExpectHttpRequest returns ExpectHttpRequest
+	 *
+	 * Constraint:
+	 *     not='not'?
+	 */
+	protected void sequence_ExpectHttpRequest(ISerializationContext context, ExpectHttpRequest semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

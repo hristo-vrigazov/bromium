@@ -7,7 +7,8 @@ import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.BromiumFactory;
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.ClickCssSelector;
-import com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent;
+import com.hribol.bromium.dsl.bromium.ElementByCssToBePresent;
+import com.hribol.bromium.dsl.bromium.ExpectHttpRequest;
 import com.hribol.bromium.dsl.bromium.ExposedParameter;
 import com.hribol.bromium.dsl.bromium.Model;
 import com.hribol.bromium.dsl.bromium.PageLoad;
@@ -81,7 +82,14 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass elementWithIdIsPresentEClass = null;
+  private EClass expectHttpRequestEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass elementByCssToBePresentEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -303,9 +311,9 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getApplicationAction_ExpectHttpRequest()
+  public EReference getApplicationAction_ExpectHttpRequest()
   {
-    return (EAttribute)applicationActionEClass.getEStructuralFeatures().get(5);
+    return (EReference)applicationActionEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -393,9 +401,9 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getElementWithIdIsPresent()
+  public EClass getExpectHttpRequest()
   {
-    return elementWithIdIsPresentEClass;
+    return expectHttpRequestEClass;
   }
 
   /**
@@ -403,9 +411,29 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getElementWithIdIsPresent_CssSelector()
+  public EAttribute getExpectHttpRequest_Not()
   {
-    return (EReference)elementWithIdIsPresentEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)expectHttpRequestEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getElementByCssToBePresent()
+  {
+    return elementByCssToBePresentEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getElementByCssToBePresent_CssSelector()
+  {
+    return (EReference)elementByCssToBePresentEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -610,7 +638,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     createEReference(applicationActionEClass, APPLICATION_ACTION__PRECONDITION);
     createEReference(applicationActionEClass, APPLICATION_ACTION__WEB_DRIVER_ACTION);
     createEReference(applicationActionEClass, APPLICATION_ACTION__POSTCONDITION);
-    createEAttribute(applicationActionEClass, APPLICATION_ACTION__EXPECT_HTTP_REQUEST);
+    createEReference(applicationActionEClass, APPLICATION_ACTION__EXPECT_HTTP_REQUEST);
 
     syntaxDefinitionEClass = createEClass(SYNTAX_DEFINITION);
     createEAttribute(syntaxDefinitionEClass, SYNTAX_DEFINITION__CONTENT);
@@ -624,8 +652,11 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     postconditionEClass = createEClass(POSTCONDITION);
     createEReference(postconditionEClass, POSTCONDITION__POSTCONDITION);
 
-    elementWithIdIsPresentEClass = createEClass(ELEMENT_WITH_ID_IS_PRESENT);
-    createEReference(elementWithIdIsPresentEClass, ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR);
+    expectHttpRequestEClass = createEClass(EXPECT_HTTP_REQUEST);
+    createEAttribute(expectHttpRequestEClass, EXPECT_HTTP_REQUEST__NOT);
+
+    elementByCssToBePresentEClass = createEClass(ELEMENT_BY_CSS_TO_BE_PRESENT);
+    createEReference(elementByCssToBePresentEClass, ELEMENT_BY_CSS_TO_BE_PRESENT__CSS_SELECTOR);
 
     clickCssSelectorEClass = createEClass(CLICK_CSS_SELECTOR);
     createEReference(clickCssSelectorEClass, CLICK_CSS_SELECTOR__CSS_SELECTOR);
@@ -679,7 +710,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    elementWithIdIsPresentEClass.getESuperTypes().add(this.getWebDriverAction());
+    elementByCssToBePresentEClass.getESuperTypes().add(this.getWebDriverAction());
     clickCssSelectorEClass.getESuperTypes().add(this.getWebDriverAction());
     pageLoadEClass.getESuperTypes().add(this.getWebDriverAction());
     typeTextInElementFoundByCssSelectorEClass.getESuperTypes().add(this.getWebDriverAction());
@@ -697,7 +728,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     initEReference(getApplicationAction_Precondition(), this.getPrecondition(), null, "precondition", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getApplicationAction_WebDriverAction(), this.getWebDriverAction(), null, "webDriverAction", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getApplicationAction_Postcondition(), this.getPostcondition(), null, "postcondition", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getApplicationAction_ExpectHttpRequest(), ecorePackage.getEString(), "expectHttpRequest", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getApplicationAction_ExpectHttpRequest(), this.getExpectHttpRequest(), null, "expectHttpRequest", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(syntaxDefinitionEClass, SyntaxDefinition.class, "SyntaxDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSyntaxDefinition_Content(), ecorePackage.getEString(), "content", null, 0, 1, SyntaxDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -711,8 +742,11 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     initEClass(postconditionEClass, Postcondition.class, "Postcondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getPostcondition_Postcondition(), this.getWebDriverAction(), null, "postcondition", null, 0, 1, Postcondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(elementWithIdIsPresentEClass, ElementWithIdIsPresent.class, "ElementWithIdIsPresent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getElementWithIdIsPresent_CssSelector(), this.getParameterValue(), null, "cssSelector", null, 0, 1, ElementWithIdIsPresent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(expectHttpRequestEClass, ExpectHttpRequest.class, "ExpectHttpRequest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getExpectHttpRequest_Not(), ecorePackage.getEString(), "not", null, 0, 1, ExpectHttpRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(elementByCssToBePresentEClass, ElementByCssToBePresent.class, "ElementByCssToBePresent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getElementByCssToBePresent_CssSelector(), this.getParameterValue(), null, "cssSelector", null, 0, 1, ElementByCssToBePresent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(clickCssSelectorEClass, ClickCssSelector.class, "ClickCssSelector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getClickCssSelector_CssSelector(), this.getParameterValue(), null, "cssSelector", null, 0, 1, ClickCssSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

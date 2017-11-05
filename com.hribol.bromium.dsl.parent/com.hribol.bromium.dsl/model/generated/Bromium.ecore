@@ -18,7 +18,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="postcondition" eType="#//Postcondition"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expectHttpRequest" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expectHttpRequest" eType="#//ExpectHttpRequest"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SyntaxDefinition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -34,7 +35,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="postcondition" eType="#//WebDriverAction"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ElementWithIdIsPresent" eSuperTypes="#//WebDriverAction">
+  <eClassifiers xsi:type="ecore:EClass" name="ExpectHttpRequest">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="not" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementByCssToBePresent" eSuperTypes="#//WebDriverAction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="cssSelector" eType="#//ParameterValue"
         containment="true"/>
   </eClassifiers>

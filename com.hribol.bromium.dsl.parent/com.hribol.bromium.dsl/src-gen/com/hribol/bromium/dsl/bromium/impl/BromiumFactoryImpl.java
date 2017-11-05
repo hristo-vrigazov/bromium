@@ -71,7 +71,8 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
       case BromiumPackage.WEB_DRIVER_ACTION: return createWebDriverAction();
       case BromiumPackage.PRECONDITION: return createPrecondition();
       case BromiumPackage.POSTCONDITION: return createPostcondition();
-      case BromiumPackage.ELEMENT_WITH_ID_IS_PRESENT: return createElementWithIdIsPresent();
+      case BromiumPackage.EXPECT_HTTP_REQUEST: return createExpectHttpRequest();
+      case BromiumPackage.ELEMENT_BY_CSS_TO_BE_PRESENT: return createElementByCssToBePresent();
       case BromiumPackage.CLICK_CSS_SELECTOR: return createClickCssSelector();
       case BromiumPackage.PAGE_LOAD: return createPageLoad();
       case BromiumPackage.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR: return createTypeTextInElementFoundByCssSelector();
@@ -154,10 +155,21 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ElementWithIdIsPresent createElementWithIdIsPresent()
+  public ExpectHttpRequest createExpectHttpRequest()
   {
-    ElementWithIdIsPresentImpl elementWithIdIsPresent = new ElementWithIdIsPresentImpl();
-    return elementWithIdIsPresent;
+    ExpectHttpRequestImpl expectHttpRequest = new ExpectHttpRequestImpl();
+    return expectHttpRequest;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ElementByCssToBePresent createElementByCssToBePresent()
+  {
+    ElementByCssToBePresentImpl elementByCssToBePresent = new ElementByCssToBePresentImpl();
+    return elementByCssToBePresent;
   }
 
   /**

@@ -5,6 +5,7 @@ package com.hribol.bromium.dsl.bromium.impl;
 
 import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
+import com.hribol.bromium.dsl.bromium.ExpectHttpRequest;
 import com.hribol.bromium.dsl.bromium.Postcondition;
 import com.hribol.bromium.dsl.bromium.Precondition;
 import com.hribol.bromium.dsl.bromium.SyntaxDefinition;
@@ -32,7 +33,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
- * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getSyntaxDefinitions <em>Syntax Definitions</em>}</li>
@@ -41,6 +41,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getPostcondition <em>Postcondition</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getExpectHttpRequest <em>Expect Http Request</em>}</li>
  * </ul>
+ * </p>
  *
  * @generated
  */
@@ -107,24 +108,14 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
   protected Postcondition postcondition;
 
   /**
-   * The default value of the '{@link #getExpectHttpRequest() <em>Expect Http Request</em>}' attribute.
+   * The cached value of the '{@link #getExpectHttpRequest() <em>Expect Http Request</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getExpectHttpRequest()
    * @generated
    * @ordered
    */
-  protected static final String EXPECT_HTTP_REQUEST_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getExpectHttpRequest() <em>Expect Http Request</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getExpectHttpRequest()
-   * @generated
-   * @ordered
-   */
-  protected String expectHttpRequest = EXPECT_HTTP_REQUEST_EDEFAULT;
+  protected ExpectHttpRequest expectHttpRequest;
 
   /**
    * <!-- begin-user-doc -->
@@ -333,7 +324,7 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getExpectHttpRequest()
+  public ExpectHttpRequest getExpectHttpRequest()
   {
     return expectHttpRequest;
   }
@@ -343,12 +334,37 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExpectHttpRequest(String newExpectHttpRequest)
+  public NotificationChain basicSetExpectHttpRequest(ExpectHttpRequest newExpectHttpRequest, NotificationChain msgs)
   {
-    String oldExpectHttpRequest = expectHttpRequest;
+    ExpectHttpRequest oldExpectHttpRequest = expectHttpRequest;
     expectHttpRequest = newExpectHttpRequest;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST, oldExpectHttpRequest, expectHttpRequest));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST, oldExpectHttpRequest, newExpectHttpRequest);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setExpectHttpRequest(ExpectHttpRequest newExpectHttpRequest)
+  {
+    if (newExpectHttpRequest != expectHttpRequest)
+    {
+      NotificationChain msgs = null;
+      if (expectHttpRequest != null)
+        msgs = ((InternalEObject)expectHttpRequest).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST, null, msgs);
+      if (newExpectHttpRequest != null)
+        msgs = ((InternalEObject)newExpectHttpRequest).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST, null, msgs);
+      msgs = basicSetExpectHttpRequest(newExpectHttpRequest, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST, newExpectHttpRequest, newExpectHttpRequest));
   }
 
   /**
@@ -369,6 +385,8 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
         return basicSetWebDriverAction(null, msgs);
       case BromiumPackage.APPLICATION_ACTION__POSTCONDITION:
         return basicSetPostcondition(null, msgs);
+      case BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST:
+        return basicSetExpectHttpRequest(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -427,7 +445,7 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
         setPostcondition((Postcondition)newValue);
         return;
       case BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST:
-        setExpectHttpRequest((String)newValue);
+        setExpectHttpRequest((ExpectHttpRequest)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -459,7 +477,7 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
         setPostcondition((Postcondition)null);
         return;
       case BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST:
-        setExpectHttpRequest(EXPECT_HTTP_REQUEST_EDEFAULT);
+        setExpectHttpRequest((ExpectHttpRequest)null);
         return;
     }
     super.eUnset(featureID);
@@ -486,7 +504,7 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
       case BromiumPackage.APPLICATION_ACTION__POSTCONDITION:
         return postcondition != null;
       case BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST:
-        return EXPECT_HTTP_REQUEST_EDEFAULT == null ? expectHttpRequest != null : !EXPECT_HTTP_REQUEST_EDEFAULT.equals(expectHttpRequest);
+        return expectHttpRequest != null;
     }
     return super.eIsSet(featureID);
   }
@@ -504,8 +522,6 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", expectHttpRequest: ");
-    result.append(expectHttpRequest);
     result.append(')');
     return result.toString();
   }

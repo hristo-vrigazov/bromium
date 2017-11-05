@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBromiumParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'name'", "'version'", "'actions'", "'{'", "'}'", "'from'", "'id'", "'syntax'", "'when'", "'then'", "'make'", "'sure'", "'do'", "'not'", "'expect'", "'http'", "'request'", "'element'", "'with'", "'css'", "'selector'", "'is'", "'present'", "'click'", "'on'", "'load'", "'page'", "'type'", "'in'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'name'", "'version'", "'actions'", "'{'", "'}'", "'from'", "'id'", "'syntax'", "'when'", "'then'", "'make'", "'sure'", "'do'", "'expect'", "'http'", "'request'", "'element'", "'with'", "'css'", "'selector'", "'is'", "'present'", "'click'", "'on'", "'load'", "'page'", "'type'", "'in'", "'not'"
     };
     public static final int RULE_STRING=4;
     public static final int RULE_SL_COMMENT=8;
@@ -636,20 +636,20 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleExpectHttpRequest"
 
 
-    // $ANTLR start "entryRuleElementWithIdIsPresent"
-    // InternalBromium.g:228:1: entryRuleElementWithIdIsPresent : ruleElementWithIdIsPresent EOF ;
-    public final void entryRuleElementWithIdIsPresent() throws RecognitionException {
+    // $ANTLR start "entryRuleElementByCssToBePresent"
+    // InternalBromium.g:228:1: entryRuleElementByCssToBePresent : ruleElementByCssToBePresent EOF ;
+    public final void entryRuleElementByCssToBePresent() throws RecognitionException {
         try {
-            // InternalBromium.g:229:1: ( ruleElementWithIdIsPresent EOF )
-            // InternalBromium.g:230:1: ruleElementWithIdIsPresent EOF
+            // InternalBromium.g:229:1: ( ruleElementByCssToBePresent EOF )
+            // InternalBromium.g:230:1: ruleElementByCssToBePresent EOF
             {
-             before(grammarAccess.getElementWithIdIsPresentRule()); 
+             before(grammarAccess.getElementByCssToBePresentRule()); 
             pushFollow(FOLLOW_1);
-            ruleElementWithIdIsPresent();
+            ruleElementByCssToBePresent();
 
             state._fsp--;
 
-             after(grammarAccess.getElementWithIdIsPresentRule()); 
+             after(grammarAccess.getElementByCssToBePresentRule()); 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -663,35 +663,35 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleElementWithIdIsPresent"
+    // $ANTLR end "entryRuleElementByCssToBePresent"
 
 
-    // $ANTLR start "ruleElementWithIdIsPresent"
-    // InternalBromium.g:237:1: ruleElementWithIdIsPresent : ( ( rule__ElementWithIdIsPresent__Group__0 ) ) ;
-    public final void ruleElementWithIdIsPresent() throws RecognitionException {
+    // $ANTLR start "ruleElementByCssToBePresent"
+    // InternalBromium.g:237:1: ruleElementByCssToBePresent : ( ( rule__ElementByCssToBePresent__Group__0 ) ) ;
+    public final void ruleElementByCssToBePresent() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:241:2: ( ( ( rule__ElementWithIdIsPresent__Group__0 ) ) )
-            // InternalBromium.g:242:2: ( ( rule__ElementWithIdIsPresent__Group__0 ) )
+            // InternalBromium.g:241:2: ( ( ( rule__ElementByCssToBePresent__Group__0 ) ) )
+            // InternalBromium.g:242:2: ( ( rule__ElementByCssToBePresent__Group__0 ) )
             {
-            // InternalBromium.g:242:2: ( ( rule__ElementWithIdIsPresent__Group__0 ) )
-            // InternalBromium.g:243:3: ( rule__ElementWithIdIsPresent__Group__0 )
+            // InternalBromium.g:242:2: ( ( rule__ElementByCssToBePresent__Group__0 ) )
+            // InternalBromium.g:243:3: ( rule__ElementByCssToBePresent__Group__0 )
             {
-             before(grammarAccess.getElementWithIdIsPresentAccess().getGroup()); 
-            // InternalBromium.g:244:3: ( rule__ElementWithIdIsPresent__Group__0 )
-            // InternalBromium.g:244:4: rule__ElementWithIdIsPresent__Group__0
+             before(grammarAccess.getElementByCssToBePresentAccess().getGroup()); 
+            // InternalBromium.g:244:3: ( rule__ElementByCssToBePresent__Group__0 )
+            // InternalBromium.g:244:4: rule__ElementByCssToBePresent__Group__0
             {
             pushFollow(FOLLOW_2);
-            rule__ElementWithIdIsPresent__Group__0();
+            rule__ElementByCssToBePresent__Group__0();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getElementWithIdIsPresentAccess().getGroup()); 
+             after(grammarAccess.getElementByCssToBePresentAccess().getGroup()); 
 
             }
 
@@ -710,7 +710,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "ruleElementWithIdIsPresent"
+    // $ANTLR end "ruleElementByCssToBePresent"
 
 
     // $ANTLR start "entryRuleClickCssSelector"
@@ -1166,31 +1166,31 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__WebDriverAction__Alternatives"
-    // InternalBromium.g:402:1: rule__WebDriverAction__Alternatives : ( ( ruleElementWithIdIsPresent ) | ( ruleClickCssSelector ) | ( rulePageLoad ) | ( ruleTypeTextInElementFoundByCssSelector ) );
+    // InternalBromium.g:402:1: rule__WebDriverAction__Alternatives : ( ( ruleElementByCssToBePresent ) | ( ruleClickCssSelector ) | ( rulePageLoad ) | ( ruleTypeTextInElementFoundByCssSelector ) );
     public final void rule__WebDriverAction__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:406:1: ( ( ruleElementWithIdIsPresent ) | ( ruleClickCssSelector ) | ( rulePageLoad ) | ( ruleTypeTextInElementFoundByCssSelector ) )
+            // InternalBromium.g:406:1: ( ( ruleElementByCssToBePresent ) | ( ruleClickCssSelector ) | ( rulePageLoad ) | ( ruleTypeTextInElementFoundByCssSelector ) )
             int alt1=4;
             switch ( input.LA(1) ) {
-            case 28:
+            case 27:
                 {
                 alt1=1;
                 }
                 break;
-            case 34:
+            case 33:
                 {
                 alt1=2;
                 }
                 break;
-            case 36:
+            case 35:
                 {
                 alt1=3;
                 }
                 break;
-            case 38:
+            case 37:
                 {
                 alt1=4;
                 }
@@ -1204,18 +1204,18 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
             switch (alt1) {
                 case 1 :
-                    // InternalBromium.g:407:2: ( ruleElementWithIdIsPresent )
+                    // InternalBromium.g:407:2: ( ruleElementByCssToBePresent )
                     {
-                    // InternalBromium.g:407:2: ( ruleElementWithIdIsPresent )
-                    // InternalBromium.g:408:3: ruleElementWithIdIsPresent
+                    // InternalBromium.g:407:2: ( ruleElementByCssToBePresent )
+                    // InternalBromium.g:408:3: ruleElementByCssToBePresent
                     {
-                     before(grammarAccess.getWebDriverActionAccess().getElementWithIdIsPresentParserRuleCall_0()); 
+                     before(grammarAccess.getWebDriverActionAccess().getElementByCssToBePresentParserRuleCall_0()); 
                     pushFollow(FOLLOW_2);
-                    ruleElementWithIdIsPresent();
+                    ruleElementByCssToBePresent();
 
                     state._fsp--;
 
-                     after(grammarAccess.getWebDriverActionAccess().getElementWithIdIsPresentParserRuleCall_0()); 
+                     after(grammarAccess.getWebDriverActionAccess().getElementByCssToBePresentParserRuleCall_0()); 
 
                     }
 
@@ -3697,7 +3697,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1216:1: ( rule__ExpectHttpRequest__Group__0__Impl rule__ExpectHttpRequest__Group__1 )
             // InternalBromium.g:1217:2: rule__ExpectHttpRequest__Group__0__Impl rule__ExpectHttpRequest__Group__1
             {
-            pushFollow(FOLLOW_16);
+            pushFollow(FOLLOW_13);
             rule__ExpectHttpRequest__Group__0__Impl();
 
             state._fsp--;
@@ -3726,31 +3726,31 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExpectHttpRequest__Group__0__Impl"
-    // InternalBromium.g:1224:1: rule__ExpectHttpRequest__Group__0__Impl : ( 'do' ) ;
+    // InternalBromium.g:1224:1: rule__ExpectHttpRequest__Group__0__Impl : ( () ) ;
     public final void rule__ExpectHttpRequest__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1228:1: ( ( 'do' ) )
-            // InternalBromium.g:1229:1: ( 'do' )
+            // InternalBromium.g:1228:1: ( ( () ) )
+            // InternalBromium.g:1229:1: ( () )
             {
-            // InternalBromium.g:1229:1: ( 'do' )
-            // InternalBromium.g:1230:2: 'do'
+            // InternalBromium.g:1229:1: ( () )
+            // InternalBromium.g:1230:2: ()
             {
-             before(grammarAccess.getExpectHttpRequestAccess().getDoKeyword_0()); 
-            match(input,23,FOLLOW_2); 
-             after(grammarAccess.getExpectHttpRequestAccess().getDoKeyword_0()); 
+             before(grammarAccess.getExpectHttpRequestAccess().getExpectHttpRequestAction_0()); 
+            // InternalBromium.g:1231:2: ()
+            // InternalBromium.g:1231:3: 
+            {
+            }
+
+             after(grammarAccess.getExpectHttpRequestAccess().getExpectHttpRequestAction_0()); 
 
             }
 
 
             }
 
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
         }
         finally {
 
@@ -3763,22 +3763,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExpectHttpRequest__Group__1"
-    // InternalBromium.g:1239:1: rule__ExpectHttpRequest__Group__1 : rule__ExpectHttpRequest__Group__1__Impl rule__ExpectHttpRequest__Group__2 ;
+    // InternalBromium.g:1239:1: rule__ExpectHttpRequest__Group__1 : rule__ExpectHttpRequest__Group__1__Impl ;
     public final void rule__ExpectHttpRequest__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1243:1: ( rule__ExpectHttpRequest__Group__1__Impl rule__ExpectHttpRequest__Group__2 )
-            // InternalBromium.g:1244:2: rule__ExpectHttpRequest__Group__1__Impl rule__ExpectHttpRequest__Group__2
+            // InternalBromium.g:1243:1: ( rule__ExpectHttpRequest__Group__1__Impl )
+            // InternalBromium.g:1244:2: rule__ExpectHttpRequest__Group__1__Impl
             {
-            pushFollow(FOLLOW_16);
-            rule__ExpectHttpRequest__Group__1__Impl();
-
-            state._fsp--;
-
             pushFollow(FOLLOW_2);
-            rule__ExpectHttpRequest__Group__2();
+            rule__ExpectHttpRequest__Group__1__Impl();
 
             state._fsp--;
 
@@ -3801,38 +3796,31 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExpectHttpRequest__Group__1__Impl"
-    // InternalBromium.g:1251:1: rule__ExpectHttpRequest__Group__1__Impl : ( ( 'not' )? ) ;
+    // InternalBromium.g:1250:1: rule__ExpectHttpRequest__Group__1__Impl : ( ( rule__ExpectHttpRequest__Group_1__0 ) ) ;
     public final void rule__ExpectHttpRequest__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1255:1: ( ( ( 'not' )? ) )
-            // InternalBromium.g:1256:1: ( ( 'not' )? )
+            // InternalBromium.g:1254:1: ( ( ( rule__ExpectHttpRequest__Group_1__0 ) ) )
+            // InternalBromium.g:1255:1: ( ( rule__ExpectHttpRequest__Group_1__0 ) )
             {
-            // InternalBromium.g:1256:1: ( ( 'not' )? )
-            // InternalBromium.g:1257:2: ( 'not' )?
+            // InternalBromium.g:1255:1: ( ( rule__ExpectHttpRequest__Group_1__0 ) )
+            // InternalBromium.g:1256:2: ( rule__ExpectHttpRequest__Group_1__0 )
             {
-             before(grammarAccess.getExpectHttpRequestAccess().getNotKeyword_1()); 
-            // InternalBromium.g:1258:2: ( 'not' )?
-            int alt9=2;
-            int LA9_0 = input.LA(1);
+             before(grammarAccess.getExpectHttpRequestAccess().getGroup_1()); 
+            // InternalBromium.g:1257:2: ( rule__ExpectHttpRequest__Group_1__0 )
+            // InternalBromium.g:1257:3: rule__ExpectHttpRequest__Group_1__0
+            {
+            pushFollow(FOLLOW_2);
+            rule__ExpectHttpRequest__Group_1__0();
 
-            if ( (LA9_0==24) ) {
-                alt9=1;
-            }
-            switch (alt9) {
-                case 1 :
-                    // InternalBromium.g:1258:3: 'not'
-                    {
-                    match(input,24,FOLLOW_2); 
+            state._fsp--;
 
-                    }
-                    break;
 
             }
 
-             after(grammarAccess.getExpectHttpRequestAccess().getNotKeyword_1()); 
+             after(grammarAccess.getExpectHttpRequestAccess().getGroup_1()); 
 
             }
 
@@ -3854,23 +3842,194 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__ExpectHttpRequest__Group__1__Impl"
 
 
-    // $ANTLR start "rule__ExpectHttpRequest__Group__2"
-    // InternalBromium.g:1266:1: rule__ExpectHttpRequest__Group__2 : rule__ExpectHttpRequest__Group__2__Impl rule__ExpectHttpRequest__Group__3 ;
-    public final void rule__ExpectHttpRequest__Group__2() throws RecognitionException {
+    // $ANTLR start "rule__ExpectHttpRequest__Group_1__0"
+    // InternalBromium.g:1266:1: rule__ExpectHttpRequest__Group_1__0 : rule__ExpectHttpRequest__Group_1__0__Impl rule__ExpectHttpRequest__Group_1__1 ;
+    public final void rule__ExpectHttpRequest__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1270:1: ( rule__ExpectHttpRequest__Group__2__Impl rule__ExpectHttpRequest__Group__3 )
-            // InternalBromium.g:1271:2: rule__ExpectHttpRequest__Group__2__Impl rule__ExpectHttpRequest__Group__3
+            // InternalBromium.g:1270:1: ( rule__ExpectHttpRequest__Group_1__0__Impl rule__ExpectHttpRequest__Group_1__1 )
+            // InternalBromium.g:1271:2: rule__ExpectHttpRequest__Group_1__0__Impl rule__ExpectHttpRequest__Group_1__1
+            {
+            pushFollow(FOLLOW_16);
+            rule__ExpectHttpRequest__Group_1__0__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__ExpectHttpRequest__Group_1__1();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ExpectHttpRequest__Group_1__0"
+
+
+    // $ANTLR start "rule__ExpectHttpRequest__Group_1__0__Impl"
+    // InternalBromium.g:1278:1: rule__ExpectHttpRequest__Group_1__0__Impl : ( 'do' ) ;
+    public final void rule__ExpectHttpRequest__Group_1__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBromium.g:1282:1: ( ( 'do' ) )
+            // InternalBromium.g:1283:1: ( 'do' )
+            {
+            // InternalBromium.g:1283:1: ( 'do' )
+            // InternalBromium.g:1284:2: 'do'
+            {
+             before(grammarAccess.getExpectHttpRequestAccess().getDoKeyword_1_0()); 
+            match(input,23,FOLLOW_2); 
+             after(grammarAccess.getExpectHttpRequestAccess().getDoKeyword_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ExpectHttpRequest__Group_1__0__Impl"
+
+
+    // $ANTLR start "rule__ExpectHttpRequest__Group_1__1"
+    // InternalBromium.g:1293:1: rule__ExpectHttpRequest__Group_1__1 : rule__ExpectHttpRequest__Group_1__1__Impl rule__ExpectHttpRequest__Group_1__2 ;
+    public final void rule__ExpectHttpRequest__Group_1__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBromium.g:1297:1: ( rule__ExpectHttpRequest__Group_1__1__Impl rule__ExpectHttpRequest__Group_1__2 )
+            // InternalBromium.g:1298:2: rule__ExpectHttpRequest__Group_1__1__Impl rule__ExpectHttpRequest__Group_1__2
+            {
+            pushFollow(FOLLOW_16);
+            rule__ExpectHttpRequest__Group_1__1__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__ExpectHttpRequest__Group_1__2();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ExpectHttpRequest__Group_1__1"
+
+
+    // $ANTLR start "rule__ExpectHttpRequest__Group_1__1__Impl"
+    // InternalBromium.g:1305:1: rule__ExpectHttpRequest__Group_1__1__Impl : ( ( rule__ExpectHttpRequest__NotAssignment_1_1 )? ) ;
+    public final void rule__ExpectHttpRequest__Group_1__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBromium.g:1309:1: ( ( ( rule__ExpectHttpRequest__NotAssignment_1_1 )? ) )
+            // InternalBromium.g:1310:1: ( ( rule__ExpectHttpRequest__NotAssignment_1_1 )? )
+            {
+            // InternalBromium.g:1310:1: ( ( rule__ExpectHttpRequest__NotAssignment_1_1 )? )
+            // InternalBromium.g:1311:2: ( rule__ExpectHttpRequest__NotAssignment_1_1 )?
+            {
+             before(grammarAccess.getExpectHttpRequestAccess().getNotAssignment_1_1()); 
+            // InternalBromium.g:1312:2: ( rule__ExpectHttpRequest__NotAssignment_1_1 )?
+            int alt9=2;
+            int LA9_0 = input.LA(1);
+
+            if ( (LA9_0==39) ) {
+                alt9=1;
+            }
+            switch (alt9) {
+                case 1 :
+                    // InternalBromium.g:1312:3: rule__ExpectHttpRequest__NotAssignment_1_1
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__ExpectHttpRequest__NotAssignment_1_1();
+
+                    state._fsp--;
+
+
+                    }
+                    break;
+
+            }
+
+             after(grammarAccess.getExpectHttpRequestAccess().getNotAssignment_1_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ExpectHttpRequest__Group_1__1__Impl"
+
+
+    // $ANTLR start "rule__ExpectHttpRequest__Group_1__2"
+    // InternalBromium.g:1320:1: rule__ExpectHttpRequest__Group_1__2 : rule__ExpectHttpRequest__Group_1__2__Impl rule__ExpectHttpRequest__Group_1__3 ;
+    public final void rule__ExpectHttpRequest__Group_1__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBromium.g:1324:1: ( rule__ExpectHttpRequest__Group_1__2__Impl rule__ExpectHttpRequest__Group_1__3 )
+            // InternalBromium.g:1325:2: rule__ExpectHttpRequest__Group_1__2__Impl rule__ExpectHttpRequest__Group_1__3
             {
             pushFollow(FOLLOW_17);
-            rule__ExpectHttpRequest__Group__2__Impl();
+            rule__ExpectHttpRequest__Group_1__2__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__ExpectHttpRequest__Group__3();
+            rule__ExpectHttpRequest__Group_1__3();
 
             state._fsp--;
 
@@ -3889,25 +4048,25 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ExpectHttpRequest__Group__2"
+    // $ANTLR end "rule__ExpectHttpRequest__Group_1__2"
 
 
-    // $ANTLR start "rule__ExpectHttpRequest__Group__2__Impl"
-    // InternalBromium.g:1278:1: rule__ExpectHttpRequest__Group__2__Impl : ( 'expect' ) ;
-    public final void rule__ExpectHttpRequest__Group__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ExpectHttpRequest__Group_1__2__Impl"
+    // InternalBromium.g:1332:1: rule__ExpectHttpRequest__Group_1__2__Impl : ( 'expect' ) ;
+    public final void rule__ExpectHttpRequest__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1282:1: ( ( 'expect' ) )
-            // InternalBromium.g:1283:1: ( 'expect' )
+            // InternalBromium.g:1336:1: ( ( 'expect' ) )
+            // InternalBromium.g:1337:1: ( 'expect' )
             {
-            // InternalBromium.g:1283:1: ( 'expect' )
-            // InternalBromium.g:1284:2: 'expect'
+            // InternalBromium.g:1337:1: ( 'expect' )
+            // InternalBromium.g:1338:2: 'expect'
             {
-             before(grammarAccess.getExpectHttpRequestAccess().getExpectKeyword_2()); 
-            match(input,25,FOLLOW_2); 
-             after(grammarAccess.getExpectHttpRequestAccess().getExpectKeyword_2()); 
+             before(grammarAccess.getExpectHttpRequestAccess().getExpectKeyword_1_2()); 
+            match(input,24,FOLLOW_2); 
+             after(grammarAccess.getExpectHttpRequestAccess().getExpectKeyword_1_2()); 
 
             }
 
@@ -3926,26 +4085,26 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ExpectHttpRequest__Group__2__Impl"
+    // $ANTLR end "rule__ExpectHttpRequest__Group_1__2__Impl"
 
 
-    // $ANTLR start "rule__ExpectHttpRequest__Group__3"
-    // InternalBromium.g:1293:1: rule__ExpectHttpRequest__Group__3 : rule__ExpectHttpRequest__Group__3__Impl rule__ExpectHttpRequest__Group__4 ;
-    public final void rule__ExpectHttpRequest__Group__3() throws RecognitionException {
+    // $ANTLR start "rule__ExpectHttpRequest__Group_1__3"
+    // InternalBromium.g:1347:1: rule__ExpectHttpRequest__Group_1__3 : rule__ExpectHttpRequest__Group_1__3__Impl rule__ExpectHttpRequest__Group_1__4 ;
+    public final void rule__ExpectHttpRequest__Group_1__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1297:1: ( rule__ExpectHttpRequest__Group__3__Impl rule__ExpectHttpRequest__Group__4 )
-            // InternalBromium.g:1298:2: rule__ExpectHttpRequest__Group__3__Impl rule__ExpectHttpRequest__Group__4
+            // InternalBromium.g:1351:1: ( rule__ExpectHttpRequest__Group_1__3__Impl rule__ExpectHttpRequest__Group_1__4 )
+            // InternalBromium.g:1352:2: rule__ExpectHttpRequest__Group_1__3__Impl rule__ExpectHttpRequest__Group_1__4
             {
             pushFollow(FOLLOW_18);
-            rule__ExpectHttpRequest__Group__3__Impl();
+            rule__ExpectHttpRequest__Group_1__3__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__ExpectHttpRequest__Group__4();
+            rule__ExpectHttpRequest__Group_1__4();
 
             state._fsp--;
 
@@ -3964,25 +4123,95 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ExpectHttpRequest__Group__3"
+    // $ANTLR end "rule__ExpectHttpRequest__Group_1__3"
 
 
-    // $ANTLR start "rule__ExpectHttpRequest__Group__3__Impl"
-    // InternalBromium.g:1305:1: rule__ExpectHttpRequest__Group__3__Impl : ( 'http' ) ;
-    public final void rule__ExpectHttpRequest__Group__3__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ExpectHttpRequest__Group_1__3__Impl"
+    // InternalBromium.g:1359:1: rule__ExpectHttpRequest__Group_1__3__Impl : ( 'http' ) ;
+    public final void rule__ExpectHttpRequest__Group_1__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1309:1: ( ( 'http' ) )
-            // InternalBromium.g:1310:1: ( 'http' )
+            // InternalBromium.g:1363:1: ( ( 'http' ) )
+            // InternalBromium.g:1364:1: ( 'http' )
             {
-            // InternalBromium.g:1310:1: ( 'http' )
-            // InternalBromium.g:1311:2: 'http'
+            // InternalBromium.g:1364:1: ( 'http' )
+            // InternalBromium.g:1365:2: 'http'
             {
-             before(grammarAccess.getExpectHttpRequestAccess().getHttpKeyword_3()); 
+             before(grammarAccess.getExpectHttpRequestAccess().getHttpKeyword_1_3()); 
+            match(input,25,FOLLOW_2); 
+             after(grammarAccess.getExpectHttpRequestAccess().getHttpKeyword_1_3()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ExpectHttpRequest__Group_1__3__Impl"
+
+
+    // $ANTLR start "rule__ExpectHttpRequest__Group_1__4"
+    // InternalBromium.g:1374:1: rule__ExpectHttpRequest__Group_1__4 : rule__ExpectHttpRequest__Group_1__4__Impl ;
+    public final void rule__ExpectHttpRequest__Group_1__4() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBromium.g:1378:1: ( rule__ExpectHttpRequest__Group_1__4__Impl )
+            // InternalBromium.g:1379:2: rule__ExpectHttpRequest__Group_1__4__Impl
+            {
+            pushFollow(FOLLOW_2);
+            rule__ExpectHttpRequest__Group_1__4__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ExpectHttpRequest__Group_1__4"
+
+
+    // $ANTLR start "rule__ExpectHttpRequest__Group_1__4__Impl"
+    // InternalBromium.g:1385:1: rule__ExpectHttpRequest__Group_1__4__Impl : ( 'request' ) ;
+    public final void rule__ExpectHttpRequest__Group_1__4__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBromium.g:1389:1: ( ( 'request' ) )
+            // InternalBromium.g:1390:1: ( 'request' )
+            {
+            // InternalBromium.g:1390:1: ( 'request' )
+            // InternalBromium.g:1391:2: 'request'
+            {
+             before(grammarAccess.getExpectHttpRequestAccess().getRequestKeyword_1_4()); 
             match(input,26,FOLLOW_2); 
-             after(grammarAccess.getExpectHttpRequestAccess().getHttpKeyword_3()); 
+             after(grammarAccess.getExpectHttpRequestAccess().getRequestKeyword_1_4()); 
 
             }
 
@@ -4001,96 +4230,26 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ExpectHttpRequest__Group__3__Impl"
+    // $ANTLR end "rule__ExpectHttpRequest__Group_1__4__Impl"
 
 
-    // $ANTLR start "rule__ExpectHttpRequest__Group__4"
-    // InternalBromium.g:1320:1: rule__ExpectHttpRequest__Group__4 : rule__ExpectHttpRequest__Group__4__Impl ;
-    public final void rule__ExpectHttpRequest__Group__4() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBromium.g:1324:1: ( rule__ExpectHttpRequest__Group__4__Impl )
-            // InternalBromium.g:1325:2: rule__ExpectHttpRequest__Group__4__Impl
-            {
-            pushFollow(FOLLOW_2);
-            rule__ExpectHttpRequest__Group__4__Impl();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ExpectHttpRequest__Group__4"
-
-
-    // $ANTLR start "rule__ExpectHttpRequest__Group__4__Impl"
-    // InternalBromium.g:1331:1: rule__ExpectHttpRequest__Group__4__Impl : ( 'request' ) ;
-    public final void rule__ExpectHttpRequest__Group__4__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ElementByCssToBePresent__Group__0"
+    // InternalBromium.g:1401:1: rule__ElementByCssToBePresent__Group__0 : rule__ElementByCssToBePresent__Group__0__Impl rule__ElementByCssToBePresent__Group__1 ;
+    public final void rule__ElementByCssToBePresent__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1335:1: ( ( 'request' ) )
-            // InternalBromium.g:1336:1: ( 'request' )
-            {
-            // InternalBromium.g:1336:1: ( 'request' )
-            // InternalBromium.g:1337:2: 'request'
-            {
-             before(grammarAccess.getExpectHttpRequestAccess().getRequestKeyword_4()); 
-            match(input,27,FOLLOW_2); 
-             after(grammarAccess.getExpectHttpRequestAccess().getRequestKeyword_4()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ExpectHttpRequest__Group__4__Impl"
-
-
-    // $ANTLR start "rule__ElementWithIdIsPresent__Group__0"
-    // InternalBromium.g:1347:1: rule__ElementWithIdIsPresent__Group__0 : rule__ElementWithIdIsPresent__Group__0__Impl rule__ElementWithIdIsPresent__Group__1 ;
-    public final void rule__ElementWithIdIsPresent__Group__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBromium.g:1351:1: ( rule__ElementWithIdIsPresent__Group__0__Impl rule__ElementWithIdIsPresent__Group__1 )
-            // InternalBromium.g:1352:2: rule__ElementWithIdIsPresent__Group__0__Impl rule__ElementWithIdIsPresent__Group__1
+            // InternalBromium.g:1405:1: ( rule__ElementByCssToBePresent__Group__0__Impl rule__ElementByCssToBePresent__Group__1 )
+            // InternalBromium.g:1406:2: rule__ElementByCssToBePresent__Group__0__Impl rule__ElementByCssToBePresent__Group__1
             {
             pushFollow(FOLLOW_19);
-            rule__ElementWithIdIsPresent__Group__0__Impl();
+            rule__ElementByCssToBePresent__Group__0__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__ElementWithIdIsPresent__Group__1();
+            rule__ElementByCssToBePresent__Group__1();
 
             state._fsp--;
 
@@ -4109,25 +4268,25 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ElementWithIdIsPresent__Group__0"
+    // $ANTLR end "rule__ElementByCssToBePresent__Group__0"
 
 
-    // $ANTLR start "rule__ElementWithIdIsPresent__Group__0__Impl"
-    // InternalBromium.g:1359:1: rule__ElementWithIdIsPresent__Group__0__Impl : ( 'element' ) ;
-    public final void rule__ElementWithIdIsPresent__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ElementByCssToBePresent__Group__0__Impl"
+    // InternalBromium.g:1413:1: rule__ElementByCssToBePresent__Group__0__Impl : ( 'element' ) ;
+    public final void rule__ElementByCssToBePresent__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1363:1: ( ( 'element' ) )
-            // InternalBromium.g:1364:1: ( 'element' )
+            // InternalBromium.g:1417:1: ( ( 'element' ) )
+            // InternalBromium.g:1418:1: ( 'element' )
             {
-            // InternalBromium.g:1364:1: ( 'element' )
-            // InternalBromium.g:1365:2: 'element'
+            // InternalBromium.g:1418:1: ( 'element' )
+            // InternalBromium.g:1419:2: 'element'
             {
-             before(grammarAccess.getElementWithIdIsPresentAccess().getElementKeyword_0()); 
-            match(input,28,FOLLOW_2); 
-             after(grammarAccess.getElementWithIdIsPresentAccess().getElementKeyword_0()); 
+             before(grammarAccess.getElementByCssToBePresentAccess().getElementKeyword_0()); 
+            match(input,27,FOLLOW_2); 
+             after(grammarAccess.getElementByCssToBePresentAccess().getElementKeyword_0()); 
 
             }
 
@@ -4146,26 +4305,26 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ElementWithIdIsPresent__Group__0__Impl"
+    // $ANTLR end "rule__ElementByCssToBePresent__Group__0__Impl"
 
 
-    // $ANTLR start "rule__ElementWithIdIsPresent__Group__1"
-    // InternalBromium.g:1374:1: rule__ElementWithIdIsPresent__Group__1 : rule__ElementWithIdIsPresent__Group__1__Impl rule__ElementWithIdIsPresent__Group__2 ;
-    public final void rule__ElementWithIdIsPresent__Group__1() throws RecognitionException {
+    // $ANTLR start "rule__ElementByCssToBePresent__Group__1"
+    // InternalBromium.g:1428:1: rule__ElementByCssToBePresent__Group__1 : rule__ElementByCssToBePresent__Group__1__Impl rule__ElementByCssToBePresent__Group__2 ;
+    public final void rule__ElementByCssToBePresent__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1378:1: ( rule__ElementWithIdIsPresent__Group__1__Impl rule__ElementWithIdIsPresent__Group__2 )
-            // InternalBromium.g:1379:2: rule__ElementWithIdIsPresent__Group__1__Impl rule__ElementWithIdIsPresent__Group__2
+            // InternalBromium.g:1432:1: ( rule__ElementByCssToBePresent__Group__1__Impl rule__ElementByCssToBePresent__Group__2 )
+            // InternalBromium.g:1433:2: rule__ElementByCssToBePresent__Group__1__Impl rule__ElementByCssToBePresent__Group__2
             {
             pushFollow(FOLLOW_20);
-            rule__ElementWithIdIsPresent__Group__1__Impl();
+            rule__ElementByCssToBePresent__Group__1__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__ElementWithIdIsPresent__Group__2();
+            rule__ElementByCssToBePresent__Group__2();
 
             state._fsp--;
 
@@ -4184,25 +4343,25 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ElementWithIdIsPresent__Group__1"
+    // $ANTLR end "rule__ElementByCssToBePresent__Group__1"
 
 
-    // $ANTLR start "rule__ElementWithIdIsPresent__Group__1__Impl"
-    // InternalBromium.g:1386:1: rule__ElementWithIdIsPresent__Group__1__Impl : ( 'with' ) ;
-    public final void rule__ElementWithIdIsPresent__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ElementByCssToBePresent__Group__1__Impl"
+    // InternalBromium.g:1440:1: rule__ElementByCssToBePresent__Group__1__Impl : ( 'with' ) ;
+    public final void rule__ElementByCssToBePresent__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1390:1: ( ( 'with' ) )
-            // InternalBromium.g:1391:1: ( 'with' )
+            // InternalBromium.g:1444:1: ( ( 'with' ) )
+            // InternalBromium.g:1445:1: ( 'with' )
             {
-            // InternalBromium.g:1391:1: ( 'with' )
-            // InternalBromium.g:1392:2: 'with'
+            // InternalBromium.g:1445:1: ( 'with' )
+            // InternalBromium.g:1446:2: 'with'
             {
-             before(grammarAccess.getElementWithIdIsPresentAccess().getWithKeyword_1()); 
-            match(input,29,FOLLOW_2); 
-             after(grammarAccess.getElementWithIdIsPresentAccess().getWithKeyword_1()); 
+             before(grammarAccess.getElementByCssToBePresentAccess().getWithKeyword_1()); 
+            match(input,28,FOLLOW_2); 
+             after(grammarAccess.getElementByCssToBePresentAccess().getWithKeyword_1()); 
 
             }
 
@@ -4221,26 +4380,26 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ElementWithIdIsPresent__Group__1__Impl"
+    // $ANTLR end "rule__ElementByCssToBePresent__Group__1__Impl"
 
 
-    // $ANTLR start "rule__ElementWithIdIsPresent__Group__2"
-    // InternalBromium.g:1401:1: rule__ElementWithIdIsPresent__Group__2 : rule__ElementWithIdIsPresent__Group__2__Impl rule__ElementWithIdIsPresent__Group__3 ;
-    public final void rule__ElementWithIdIsPresent__Group__2() throws RecognitionException {
+    // $ANTLR start "rule__ElementByCssToBePresent__Group__2"
+    // InternalBromium.g:1455:1: rule__ElementByCssToBePresent__Group__2 : rule__ElementByCssToBePresent__Group__2__Impl rule__ElementByCssToBePresent__Group__3 ;
+    public final void rule__ElementByCssToBePresent__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1405:1: ( rule__ElementWithIdIsPresent__Group__2__Impl rule__ElementWithIdIsPresent__Group__3 )
-            // InternalBromium.g:1406:2: rule__ElementWithIdIsPresent__Group__2__Impl rule__ElementWithIdIsPresent__Group__3
+            // InternalBromium.g:1459:1: ( rule__ElementByCssToBePresent__Group__2__Impl rule__ElementByCssToBePresent__Group__3 )
+            // InternalBromium.g:1460:2: rule__ElementByCssToBePresent__Group__2__Impl rule__ElementByCssToBePresent__Group__3
             {
             pushFollow(FOLLOW_21);
-            rule__ElementWithIdIsPresent__Group__2__Impl();
+            rule__ElementByCssToBePresent__Group__2__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__ElementWithIdIsPresent__Group__3();
+            rule__ElementByCssToBePresent__Group__3();
 
             state._fsp--;
 
@@ -4259,25 +4418,25 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ElementWithIdIsPresent__Group__2"
+    // $ANTLR end "rule__ElementByCssToBePresent__Group__2"
 
 
-    // $ANTLR start "rule__ElementWithIdIsPresent__Group__2__Impl"
-    // InternalBromium.g:1413:1: rule__ElementWithIdIsPresent__Group__2__Impl : ( 'css' ) ;
-    public final void rule__ElementWithIdIsPresent__Group__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ElementByCssToBePresent__Group__2__Impl"
+    // InternalBromium.g:1467:1: rule__ElementByCssToBePresent__Group__2__Impl : ( 'css' ) ;
+    public final void rule__ElementByCssToBePresent__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1417:1: ( ( 'css' ) )
-            // InternalBromium.g:1418:1: ( 'css' )
+            // InternalBromium.g:1471:1: ( ( 'css' ) )
+            // InternalBromium.g:1472:1: ( 'css' )
             {
-            // InternalBromium.g:1418:1: ( 'css' )
-            // InternalBromium.g:1419:2: 'css'
+            // InternalBromium.g:1472:1: ( 'css' )
+            // InternalBromium.g:1473:2: 'css'
             {
-             before(grammarAccess.getElementWithIdIsPresentAccess().getCssKeyword_2()); 
-            match(input,30,FOLLOW_2); 
-             after(grammarAccess.getElementWithIdIsPresentAccess().getCssKeyword_2()); 
+             before(grammarAccess.getElementByCssToBePresentAccess().getCssKeyword_2()); 
+            match(input,29,FOLLOW_2); 
+             after(grammarAccess.getElementByCssToBePresentAccess().getCssKeyword_2()); 
 
             }
 
@@ -4296,26 +4455,26 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ElementWithIdIsPresent__Group__2__Impl"
+    // $ANTLR end "rule__ElementByCssToBePresent__Group__2__Impl"
 
 
-    // $ANTLR start "rule__ElementWithIdIsPresent__Group__3"
-    // InternalBromium.g:1428:1: rule__ElementWithIdIsPresent__Group__3 : rule__ElementWithIdIsPresent__Group__3__Impl rule__ElementWithIdIsPresent__Group__4 ;
-    public final void rule__ElementWithIdIsPresent__Group__3() throws RecognitionException {
+    // $ANTLR start "rule__ElementByCssToBePresent__Group__3"
+    // InternalBromium.g:1482:1: rule__ElementByCssToBePresent__Group__3 : rule__ElementByCssToBePresent__Group__3__Impl rule__ElementByCssToBePresent__Group__4 ;
+    public final void rule__ElementByCssToBePresent__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1432:1: ( rule__ElementWithIdIsPresent__Group__3__Impl rule__ElementWithIdIsPresent__Group__4 )
-            // InternalBromium.g:1433:2: rule__ElementWithIdIsPresent__Group__3__Impl rule__ElementWithIdIsPresent__Group__4
+            // InternalBromium.g:1486:1: ( rule__ElementByCssToBePresent__Group__3__Impl rule__ElementByCssToBePresent__Group__4 )
+            // InternalBromium.g:1487:2: rule__ElementByCssToBePresent__Group__3__Impl rule__ElementByCssToBePresent__Group__4
             {
             pushFollow(FOLLOW_22);
-            rule__ElementWithIdIsPresent__Group__3__Impl();
+            rule__ElementByCssToBePresent__Group__3__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__ElementWithIdIsPresent__Group__4();
+            rule__ElementByCssToBePresent__Group__4();
 
             state._fsp--;
 
@@ -4334,25 +4493,25 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ElementWithIdIsPresent__Group__3"
+    // $ANTLR end "rule__ElementByCssToBePresent__Group__3"
 
 
-    // $ANTLR start "rule__ElementWithIdIsPresent__Group__3__Impl"
-    // InternalBromium.g:1440:1: rule__ElementWithIdIsPresent__Group__3__Impl : ( 'selector' ) ;
-    public final void rule__ElementWithIdIsPresent__Group__3__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ElementByCssToBePresent__Group__3__Impl"
+    // InternalBromium.g:1494:1: rule__ElementByCssToBePresent__Group__3__Impl : ( 'selector' ) ;
+    public final void rule__ElementByCssToBePresent__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1444:1: ( ( 'selector' ) )
-            // InternalBromium.g:1445:1: ( 'selector' )
+            // InternalBromium.g:1498:1: ( ( 'selector' ) )
+            // InternalBromium.g:1499:1: ( 'selector' )
             {
-            // InternalBromium.g:1445:1: ( 'selector' )
-            // InternalBromium.g:1446:2: 'selector'
+            // InternalBromium.g:1499:1: ( 'selector' )
+            // InternalBromium.g:1500:2: 'selector'
             {
-             before(grammarAccess.getElementWithIdIsPresentAccess().getSelectorKeyword_3()); 
-            match(input,31,FOLLOW_2); 
-             after(grammarAccess.getElementWithIdIsPresentAccess().getSelectorKeyword_3()); 
+             before(grammarAccess.getElementByCssToBePresentAccess().getSelectorKeyword_3()); 
+            match(input,30,FOLLOW_2); 
+             after(grammarAccess.getElementByCssToBePresentAccess().getSelectorKeyword_3()); 
 
             }
 
@@ -4371,26 +4530,26 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ElementWithIdIsPresent__Group__3__Impl"
+    // $ANTLR end "rule__ElementByCssToBePresent__Group__3__Impl"
 
 
-    // $ANTLR start "rule__ElementWithIdIsPresent__Group__4"
-    // InternalBromium.g:1455:1: rule__ElementWithIdIsPresent__Group__4 : rule__ElementWithIdIsPresent__Group__4__Impl rule__ElementWithIdIsPresent__Group__5 ;
-    public final void rule__ElementWithIdIsPresent__Group__4() throws RecognitionException {
+    // $ANTLR start "rule__ElementByCssToBePresent__Group__4"
+    // InternalBromium.g:1509:1: rule__ElementByCssToBePresent__Group__4 : rule__ElementByCssToBePresent__Group__4__Impl rule__ElementByCssToBePresent__Group__5 ;
+    public final void rule__ElementByCssToBePresent__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1459:1: ( rule__ElementWithIdIsPresent__Group__4__Impl rule__ElementWithIdIsPresent__Group__5 )
-            // InternalBromium.g:1460:2: rule__ElementWithIdIsPresent__Group__4__Impl rule__ElementWithIdIsPresent__Group__5
+            // InternalBromium.g:1513:1: ( rule__ElementByCssToBePresent__Group__4__Impl rule__ElementByCssToBePresent__Group__5 )
+            // InternalBromium.g:1514:2: rule__ElementByCssToBePresent__Group__4__Impl rule__ElementByCssToBePresent__Group__5
             {
             pushFollow(FOLLOW_23);
-            rule__ElementWithIdIsPresent__Group__4__Impl();
+            rule__ElementByCssToBePresent__Group__4__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__ElementWithIdIsPresent__Group__5();
+            rule__ElementByCssToBePresent__Group__5();
 
             state._fsp--;
 
@@ -4409,35 +4568,35 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ElementWithIdIsPresent__Group__4"
+    // $ANTLR end "rule__ElementByCssToBePresent__Group__4"
 
 
-    // $ANTLR start "rule__ElementWithIdIsPresent__Group__4__Impl"
-    // InternalBromium.g:1467:1: rule__ElementWithIdIsPresent__Group__4__Impl : ( ( rule__ElementWithIdIsPresent__CssSelectorAssignment_4 ) ) ;
-    public final void rule__ElementWithIdIsPresent__Group__4__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ElementByCssToBePresent__Group__4__Impl"
+    // InternalBromium.g:1521:1: rule__ElementByCssToBePresent__Group__4__Impl : ( ( rule__ElementByCssToBePresent__CssSelectorAssignment_4 ) ) ;
+    public final void rule__ElementByCssToBePresent__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1471:1: ( ( ( rule__ElementWithIdIsPresent__CssSelectorAssignment_4 ) ) )
-            // InternalBromium.g:1472:1: ( ( rule__ElementWithIdIsPresent__CssSelectorAssignment_4 ) )
+            // InternalBromium.g:1525:1: ( ( ( rule__ElementByCssToBePresent__CssSelectorAssignment_4 ) ) )
+            // InternalBromium.g:1526:1: ( ( rule__ElementByCssToBePresent__CssSelectorAssignment_4 ) )
             {
-            // InternalBromium.g:1472:1: ( ( rule__ElementWithIdIsPresent__CssSelectorAssignment_4 ) )
-            // InternalBromium.g:1473:2: ( rule__ElementWithIdIsPresent__CssSelectorAssignment_4 )
+            // InternalBromium.g:1526:1: ( ( rule__ElementByCssToBePresent__CssSelectorAssignment_4 ) )
+            // InternalBromium.g:1527:2: ( rule__ElementByCssToBePresent__CssSelectorAssignment_4 )
             {
-             before(grammarAccess.getElementWithIdIsPresentAccess().getCssSelectorAssignment_4()); 
-            // InternalBromium.g:1474:2: ( rule__ElementWithIdIsPresent__CssSelectorAssignment_4 )
-            // InternalBromium.g:1474:3: rule__ElementWithIdIsPresent__CssSelectorAssignment_4
+             before(grammarAccess.getElementByCssToBePresentAccess().getCssSelectorAssignment_4()); 
+            // InternalBromium.g:1528:2: ( rule__ElementByCssToBePresent__CssSelectorAssignment_4 )
+            // InternalBromium.g:1528:3: rule__ElementByCssToBePresent__CssSelectorAssignment_4
             {
             pushFollow(FOLLOW_2);
-            rule__ElementWithIdIsPresent__CssSelectorAssignment_4();
+            rule__ElementByCssToBePresent__CssSelectorAssignment_4();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getElementWithIdIsPresentAccess().getCssSelectorAssignment_4()); 
+             after(grammarAccess.getElementByCssToBePresentAccess().getCssSelectorAssignment_4()); 
 
             }
 
@@ -4456,26 +4615,26 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ElementWithIdIsPresent__Group__4__Impl"
+    // $ANTLR end "rule__ElementByCssToBePresent__Group__4__Impl"
 
 
-    // $ANTLR start "rule__ElementWithIdIsPresent__Group__5"
-    // InternalBromium.g:1482:1: rule__ElementWithIdIsPresent__Group__5 : rule__ElementWithIdIsPresent__Group__5__Impl rule__ElementWithIdIsPresent__Group__6 ;
-    public final void rule__ElementWithIdIsPresent__Group__5() throws RecognitionException {
+    // $ANTLR start "rule__ElementByCssToBePresent__Group__5"
+    // InternalBromium.g:1536:1: rule__ElementByCssToBePresent__Group__5 : rule__ElementByCssToBePresent__Group__5__Impl rule__ElementByCssToBePresent__Group__6 ;
+    public final void rule__ElementByCssToBePresent__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1486:1: ( rule__ElementWithIdIsPresent__Group__5__Impl rule__ElementWithIdIsPresent__Group__6 )
-            // InternalBromium.g:1487:2: rule__ElementWithIdIsPresent__Group__5__Impl rule__ElementWithIdIsPresent__Group__6
+            // InternalBromium.g:1540:1: ( rule__ElementByCssToBePresent__Group__5__Impl rule__ElementByCssToBePresent__Group__6 )
+            // InternalBromium.g:1541:2: rule__ElementByCssToBePresent__Group__5__Impl rule__ElementByCssToBePresent__Group__6
             {
             pushFollow(FOLLOW_24);
-            rule__ElementWithIdIsPresent__Group__5__Impl();
+            rule__ElementByCssToBePresent__Group__5__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__ElementWithIdIsPresent__Group__6();
+            rule__ElementByCssToBePresent__Group__6();
 
             state._fsp--;
 
@@ -4494,25 +4653,95 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ElementWithIdIsPresent__Group__5"
+    // $ANTLR end "rule__ElementByCssToBePresent__Group__5"
 
 
-    // $ANTLR start "rule__ElementWithIdIsPresent__Group__5__Impl"
-    // InternalBromium.g:1494:1: rule__ElementWithIdIsPresent__Group__5__Impl : ( 'is' ) ;
-    public final void rule__ElementWithIdIsPresent__Group__5__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ElementByCssToBePresent__Group__5__Impl"
+    // InternalBromium.g:1548:1: rule__ElementByCssToBePresent__Group__5__Impl : ( 'is' ) ;
+    public final void rule__ElementByCssToBePresent__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1498:1: ( ( 'is' ) )
-            // InternalBromium.g:1499:1: ( 'is' )
+            // InternalBromium.g:1552:1: ( ( 'is' ) )
+            // InternalBromium.g:1553:1: ( 'is' )
             {
-            // InternalBromium.g:1499:1: ( 'is' )
-            // InternalBromium.g:1500:2: 'is'
+            // InternalBromium.g:1553:1: ( 'is' )
+            // InternalBromium.g:1554:2: 'is'
             {
-             before(grammarAccess.getElementWithIdIsPresentAccess().getIsKeyword_5()); 
+             before(grammarAccess.getElementByCssToBePresentAccess().getIsKeyword_5()); 
+            match(input,31,FOLLOW_2); 
+             after(grammarAccess.getElementByCssToBePresentAccess().getIsKeyword_5()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ElementByCssToBePresent__Group__5__Impl"
+
+
+    // $ANTLR start "rule__ElementByCssToBePresent__Group__6"
+    // InternalBromium.g:1563:1: rule__ElementByCssToBePresent__Group__6 : rule__ElementByCssToBePresent__Group__6__Impl ;
+    public final void rule__ElementByCssToBePresent__Group__6() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBromium.g:1567:1: ( rule__ElementByCssToBePresent__Group__6__Impl )
+            // InternalBromium.g:1568:2: rule__ElementByCssToBePresent__Group__6__Impl
+            {
+            pushFollow(FOLLOW_2);
+            rule__ElementByCssToBePresent__Group__6__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ElementByCssToBePresent__Group__6"
+
+
+    // $ANTLR start "rule__ElementByCssToBePresent__Group__6__Impl"
+    // InternalBromium.g:1574:1: rule__ElementByCssToBePresent__Group__6__Impl : ( 'present' ) ;
+    public final void rule__ElementByCssToBePresent__Group__6__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBromium.g:1578:1: ( ( 'present' ) )
+            // InternalBromium.g:1579:1: ( 'present' )
+            {
+            // InternalBromium.g:1579:1: ( 'present' )
+            // InternalBromium.g:1580:2: 'present'
+            {
+             before(grammarAccess.getElementByCssToBePresentAccess().getPresentKeyword_6()); 
             match(input,32,FOLLOW_2); 
-             after(grammarAccess.getElementWithIdIsPresentAccess().getIsKeyword_5()); 
+             after(grammarAccess.getElementByCssToBePresentAccess().getPresentKeyword_6()); 
 
             }
 
@@ -4531,88 +4760,18 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ElementWithIdIsPresent__Group__5__Impl"
-
-
-    // $ANTLR start "rule__ElementWithIdIsPresent__Group__6"
-    // InternalBromium.g:1509:1: rule__ElementWithIdIsPresent__Group__6 : rule__ElementWithIdIsPresent__Group__6__Impl ;
-    public final void rule__ElementWithIdIsPresent__Group__6() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBromium.g:1513:1: ( rule__ElementWithIdIsPresent__Group__6__Impl )
-            // InternalBromium.g:1514:2: rule__ElementWithIdIsPresent__Group__6__Impl
-            {
-            pushFollow(FOLLOW_2);
-            rule__ElementWithIdIsPresent__Group__6__Impl();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ElementWithIdIsPresent__Group__6"
-
-
-    // $ANTLR start "rule__ElementWithIdIsPresent__Group__6__Impl"
-    // InternalBromium.g:1520:1: rule__ElementWithIdIsPresent__Group__6__Impl : ( 'present' ) ;
-    public final void rule__ElementWithIdIsPresent__Group__6__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBromium.g:1524:1: ( ( 'present' ) )
-            // InternalBromium.g:1525:1: ( 'present' )
-            {
-            // InternalBromium.g:1525:1: ( 'present' )
-            // InternalBromium.g:1526:2: 'present'
-            {
-             before(grammarAccess.getElementWithIdIsPresentAccess().getPresentKeyword_6()); 
-            match(input,33,FOLLOW_2); 
-             after(grammarAccess.getElementWithIdIsPresentAccess().getPresentKeyword_6()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ElementWithIdIsPresent__Group__6__Impl"
+    // $ANTLR end "rule__ElementByCssToBePresent__Group__6__Impl"
 
 
     // $ANTLR start "rule__ClickCssSelector__Group__0"
-    // InternalBromium.g:1536:1: rule__ClickCssSelector__Group__0 : rule__ClickCssSelector__Group__0__Impl rule__ClickCssSelector__Group__1 ;
+    // InternalBromium.g:1590:1: rule__ClickCssSelector__Group__0 : rule__ClickCssSelector__Group__0__Impl rule__ClickCssSelector__Group__1 ;
     public final void rule__ClickCssSelector__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1540:1: ( rule__ClickCssSelector__Group__0__Impl rule__ClickCssSelector__Group__1 )
-            // InternalBromium.g:1541:2: rule__ClickCssSelector__Group__0__Impl rule__ClickCssSelector__Group__1
+            // InternalBromium.g:1594:1: ( rule__ClickCssSelector__Group__0__Impl rule__ClickCssSelector__Group__1 )
+            // InternalBromium.g:1595:2: rule__ClickCssSelector__Group__0__Impl rule__ClickCssSelector__Group__1
             {
             pushFollow(FOLLOW_25);
             rule__ClickCssSelector__Group__0__Impl();
@@ -4643,20 +4802,20 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ClickCssSelector__Group__0__Impl"
-    // InternalBromium.g:1548:1: rule__ClickCssSelector__Group__0__Impl : ( 'click' ) ;
+    // InternalBromium.g:1602:1: rule__ClickCssSelector__Group__0__Impl : ( 'click' ) ;
     public final void rule__ClickCssSelector__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1552:1: ( ( 'click' ) )
-            // InternalBromium.g:1553:1: ( 'click' )
+            // InternalBromium.g:1606:1: ( ( 'click' ) )
+            // InternalBromium.g:1607:1: ( 'click' )
             {
-            // InternalBromium.g:1553:1: ( 'click' )
-            // InternalBromium.g:1554:2: 'click'
+            // InternalBromium.g:1607:1: ( 'click' )
+            // InternalBromium.g:1608:2: 'click'
             {
              before(grammarAccess.getClickCssSelectorAccess().getClickKeyword_0()); 
-            match(input,34,FOLLOW_2); 
+            match(input,33,FOLLOW_2); 
              after(grammarAccess.getClickCssSelectorAccess().getClickKeyword_0()); 
 
             }
@@ -4680,14 +4839,14 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ClickCssSelector__Group__1"
-    // InternalBromium.g:1563:1: rule__ClickCssSelector__Group__1 : rule__ClickCssSelector__Group__1__Impl rule__ClickCssSelector__Group__2 ;
+    // InternalBromium.g:1617:1: rule__ClickCssSelector__Group__1 : rule__ClickCssSelector__Group__1__Impl rule__ClickCssSelector__Group__2 ;
     public final void rule__ClickCssSelector__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1567:1: ( rule__ClickCssSelector__Group__1__Impl rule__ClickCssSelector__Group__2 )
-            // InternalBromium.g:1568:2: rule__ClickCssSelector__Group__1__Impl rule__ClickCssSelector__Group__2
+            // InternalBromium.g:1621:1: ( rule__ClickCssSelector__Group__1__Impl rule__ClickCssSelector__Group__2 )
+            // InternalBromium.g:1622:2: rule__ClickCssSelector__Group__1__Impl rule__ClickCssSelector__Group__2
             {
             pushFollow(FOLLOW_26);
             rule__ClickCssSelector__Group__1__Impl();
@@ -4718,20 +4877,20 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ClickCssSelector__Group__1__Impl"
-    // InternalBromium.g:1575:1: rule__ClickCssSelector__Group__1__Impl : ( 'on' ) ;
+    // InternalBromium.g:1629:1: rule__ClickCssSelector__Group__1__Impl : ( 'on' ) ;
     public final void rule__ClickCssSelector__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1579:1: ( ( 'on' ) )
-            // InternalBromium.g:1580:1: ( 'on' )
+            // InternalBromium.g:1633:1: ( ( 'on' ) )
+            // InternalBromium.g:1634:1: ( 'on' )
             {
-            // InternalBromium.g:1580:1: ( 'on' )
-            // InternalBromium.g:1581:2: 'on'
+            // InternalBromium.g:1634:1: ( 'on' )
+            // InternalBromium.g:1635:2: 'on'
             {
              before(grammarAccess.getClickCssSelectorAccess().getOnKeyword_1()); 
-            match(input,35,FOLLOW_2); 
+            match(input,34,FOLLOW_2); 
              after(grammarAccess.getClickCssSelectorAccess().getOnKeyword_1()); 
 
             }
@@ -4755,14 +4914,14 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ClickCssSelector__Group__2"
-    // InternalBromium.g:1590:1: rule__ClickCssSelector__Group__2 : rule__ClickCssSelector__Group__2__Impl rule__ClickCssSelector__Group__3 ;
+    // InternalBromium.g:1644:1: rule__ClickCssSelector__Group__2 : rule__ClickCssSelector__Group__2__Impl rule__ClickCssSelector__Group__3 ;
     public final void rule__ClickCssSelector__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1594:1: ( rule__ClickCssSelector__Group__2__Impl rule__ClickCssSelector__Group__3 )
-            // InternalBromium.g:1595:2: rule__ClickCssSelector__Group__2__Impl rule__ClickCssSelector__Group__3
+            // InternalBromium.g:1648:1: ( rule__ClickCssSelector__Group__2__Impl rule__ClickCssSelector__Group__3 )
+            // InternalBromium.g:1649:2: rule__ClickCssSelector__Group__2__Impl rule__ClickCssSelector__Group__3
             {
             pushFollow(FOLLOW_19);
             rule__ClickCssSelector__Group__2__Impl();
@@ -4793,20 +4952,20 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ClickCssSelector__Group__2__Impl"
-    // InternalBromium.g:1602:1: rule__ClickCssSelector__Group__2__Impl : ( 'element' ) ;
+    // InternalBromium.g:1656:1: rule__ClickCssSelector__Group__2__Impl : ( 'element' ) ;
     public final void rule__ClickCssSelector__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1606:1: ( ( 'element' ) )
-            // InternalBromium.g:1607:1: ( 'element' )
+            // InternalBromium.g:1660:1: ( ( 'element' ) )
+            // InternalBromium.g:1661:1: ( 'element' )
             {
-            // InternalBromium.g:1607:1: ( 'element' )
-            // InternalBromium.g:1608:2: 'element'
+            // InternalBromium.g:1661:1: ( 'element' )
+            // InternalBromium.g:1662:2: 'element'
             {
              before(grammarAccess.getClickCssSelectorAccess().getElementKeyword_2()); 
-            match(input,28,FOLLOW_2); 
+            match(input,27,FOLLOW_2); 
              after(grammarAccess.getClickCssSelectorAccess().getElementKeyword_2()); 
 
             }
@@ -4830,14 +4989,14 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ClickCssSelector__Group__3"
-    // InternalBromium.g:1617:1: rule__ClickCssSelector__Group__3 : rule__ClickCssSelector__Group__3__Impl rule__ClickCssSelector__Group__4 ;
+    // InternalBromium.g:1671:1: rule__ClickCssSelector__Group__3 : rule__ClickCssSelector__Group__3__Impl rule__ClickCssSelector__Group__4 ;
     public final void rule__ClickCssSelector__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1621:1: ( rule__ClickCssSelector__Group__3__Impl rule__ClickCssSelector__Group__4 )
-            // InternalBromium.g:1622:2: rule__ClickCssSelector__Group__3__Impl rule__ClickCssSelector__Group__4
+            // InternalBromium.g:1675:1: ( rule__ClickCssSelector__Group__3__Impl rule__ClickCssSelector__Group__4 )
+            // InternalBromium.g:1676:2: rule__ClickCssSelector__Group__3__Impl rule__ClickCssSelector__Group__4
             {
             pushFollow(FOLLOW_20);
             rule__ClickCssSelector__Group__3__Impl();
@@ -4868,20 +5027,20 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ClickCssSelector__Group__3__Impl"
-    // InternalBromium.g:1629:1: rule__ClickCssSelector__Group__3__Impl : ( 'with' ) ;
+    // InternalBromium.g:1683:1: rule__ClickCssSelector__Group__3__Impl : ( 'with' ) ;
     public final void rule__ClickCssSelector__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1633:1: ( ( 'with' ) )
-            // InternalBromium.g:1634:1: ( 'with' )
+            // InternalBromium.g:1687:1: ( ( 'with' ) )
+            // InternalBromium.g:1688:1: ( 'with' )
             {
-            // InternalBromium.g:1634:1: ( 'with' )
-            // InternalBromium.g:1635:2: 'with'
+            // InternalBromium.g:1688:1: ( 'with' )
+            // InternalBromium.g:1689:2: 'with'
             {
              before(grammarAccess.getClickCssSelectorAccess().getWithKeyword_3()); 
-            match(input,29,FOLLOW_2); 
+            match(input,28,FOLLOW_2); 
              after(grammarAccess.getClickCssSelectorAccess().getWithKeyword_3()); 
 
             }
@@ -4905,14 +5064,14 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ClickCssSelector__Group__4"
-    // InternalBromium.g:1644:1: rule__ClickCssSelector__Group__4 : rule__ClickCssSelector__Group__4__Impl rule__ClickCssSelector__Group__5 ;
+    // InternalBromium.g:1698:1: rule__ClickCssSelector__Group__4 : rule__ClickCssSelector__Group__4__Impl rule__ClickCssSelector__Group__5 ;
     public final void rule__ClickCssSelector__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1648:1: ( rule__ClickCssSelector__Group__4__Impl rule__ClickCssSelector__Group__5 )
-            // InternalBromium.g:1649:2: rule__ClickCssSelector__Group__4__Impl rule__ClickCssSelector__Group__5
+            // InternalBromium.g:1702:1: ( rule__ClickCssSelector__Group__4__Impl rule__ClickCssSelector__Group__5 )
+            // InternalBromium.g:1703:2: rule__ClickCssSelector__Group__4__Impl rule__ClickCssSelector__Group__5
             {
             pushFollow(FOLLOW_21);
             rule__ClickCssSelector__Group__4__Impl();
@@ -4943,20 +5102,20 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ClickCssSelector__Group__4__Impl"
-    // InternalBromium.g:1656:1: rule__ClickCssSelector__Group__4__Impl : ( 'css' ) ;
+    // InternalBromium.g:1710:1: rule__ClickCssSelector__Group__4__Impl : ( 'css' ) ;
     public final void rule__ClickCssSelector__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1660:1: ( ( 'css' ) )
-            // InternalBromium.g:1661:1: ( 'css' )
+            // InternalBromium.g:1714:1: ( ( 'css' ) )
+            // InternalBromium.g:1715:1: ( 'css' )
             {
-            // InternalBromium.g:1661:1: ( 'css' )
-            // InternalBromium.g:1662:2: 'css'
+            // InternalBromium.g:1715:1: ( 'css' )
+            // InternalBromium.g:1716:2: 'css'
             {
              before(grammarAccess.getClickCssSelectorAccess().getCssKeyword_4()); 
-            match(input,30,FOLLOW_2); 
+            match(input,29,FOLLOW_2); 
              after(grammarAccess.getClickCssSelectorAccess().getCssKeyword_4()); 
 
             }
@@ -4980,14 +5139,14 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ClickCssSelector__Group__5"
-    // InternalBromium.g:1671:1: rule__ClickCssSelector__Group__5 : rule__ClickCssSelector__Group__5__Impl rule__ClickCssSelector__Group__6 ;
+    // InternalBromium.g:1725:1: rule__ClickCssSelector__Group__5 : rule__ClickCssSelector__Group__5__Impl rule__ClickCssSelector__Group__6 ;
     public final void rule__ClickCssSelector__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1675:1: ( rule__ClickCssSelector__Group__5__Impl rule__ClickCssSelector__Group__6 )
-            // InternalBromium.g:1676:2: rule__ClickCssSelector__Group__5__Impl rule__ClickCssSelector__Group__6
+            // InternalBromium.g:1729:1: ( rule__ClickCssSelector__Group__5__Impl rule__ClickCssSelector__Group__6 )
+            // InternalBromium.g:1730:2: rule__ClickCssSelector__Group__5__Impl rule__ClickCssSelector__Group__6
             {
             pushFollow(FOLLOW_22);
             rule__ClickCssSelector__Group__5__Impl();
@@ -5018,20 +5177,20 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ClickCssSelector__Group__5__Impl"
-    // InternalBromium.g:1683:1: rule__ClickCssSelector__Group__5__Impl : ( 'selector' ) ;
+    // InternalBromium.g:1737:1: rule__ClickCssSelector__Group__5__Impl : ( 'selector' ) ;
     public final void rule__ClickCssSelector__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1687:1: ( ( 'selector' ) )
-            // InternalBromium.g:1688:1: ( 'selector' )
+            // InternalBromium.g:1741:1: ( ( 'selector' ) )
+            // InternalBromium.g:1742:1: ( 'selector' )
             {
-            // InternalBromium.g:1688:1: ( 'selector' )
-            // InternalBromium.g:1689:2: 'selector'
+            // InternalBromium.g:1742:1: ( 'selector' )
+            // InternalBromium.g:1743:2: 'selector'
             {
              before(grammarAccess.getClickCssSelectorAccess().getSelectorKeyword_5()); 
-            match(input,31,FOLLOW_2); 
+            match(input,30,FOLLOW_2); 
              after(grammarAccess.getClickCssSelectorAccess().getSelectorKeyword_5()); 
 
             }
@@ -5055,14 +5214,14 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ClickCssSelector__Group__6"
-    // InternalBromium.g:1698:1: rule__ClickCssSelector__Group__6 : rule__ClickCssSelector__Group__6__Impl ;
+    // InternalBromium.g:1752:1: rule__ClickCssSelector__Group__6 : rule__ClickCssSelector__Group__6__Impl ;
     public final void rule__ClickCssSelector__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1702:1: ( rule__ClickCssSelector__Group__6__Impl )
-            // InternalBromium.g:1703:2: rule__ClickCssSelector__Group__6__Impl
+            // InternalBromium.g:1756:1: ( rule__ClickCssSelector__Group__6__Impl )
+            // InternalBromium.g:1757:2: rule__ClickCssSelector__Group__6__Impl
             {
             pushFollow(FOLLOW_2);
             rule__ClickCssSelector__Group__6__Impl();
@@ -5088,21 +5247,21 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ClickCssSelector__Group__6__Impl"
-    // InternalBromium.g:1709:1: rule__ClickCssSelector__Group__6__Impl : ( ( rule__ClickCssSelector__CssSelectorAssignment_6 ) ) ;
+    // InternalBromium.g:1763:1: rule__ClickCssSelector__Group__6__Impl : ( ( rule__ClickCssSelector__CssSelectorAssignment_6 ) ) ;
     public final void rule__ClickCssSelector__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1713:1: ( ( ( rule__ClickCssSelector__CssSelectorAssignment_6 ) ) )
-            // InternalBromium.g:1714:1: ( ( rule__ClickCssSelector__CssSelectorAssignment_6 ) )
+            // InternalBromium.g:1767:1: ( ( ( rule__ClickCssSelector__CssSelectorAssignment_6 ) ) )
+            // InternalBromium.g:1768:1: ( ( rule__ClickCssSelector__CssSelectorAssignment_6 ) )
             {
-            // InternalBromium.g:1714:1: ( ( rule__ClickCssSelector__CssSelectorAssignment_6 ) )
-            // InternalBromium.g:1715:2: ( rule__ClickCssSelector__CssSelectorAssignment_6 )
+            // InternalBromium.g:1768:1: ( ( rule__ClickCssSelector__CssSelectorAssignment_6 ) )
+            // InternalBromium.g:1769:2: ( rule__ClickCssSelector__CssSelectorAssignment_6 )
             {
              before(grammarAccess.getClickCssSelectorAccess().getCssSelectorAssignment_6()); 
-            // InternalBromium.g:1716:2: ( rule__ClickCssSelector__CssSelectorAssignment_6 )
-            // InternalBromium.g:1716:3: rule__ClickCssSelector__CssSelectorAssignment_6
+            // InternalBromium.g:1770:2: ( rule__ClickCssSelector__CssSelectorAssignment_6 )
+            // InternalBromium.g:1770:3: rule__ClickCssSelector__CssSelectorAssignment_6
             {
             pushFollow(FOLLOW_2);
             rule__ClickCssSelector__CssSelectorAssignment_6();
@@ -5135,14 +5294,14 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PageLoad__Group__0"
-    // InternalBromium.g:1725:1: rule__PageLoad__Group__0 : rule__PageLoad__Group__0__Impl rule__PageLoad__Group__1 ;
+    // InternalBromium.g:1779:1: rule__PageLoad__Group__0 : rule__PageLoad__Group__0__Impl rule__PageLoad__Group__1 ;
     public final void rule__PageLoad__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1729:1: ( rule__PageLoad__Group__0__Impl rule__PageLoad__Group__1 )
-            // InternalBromium.g:1730:2: rule__PageLoad__Group__0__Impl rule__PageLoad__Group__1
+            // InternalBromium.g:1783:1: ( rule__PageLoad__Group__0__Impl rule__PageLoad__Group__1 )
+            // InternalBromium.g:1784:2: rule__PageLoad__Group__0__Impl rule__PageLoad__Group__1
             {
             pushFollow(FOLLOW_27);
             rule__PageLoad__Group__0__Impl();
@@ -5173,20 +5332,20 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PageLoad__Group__0__Impl"
-    // InternalBromium.g:1737:1: rule__PageLoad__Group__0__Impl : ( 'load' ) ;
+    // InternalBromium.g:1791:1: rule__PageLoad__Group__0__Impl : ( 'load' ) ;
     public final void rule__PageLoad__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1741:1: ( ( 'load' ) )
-            // InternalBromium.g:1742:1: ( 'load' )
+            // InternalBromium.g:1795:1: ( ( 'load' ) )
+            // InternalBromium.g:1796:1: ( 'load' )
             {
-            // InternalBromium.g:1742:1: ( 'load' )
-            // InternalBromium.g:1743:2: 'load'
+            // InternalBromium.g:1796:1: ( 'load' )
+            // InternalBromium.g:1797:2: 'load'
             {
              before(grammarAccess.getPageLoadAccess().getLoadKeyword_0()); 
-            match(input,36,FOLLOW_2); 
+            match(input,35,FOLLOW_2); 
              after(grammarAccess.getPageLoadAccess().getLoadKeyword_0()); 
 
             }
@@ -5210,14 +5369,14 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PageLoad__Group__1"
-    // InternalBromium.g:1752:1: rule__PageLoad__Group__1 : rule__PageLoad__Group__1__Impl rule__PageLoad__Group__2 ;
+    // InternalBromium.g:1806:1: rule__PageLoad__Group__1 : rule__PageLoad__Group__1__Impl rule__PageLoad__Group__2 ;
     public final void rule__PageLoad__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1756:1: ( rule__PageLoad__Group__1__Impl rule__PageLoad__Group__2 )
-            // InternalBromium.g:1757:2: rule__PageLoad__Group__1__Impl rule__PageLoad__Group__2
+            // InternalBromium.g:1810:1: ( rule__PageLoad__Group__1__Impl rule__PageLoad__Group__2 )
+            // InternalBromium.g:1811:2: rule__PageLoad__Group__1__Impl rule__PageLoad__Group__2
             {
             pushFollow(FOLLOW_3);
             rule__PageLoad__Group__1__Impl();
@@ -5248,20 +5407,20 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PageLoad__Group__1__Impl"
-    // InternalBromium.g:1764:1: rule__PageLoad__Group__1__Impl : ( 'page' ) ;
+    // InternalBromium.g:1818:1: rule__PageLoad__Group__1__Impl : ( 'page' ) ;
     public final void rule__PageLoad__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1768:1: ( ( 'page' ) )
-            // InternalBromium.g:1769:1: ( 'page' )
+            // InternalBromium.g:1822:1: ( ( 'page' ) )
+            // InternalBromium.g:1823:1: ( 'page' )
             {
-            // InternalBromium.g:1769:1: ( 'page' )
-            // InternalBromium.g:1770:2: 'page'
+            // InternalBromium.g:1823:1: ( 'page' )
+            // InternalBromium.g:1824:2: 'page'
             {
              before(grammarAccess.getPageLoadAccess().getPageKeyword_1()); 
-            match(input,37,FOLLOW_2); 
+            match(input,36,FOLLOW_2); 
              after(grammarAccess.getPageLoadAccess().getPageKeyword_1()); 
 
             }
@@ -5285,14 +5444,14 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PageLoad__Group__2"
-    // InternalBromium.g:1779:1: rule__PageLoad__Group__2 : rule__PageLoad__Group__2__Impl ;
+    // InternalBromium.g:1833:1: rule__PageLoad__Group__2 : rule__PageLoad__Group__2__Impl ;
     public final void rule__PageLoad__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1783:1: ( rule__PageLoad__Group__2__Impl )
-            // InternalBromium.g:1784:2: rule__PageLoad__Group__2__Impl
+            // InternalBromium.g:1837:1: ( rule__PageLoad__Group__2__Impl )
+            // InternalBromium.g:1838:2: rule__PageLoad__Group__2__Impl
             {
             pushFollow(FOLLOW_2);
             rule__PageLoad__Group__2__Impl();
@@ -5318,21 +5477,21 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PageLoad__Group__2__Impl"
-    // InternalBromium.g:1790:1: rule__PageLoad__Group__2__Impl : ( ( rule__PageLoad__SubpathAssignment_2 ) ) ;
+    // InternalBromium.g:1844:1: rule__PageLoad__Group__2__Impl : ( ( rule__PageLoad__SubpathAssignment_2 ) ) ;
     public final void rule__PageLoad__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1794:1: ( ( ( rule__PageLoad__SubpathAssignment_2 ) ) )
-            // InternalBromium.g:1795:1: ( ( rule__PageLoad__SubpathAssignment_2 ) )
+            // InternalBromium.g:1848:1: ( ( ( rule__PageLoad__SubpathAssignment_2 ) ) )
+            // InternalBromium.g:1849:1: ( ( rule__PageLoad__SubpathAssignment_2 ) )
             {
-            // InternalBromium.g:1795:1: ( ( rule__PageLoad__SubpathAssignment_2 ) )
-            // InternalBromium.g:1796:2: ( rule__PageLoad__SubpathAssignment_2 )
+            // InternalBromium.g:1849:1: ( ( rule__PageLoad__SubpathAssignment_2 ) )
+            // InternalBromium.g:1850:2: ( rule__PageLoad__SubpathAssignment_2 )
             {
              before(grammarAccess.getPageLoadAccess().getSubpathAssignment_2()); 
-            // InternalBromium.g:1797:2: ( rule__PageLoad__SubpathAssignment_2 )
-            // InternalBromium.g:1797:3: rule__PageLoad__SubpathAssignment_2
+            // InternalBromium.g:1851:2: ( rule__PageLoad__SubpathAssignment_2 )
+            // InternalBromium.g:1851:3: rule__PageLoad__SubpathAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__PageLoad__SubpathAssignment_2();
@@ -5365,14 +5524,14 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeTextInElementFoundByCssSelector__Group__0"
-    // InternalBromium.g:1806:1: rule__TypeTextInElementFoundByCssSelector__Group__0 : rule__TypeTextInElementFoundByCssSelector__Group__0__Impl rule__TypeTextInElementFoundByCssSelector__Group__1 ;
+    // InternalBromium.g:1860:1: rule__TypeTextInElementFoundByCssSelector__Group__0 : rule__TypeTextInElementFoundByCssSelector__Group__0__Impl rule__TypeTextInElementFoundByCssSelector__Group__1 ;
     public final void rule__TypeTextInElementFoundByCssSelector__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1810:1: ( rule__TypeTextInElementFoundByCssSelector__Group__0__Impl rule__TypeTextInElementFoundByCssSelector__Group__1 )
-            // InternalBromium.g:1811:2: rule__TypeTextInElementFoundByCssSelector__Group__0__Impl rule__TypeTextInElementFoundByCssSelector__Group__1
+            // InternalBromium.g:1864:1: ( rule__TypeTextInElementFoundByCssSelector__Group__0__Impl rule__TypeTextInElementFoundByCssSelector__Group__1 )
+            // InternalBromium.g:1865:2: rule__TypeTextInElementFoundByCssSelector__Group__0__Impl rule__TypeTextInElementFoundByCssSelector__Group__1
             {
             pushFollow(FOLLOW_22);
             rule__TypeTextInElementFoundByCssSelector__Group__0__Impl();
@@ -5403,20 +5562,20 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeTextInElementFoundByCssSelector__Group__0__Impl"
-    // InternalBromium.g:1818:1: rule__TypeTextInElementFoundByCssSelector__Group__0__Impl : ( 'type' ) ;
+    // InternalBromium.g:1872:1: rule__TypeTextInElementFoundByCssSelector__Group__0__Impl : ( 'type' ) ;
     public final void rule__TypeTextInElementFoundByCssSelector__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1822:1: ( ( 'type' ) )
-            // InternalBromium.g:1823:1: ( 'type' )
+            // InternalBromium.g:1876:1: ( ( 'type' ) )
+            // InternalBromium.g:1877:1: ( 'type' )
             {
-            // InternalBromium.g:1823:1: ( 'type' )
-            // InternalBromium.g:1824:2: 'type'
+            // InternalBromium.g:1877:1: ( 'type' )
+            // InternalBromium.g:1878:2: 'type'
             {
              before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTypeKeyword_0()); 
-            match(input,38,FOLLOW_2); 
+            match(input,37,FOLLOW_2); 
              after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTypeKeyword_0()); 
 
             }
@@ -5440,14 +5599,14 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeTextInElementFoundByCssSelector__Group__1"
-    // InternalBromium.g:1833:1: rule__TypeTextInElementFoundByCssSelector__Group__1 : rule__TypeTextInElementFoundByCssSelector__Group__1__Impl rule__TypeTextInElementFoundByCssSelector__Group__2 ;
+    // InternalBromium.g:1887:1: rule__TypeTextInElementFoundByCssSelector__Group__1 : rule__TypeTextInElementFoundByCssSelector__Group__1__Impl rule__TypeTextInElementFoundByCssSelector__Group__2 ;
     public final void rule__TypeTextInElementFoundByCssSelector__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1837:1: ( rule__TypeTextInElementFoundByCssSelector__Group__1__Impl rule__TypeTextInElementFoundByCssSelector__Group__2 )
-            // InternalBromium.g:1838:2: rule__TypeTextInElementFoundByCssSelector__Group__1__Impl rule__TypeTextInElementFoundByCssSelector__Group__2
+            // InternalBromium.g:1891:1: ( rule__TypeTextInElementFoundByCssSelector__Group__1__Impl rule__TypeTextInElementFoundByCssSelector__Group__2 )
+            // InternalBromium.g:1892:2: rule__TypeTextInElementFoundByCssSelector__Group__1__Impl rule__TypeTextInElementFoundByCssSelector__Group__2
             {
             pushFollow(FOLLOW_28);
             rule__TypeTextInElementFoundByCssSelector__Group__1__Impl();
@@ -5478,21 +5637,21 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeTextInElementFoundByCssSelector__Group__1__Impl"
-    // InternalBromium.g:1845:1: rule__TypeTextInElementFoundByCssSelector__Group__1__Impl : ( ( rule__TypeTextInElementFoundByCssSelector__TextAssignment_1 ) ) ;
+    // InternalBromium.g:1899:1: rule__TypeTextInElementFoundByCssSelector__Group__1__Impl : ( ( rule__TypeTextInElementFoundByCssSelector__TextAssignment_1 ) ) ;
     public final void rule__TypeTextInElementFoundByCssSelector__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1849:1: ( ( ( rule__TypeTextInElementFoundByCssSelector__TextAssignment_1 ) ) )
-            // InternalBromium.g:1850:1: ( ( rule__TypeTextInElementFoundByCssSelector__TextAssignment_1 ) )
+            // InternalBromium.g:1903:1: ( ( ( rule__TypeTextInElementFoundByCssSelector__TextAssignment_1 ) ) )
+            // InternalBromium.g:1904:1: ( ( rule__TypeTextInElementFoundByCssSelector__TextAssignment_1 ) )
             {
-            // InternalBromium.g:1850:1: ( ( rule__TypeTextInElementFoundByCssSelector__TextAssignment_1 ) )
-            // InternalBromium.g:1851:2: ( rule__TypeTextInElementFoundByCssSelector__TextAssignment_1 )
+            // InternalBromium.g:1904:1: ( ( rule__TypeTextInElementFoundByCssSelector__TextAssignment_1 ) )
+            // InternalBromium.g:1905:2: ( rule__TypeTextInElementFoundByCssSelector__TextAssignment_1 )
             {
              before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTextAssignment_1()); 
-            // InternalBromium.g:1852:2: ( rule__TypeTextInElementFoundByCssSelector__TextAssignment_1 )
-            // InternalBromium.g:1852:3: rule__TypeTextInElementFoundByCssSelector__TextAssignment_1
+            // InternalBromium.g:1906:2: ( rule__TypeTextInElementFoundByCssSelector__TextAssignment_1 )
+            // InternalBromium.g:1906:3: rule__TypeTextInElementFoundByCssSelector__TextAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__TypeTextInElementFoundByCssSelector__TextAssignment_1();
@@ -5525,14 +5684,14 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeTextInElementFoundByCssSelector__Group__2"
-    // InternalBromium.g:1860:1: rule__TypeTextInElementFoundByCssSelector__Group__2 : rule__TypeTextInElementFoundByCssSelector__Group__2__Impl rule__TypeTextInElementFoundByCssSelector__Group__3 ;
+    // InternalBromium.g:1914:1: rule__TypeTextInElementFoundByCssSelector__Group__2 : rule__TypeTextInElementFoundByCssSelector__Group__2__Impl rule__TypeTextInElementFoundByCssSelector__Group__3 ;
     public final void rule__TypeTextInElementFoundByCssSelector__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1864:1: ( rule__TypeTextInElementFoundByCssSelector__Group__2__Impl rule__TypeTextInElementFoundByCssSelector__Group__3 )
-            // InternalBromium.g:1865:2: rule__TypeTextInElementFoundByCssSelector__Group__2__Impl rule__TypeTextInElementFoundByCssSelector__Group__3
+            // InternalBromium.g:1918:1: ( rule__TypeTextInElementFoundByCssSelector__Group__2__Impl rule__TypeTextInElementFoundByCssSelector__Group__3 )
+            // InternalBromium.g:1919:2: rule__TypeTextInElementFoundByCssSelector__Group__2__Impl rule__TypeTextInElementFoundByCssSelector__Group__3
             {
             pushFollow(FOLLOW_26);
             rule__TypeTextInElementFoundByCssSelector__Group__2__Impl();
@@ -5563,20 +5722,20 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeTextInElementFoundByCssSelector__Group__2__Impl"
-    // InternalBromium.g:1872:1: rule__TypeTextInElementFoundByCssSelector__Group__2__Impl : ( 'in' ) ;
+    // InternalBromium.g:1926:1: rule__TypeTextInElementFoundByCssSelector__Group__2__Impl : ( 'in' ) ;
     public final void rule__TypeTextInElementFoundByCssSelector__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1876:1: ( ( 'in' ) )
-            // InternalBromium.g:1877:1: ( 'in' )
+            // InternalBromium.g:1930:1: ( ( 'in' ) )
+            // InternalBromium.g:1931:1: ( 'in' )
             {
-            // InternalBromium.g:1877:1: ( 'in' )
-            // InternalBromium.g:1878:2: 'in'
+            // InternalBromium.g:1931:1: ( 'in' )
+            // InternalBromium.g:1932:2: 'in'
             {
              before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getInKeyword_2()); 
-            match(input,39,FOLLOW_2); 
+            match(input,38,FOLLOW_2); 
              after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getInKeyword_2()); 
 
             }
@@ -5600,14 +5759,14 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeTextInElementFoundByCssSelector__Group__3"
-    // InternalBromium.g:1887:1: rule__TypeTextInElementFoundByCssSelector__Group__3 : rule__TypeTextInElementFoundByCssSelector__Group__3__Impl rule__TypeTextInElementFoundByCssSelector__Group__4 ;
+    // InternalBromium.g:1941:1: rule__TypeTextInElementFoundByCssSelector__Group__3 : rule__TypeTextInElementFoundByCssSelector__Group__3__Impl rule__TypeTextInElementFoundByCssSelector__Group__4 ;
     public final void rule__TypeTextInElementFoundByCssSelector__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1891:1: ( rule__TypeTextInElementFoundByCssSelector__Group__3__Impl rule__TypeTextInElementFoundByCssSelector__Group__4 )
-            // InternalBromium.g:1892:2: rule__TypeTextInElementFoundByCssSelector__Group__3__Impl rule__TypeTextInElementFoundByCssSelector__Group__4
+            // InternalBromium.g:1945:1: ( rule__TypeTextInElementFoundByCssSelector__Group__3__Impl rule__TypeTextInElementFoundByCssSelector__Group__4 )
+            // InternalBromium.g:1946:2: rule__TypeTextInElementFoundByCssSelector__Group__3__Impl rule__TypeTextInElementFoundByCssSelector__Group__4
             {
             pushFollow(FOLLOW_19);
             rule__TypeTextInElementFoundByCssSelector__Group__3__Impl();
@@ -5638,20 +5797,20 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeTextInElementFoundByCssSelector__Group__3__Impl"
-    // InternalBromium.g:1899:1: rule__TypeTextInElementFoundByCssSelector__Group__3__Impl : ( 'element' ) ;
+    // InternalBromium.g:1953:1: rule__TypeTextInElementFoundByCssSelector__Group__3__Impl : ( 'element' ) ;
     public final void rule__TypeTextInElementFoundByCssSelector__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1903:1: ( ( 'element' ) )
-            // InternalBromium.g:1904:1: ( 'element' )
+            // InternalBromium.g:1957:1: ( ( 'element' ) )
+            // InternalBromium.g:1958:1: ( 'element' )
             {
-            // InternalBromium.g:1904:1: ( 'element' )
-            // InternalBromium.g:1905:2: 'element'
+            // InternalBromium.g:1958:1: ( 'element' )
+            // InternalBromium.g:1959:2: 'element'
             {
              before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getElementKeyword_3()); 
-            match(input,28,FOLLOW_2); 
+            match(input,27,FOLLOW_2); 
              after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getElementKeyword_3()); 
 
             }
@@ -5675,14 +5834,14 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeTextInElementFoundByCssSelector__Group__4"
-    // InternalBromium.g:1914:1: rule__TypeTextInElementFoundByCssSelector__Group__4 : rule__TypeTextInElementFoundByCssSelector__Group__4__Impl rule__TypeTextInElementFoundByCssSelector__Group__5 ;
+    // InternalBromium.g:1968:1: rule__TypeTextInElementFoundByCssSelector__Group__4 : rule__TypeTextInElementFoundByCssSelector__Group__4__Impl rule__TypeTextInElementFoundByCssSelector__Group__5 ;
     public final void rule__TypeTextInElementFoundByCssSelector__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1918:1: ( rule__TypeTextInElementFoundByCssSelector__Group__4__Impl rule__TypeTextInElementFoundByCssSelector__Group__5 )
-            // InternalBromium.g:1919:2: rule__TypeTextInElementFoundByCssSelector__Group__4__Impl rule__TypeTextInElementFoundByCssSelector__Group__5
+            // InternalBromium.g:1972:1: ( rule__TypeTextInElementFoundByCssSelector__Group__4__Impl rule__TypeTextInElementFoundByCssSelector__Group__5 )
+            // InternalBromium.g:1973:2: rule__TypeTextInElementFoundByCssSelector__Group__4__Impl rule__TypeTextInElementFoundByCssSelector__Group__5
             {
             pushFollow(FOLLOW_20);
             rule__TypeTextInElementFoundByCssSelector__Group__4__Impl();
@@ -5713,20 +5872,20 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeTextInElementFoundByCssSelector__Group__4__Impl"
-    // InternalBromium.g:1926:1: rule__TypeTextInElementFoundByCssSelector__Group__4__Impl : ( 'with' ) ;
+    // InternalBromium.g:1980:1: rule__TypeTextInElementFoundByCssSelector__Group__4__Impl : ( 'with' ) ;
     public final void rule__TypeTextInElementFoundByCssSelector__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1930:1: ( ( 'with' ) )
-            // InternalBromium.g:1931:1: ( 'with' )
+            // InternalBromium.g:1984:1: ( ( 'with' ) )
+            // InternalBromium.g:1985:1: ( 'with' )
             {
-            // InternalBromium.g:1931:1: ( 'with' )
-            // InternalBromium.g:1932:2: 'with'
+            // InternalBromium.g:1985:1: ( 'with' )
+            // InternalBromium.g:1986:2: 'with'
             {
              before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getWithKeyword_4()); 
-            match(input,29,FOLLOW_2); 
+            match(input,28,FOLLOW_2); 
              after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getWithKeyword_4()); 
 
             }
@@ -5750,14 +5909,14 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeTextInElementFoundByCssSelector__Group__5"
-    // InternalBromium.g:1941:1: rule__TypeTextInElementFoundByCssSelector__Group__5 : rule__TypeTextInElementFoundByCssSelector__Group__5__Impl rule__TypeTextInElementFoundByCssSelector__Group__6 ;
+    // InternalBromium.g:1995:1: rule__TypeTextInElementFoundByCssSelector__Group__5 : rule__TypeTextInElementFoundByCssSelector__Group__5__Impl rule__TypeTextInElementFoundByCssSelector__Group__6 ;
     public final void rule__TypeTextInElementFoundByCssSelector__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1945:1: ( rule__TypeTextInElementFoundByCssSelector__Group__5__Impl rule__TypeTextInElementFoundByCssSelector__Group__6 )
-            // InternalBromium.g:1946:2: rule__TypeTextInElementFoundByCssSelector__Group__5__Impl rule__TypeTextInElementFoundByCssSelector__Group__6
+            // InternalBromium.g:1999:1: ( rule__TypeTextInElementFoundByCssSelector__Group__5__Impl rule__TypeTextInElementFoundByCssSelector__Group__6 )
+            // InternalBromium.g:2000:2: rule__TypeTextInElementFoundByCssSelector__Group__5__Impl rule__TypeTextInElementFoundByCssSelector__Group__6
             {
             pushFollow(FOLLOW_21);
             rule__TypeTextInElementFoundByCssSelector__Group__5__Impl();
@@ -5788,20 +5947,20 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeTextInElementFoundByCssSelector__Group__5__Impl"
-    // InternalBromium.g:1953:1: rule__TypeTextInElementFoundByCssSelector__Group__5__Impl : ( 'css' ) ;
+    // InternalBromium.g:2007:1: rule__TypeTextInElementFoundByCssSelector__Group__5__Impl : ( 'css' ) ;
     public final void rule__TypeTextInElementFoundByCssSelector__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1957:1: ( ( 'css' ) )
-            // InternalBromium.g:1958:1: ( 'css' )
+            // InternalBromium.g:2011:1: ( ( 'css' ) )
+            // InternalBromium.g:2012:1: ( 'css' )
             {
-            // InternalBromium.g:1958:1: ( 'css' )
-            // InternalBromium.g:1959:2: 'css'
+            // InternalBromium.g:2012:1: ( 'css' )
+            // InternalBromium.g:2013:2: 'css'
             {
              before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getCssKeyword_5()); 
-            match(input,30,FOLLOW_2); 
+            match(input,29,FOLLOW_2); 
              after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getCssKeyword_5()); 
 
             }
@@ -5825,14 +5984,14 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeTextInElementFoundByCssSelector__Group__6"
-    // InternalBromium.g:1968:1: rule__TypeTextInElementFoundByCssSelector__Group__6 : rule__TypeTextInElementFoundByCssSelector__Group__6__Impl rule__TypeTextInElementFoundByCssSelector__Group__7 ;
+    // InternalBromium.g:2022:1: rule__TypeTextInElementFoundByCssSelector__Group__6 : rule__TypeTextInElementFoundByCssSelector__Group__6__Impl rule__TypeTextInElementFoundByCssSelector__Group__7 ;
     public final void rule__TypeTextInElementFoundByCssSelector__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1972:1: ( rule__TypeTextInElementFoundByCssSelector__Group__6__Impl rule__TypeTextInElementFoundByCssSelector__Group__7 )
-            // InternalBromium.g:1973:2: rule__TypeTextInElementFoundByCssSelector__Group__6__Impl rule__TypeTextInElementFoundByCssSelector__Group__7
+            // InternalBromium.g:2026:1: ( rule__TypeTextInElementFoundByCssSelector__Group__6__Impl rule__TypeTextInElementFoundByCssSelector__Group__7 )
+            // InternalBromium.g:2027:2: rule__TypeTextInElementFoundByCssSelector__Group__6__Impl rule__TypeTextInElementFoundByCssSelector__Group__7
             {
             pushFollow(FOLLOW_22);
             rule__TypeTextInElementFoundByCssSelector__Group__6__Impl();
@@ -5863,20 +6022,20 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeTextInElementFoundByCssSelector__Group__6__Impl"
-    // InternalBromium.g:1980:1: rule__TypeTextInElementFoundByCssSelector__Group__6__Impl : ( 'selector' ) ;
+    // InternalBromium.g:2034:1: rule__TypeTextInElementFoundByCssSelector__Group__6__Impl : ( 'selector' ) ;
     public final void rule__TypeTextInElementFoundByCssSelector__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1984:1: ( ( 'selector' ) )
-            // InternalBromium.g:1985:1: ( 'selector' )
+            // InternalBromium.g:2038:1: ( ( 'selector' ) )
+            // InternalBromium.g:2039:1: ( 'selector' )
             {
-            // InternalBromium.g:1985:1: ( 'selector' )
-            // InternalBromium.g:1986:2: 'selector'
+            // InternalBromium.g:2039:1: ( 'selector' )
+            // InternalBromium.g:2040:2: 'selector'
             {
              before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getSelectorKeyword_6()); 
-            match(input,31,FOLLOW_2); 
+            match(input,30,FOLLOW_2); 
              after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getSelectorKeyword_6()); 
 
             }
@@ -5900,14 +6059,14 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeTextInElementFoundByCssSelector__Group__7"
-    // InternalBromium.g:1995:1: rule__TypeTextInElementFoundByCssSelector__Group__7 : rule__TypeTextInElementFoundByCssSelector__Group__7__Impl ;
+    // InternalBromium.g:2049:1: rule__TypeTextInElementFoundByCssSelector__Group__7 : rule__TypeTextInElementFoundByCssSelector__Group__7__Impl ;
     public final void rule__TypeTextInElementFoundByCssSelector__Group__7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1999:1: ( rule__TypeTextInElementFoundByCssSelector__Group__7__Impl )
-            // InternalBromium.g:2000:2: rule__TypeTextInElementFoundByCssSelector__Group__7__Impl
+            // InternalBromium.g:2053:1: ( rule__TypeTextInElementFoundByCssSelector__Group__7__Impl )
+            // InternalBromium.g:2054:2: rule__TypeTextInElementFoundByCssSelector__Group__7__Impl
             {
             pushFollow(FOLLOW_2);
             rule__TypeTextInElementFoundByCssSelector__Group__7__Impl();
@@ -5933,21 +6092,21 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeTextInElementFoundByCssSelector__Group__7__Impl"
-    // InternalBromium.g:2006:1: rule__TypeTextInElementFoundByCssSelector__Group__7__Impl : ( ( rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7 ) ) ;
+    // InternalBromium.g:2060:1: rule__TypeTextInElementFoundByCssSelector__Group__7__Impl : ( ( rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7 ) ) ;
     public final void rule__TypeTextInElementFoundByCssSelector__Group__7__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2010:1: ( ( ( rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7 ) ) )
-            // InternalBromium.g:2011:1: ( ( rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7 ) )
+            // InternalBromium.g:2064:1: ( ( ( rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7 ) ) )
+            // InternalBromium.g:2065:1: ( ( rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7 ) )
             {
-            // InternalBromium.g:2011:1: ( ( rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7 ) )
-            // InternalBromium.g:2012:2: ( rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7 )
+            // InternalBromium.g:2065:1: ( ( rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7 ) )
+            // InternalBromium.g:2066:2: ( rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7 )
             {
              before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getCssSelectorAssignment_7()); 
-            // InternalBromium.g:2013:2: ( rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7 )
-            // InternalBromium.g:2013:3: rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7
+            // InternalBromium.g:2067:2: ( rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7 )
+            // InternalBromium.g:2067:3: rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7
             {
             pushFollow(FOLLOW_2);
             rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7();
@@ -5980,17 +6139,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Model__NameAssignment_1"
-    // InternalBromium.g:2022:1: rule__Model__NameAssignment_1 : ( RULE_STRING ) ;
+    // InternalBromium.g:2076:1: rule__Model__NameAssignment_1 : ( RULE_STRING ) ;
     public final void rule__Model__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2026:1: ( ( RULE_STRING ) )
-            // InternalBromium.g:2027:2: ( RULE_STRING )
+            // InternalBromium.g:2080:1: ( ( RULE_STRING ) )
+            // InternalBromium.g:2081:2: ( RULE_STRING )
             {
-            // InternalBromium.g:2027:2: ( RULE_STRING )
-            // InternalBromium.g:2028:3: RULE_STRING
+            // InternalBromium.g:2081:2: ( RULE_STRING )
+            // InternalBromium.g:2082:3: RULE_STRING
             {
              before(grammarAccess.getModelAccess().getNameSTRINGTerminalRuleCall_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -6017,17 +6176,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Model__VersionAssignment_3"
-    // InternalBromium.g:2037:1: rule__Model__VersionAssignment_3 : ( RULE_STRING ) ;
+    // InternalBromium.g:2091:1: rule__Model__VersionAssignment_3 : ( RULE_STRING ) ;
     public final void rule__Model__VersionAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2041:1: ( ( RULE_STRING ) )
-            // InternalBromium.g:2042:2: ( RULE_STRING )
+            // InternalBromium.g:2095:1: ( ( RULE_STRING ) )
+            // InternalBromium.g:2096:2: ( RULE_STRING )
             {
-            // InternalBromium.g:2042:2: ( RULE_STRING )
-            // InternalBromium.g:2043:3: RULE_STRING
+            // InternalBromium.g:2096:2: ( RULE_STRING )
+            // InternalBromium.g:2097:3: RULE_STRING
             {
              before(grammarAccess.getModelAccess().getVersionSTRINGTerminalRuleCall_3_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -6054,17 +6213,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Model__BaseVersionAssignment_4_1"
-    // InternalBromium.g:2052:1: rule__Model__BaseVersionAssignment_4_1 : ( ruleVersion ) ;
+    // InternalBromium.g:2106:1: rule__Model__BaseVersionAssignment_4_1 : ( ruleVersion ) ;
     public final void rule__Model__BaseVersionAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2056:1: ( ( ruleVersion ) )
-            // InternalBromium.g:2057:2: ( ruleVersion )
+            // InternalBromium.g:2110:1: ( ( ruleVersion ) )
+            // InternalBromium.g:2111:2: ( ruleVersion )
             {
-            // InternalBromium.g:2057:2: ( ruleVersion )
-            // InternalBromium.g:2058:3: ruleVersion
+            // InternalBromium.g:2111:2: ( ruleVersion )
+            // InternalBromium.g:2112:3: ruleVersion
             {
              before(grammarAccess.getModelAccess().getBaseVersionVersionParserRuleCall_4_1_0()); 
             pushFollow(FOLLOW_2);
@@ -6095,17 +6254,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Model__ActionsAssignment_7"
-    // InternalBromium.g:2067:1: rule__Model__ActionsAssignment_7 : ( ruleApplicationAction ) ;
+    // InternalBromium.g:2121:1: rule__Model__ActionsAssignment_7 : ( ruleApplicationAction ) ;
     public final void rule__Model__ActionsAssignment_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2071:1: ( ( ruleApplicationAction ) )
-            // InternalBromium.g:2072:2: ( ruleApplicationAction )
+            // InternalBromium.g:2125:1: ( ( ruleApplicationAction ) )
+            // InternalBromium.g:2126:2: ( ruleApplicationAction )
             {
-            // InternalBromium.g:2072:2: ( ruleApplicationAction )
-            // InternalBromium.g:2073:3: ruleApplicationAction
+            // InternalBromium.g:2126:2: ( ruleApplicationAction )
+            // InternalBromium.g:2127:3: ruleApplicationAction
             {
              before(grammarAccess.getModelAccess().getActionsApplicationActionParserRuleCall_7_0()); 
             pushFollow(FOLLOW_2);
@@ -6136,17 +6295,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ApplicationAction__NameAssignment_1"
-    // InternalBromium.g:2082:1: rule__ApplicationAction__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalBromium.g:2136:1: rule__ApplicationAction__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__ApplicationAction__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2086:1: ( ( RULE_ID ) )
-            // InternalBromium.g:2087:2: ( RULE_ID )
+            // InternalBromium.g:2140:1: ( ( RULE_ID ) )
+            // InternalBromium.g:2141:2: ( RULE_ID )
             {
-            // InternalBromium.g:2087:2: ( RULE_ID )
-            // InternalBromium.g:2088:3: RULE_ID
+            // InternalBromium.g:2141:2: ( RULE_ID )
+            // InternalBromium.g:2142:3: RULE_ID
             {
              before(grammarAccess.getApplicationActionAccess().getNameIDTerminalRuleCall_1_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -6173,17 +6332,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ApplicationAction__SyntaxDefinitionsAssignment_3"
-    // InternalBromium.g:2097:1: rule__ApplicationAction__SyntaxDefinitionsAssignment_3 : ( ruleSyntaxDefinition ) ;
+    // InternalBromium.g:2151:1: rule__ApplicationAction__SyntaxDefinitionsAssignment_3 : ( ruleSyntaxDefinition ) ;
     public final void rule__ApplicationAction__SyntaxDefinitionsAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2101:1: ( ( ruleSyntaxDefinition ) )
-            // InternalBromium.g:2102:2: ( ruleSyntaxDefinition )
+            // InternalBromium.g:2155:1: ( ( ruleSyntaxDefinition ) )
+            // InternalBromium.g:2156:2: ( ruleSyntaxDefinition )
             {
-            // InternalBromium.g:2102:2: ( ruleSyntaxDefinition )
-            // InternalBromium.g:2103:3: ruleSyntaxDefinition
+            // InternalBromium.g:2156:2: ( ruleSyntaxDefinition )
+            // InternalBromium.g:2157:3: ruleSyntaxDefinition
             {
              before(grammarAccess.getApplicationActionAccess().getSyntaxDefinitionsSyntaxDefinitionParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -6214,17 +6373,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ApplicationAction__PreconditionAssignment_4"
-    // InternalBromium.g:2112:1: rule__ApplicationAction__PreconditionAssignment_4 : ( rulePrecondition ) ;
+    // InternalBromium.g:2166:1: rule__ApplicationAction__PreconditionAssignment_4 : ( rulePrecondition ) ;
     public final void rule__ApplicationAction__PreconditionAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2116:1: ( ( rulePrecondition ) )
-            // InternalBromium.g:2117:2: ( rulePrecondition )
+            // InternalBromium.g:2170:1: ( ( rulePrecondition ) )
+            // InternalBromium.g:2171:2: ( rulePrecondition )
             {
-            // InternalBromium.g:2117:2: ( rulePrecondition )
-            // InternalBromium.g:2118:3: rulePrecondition
+            // InternalBromium.g:2171:2: ( rulePrecondition )
+            // InternalBromium.g:2172:3: rulePrecondition
             {
              before(grammarAccess.getApplicationActionAccess().getPreconditionPreconditionParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -6255,17 +6414,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ApplicationAction__WebDriverActionAssignment_5"
-    // InternalBromium.g:2127:1: rule__ApplicationAction__WebDriverActionAssignment_5 : ( ruleWebDriverAction ) ;
+    // InternalBromium.g:2181:1: rule__ApplicationAction__WebDriverActionAssignment_5 : ( ruleWebDriverAction ) ;
     public final void rule__ApplicationAction__WebDriverActionAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2131:1: ( ( ruleWebDriverAction ) )
-            // InternalBromium.g:2132:2: ( ruleWebDriverAction )
+            // InternalBromium.g:2185:1: ( ( ruleWebDriverAction ) )
+            // InternalBromium.g:2186:2: ( ruleWebDriverAction )
             {
-            // InternalBromium.g:2132:2: ( ruleWebDriverAction )
-            // InternalBromium.g:2133:3: ruleWebDriverAction
+            // InternalBromium.g:2186:2: ( ruleWebDriverAction )
+            // InternalBromium.g:2187:3: ruleWebDriverAction
             {
              before(grammarAccess.getApplicationActionAccess().getWebDriverActionWebDriverActionParserRuleCall_5_0()); 
             pushFollow(FOLLOW_2);
@@ -6296,17 +6455,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ApplicationAction__PostconditionAssignment_6"
-    // InternalBromium.g:2142:1: rule__ApplicationAction__PostconditionAssignment_6 : ( rulePostcondition ) ;
+    // InternalBromium.g:2196:1: rule__ApplicationAction__PostconditionAssignment_6 : ( rulePostcondition ) ;
     public final void rule__ApplicationAction__PostconditionAssignment_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2146:1: ( ( rulePostcondition ) )
-            // InternalBromium.g:2147:2: ( rulePostcondition )
+            // InternalBromium.g:2200:1: ( ( rulePostcondition ) )
+            // InternalBromium.g:2201:2: ( rulePostcondition )
             {
-            // InternalBromium.g:2147:2: ( rulePostcondition )
-            // InternalBromium.g:2148:3: rulePostcondition
+            // InternalBromium.g:2201:2: ( rulePostcondition )
+            // InternalBromium.g:2202:3: rulePostcondition
             {
              before(grammarAccess.getApplicationActionAccess().getPostconditionPostconditionParserRuleCall_6_0()); 
             pushFollow(FOLLOW_2);
@@ -6337,17 +6496,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ApplicationAction__ExpectHttpRequestAssignment_7"
-    // InternalBromium.g:2157:1: rule__ApplicationAction__ExpectHttpRequestAssignment_7 : ( ruleExpectHttpRequest ) ;
+    // InternalBromium.g:2211:1: rule__ApplicationAction__ExpectHttpRequestAssignment_7 : ( ruleExpectHttpRequest ) ;
     public final void rule__ApplicationAction__ExpectHttpRequestAssignment_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2161:1: ( ( ruleExpectHttpRequest ) )
-            // InternalBromium.g:2162:2: ( ruleExpectHttpRequest )
+            // InternalBromium.g:2215:1: ( ( ruleExpectHttpRequest ) )
+            // InternalBromium.g:2216:2: ( ruleExpectHttpRequest )
             {
-            // InternalBromium.g:2162:2: ( ruleExpectHttpRequest )
-            // InternalBromium.g:2163:3: ruleExpectHttpRequest
+            // InternalBromium.g:2216:2: ( ruleExpectHttpRequest )
+            // InternalBromium.g:2217:3: ruleExpectHttpRequest
             {
              before(grammarAccess.getApplicationActionAccess().getExpectHttpRequestExpectHttpRequestParserRuleCall_7_0()); 
             pushFollow(FOLLOW_2);
@@ -6378,17 +6537,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SyntaxDefinition__ContentAssignment_1"
-    // InternalBromium.g:2172:1: rule__SyntaxDefinition__ContentAssignment_1 : ( RULE_STRING ) ;
+    // InternalBromium.g:2226:1: rule__SyntaxDefinition__ContentAssignment_1 : ( RULE_STRING ) ;
     public final void rule__SyntaxDefinition__ContentAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2176:1: ( ( RULE_STRING ) )
-            // InternalBromium.g:2177:2: ( RULE_STRING )
+            // InternalBromium.g:2230:1: ( ( RULE_STRING ) )
+            // InternalBromium.g:2231:2: ( RULE_STRING )
             {
-            // InternalBromium.g:2177:2: ( RULE_STRING )
-            // InternalBromium.g:2178:3: RULE_STRING
+            // InternalBromium.g:2231:2: ( RULE_STRING )
+            // InternalBromium.g:2232:3: RULE_STRING
             {
              before(grammarAccess.getSyntaxDefinitionAccess().getContentSTRINGTerminalRuleCall_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -6415,17 +6574,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SyntaxDefinition__ParameterAssignment_2"
-    // InternalBromium.g:2187:1: rule__SyntaxDefinition__ParameterAssignment_2 : ( ruleExposedParameter ) ;
+    // InternalBromium.g:2241:1: rule__SyntaxDefinition__ParameterAssignment_2 : ( ruleExposedParameter ) ;
     public final void rule__SyntaxDefinition__ParameterAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2191:1: ( ( ruleExposedParameter ) )
-            // InternalBromium.g:2192:2: ( ruleExposedParameter )
+            // InternalBromium.g:2245:1: ( ( ruleExposedParameter ) )
+            // InternalBromium.g:2246:2: ( ruleExposedParameter )
             {
-            // InternalBromium.g:2192:2: ( ruleExposedParameter )
-            // InternalBromium.g:2193:3: ruleExposedParameter
+            // InternalBromium.g:2246:2: ( ruleExposedParameter )
+            // InternalBromium.g:2247:3: ruleExposedParameter
             {
              before(grammarAccess.getSyntaxDefinitionAccess().getParameterExposedParameterParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -6456,17 +6615,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Precondition__ActionAssignment_1"
-    // InternalBromium.g:2202:1: rule__Precondition__ActionAssignment_1 : ( ruleWebDriverAction ) ;
+    // InternalBromium.g:2256:1: rule__Precondition__ActionAssignment_1 : ( ruleWebDriverAction ) ;
     public final void rule__Precondition__ActionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2206:1: ( ( ruleWebDriverAction ) )
-            // InternalBromium.g:2207:2: ( ruleWebDriverAction )
+            // InternalBromium.g:2260:1: ( ( ruleWebDriverAction ) )
+            // InternalBromium.g:2261:2: ( ruleWebDriverAction )
             {
-            // InternalBromium.g:2207:2: ( ruleWebDriverAction )
-            // InternalBromium.g:2208:3: ruleWebDriverAction
+            // InternalBromium.g:2261:2: ( ruleWebDriverAction )
+            // InternalBromium.g:2262:3: ruleWebDriverAction
             {
              before(grammarAccess.getPreconditionAccess().getActionWebDriverActionParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -6497,17 +6656,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Postcondition__PostconditionAssignment_3"
-    // InternalBromium.g:2217:1: rule__Postcondition__PostconditionAssignment_3 : ( ruleWebDriverAction ) ;
+    // InternalBromium.g:2271:1: rule__Postcondition__PostconditionAssignment_3 : ( ruleWebDriverAction ) ;
     public final void rule__Postcondition__PostconditionAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2221:1: ( ( ruleWebDriverAction ) )
-            // InternalBromium.g:2222:2: ( ruleWebDriverAction )
+            // InternalBromium.g:2275:1: ( ( ruleWebDriverAction ) )
+            // InternalBromium.g:2276:2: ( ruleWebDriverAction )
             {
-            // InternalBromium.g:2222:2: ( ruleWebDriverAction )
-            // InternalBromium.g:2223:3: ruleWebDriverAction
+            // InternalBromium.g:2276:2: ( ruleWebDriverAction )
+            // InternalBromium.g:2277:3: ruleWebDriverAction
             {
              before(grammarAccess.getPostconditionAccess().getPostconditionWebDriverActionParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -6537,26 +6696,30 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Postcondition__PostconditionAssignment_3"
 
 
-    // $ANTLR start "rule__ElementWithIdIsPresent__CssSelectorAssignment_4"
-    // InternalBromium.g:2232:1: rule__ElementWithIdIsPresent__CssSelectorAssignment_4 : ( ruleParameterValue ) ;
-    public final void rule__ElementWithIdIsPresent__CssSelectorAssignment_4() throws RecognitionException {
+    // $ANTLR start "rule__ExpectHttpRequest__NotAssignment_1_1"
+    // InternalBromium.g:2286:1: rule__ExpectHttpRequest__NotAssignment_1_1 : ( ( 'not' ) ) ;
+    public final void rule__ExpectHttpRequest__NotAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2236:1: ( ( ruleParameterValue ) )
-            // InternalBromium.g:2237:2: ( ruleParameterValue )
+            // InternalBromium.g:2290:1: ( ( ( 'not' ) ) )
+            // InternalBromium.g:2291:2: ( ( 'not' ) )
             {
-            // InternalBromium.g:2237:2: ( ruleParameterValue )
-            // InternalBromium.g:2238:3: ruleParameterValue
+            // InternalBromium.g:2291:2: ( ( 'not' ) )
+            // InternalBromium.g:2292:3: ( 'not' )
             {
-             before(grammarAccess.getElementWithIdIsPresentAccess().getCssSelectorParameterValueParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_2);
-            ruleParameterValue();
+             before(grammarAccess.getExpectHttpRequestAccess().getNotNotKeyword_1_1_0()); 
+            // InternalBromium.g:2293:3: ( 'not' )
+            // InternalBromium.g:2294:4: 'not'
+            {
+             before(grammarAccess.getExpectHttpRequestAccess().getNotNotKeyword_1_1_0()); 
+            match(input,39,FOLLOW_2); 
+             after(grammarAccess.getExpectHttpRequestAccess().getNotNotKeyword_1_1_0()); 
 
-            state._fsp--;
+            }
 
-             after(grammarAccess.getElementWithIdIsPresentAccess().getCssSelectorParameterValueParserRuleCall_4_0()); 
+             after(grammarAccess.getExpectHttpRequestAccess().getNotNotKeyword_1_1_0()); 
 
             }
 
@@ -6575,21 +6738,62 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ElementWithIdIsPresent__CssSelectorAssignment_4"
+    // $ANTLR end "rule__ExpectHttpRequest__NotAssignment_1_1"
+
+
+    // $ANTLR start "rule__ElementByCssToBePresent__CssSelectorAssignment_4"
+    // InternalBromium.g:2305:1: rule__ElementByCssToBePresent__CssSelectorAssignment_4 : ( ruleParameterValue ) ;
+    public final void rule__ElementByCssToBePresent__CssSelectorAssignment_4() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBromium.g:2309:1: ( ( ruleParameterValue ) )
+            // InternalBromium.g:2310:2: ( ruleParameterValue )
+            {
+            // InternalBromium.g:2310:2: ( ruleParameterValue )
+            // InternalBromium.g:2311:3: ruleParameterValue
+            {
+             before(grammarAccess.getElementByCssToBePresentAccess().getCssSelectorParameterValueParserRuleCall_4_0()); 
+            pushFollow(FOLLOW_2);
+            ruleParameterValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getElementByCssToBePresentAccess().getCssSelectorParameterValueParserRuleCall_4_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ElementByCssToBePresent__CssSelectorAssignment_4"
 
 
     // $ANTLR start "rule__ClickCssSelector__CssSelectorAssignment_6"
-    // InternalBromium.g:2247:1: rule__ClickCssSelector__CssSelectorAssignment_6 : ( ruleParameterValue ) ;
+    // InternalBromium.g:2320:1: rule__ClickCssSelector__CssSelectorAssignment_6 : ( ruleParameterValue ) ;
     public final void rule__ClickCssSelector__CssSelectorAssignment_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2251:1: ( ( ruleParameterValue ) )
-            // InternalBromium.g:2252:2: ( ruleParameterValue )
+            // InternalBromium.g:2324:1: ( ( ruleParameterValue ) )
+            // InternalBromium.g:2325:2: ( ruleParameterValue )
             {
-            // InternalBromium.g:2252:2: ( ruleParameterValue )
-            // InternalBromium.g:2253:3: ruleParameterValue
+            // InternalBromium.g:2325:2: ( ruleParameterValue )
+            // InternalBromium.g:2326:3: ruleParameterValue
             {
              before(grammarAccess.getClickCssSelectorAccess().getCssSelectorParameterValueParserRuleCall_6_0()); 
             pushFollow(FOLLOW_2);
@@ -6620,17 +6824,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PageLoad__SubpathAssignment_2"
-    // InternalBromium.g:2262:1: rule__PageLoad__SubpathAssignment_2 : ( RULE_STRING ) ;
+    // InternalBromium.g:2335:1: rule__PageLoad__SubpathAssignment_2 : ( RULE_STRING ) ;
     public final void rule__PageLoad__SubpathAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2266:1: ( ( RULE_STRING ) )
-            // InternalBromium.g:2267:2: ( RULE_STRING )
+            // InternalBromium.g:2339:1: ( ( RULE_STRING ) )
+            // InternalBromium.g:2340:2: ( RULE_STRING )
             {
-            // InternalBromium.g:2267:2: ( RULE_STRING )
-            // InternalBromium.g:2268:3: RULE_STRING
+            // InternalBromium.g:2340:2: ( RULE_STRING )
+            // InternalBromium.g:2341:3: RULE_STRING
             {
              before(grammarAccess.getPageLoadAccess().getSubpathSTRINGTerminalRuleCall_2_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -6657,17 +6861,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeTextInElementFoundByCssSelector__TextAssignment_1"
-    // InternalBromium.g:2277:1: rule__TypeTextInElementFoundByCssSelector__TextAssignment_1 : ( ruleParameterValue ) ;
+    // InternalBromium.g:2350:1: rule__TypeTextInElementFoundByCssSelector__TextAssignment_1 : ( ruleParameterValue ) ;
     public final void rule__TypeTextInElementFoundByCssSelector__TextAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2281:1: ( ( ruleParameterValue ) )
-            // InternalBromium.g:2282:2: ( ruleParameterValue )
+            // InternalBromium.g:2354:1: ( ( ruleParameterValue ) )
+            // InternalBromium.g:2355:2: ( ruleParameterValue )
             {
-            // InternalBromium.g:2282:2: ( ruleParameterValue )
-            // InternalBromium.g:2283:3: ruleParameterValue
+            // InternalBromium.g:2355:2: ( ruleParameterValue )
+            // InternalBromium.g:2356:3: ruleParameterValue
             {
              before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTextParameterValueParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -6698,17 +6902,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7"
-    // InternalBromium.g:2292:1: rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7 : ( ruleParameterValue ) ;
+    // InternalBromium.g:2365:1: rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7 : ( ruleParameterValue ) ;
     public final void rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2296:1: ( ( ruleParameterValue ) )
-            // InternalBromium.g:2297:2: ( ruleParameterValue )
+            // InternalBromium.g:2369:1: ( ( ruleParameterValue ) )
+            // InternalBromium.g:2370:2: ( ruleParameterValue )
             {
-            // InternalBromium.g:2297:2: ( ruleParameterValue )
-            // InternalBromium.g:2298:3: ruleParameterValue
+            // InternalBromium.g:2370:2: ( ruleParameterValue )
+            // InternalBromium.g:2371:3: ruleParameterValue
             {
              before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getCssSelectorParameterValueParserRuleCall_7_0()); 
             pushFollow(FOLLOW_2);
@@ -6739,17 +6943,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ParameterValue__ContentAssignment_0"
-    // InternalBromium.g:2307:1: rule__ParameterValue__ContentAssignment_0 : ( RULE_STRING ) ;
+    // InternalBromium.g:2380:1: rule__ParameterValue__ContentAssignment_0 : ( RULE_STRING ) ;
     public final void rule__ParameterValue__ContentAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2311:1: ( ( RULE_STRING ) )
-            // InternalBromium.g:2312:2: ( RULE_STRING )
+            // InternalBromium.g:2384:1: ( ( RULE_STRING ) )
+            // InternalBromium.g:2385:2: ( RULE_STRING )
             {
-            // InternalBromium.g:2312:2: ( RULE_STRING )
-            // InternalBromium.g:2313:3: RULE_STRING
+            // InternalBromium.g:2385:2: ( RULE_STRING )
+            // InternalBromium.g:2386:3: RULE_STRING
             {
              before(grammarAccess.getParameterValueAccess().getContentSTRINGTerminalRuleCall_0_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -6776,21 +6980,21 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ParameterValue__ExposedParameterAssignment_1"
-    // InternalBromium.g:2322:1: rule__ParameterValue__ExposedParameterAssignment_1 : ( ( RULE_ID ) ) ;
+    // InternalBromium.g:2395:1: rule__ParameterValue__ExposedParameterAssignment_1 : ( ( RULE_ID ) ) ;
     public final void rule__ParameterValue__ExposedParameterAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2326:1: ( ( ( RULE_ID ) ) )
-            // InternalBromium.g:2327:2: ( ( RULE_ID ) )
+            // InternalBromium.g:2399:1: ( ( ( RULE_ID ) ) )
+            // InternalBromium.g:2400:2: ( ( RULE_ID ) )
             {
-            // InternalBromium.g:2327:2: ( ( RULE_ID ) )
-            // InternalBromium.g:2328:3: ( RULE_ID )
+            // InternalBromium.g:2400:2: ( ( RULE_ID ) )
+            // InternalBromium.g:2401:3: ( RULE_ID )
             {
              before(grammarAccess.getParameterValueAccess().getExposedParameterExposedParameterCrossReference_1_0()); 
-            // InternalBromium.g:2329:3: ( RULE_ID )
-            // InternalBromium.g:2330:4: RULE_ID
+            // InternalBromium.g:2402:3: ( RULE_ID )
+            // InternalBromium.g:2403:4: RULE_ID
             {
              before(grammarAccess.getParameterValueAccess().getExposedParameterExposedParameterIDTerminalRuleCall_1_0_1()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -6821,17 +7025,17 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExposedParameter__NameAssignment"
-    // InternalBromium.g:2341:1: rule__ExposedParameter__NameAssignment : ( RULE_ID ) ;
+    // InternalBromium.g:2414:1: rule__ExposedParameter__NameAssignment : ( RULE_ID ) ;
     public final void rule__ExposedParameter__NameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2345:1: ( ( RULE_ID ) )
-            // InternalBromium.g:2346:2: ( RULE_ID )
+            // InternalBromium.g:2418:1: ( ( RULE_ID ) )
+            // InternalBromium.g:2419:2: ( RULE_ID )
             {
-            // InternalBromium.g:2346:2: ( RULE_ID )
-            // InternalBromium.g:2347:3: RULE_ID
+            // InternalBromium.g:2419:2: ( RULE_ID )
+            // InternalBromium.g:2420:3: RULE_ID
             {
              before(grammarAccess.getExposedParameterAccess().getNameIDTerminalRuleCall_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -6871,23 +7075,23 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000020002L});
     public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000005410080010L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000002A08080010L});
     public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000000012L});
     public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000900000L});
     public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000200000L});
     public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000003000000L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000008001000000L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000004000000L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000040000000L});
     public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000008000000000L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000004000000000L});
 
 }

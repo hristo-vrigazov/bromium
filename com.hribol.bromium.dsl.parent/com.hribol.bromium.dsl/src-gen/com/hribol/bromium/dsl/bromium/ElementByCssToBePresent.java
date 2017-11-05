@@ -6,21 +6,21 @@ package com.hribol.bromium.dsl.bromium;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Element With Id Is Present</b></em>'.
+ * A representation of the model object '<em><b>Element By Css To Be Present</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
- * </p>
  * <ul>
- *   <li>{@link com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent#getCssSelector <em>Css Selector</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.ElementByCssToBePresent#getCssSelector <em>Css Selector</em>}</li>
  * </ul>
+ * </p>
  *
- * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getElementWithIdIsPresent()
+ * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getElementByCssToBePresent()
  * @model
  * @generated
  */
-public interface ElementWithIdIsPresent extends WebDriverAction
+public interface ElementByCssToBePresent extends WebDriverAction
 {
   /**
    * Returns the value of the '<em><b>Css Selector</b></em>' containment reference.
@@ -32,14 +32,14 @@ public interface ElementWithIdIsPresent extends WebDriverAction
    * <!-- end-user-doc -->
    * @return the value of the '<em>Css Selector</em>' containment reference.
    * @see #setCssSelector(ParameterValue)
-   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getElementWithIdIsPresent_CssSelector()
+   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getElementByCssToBePresent_CssSelector()
    * @model containment="true"
    * @generated
    */
   ParameterValue getCssSelector();
 
   /**
-   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent#getCssSelector <em>Css Selector</em>}' containment reference.
+   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.ElementByCssToBePresent#getCssSelector <em>Css Selector</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Css Selector</em>' containment reference.
@@ -48,4 +48,4 @@ public interface ElementWithIdIsPresent extends WebDriverAction
    */
   void setCssSelector(ParameterValue value);
 
-} // ElementWithIdIsPresent
+} // ElementByCssToBePresent

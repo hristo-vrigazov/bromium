@@ -399,11 +399,11 @@ ruleWebDriverAction returns [EObject current=null]
 }:
 	(
 		{
-			newCompositeNode(grammarAccess.getWebDriverActionAccess().getElementWithIdIsPresentParserRuleCall_0());
+			newCompositeNode(grammarAccess.getWebDriverActionAccess().getElementByCssToBePresentParserRuleCall_0());
 		}
-		this_ElementWithIdIsPresent_0=ruleElementWithIdIsPresent
+		this_ElementByCssToBePresent_0=ruleElementByCssToBePresent
 		{
-			$current = $this_ElementWithIdIsPresent_0.current;
+			$current = $this_ElementByCssToBePresent_0.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
@@ -529,14 +529,14 @@ rulePostcondition returns [EObject current=null]
 ;
 
 // Entry rule entryRuleExpectHttpRequest
-entryRuleExpectHttpRequest returns [String current=null]:
+entryRuleExpectHttpRequest returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getExpectHttpRequestRule()); }
 	iv_ruleExpectHttpRequest=ruleExpectHttpRequest
-	{ $current=$iv_ruleExpectHttpRequest.current.getText(); }
+	{ $current=$iv_ruleExpectHttpRequest.current; }
 	EOF;
 
 // Rule ExpectHttpRequest
-ruleExpectHttpRequest returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+ruleExpectHttpRequest returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -544,45 +544,57 @@ ruleExpectHttpRequest returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	leaveRule();
 }:
 	(
-		kw='do'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getExpectHttpRequestAccess().getDoKeyword_0());
-		}
 		(
-			kw='not'
 			{
-				$current.merge(kw);
-				newLeafNode(kw, grammarAccess.getExpectHttpRequestAccess().getNotKeyword_1());
+				$current = forceCreateModelElement(
+					grammarAccess.getExpectHttpRequestAccess().getExpectHttpRequestAction_0(),
+					$current);
 			}
-		)?
-		kw='expect'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getExpectHttpRequestAccess().getExpectKeyword_2());
-		}
-		kw='http'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getExpectHttpRequestAccess().getHttpKeyword_3());
-		}
-		kw='request'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getExpectHttpRequestAccess().getRequestKeyword_4());
-		}
+		)
+		(
+			otherlv_1='do'
+			{
+				newLeafNode(otherlv_1, grammarAccess.getExpectHttpRequestAccess().getDoKeyword_1_0());
+			}
+			(
+				(
+					lv_not_2_0='not'
+					{
+						newLeafNode(lv_not_2_0, grammarAccess.getExpectHttpRequestAccess().getNotNotKeyword_1_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getExpectHttpRequestRule());
+						}
+						setWithLastConsumed($current, "not", lv_not_2_0, "not");
+					}
+				)
+			)?
+			otherlv_3='expect'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getExpectHttpRequestAccess().getExpectKeyword_1_2());
+			}
+			otherlv_4='http'
+			{
+				newLeafNode(otherlv_4, grammarAccess.getExpectHttpRequestAccess().getHttpKeyword_1_3());
+			}
+			otherlv_5='request'
+			{
+				newLeafNode(otherlv_5, grammarAccess.getExpectHttpRequestAccess().getRequestKeyword_1_4());
+			}
+		)
 	)
 ;
 
-// Entry rule entryRuleElementWithIdIsPresent
-entryRuleElementWithIdIsPresent returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getElementWithIdIsPresentRule()); }
-	iv_ruleElementWithIdIsPresent=ruleElementWithIdIsPresent
-	{ $current=$iv_ruleElementWithIdIsPresent.current; }
+// Entry rule entryRuleElementByCssToBePresent
+entryRuleElementByCssToBePresent returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getElementByCssToBePresentRule()); }
+	iv_ruleElementByCssToBePresent=ruleElementByCssToBePresent
+	{ $current=$iv_ruleElementByCssToBePresent.current; }
 	EOF;
 
-// Rule ElementWithIdIsPresent
-ruleElementWithIdIsPresent returns [EObject current=null]
+// Rule ElementByCssToBePresent
+ruleElementByCssToBePresent returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -592,29 +604,29 @@ ruleElementWithIdIsPresent returns [EObject current=null]
 	(
 		otherlv_0='element'
 		{
-			newLeafNode(otherlv_0, grammarAccess.getElementWithIdIsPresentAccess().getElementKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getElementByCssToBePresentAccess().getElementKeyword_0());
 		}
 		otherlv_1='with'
 		{
-			newLeafNode(otherlv_1, grammarAccess.getElementWithIdIsPresentAccess().getWithKeyword_1());
+			newLeafNode(otherlv_1, grammarAccess.getElementByCssToBePresentAccess().getWithKeyword_1());
 		}
 		otherlv_2='css'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getElementWithIdIsPresentAccess().getCssKeyword_2());
+			newLeafNode(otherlv_2, grammarAccess.getElementByCssToBePresentAccess().getCssKeyword_2());
 		}
 		otherlv_3='selector'
 		{
-			newLeafNode(otherlv_3, grammarAccess.getElementWithIdIsPresentAccess().getSelectorKeyword_3());
+			newLeafNode(otherlv_3, grammarAccess.getElementByCssToBePresentAccess().getSelectorKeyword_3());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getElementWithIdIsPresentAccess().getCssSelectorParameterValueParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getElementByCssToBePresentAccess().getCssSelectorParameterValueParserRuleCall_4_0());
 				}
 				lv_cssSelector_4_0=ruleParameterValue
 				{
 					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getElementWithIdIsPresentRule());
+						$current = createModelElementForParent(grammarAccess.getElementByCssToBePresentRule());
 					}
 					set(
 						$current,
@@ -627,11 +639,11 @@ ruleElementWithIdIsPresent returns [EObject current=null]
 		)
 		otherlv_5='is'
 		{
-			newLeafNode(otherlv_5, grammarAccess.getElementWithIdIsPresentAccess().getIsKeyword_5());
+			newLeafNode(otherlv_5, grammarAccess.getElementByCssToBePresentAccess().getIsKeyword_5());
 		}
 		otherlv_6='present'
 		{
-			newLeafNode(otherlv_6, grammarAccess.getElementWithIdIsPresentAccess().getPresentKeyword_6());
+			newLeafNode(otherlv_6, grammarAccess.getElementByCssToBePresentAccess().getPresentKeyword_6());
 		}
 	)
 ;

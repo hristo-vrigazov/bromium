@@ -4,7 +4,7 @@
 package com.hribol.bromium.dsl.bromium.impl;
 
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
-import com.hribol.bromium.dsl.bromium.ExposedParameter;
+import com.hribol.bromium.dsl.bromium.ExpectHttpRequest;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -15,45 +15,45 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Exposed Parameter</b></em>'.
+ * An implementation of the model object '<em><b>Expect Http Request</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ExposedParameterImpl#getName <em>Name</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ExpectHttpRequestImpl#getNot <em>Not</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ExposedParameterImpl extends MinimalEObjectImpl.Container implements ExposedParameter
+public class ExpectHttpRequestImpl extends MinimalEObjectImpl.Container implements ExpectHttpRequest
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The default value of the '{@link #getNot() <em>Not</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getNot()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
+  protected static final String NOT_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getNot() <em>Not</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getNot()
    * @generated
    * @ordered
    */
-  protected String name = NAME_EDEFAULT;
+  protected String not = NOT_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ExposedParameterImpl()
+  protected ExpectHttpRequestImpl()
   {
     super();
   }
@@ -66,7 +66,7 @@ public class ExposedParameterImpl extends MinimalEObjectImpl.Container implement
   @Override
   protected EClass eStaticClass()
   {
-    return BromiumPackage.Literals.EXPOSED_PARAMETER;
+    return BromiumPackage.Literals.EXPECT_HTTP_REQUEST;
   }
 
   /**
@@ -74,9 +74,9 @@ public class ExposedParameterImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  public String getNot()
   {
-    return name;
+    return not;
   }
 
   /**
@@ -84,12 +84,12 @@ public class ExposedParameterImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  public void setNot(String newNot)
   {
-    String oldName = name;
-    name = newName;
+    String oldNot = not;
+    not = newNot;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.EXPOSED_PARAMETER__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.EXPECT_HTTP_REQUEST__NOT, oldNot, not));
   }
 
   /**
@@ -102,8 +102,8 @@ public class ExposedParameterImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case BromiumPackage.EXPOSED_PARAMETER__NAME:
-        return getName();
+      case BromiumPackage.EXPECT_HTTP_REQUEST__NOT:
+        return getNot();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -118,8 +118,8 @@ public class ExposedParameterImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case BromiumPackage.EXPOSED_PARAMETER__NAME:
-        setName((String)newValue);
+      case BromiumPackage.EXPECT_HTTP_REQUEST__NOT:
+        setNot((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -135,8 +135,8 @@ public class ExposedParameterImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case BromiumPackage.EXPOSED_PARAMETER__NAME:
-        setName(NAME_EDEFAULT);
+      case BromiumPackage.EXPECT_HTTP_REQUEST__NOT:
+        setNot(NOT_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -152,8 +152,8 @@ public class ExposedParameterImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case BromiumPackage.EXPOSED_PARAMETER__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case BromiumPackage.EXPECT_HTTP_REQUEST__NOT:
+        return NOT_EDEFAULT == null ? not != null : !NOT_EDEFAULT.equals(not);
     }
     return super.eIsSet(featureID);
   }
@@ -169,10 +169,10 @@ public class ExposedParameterImpl extends MinimalEObjectImpl.Container implement
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
+    result.append(" (not: ");
+    result.append(not);
     result.append(')');
     return result.toString();
   }
 
-} //ExposedParameterImpl
+} //ExpectHttpRequestImpl

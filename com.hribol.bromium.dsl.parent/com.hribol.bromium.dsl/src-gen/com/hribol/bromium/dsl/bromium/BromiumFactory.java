@@ -78,13 +78,22 @@ public interface BromiumFactory extends EFactory
   Postcondition createPostcondition();
 
   /**
-   * Returns a new object of class '<em>Element With Id Is Present</em>'.
+   * Returns a new object of class '<em>Expect Http Request</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Element With Id Is Present</em>'.
+   * @return a new object of class '<em>Expect Http Request</em>'.
    * @generated
    */
-  ElementWithIdIsPresent createElementWithIdIsPresent();
+  ExpectHttpRequest createExpectHttpRequest();
+
+  /**
+   * Returns a new object of class '<em>Element By Css To Be Present</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Element By Css To Be Present</em>'.
+   * @generated
+   */
+  ElementByCssToBePresent createElementByCssToBePresent();
 
   /**
    * Returns a new object of class '<em>Click Css Selector</em>'.

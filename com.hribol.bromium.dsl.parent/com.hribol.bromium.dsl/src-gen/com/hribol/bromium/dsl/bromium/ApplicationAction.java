@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
- * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getName <em>Name</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getSyntaxDefinitions <em>Syntax Definitions</em>}</li>
@@ -23,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getPostcondition <em>Postcondition</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getExpectHttpRequest <em>Expect Http Request</em>}</li>
  * </ul>
+ * </p>
  *
  * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getApplicationAction()
  * @model
@@ -151,29 +151,29 @@ public interface ApplicationAction extends EObject
   void setPostcondition(Postcondition value);
 
   /**
-   * Returns the value of the '<em><b>Expect Http Request</b></em>' attribute.
+   * Returns the value of the '<em><b>Expect Http Request</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Expect Http Request</em>' attribute isn't clear,
+   * If the meaning of the '<em>Expect Http Request</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Expect Http Request</em>' attribute.
-   * @see #setExpectHttpRequest(String)
+   * @return the value of the '<em>Expect Http Request</em>' containment reference.
+   * @see #setExpectHttpRequest(ExpectHttpRequest)
    * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getApplicationAction_ExpectHttpRequest()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getExpectHttpRequest();
+  ExpectHttpRequest getExpectHttpRequest();
 
   /**
-   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getExpectHttpRequest <em>Expect Http Request</em>}' attribute.
+   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getExpectHttpRequest <em>Expect Http Request</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Expect Http Request</em>' attribute.
+   * @param value the new value of the '<em>Expect Http Request</em>' containment reference.
    * @see #getExpectHttpRequest()
    * @generated
    */
-  void setExpectHttpRequest(String value);
+  void setExpectHttpRequest(ExpectHttpRequest value);
 
 } // ApplicationAction

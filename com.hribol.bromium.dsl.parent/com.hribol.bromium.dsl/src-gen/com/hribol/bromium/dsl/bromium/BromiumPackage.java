@@ -168,7 +168,7 @@ public interface BromiumPackage extends EPackage
   int APPLICATION_ACTION__POSTCONDITION = 4;
 
   /**
-   * The feature id for the '<em><b>Expect Http Request</b></em>' attribute.
+   * The feature id for the '<em><b>Expect Http Request</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -298,14 +298,42 @@ public interface BromiumPackage extends EPackage
   int POSTCONDITION_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ElementWithIdIsPresentImpl <em>Element With Id Is Present</em>}' class.
+   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ExpectHttpRequestImpl <em>Expect Http Request</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see com.hribol.bromium.dsl.bromium.impl.ElementWithIdIsPresentImpl
-   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getElementWithIdIsPresent()
+   * @see com.hribol.bromium.dsl.bromium.impl.ExpectHttpRequestImpl
+   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getExpectHttpRequest()
    * @generated
    */
-  int ELEMENT_WITH_ID_IS_PRESENT = 6;
+  int EXPECT_HTTP_REQUEST = 6;
+
+  /**
+   * The feature id for the '<em><b>Not</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPECT_HTTP_REQUEST__NOT = 0;
+
+  /**
+   * The number of structural features of the '<em>Expect Http Request</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPECT_HTTP_REQUEST_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ElementByCssToBePresentImpl <em>Element By Css To Be Present</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see com.hribol.bromium.dsl.bromium.impl.ElementByCssToBePresentImpl
+   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getElementByCssToBePresent()
+   * @generated
+   */
+  int ELEMENT_BY_CSS_TO_BE_PRESENT = 7;
 
   /**
    * The feature id for the '<em><b>Css Selector</b></em>' containment reference.
@@ -314,16 +342,16 @@ public interface BromiumPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR = WEB_DRIVER_ACTION_FEATURE_COUNT + 0;
+  int ELEMENT_BY_CSS_TO_BE_PRESENT__CSS_SELECTOR = WEB_DRIVER_ACTION_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Element With Id Is Present</em>' class.
+   * The number of structural features of the '<em>Element By Css To Be Present</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ELEMENT_WITH_ID_IS_PRESENT_FEATURE_COUNT = WEB_DRIVER_ACTION_FEATURE_COUNT + 1;
+  int ELEMENT_BY_CSS_TO_BE_PRESENT_FEATURE_COUNT = WEB_DRIVER_ACTION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ClickCssSelectorImpl <em>Click Css Selector</em>}' class.
@@ -333,7 +361,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getClickCssSelector()
    * @generated
    */
-  int CLICK_CSS_SELECTOR = 7;
+  int CLICK_CSS_SELECTOR = 8;
 
   /**
    * The feature id for the '<em><b>Css Selector</b></em>' containment reference.
@@ -361,7 +389,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getPageLoad()
    * @generated
    */
-  int PAGE_LOAD = 8;
+  int PAGE_LOAD = 9;
 
   /**
    * The feature id for the '<em><b>Subpath</b></em>' attribute.
@@ -389,7 +417,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getTypeTextInElementFoundByCssSelector()
    * @generated
    */
-  int TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR = 9;
+  int TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR = 10;
 
   /**
    * The feature id for the '<em><b>Text</b></em>' containment reference.
@@ -426,7 +454,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getParameterValue()
    * @generated
    */
-  int PARAMETER_VALUE = 10;
+  int PARAMETER_VALUE = 11;
 
   /**
    * The feature id for the '<em><b>Content</b></em>' attribute.
@@ -463,7 +491,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getExposedParameter()
    * @generated
    */
-  int EXPOSED_PARAMETER = 11;
+  int EXPOSED_PARAMETER = 12;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -491,7 +519,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getThreeDottedVersion()
    * @generated
    */
-  int THREE_DOTTED_VERSION = 12;
+  int THREE_DOTTED_VERSION = 13;
 
   /**
    * The feature id for the '<em><b>Big</b></em>' attribute.
@@ -650,15 +678,15 @@ public interface BromiumPackage extends EPackage
   EReference getApplicationAction_Postcondition();
 
   /**
-   * Returns the meta object for the attribute '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getExpectHttpRequest <em>Expect Http Request</em>}'.
+   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getExpectHttpRequest <em>Expect Http Request</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Expect Http Request</em>'.
+   * @return the meta object for the containment reference '<em>Expect Http Request</em>'.
    * @see com.hribol.bromium.dsl.bromium.ApplicationAction#getExpectHttpRequest()
    * @see #getApplicationAction()
    * @generated
    */
-  EAttribute getApplicationAction_ExpectHttpRequest();
+  EReference getApplicationAction_ExpectHttpRequest();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.SyntaxDefinition <em>Syntax Definition</em>}'.
@@ -745,25 +773,46 @@ public interface BromiumPackage extends EPackage
   EReference getPostcondition_Postcondition();
 
   /**
-   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent <em>Element With Id Is Present</em>}'.
+   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ExpectHttpRequest <em>Expect Http Request</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Element With Id Is Present</em>'.
-   * @see com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent
+   * @return the meta object for class '<em>Expect Http Request</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ExpectHttpRequest
    * @generated
    */
-  EClass getElementWithIdIsPresent();
+  EClass getExpectHttpRequest();
 
   /**
-   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent#getCssSelector <em>Css Selector</em>}'.
+   * Returns the meta object for the attribute '{@link com.hribol.bromium.dsl.bromium.ExpectHttpRequest#getNot <em>Not</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Not</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ExpectHttpRequest#getNot()
+   * @see #getExpectHttpRequest()
+   * @generated
+   */
+  EAttribute getExpectHttpRequest_Not();
+
+  /**
+   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ElementByCssToBePresent <em>Element By Css To Be Present</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Element By Css To Be Present</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ElementByCssToBePresent
+   * @generated
+   */
+  EClass getElementByCssToBePresent();
+
+  /**
+   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.ElementByCssToBePresent#getCssSelector <em>Css Selector</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Css Selector</em>'.
-   * @see com.hribol.bromium.dsl.bromium.ElementWithIdIsPresent#getCssSelector()
-   * @see #getElementWithIdIsPresent()
+   * @see com.hribol.bromium.dsl.bromium.ElementByCssToBePresent#getCssSelector()
+   * @see #getElementByCssToBePresent()
    * @generated
    */
-  EReference getElementWithIdIsPresent_CssSelector();
+  EReference getElementByCssToBePresent_CssSelector();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ClickCssSelector <em>Click Css Selector</em>}'.
@@ -1051,12 +1100,12 @@ public interface BromiumPackage extends EPackage
     EReference APPLICATION_ACTION__POSTCONDITION = eINSTANCE.getApplicationAction_Postcondition();
 
     /**
-     * The meta object literal for the '<em><b>Expect Http Request</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Expect Http Request</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute APPLICATION_ACTION__EXPECT_HTTP_REQUEST = eINSTANCE.getApplicationAction_ExpectHttpRequest();
+    EReference APPLICATION_ACTION__EXPECT_HTTP_REQUEST = eINSTANCE.getApplicationAction_ExpectHttpRequest();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.SyntaxDefinitionImpl <em>Syntax Definition</em>}' class.
@@ -1131,14 +1180,32 @@ public interface BromiumPackage extends EPackage
     EReference POSTCONDITION__POSTCONDITION = eINSTANCE.getPostcondition_Postcondition();
 
     /**
-     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ElementWithIdIsPresentImpl <em>Element With Id Is Present</em>}' class.
+     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ExpectHttpRequestImpl <em>Expect Http Request</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see com.hribol.bromium.dsl.bromium.impl.ElementWithIdIsPresentImpl
-     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getElementWithIdIsPresent()
+     * @see com.hribol.bromium.dsl.bromium.impl.ExpectHttpRequestImpl
+     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getExpectHttpRequest()
      * @generated
      */
-    EClass ELEMENT_WITH_ID_IS_PRESENT = eINSTANCE.getElementWithIdIsPresent();
+    EClass EXPECT_HTTP_REQUEST = eINSTANCE.getExpectHttpRequest();
+
+    /**
+     * The meta object literal for the '<em><b>Not</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EXPECT_HTTP_REQUEST__NOT = eINSTANCE.getExpectHttpRequest_Not();
+
+    /**
+     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ElementByCssToBePresentImpl <em>Element By Css To Be Present</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.hribol.bromium.dsl.bromium.impl.ElementByCssToBePresentImpl
+     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getElementByCssToBePresent()
+     * @generated
+     */
+    EClass ELEMENT_BY_CSS_TO_BE_PRESENT = eINSTANCE.getElementByCssToBePresent();
 
     /**
      * The meta object literal for the '<em><b>Css Selector</b></em>' containment reference feature.
@@ -1146,7 +1213,7 @@ public interface BromiumPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ELEMENT_WITH_ID_IS_PRESENT__CSS_SELECTOR = eINSTANCE.getElementWithIdIsPresent_CssSelector();
+    EReference ELEMENT_BY_CSS_TO_BE_PRESENT__CSS_SELECTOR = eINSTANCE.getElementByCssToBePresent_CssSelector();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ClickCssSelectorImpl <em>Click Css Selector</em>}' class.

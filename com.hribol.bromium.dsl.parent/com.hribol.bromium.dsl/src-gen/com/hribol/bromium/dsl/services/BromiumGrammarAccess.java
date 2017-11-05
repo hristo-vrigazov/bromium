@@ -206,20 +206,20 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	public class WebDriverActionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.WebDriverAction");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cElementWithIdIsPresentParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cElementByCssToBePresentParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cClickCssSelectorParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cPageLoadParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cTypeTextInElementFoundByCssSelectorParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//WebDriverAction:
-		//	ElementWithIdIsPresent | ClickCssSelector | PageLoad | TypeTextInElementFoundByCssSelector;
+		//	ElementByCssToBePresent | ClickCssSelector | PageLoad | TypeTextInElementFoundByCssSelector;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ElementWithIdIsPresent | ClickCssSelector | PageLoad | TypeTextInElementFoundByCssSelector
+		//ElementByCssToBePresent | ClickCssSelector | PageLoad | TypeTextInElementFoundByCssSelector
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//ElementWithIdIsPresent
-		public RuleCall getElementWithIdIsPresentParserRuleCall_0() { return cElementWithIdIsPresentParserRuleCall_0; }
+		//ElementByCssToBePresent
+		public RuleCall getElementByCssToBePresentParserRuleCall_0() { return cElementByCssToBePresentParserRuleCall_0; }
 		
 		//ClickCssSelector
 		public RuleCall getClickCssSelectorParserRuleCall_1() { return cClickCssSelectorParserRuleCall_1; }
@@ -287,36 +287,48 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	public class ExpectHttpRequestElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.ExpectHttpRequest");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cDoKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cNotKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cExpectKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Keyword cHttpKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Keyword cRequestKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Action cExpectHttpRequestAction_0 = (Action)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cDoKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cNotAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final Keyword cNotNotKeyword_1_1_0 = (Keyword)cNotAssignment_1_1.eContents().get(0);
+		private final Keyword cExpectKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
+		private final Keyword cHttpKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
+		private final Keyword cRequestKeyword_1_4 = (Keyword)cGroup_1.eContents().get(4);
 		
 		//ExpectHttpRequest:
-		//	'do' 'not'? 'expect' 'http' 'request';
+		//	{ExpectHttpRequest} ('do' not='not'? 'expect' 'http' 'request');
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'do' 'not'? 'expect' 'http' 'request'
+		//{ExpectHttpRequest} ('do' not='not'? 'expect' 'http' 'request')
 		public Group getGroup() { return cGroup; }
 		
-		//'do'
-		public Keyword getDoKeyword_0() { return cDoKeyword_0; }
+		//{ExpectHttpRequest}
+		public Action getExpectHttpRequestAction_0() { return cExpectHttpRequestAction_0; }
 		
-		//'not'?
-		public Keyword getNotKeyword_1() { return cNotKeyword_1; }
+		//'do' not='not'? 'expect' 'http' 'request'
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'do'
+		public Keyword getDoKeyword_1_0() { return cDoKeyword_1_0; }
+		
+		//not='not'?
+		public Assignment getNotAssignment_1_1() { return cNotAssignment_1_1; }
+		
+		//'not'
+		public Keyword getNotNotKeyword_1_1_0() { return cNotNotKeyword_1_1_0; }
 		
 		//'expect'
-		public Keyword getExpectKeyword_2() { return cExpectKeyword_2; }
+		public Keyword getExpectKeyword_1_2() { return cExpectKeyword_1_2; }
 		
 		//'http'
-		public Keyword getHttpKeyword_3() { return cHttpKeyword_3; }
+		public Keyword getHttpKeyword_1_3() { return cHttpKeyword_1_3; }
 		
 		//'request'
-		public Keyword getRequestKeyword_4() { return cRequestKeyword_4; }
+		public Keyword getRequestKeyword_1_4() { return cRequestKeyword_1_4; }
 	}
-	public class ElementWithIdIsPresentElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.ElementWithIdIsPresent");
+	public class ElementByCssToBePresentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.ElementByCssToBePresent");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cElementKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cWithKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -328,7 +340,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cPresentKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//// TODO: syntactic sugar for CSS selectors
-		//ElementWithIdIsPresent:
+		//ElementByCssToBePresent:
 		//	'element' 'with' 'css' 'selector' cssSelector=ParameterValue 'is' 'present';
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -591,7 +603,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	private final PreconditionElements pPrecondition;
 	private final PostconditionElements pPostcondition;
 	private final ExpectHttpRequestElements pExpectHttpRequest;
-	private final ElementWithIdIsPresentElements pElementWithIdIsPresent;
+	private final ElementByCssToBePresentElements pElementByCssToBePresent;
 	private final ClickCssSelectorElements pClickCssSelector;
 	private final PageLoadElements pPageLoad;
 	private final TypeTextInElementFoundByCssSelectorElements pTypeTextInElementFoundByCssSelector;
@@ -616,7 +628,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		this.pPrecondition = new PreconditionElements();
 		this.pPostcondition = new PostconditionElements();
 		this.pExpectHttpRequest = new ExpectHttpRequestElements();
-		this.pElementWithIdIsPresent = new ElementWithIdIsPresentElements();
+		this.pElementByCssToBePresent = new ElementByCssToBePresentElements();
 		this.pClickCssSelector = new ClickCssSelectorElements();
 		this.pPageLoad = new PageLoadElements();
 		this.pTypeTextInElementFoundByCssSelector = new TypeTextInElementFoundByCssSelectorElements();
@@ -693,7 +705,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//WebDriverAction:
-	//	ElementWithIdIsPresent | ClickCssSelector | PageLoad | TypeTextInElementFoundByCssSelector;
+	//	ElementByCssToBePresent | ClickCssSelector | PageLoad | TypeTextInElementFoundByCssSelector;
 	public WebDriverActionElements getWebDriverActionAccess() {
 		return pWebDriverAction;
 	}
@@ -723,7 +735,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ExpectHttpRequest:
-	//	'do' 'not'? 'expect' 'http' 'request';
+	//	{ExpectHttpRequest} ('do' not='not'? 'expect' 'http' 'request');
 	public ExpectHttpRequestElements getExpectHttpRequestAccess() {
 		return pExpectHttpRequest;
 	}
@@ -733,14 +745,14 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//// TODO: syntactic sugar for CSS selectors
-	//ElementWithIdIsPresent:
+	//ElementByCssToBePresent:
 	//	'element' 'with' 'css' 'selector' cssSelector=ParameterValue 'is' 'present';
-	public ElementWithIdIsPresentElements getElementWithIdIsPresentAccess() {
-		return pElementWithIdIsPresent;
+	public ElementByCssToBePresentElements getElementByCssToBePresentAccess() {
+		return pElementByCssToBePresent;
 	}
 	
-	public ParserRule getElementWithIdIsPresentRule() {
-		return getElementWithIdIsPresentAccess().getRule();
+	public ParserRule getElementByCssToBePresentRule() {
+		return getElementByCssToBePresentAccess().getRule();
 	}
 	
 	//ClickCssSelector:

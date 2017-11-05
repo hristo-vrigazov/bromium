@@ -411,7 +411,7 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
         EObject lv_postcondition_6_0 = null;
 
-        AntlrDatatypeRuleToken lv_expectHttpRequest_7_0 = null;
+        EObject lv_expectHttpRequest_7_0 = null;
 
 
 
@@ -868,11 +868,11 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleWebDriverAction"
-    // InternalBromium.g:393:1: ruleWebDriverAction returns [EObject current=null] : (this_ElementWithIdIsPresent_0= ruleElementWithIdIsPresent | this_ClickCssSelector_1= ruleClickCssSelector | this_PageLoad_2= rulePageLoad | this_TypeTextInElementFoundByCssSelector_3= ruleTypeTextInElementFoundByCssSelector ) ;
+    // InternalBromium.g:393:1: ruleWebDriverAction returns [EObject current=null] : (this_ElementByCssToBePresent_0= ruleElementByCssToBePresent | this_ClickCssSelector_1= ruleClickCssSelector | this_PageLoad_2= rulePageLoad | this_TypeTextInElementFoundByCssSelector_3= ruleTypeTextInElementFoundByCssSelector ) ;
     public final EObject ruleWebDriverAction() throws RecognitionException {
         EObject current = null;
 
-        EObject this_ElementWithIdIsPresent_0 = null;
+        EObject this_ElementByCssToBePresent_0 = null;
 
         EObject this_ClickCssSelector_1 = null;
 
@@ -885,10 +885,10 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBromium.g:399:2: ( (this_ElementWithIdIsPresent_0= ruleElementWithIdIsPresent | this_ClickCssSelector_1= ruleClickCssSelector | this_PageLoad_2= rulePageLoad | this_TypeTextInElementFoundByCssSelector_3= ruleTypeTextInElementFoundByCssSelector ) )
-            // InternalBromium.g:400:2: (this_ElementWithIdIsPresent_0= ruleElementWithIdIsPresent | this_ClickCssSelector_1= ruleClickCssSelector | this_PageLoad_2= rulePageLoad | this_TypeTextInElementFoundByCssSelector_3= ruleTypeTextInElementFoundByCssSelector )
+            // InternalBromium.g:399:2: ( (this_ElementByCssToBePresent_0= ruleElementByCssToBePresent | this_ClickCssSelector_1= ruleClickCssSelector | this_PageLoad_2= rulePageLoad | this_TypeTextInElementFoundByCssSelector_3= ruleTypeTextInElementFoundByCssSelector ) )
+            // InternalBromium.g:400:2: (this_ElementByCssToBePresent_0= ruleElementByCssToBePresent | this_ClickCssSelector_1= ruleClickCssSelector | this_PageLoad_2= rulePageLoad | this_TypeTextInElementFoundByCssSelector_3= ruleTypeTextInElementFoundByCssSelector )
             {
-            // InternalBromium.g:400:2: (this_ElementWithIdIsPresent_0= ruleElementWithIdIsPresent | this_ClickCssSelector_1= ruleClickCssSelector | this_PageLoad_2= rulePageLoad | this_TypeTextInElementFoundByCssSelector_3= ruleTypeTextInElementFoundByCssSelector )
+            // InternalBromium.g:400:2: (this_ElementByCssToBePresent_0= ruleElementByCssToBePresent | this_ClickCssSelector_1= ruleClickCssSelector | this_PageLoad_2= rulePageLoad | this_TypeTextInElementFoundByCssSelector_3= ruleTypeTextInElementFoundByCssSelector )
             int alt7=4;
             switch ( input.LA(1) ) {
             case 28:
@@ -920,18 +920,18 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
             switch (alt7) {
                 case 1 :
-                    // InternalBromium.g:401:3: this_ElementWithIdIsPresent_0= ruleElementWithIdIsPresent
+                    // InternalBromium.g:401:3: this_ElementByCssToBePresent_0= ruleElementByCssToBePresent
                     {
 
-                    			newCompositeNode(grammarAccess.getWebDriverActionAccess().getElementWithIdIsPresentParserRuleCall_0());
+                    			newCompositeNode(grammarAccess.getWebDriverActionAccess().getElementByCssToBePresentParserRuleCall_0());
                     		
                     pushFollow(FOLLOW_2);
-                    this_ElementWithIdIsPresent_0=ruleElementWithIdIsPresent();
+                    this_ElementByCssToBePresent_0=ruleElementByCssToBePresent();
 
                     state._fsp--;
 
 
-                    			current = this_ElementWithIdIsPresent_0;
+                    			current = this_ElementByCssToBePresent_0;
                     			afterParserOrEnumRuleCall();
                     		
 
@@ -1248,15 +1248,15 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleExpectHttpRequest"
-    // InternalBromium.g:532:1: entryRuleExpectHttpRequest returns [String current=null] : iv_ruleExpectHttpRequest= ruleExpectHttpRequest EOF ;
-    public final String entryRuleExpectHttpRequest() throws RecognitionException {
-        String current = null;
+    // InternalBromium.g:532:1: entryRuleExpectHttpRequest returns [EObject current=null] : iv_ruleExpectHttpRequest= ruleExpectHttpRequest EOF ;
+    public final EObject entryRuleExpectHttpRequest() throws RecognitionException {
+        EObject current = null;
 
-        AntlrDatatypeRuleToken iv_ruleExpectHttpRequest = null;
+        EObject iv_ruleExpectHttpRequest = null;
 
 
         try {
-            // InternalBromium.g:532:57: (iv_ruleExpectHttpRequest= ruleExpectHttpRequest EOF )
+            // InternalBromium.g:532:58: (iv_ruleExpectHttpRequest= ruleExpectHttpRequest EOF )
             // InternalBromium.g:533:2: iv_ruleExpectHttpRequest= ruleExpectHttpRequest EOF
             {
              newCompositeNode(grammarAccess.getExpectHttpRequestRule()); 
@@ -1265,7 +1265,7 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
             state._fsp--;
 
-             current =iv_ruleExpectHttpRequest.getText(); 
+             current =iv_ruleExpectHttpRequest; 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -1284,28 +1284,45 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleExpectHttpRequest"
-    // InternalBromium.g:539:1: ruleExpectHttpRequest returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'do' (kw= 'not' )? kw= 'expect' kw= 'http' kw= 'request' ) ;
-    public final AntlrDatatypeRuleToken ruleExpectHttpRequest() throws RecognitionException {
-        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+    // InternalBromium.g:539:1: ruleExpectHttpRequest returns [EObject current=null] : ( () (otherlv_1= 'do' ( (lv_not_2_0= 'not' ) )? otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request' ) ) ;
+    public final EObject ruleExpectHttpRequest() throws RecognitionException {
+        EObject current = null;
 
-        Token kw=null;
+        Token otherlv_1=null;
+        Token lv_not_2_0=null;
+        Token otherlv_3=null;
+        Token otherlv_4=null;
+        Token otherlv_5=null;
 
 
         	enterRule();
 
         try {
-            // InternalBromium.g:545:2: ( (kw= 'do' (kw= 'not' )? kw= 'expect' kw= 'http' kw= 'request' ) )
-            // InternalBromium.g:546:2: (kw= 'do' (kw= 'not' )? kw= 'expect' kw= 'http' kw= 'request' )
+            // InternalBromium.g:545:2: ( ( () (otherlv_1= 'do' ( (lv_not_2_0= 'not' ) )? otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request' ) ) )
+            // InternalBromium.g:546:2: ( () (otherlv_1= 'do' ( (lv_not_2_0= 'not' ) )? otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request' ) )
             {
-            // InternalBromium.g:546:2: (kw= 'do' (kw= 'not' )? kw= 'expect' kw= 'http' kw= 'request' )
-            // InternalBromium.g:547:3: kw= 'do' (kw= 'not' )? kw= 'expect' kw= 'http' kw= 'request'
+            // InternalBromium.g:546:2: ( () (otherlv_1= 'do' ( (lv_not_2_0= 'not' ) )? otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request' ) )
+            // InternalBromium.g:547:3: () (otherlv_1= 'do' ( (lv_not_2_0= 'not' ) )? otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request' )
             {
-            kw=(Token)match(input,23,FOLLOW_16); 
+            // InternalBromium.g:547:3: ()
+            // InternalBromium.g:548:4: 
+            {
 
-            			current.merge(kw);
-            			newLeafNode(kw, grammarAccess.getExpectHttpRequestAccess().getDoKeyword_0());
-            		
-            // InternalBromium.g:552:3: (kw= 'not' )?
+            				current = forceCreateModelElement(
+            					grammarAccess.getExpectHttpRequestAccess().getExpectHttpRequestAction_0(),
+            					current);
+            			
+
+            }
+
+            // InternalBromium.g:554:3: (otherlv_1= 'do' ( (lv_not_2_0= 'not' ) )? otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request' )
+            // InternalBromium.g:555:4: otherlv_1= 'do' ( (lv_not_2_0= 'not' ) )? otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request'
+            {
+            otherlv_1=(Token)match(input,23,FOLLOW_16); 
+
+            				newLeafNode(otherlv_1, grammarAccess.getExpectHttpRequestAccess().getDoKeyword_1_0());
+            			
+            // InternalBromium.g:559:4: ( (lv_not_2_0= 'not' ) )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1314,34 +1331,45 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
             }
             switch (alt8) {
                 case 1 :
-                    // InternalBromium.g:553:4: kw= 'not'
+                    // InternalBromium.g:560:5: (lv_not_2_0= 'not' )
                     {
-                    kw=(Token)match(input,24,FOLLOW_17); 
+                    // InternalBromium.g:560:5: (lv_not_2_0= 'not' )
+                    // InternalBromium.g:561:6: lv_not_2_0= 'not'
+                    {
+                    lv_not_2_0=(Token)match(input,24,FOLLOW_17); 
 
-                    				current.merge(kw);
-                    				newLeafNode(kw, grammarAccess.getExpectHttpRequestAccess().getNotKeyword_1());
-                    			
+                    						newLeafNode(lv_not_2_0, grammarAccess.getExpectHttpRequestAccess().getNotNotKeyword_1_1_0());
+                    					
+
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getExpectHttpRequestRule());
+                    						}
+                    						setWithLastConsumed(current, "not", lv_not_2_0, "not");
+                    					
+
+                    }
+
 
                     }
                     break;
 
             }
 
-            kw=(Token)match(input,25,FOLLOW_18); 
+            otherlv_3=(Token)match(input,25,FOLLOW_18); 
 
-            			current.merge(kw);
-            			newLeafNode(kw, grammarAccess.getExpectHttpRequestAccess().getExpectKeyword_2());
-            		
-            kw=(Token)match(input,26,FOLLOW_19); 
+            				newLeafNode(otherlv_3, grammarAccess.getExpectHttpRequestAccess().getExpectKeyword_1_2());
+            			
+            otherlv_4=(Token)match(input,26,FOLLOW_19); 
 
-            			current.merge(kw);
-            			newLeafNode(kw, grammarAccess.getExpectHttpRequestAccess().getHttpKeyword_3());
-            		
-            kw=(Token)match(input,27,FOLLOW_2); 
+            				newLeafNode(otherlv_4, grammarAccess.getExpectHttpRequestAccess().getHttpKeyword_1_3());
+            			
+            otherlv_5=(Token)match(input,27,FOLLOW_2); 
 
-            			current.merge(kw);
-            			newLeafNode(kw, grammarAccess.getExpectHttpRequestAccess().getRequestKeyword_4());
-            		
+            				newLeafNode(otherlv_5, grammarAccess.getExpectHttpRequestAccess().getRequestKeyword_1_4());
+            			
+
+            }
+
 
             }
 
@@ -1364,25 +1392,25 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleExpectHttpRequest"
 
 
-    // $ANTLR start "entryRuleElementWithIdIsPresent"
-    // InternalBromium.g:578:1: entryRuleElementWithIdIsPresent returns [EObject current=null] : iv_ruleElementWithIdIsPresent= ruleElementWithIdIsPresent EOF ;
-    public final EObject entryRuleElementWithIdIsPresent() throws RecognitionException {
+    // $ANTLR start "entryRuleElementByCssToBePresent"
+    // InternalBromium.g:590:1: entryRuleElementByCssToBePresent returns [EObject current=null] : iv_ruleElementByCssToBePresent= ruleElementByCssToBePresent EOF ;
+    public final EObject entryRuleElementByCssToBePresent() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleElementWithIdIsPresent = null;
+        EObject iv_ruleElementByCssToBePresent = null;
 
 
         try {
-            // InternalBromium.g:578:63: (iv_ruleElementWithIdIsPresent= ruleElementWithIdIsPresent EOF )
-            // InternalBromium.g:579:2: iv_ruleElementWithIdIsPresent= ruleElementWithIdIsPresent EOF
+            // InternalBromium.g:590:64: (iv_ruleElementByCssToBePresent= ruleElementByCssToBePresent EOF )
+            // InternalBromium.g:591:2: iv_ruleElementByCssToBePresent= ruleElementByCssToBePresent EOF
             {
-             newCompositeNode(grammarAccess.getElementWithIdIsPresentRule()); 
+             newCompositeNode(grammarAccess.getElementByCssToBePresentRule()); 
             pushFollow(FOLLOW_1);
-            iv_ruleElementWithIdIsPresent=ruleElementWithIdIsPresent();
+            iv_ruleElementByCssToBePresent=ruleElementByCssToBePresent();
 
             state._fsp--;
 
-             current =iv_ruleElementWithIdIsPresent; 
+             current =iv_ruleElementByCssToBePresent; 
             match(input,EOF,FOLLOW_2); 
 
             }
@@ -1397,12 +1425,12 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleElementWithIdIsPresent"
+    // $ANTLR end "entryRuleElementByCssToBePresent"
 
 
-    // $ANTLR start "ruleElementWithIdIsPresent"
-    // InternalBromium.g:585:1: ruleElementWithIdIsPresent returns [EObject current=null] : (otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'present' ) ;
-    public final EObject ruleElementWithIdIsPresent() throws RecognitionException {
+    // $ANTLR start "ruleElementByCssToBePresent"
+    // InternalBromium.g:597:1: ruleElementByCssToBePresent returns [EObject current=null] : (otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'present' ) ;
+    public final EObject ruleElementByCssToBePresent() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
@@ -1418,36 +1446,36 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBromium.g:591:2: ( (otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'present' ) )
-            // InternalBromium.g:592:2: (otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'present' )
+            // InternalBromium.g:603:2: ( (otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'present' ) )
+            // InternalBromium.g:604:2: (otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'present' )
             {
-            // InternalBromium.g:592:2: (otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'present' )
-            // InternalBromium.g:593:3: otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'present'
+            // InternalBromium.g:604:2: (otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'present' )
+            // InternalBromium.g:605:3: otherlv_0= 'element' otherlv_1= 'with' otherlv_2= 'css' otherlv_3= 'selector' ( (lv_cssSelector_4_0= ruleParameterValue ) ) otherlv_5= 'is' otherlv_6= 'present'
             {
             otherlv_0=(Token)match(input,28,FOLLOW_20); 
 
-            			newLeafNode(otherlv_0, grammarAccess.getElementWithIdIsPresentAccess().getElementKeyword_0());
+            			newLeafNode(otherlv_0, grammarAccess.getElementByCssToBePresentAccess().getElementKeyword_0());
             		
             otherlv_1=(Token)match(input,29,FOLLOW_21); 
 
-            			newLeafNode(otherlv_1, grammarAccess.getElementWithIdIsPresentAccess().getWithKeyword_1());
+            			newLeafNode(otherlv_1, grammarAccess.getElementByCssToBePresentAccess().getWithKeyword_1());
             		
             otherlv_2=(Token)match(input,30,FOLLOW_22); 
 
-            			newLeafNode(otherlv_2, grammarAccess.getElementWithIdIsPresentAccess().getCssKeyword_2());
+            			newLeafNode(otherlv_2, grammarAccess.getElementByCssToBePresentAccess().getCssKeyword_2());
             		
             otherlv_3=(Token)match(input,31,FOLLOW_23); 
 
-            			newLeafNode(otherlv_3, grammarAccess.getElementWithIdIsPresentAccess().getSelectorKeyword_3());
+            			newLeafNode(otherlv_3, grammarAccess.getElementByCssToBePresentAccess().getSelectorKeyword_3());
             		
-            // InternalBromium.g:609:3: ( (lv_cssSelector_4_0= ruleParameterValue ) )
-            // InternalBromium.g:610:4: (lv_cssSelector_4_0= ruleParameterValue )
+            // InternalBromium.g:621:3: ( (lv_cssSelector_4_0= ruleParameterValue ) )
+            // InternalBromium.g:622:4: (lv_cssSelector_4_0= ruleParameterValue )
             {
-            // InternalBromium.g:610:4: (lv_cssSelector_4_0= ruleParameterValue )
-            // InternalBromium.g:611:5: lv_cssSelector_4_0= ruleParameterValue
+            // InternalBromium.g:622:4: (lv_cssSelector_4_0= ruleParameterValue )
+            // InternalBromium.g:623:5: lv_cssSelector_4_0= ruleParameterValue
             {
 
-            					newCompositeNode(grammarAccess.getElementWithIdIsPresentAccess().getCssSelectorParameterValueParserRuleCall_4_0());
+            					newCompositeNode(grammarAccess.getElementByCssToBePresentAccess().getCssSelectorParameterValueParserRuleCall_4_0());
             				
             pushFollow(FOLLOW_24);
             lv_cssSelector_4_0=ruleParameterValue();
@@ -1456,7 +1484,7 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
             					if (current==null) {
-            						current = createModelElementForParent(grammarAccess.getElementWithIdIsPresentRule());
+            						current = createModelElementForParent(grammarAccess.getElementByCssToBePresentRule());
             					}
             					set(
             						current,
@@ -1473,11 +1501,11 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
             otherlv_5=(Token)match(input,32,FOLLOW_25); 
 
-            			newLeafNode(otherlv_5, grammarAccess.getElementWithIdIsPresentAccess().getIsKeyword_5());
+            			newLeafNode(otherlv_5, grammarAccess.getElementByCssToBePresentAccess().getIsKeyword_5());
             		
             otherlv_6=(Token)match(input,33,FOLLOW_2); 
 
-            			newLeafNode(otherlv_6, grammarAccess.getElementWithIdIsPresentAccess().getPresentKeyword_6());
+            			newLeafNode(otherlv_6, grammarAccess.getElementByCssToBePresentAccess().getPresentKeyword_6());
             		
 
             }
@@ -1498,11 +1526,11 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleElementWithIdIsPresent"
+    // $ANTLR end "ruleElementByCssToBePresent"
 
 
     // $ANTLR start "entryRuleClickCssSelector"
-    // InternalBromium.g:640:1: entryRuleClickCssSelector returns [EObject current=null] : iv_ruleClickCssSelector= ruleClickCssSelector EOF ;
+    // InternalBromium.g:652:1: entryRuleClickCssSelector returns [EObject current=null] : iv_ruleClickCssSelector= ruleClickCssSelector EOF ;
     public final EObject entryRuleClickCssSelector() throws RecognitionException {
         EObject current = null;
 
@@ -1510,8 +1538,8 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBromium.g:640:57: (iv_ruleClickCssSelector= ruleClickCssSelector EOF )
-            // InternalBromium.g:641:2: iv_ruleClickCssSelector= ruleClickCssSelector EOF
+            // InternalBromium.g:652:57: (iv_ruleClickCssSelector= ruleClickCssSelector EOF )
+            // InternalBromium.g:653:2: iv_ruleClickCssSelector= ruleClickCssSelector EOF
             {
              newCompositeNode(grammarAccess.getClickCssSelectorRule()); 
             pushFollow(FOLLOW_1);
@@ -1538,7 +1566,7 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleClickCssSelector"
-    // InternalBromium.g:647:1: ruleClickCssSelector returns [EObject current=null] : (otherlv_0= 'click' otherlv_1= 'on' otherlv_2= 'element' otherlv_3= 'with' otherlv_4= 'css' otherlv_5= 'selector' ( (lv_cssSelector_6_0= ruleParameterValue ) ) ) ;
+    // InternalBromium.g:659:1: ruleClickCssSelector returns [EObject current=null] : (otherlv_0= 'click' otherlv_1= 'on' otherlv_2= 'element' otherlv_3= 'with' otherlv_4= 'css' otherlv_5= 'selector' ( (lv_cssSelector_6_0= ruleParameterValue ) ) ) ;
     public final EObject ruleClickCssSelector() throws RecognitionException {
         EObject current = null;
 
@@ -1555,11 +1583,11 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBromium.g:653:2: ( (otherlv_0= 'click' otherlv_1= 'on' otherlv_2= 'element' otherlv_3= 'with' otherlv_4= 'css' otherlv_5= 'selector' ( (lv_cssSelector_6_0= ruleParameterValue ) ) ) )
-            // InternalBromium.g:654:2: (otherlv_0= 'click' otherlv_1= 'on' otherlv_2= 'element' otherlv_3= 'with' otherlv_4= 'css' otherlv_5= 'selector' ( (lv_cssSelector_6_0= ruleParameterValue ) ) )
+            // InternalBromium.g:665:2: ( (otherlv_0= 'click' otherlv_1= 'on' otherlv_2= 'element' otherlv_3= 'with' otherlv_4= 'css' otherlv_5= 'selector' ( (lv_cssSelector_6_0= ruleParameterValue ) ) ) )
+            // InternalBromium.g:666:2: (otherlv_0= 'click' otherlv_1= 'on' otherlv_2= 'element' otherlv_3= 'with' otherlv_4= 'css' otherlv_5= 'selector' ( (lv_cssSelector_6_0= ruleParameterValue ) ) )
             {
-            // InternalBromium.g:654:2: (otherlv_0= 'click' otherlv_1= 'on' otherlv_2= 'element' otherlv_3= 'with' otherlv_4= 'css' otherlv_5= 'selector' ( (lv_cssSelector_6_0= ruleParameterValue ) ) )
-            // InternalBromium.g:655:3: otherlv_0= 'click' otherlv_1= 'on' otherlv_2= 'element' otherlv_3= 'with' otherlv_4= 'css' otherlv_5= 'selector' ( (lv_cssSelector_6_0= ruleParameterValue ) )
+            // InternalBromium.g:666:2: (otherlv_0= 'click' otherlv_1= 'on' otherlv_2= 'element' otherlv_3= 'with' otherlv_4= 'css' otherlv_5= 'selector' ( (lv_cssSelector_6_0= ruleParameterValue ) ) )
+            // InternalBromium.g:667:3: otherlv_0= 'click' otherlv_1= 'on' otherlv_2= 'element' otherlv_3= 'with' otherlv_4= 'css' otherlv_5= 'selector' ( (lv_cssSelector_6_0= ruleParameterValue ) )
             {
             otherlv_0=(Token)match(input,34,FOLLOW_26); 
 
@@ -1585,11 +1613,11 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_5, grammarAccess.getClickCssSelectorAccess().getSelectorKeyword_5());
             		
-            // InternalBromium.g:679:3: ( (lv_cssSelector_6_0= ruleParameterValue ) )
-            // InternalBromium.g:680:4: (lv_cssSelector_6_0= ruleParameterValue )
+            // InternalBromium.g:691:3: ( (lv_cssSelector_6_0= ruleParameterValue ) )
+            // InternalBromium.g:692:4: (lv_cssSelector_6_0= ruleParameterValue )
             {
-            // InternalBromium.g:680:4: (lv_cssSelector_6_0= ruleParameterValue )
-            // InternalBromium.g:681:5: lv_cssSelector_6_0= ruleParameterValue
+            // InternalBromium.g:692:4: (lv_cssSelector_6_0= ruleParameterValue )
+            // InternalBromium.g:693:5: lv_cssSelector_6_0= ruleParameterValue
             {
 
             					newCompositeNode(grammarAccess.getClickCssSelectorAccess().getCssSelectorParameterValueParserRuleCall_6_0());
@@ -1639,7 +1667,7 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRulePageLoad"
-    // InternalBromium.g:702:1: entryRulePageLoad returns [EObject current=null] : iv_rulePageLoad= rulePageLoad EOF ;
+    // InternalBromium.g:714:1: entryRulePageLoad returns [EObject current=null] : iv_rulePageLoad= rulePageLoad EOF ;
     public final EObject entryRulePageLoad() throws RecognitionException {
         EObject current = null;
 
@@ -1647,8 +1675,8 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBromium.g:702:49: (iv_rulePageLoad= rulePageLoad EOF )
-            // InternalBromium.g:703:2: iv_rulePageLoad= rulePageLoad EOF
+            // InternalBromium.g:714:49: (iv_rulePageLoad= rulePageLoad EOF )
+            // InternalBromium.g:715:2: iv_rulePageLoad= rulePageLoad EOF
             {
              newCompositeNode(grammarAccess.getPageLoadRule()); 
             pushFollow(FOLLOW_1);
@@ -1675,7 +1703,7 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePageLoad"
-    // InternalBromium.g:709:1: rulePageLoad returns [EObject current=null] : (otherlv_0= 'load' otherlv_1= 'page' ( (lv_subpath_2_0= RULE_STRING ) ) ) ;
+    // InternalBromium.g:721:1: rulePageLoad returns [EObject current=null] : (otherlv_0= 'load' otherlv_1= 'page' ( (lv_subpath_2_0= RULE_STRING ) ) ) ;
     public final EObject rulePageLoad() throws RecognitionException {
         EObject current = null;
 
@@ -1687,11 +1715,11 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBromium.g:715:2: ( (otherlv_0= 'load' otherlv_1= 'page' ( (lv_subpath_2_0= RULE_STRING ) ) ) )
-            // InternalBromium.g:716:2: (otherlv_0= 'load' otherlv_1= 'page' ( (lv_subpath_2_0= RULE_STRING ) ) )
+            // InternalBromium.g:727:2: ( (otherlv_0= 'load' otherlv_1= 'page' ( (lv_subpath_2_0= RULE_STRING ) ) ) )
+            // InternalBromium.g:728:2: (otherlv_0= 'load' otherlv_1= 'page' ( (lv_subpath_2_0= RULE_STRING ) ) )
             {
-            // InternalBromium.g:716:2: (otherlv_0= 'load' otherlv_1= 'page' ( (lv_subpath_2_0= RULE_STRING ) ) )
-            // InternalBromium.g:717:3: otherlv_0= 'load' otherlv_1= 'page' ( (lv_subpath_2_0= RULE_STRING ) )
+            // InternalBromium.g:728:2: (otherlv_0= 'load' otherlv_1= 'page' ( (lv_subpath_2_0= RULE_STRING ) ) )
+            // InternalBromium.g:729:3: otherlv_0= 'load' otherlv_1= 'page' ( (lv_subpath_2_0= RULE_STRING ) )
             {
             otherlv_0=(Token)match(input,36,FOLLOW_28); 
 
@@ -1701,11 +1729,11 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getPageLoadAccess().getPageKeyword_1());
             		
-            // InternalBromium.g:725:3: ( (lv_subpath_2_0= RULE_STRING ) )
-            // InternalBromium.g:726:4: (lv_subpath_2_0= RULE_STRING )
+            // InternalBromium.g:737:3: ( (lv_subpath_2_0= RULE_STRING ) )
+            // InternalBromium.g:738:4: (lv_subpath_2_0= RULE_STRING )
             {
-            // InternalBromium.g:726:4: (lv_subpath_2_0= RULE_STRING )
-            // InternalBromium.g:727:5: lv_subpath_2_0= RULE_STRING
+            // InternalBromium.g:738:4: (lv_subpath_2_0= RULE_STRING )
+            // InternalBromium.g:739:5: lv_subpath_2_0= RULE_STRING
             {
             lv_subpath_2_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
@@ -1750,7 +1778,7 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTypeTextInElementFoundByCssSelector"
-    // InternalBromium.g:747:1: entryRuleTypeTextInElementFoundByCssSelector returns [EObject current=null] : iv_ruleTypeTextInElementFoundByCssSelector= ruleTypeTextInElementFoundByCssSelector EOF ;
+    // InternalBromium.g:759:1: entryRuleTypeTextInElementFoundByCssSelector returns [EObject current=null] : iv_ruleTypeTextInElementFoundByCssSelector= ruleTypeTextInElementFoundByCssSelector EOF ;
     public final EObject entryRuleTypeTextInElementFoundByCssSelector() throws RecognitionException {
         EObject current = null;
 
@@ -1758,8 +1786,8 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBromium.g:747:76: (iv_ruleTypeTextInElementFoundByCssSelector= ruleTypeTextInElementFoundByCssSelector EOF )
-            // InternalBromium.g:748:2: iv_ruleTypeTextInElementFoundByCssSelector= ruleTypeTextInElementFoundByCssSelector EOF
+            // InternalBromium.g:759:76: (iv_ruleTypeTextInElementFoundByCssSelector= ruleTypeTextInElementFoundByCssSelector EOF )
+            // InternalBromium.g:760:2: iv_ruleTypeTextInElementFoundByCssSelector= ruleTypeTextInElementFoundByCssSelector EOF
             {
              newCompositeNode(grammarAccess.getTypeTextInElementFoundByCssSelectorRule()); 
             pushFollow(FOLLOW_1);
@@ -1786,7 +1814,7 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTypeTextInElementFoundByCssSelector"
-    // InternalBromium.g:754:1: ruleTypeTextInElementFoundByCssSelector returns [EObject current=null] : (otherlv_0= 'type' ( (lv_text_1_0= ruleParameterValue ) ) otherlv_2= 'in' otherlv_3= 'element' otherlv_4= 'with' otherlv_5= 'css' otherlv_6= 'selector' ( (lv_cssSelector_7_0= ruleParameterValue ) ) ) ;
+    // InternalBromium.g:766:1: ruleTypeTextInElementFoundByCssSelector returns [EObject current=null] : (otherlv_0= 'type' ( (lv_text_1_0= ruleParameterValue ) ) otherlv_2= 'in' otherlv_3= 'element' otherlv_4= 'with' otherlv_5= 'css' otherlv_6= 'selector' ( (lv_cssSelector_7_0= ruleParameterValue ) ) ) ;
     public final EObject ruleTypeTextInElementFoundByCssSelector() throws RecognitionException {
         EObject current = null;
 
@@ -1805,21 +1833,21 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBromium.g:760:2: ( (otherlv_0= 'type' ( (lv_text_1_0= ruleParameterValue ) ) otherlv_2= 'in' otherlv_3= 'element' otherlv_4= 'with' otherlv_5= 'css' otherlv_6= 'selector' ( (lv_cssSelector_7_0= ruleParameterValue ) ) ) )
-            // InternalBromium.g:761:2: (otherlv_0= 'type' ( (lv_text_1_0= ruleParameterValue ) ) otherlv_2= 'in' otherlv_3= 'element' otherlv_4= 'with' otherlv_5= 'css' otherlv_6= 'selector' ( (lv_cssSelector_7_0= ruleParameterValue ) ) )
+            // InternalBromium.g:772:2: ( (otherlv_0= 'type' ( (lv_text_1_0= ruleParameterValue ) ) otherlv_2= 'in' otherlv_3= 'element' otherlv_4= 'with' otherlv_5= 'css' otherlv_6= 'selector' ( (lv_cssSelector_7_0= ruleParameterValue ) ) ) )
+            // InternalBromium.g:773:2: (otherlv_0= 'type' ( (lv_text_1_0= ruleParameterValue ) ) otherlv_2= 'in' otherlv_3= 'element' otherlv_4= 'with' otherlv_5= 'css' otherlv_6= 'selector' ( (lv_cssSelector_7_0= ruleParameterValue ) ) )
             {
-            // InternalBromium.g:761:2: (otherlv_0= 'type' ( (lv_text_1_0= ruleParameterValue ) ) otherlv_2= 'in' otherlv_3= 'element' otherlv_4= 'with' otherlv_5= 'css' otherlv_6= 'selector' ( (lv_cssSelector_7_0= ruleParameterValue ) ) )
-            // InternalBromium.g:762:3: otherlv_0= 'type' ( (lv_text_1_0= ruleParameterValue ) ) otherlv_2= 'in' otherlv_3= 'element' otherlv_4= 'with' otherlv_5= 'css' otherlv_6= 'selector' ( (lv_cssSelector_7_0= ruleParameterValue ) )
+            // InternalBromium.g:773:2: (otherlv_0= 'type' ( (lv_text_1_0= ruleParameterValue ) ) otherlv_2= 'in' otherlv_3= 'element' otherlv_4= 'with' otherlv_5= 'css' otherlv_6= 'selector' ( (lv_cssSelector_7_0= ruleParameterValue ) ) )
+            // InternalBromium.g:774:3: otherlv_0= 'type' ( (lv_text_1_0= ruleParameterValue ) ) otherlv_2= 'in' otherlv_3= 'element' otherlv_4= 'with' otherlv_5= 'css' otherlv_6= 'selector' ( (lv_cssSelector_7_0= ruleParameterValue ) )
             {
             otherlv_0=(Token)match(input,38,FOLLOW_23); 
 
             			newLeafNode(otherlv_0, grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTypeKeyword_0());
             		
-            // InternalBromium.g:766:3: ( (lv_text_1_0= ruleParameterValue ) )
-            // InternalBromium.g:767:4: (lv_text_1_0= ruleParameterValue )
+            // InternalBromium.g:778:3: ( (lv_text_1_0= ruleParameterValue ) )
+            // InternalBromium.g:779:4: (lv_text_1_0= ruleParameterValue )
             {
-            // InternalBromium.g:767:4: (lv_text_1_0= ruleParameterValue )
-            // InternalBromium.g:768:5: lv_text_1_0= ruleParameterValue
+            // InternalBromium.g:779:4: (lv_text_1_0= ruleParameterValue )
+            // InternalBromium.g:780:5: lv_text_1_0= ruleParameterValue
             {
 
             					newCompositeNode(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTextParameterValueParserRuleCall_1_0());
@@ -1866,11 +1894,11 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_6, grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getSelectorKeyword_6());
             		
-            // InternalBromium.g:805:3: ( (lv_cssSelector_7_0= ruleParameterValue ) )
-            // InternalBromium.g:806:4: (lv_cssSelector_7_0= ruleParameterValue )
+            // InternalBromium.g:817:3: ( (lv_cssSelector_7_0= ruleParameterValue ) )
+            // InternalBromium.g:818:4: (lv_cssSelector_7_0= ruleParameterValue )
             {
-            // InternalBromium.g:806:4: (lv_cssSelector_7_0= ruleParameterValue )
-            // InternalBromium.g:807:5: lv_cssSelector_7_0= ruleParameterValue
+            // InternalBromium.g:818:4: (lv_cssSelector_7_0= ruleParameterValue )
+            // InternalBromium.g:819:5: lv_cssSelector_7_0= ruleParameterValue
             {
 
             					newCompositeNode(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getCssSelectorParameterValueParserRuleCall_7_0());
@@ -1920,7 +1948,7 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleParameterValue"
-    // InternalBromium.g:828:1: entryRuleParameterValue returns [EObject current=null] : iv_ruleParameterValue= ruleParameterValue EOF ;
+    // InternalBromium.g:840:1: entryRuleParameterValue returns [EObject current=null] : iv_ruleParameterValue= ruleParameterValue EOF ;
     public final EObject entryRuleParameterValue() throws RecognitionException {
         EObject current = null;
 
@@ -1928,8 +1956,8 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBromium.g:828:55: (iv_ruleParameterValue= ruleParameterValue EOF )
-            // InternalBromium.g:829:2: iv_ruleParameterValue= ruleParameterValue EOF
+            // InternalBromium.g:840:55: (iv_ruleParameterValue= ruleParameterValue EOF )
+            // InternalBromium.g:841:2: iv_ruleParameterValue= ruleParameterValue EOF
             {
              newCompositeNode(grammarAccess.getParameterValueRule()); 
             pushFollow(FOLLOW_1);
@@ -1956,7 +1984,7 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleParameterValue"
-    // InternalBromium.g:835:1: ruleParameterValue returns [EObject current=null] : ( ( (lv_content_0_0= RULE_STRING ) ) | ( (otherlv_1= RULE_ID ) ) ) ;
+    // InternalBromium.g:847:1: ruleParameterValue returns [EObject current=null] : ( ( (lv_content_0_0= RULE_STRING ) ) | ( (otherlv_1= RULE_ID ) ) ) ;
     public final EObject ruleParameterValue() throws RecognitionException {
         EObject current = null;
 
@@ -1967,10 +1995,10 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBromium.g:841:2: ( ( ( (lv_content_0_0= RULE_STRING ) ) | ( (otherlv_1= RULE_ID ) ) ) )
-            // InternalBromium.g:842:2: ( ( (lv_content_0_0= RULE_STRING ) ) | ( (otherlv_1= RULE_ID ) ) )
+            // InternalBromium.g:853:2: ( ( ( (lv_content_0_0= RULE_STRING ) ) | ( (otherlv_1= RULE_ID ) ) ) )
+            // InternalBromium.g:854:2: ( ( (lv_content_0_0= RULE_STRING ) ) | ( (otherlv_1= RULE_ID ) ) )
             {
-            // InternalBromium.g:842:2: ( ( (lv_content_0_0= RULE_STRING ) ) | ( (otherlv_1= RULE_ID ) ) )
+            // InternalBromium.g:854:2: ( ( (lv_content_0_0= RULE_STRING ) ) | ( (otherlv_1= RULE_ID ) ) )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -1988,13 +2016,13 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
             }
             switch (alt9) {
                 case 1 :
-                    // InternalBromium.g:843:3: ( (lv_content_0_0= RULE_STRING ) )
+                    // InternalBromium.g:855:3: ( (lv_content_0_0= RULE_STRING ) )
                     {
-                    // InternalBromium.g:843:3: ( (lv_content_0_0= RULE_STRING ) )
-                    // InternalBromium.g:844:4: (lv_content_0_0= RULE_STRING )
+                    // InternalBromium.g:855:3: ( (lv_content_0_0= RULE_STRING ) )
+                    // InternalBromium.g:856:4: (lv_content_0_0= RULE_STRING )
                     {
-                    // InternalBromium.g:844:4: (lv_content_0_0= RULE_STRING )
-                    // InternalBromium.g:845:5: lv_content_0_0= RULE_STRING
+                    // InternalBromium.g:856:4: (lv_content_0_0= RULE_STRING )
+                    // InternalBromium.g:857:5: lv_content_0_0= RULE_STRING
                     {
                     lv_content_0_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
@@ -2020,13 +2048,13 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalBromium.g:862:3: ( (otherlv_1= RULE_ID ) )
+                    // InternalBromium.g:874:3: ( (otherlv_1= RULE_ID ) )
                     {
-                    // InternalBromium.g:862:3: ( (otherlv_1= RULE_ID ) )
-                    // InternalBromium.g:863:4: (otherlv_1= RULE_ID )
+                    // InternalBromium.g:874:3: ( (otherlv_1= RULE_ID ) )
+                    // InternalBromium.g:875:4: (otherlv_1= RULE_ID )
                     {
-                    // InternalBromium.g:863:4: (otherlv_1= RULE_ID )
-                    // InternalBromium.g:864:5: otherlv_1= RULE_ID
+                    // InternalBromium.g:875:4: (otherlv_1= RULE_ID )
+                    // InternalBromium.g:876:5: otherlv_1= RULE_ID
                     {
 
                     					if (current==null) {
@@ -2069,7 +2097,7 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleExposedParameter"
-    // InternalBromium.g:879:1: entryRuleExposedParameter returns [EObject current=null] : iv_ruleExposedParameter= ruleExposedParameter EOF ;
+    // InternalBromium.g:891:1: entryRuleExposedParameter returns [EObject current=null] : iv_ruleExposedParameter= ruleExposedParameter EOF ;
     public final EObject entryRuleExposedParameter() throws RecognitionException {
         EObject current = null;
 
@@ -2077,8 +2105,8 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBromium.g:879:57: (iv_ruleExposedParameter= ruleExposedParameter EOF )
-            // InternalBromium.g:880:2: iv_ruleExposedParameter= ruleExposedParameter EOF
+            // InternalBromium.g:891:57: (iv_ruleExposedParameter= ruleExposedParameter EOF )
+            // InternalBromium.g:892:2: iv_ruleExposedParameter= ruleExposedParameter EOF
             {
              newCompositeNode(grammarAccess.getExposedParameterRule()); 
             pushFollow(FOLLOW_1);
@@ -2105,7 +2133,7 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleExposedParameter"
-    // InternalBromium.g:886:1: ruleExposedParameter returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // InternalBromium.g:898:1: ruleExposedParameter returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleExposedParameter() throws RecognitionException {
         EObject current = null;
 
@@ -2115,14 +2143,14 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBromium.g:892:2: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // InternalBromium.g:893:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalBromium.g:904:2: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // InternalBromium.g:905:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // InternalBromium.g:893:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalBromium.g:894:3: (lv_name_0_0= RULE_ID )
+            // InternalBromium.g:905:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalBromium.g:906:3: (lv_name_0_0= RULE_ID )
             {
-            // InternalBromium.g:894:3: (lv_name_0_0= RULE_ID )
-            // InternalBromium.g:895:4: lv_name_0_0= RULE_ID
+            // InternalBromium.g:906:3: (lv_name_0_0= RULE_ID )
+            // InternalBromium.g:907:4: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_2); 
 
@@ -2164,7 +2192,7 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVersion"
-    // InternalBromium.g:914:1: entryRuleVersion returns [String current=null] : iv_ruleVersion= ruleVersion EOF ;
+    // InternalBromium.g:926:1: entryRuleVersion returns [String current=null] : iv_ruleVersion= ruleVersion EOF ;
     public final String entryRuleVersion() throws RecognitionException {
         String current = null;
 
@@ -2172,8 +2200,8 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBromium.g:914:47: (iv_ruleVersion= ruleVersion EOF )
-            // InternalBromium.g:915:2: iv_ruleVersion= ruleVersion EOF
+            // InternalBromium.g:926:47: (iv_ruleVersion= ruleVersion EOF )
+            // InternalBromium.g:927:2: iv_ruleVersion= ruleVersion EOF
             {
              newCompositeNode(grammarAccess.getVersionRule()); 
             pushFollow(FOLLOW_1);
@@ -2200,7 +2228,7 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVersion"
-    // InternalBromium.g:921:1: ruleVersion returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_STRING_0= RULE_STRING ;
+    // InternalBromium.g:933:1: ruleVersion returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_STRING_0= RULE_STRING ;
     public final AntlrDatatypeRuleToken ruleVersion() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -2210,8 +2238,8 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBromium.g:927:2: (this_STRING_0= RULE_STRING )
-            // InternalBromium.g:928:2: this_STRING_0= RULE_STRING
+            // InternalBromium.g:939:2: (this_STRING_0= RULE_STRING )
+            // InternalBromium.g:940:2: this_STRING_0= RULE_STRING
             {
             this_STRING_0=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
