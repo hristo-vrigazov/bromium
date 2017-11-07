@@ -505,9 +505,9 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPageLoad_Subpath()
+  public EReference getPageLoad_Subpath()
   {
-    return (EAttribute)pageLoadEClass.getEStructuralFeatures().get(0);
+    return (EReference)pageLoadEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -748,7 +748,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     createEReference(clickCssSelectorEClass, CLICK_CSS_SELECTOR__CSS_SELECTOR);
 
     pageLoadEClass = createEClass(PAGE_LOAD);
-    createEAttribute(pageLoadEClass, PAGE_LOAD__SUBPATH);
+    createEReference(pageLoadEClass, PAGE_LOAD__SUBPATH);
 
     typeTextInElementFoundByCssSelectorEClass = createEClass(TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR);
     createEReference(typeTextInElementFoundByCssSelectorEClass, TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR__TEXT);
@@ -849,7 +849,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     initEReference(getClickCssSelector_CssSelector(), this.getParameterValue(), null, "cssSelector", null, 0, 1, ClickCssSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(pageLoadEClass, PageLoad.class, "PageLoad", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getPageLoad_Subpath(), ecorePackage.getEString(), "subpath", null, 0, 1, PageLoad.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPageLoad_Subpath(), this.getParameterValue(), null, "subpath", null, 0, 1, PageLoad.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeTextInElementFoundByCssSelectorEClass, TypeTextInElementFoundByCssSelector.class, "TypeTextInElementFoundByCssSelector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTypeTextInElementFoundByCssSelector_Text(), this.getParameterValue(), null, "text", null, 0, 1, TypeTextInElementFoundByCssSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

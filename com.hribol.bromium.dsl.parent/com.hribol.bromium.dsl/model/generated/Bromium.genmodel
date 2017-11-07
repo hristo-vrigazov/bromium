@@ -42,7 +42,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ClickCssSelector/cssSelector"/>
     </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//PageLoad">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//PageLoad/subpath"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//PageLoad/subpath"/>
     </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//TypeTextInElementFoundByCssSelector">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//TypeTextInElementFoundByCssSelector/text"/>

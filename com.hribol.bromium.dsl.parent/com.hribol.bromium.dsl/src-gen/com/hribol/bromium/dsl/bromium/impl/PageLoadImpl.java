@@ -5,10 +5,13 @@ package com.hribol.bromium.dsl.bromium.impl;
 
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.PageLoad;
+import com.hribol.bromium.dsl.bromium.ParameterValue;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -28,24 +31,14 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 public class PageLoadImpl extends WebDriverActionImpl implements PageLoad
 {
   /**
-   * The default value of the '{@link #getSubpath() <em>Subpath</em>}' attribute.
+   * The cached value of the '{@link #getSubpath() <em>Subpath</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getSubpath()
    * @generated
    * @ordered
    */
-  protected static final String SUBPATH_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getSubpath() <em>Subpath</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getSubpath()
-   * @generated
-   * @ordered
-   */
-  protected String subpath = SUBPATH_EDEFAULT;
+  protected ParameterValue subpath;
 
   /**
    * <!-- begin-user-doc -->
@@ -73,7 +66,7 @@ public class PageLoadImpl extends WebDriverActionImpl implements PageLoad
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getSubpath()
+  public ParameterValue getSubpath()
   {
     return subpath;
   }
@@ -83,12 +76,53 @@ public class PageLoadImpl extends WebDriverActionImpl implements PageLoad
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSubpath(String newSubpath)
+  public NotificationChain basicSetSubpath(ParameterValue newSubpath, NotificationChain msgs)
   {
-    String oldSubpath = subpath;
+    ParameterValue oldSubpath = subpath;
     subpath = newSubpath;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.PAGE_LOAD__SUBPATH, oldSubpath, subpath));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BromiumPackage.PAGE_LOAD__SUBPATH, oldSubpath, newSubpath);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setSubpath(ParameterValue newSubpath)
+  {
+    if (newSubpath != subpath)
+    {
+      NotificationChain msgs = null;
+      if (subpath != null)
+        msgs = ((InternalEObject)subpath).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.PAGE_LOAD__SUBPATH, null, msgs);
+      if (newSubpath != null)
+        msgs = ((InternalEObject)newSubpath).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.PAGE_LOAD__SUBPATH, null, msgs);
+      msgs = basicSetSubpath(newSubpath, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.PAGE_LOAD__SUBPATH, newSubpath, newSubpath));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case BromiumPackage.PAGE_LOAD__SUBPATH:
+        return basicSetSubpath(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -118,7 +152,7 @@ public class PageLoadImpl extends WebDriverActionImpl implements PageLoad
     switch (featureID)
     {
       case BromiumPackage.PAGE_LOAD__SUBPATH:
-        setSubpath((String)newValue);
+        setSubpath((ParameterValue)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -135,7 +169,7 @@ public class PageLoadImpl extends WebDriverActionImpl implements PageLoad
     switch (featureID)
     {
       case BromiumPackage.PAGE_LOAD__SUBPATH:
-        setSubpath(SUBPATH_EDEFAULT);
+        setSubpath((ParameterValue)null);
         return;
     }
     super.eUnset(featureID);
@@ -152,26 +186,9 @@ public class PageLoadImpl extends WebDriverActionImpl implements PageLoad
     switch (featureID)
     {
       case BromiumPackage.PAGE_LOAD__SUBPATH:
-        return SUBPATH_EDEFAULT == null ? subpath != null : !SUBPATH_EDEFAULT.equals(subpath);
+        return subpath != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (subpath: ");
-    result.append(subpath);
-    result.append(')');
-    return result.toString();
   }
 
 } //PageLoadImpl

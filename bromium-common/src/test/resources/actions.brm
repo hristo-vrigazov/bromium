@@ -3,7 +3,7 @@ version '8.2.5'
 actions {
 
     id typeUsernameField
-    syntax 'Type ' username ' into username field '
+    syntax 'Type' username 'into username field'
     when element with css selector '#login' is present
     type username in element with css selector '#login'
     then make sure element with css selector '#pass' is present
@@ -15,7 +15,7 @@ actions {
     do not expect http request
 
     id typePasswordField
-    syntax 'Type ' pass ' into password field'
+    syntax 'Type' pass 'into password field'
     type pass in element with css selector '#pass'
     do expect http request
 

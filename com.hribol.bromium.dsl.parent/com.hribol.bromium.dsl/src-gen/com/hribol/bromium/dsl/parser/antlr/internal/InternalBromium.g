@@ -772,19 +772,20 @@ rulePageLoad returns [EObject current=null]
 		}
 		(
 			(
-				lv_subpath_2_0=RULE_STRING
 				{
-					newLeafNode(lv_subpath_2_0, grammarAccess.getPageLoadAccess().getSubpathSTRINGTerminalRuleCall_2_0());
+					newCompositeNode(grammarAccess.getPageLoadAccess().getSubpathParameterValueParserRuleCall_2_0());
 				}
+				lv_subpath_2_0=ruleParameterValue
 				{
 					if ($current==null) {
-						$current = createModelElement(grammarAccess.getPageLoadRule());
+						$current = createModelElementForParent(grammarAccess.getPageLoadRule());
 					}
-					setWithLastConsumed(
+					set(
 						$current,
 						"subpath",
 						lv_subpath_2_0,
-						"org.eclipse.xtext.common.Terminals.STRING");
+						"com.hribol.bromium.dsl.Bromium.ParameterValue");
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)

@@ -1,11 +1,14 @@
 package com.hribol.bromium.common.parsing;
 
 import com.google.inject.Injector;
+import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
+import com.hribol.bromium.core.config.SyntaxDefinitionConfiguration;
 import com.hribol.bromium.core.parsing.ApplicationConfigurationParser;
 import com.hribol.bromium.dsl.BromiumStandaloneSetup;
+import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.Model;
-import com.hribol.bromium.dsl.bromium.impl.ModelImpl;
+import com.hribol.bromium.dsl.bromium.SyntaxDefinition;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -47,6 +50,17 @@ public class DslParser implements ApplicationConfigurationParser {
         ApplicationConfiguration applicationConfiguration = new ApplicationConfiguration();
         applicationConfiguration.setApplicationName(model.getName());
         applicationConfiguration.setVersion(model.getVersion());
+
+        for (ApplicationAction applicationAction: model.getActions()) {
+            ApplicationActionConfiguration applicationActionConfiguration = new ApplicationActionConfiguration();
+            applicationActionConfiguration.setName(applicationAction.getName());
+
+            for (SyntaxDefinition syntaxDefinition: applicationAction.getSyntaxDefinitions())  {
+
+            }
+
+            applicationConfiguration.addApplicationActionConfiguration(applicationActionConfiguration);
+        }
 
         return applicationConfiguration;
     }

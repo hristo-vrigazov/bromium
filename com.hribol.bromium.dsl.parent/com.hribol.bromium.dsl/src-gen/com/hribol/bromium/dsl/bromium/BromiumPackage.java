@@ -420,7 +420,7 @@ public interface BromiumPackage extends EPackage
   int PAGE_LOAD = 10;
 
   /**
-   * The feature id for the '<em><b>Subpath</b></em>' attribute.
+   * The feature id for the '<em><b>Subpath</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -958,15 +958,15 @@ public interface BromiumPackage extends EPackage
   EClass getPageLoad();
 
   /**
-   * Returns the meta object for the attribute '{@link com.hribol.bromium.dsl.bromium.PageLoad#getSubpath <em>Subpath</em>}'.
+   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.PageLoad#getSubpath <em>Subpath</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Subpath</em>'.
+   * @return the meta object for the containment reference '<em>Subpath</em>'.
    * @see com.hribol.bromium.dsl.bromium.PageLoad#getSubpath()
    * @see #getPageLoad()
    * @generated
    */
-  EAttribute getPageLoad_Subpath();
+  EReference getPageLoad_Subpath();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector <em>Type Text In Element Found By Css Selector</em>}'.
@@ -1419,12 +1419,12 @@ public interface BromiumPackage extends EPackage
     EClass PAGE_LOAD = eINSTANCE.getPageLoad();
 
     /**
-     * The meta object literal for the '<em><b>Subpath</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Subpath</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute PAGE_LOAD__SUBPATH = eINSTANCE.getPageLoad_Subpath();
+    EReference PAGE_LOAD__SUBPATH = eINSTANCE.getPageLoad_Subpath();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.TypeTextInElementFoundByCssSelectorImpl <em>Type Text In Element Found By Css Selector</em>}' class.

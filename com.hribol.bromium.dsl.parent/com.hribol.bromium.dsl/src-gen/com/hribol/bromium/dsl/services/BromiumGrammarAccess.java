@@ -439,13 +439,13 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLoadKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cPageKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cSubpathAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cSubpathSTRINGTerminalRuleCall_2_0 = (RuleCall)cSubpathAssignment_2.eContents().get(0);
+		private final RuleCall cSubpathParameterValueParserRuleCall_2_0 = (RuleCall)cSubpathAssignment_2.eContents().get(0);
 		
 		//PageLoad:
-		//	'load' 'page' subpath=STRING;
+		//	'load' 'page' subpath=ParameterValue;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'load' 'page' subpath=STRING
+		//'load' 'page' subpath=ParameterValue
 		public Group getGroup() { return cGroup; }
 		
 		//'load'
@@ -454,11 +454,11 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		//'page'
 		public Keyword getPageKeyword_1() { return cPageKeyword_1; }
 		
-		//subpath=STRING
+		//subpath=ParameterValue
 		public Assignment getSubpathAssignment_2() { return cSubpathAssignment_2; }
 		
-		//STRING
-		public RuleCall getSubpathSTRINGTerminalRuleCall_2_0() { return cSubpathSTRINGTerminalRuleCall_2_0; }
+		//ParameterValue
+		public RuleCall getSubpathParameterValueParserRuleCall_2_0() { return cSubpathParameterValueParserRuleCall_2_0; }
 	}
 	public class TypeTextInElementFoundByCssSelectorElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.TypeTextInElementFoundByCssSelector");
@@ -911,7 +911,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//PageLoad:
-	//	'load' 'page' subpath=STRING;
+	//	'load' 'page' subpath=ParameterValue;
 	public PageLoadElements getPageLoadAccess() {
 		return pPageLoad;
 	}

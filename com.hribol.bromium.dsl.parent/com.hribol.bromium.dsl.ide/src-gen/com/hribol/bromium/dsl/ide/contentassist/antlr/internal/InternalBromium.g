@@ -2920,9 +2920,9 @@ rule__PageLoad__SubpathAssignment_2
 	}
 :
 	(
-		{ before(grammarAccess.getPageLoadAccess().getSubpathSTRINGTerminalRuleCall_2_0()); }
-		RULE_STRING
-		{ after(grammarAccess.getPageLoadAccess().getSubpathSTRINGTerminalRuleCall_2_0()); }
+		{ before(grammarAccess.getPageLoadAccess().getSubpathParameterValueParserRuleCall_2_0()); }
+		ruleParameterValue
+		{ after(grammarAccess.getPageLoadAccess().getSubpathParameterValueParserRuleCall_2_0()); }
 	)
 ;
 finally {

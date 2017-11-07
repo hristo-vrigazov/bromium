@@ -23,29 +23,29 @@ package com.hribol.bromium.dsl.bromium;
 public interface PageLoad extends WebDriverAction
 {
   /**
-   * Returns the value of the '<em><b>Subpath</b></em>' attribute.
+   * Returns the value of the '<em><b>Subpath</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Subpath</em>' attribute isn't clear,
+   * If the meaning of the '<em>Subpath</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Subpath</em>' attribute.
-   * @see #setSubpath(String)
+   * @return the value of the '<em>Subpath</em>' containment reference.
+   * @see #setSubpath(ParameterValue)
    * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getPageLoad_Subpath()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getSubpath();
+  ParameterValue getSubpath();
 
   /**
-   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.PageLoad#getSubpath <em>Subpath</em>}' attribute.
+   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.PageLoad#getSubpath <em>Subpath</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Subpath</em>' attribute.
+   * @param value the new value of the '<em>Subpath</em>' containment reference.
    * @see #getSubpath()
    * @generated
    */
-  void setSubpath(String value);
+  void setSubpath(ParameterValue value);
 
 } // PageLoad

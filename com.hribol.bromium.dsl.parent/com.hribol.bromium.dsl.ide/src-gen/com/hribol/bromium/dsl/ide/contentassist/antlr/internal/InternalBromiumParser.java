@@ -5730,7 +5730,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1906:1: ( rule__PageLoad__Group__1__Impl rule__PageLoad__Group__2 )
             // InternalBromium.g:1907:2: rule__PageLoad__Group__1__Impl rule__PageLoad__Group__2
             {
-            pushFollow(FOLLOW_3);
+            pushFollow(FOLLOW_23);
             rule__PageLoad__Group__1__Impl();
 
             state._fsp--;
@@ -8556,21 +8556,25 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PageLoad__SubpathAssignment_2"
-    // InternalBromium.g:2917:1: rule__PageLoad__SubpathAssignment_2 : ( RULE_STRING ) ;
+    // InternalBromium.g:2917:1: rule__PageLoad__SubpathAssignment_2 : ( ruleParameterValue ) ;
     public final void rule__PageLoad__SubpathAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2921:1: ( ( RULE_STRING ) )
-            // InternalBromium.g:2922:2: ( RULE_STRING )
+            // InternalBromium.g:2921:1: ( ( ruleParameterValue ) )
+            // InternalBromium.g:2922:2: ( ruleParameterValue )
             {
-            // InternalBromium.g:2922:2: ( RULE_STRING )
-            // InternalBromium.g:2923:3: RULE_STRING
+            // InternalBromium.g:2922:2: ( ruleParameterValue )
+            // InternalBromium.g:2923:3: ruleParameterValue
             {
-             before(grammarAccess.getPageLoadAccess().getSubpathSTRINGTerminalRuleCall_2_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getPageLoadAccess().getSubpathSTRINGTerminalRuleCall_2_0()); 
+             before(grammarAccess.getPageLoadAccess().getSubpathParameterValueParserRuleCall_2_0()); 
+            pushFollow(FOLLOW_2);
+            ruleParameterValue();
+
+            state._fsp--;
+
+             after(grammarAccess.getPageLoadAccess().getSubpathParameterValueParserRuleCall_2_0()); 
 
             }
 

@@ -223,7 +223,7 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     PageLoad returns PageLoad
 	 *
 	 * Constraint:
-	 *     subpath=STRING
+	 *     subpath=ParameterValue
 	 */
 	protected void sequence_PageLoad(ISerializationContext context, PageLoad semanticObject) {
 		if (errorAcceptor != null) {
@@ -231,7 +231,7 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.PAGE_LOAD__SUBPATH));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPageLoadAccess().getSubpathSTRINGTerminalRuleCall_2_0(), semanticObject.getSubpath());
+		feeder.accept(grammarAccess.getPageLoadAccess().getSubpathParameterValueParserRuleCall_2_0(), semanticObject.getSubpath());
 		feeder.finish();
 	}
 	
