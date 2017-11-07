@@ -40,12 +40,6 @@ public class DslParserTest {
     private IResourceValidator resourceValidator;
     private DslConfigurationConverter dslConfigurationConverter;
 
-    public static final String EXAMPLE_NAME = "Example name";
-    public static final String EXAMPLE_VERSION = "8.2.5";
-    public static final String TYPE_USERNAME_FIELD = "typeUsernameField";
-    public static final String TYPE = "Type";
-    public static final String USERNAME = "username";
-
     @Test
     public void ifNoIssuesThenDelegatedToConverter() throws IOException {
         File file = new File(getClass().getResource("/name.brm").getFile());
