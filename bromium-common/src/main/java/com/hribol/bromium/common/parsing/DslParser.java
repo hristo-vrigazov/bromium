@@ -56,7 +56,12 @@ public class DslParser implements ApplicationConfigurationParser {
             applicationActionConfiguration.setName(applicationAction.getName());
 
             for (SyntaxDefinition syntaxDefinition: applicationAction.getSyntaxDefinitions())  {
-
+                SyntaxDefinitionConfiguration syntaxDefinitionConfiguration = new SyntaxDefinitionConfiguration();
+                syntaxDefinitionConfiguration.setContent(syntaxDefinition.getContent());
+                if (syntaxDefinition.getParameter() != null) {
+                    syntaxDefinitionConfiguration.setExposedParameter(syntaxDefinition.getParameter().getName());
+                }
+                applicationActionConfiguration.addSyntaxDefinition(syntaxDefinitionConfiguration);
             }
 
             applicationConfiguration.addApplicationActionConfiguration(applicationActionConfiguration);

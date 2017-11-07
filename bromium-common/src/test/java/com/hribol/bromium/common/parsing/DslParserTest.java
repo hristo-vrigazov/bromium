@@ -21,6 +21,7 @@ public class DslParserTest {
     public static final String EXAMPLE_VERSION = "8.2.5";
     public static final String TYPE_USERNAME_FIELD = "typeUsernameField";
     public static final String TYPE = "Type";
+    public static final String USERNAME = "username";
 
     @Test
     public void parsesNameAndThreeDottedVersionCorrectly() throws IOException {
@@ -49,6 +50,7 @@ public class DslParserTest {
         List<SyntaxDefinitionConfiguration> syntaxDefinitionConfigurations = typeUserNameField.getSyntaxDefinitionConfigurationList();
 
         assertEquals(TYPE, syntaxDefinitionConfigurations.get(0).getContent());
+        assertEquals(USERNAME, syntaxDefinitionConfigurations.get(0).getExposedParameter());
     }
 
 
