@@ -1,6 +1,7 @@
 package com.hribol.bromium.common.parsing;
 
 import com.google.inject.Injector;
+import com.hribol.bromium.common.parsing.dsl.convert.DslConfigurationConverter;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.config.SyntaxDefinitionConfiguration;
@@ -28,11 +29,12 @@ public class DslParser implements ApplicationConfigurationParser {
 
     private ResourceSet resourceSet;
     private IResourceValidator validator;
+    private DslConfigurationConverter dslConfigurationConverter;
 
-    public DslParser() {
-        Injector injector = new BromiumStandaloneSetup().createInjectorAndDoEMFRegistration();
-        resourceSet = injector.getInstance(ResourceSet.class);
-        validator = injector.getInstance(IResourceValidator.class);
+    public DslParser(ResourceSet resourceSet, IResourceValidator validator, DslConfigurationConverter dslConfigurationConverter) {
+        this.resourceSet = resourceSet;
+        this.validator = validator;
+        this.dslConfigurationConverter = dslConfigurationConverter;
     }
 
     @Override
@@ -46,28 +48,7 @@ public class DslParser implements ApplicationConfigurationParser {
         }
 
         Model model = (Model) resource.getAllContents().next();
-
-        ApplicationConfiguration applicationConfiguration = new ApplicationConfiguration();
-        applicationConfiguration.setApplicationName(model.getName());
-        applicationConfiguration.setVersion(model.getVersion());
-
-        for (ApplicationAction applicationAction: model.getActions()) {
-            ApplicationActionConfiguration applicationActionConfiguration = new ApplicationActionConfiguration();
-            applicationActionConfiguration.setName(applicationAction.getName());
-
-            for (SyntaxDefinition syntaxDefinition: applicationAction.getSyntaxDefinitions())  {
-                SyntaxDefinitionConfiguration syntaxDefinitionConfiguration = new SyntaxDefinitionConfiguration();
-                syntaxDefinitionConfiguration.setContent(syntaxDefinition.getContent());
-                if (syntaxDefinition.getParameter() != null) {
-                    syntaxDefinitionConfiguration.setExposedParameter(syntaxDefinition.getParameter().getName());
-                }
-                applicationActionConfiguration.addSyntaxDefinition(syntaxDefinitionConfiguration);
-            }
-
-            applicationConfiguration.addApplicationActionConfiguration(applicationActionConfiguration);
-        }
-
-        return applicationConfiguration;
+        return dslConfigurationConverter.convert(model);
     }
 
     @Override
