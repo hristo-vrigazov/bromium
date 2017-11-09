@@ -20,8 +20,10 @@ import static com.hribol.bromium.core.utils.JsEvents.CLICK;
 public class ClickClassByTextRecorderFunction implements RecorderFunction {
 
     private String javascriptCode;
+    private InvocationProvider invocationProvider;
 
-    public ClickClassByTextRecorderFunction(JsCollector jsCollector) {
+    public ClickClassByTextRecorderFunction(JsCollector jsCollector, InvocationProvider invocationProvider) {
+        this.invocationProvider = invocationProvider;
         this.javascriptCode = jsCollector
                 .declareFunction(CLICK_CLASS_BY_TEXT)
                     // text in here means the alias for text
@@ -61,6 +63,10 @@ public class ClickClassByTextRecorderFunction implements RecorderFunction {
                 .get(TEXT)
                 .getAlias();
 
-        return new ClickClassByTextRecorderInvocation(initialCollectorClass, aliasText, eventName);
+        return invocationProvider.get(initialCollectorClass, aliasText, eventName);
+    }
+
+    public interface InvocationProvider {
+        RecorderFunctionInvocation get(String initialCollectorClass, String aliasText, String eventName);
     }
 }

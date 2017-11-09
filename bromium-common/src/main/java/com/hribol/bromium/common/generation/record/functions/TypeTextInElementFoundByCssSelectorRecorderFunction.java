@@ -15,8 +15,9 @@ import static com.hribol.bromium.core.utils.JsEvents.CHANGE;
 public class TypeTextInElementFoundByCssSelectorRecorderFunction implements RecorderFunction {
 
     private String functionDeclarationCode;
+    private InvocationProvider invocationProvider;
 
-    public TypeTextInElementFoundByCssSelectorRecorderFunction(JsCollector jsCollector) {
+    public TypeTextInElementFoundByCssSelectorRecorderFunction(JsCollector jsCollector, InvocationProvider invocationProvider) {
         this.functionDeclarationCode = jsCollector
                 .declareFunction(TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR)
                 .withParameters(CSS_SELECTOR, EVENT_NAME, TEXT)
@@ -34,6 +35,8 @@ public class TypeTextInElementFoundByCssSelectorRecorderFunction implements Reco
                     .endArriveHandler()
                 .endBody()
                 .build();
+
+        this.invocationProvider = invocationProvider;
     }
 
     @Override
@@ -52,6 +55,10 @@ public class TypeTextInElementFoundByCssSelectorRecorderFunction implements Reco
                 .getParametersConfiguration()
                 .get(TEXT)
                 .getAlias();
-        return new TypeTextInElementFoundByCssSelectorRecorderFunctionInvocation(cssSelector, eventName, textAlias);
+        return invocationProvider.get(cssSelector, eventName, textAlias);
+    }
+
+    public interface InvocationProvider {
+        RecorderFunctionInvocation get(String cssSelector, String eventName, String textAlias);
     }
 }

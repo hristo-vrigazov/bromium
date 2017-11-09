@@ -1,10 +1,14 @@
 package com.hribol.bromium.common.generation.record.functions;
 
+import com.hribol.bromium.common.generation.record.invocations.RecorderFunctionInvocation;
 import org.junit.Test;
 
 import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSpace;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 /**
@@ -23,23 +27,35 @@ public class ClickCssSelectorRecorderFunctionTest {
             "\t});\n" +
             "}";
 
+    private ClickCssSelectorRecorderFunction.InvocationProvider invocationProvider;
+
     @Test
     public void buildsDeclarationFunction() throws Exception {
-        RecorderFunctionMocks mocks = new RecorderFunctionMocks(expected);
+        invocationProvider = mock(ClickCssSelectorRecorderFunction.InvocationProvider.class);
+        RecorderFunctionMocks mocks = new RecorderFunctionMocks();
 
         ClickCssSelectorRecorderFunction clickCssSelectorRecorderFunction =
-                new ClickCssSelectorRecorderFunction(mocks.getJsCollector());
+                new ClickCssSelectorRecorderFunction(mocks.getJsCollector(), invocationProvider);
 
         assertTrue(equalToIgnoringWhiteSpace(expected).matches(clickCssSelectorRecorderFunction.getJavascriptCode()));
     }
 
     @Test
     public void createsNotNullRecorderFunction() throws Exception {
-        RecorderFunctionMocks mocks = new RecorderFunctionMocks(expected);
+        RecorderFunctionInvocation expected = mock(RecorderFunctionInvocation.class);
+        invocationProvider = mock(ClickCssSelectorRecorderFunction.InvocationProvider.class);
 
-        ClickCssSelectorRecorderFunction clickCssSelectorRecorderFunction = new ClickCssSelectorRecorderFunction(mocks.getJsCollector());
+        RecorderFunctionMocks mocks = new RecorderFunctionMocks();
 
-        assertNotNull(clickCssSelectorRecorderFunction.getInvocation(mocks.getNameWebDriverActionConfiguration()));
+        when(invocationProvider.get(mocks.getCssSelector(), mocks.getEventName()))
+                .thenReturn(expected);
+
+        ClickCssSelectorRecorderFunction clickCssSelectorRecorderFunction =
+                new ClickCssSelectorRecorderFunction(mocks.getJsCollector(), invocationProvider);
+
+        RecorderFunctionInvocation actual = clickCssSelectorRecorderFunction.getInvocation(mocks.getNameWebDriverActionConfiguration());
+
+        assertEquals(expected, actual);
     }
 
 }
