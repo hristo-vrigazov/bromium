@@ -22,8 +22,9 @@ import static com.hribol.bromium.core.utils.Constants.TEXT;
 public class TextOfElementFoundByCssSelectorToBeReplayFunction implements ReplayFunction {
 
     private String functionDeclarationCode;
+    private InvocationProvider invocationProvider;
 
-    public TextOfElementFoundByCssSelectorToBeReplayFunction(JsCollector jsCollector) {
+    public TextOfElementFoundByCssSelectorToBeReplayFunction(JsCollector jsCollector, InvocationProvider invocationProvider) {
         this.functionDeclarationCode = jsCollector
                 .declareFunction(TEXT_OF_ELEMENT_FOUND_BY_CSS_SELECTOR_TO_BE)
                 .withParameters(CSS_SELECTOR, TEXT, HASHCODE)
@@ -36,6 +37,7 @@ public class TextOfElementFoundByCssSelectorToBeReplayFunction implements Replay
                     .endLeaveHandler()
                 .endBody()
                 .build();
+        this.invocationProvider = invocationProvider;
     }
 
     @Override
@@ -51,6 +53,10 @@ public class TextOfElementFoundByCssSelectorToBeReplayFunction implements Replay
         ParameterConfiguration textConfiguration = parametersConfiguration.get(TEXT);
         String text = textConfiguration.getValue();
         String hashCode = String.valueOf(MessageFormat.format("{0} {1} {2}", TEXT_OF_ELEMENT_FOUND_BY_CSS_SELECTOR_TO_BE, cssSelector, text).hashCode());
-        return new TextOfElementFoundByCssSelectorToBeInvocation(cssSelector, text, hashCode);
+        return invocationProvider.get(cssSelector, text, hashCode);
+    }
+
+    public interface InvocationProvider {
+        TextOfElementFoundByCssSelectorToBeInvocation get(String cssSelector, String text, String hashCode);
     }
 }

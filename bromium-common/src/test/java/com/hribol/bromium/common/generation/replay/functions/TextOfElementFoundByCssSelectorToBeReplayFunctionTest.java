@@ -24,10 +24,14 @@ import static org.mockito.Mockito.*;
  */
 public class TextOfElementFoundByCssSelectorToBeReplayFunctionTest {
 
+
     @Test
     public void generatesInCorrectWay() {
         JsCollector jsCollector = new JsCollector();
-        ReplayFunction replayFunction = new TextOfElementFoundByCssSelectorToBeReplayFunction(jsCollector);
+        TextOfElementFoundByCssSelectorToBeReplayFunction.InvocationProvider invocationProvider =
+                mock(TextOfElementFoundByCssSelectorToBeReplayFunction.InvocationProvider.class);
+
+        ReplayFunction replayFunction = new TextOfElementFoundByCssSelectorToBeReplayFunction(jsCollector, invocationProvider);
 
         String expected = "function TextOfElementFoundByCssSelectorToBe(cssSelector, text, hashCode) {\n" +
                 "\tdocument.arrive(cssSelector, options, function () {\n" +
@@ -58,11 +62,17 @@ public class TextOfElementFoundByCssSelectorToBeReplayFunctionTest {
         StepAndWebDriverActionConfiguration stepAndWebDriverActionConfiguration = mock(StepAndWebDriverActionConfiguration.class, RETURNS_DEEP_STUBS);
         when(stepAndWebDriverActionConfiguration.getGenerationFunctionInformation().getParametersConfiguration())
                 .thenReturn(parameterConfigurationMap);
+        TextOfElementFoundByCssSelectorToBeInvocation invocation = mock(TextOfElementFoundByCssSelectorToBeInvocation.class);
 
-        ReplayFunction replayFunction = new TextOfElementFoundByCssSelectorToBeReplayFunction(jsCollector);
-        ReplayFunctionInvocation invocation = replayFunction.getInvocation(stepAndWebDriverActionConfiguration);
+        TextOfElementFoundByCssSelectorToBeReplayFunction.InvocationProvider invocationProvider =
+                mock(TextOfElementFoundByCssSelectorToBeReplayFunction.InvocationProvider.class);
 
-        assertTrue(invocation instanceof TextOfElementFoundByCssSelectorToBeInvocation);
+        when(invocationProvider.get(cssSelector, text, expected)).thenReturn(invocation);
+
+        ReplayFunction replayFunction = new TextOfElementFoundByCssSelectorToBeReplayFunction(jsCollector, invocationProvider);
+        ReplayFunctionInvocation actual = replayFunction.getInvocation(stepAndWebDriverActionConfiguration);
+
+        assertEquals(invocation, actual);
 
     }
 

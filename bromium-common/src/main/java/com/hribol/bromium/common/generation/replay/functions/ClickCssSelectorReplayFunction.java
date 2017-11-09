@@ -10,7 +10,7 @@ import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CSS_SELECT
  */
 public class ClickCssSelectorReplayFunction extends ElementArrivedReplayFunction {
 
-    public ClickCssSelectorReplayFunction(JsCollector jsCollector) {
-        super(CLICK_CSS_SELECTOR, jsCollector, ClickCssSelectorReplayInvocation::new);
+    public ClickCssSelectorReplayFunction(JsCollector jsCollector, ElementArrivedInvocationProvider invocationProvider) {
+        super(CLICK_CSS_SELECTOR, jsCollector, invocationProvider);
     }
 }

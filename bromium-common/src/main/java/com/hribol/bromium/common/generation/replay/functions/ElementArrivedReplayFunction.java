@@ -59,4 +59,5 @@ public class ElementArrivedReplayFunction implements ReplayFunction {
         ReplayFunctionInvocation get(String cssSelector, String hashCode);
     }
 
+
 }

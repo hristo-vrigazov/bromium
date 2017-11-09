@@ -2,7 +2,6 @@ package com.hribol.bromium.common.generation.replay.functions;
 
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfiguration;
-import com.hribol.bromium.common.generation.replay.invocations.ClickClassByTextReplayInvocation;
 import com.hribol.bromium.common.generation.replay.invocations.ReplayFunctionInvocation;
 import com.hribol.bromium.core.config.ParameterConfiguration;
 import com.hribol.bromium.core.utils.WebDriverActions;
@@ -21,9 +20,9 @@ import static com.hribol.bromium.core.utils.Constants.TEXT;
 public class ClickClassByTextReplayFunction implements ReplayFunction {
 
     private String javascriptCode;
-    private ClickClassByTextReplayInvocationProvider provider;
+    private InvocationProvider provider;
 
-    public ClickClassByTextReplayFunction(JsCollector jsCollector, ClickClassByTextReplayInvocationProvider provider) {
+    public ClickClassByTextReplayFunction(JsCollector jsCollector, InvocationProvider provider) {
         this.javascriptCode = jsCollector
                 .declareFunction(CLICK_CLASS_BY_TEXT)
                 .withParameters(INITIAL_COLLECTOR_CLASS, TEXT, HASHCODE)
@@ -53,7 +52,7 @@ public class ClickClassByTextReplayFunction implements ReplayFunction {
         return provider.get(initialCollectorClass, text, hashCode);
     }
 
-    public interface ClickClassByTextReplayInvocationProvider {
+    public interface InvocationProvider {
         ReplayFunctionInvocation get(String initialCollectorClass, String text, String hashCode);
     }
 }

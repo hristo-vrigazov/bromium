@@ -31,8 +31,8 @@ public class ClickClassByTextReplayFunctionTest {
                 "}";
 
         JsCollector jsCollector = new JsCollector();
-        ClickClassByTextReplayFunction.ClickClassByTextReplayInvocationProvider provider =
-                mock(ClickClassByTextReplayFunction.ClickClassByTextReplayInvocationProvider.class);
+        ClickClassByTextReplayFunction.InvocationProvider provider =
+                mock(ClickClassByTextReplayFunction.InvocationProvider.class);
 
         ReplayFunction replayFunction = new ClickClassByTextReplayFunction(jsCollector, provider);
         assertEquals(expected.trim(), replayFunction.getJavascriptCode().trim());
@@ -43,8 +43,8 @@ public class ClickClassByTextReplayFunctionTest {
         final String expectedHashCode = "-425754230";
         JsCollector jsCollector = new JsCollector();
         ReplayFunctionInvocation expected = mock(ReplayFunctionInvocation.class);
-        ClickClassByTextReplayFunction.ClickClassByTextReplayInvocationProvider provider =
-                mock(ClickClassByTextReplayFunction.ClickClassByTextReplayInvocationProvider.class);
+        ClickClassByTextReplayFunction.InvocationProvider provider =
+                mock(ClickClassByTextReplayFunction.InvocationProvider.class);
         when(provider.get(EXAMPLE_CLASS, EXAMPLE_TEXT_VALUE, expectedHashCode)).thenReturn(expected);
         StepAndWebDriverActionConfiguration stepAndWebDriverActionConfiguration = buildMock();
 

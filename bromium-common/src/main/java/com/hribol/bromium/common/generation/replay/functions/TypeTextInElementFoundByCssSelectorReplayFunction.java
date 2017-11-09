@@ -10,7 +10,7 @@ import static com.hribol.bromium.common.builder.JsFunctionNames.TYPE_TEXT_IN_ELE
  */
 public class TypeTextInElementFoundByCssSelectorReplayFunction extends ElementArrivedReplayFunction {
 
-    public TypeTextInElementFoundByCssSelectorReplayFunction(JsCollector jsCollector) {
-        super(TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR, jsCollector, TypeTextInElementFoundByCssSelectorReplayInvocation::new);
+    public TypeTextInElementFoundByCssSelectorReplayFunction(JsCollector jsCollector, ElementArrivedInvocationProvider invocationProvider) {
+        super(TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR, jsCollector, invocationProvider);
     }
 }

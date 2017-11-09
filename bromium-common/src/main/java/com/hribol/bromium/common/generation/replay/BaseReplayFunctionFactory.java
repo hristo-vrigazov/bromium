@@ -4,8 +4,7 @@ import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.common.FunctionFactoryBase;
 import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.replay.functions.*;
-import com.hribol.bromium.common.generation.replay.invocations.ClickClassByTextReplayInvocation;
-import com.hribol.bromium.common.generation.replay.invocations.ReplayFunctionInvocation;
+import com.hribol.bromium.common.generation.replay.invocations.*;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.core.generation.GeneratedFunction;
 
@@ -30,10 +29,12 @@ public abstract class BaseReplayFunctionFactory extends
 
     @Override
     protected void addPredefined() {
-        add(CLICK_CSS_SELECTOR, new ClickCssSelectorReplayFunction(jsCollector));
+        add(CLICK_CSS_SELECTOR, new ClickCssSelectorReplayFunction(jsCollector, ClickCssSelectorReplayInvocation::new));
         add(CLICK_CLASS_BY_TEXT, new ClickClassByTextReplayFunction(jsCollector, ClickClassByTextReplayInvocation::new));
-        add(TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR, new TypeTextInElementFoundByCssSelectorReplayFunction(jsCollector));
-        add(ELEMENT_BY_CSS_TO_BE_PRESENT, new ElementByCssToBePresentReplayFunction(jsCollector));
-        add(TEXT_OF_ELEMENT_FOUND_BY_CSS_SELECTOR_TO_BE, new TextOfElementFoundByCssSelectorToBeReplayFunction(jsCollector));
+        add(TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR,
+                new TypeTextInElementFoundByCssSelectorReplayFunction(jsCollector, TypeTextInElementFoundByCssSelectorReplayInvocation::new));
+        add(ELEMENT_BY_CSS_TO_BE_PRESENT, new ElementByCssToBePresentReplayFunction(jsCollector, ElementByCssToBePresentReplayInvocation::new));
+        add(TEXT_OF_ELEMENT_FOUND_BY_CSS_SELECTOR_TO_BE,
+                new TextOfElementFoundByCssSelectorToBeReplayFunction(jsCollector, TextOfElementFoundByCssSelectorToBeInvocation::new));
     }
 }
