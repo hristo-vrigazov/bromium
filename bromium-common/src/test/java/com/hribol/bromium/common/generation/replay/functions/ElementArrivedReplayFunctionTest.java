@@ -39,6 +39,7 @@ public abstract class ElementArrivedReplayFunctionTest {
     public void createsNotNullRecorderFunction() throws Exception {
         Mocks mocks = new Mocks();
         ReplayFunction replayFunction = provider.get(mocks.jsCollector);
+        //TODO: this should actually check the hashCode
         assertNotNull(replayFunction.getInvocation(mocks.stepAndWebDriverActionConfiguration));
     }
 
