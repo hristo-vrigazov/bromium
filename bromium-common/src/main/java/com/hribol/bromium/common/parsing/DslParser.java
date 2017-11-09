@@ -1,15 +1,9 @@
 package com.hribol.bromium.common.parsing;
 
-import com.google.inject.Injector;
 import com.hribol.bromium.common.parsing.dsl.convert.DslConfigurationConverter;
-import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
-import com.hribol.bromium.core.config.SyntaxDefinitionConfiguration;
 import com.hribol.bromium.core.parsing.ApplicationConfigurationParser;
-import com.hribol.bromium.dsl.BromiumStandaloneSetup;
-import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.Model;
-import com.hribol.bromium.dsl.bromium.SyntaxDefinition;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
