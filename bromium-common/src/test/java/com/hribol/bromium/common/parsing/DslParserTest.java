@@ -53,6 +53,19 @@ public class DslParserTest {
         assertEquals(applicationConfiguration, actual);
     }
 
+    @Test
+    public void ifNoIssuesByFilenameThenDelegatedToConverter() throws IOException {
+        String filename = getClass().getResource("/name.brm").getFile();
+        initMocks(new File(filename));
+        when(resourceValidator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl)).thenReturn(new ArrayList<>());
+
+        ApplicationConfigurationParser parser = new DslParser(resourceSet, resourceValidator, dslConfigurationConverter);
+
+        ApplicationConfiguration actual = parser.parseApplicationConfiguration(filename);
+
+        assertEquals(applicationConfiguration, actual);
+    }
+
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 

@@ -47,6 +47,6 @@ public class DslParser implements ApplicationConfigurationParser {
 
     @Override
     public ApplicationConfiguration parseApplicationConfiguration(String filename) throws IOException {
-        return null;
+        return parseApplicationConfiguration(new File(filename));
     }
 }
