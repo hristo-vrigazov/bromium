@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +31,7 @@ import java.util.Map;
 import static com.hribol.bromium.cli.Main.Commands.RECORD;
 import static com.hribol.bromium.cli.Main.Commands.REPLAY;
 import static com.hribol.bromium.cli.ParsedOptions.*;
+import static com.hribol.bromium.core.DependencyInjectionConstants.CONFIGURATION_INPUT_STREAM;
 import static com.hribol.bromium.core.DependencyInjectionConstants.HAR_FILE;
 import static com.hribol.bromium.core.DependencyInjectionConstants.MEASUREMENTS_FILE;
 import static com.hribol.bromium.core.utils.Constants.HAR_EXTENSION;
@@ -228,6 +230,21 @@ public class DefaultModuleTest {
         }));
 
         ioProvider.get();
+    }
+
+    @Test
+    public void canSupplyConfigurationInputStream() throws IOException {
+        Map<String, Object> opts = new HashMap<>();
+        opts.put(APPLICATION, configurationFile.getAbsolutePath());
+
+        TypeLiteral<IOProvider<InputStream>> typeLiteral = new TypeLiteral<IOProvider<InputStream>>() {};
+
+        Module module = new DefaultModule(RECORD, opts);
+        Injector injector = Guice.createInjector(module);
+
+        IOProvider<InputStream> instance = injector.getInstance(Key.get(typeLiteral, Names.named(CONFIGURATION_INPUT_STREAM)));
+
+        instance.get().close();
     }
 
     @After
