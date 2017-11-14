@@ -64,7 +64,8 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPreconditionAccess().getActionAssignment_1(), "rule__Precondition__ActionAssignment_1");
 					put(grammarAccess.getPostconditionAccess().getPostconditionAssignment_3(), "rule__Postcondition__PostconditionAssignment_3");
 					put(grammarAccess.getExpectHttpRequestAccess().getNotAssignment_1_1(), "rule__ExpectHttpRequest__NotAssignment_1_1");
-					put(grammarAccess.getElementByCssToBePresentAccess().getCssSelectorAssignment_4(), "rule__ElementByCssToBePresent__CssSelectorAssignment_4");
+					put(grammarAccess.getElementByCssToBePresentAccess().getParameterNamesAssignment_3(), "rule__ElementByCssToBePresent__ParameterNamesAssignment_3");
+					put(grammarAccess.getElementByCssToBePresentAccess().getParameterValuesAssignment_4(), "rule__ElementByCssToBePresent__ParameterValuesAssignment_4");
 					put(grammarAccess.getClickCssSelectorAccess().getParameterNamesAssignment_5(), "rule__ClickCssSelector__ParameterNamesAssignment_5");
 					put(grammarAccess.getClickCssSelectorAccess().getParameterValuesAssignment_6(), "rule__ClickCssSelector__ParameterValuesAssignment_6");
 					put(grammarAccess.getPageLoadAccess().getParameterNamesAssignment_1(), "rule__PageLoad__ParameterNamesAssignment_1");
@@ -73,8 +74,10 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterValuesAssignment_1(), "rule__TypeTextInElementFoundByCssSelector__ParameterValuesAssignment_1");
 					put(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterNamesAssignment_6(), "rule__TypeTextInElementFoundByCssSelector__ParameterNamesAssignment_6");
 					put(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterValuesAssignment_7(), "rule__TypeTextInElementFoundByCssSelector__ParameterValuesAssignment_7");
-					put(grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getCssSelectorAssignment_6(), "rule__TextOfElementWithCssSelectorToBe__CssSelectorAssignment_6");
-					put(grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getTextAssignment_8(), "rule__TextOfElementWithCssSelectorToBe__TextAssignment_8");
+					put(grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getParameterNamesAssignment_3(), "rule__TextOfElementWithCssSelectorToBe__ParameterNamesAssignment_3");
+					put(grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getParameterValuesAssignment_4(), "rule__TextOfElementWithCssSelectorToBe__ParameterValuesAssignment_4");
+					put(grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getParameterNamesAssignment_6(), "rule__TextOfElementWithCssSelectorToBe__ParameterNamesAssignment_6");
+					put(grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getParameterValuesAssignment_7(), "rule__TextOfElementWithCssSelectorToBe__ParameterValuesAssignment_7");
 					put(grammarAccess.getClickClassByTextAccess().getParameterNamesAssignment_4(), "rule__ClickClassByText__ParameterNamesAssignment_4");
 					put(grammarAccess.getClickClassByTextAccess().getParameterValuesAssignment_5(), "rule__ClickClassByText__ParameterValuesAssignment_5");
 					put(grammarAccess.getClickClassByTextAccess().getParameterNamesAssignment_7(), "rule__ClickClassByText__ParameterNamesAssignment_7");

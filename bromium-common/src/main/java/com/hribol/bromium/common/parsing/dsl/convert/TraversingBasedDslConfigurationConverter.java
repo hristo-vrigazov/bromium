@@ -3,6 +3,7 @@ package com.hribol.bromium.common.parsing.dsl.convert;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.config.SyntaxDefinitionConfiguration;
+import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.dsl.bromium.*;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -31,6 +32,13 @@ public class TraversingBasedDslConfigurationConverter implements DslConfiguratio
                 }
                 applicationActionConfiguration.addSyntaxDefinition(syntaxDefinitionConfiguration);
             }
+
+            if (applicationAction.getPrecondition() != null) {
+                WebDriverActionConfiguration precondition = new WebDriverActionConfiguration();
+                precondition.setWebDriverActionType(applicationAction.getPrecondition().getAction().eClass().getName());
+                applicationActionConfiguration.setConditionBeforeExecution(precondition);
+            }
+
 
             applicationConfiguration.addApplicationActionConfiguration(applicationActionConfiguration);
         }

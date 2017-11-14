@@ -385,9 +385,19 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getWebDriverActionCondition_CssSelector()
+  public EAttribute getWebDriverActionCondition_ParameterNames()
   {
-    return (EReference)webDriverActionConditionEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)webDriverActionConditionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getWebDriverActionCondition_ParameterValues()
+  {
+    return (EReference)webDriverActionConditionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -528,16 +538,6 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
   public EClass getTextOfElementWithCssSelectorToBe()
   {
     return textOfElementWithCssSelectorToBeEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getTextOfElementWithCssSelectorToBe_Text()
-  {
-    return (EReference)textOfElementWithCssSelectorToBeEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -699,7 +699,8 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     createEReference(syntaxDefinitionEClass, SYNTAX_DEFINITION__PARAMETER);
 
     webDriverActionConditionEClass = createEClass(WEB_DRIVER_ACTION_CONDITION);
-    createEReference(webDriverActionConditionEClass, WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR);
+    createEAttribute(webDriverActionConditionEClass, WEB_DRIVER_ACTION_CONDITION__PARAMETER_NAMES);
+    createEReference(webDriverActionConditionEClass, WEB_DRIVER_ACTION_CONDITION__PARAMETER_VALUES);
 
     webDriverActionEClass = createEClass(WEB_DRIVER_ACTION);
     createEAttribute(webDriverActionEClass, WEB_DRIVER_ACTION__PARAMETER_NAMES);
@@ -723,7 +724,6 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     typeTextInElementFoundByCssSelectorEClass = createEClass(TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR);
 
     textOfElementWithCssSelectorToBeEClass = createEClass(TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE);
-    createEReference(textOfElementWithCssSelectorToBeEClass, TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__TEXT);
 
     clickClassByTextEClass = createEClass(CLICK_CLASS_BY_TEXT);
     createEReference(clickClassByTextEClass, CLICK_CLASS_BY_TEXT__PARAMETERS);
@@ -797,7 +797,8 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     initEReference(getSyntaxDefinition_Parameter(), this.getExposedParameter(), null, "parameter", null, 0, 1, SyntaxDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(webDriverActionConditionEClass, WebDriverActionCondition.class, "WebDriverActionCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getWebDriverActionCondition_CssSelector(), this.getParameterValue(), null, "cssSelector", null, 0, 1, WebDriverActionCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getWebDriverActionCondition_ParameterNames(), ecorePackage.getEString(), "parameterNames", null, 0, -1, WebDriverActionCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getWebDriverActionCondition_ParameterValues(), this.getParameterValue(), null, "parameterValues", null, 0, -1, WebDriverActionCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(webDriverActionEClass, WebDriverAction.class, "WebDriverAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getWebDriverAction_ParameterNames(), ecorePackage.getEString(), "parameterNames", null, 0, -1, WebDriverAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -821,7 +822,6 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     initEClass(typeTextInElementFoundByCssSelectorEClass, TypeTextInElementFoundByCssSelector.class, "TypeTextInElementFoundByCssSelector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(textOfElementWithCssSelectorToBeEClass, TextOfElementWithCssSelectorToBe.class, "TextOfElementWithCssSelectorToBe", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTextOfElementWithCssSelectorToBe_Text(), this.getParameterValue(), null, "text", null, 0, 1, TextOfElementWithCssSelectorToBe.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(clickClassByTextEClass, ClickClassByText.class, "ClickClassByText", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getClickClassByText_Parameters(), this.getParameterValue(), null, "parameters", null, 0, -1, ClickClassByText.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

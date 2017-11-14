@@ -3,6 +3,8 @@
  */
 package com.hribol.bromium.dsl.bromium;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -14,7 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link com.hribol.bromium.dsl.bromium.WebDriverActionCondition#getCssSelector <em>Css Selector</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.WebDriverActionCondition#getParameterNames <em>Parameter Names</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.WebDriverActionCondition#getParameterValues <em>Parameter Values</em>}</li>
  * </ul>
  *
  * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getWebDriverActionCondition()
@@ -24,29 +27,35 @@ import org.eclipse.emf.ecore.EObject;
 public interface WebDriverActionCondition extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Css Selector</b></em>' containment reference.
+   * Returns the value of the '<em><b>Parameter Names</b></em>' attribute list.
+   * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Css Selector</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Parameter Names</em>' attribute list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Css Selector</em>' containment reference.
-   * @see #setCssSelector(ParameterValue)
-   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getWebDriverActionCondition_CssSelector()
+   * @return the value of the '<em>Parameter Names</em>' attribute list.
+   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getWebDriverActionCondition_ParameterNames()
+   * @model unique="false"
+   * @generated
+   */
+  EList<String> getParameterNames();
+
+  /**
+   * Returns the value of the '<em><b>Parameter Values</b></em>' containment reference list.
+   * The list contents are of type {@link com.hribol.bromium.dsl.bromium.ParameterValue}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Parameter Values</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Parameter Values</em>' containment reference list.
+   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getWebDriverActionCondition_ParameterValues()
    * @model containment="true"
    * @generated
    */
-  ParameterValue getCssSelector();
-
-  /**
-   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.WebDriverActionCondition#getCssSelector <em>Css Selector</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Css Selector</em>' containment reference.
-   * @see #getCssSelector()
-   * @generated
-   */
-  void setCssSelector(ParameterValue value);
+  EList<ParameterValue> getParameterValues();
 
 } // WebDriverActionCondition

@@ -7,6 +7,7 @@
 'element'=28
 'expect'=25
 'from'=13
+'has'=40
 'http'=26
 'id'=17
 'in'=39
@@ -15,7 +16,6 @@
 'make'=21
 'name'=11
 'not'=24
-'of'=41
 'on'=35
 'page'=37
 'present'=33
@@ -23,7 +23,7 @@
 'selector'=31
 'sure'=22
 'syntax'=18
-'text'=40
+'text'=41
 'then'=20
 'type'=38
 'version'=12

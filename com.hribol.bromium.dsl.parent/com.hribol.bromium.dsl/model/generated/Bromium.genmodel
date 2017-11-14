@@ -25,7 +25,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//SyntaxDefinition/parameter"/>
     </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//WebDriverActionCondition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//WebDriverActionCondition/cssSelector"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//WebDriverActionCondition/parameterNames"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//WebDriverActionCondition/parameterValues"/>
     </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//WebDriverAction">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//WebDriverAction/parameterNames"/>
@@ -44,9 +45,7 @@
     <genClasses ecoreClass="Bromium.ecore#//ClickCssSelector"/>
     <genClasses ecoreClass="Bromium.ecore#//PageLoad"/>
     <genClasses ecoreClass="Bromium.ecore#//TypeTextInElementFoundByCssSelector"/>
-    <genClasses ecoreClass="Bromium.ecore#//TextOfElementWithCssSelectorToBe">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//TextOfElementWithCssSelectorToBe/text"/>
-    </genClasses>
+    <genClasses ecoreClass="Bromium.ecore#//TextOfElementWithCssSelectorToBe"/>
     <genClasses ecoreClass="Bromium.ecore#//ClickClassByText">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ClickClassByText/parameters"/>
     </genClasses>

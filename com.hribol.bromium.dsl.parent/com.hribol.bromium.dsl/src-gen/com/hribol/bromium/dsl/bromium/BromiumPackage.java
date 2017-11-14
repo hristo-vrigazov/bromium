@@ -233,13 +233,22 @@ public interface BromiumPackage extends EPackage
   int WEB_DRIVER_ACTION_CONDITION = 3;
 
   /**
-   * The feature id for the '<em><b>Css Selector</b></em>' containment reference.
+   * The feature id for the '<em><b>Parameter Names</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR = 0;
+  int WEB_DRIVER_ACTION_CONDITION__PARAMETER_NAMES = 0;
+
+  /**
+   * The feature id for the '<em><b>Parameter Values</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WEB_DRIVER_ACTION_CONDITION__PARAMETER_VALUES = 1;
 
   /**
    * The number of structural features of the '<em>Web Driver Action Condition</em>' class.
@@ -248,7 +257,7 @@ public interface BromiumPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WEB_DRIVER_ACTION_CONDITION_FEATURE_COUNT = 1;
+  int WEB_DRIVER_ACTION_CONDITION_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.WebDriverActionImpl <em>Web Driver Action</em>}' class.
@@ -382,13 +391,22 @@ public interface BromiumPackage extends EPackage
   int ELEMENT_BY_CSS_TO_BE_PRESENT = 8;
 
   /**
-   * The feature id for the '<em><b>Css Selector</b></em>' containment reference.
+   * The feature id for the '<em><b>Parameter Names</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ELEMENT_BY_CSS_TO_BE_PRESENT__CSS_SELECTOR = WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR;
+  int ELEMENT_BY_CSS_TO_BE_PRESENT__PARAMETER_NAMES = WEB_DRIVER_ACTION_CONDITION__PARAMETER_NAMES;
+
+  /**
+   * The feature id for the '<em><b>Parameter Values</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ELEMENT_BY_CSS_TO_BE_PRESENT__PARAMETER_VALUES = WEB_DRIVER_ACTION_CONDITION__PARAMETER_VALUES;
 
   /**
    * The number of structural features of the '<em>Element By Css To Be Present</em>' class.
@@ -521,22 +539,22 @@ public interface BromiumPackage extends EPackage
   int TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE = 12;
 
   /**
-   * The feature id for the '<em><b>Css Selector</b></em>' containment reference.
+   * The feature id for the '<em><b>Parameter Names</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__CSS_SELECTOR = WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR;
+  int TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__PARAMETER_NAMES = WEB_DRIVER_ACTION_CONDITION__PARAMETER_NAMES;
 
   /**
-   * The feature id for the '<em><b>Text</b></em>' containment reference.
+   * The feature id for the '<em><b>Parameter Values</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__TEXT = WEB_DRIVER_ACTION_CONDITION_FEATURE_COUNT + 0;
+  int TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__PARAMETER_VALUES = WEB_DRIVER_ACTION_CONDITION__PARAMETER_VALUES;
 
   /**
    * The number of structural features of the '<em>Text Of Element With Css Selector To Be</em>' class.
@@ -545,7 +563,7 @@ public interface BromiumPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE_FEATURE_COUNT = WEB_DRIVER_ACTION_CONDITION_FEATURE_COUNT + 1;
+  int TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE_FEATURE_COUNT = WEB_DRIVER_ACTION_CONDITION_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ClickClassByTextImpl <em>Click Class By Text</em>}' class.
@@ -878,15 +896,26 @@ public interface BromiumPackage extends EPackage
   EClass getWebDriverActionCondition();
 
   /**
-   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.WebDriverActionCondition#getCssSelector <em>Css Selector</em>}'.
+   * Returns the meta object for the attribute list '{@link com.hribol.bromium.dsl.bromium.WebDriverActionCondition#getParameterNames <em>Parameter Names</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Css Selector</em>'.
-   * @see com.hribol.bromium.dsl.bromium.WebDriverActionCondition#getCssSelector()
+   * @return the meta object for the attribute list '<em>Parameter Names</em>'.
+   * @see com.hribol.bromium.dsl.bromium.WebDriverActionCondition#getParameterNames()
    * @see #getWebDriverActionCondition()
    * @generated
    */
-  EReference getWebDriverActionCondition_CssSelector();
+  EAttribute getWebDriverActionCondition_ParameterNames();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link com.hribol.bromium.dsl.bromium.WebDriverActionCondition#getParameterValues <em>Parameter Values</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Parameter Values</em>'.
+   * @see com.hribol.bromium.dsl.bromium.WebDriverActionCondition#getParameterValues()
+   * @see #getWebDriverActionCondition()
+   * @generated
+   */
+  EReference getWebDriverActionCondition_ParameterValues();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.WebDriverAction <em>Web Driver Action</em>}'.
@@ -1032,17 +1061,6 @@ public interface BromiumPackage extends EPackage
    * @generated
    */
   EClass getTextOfElementWithCssSelectorToBe();
-
-  /**
-   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.TextOfElementWithCssSelectorToBe#getText <em>Text</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Text</em>'.
-   * @see com.hribol.bromium.dsl.bromium.TextOfElementWithCssSelectorToBe#getText()
-   * @see #getTextOfElementWithCssSelectorToBe()
-   * @generated
-   */
-  EReference getTextOfElementWithCssSelectorToBe_Text();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ClickClassByText <em>Click Class By Text</em>}'.
@@ -1321,12 +1339,20 @@ public interface BromiumPackage extends EPackage
     EClass WEB_DRIVER_ACTION_CONDITION = eINSTANCE.getWebDriverActionCondition();
 
     /**
-     * The meta object literal for the '<em><b>Css Selector</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Parameter Names</b></em>' attribute list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR = eINSTANCE.getWebDriverActionCondition_CssSelector();
+    EAttribute WEB_DRIVER_ACTION_CONDITION__PARAMETER_NAMES = eINSTANCE.getWebDriverActionCondition_ParameterNames();
+
+    /**
+     * The meta object literal for the '<em><b>Parameter Values</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference WEB_DRIVER_ACTION_CONDITION__PARAMETER_VALUES = eINSTANCE.getWebDriverActionCondition_ParameterValues();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.WebDriverActionImpl <em>Web Driver Action</em>}' class.
@@ -1457,14 +1483,6 @@ public interface BromiumPackage extends EPackage
      * @generated
      */
     EClass TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE = eINSTANCE.getTextOfElementWithCssSelectorToBe();
-
-    /**
-     * The meta object literal for the '<em><b>Text</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__TEXT = eINSTANCE.getTextOfElementWithCssSelectorToBe_Text();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ClickClassByTextImpl <em>Click Class By Text</em>}' class.

@@ -1,7 +1,10 @@
 package com.hribol.bromium.common.parsing.dsl.convert;
 
 import com.google.inject.Injector;
+import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
+import com.hribol.bromium.core.config.SyntaxDefinitionConfiguration;
+import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.dsl.BromiumStandaloneSetup;
 import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.Model;
@@ -13,7 +16,9 @@ import org.junit.Test;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
+import static com.hribol.bromium.core.utils.WebDriverActions.ELEMENT_BY_CSS_TO_BE_PRESENT;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -53,6 +58,21 @@ public class TraversingBasedDslConfigurationConverterTest {
 
         assertEquals(EXAMPLE_NAME, actual.getApplicationName());
         assertEquals(EXAMPLE_VERSION, actual.getVersion());
+
+        List<ApplicationActionConfiguration> actionConfigurations = actual.getApplicationActionConfigurationList();
+
+        assertEquals(3, actionConfigurations.size());
+
+        ApplicationActionConfiguration typeUserNameField = actionConfigurations.get(0);
+        assertEquals("typeUsernameField", typeUserNameField.getName());
+
+        List<SyntaxDefinitionConfiguration> syntaxDefinitions = typeUserNameField.getSyntaxDefinitionConfigurationList();
+        assertEquals("Type", syntaxDefinitions.get(0).getContent());
+        assertEquals("username", syntaxDefinitions.get(0).getExposedParameter());
+        assertEquals("into username field", syntaxDefinitions.get(1).getContent());
+
+        WebDriverActionConfiguration precondition = typeUserNameField.getConditionBeforeExecution();
+        assertEquals(ELEMENT_BY_CSS_TO_BE_PRESENT, precondition.getWebDriverActionType());
     }
 
     private Model readExample() {

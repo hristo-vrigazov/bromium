@@ -147,16 +147,10 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     ElementByCssToBePresent returns ElementByCssToBePresent
 	 *
 	 * Constraint:
-	 *     cssSelector=ParameterValue
+	 *     (parameterNames+='selector' parameterValues+=ParameterValue)
 	 */
 	protected void sequence_ElementByCssToBePresent(ISerializationContext context, ElementByCssToBePresent semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getElementByCssToBePresentAccess().getCssSelectorParameterValueParserRuleCall_4_0(), semanticObject.getCssSelector());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -281,19 +275,10 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     TextOfElementWithCssSelectorToBe returns TextOfElementWithCssSelectorToBe
 	 *
 	 * Constraint:
-	 *     (cssSelector=ParameterValue text=ParameterValue)
+	 *     (parameterNames+='selector' parameterValues+=ParameterValue parameterNames+='text' parameterValues+=ParameterValue)
 	 */
 	protected void sequence_TextOfElementWithCssSelectorToBe(ISerializationContext context, TextOfElementWithCssSelectorToBe semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.WEB_DRIVER_ACTION_CONDITION__CSS_SELECTOR));
-			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__TEXT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE__TEXT));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getCssSelectorParameterValueParserRuleCall_6_0(), semanticObject.getCssSelector());
-		feeder.accept(grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getTextParameterValueParserRuleCall_8_0(), semanticObject.getText());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
