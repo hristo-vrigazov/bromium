@@ -605,7 +605,7 @@ ruleExpectHttpRequest returns [EObject current=null]
 						setWithLastConsumed($current, "not", true, "not");
 					}
 				)
-			)
+			)?
 			otherlv_3='expect'
 			{
 				newLeafNode(otherlv_3, grammarAccess.getExpectHttpRequestAccess().getExpectKeyword_1_2());
@@ -720,24 +720,34 @@ ruleClickCssSelector returns [EObject current=null]
 		{
 			newLeafNode(otherlv_4, grammarAccess.getClickCssSelectorAccess().getCssKeyword_4());
 		}
-		otherlv_5='selector'
-		{
-			newLeafNode(otherlv_5, grammarAccess.getClickCssSelectorAccess().getSelectorKeyword_5());
-		}
+		(
+			(
+				lv_parameterNames_5_0='selector'
+				{
+					newLeafNode(lv_parameterNames_5_0, grammarAccess.getClickCssSelectorAccess().getParameterNamesSelectorKeyword_5_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getClickCssSelectorRule());
+					}
+					addWithLastConsumed($current, "parameterNames", lv_parameterNames_5_0, "selector");
+				}
+			)
+		)
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getClickCssSelectorAccess().getCssSelectorParameterValueParserRuleCall_6_0());
+					newCompositeNode(grammarAccess.getClickCssSelectorAccess().getParameterValuesParameterValueParserRuleCall_6_0());
 				}
-				lv_cssSelector_6_0=ruleParameterValue
+				lv_parameterValues_6_0=ruleParameterValue
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getClickCssSelectorRule());
 					}
-					set(
+					add(
 						$current,
-						"cssSelector",
-						lv_cssSelector_6_0,
+						"parameterValues",
+						lv_parameterValues_6_0,
 						"com.hribol.bromium.dsl.Bromium.ParameterValue");
 					afterParserOrEnumRuleCall();
 				}
@@ -766,24 +776,34 @@ rulePageLoad returns [EObject current=null]
 		{
 			newLeafNode(otherlv_0, grammarAccess.getPageLoadAccess().getLoadKeyword_0());
 		}
-		otherlv_1='page'
-		{
-			newLeafNode(otherlv_1, grammarAccess.getPageLoadAccess().getPageKeyword_1());
-		}
+		(
+			(
+				lv_parameterNames_1_0='page'
+				{
+					newLeafNode(lv_parameterNames_1_0, grammarAccess.getPageLoadAccess().getParameterNamesPageKeyword_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getPageLoadRule());
+					}
+					addWithLastConsumed($current, "parameterNames", lv_parameterNames_1_0, "page");
+				}
+			)
+		)
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getPageLoadAccess().getSubpathParameterValueParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getPageLoadAccess().getParameterValuesParameterValueParserRuleCall_2_0());
 				}
-				lv_subpath_2_0=ruleParameterValue
+				lv_parameterValues_2_0=ruleParameterValue
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getPageLoadRule());
 					}
-					set(
+					add(
 						$current,
-						"subpath",
-						lv_subpath_2_0,
+						"parameterValues",
+						lv_parameterValues_2_0,
 						"com.hribol.bromium.dsl.Bromium.ParameterValue");
 					afterParserOrEnumRuleCall();
 				}
@@ -808,24 +828,34 @@ ruleTypeTextInElementFoundByCssSelector returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='type'
-		{
-			newLeafNode(otherlv_0, grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTypeKeyword_0());
-		}
+		(
+			(
+				lv_parameterNames_0_0='type'
+				{
+					newLeafNode(lv_parameterNames_0_0, grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterNamesTypeKeyword_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getTypeTextInElementFoundByCssSelectorRule());
+					}
+					addWithLastConsumed($current, "parameterNames", lv_parameterNames_0_0, "type");
+				}
+			)
+		)
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTextParameterValueParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterValuesParameterValueParserRuleCall_1_0());
 				}
-				lv_text_1_0=ruleParameterValue
+				lv_parameterValues_1_0=ruleParameterValue
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTypeTextInElementFoundByCssSelectorRule());
 					}
-					set(
+					add(
 						$current,
-						"text",
-						lv_text_1_0,
+						"parameterValues",
+						lv_parameterValues_1_0,
 						"com.hribol.bromium.dsl.Bromium.ParameterValue");
 					afterParserOrEnumRuleCall();
 				}
@@ -847,24 +877,34 @@ ruleTypeTextInElementFoundByCssSelector returns [EObject current=null]
 		{
 			newLeafNode(otherlv_5, grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getCssKeyword_5());
 		}
-		otherlv_6='selector'
-		{
-			newLeafNode(otherlv_6, grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getSelectorKeyword_6());
-		}
+		(
+			(
+				lv_parameterNames_6_0='selector'
+				{
+					newLeafNode(lv_parameterNames_6_0, grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterNamesSelectorKeyword_6_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getTypeTextInElementFoundByCssSelectorRule());
+					}
+					addWithLastConsumed($current, "parameterNames", lv_parameterNames_6_0, "selector");
+				}
+			)
+		)
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getCssSelectorParameterValueParserRuleCall_7_0());
+					newCompositeNode(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterValuesParameterValueParserRuleCall_7_0());
 				}
-				lv_cssSelector_7_0=ruleParameterValue
+				lv_parameterValues_7_0=ruleParameterValue
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTypeTextInElementFoundByCssSelectorRule());
 					}
-					set(
+					add(
 						$current,
-						"cssSelector",
-						lv_cssSelector_7_0,
+						"parameterValues",
+						lv_parameterValues_7_0,
 						"com.hribol.bromium.dsl.Bromium.ParameterValue");
 					afterParserOrEnumRuleCall();
 				}
@@ -990,24 +1030,34 @@ ruleClickClassByText returns [EObject current=null]
 		{
 			newLeafNode(otherlv_3, grammarAccess.getClickClassByTextAccess().getWithKeyword_3());
 		}
-		otherlv_4='class'
-		{
-			newLeafNode(otherlv_4, grammarAccess.getClickClassByTextAccess().getClassKeyword_4());
-		}
+		(
+			(
+				lv_parameterNames_4_0='class'
+				{
+					newLeafNode(lv_parameterNames_4_0, grammarAccess.getClickClassByTextAccess().getParameterNamesClassKeyword_4_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getClickClassByTextRule());
+					}
+					addWithLastConsumed($current, "parameterNames", lv_parameterNames_4_0, "class");
+				}
+			)
+		)
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getClickClassByTextAccess().getCssClassParameterValueParserRuleCall_5_0());
+					newCompositeNode(grammarAccess.getClickClassByTextAccess().getParameterValuesParameterValueParserRuleCall_5_0());
 				}
-				lv_cssClass_5_0=ruleParameterValue
+				lv_parameterValues_5_0=ruleParameterValue
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getClickClassByTextRule());
 					}
-					set(
+					add(
 						$current,
-						"cssClass",
-						lv_cssClass_5_0,
+						"parameterValues",
+						lv_parameterValues_5_0,
 						"com.hribol.bromium.dsl.Bromium.ParameterValue");
 					afterParserOrEnumRuleCall();
 				}
@@ -1017,24 +1067,34 @@ ruleClickClassByText returns [EObject current=null]
 		{
 			newLeafNode(otherlv_6, grammarAccess.getClickClassByTextAccess().getAndKeyword_6());
 		}
-		otherlv_7='text'
-		{
-			newLeafNode(otherlv_7, grammarAccess.getClickClassByTextAccess().getTextKeyword_7());
-		}
+		(
+			(
+				lv_parameterNames_7_0='text'
+				{
+					newLeafNode(lv_parameterNames_7_0, grammarAccess.getClickClassByTextAccess().getParameterNamesTextKeyword_7_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getClickClassByTextRule());
+					}
+					addWithLastConsumed($current, "parameterNames", lv_parameterNames_7_0, "text");
+				}
+			)
+		)
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getClickClassByTextAccess().getTextParameterValueParserRuleCall_8_0());
+					newCompositeNode(grammarAccess.getClickClassByTextAccess().getParametersParameterValueParserRuleCall_8_0());
 				}
-				lv_text_8_0=ruleParameterValue
+				lv_parameters_8_0=ruleParameterValue
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getClickClassByTextRule());
 					}
-					set(
+					add(
 						$current,
-						"text",
-						lv_text_8_0,
+						"parameters",
+						lv_parameters_8_0,
 						"com.hribol.bromium.dsl.Bromium.ParameterValue");
 					afterParserOrEnumRuleCall();
 				}

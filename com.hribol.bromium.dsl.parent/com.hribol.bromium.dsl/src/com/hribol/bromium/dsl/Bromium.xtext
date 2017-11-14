@@ -45,16 +45,16 @@ Postcondition:
 ;
 
 ExpectHttpRequest:
-	{ExpectHttpRequest} ('do' not?='not' 'expect' 'http' 'request')
+	{ExpectHttpRequest} ('do' (not?='not')? 'expect' 'http' 'request')
 ;
 
 
 // TODO: syntactic sugar for CSS selectors
 ElementByCssToBePresent: 'element' 'with' 'css' 'selector' cssSelector=ParameterValue 'is' 'present';
-ClickCssSelector: 'click' 'on' 'element' 'with' 'css' 'selector' cssSelector=ParameterValue;
-PageLoad: 'load' 'page' subpath=ParameterValue;
-TypeTextInElementFoundByCssSelector: 'type' text=ParameterValue 
-'in' 'element' 'with' 'css' 'selector' cssSelector=ParameterValue
+ClickCssSelector: 'click' 'on' 'element' 'with' 'css' parameterNames+='selector' parameterValues+=ParameterValue;
+PageLoad: 'load' parameterNames+='page' parameterValues+=ParameterValue;
+TypeTextInElementFoundByCssSelector: parameterNames+='type' parameterValues+=ParameterValue 
+'in' 'element' 'with' 'css' parameterNames+='selector' parameterValues+=ParameterValue
 ;
 
 TextOfElementWithCssSelectorToBe:
@@ -62,7 +62,11 @@ TextOfElementWithCssSelectorToBe:
 ;
 
 ClickClassByText:
-	'click' 'on' 'element' 'with' 'class' cssClass=ParameterValue 'and' 'text' text=ParameterValue
+	'click' 'on' 'element' 'with' 
+	parameterNames+='class' 
+	parameterValues+=ParameterValue 'and' 
+	parameterNames+='text' 
+	parameters+=ParameterValue
 ;
 
 ParameterValue:

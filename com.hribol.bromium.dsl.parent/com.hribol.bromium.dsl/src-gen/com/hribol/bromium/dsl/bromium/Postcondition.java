@@ -12,10 +12,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.Postcondition#getPostcondition <em>Postcondition</em>}</li>
  * </ul>
- * </p>
  *
  * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getPostcondition()
  * @model

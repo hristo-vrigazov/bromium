@@ -49,7 +49,10 @@ public class TraversingBasedDslConfigurationConverterTest {
 
         TraversingBasedDslConfigurationConverter converter = new TraversingBasedDslConfigurationConverter();
 
-        converter.convert(exampleModel);
+        ApplicationConfiguration actual = converter.convert(exampleModel);
+
+        assertEquals(EXAMPLE_NAME, actual.getApplicationName());
+        assertEquals(EXAMPLE_VERSION, actual.getVersion());
     }
 
     private Model readExample() {

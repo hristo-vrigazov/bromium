@@ -1405,7 +1405,7 @@ rule__ExpectHttpRequest__Group_1__1__Impl
 :
 (
 	{ before(grammarAccess.getExpectHttpRequestAccess().getNotAssignment_1_1()); }
-	(rule__ExpectHttpRequest__NotAssignment_1_1)
+	(rule__ExpectHttpRequest__NotAssignment_1_1)?
 	{ after(grammarAccess.getExpectHttpRequestAccess().getNotAssignment_1_1()); }
 )
 ;
@@ -1836,9 +1836,9 @@ rule__ClickCssSelector__Group__5__Impl
 	}
 :
 (
-	{ before(grammarAccess.getClickCssSelectorAccess().getSelectorKeyword_5()); }
-	'selector'
-	{ after(grammarAccess.getClickCssSelectorAccess().getSelectorKeyword_5()); }
+	{ before(grammarAccess.getClickCssSelectorAccess().getParameterNamesAssignment_5()); }
+	(rule__ClickCssSelector__ParameterNamesAssignment_5)
+	{ after(grammarAccess.getClickCssSelectorAccess().getParameterNamesAssignment_5()); }
 )
 ;
 finally {
@@ -1862,9 +1862,9 @@ rule__ClickCssSelector__Group__6__Impl
 	}
 :
 (
-	{ before(grammarAccess.getClickCssSelectorAccess().getCssSelectorAssignment_6()); }
-	(rule__ClickCssSelector__CssSelectorAssignment_6)
-	{ after(grammarAccess.getClickCssSelectorAccess().getCssSelectorAssignment_6()); }
+	{ before(grammarAccess.getClickCssSelectorAccess().getParameterValuesAssignment_6()); }
+	(rule__ClickCssSelector__ParameterValuesAssignment_6)
+	{ after(grammarAccess.getClickCssSelectorAccess().getParameterValuesAssignment_6()); }
 )
 ;
 finally {
@@ -1917,9 +1917,9 @@ rule__PageLoad__Group__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getPageLoadAccess().getPageKeyword_1()); }
-	'page'
-	{ after(grammarAccess.getPageLoadAccess().getPageKeyword_1()); }
+	{ before(grammarAccess.getPageLoadAccess().getParameterNamesAssignment_1()); }
+	(rule__PageLoad__ParameterNamesAssignment_1)
+	{ after(grammarAccess.getPageLoadAccess().getParameterNamesAssignment_1()); }
 )
 ;
 finally {
@@ -1943,9 +1943,9 @@ rule__PageLoad__Group__2__Impl
 	}
 :
 (
-	{ before(grammarAccess.getPageLoadAccess().getSubpathAssignment_2()); }
-	(rule__PageLoad__SubpathAssignment_2)
-	{ after(grammarAccess.getPageLoadAccess().getSubpathAssignment_2()); }
+	{ before(grammarAccess.getPageLoadAccess().getParameterValuesAssignment_2()); }
+	(rule__PageLoad__ParameterValuesAssignment_2)
+	{ after(grammarAccess.getPageLoadAccess().getParameterValuesAssignment_2()); }
 )
 ;
 finally {
@@ -1971,9 +1971,9 @@ rule__TypeTextInElementFoundByCssSelector__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTypeKeyword_0()); }
-	'type'
-	{ after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTypeKeyword_0()); }
+	{ before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterNamesAssignment_0()); }
+	(rule__TypeTextInElementFoundByCssSelector__ParameterNamesAssignment_0)
+	{ after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterNamesAssignment_0()); }
 )
 ;
 finally {
@@ -1998,9 +1998,9 @@ rule__TypeTextInElementFoundByCssSelector__Group__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTextAssignment_1()); }
-	(rule__TypeTextInElementFoundByCssSelector__TextAssignment_1)
-	{ after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTextAssignment_1()); }
+	{ before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterValuesAssignment_1()); }
+	(rule__TypeTextInElementFoundByCssSelector__ParameterValuesAssignment_1)
+	{ after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterValuesAssignment_1()); }
 )
 ;
 finally {
@@ -2133,9 +2133,9 @@ rule__TypeTextInElementFoundByCssSelector__Group__6__Impl
 	}
 :
 (
-	{ before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getSelectorKeyword_6()); }
-	'selector'
-	{ after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getSelectorKeyword_6()); }
+	{ before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterNamesAssignment_6()); }
+	(rule__TypeTextInElementFoundByCssSelector__ParameterNamesAssignment_6)
+	{ after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterNamesAssignment_6()); }
 )
 ;
 finally {
@@ -2159,9 +2159,9 @@ rule__TypeTextInElementFoundByCssSelector__Group__7__Impl
 	}
 :
 (
-	{ before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getCssSelectorAssignment_7()); }
-	(rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7)
-	{ after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getCssSelectorAssignment_7()); }
+	{ before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterValuesAssignment_7()); }
+	(rule__TypeTextInElementFoundByCssSelector__ParameterValuesAssignment_7)
+	{ after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterValuesAssignment_7()); }
 )
 ;
 finally {
@@ -2538,9 +2538,9 @@ rule__ClickClassByText__Group__4__Impl
 	}
 :
 (
-	{ before(grammarAccess.getClickClassByTextAccess().getClassKeyword_4()); }
-	'class'
-	{ after(grammarAccess.getClickClassByTextAccess().getClassKeyword_4()); }
+	{ before(grammarAccess.getClickClassByTextAccess().getParameterNamesAssignment_4()); }
+	(rule__ClickClassByText__ParameterNamesAssignment_4)
+	{ after(grammarAccess.getClickClassByTextAccess().getParameterNamesAssignment_4()); }
 )
 ;
 finally {
@@ -2565,9 +2565,9 @@ rule__ClickClassByText__Group__5__Impl
 	}
 :
 (
-	{ before(grammarAccess.getClickClassByTextAccess().getCssClassAssignment_5()); }
-	(rule__ClickClassByText__CssClassAssignment_5)
-	{ after(grammarAccess.getClickClassByTextAccess().getCssClassAssignment_5()); }
+	{ before(grammarAccess.getClickClassByTextAccess().getParameterValuesAssignment_5()); }
+	(rule__ClickClassByText__ParameterValuesAssignment_5)
+	{ after(grammarAccess.getClickClassByTextAccess().getParameterValuesAssignment_5()); }
 )
 ;
 finally {
@@ -2619,9 +2619,9 @@ rule__ClickClassByText__Group__7__Impl
 	}
 :
 (
-	{ before(grammarAccess.getClickClassByTextAccess().getTextKeyword_7()); }
-	'text'
-	{ after(grammarAccess.getClickClassByTextAccess().getTextKeyword_7()); }
+	{ before(grammarAccess.getClickClassByTextAccess().getParameterNamesAssignment_7()); }
+	(rule__ClickClassByText__ParameterNamesAssignment_7)
+	{ after(grammarAccess.getClickClassByTextAccess().getParameterNamesAssignment_7()); }
 )
 ;
 finally {
@@ -2645,9 +2645,9 @@ rule__ClickClassByText__Group__8__Impl
 	}
 :
 (
-	{ before(grammarAccess.getClickClassByTextAccess().getTextAssignment_8()); }
-	(rule__ClickClassByText__TextAssignment_8)
-	{ after(grammarAccess.getClickClassByTextAccess().getTextAssignment_8()); }
+	{ before(grammarAccess.getClickClassByTextAccess().getParametersAssignment_8()); }
+	(rule__ClickClassByText__ParametersAssignment_8)
+	{ after(grammarAccess.getClickClassByTextAccess().getParametersAssignment_8()); }
 )
 ;
 finally {
@@ -2899,60 +2899,136 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClickCssSelector__CssSelectorAssignment_6
+rule__ClickCssSelector__ParameterNamesAssignment_5
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getClickCssSelectorAccess().getCssSelectorParameterValueParserRuleCall_6_0()); }
-		ruleParameterValue
-		{ after(grammarAccess.getClickCssSelectorAccess().getCssSelectorParameterValueParserRuleCall_6_0()); }
+		{ before(grammarAccess.getClickCssSelectorAccess().getParameterNamesSelectorKeyword_5_0()); }
+		(
+			{ before(grammarAccess.getClickCssSelectorAccess().getParameterNamesSelectorKeyword_5_0()); }
+			'selector'
+			{ after(grammarAccess.getClickCssSelectorAccess().getParameterNamesSelectorKeyword_5_0()); }
+		)
+		{ after(grammarAccess.getClickCssSelectorAccess().getParameterNamesSelectorKeyword_5_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__PageLoad__SubpathAssignment_2
+rule__ClickCssSelector__ParameterValuesAssignment_6
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getPageLoadAccess().getSubpathParameterValueParserRuleCall_2_0()); }
+		{ before(grammarAccess.getClickCssSelectorAccess().getParameterValuesParameterValueParserRuleCall_6_0()); }
 		ruleParameterValue
-		{ after(grammarAccess.getPageLoadAccess().getSubpathParameterValueParserRuleCall_2_0()); }
+		{ after(grammarAccess.getClickCssSelectorAccess().getParameterValuesParameterValueParserRuleCall_6_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__TypeTextInElementFoundByCssSelector__TextAssignment_1
+rule__PageLoad__ParameterNamesAssignment_1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTextParameterValueParserRuleCall_1_0()); }
-		ruleParameterValue
-		{ after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getTextParameterValueParserRuleCall_1_0()); }
+		{ before(grammarAccess.getPageLoadAccess().getParameterNamesPageKeyword_1_0()); }
+		(
+			{ before(grammarAccess.getPageLoadAccess().getParameterNamesPageKeyword_1_0()); }
+			'page'
+			{ after(grammarAccess.getPageLoadAccess().getParameterNamesPageKeyword_1_0()); }
+		)
+		{ after(grammarAccess.getPageLoadAccess().getParameterNamesPageKeyword_1_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__TypeTextInElementFoundByCssSelector__CssSelectorAssignment_7
+rule__PageLoad__ParameterValuesAssignment_2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getCssSelectorParameterValueParserRuleCall_7_0()); }
+		{ before(grammarAccess.getPageLoadAccess().getParameterValuesParameterValueParserRuleCall_2_0()); }
 		ruleParameterValue
-		{ after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getCssSelectorParameterValueParserRuleCall_7_0()); }
+		{ after(grammarAccess.getPageLoadAccess().getParameterValuesParameterValueParserRuleCall_2_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TypeTextInElementFoundByCssSelector__ParameterNamesAssignment_0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterNamesTypeKeyword_0_0()); }
+		(
+			{ before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterNamesTypeKeyword_0_0()); }
+			'type'
+			{ after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterNamesTypeKeyword_0_0()); }
+		)
+		{ after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterNamesTypeKeyword_0_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TypeTextInElementFoundByCssSelector__ParameterValuesAssignment_1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterValuesParameterValueParserRuleCall_1_0()); }
+		ruleParameterValue
+		{ after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterValuesParameterValueParserRuleCall_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TypeTextInElementFoundByCssSelector__ParameterNamesAssignment_6
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterNamesSelectorKeyword_6_0()); }
+		(
+			{ before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterNamesSelectorKeyword_6_0()); }
+			'selector'
+			{ after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterNamesSelectorKeyword_6_0()); }
+		)
+		{ after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterNamesSelectorKeyword_6_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TypeTextInElementFoundByCssSelector__ParameterValuesAssignment_7
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterValuesParameterValueParserRuleCall_7_0()); }
+		ruleParameterValue
+		{ after(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getParameterValuesParameterValueParserRuleCall_7_0()); }
 	)
 ;
 finally {
@@ -2989,30 +3065,68 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClickClassByText__CssClassAssignment_5
+rule__ClickClassByText__ParameterNamesAssignment_4
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getClickClassByTextAccess().getCssClassParameterValueParserRuleCall_5_0()); }
-		ruleParameterValue
-		{ after(grammarAccess.getClickClassByTextAccess().getCssClassParameterValueParserRuleCall_5_0()); }
+		{ before(grammarAccess.getClickClassByTextAccess().getParameterNamesClassKeyword_4_0()); }
+		(
+			{ before(grammarAccess.getClickClassByTextAccess().getParameterNamesClassKeyword_4_0()); }
+			'class'
+			{ after(grammarAccess.getClickClassByTextAccess().getParameterNamesClassKeyword_4_0()); }
+		)
+		{ after(grammarAccess.getClickClassByTextAccess().getParameterNamesClassKeyword_4_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClickClassByText__TextAssignment_8
+rule__ClickClassByText__ParameterValuesAssignment_5
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getClickClassByTextAccess().getTextParameterValueParserRuleCall_8_0()); }
+		{ before(grammarAccess.getClickClassByTextAccess().getParameterValuesParameterValueParserRuleCall_5_0()); }
 		ruleParameterValue
-		{ after(grammarAccess.getClickClassByTextAccess().getTextParameterValueParserRuleCall_8_0()); }
+		{ after(grammarAccess.getClickClassByTextAccess().getParameterValuesParameterValueParserRuleCall_5_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ClickClassByText__ParameterNamesAssignment_7
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getClickClassByTextAccess().getParameterNamesTextKeyword_7_0()); }
+		(
+			{ before(grammarAccess.getClickClassByTextAccess().getParameterNamesTextKeyword_7_0()); }
+			'text'
+			{ after(grammarAccess.getClickClassByTextAccess().getParameterNamesTextKeyword_7_0()); }
+		)
+		{ after(grammarAccess.getClickClassByTextAccess().getParameterNamesTextKeyword_7_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ClickClassByText__ParametersAssignment_8
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getClickClassByTextAccess().getParametersParameterValueParserRuleCall_8_0()); }
+		ruleParameterValue
+		{ after(grammarAccess.getClickClassByTextAccess().getParametersParameterValueParserRuleCall_8_0()); }
 	)
 ;
 finally {

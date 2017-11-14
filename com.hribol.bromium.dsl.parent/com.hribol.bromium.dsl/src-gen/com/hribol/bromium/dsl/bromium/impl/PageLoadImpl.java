@@ -5,41 +5,18 @@ package com.hribol.bromium.dsl.bromium.impl;
 
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.PageLoad;
-import com.hribol.bromium.dsl.bromium.ParameterValue;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Page Load</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following features are implemented:
- * <ul>
- *   <li>{@link com.hribol.bromium.dsl.bromium.impl.PageLoadImpl#getSubpath <em>Subpath</em>}</li>
- * </ul>
- * </p>
  *
  * @generated
  */
 public class PageLoadImpl extends WebDriverActionImpl implements PageLoad
 {
-  /**
-   * The cached value of the '{@link #getSubpath() <em>Subpath</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getSubpath()
-   * @generated
-   * @ordered
-   */
-  protected ParameterValue subpath;
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -59,136 +36,6 @@ public class PageLoadImpl extends WebDriverActionImpl implements PageLoad
   protected EClass eStaticClass()
   {
     return BromiumPackage.Literals.PAGE_LOAD;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ParameterValue getSubpath()
-  {
-    return subpath;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetSubpath(ParameterValue newSubpath, NotificationChain msgs)
-  {
-    ParameterValue oldSubpath = subpath;
-    subpath = newSubpath;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BromiumPackage.PAGE_LOAD__SUBPATH, oldSubpath, newSubpath);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setSubpath(ParameterValue newSubpath)
-  {
-    if (newSubpath != subpath)
-    {
-      NotificationChain msgs = null;
-      if (subpath != null)
-        msgs = ((InternalEObject)subpath).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.PAGE_LOAD__SUBPATH, null, msgs);
-      if (newSubpath != null)
-        msgs = ((InternalEObject)newSubpath).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.PAGE_LOAD__SUBPATH, null, msgs);
-      msgs = basicSetSubpath(newSubpath, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.PAGE_LOAD__SUBPATH, newSubpath, newSubpath));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case BromiumPackage.PAGE_LOAD__SUBPATH:
-        return basicSetSubpath(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
-    switch (featureID)
-    {
-      case BromiumPackage.PAGE_LOAD__SUBPATH:
-        return getSubpath();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
-    switch (featureID)
-    {
-      case BromiumPackage.PAGE_LOAD__SUBPATH:
-        setSubpath((ParameterValue)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID)
-  {
-    switch (featureID)
-    {
-      case BromiumPackage.PAGE_LOAD__SUBPATH:
-        setSubpath((ParameterValue)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
-    switch (featureID)
-    {
-      case BromiumPackage.PAGE_LOAD__SUBPATH:
-        return subpath != null;
-    }
-    return super.eIsSet(featureID);
   }
 
 } //PageLoadImpl

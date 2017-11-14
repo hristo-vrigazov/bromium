@@ -7,13 +7,17 @@ import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.ClickClassByText;
 import com.hribol.bromium.dsl.bromium.ParameterValue;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,35 +25,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
- * <ul>
- *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ClickClassByTextImpl#getCssClass <em>Css Class</em>}</li>
- *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ClickClassByTextImpl#getText <em>Text</em>}</li>
- * </ul>
  * </p>
+ * <ul>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ClickClassByTextImpl#getParameters <em>Parameters</em>}</li>
+ * </ul>
  *
  * @generated
  */
 public class ClickClassByTextImpl extends WebDriverActionImpl implements ClickClassByText
 {
   /**
-   * The cached value of the '{@link #getCssClass() <em>Css Class</em>}' containment reference.
+   * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCssClass()
+   * @see #getParameters()
    * @generated
    * @ordered
    */
-  protected ParameterValue cssClass;
-
-  /**
-   * The cached value of the '{@link #getText() <em>Text</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getText()
-   * @generated
-   * @ordered
-   */
-  protected ParameterValue text;
+  protected EList<ParameterValue> parameters;
 
   /**
    * <!-- begin-user-doc -->
@@ -77,95 +70,13 @@ public class ClickClassByTextImpl extends WebDriverActionImpl implements ClickCl
    * <!-- end-user-doc -->
    * @generated
    */
-  public ParameterValue getCssClass()
+  public EList<ParameterValue> getParameters()
   {
-    return cssClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetCssClass(ParameterValue newCssClass, NotificationChain msgs)
-  {
-    ParameterValue oldCssClass = cssClass;
-    cssClass = newCssClass;
-    if (eNotificationRequired())
+    if (parameters == null)
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BromiumPackage.CLICK_CLASS_BY_TEXT__CSS_CLASS, oldCssClass, newCssClass);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
+      parameters = new EObjectContainmentEList<ParameterValue>(ParameterValue.class, this, BromiumPackage.CLICK_CLASS_BY_TEXT__PARAMETERS);
     }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setCssClass(ParameterValue newCssClass)
-  {
-    if (newCssClass != cssClass)
-    {
-      NotificationChain msgs = null;
-      if (cssClass != null)
-        msgs = ((InternalEObject)cssClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.CLICK_CLASS_BY_TEXT__CSS_CLASS, null, msgs);
-      if (newCssClass != null)
-        msgs = ((InternalEObject)newCssClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.CLICK_CLASS_BY_TEXT__CSS_CLASS, null, msgs);
-      msgs = basicSetCssClass(newCssClass, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.CLICK_CLASS_BY_TEXT__CSS_CLASS, newCssClass, newCssClass));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ParameterValue getText()
-  {
-    return text;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetText(ParameterValue newText, NotificationChain msgs)
-  {
-    ParameterValue oldText = text;
-    text = newText;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BromiumPackage.CLICK_CLASS_BY_TEXT__TEXT, oldText, newText);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setText(ParameterValue newText)
-  {
-    if (newText != text)
-    {
-      NotificationChain msgs = null;
-      if (text != null)
-        msgs = ((InternalEObject)text).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.CLICK_CLASS_BY_TEXT__TEXT, null, msgs);
-      if (newText != null)
-        msgs = ((InternalEObject)newText).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.CLICK_CLASS_BY_TEXT__TEXT, null, msgs);
-      msgs = basicSetText(newText, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.CLICK_CLASS_BY_TEXT__TEXT, newText, newText));
+    return parameters;
   }
 
   /**
@@ -178,10 +89,8 @@ public class ClickClassByTextImpl extends WebDriverActionImpl implements ClickCl
   {
     switch (featureID)
     {
-      case BromiumPackage.CLICK_CLASS_BY_TEXT__CSS_CLASS:
-        return basicSetCssClass(null, msgs);
-      case BromiumPackage.CLICK_CLASS_BY_TEXT__TEXT:
-        return basicSetText(null, msgs);
+      case BromiumPackage.CLICK_CLASS_BY_TEXT__PARAMETERS:
+        return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -196,10 +105,8 @@ public class ClickClassByTextImpl extends WebDriverActionImpl implements ClickCl
   {
     switch (featureID)
     {
-      case BromiumPackage.CLICK_CLASS_BY_TEXT__CSS_CLASS:
-        return getCssClass();
-      case BromiumPackage.CLICK_CLASS_BY_TEXT__TEXT:
-        return getText();
+      case BromiumPackage.CLICK_CLASS_BY_TEXT__PARAMETERS:
+        return getParameters();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -209,16 +116,15 @@ public class ClickClassByTextImpl extends WebDriverActionImpl implements ClickCl
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case BromiumPackage.CLICK_CLASS_BY_TEXT__CSS_CLASS:
-        setCssClass((ParameterValue)newValue);
-        return;
-      case BromiumPackage.CLICK_CLASS_BY_TEXT__TEXT:
-        setText((ParameterValue)newValue);
+      case BromiumPackage.CLICK_CLASS_BY_TEXT__PARAMETERS:
+        getParameters().clear();
+        getParameters().addAll((Collection<? extends ParameterValue>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -234,11 +140,8 @@ public class ClickClassByTextImpl extends WebDriverActionImpl implements ClickCl
   {
     switch (featureID)
     {
-      case BromiumPackage.CLICK_CLASS_BY_TEXT__CSS_CLASS:
-        setCssClass((ParameterValue)null);
-        return;
-      case BromiumPackage.CLICK_CLASS_BY_TEXT__TEXT:
-        setText((ParameterValue)null);
+      case BromiumPackage.CLICK_CLASS_BY_TEXT__PARAMETERS:
+        getParameters().clear();
         return;
     }
     super.eUnset(featureID);
@@ -254,10 +157,8 @@ public class ClickClassByTextImpl extends WebDriverActionImpl implements ClickCl
   {
     switch (featureID)
     {
-      case BromiumPackage.CLICK_CLASS_BY_TEXT__CSS_CLASS:
-        return cssClass != null;
-      case BromiumPackage.CLICK_CLASS_BY_TEXT__TEXT:
-        return text != null;
+      case BromiumPackage.CLICK_CLASS_BY_TEXT__PARAMETERS:
+        return parameters != null && !parameters.isEmpty();
     }
     return super.eIsSet(featureID);
   }

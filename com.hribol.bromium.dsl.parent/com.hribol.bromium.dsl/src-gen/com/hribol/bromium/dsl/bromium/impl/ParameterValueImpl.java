@@ -21,11 +21,11 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ParameterValueImpl#getContent <em>Content</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ParameterValueImpl#getExposedParameter <em>Exposed Parameter</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

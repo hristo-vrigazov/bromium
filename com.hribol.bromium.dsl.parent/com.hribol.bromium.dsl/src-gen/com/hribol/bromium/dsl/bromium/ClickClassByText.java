@@ -3,6 +3,7 @@
  */
 package com.hribol.bromium.dsl.bromium;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -11,11 +12,10 @@ package com.hribol.bromium.dsl.bromium;
  *
  * <p>
  * The following features are supported:
- * <ul>
- *   <li>{@link com.hribol.bromium.dsl.bromium.ClickClassByText#getCssClass <em>Css Class</em>}</li>
- *   <li>{@link com.hribol.bromium.dsl.bromium.ClickClassByText#getText <em>Text</em>}</li>
- * </ul>
  * </p>
+ * <ul>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.ClickClassByText#getParameters <em>Parameters</em>}</li>
+ * </ul>
  *
  * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getClickClassByText()
  * @model
@@ -24,55 +24,19 @@ package com.hribol.bromium.dsl.bromium;
 public interface ClickClassByText extends WebDriverAction
 {
   /**
-   * Returns the value of the '<em><b>Css Class</b></em>' containment reference.
+   * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
+   * The list contents are of type {@link com.hribol.bromium.dsl.bromium.ParameterValue}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Css Class</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Css Class</em>' containment reference.
-   * @see #setCssClass(ParameterValue)
-   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getClickClassByText_CssClass()
+   * @return the value of the '<em>Parameters</em>' containment reference list.
+   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getClickClassByText_Parameters()
    * @model containment="true"
    * @generated
    */
-  ParameterValue getCssClass();
-
-  /**
-   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.ClickClassByText#getCssClass <em>Css Class</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Css Class</em>' containment reference.
-   * @see #getCssClass()
-   * @generated
-   */
-  void setCssClass(ParameterValue value);
-
-  /**
-   * Returns the value of the '<em><b>Text</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Text</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Text</em>' containment reference.
-   * @see #setText(ParameterValue)
-   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getClickClassByText_Text()
-   * @model containment="true"
-   * @generated
-   */
-  ParameterValue getText();
-
-  /**
-   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.ClickClassByText#getText <em>Text</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Text</em>' containment reference.
-   * @see #getText()
-   * @generated
-   */
-  void setText(ParameterValue value);
+  EList<ParameterValue> getParameters();
 
 } // ClickClassByText

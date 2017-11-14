@@ -15,17 +15,6 @@ public class TraversingBasedDslConfigurationConverter implements DslConfiguratio
 
     @Override
     public ApplicationConfiguration convert(Model model) {
-        TreeIterator<EObject> treeIterator = model.getActions().get(2).getWebDriverAction().eAllContents();
-        ((ParameterValue) model.getActions().get(2).getWebDriverAction().eAllContents().next()).getExposedParameter();
-
-
-        while (treeIterator.hasNext()) {
-            EObject treeNode = treeIterator.next();
-            String className = treeNode.getClass().getSimpleName();
-            ParameterValue parameterValue = (ParameterValue) treeNode;
-            System.out.println(className);
-            System.out.println(parameterValue);
-        }
         ApplicationConfiguration applicationConfiguration = new ApplicationConfiguration();
         applicationConfiguration.setApplicationName(model.getName());
         applicationConfiguration.setVersion(model.getVersion());
