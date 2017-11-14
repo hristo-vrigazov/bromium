@@ -19,34 +19,34 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
- * </p>
  * <ul>
- *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ExpectHttpRequestImpl#getNot <em>Not</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ExpectHttpRequestImpl#isNot <em>Not</em>}</li>
  * </ul>
+ * </p>
  *
  * @generated
  */
 public class ExpectHttpRequestImpl extends MinimalEObjectImpl.Container implements ExpectHttpRequest
 {
   /**
-   * The default value of the '{@link #getNot() <em>Not</em>}' attribute.
+   * The default value of the '{@link #isNot() <em>Not</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNot()
+   * @see #isNot()
    * @generated
    * @ordered
    */
-  protected static final String NOT_EDEFAULT = null;
+  protected static final boolean NOT_EDEFAULT = false;
 
   /**
-   * The cached value of the '{@link #getNot() <em>Not</em>}' attribute.
+   * The cached value of the '{@link #isNot() <em>Not</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNot()
+   * @see #isNot()
    * @generated
    * @ordered
    */
-  protected String not = NOT_EDEFAULT;
+  protected boolean not = NOT_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -74,7 +74,7 @@ public class ExpectHttpRequestImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getNot()
+  public boolean isNot()
   {
     return not;
   }
@@ -84,9 +84,9 @@ public class ExpectHttpRequestImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setNot(String newNot)
+  public void setNot(boolean newNot)
   {
-    String oldNot = not;
+    boolean oldNot = not;
     not = newNot;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.EXPECT_HTTP_REQUEST__NOT, oldNot, not));
@@ -103,7 +103,7 @@ public class ExpectHttpRequestImpl extends MinimalEObjectImpl.Container implemen
     switch (featureID)
     {
       case BromiumPackage.EXPECT_HTTP_REQUEST__NOT:
-        return getNot();
+        return isNot();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,7 +119,7 @@ public class ExpectHttpRequestImpl extends MinimalEObjectImpl.Container implemen
     switch (featureID)
     {
       case BromiumPackage.EXPECT_HTTP_REQUEST__NOT:
-        setNot((String)newValue);
+        setNot((Boolean)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -153,7 +153,7 @@ public class ExpectHttpRequestImpl extends MinimalEObjectImpl.Container implemen
     switch (featureID)
     {
       case BromiumPackage.EXPECT_HTTP_REQUEST__NOT:
-        return NOT_EDEFAULT == null ? not != null : !NOT_EDEFAULT.equals(not);
+        return not != NOT_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }

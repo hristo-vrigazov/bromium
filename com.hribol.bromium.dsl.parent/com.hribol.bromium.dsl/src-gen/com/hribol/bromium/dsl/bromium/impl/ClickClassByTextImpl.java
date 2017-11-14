@@ -21,11 +21,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
- * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ClickClassByTextImpl#getCssClass <em>Css Class</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ClickClassByTextImpl#getText <em>Text</em>}</li>
  * </ul>
+ * </p>
  *
  * @generated
  */

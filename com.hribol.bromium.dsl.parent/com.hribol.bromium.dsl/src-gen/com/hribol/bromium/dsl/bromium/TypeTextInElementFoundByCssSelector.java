@@ -11,11 +11,11 @@ package com.hribol.bromium.dsl.bromium;
  *
  * <p>
  * The following features are supported:
- * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector#getText <em>Text</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector#getCssSelector <em>Css Selector</em>}</li>
  * </ul>
+ * </p>
  *
  * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getTypeTextInElementFoundByCssSelector()
  * @model

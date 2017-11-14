@@ -602,10 +602,10 @@ ruleExpectHttpRequest returns [EObject current=null]
 						if ($current==null) {
 							$current = createModelElement(grammarAccess.getExpectHttpRequestRule());
 						}
-						setWithLastConsumed($current, "not", lv_not_2_0, "not");
+						setWithLastConsumed($current, "not", true, "not");
 					}
 				)
-			)?
+			)
 			otherlv_3='expect'
 			{
 				newLeafNode(otherlv_3, grammarAccess.getExpectHttpRequestAccess().getExpectKeyword_1_2());

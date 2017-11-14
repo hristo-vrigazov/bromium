@@ -1405,7 +1405,7 @@ rule__ExpectHttpRequest__Group_1__1__Impl
 :
 (
 	{ before(grammarAccess.getExpectHttpRequestAccess().getNotAssignment_1_1()); }
-	(rule__ExpectHttpRequest__NotAssignment_1_1)?
+	(rule__ExpectHttpRequest__NotAssignment_1_1)
 	{ after(grammarAccess.getExpectHttpRequestAccess().getNotAssignment_1_1()); }
 )
 ;

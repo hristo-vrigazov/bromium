@@ -11,11 +11,11 @@ package com.hribol.bromium.dsl.bromium;
  *
  * <p>
  * The following features are supported:
- * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ClickClassByText#getCssClass <em>Css Class</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ClickClassByText#getText <em>Text</em>}</li>
  * </ul>
+ * </p>
  *
  * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getClickClassByText()
  * @model

@@ -906,11 +906,11 @@ public interface BromiumPackage extends EPackage
   EClass getExpectHttpRequest();
 
   /**
-   * Returns the meta object for the attribute '{@link com.hribol.bromium.dsl.bromium.ExpectHttpRequest#getNot <em>Not</em>}'.
+   * Returns the meta object for the attribute '{@link com.hribol.bromium.dsl.bromium.ExpectHttpRequest#isNot <em>Not</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Not</em>'.
-   * @see com.hribol.bromium.dsl.bromium.ExpectHttpRequest#getNot()
+   * @see com.hribol.bromium.dsl.bromium.ExpectHttpRequest#isNot()
    * @see #getExpectHttpRequest()
    * @generated
    */

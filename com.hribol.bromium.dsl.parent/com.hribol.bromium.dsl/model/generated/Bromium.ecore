@@ -40,7 +40,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExpectHttpRequest">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="not" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="not" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ElementByCssToBePresent" eSuperTypes="#//WebDriverActionCondition"/>
   <eClassifiers xsi:type="ecore:EClass" name="ClickCssSelector" eSuperTypes="#//WebDriverAction">

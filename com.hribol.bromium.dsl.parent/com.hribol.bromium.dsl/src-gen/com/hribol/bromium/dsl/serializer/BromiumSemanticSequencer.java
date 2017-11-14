@@ -180,10 +180,16 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     ExpectHttpRequest returns ExpectHttpRequest
 	 *
 	 * Constraint:
-	 *     not='not'?
+	 *     not?='not'
 	 */
 	protected void sequence_ExpectHttpRequest(ISerializationContext context, ExpectHttpRequest semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.EXPECT_HTTP_REQUEST__NOT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.EXPECT_HTTP_REQUEST__NOT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getExpectHttpRequestAccess().getNotNotKeyword_1_1_0(), semanticObject.isNot());
+		feeder.finish();
 	}
 	
 	

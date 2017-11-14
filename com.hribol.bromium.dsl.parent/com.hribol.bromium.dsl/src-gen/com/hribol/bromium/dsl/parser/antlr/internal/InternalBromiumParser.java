@@ -1036,11 +1036,11 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
                         if ( (LA8_5==29) ) {
                             int LA8_6 = input.LA(5);
 
-                            if ( (LA8_6==42) ) {
-                                alt8=2;
-                            }
-                            else if ( (LA8_6==30) ) {
+                            if ( (LA8_6==30) ) {
                                 alt8=1;
+                            }
+                            else if ( (LA8_6==42) ) {
+                                alt8=2;
                             }
                             else {
                                 NoViableAltException nvae =
@@ -1454,7 +1454,7 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleExpectHttpRequest"
-    // InternalBromium.g:575:1: ruleExpectHttpRequest returns [EObject current=null] : ( () (otherlv_1= 'do' ( (lv_not_2_0= 'not' ) )? otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request' ) ) ;
+    // InternalBromium.g:575:1: ruleExpectHttpRequest returns [EObject current=null] : ( () (otherlv_1= 'do' ( (lv_not_2_0= 'not' ) ) otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request' ) ) ;
     public final EObject ruleExpectHttpRequest() throws RecognitionException {
         EObject current = null;
 
@@ -1468,11 +1468,11 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalBromium.g:581:2: ( ( () (otherlv_1= 'do' ( (lv_not_2_0= 'not' ) )? otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request' ) ) )
-            // InternalBromium.g:582:2: ( () (otherlv_1= 'do' ( (lv_not_2_0= 'not' ) )? otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request' ) )
+            // InternalBromium.g:581:2: ( ( () (otherlv_1= 'do' ( (lv_not_2_0= 'not' ) ) otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request' ) ) )
+            // InternalBromium.g:582:2: ( () (otherlv_1= 'do' ( (lv_not_2_0= 'not' ) ) otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request' ) )
             {
-            // InternalBromium.g:582:2: ( () (otherlv_1= 'do' ( (lv_not_2_0= 'not' ) )? otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request' ) )
-            // InternalBromium.g:583:3: () (otherlv_1= 'do' ( (lv_not_2_0= 'not' ) )? otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request' )
+            // InternalBromium.g:582:2: ( () (otherlv_1= 'do' ( (lv_not_2_0= 'not' ) ) otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request' ) )
+            // InternalBromium.g:583:3: () (otherlv_1= 'do' ( (lv_not_2_0= 'not' ) ) otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request' )
             {
             // InternalBromium.g:583:3: ()
             // InternalBromium.g:584:4: 
@@ -1485,43 +1485,32 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalBromium.g:590:3: (otherlv_1= 'do' ( (lv_not_2_0= 'not' ) )? otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request' )
-            // InternalBromium.g:591:4: otherlv_1= 'do' ( (lv_not_2_0= 'not' ) )? otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request'
+            // InternalBromium.g:590:3: (otherlv_1= 'do' ( (lv_not_2_0= 'not' ) ) otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request' )
+            // InternalBromium.g:591:4: otherlv_1= 'do' ( (lv_not_2_0= 'not' ) ) otherlv_3= 'expect' otherlv_4= 'http' otherlv_5= 'request'
             {
             otherlv_1=(Token)match(input,23,FOLLOW_17); 
 
             				newLeafNode(otherlv_1, grammarAccess.getExpectHttpRequestAccess().getDoKeyword_1_0());
             			
-            // InternalBromium.g:595:4: ( (lv_not_2_0= 'not' ) )?
-            int alt9=2;
-            int LA9_0 = input.LA(1);
+            // InternalBromium.g:595:4: ( (lv_not_2_0= 'not' ) )
+            // InternalBromium.g:596:5: (lv_not_2_0= 'not' )
+            {
+            // InternalBromium.g:596:5: (lv_not_2_0= 'not' )
+            // InternalBromium.g:597:6: lv_not_2_0= 'not'
+            {
+            lv_not_2_0=(Token)match(input,24,FOLLOW_18); 
 
-            if ( (LA9_0==24) ) {
-                alt9=1;
+            						newLeafNode(lv_not_2_0, grammarAccess.getExpectHttpRequestAccess().getNotNotKeyword_1_1_0());
+            					
+
+            						if (current==null) {
+            							current = createModelElement(grammarAccess.getExpectHttpRequestRule());
+            						}
+            						setWithLastConsumed(current, "not", true, "not");
+            					
+
             }
-            switch (alt9) {
-                case 1 :
-                    // InternalBromium.g:596:5: (lv_not_2_0= 'not' )
-                    {
-                    // InternalBromium.g:596:5: (lv_not_2_0= 'not' )
-                    // InternalBromium.g:597:6: lv_not_2_0= 'not'
-                    {
-                    lv_not_2_0=(Token)match(input,24,FOLLOW_18); 
 
-                    						newLeafNode(lv_not_2_0, grammarAccess.getExpectHttpRequestAccess().getNotNotKeyword_1_1_0());
-                    					
-
-                    						if (current==null) {
-                    							current = createModelElement(grammarAccess.getExpectHttpRequestRule());
-                    						}
-                    						setWithLastConsumed(current, "not", lv_not_2_0, "not");
-                    					
-
-                    }
-
-
-                    }
-                    break;
 
             }
 
@@ -2525,22 +2514,22 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
             // InternalBromium.g:1061:2: ( ( (lv_content_0_0= RULE_STRING ) ) | ( (otherlv_1= RULE_ID ) ) )
             {
             // InternalBromium.g:1061:2: ( ( (lv_content_0_0= RULE_STRING ) ) | ( (otherlv_1= RULE_ID ) ) )
-            int alt10=2;
-            int LA10_0 = input.LA(1);
+            int alt9=2;
+            int LA9_0 = input.LA(1);
 
-            if ( (LA10_0==RULE_STRING) ) {
-                alt10=1;
+            if ( (LA9_0==RULE_STRING) ) {
+                alt9=1;
             }
-            else if ( (LA10_0==RULE_ID) ) {
-                alt10=2;
+            else if ( (LA9_0==RULE_ID) ) {
+                alt9=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 10, 0, input);
+                    new NoViableAltException("", 9, 0, input);
 
                 throw nvae;
             }
-            switch (alt10) {
+            switch (alt9) {
                 case 1 :
                     // InternalBromium.g:1062:3: ( (lv_content_0_0= RULE_STRING ) )
                     {
@@ -2813,7 +2802,7 @@ public class InternalBromiumParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000010010000000L});
     public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000200000L});
     public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000003000000L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000001000000L});
     public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000002000000L});
     public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000004000000L});
     public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000008000000L});

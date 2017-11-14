@@ -841,7 +841,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     initEReference(getPostcondition_Postcondition(), this.getWebDriverActionCondition(), null, "postcondition", null, 0, 1, Postcondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expectHttpRequestEClass, ExpectHttpRequest.class, "ExpectHttpRequest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getExpectHttpRequest_Not(), ecorePackage.getEString(), "not", null, 0, 1, ExpectHttpRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getExpectHttpRequest_Not(), ecorePackage.getEBoolean(), "not", null, 0, 1, ExpectHttpRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(elementByCssToBePresentEClass, ElementByCssToBePresent.class, "ElementByCssToBePresent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -316,22 +316,22 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRequestKeyword_1_4 = (Keyword)cGroup_1.eContents().get(4);
 		
 		//ExpectHttpRequest:
-		//	{ExpectHttpRequest} ('do' not='not'? 'expect' 'http' 'request');
+		//	{ExpectHttpRequest} ('do' not?='not' 'expect' 'http' 'request');
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{ExpectHttpRequest} ('do' not='not'? 'expect' 'http' 'request')
+		//{ExpectHttpRequest} ('do' not?='not' 'expect' 'http' 'request')
 		public Group getGroup() { return cGroup; }
 		
 		//{ExpectHttpRequest}
 		public Action getExpectHttpRequestAction_0() { return cExpectHttpRequestAction_0; }
 		
-		//'do' not='not'? 'expect' 'http' 'request'
+		//'do' not?='not' 'expect' 'http' 'request'
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//'do'
 		public Keyword getDoKeyword_1_0() { return cDoKeyword_1_0; }
 		
-		//not='not'?
+		//not?='not'
 		public Assignment getNotAssignment_1_1() { return cNotAssignment_1_1; }
 		
 		//'not'
@@ -880,7 +880,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ExpectHttpRequest:
-	//	{ExpectHttpRequest} ('do' not='not'? 'expect' 'http' 'request');
+	//	{ExpectHttpRequest} ('do' not?='not' 'expect' 'http' 'request');
 	public ExpectHttpRequestElements getExpectHttpRequestAccess() {
 		return pExpectHttpRequest;
 	}

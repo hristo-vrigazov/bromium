@@ -12,10 +12,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
- * </p>
  * <ul>
- *   <li>{@link com.hribol.bromium.dsl.bromium.ExpectHttpRequest#getNot <em>Not</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.ExpectHttpRequest#isNot <em>Not</em>}</li>
  * </ul>
+ * </p>
  *
  * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getExpectHttpRequest()
  * @model
@@ -32,21 +32,21 @@ public interface ExpectHttpRequest extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Not</em>' attribute.
-   * @see #setNot(String)
+   * @see #setNot(boolean)
    * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getExpectHttpRequest_Not()
    * @model
    * @generated
    */
-  String getNot();
+  boolean isNot();
 
   /**
-   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.ExpectHttpRequest#getNot <em>Not</em>}' attribute.
+   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.ExpectHttpRequest#isNot <em>Not</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Not</em>' attribute.
-   * @see #getNot()
+   * @see #isNot()
    * @generated
    */
-  void setNot(String value);
+  void setNot(boolean value);
 
 } // ExpectHttpRequest

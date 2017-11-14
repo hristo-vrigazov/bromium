@@ -45,7 +45,7 @@ Postcondition:
 ;
 
 ExpectHttpRequest:
-	{ExpectHttpRequest} ('do' not='not'? 'expect' 'http' 'request')
+	{ExpectHttpRequest} ('do' not?='not' 'expect' 'http' 'request')
 ;
 
 
@@ -56,6 +56,7 @@ PageLoad: 'load' 'page' subpath=ParameterValue;
 TypeTextInElementFoundByCssSelector: 'type' text=ParameterValue 
 'in' 'element' 'with' 'css' 'selector' cssSelector=ParameterValue
 ;
+
 TextOfElementWithCssSelectorToBe:
 	'text' 'of' 'element' 'with' 'css' 'selector' cssSelector=ParameterValue 'is' text=ParameterValue
 ;
