@@ -33,7 +33,7 @@ public class BromiumProposalProvider extends AbstractBromiumProposalProvider {
   @Override
   public void complete_WebDriverActionCondition(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     acceptor.accept(this.createCompletionProposal("element with css selector \'selector\' is present", context));
-    acceptor.accept(this.createCompletionProposal("text of element with css selector \'cssSelector\' is \'text\'", context));
+    acceptor.accept(this.createCompletionProposal("element with css selector \'cssSelector\' has text \'text\'", context));
     super.complete_WebDriverActionCondition(model, ruleCall, context, acceptor);
   }
   

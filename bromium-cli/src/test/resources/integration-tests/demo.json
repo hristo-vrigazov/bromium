@@ -350,7 +350,7 @@
                         "value": "#edit-toolbar"
                     }
                 },
-                "webDriverActionType": "ELEMENT_BY_CSS_TO_BE_PRESENT"
+                "webDriverActionType": "ElementByCssToBePresent"
             },
             "expectsHttpRequest": true,
             "name": "clickLikeButton",
@@ -433,7 +433,7 @@
                         "value": "#success-indicator"
                     }
                 },
-                "webDriverActionType": "ELEMENT_BY_CSS_TO_BE_PRESENT"
+                "webDriverActionType": "ElementByCssToBePresent"
             },
             "conditionBeforeExecution": {
                 "parametersConfiguration": {
