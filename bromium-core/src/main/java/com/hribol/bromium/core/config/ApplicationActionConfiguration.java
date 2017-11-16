@@ -17,6 +17,10 @@ public class ApplicationActionConfiguration implements GenerationInformation {
     private WebDriverActionConfiguration conditionAfterExecution;
     private boolean expectsHttpRequest;
 
+    public void setSyntaxDefinitionConfigurationList(List<SyntaxDefinitionConfiguration> syntaxDefinitionConfigurationList) {
+        this.syntaxDefinitionConfigurationList = syntaxDefinitionConfigurationList;
+    }
+
     private List<SyntaxDefinitionConfiguration> syntaxDefinitionConfigurationList;
 
     public ApplicationActionConfiguration() {

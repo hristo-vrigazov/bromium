@@ -36,7 +36,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//Precondition/action"/>
     </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//Postcondition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//Postcondition/postcondition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//Postcondition/action"/>
     </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//ExpectHttpRequest">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//ExpectHttpRequest/not"/>

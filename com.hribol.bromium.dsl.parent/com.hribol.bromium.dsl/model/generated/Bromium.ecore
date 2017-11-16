@@ -43,7 +43,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Postcondition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="postcondition" eType="#//WebDriverActionCondition"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//WebDriverActionCondition"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExpectHttpRequest">

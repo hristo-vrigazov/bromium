@@ -226,15 +226,15 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     Postcondition returns Postcondition
 	 *
 	 * Constraint:
-	 *     postcondition=WebDriverActionCondition
+	 *     action=WebDriverActionCondition
 	 */
 	protected void sequence_Postcondition(ISerializationContext context, Postcondition semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.POSTCONDITION__POSTCONDITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.POSTCONDITION__POSTCONDITION));
+			if (transientValues.isValueTransient(semanticObject, BromiumPackage.Literals.POSTCONDITION__ACTION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BromiumPackage.Literals.POSTCONDITION__ACTION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPostconditionAccess().getPostconditionWebDriverActionConditionParserRuleCall_3_0(), semanticObject.getPostcondition());
+		feeder.accept(grammarAccess.getPostconditionAccess().getActionWebDriverActionConditionParserRuleCall_3_0(), semanticObject.getAction());
 		feeder.finish();
 	}
 	
@@ -312,7 +312,7 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     TypeTextInElementFoundByCssSelector returns TypeTextInElementFoundByCssSelector
 	 *
 	 * Constraint:
-	 *     (parameterNames+='type' parameterValues+=ParameterValue parameterNames+='selector' parameterValues+=ParameterValue)
+	 *     (parameterNames+='text' parameterValues+=ParameterValue parameterNames+='selector' parameterValues+=ParameterValue)
 	 */
 	protected void sequence_TypeTextInElementFoundByCssSelector(ISerializationContext context, TypeTextInElementFoundByCssSelector semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -33,11 +33,11 @@ public class TextOfElementFoundByCssSelectorToBeReplayFunctionTest {
 
         ReplayFunction replayFunction = new TextOfElementFoundByCssSelectorToBeReplayFunction(jsCollector, invocationProvider);
 
-        String expected = "function TextOfElementFoundByCssSelectorToBe(cssSelector, text, hashCode) {\n" +
-                "\tdocument.arrive(cssSelector, options, function () {\n" +
+        String expected = "function TextOfElementFoundByCssSelectorToBe(selector, text, hashCode) {\n" +
+                "\tdocument.arrive(selector, options, function () {\n" +
                 "\t\tbromium.notifySatisfiedBasedOnText(this, text, hashCode);\n" +
                 "\t});\n" +
-                "\tdocument.leave(cssSelector, function () {\n" +
+                "\tdocument.leave(selector, function () {\n" +
                 "\t\tbromium.notifyNotSatisfiedCondition(hashCode);\n" +
                 "\t});\n" +
                 "}".trim();

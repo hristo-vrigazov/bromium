@@ -41,7 +41,7 @@ Precondition:
 ;
 
 Postcondition:
-	('then' 'make' 'sure' postcondition=WebDriverActionCondition)
+	('then' 'make' 'sure' action=WebDriverActionCondition)
 ;
 
 ExpectHttpRequest:
@@ -53,7 +53,7 @@ ExpectHttpRequest:
 ElementByCssToBePresent: 'element' 'with' 'css' parameterNames+='selector' parameterValues+=ParameterValue 'is' 'present';
 ClickCssSelector: 'click' 'on' 'element' 'with' 'css' parameterNames+='selector' parameterValues+=ParameterValue;
 PageLoad: 'load' parameterNames+='page' parameterValues+=ParameterValue;
-TypeTextInElementFoundByCssSelector: parameterNames+='type' parameterValues+=ParameterValue 
+TypeTextInElementFoundByCssSelector: 'type' parameterNames+='text' parameterValues+=ParameterValue 
 'in' 'element' 'with' 'css' parameterNames+='selector' parameterValues+=ParameterValue
 ;
 

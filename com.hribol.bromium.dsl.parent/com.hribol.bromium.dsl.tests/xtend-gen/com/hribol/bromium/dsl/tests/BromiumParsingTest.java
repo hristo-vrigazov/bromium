@@ -47,7 +47,7 @@ public class BromiumParsingTest {
       _builder.append("syntax \'Type \' content \'into username field\'");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("type content in element with css selector \'#login\' ");
+      _builder.append("type text content in element with css selector \'#login\' ");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("do not expect http request");
@@ -108,7 +108,7 @@ public class BromiumParsingTest {
       _builder.append("syntax \'Type username\'");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("type \"admin\" in element with css selector \"#user\"");
+      _builder.append("type text \"admin\" in element with css selector \"#user\"");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("do not expect http request");
@@ -121,7 +121,7 @@ public class BromiumParsingTest {
       _builder.append("syntax \'Type password\'");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("type \"admin\" in element with css selector \"#pass\"");
+      _builder.append("type text \"admin\" in element with css selector \"#pass\"");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("do not expect http request");

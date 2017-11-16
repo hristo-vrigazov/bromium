@@ -13,9 +13,9 @@
             "name": "clickAjaxDemoButton",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#ajax-demo"
                     }
                 },
@@ -40,9 +40,9 @@
             "name": "clickLinkToAjaxDemoPage",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#ajax-demo-link"
                     }
                 },
@@ -67,9 +67,9 @@
             "name": "clickAjaxCreatedButton",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#ajax-button"
                     }
                 },
@@ -94,9 +94,9 @@
             "name": "clickDestroyAjaxCreatedButton",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#destroy-ajax"
                     }
                 },
@@ -121,9 +121,9 @@
             "name": "clickDynamicButton",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#create-dynamic"
                     }
                 },
@@ -148,9 +148,9 @@
             "name": "clickDynamicallyCreatedButton",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#late-creation"
                     }
                 },
@@ -175,9 +175,9 @@
             "name": "clickDeleteDynamicallyCreatedButton",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#destroy-dynamic"
                     }
                 },
@@ -202,9 +202,9 @@
             "name": "clickRaceDemoButton",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#race-demo"
                     }
                 },
@@ -314,9 +314,9 @@
             "name": "typeTextInNameInput",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#name-input"
                     },
                     "text": {
@@ -344,9 +344,9 @@
             },
             "conditionBeforeExecution": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#edit-toolbar"
                     }
                 },
@@ -356,9 +356,9 @@
             "name": "clickLikeButton",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": ".like"
                     }
                 },
@@ -383,9 +383,9 @@
             "name": "clickEditButton",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#edit"
                     }
                 },
@@ -410,9 +410,9 @@
             "name": "clickUploadButton",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#upload-button"
                     }
                 },
@@ -427,9 +427,9 @@
         {
             "conditionAfterExecution": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#success-indicator"
                     }
                 },
@@ -437,9 +437,9 @@
             },
             "conditionBeforeExecution": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#text-elem"
                     },
                     "text": {
@@ -454,9 +454,9 @@
             "name": "clickButtonAfterTextChanged",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#button-to-be-clicked"
                     }
                 },

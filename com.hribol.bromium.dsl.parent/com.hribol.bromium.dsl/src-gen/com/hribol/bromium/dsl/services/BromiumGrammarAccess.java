@@ -278,14 +278,14 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cThenKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cMakeKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Keyword cSureKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cPostconditionAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cPostconditionWebDriverActionConditionParserRuleCall_3_0 = (RuleCall)cPostconditionAssignment_3.eContents().get(0);
+		private final Assignment cActionAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cActionWebDriverActionConditionParserRuleCall_3_0 = (RuleCall)cActionAssignment_3.eContents().get(0);
 		
 		//Postcondition:
-		//	'then' 'make' 'sure' postcondition=WebDriverActionCondition;
+		//	'then' 'make' 'sure' action=WebDriverActionCondition;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'then' 'make' 'sure' postcondition=WebDriverActionCondition
+		//'then' 'make' 'sure' action=WebDriverActionCondition
 		public Group getGroup() { return cGroup; }
 		
 		//'then'
@@ -297,11 +297,11 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		//'sure'
 		public Keyword getSureKeyword_2() { return cSureKeyword_2; }
 		
-		//postcondition=WebDriverActionCondition
-		public Assignment getPostconditionAssignment_3() { return cPostconditionAssignment_3; }
+		//action=WebDriverActionCondition
+		public Assignment getActionAssignment_3() { return cActionAssignment_3; }
 		
 		//WebDriverActionCondition
-		public RuleCall getPostconditionWebDriverActionConditionParserRuleCall_3_0() { return cPostconditionWebDriverActionConditionParserRuleCall_3_0; }
+		public RuleCall getActionWebDriverActionConditionParserRuleCall_3_0() { return cActionWebDriverActionConditionParserRuleCall_3_0; }
 	}
 	public class ExpectHttpRequestElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.ExpectHttpRequest");
@@ -475,63 +475,67 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	public class TypeTextInElementFoundByCssSelectorElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.TypeTextInElementFoundByCssSelector");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cParameterNamesAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cParameterNamesTypeKeyword_0_0 = (Keyword)cParameterNamesAssignment_0.eContents().get(0);
-		private final Assignment cParameterValuesAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cParameterValuesParameterValueParserRuleCall_1_0 = (RuleCall)cParameterValuesAssignment_1.eContents().get(0);
-		private final Keyword cInKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Keyword cElementKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Keyword cWithKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Keyword cCssKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cParameterNamesAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final Keyword cParameterNamesSelectorKeyword_6_0 = (Keyword)cParameterNamesAssignment_6.eContents().get(0);
-		private final Assignment cParameterValuesAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cParameterValuesParameterValueParserRuleCall_7_0 = (RuleCall)cParameterValuesAssignment_7.eContents().get(0);
+		private final Keyword cTypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cParameterNamesAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cParameterNamesTextKeyword_1_0 = (Keyword)cParameterNamesAssignment_1.eContents().get(0);
+		private final Assignment cParameterValuesAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cParameterValuesParameterValueParserRuleCall_2_0 = (RuleCall)cParameterValuesAssignment_2.eContents().get(0);
+		private final Keyword cInKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cElementKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cWithKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Keyword cCssKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cParameterNamesAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final Keyword cParameterNamesSelectorKeyword_7_0 = (Keyword)cParameterNamesAssignment_7.eContents().get(0);
+		private final Assignment cParameterValuesAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cParameterValuesParameterValueParserRuleCall_8_0 = (RuleCall)cParameterValuesAssignment_8.eContents().get(0);
 		
 		//TypeTextInElementFoundByCssSelector:
-		//	parameterNames+='type' parameterValues+=ParameterValue
+		//	'type' parameterNames+='text' parameterValues+=ParameterValue
 		//	'in' 'element' 'with' 'css' parameterNames+='selector' parameterValues+=ParameterValue;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//parameterNames+='type' parameterValues+=ParameterValue 'in' 'element' 'with' 'css' parameterNames+='selector'
+		//'type' parameterNames+='text' parameterValues+=ParameterValue 'in' 'element' 'with' 'css' parameterNames+='selector'
 		//parameterValues+=ParameterValue
 		public Group getGroup() { return cGroup; }
 		
-		//parameterNames+='type'
-		public Assignment getParameterNamesAssignment_0() { return cParameterNamesAssignment_0; }
-		
 		//'type'
-		public Keyword getParameterNamesTypeKeyword_0_0() { return cParameterNamesTypeKeyword_0_0; }
+		public Keyword getTypeKeyword_0() { return cTypeKeyword_0; }
+		
+		//parameterNames+='text'
+		public Assignment getParameterNamesAssignment_1() { return cParameterNamesAssignment_1; }
+		
+		//'text'
+		public Keyword getParameterNamesTextKeyword_1_0() { return cParameterNamesTextKeyword_1_0; }
 		
 		//parameterValues+=ParameterValue
-		public Assignment getParameterValuesAssignment_1() { return cParameterValuesAssignment_1; }
+		public Assignment getParameterValuesAssignment_2() { return cParameterValuesAssignment_2; }
 		
 		//ParameterValue
-		public RuleCall getParameterValuesParameterValueParserRuleCall_1_0() { return cParameterValuesParameterValueParserRuleCall_1_0; }
+		public RuleCall getParameterValuesParameterValueParserRuleCall_2_0() { return cParameterValuesParameterValueParserRuleCall_2_0; }
 		
 		//'in'
-		public Keyword getInKeyword_2() { return cInKeyword_2; }
+		public Keyword getInKeyword_3() { return cInKeyword_3; }
 		
 		//'element'
-		public Keyword getElementKeyword_3() { return cElementKeyword_3; }
+		public Keyword getElementKeyword_4() { return cElementKeyword_4; }
 		
 		//'with'
-		public Keyword getWithKeyword_4() { return cWithKeyword_4; }
+		public Keyword getWithKeyword_5() { return cWithKeyword_5; }
 		
 		//'css'
-		public Keyword getCssKeyword_5() { return cCssKeyword_5; }
+		public Keyword getCssKeyword_6() { return cCssKeyword_6; }
 		
 		//parameterNames+='selector'
-		public Assignment getParameterNamesAssignment_6() { return cParameterNamesAssignment_6; }
+		public Assignment getParameterNamesAssignment_7() { return cParameterNamesAssignment_7; }
 		
 		//'selector'
-		public Keyword getParameterNamesSelectorKeyword_6_0() { return cParameterNamesSelectorKeyword_6_0; }
+		public Keyword getParameterNamesSelectorKeyword_7_0() { return cParameterNamesSelectorKeyword_7_0; }
 		
 		//parameterValues+=ParameterValue
-		public Assignment getParameterValuesAssignment_7() { return cParameterValuesAssignment_7; }
+		public Assignment getParameterValuesAssignment_8() { return cParameterValuesAssignment_8; }
 		
 		//ParameterValue
-		public RuleCall getParameterValuesParameterValueParserRuleCall_7_0() { return cParameterValuesParameterValueParserRuleCall_7_0; }
+		public RuleCall getParameterValuesParameterValueParserRuleCall_8_0() { return cParameterValuesParameterValueParserRuleCall_8_0; }
 	}
 	public class TextOfElementWithCssSelectorToBeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.TextOfElementWithCssSelectorToBe");
@@ -911,7 +915,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Postcondition:
-	//	'then' 'make' 'sure' postcondition=WebDriverActionCondition;
+	//	'then' 'make' 'sure' action=WebDriverActionCondition;
 	public PostconditionElements getPostconditionAccess() {
 		return pPostcondition;
 	}
@@ -962,7 +966,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//TypeTextInElementFoundByCssSelector:
-	//	parameterNames+='type' parameterValues+=ParameterValue
+	//	'type' parameterNames+='text' parameterValues+=ParameterValue
 	//	'in' 'element' 'with' 'css' parameterNames+='selector' parameterValues+=ParameterValue;
 	public TypeTextInElementFoundByCssSelectorElements getTypeTextInElementFoundByCssSelectorAccess() {
 		return pTypeTextInElementFoundByCssSelector;

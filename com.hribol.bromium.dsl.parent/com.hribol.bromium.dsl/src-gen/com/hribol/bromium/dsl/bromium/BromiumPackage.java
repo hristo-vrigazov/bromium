@@ -335,13 +335,13 @@ public interface BromiumPackage extends EPackage
   int POSTCONDITION = 6;
 
   /**
-   * The feature id for the '<em><b>Postcondition</b></em>' containment reference.
+   * The feature id for the '<em><b>Action</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int POSTCONDITION__POSTCONDITION = 0;
+  int POSTCONDITION__ACTION = 0;
 
   /**
    * The number of structural features of the '<em>Postcondition</em>' class.
@@ -981,15 +981,15 @@ public interface BromiumPackage extends EPackage
   EClass getPostcondition();
 
   /**
-   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.Postcondition#getPostcondition <em>Postcondition</em>}'.
+   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.Postcondition#getAction <em>Action</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Postcondition</em>'.
-   * @see com.hribol.bromium.dsl.bromium.Postcondition#getPostcondition()
+   * @return the meta object for the containment reference '<em>Action</em>'.
+   * @see com.hribol.bromium.dsl.bromium.Postcondition#getAction()
    * @see #getPostcondition()
    * @generated
    */
-  EReference getPostcondition_Postcondition();
+  EReference getPostcondition_Action();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ExpectHttpRequest <em>Expect Http Request</em>}'.
@@ -1409,12 +1409,12 @@ public interface BromiumPackage extends EPackage
     EClass POSTCONDITION = eINSTANCE.getPostcondition();
 
     /**
-     * The meta object literal for the '<em><b>Postcondition</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Action</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference POSTCONDITION__POSTCONDITION = eINSTANCE.getPostcondition_Postcondition();
+    EReference POSTCONDITION__ACTION = eINSTANCE.getPostcondition_Action();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ExpectHttpRequestImpl <em>Expect Http Request</em>}' class.

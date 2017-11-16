@@ -18,6 +18,11 @@ public class ApplicationConfiguration implements GenerationInformation {
      * The version of the application
      */
     private String version;
+
+    public void setApplicationActionConfigurationList(List<ApplicationActionConfiguration> applicationActionConfigurationList) {
+        this.applicationActionConfigurationList = applicationActionConfigurationList;
+    }
+
     /**
      * A list of configurations of application actions.
      */

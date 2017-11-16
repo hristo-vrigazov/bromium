@@ -1,24 +1,15 @@
 package com.hribol.bromium.common.parsing.dsl.convert;
 
-import com.google.inject.Injector;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
-import com.hribol.bromium.core.config.SyntaxDefinitionConfiguration;
-import com.hribol.bromium.core.config.WebDriverActionConfiguration;
-import com.hribol.bromium.dsl.BromiumStandaloneSetup;
 import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.Model;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.junit.Test;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.hribol.bromium.core.utils.WebDriverActions.ELEMENT_BY_CSS_TO_BE_PRESENT;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -26,7 +17,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by hvrigazov on 08.11.17.
  */
-public class TraversingBasedDslConfigurationConverterTest {
+public class TraversingBasedASTNodeConverterTest extends BaseDSLConfigurationConverterTest {
 
     public static final String EXAMPLE_NAME = "Example name";
     public static final String EXAMPLE_VERSION = "8.2.5";
@@ -34,14 +25,19 @@ public class TraversingBasedDslConfigurationConverterTest {
     public static final String TYPE = "Type";
     public static final String USERNAME = "username";
 
+    private ASTNodeConverter<ApplicationAction, ApplicationActionConfiguration> actionConverter;
+
+    private Model exampleModel = readExample();
+
     @Test
     public void setsNameAndVersion() {
         Model model = mock(Model.class);
+        actionConverter = mock(ASTNodeConverter.class);
         when(model.getName()).thenReturn(EXAMPLE_NAME);
         when(model.getVersion()).thenReturn(EXAMPLE_VERSION);
         when(model.getActions()).thenReturn(new EListMock<>());
 
-        TraversingBasedDslConfigurationConverter converter = new TraversingBasedDslConfigurationConverter();
+        TraversingBasedASTNodeConverter converter = new TraversingBasedASTNodeConverter(actionConverter);
         ApplicationConfiguration configuration = converter.convert(model);
 
         assertEquals(EXAMPLE_NAME, configuration.getApplicationName());
@@ -50,9 +46,15 @@ public class TraversingBasedDslConfigurationConverterTest {
 
     @Test
     public void correctlyCreatesElementIsPresent() {
-        Model exampleModel = readExample();
+        actionConverter = mock(ASTNodeConverter.class);
+        List<ApplicationActionConfiguration> mockConfigurations = new ArrayList<>();
+        for (ApplicationAction applicationAction: exampleModel.getActions()) {
+            ApplicationActionConfiguration actionConfigurationMock = mock(ApplicationActionConfiguration.class);
+            mockConfigurations.add(actionConfigurationMock);
+            when(actionConverter.convert(applicationAction)).thenReturn(actionConfigurationMock);
+        }
 
-        TraversingBasedDslConfigurationConverter converter = new TraversingBasedDslConfigurationConverter();
+        TraversingBasedASTNodeConverter converter = new TraversingBasedASTNodeConverter(actionConverter);
 
         ApplicationConfiguration actual = converter.convert(exampleModel);
 
@@ -62,25 +64,7 @@ public class TraversingBasedDslConfigurationConverterTest {
         List<ApplicationActionConfiguration> actionConfigurations = actual.getApplicationActionConfigurationList();
 
         assertEquals(3, actionConfigurations.size());
-
-        ApplicationActionConfiguration typeUserNameField = actionConfigurations.get(0);
-        assertEquals("typeUsernameField", typeUserNameField.getName());
-
-        List<SyntaxDefinitionConfiguration> syntaxDefinitions = typeUserNameField.getSyntaxDefinitionConfigurationList();
-        assertEquals("Type", syntaxDefinitions.get(0).getContent());
-        assertEquals("username", syntaxDefinitions.get(0).getExposedParameter());
-        assertEquals("into username field", syntaxDefinitions.get(1).getContent());
-
-        WebDriverActionConfiguration precondition = typeUserNameField.getConditionBeforeExecution();
-        assertEquals(ELEMENT_BY_CSS_TO_BE_PRESENT, precondition.getWebDriverActionType());
-    }
-
-    private Model readExample() {
-        File file = new File(getClass().getResource("/actions.brm").getFile());
-        Injector injector = new BromiumStandaloneSetup().createInjectorAndDoEMFRegistration();
-        ResourceSet rs = injector.getInstance(ResourceSet.class);
-        Resource resource = rs.getResource(URI.createURI(file.getAbsolutePath()), true);
-        return (Model) resource.getAllContents().next();
+        assertEquals(actionConfigurations, mockConfigurations);
     }
 
     private class EListMock<E> extends ArrayList<E> implements EList<E> {

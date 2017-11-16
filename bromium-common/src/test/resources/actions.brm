@@ -12,12 +12,12 @@ actions {
     id clickLoginButton
     syntax 'Click on login button'
     click on element with css selector '#login'
-    do not expect http request
+    do expect http request
 
     id typePasswordField
     syntax 'Type' pass 'into password field'
     type pass in element with css selector '#pass'
-    do expect http request
+    do not expect http request
 
 
 }

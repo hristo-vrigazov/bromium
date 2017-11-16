@@ -17,8 +17,8 @@ import static org.mockito.Mockito.when;
 
 public class ClickCssSelectorRecorderFunctionTest {
 
-    private final String expected = "function ClickCssSelector(cssSelector, eventName) {\n" +
-            "\tdocument.arrive(cssSelector, options, function () {\n" +
+    private final String expected = "function ClickCssSelector(selector, eventName) {\n" +
+            "\tdocument.arrive(selector, options, function () {\n" +
             "\t\tthis.addEventListener(\"click\", function(e) {\n" +
             "\t\t\tvar parameters = {};\n" +
             "\t\t\tparameters[\"event\"] = eventName;\n" +

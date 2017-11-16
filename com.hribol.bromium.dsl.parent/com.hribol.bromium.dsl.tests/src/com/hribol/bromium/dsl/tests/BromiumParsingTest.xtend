@@ -34,7 +34,7 @@ class BromiumParsingTest {
 			actions {
 				id typeIntoUsernameField
 			    syntax 'Type ' content 'into username field'
-				type content in element with css selector '#login' 
+				type text content in element with css selector '#login' 
 				do not expect http request
 				
 				id clickOnLoginButton
@@ -64,12 +64,12 @@ class BromiumParsingTest {
 			
 				id typeUsername
 				syntax 'Type username'
-				type "admin" in element with css selector "#user"
+				type text "admin" in element with css selector "#user"
 				do not expect http request
 			
 				id typePassword
 				syntax 'Type password'
-				type "admin" in element with css selector "#pass"
+				type text "admin" in element with css selector "#pass"
 				do not expect http request
 			
 				id clickLoginButton

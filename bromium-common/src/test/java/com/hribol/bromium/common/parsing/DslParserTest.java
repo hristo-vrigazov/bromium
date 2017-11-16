@@ -1,9 +1,7 @@
 package com.hribol.bromium.common.parsing;
 
-import com.hribol.bromium.common.parsing.dsl.convert.DslConfigurationConverter;
-import com.hribol.bromium.core.config.ApplicationActionConfiguration;
+import com.hribol.bromium.common.parsing.dsl.convert.ASTNodeConverter;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
-import com.hribol.bromium.core.config.SyntaxDefinitionConfiguration;
 import com.hribol.bromium.core.parsing.ApplicationConfigurationParser;
 import com.hribol.bromium.dsl.bromium.Model;
 import org.eclipse.emf.common.util.URI;
@@ -38,7 +36,7 @@ public class DslParserTest {
     private Resource resource;
     private ResourceSet resourceSet;
     private IResourceValidator resourceValidator;
-    private DslConfigurationConverter dslConfigurationConverter;
+    private ASTNodeConverter ASTNodeConverter;
 
     @Test
     public void ifNoIssuesThenDelegatedToConverter() throws IOException {
@@ -46,7 +44,7 @@ public class DslParserTest {
         initMocks(file);
         when(resourceValidator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl)).thenReturn(new ArrayList<>());
 
-        ApplicationConfigurationParser parser = new DslParser(resourceSet, resourceValidator, dslConfigurationConverter);
+        ApplicationConfigurationParser parser = new DslParser(resourceSet, resourceValidator, ASTNodeConverter);
 
         ApplicationConfiguration actual = parser.parseApplicationConfiguration(file);
 
@@ -59,7 +57,7 @@ public class DslParserTest {
         initMocks(new File(filename));
         when(resourceValidator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl)).thenReturn(new ArrayList<>());
 
-        ApplicationConfigurationParser parser = new DslParser(resourceSet, resourceValidator, dslConfigurationConverter);
+        ApplicationConfigurationParser parser = new DslParser(resourceSet, resourceValidator, ASTNodeConverter);
 
         ApplicationConfiguration actual = parser.parseApplicationConfiguration(filename);
 
@@ -76,7 +74,7 @@ public class DslParserTest {
         List<Issue> issues = Arrays.asList(mock(Issue.class));
         when(resourceValidator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl)).thenReturn(issues);
 
-        ApplicationConfigurationParser parser = new DslParser(resourceSet, resourceValidator, dslConfigurationConverter);
+        ApplicationConfigurationParser parser = new DslParser(resourceSet, resourceValidator, ASTNodeConverter);
 
         expectedException.expect(IllegalStateException.class);
         parser.parseApplicationConfiguration(file);
@@ -90,7 +88,7 @@ public class DslParserTest {
         resourceSet = mock(ResourceSet.class);
         when(resourceSet.getResource(URI.createFileURI(file.getAbsolutePath()), true)).thenReturn(resource);
         resourceValidator = mock(IResourceValidator.class);
-        dslConfigurationConverter = mock(DslConfigurationConverter.class);
-        when(dslConfigurationConverter.convert(model)).thenReturn(applicationConfiguration);
+        ASTNodeConverter = mock(ASTNodeConverter.class);
+        when(ASTNodeConverter.convert(model)).thenReturn(applicationConfiguration);
     }
 }

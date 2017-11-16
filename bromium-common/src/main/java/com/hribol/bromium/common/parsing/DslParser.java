@@ -1,6 +1,6 @@
 package com.hribol.bromium.common.parsing;
 
-import com.hribol.bromium.common.parsing.dsl.convert.DslConfigurationConverter;
+import com.hribol.bromium.common.parsing.dsl.convert.ASTNodeConverter;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.parsing.ApplicationConfigurationParser;
 import com.hribol.bromium.dsl.bromium.Model;
@@ -23,12 +23,14 @@ public class DslParser implements ApplicationConfigurationParser {
 
     private ResourceSet resourceSet;
     private IResourceValidator validator;
-    private DslConfigurationConverter dslConfigurationConverter;
+    private ASTNodeConverter<Model, ApplicationConfiguration> ASTNodeConverter;
 
-    public DslParser(ResourceSet resourceSet, IResourceValidator validator, DslConfigurationConverter dslConfigurationConverter) {
+    public DslParser(ResourceSet resourceSet,
+                     IResourceValidator validator,
+                     ASTNodeConverter<Model, ApplicationConfiguration> ASTNodeConverter) {
         this.resourceSet = resourceSet;
         this.validator = validator;
-        this.dslConfigurationConverter = dslConfigurationConverter;
+        this.ASTNodeConverter = ASTNodeConverter;
     }
 
     @Override
@@ -42,7 +44,7 @@ public class DslParser implements ApplicationConfigurationParser {
         }
 
         Model model = (Model) resource.getAllContents().next();
-        return dslConfigurationConverter.convert(model);
+        return ASTNodeConverter.convert(model);
     }
 
     @Override

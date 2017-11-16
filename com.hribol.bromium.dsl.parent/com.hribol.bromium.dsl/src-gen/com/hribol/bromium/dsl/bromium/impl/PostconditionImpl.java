@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link com.hribol.bromium.dsl.bromium.impl.PostconditionImpl#getPostcondition <em>Postcondition</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.impl.PostconditionImpl#getAction <em>Action</em>}</li>
  * </ul>
  *
  * @generated
@@ -32,14 +32,14 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 public class PostconditionImpl extends MinimalEObjectImpl.Container implements Postcondition
 {
   /**
-   * The cached value of the '{@link #getPostcondition() <em>Postcondition</em>}' containment reference.
+   * The cached value of the '{@link #getAction() <em>Action</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getPostcondition()
+   * @see #getAction()
    * @generated
    * @ordered
    */
-  protected WebDriverActionCondition postcondition;
+  protected WebDriverActionCondition action;
 
   /**
    * <!-- begin-user-doc -->
@@ -67,9 +67,9 @@ public class PostconditionImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
-  public WebDriverActionCondition getPostcondition()
+  public WebDriverActionCondition getAction()
   {
-    return postcondition;
+    return action;
   }
 
   /**
@@ -77,13 +77,13 @@ public class PostconditionImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetPostcondition(WebDriverActionCondition newPostcondition, NotificationChain msgs)
+  public NotificationChain basicSetAction(WebDriverActionCondition newAction, NotificationChain msgs)
   {
-    WebDriverActionCondition oldPostcondition = postcondition;
-    postcondition = newPostcondition;
+    WebDriverActionCondition oldAction = action;
+    action = newAction;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BromiumPackage.POSTCONDITION__POSTCONDITION, oldPostcondition, newPostcondition);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BromiumPackage.POSTCONDITION__ACTION, oldAction, newAction);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -94,20 +94,20 @@ public class PostconditionImpl extends MinimalEObjectImpl.Container implements P
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPostcondition(WebDriverActionCondition newPostcondition)
+  public void setAction(WebDriverActionCondition newAction)
   {
-    if (newPostcondition != postcondition)
+    if (newAction != action)
     {
       NotificationChain msgs = null;
-      if (postcondition != null)
-        msgs = ((InternalEObject)postcondition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.POSTCONDITION__POSTCONDITION, null, msgs);
-      if (newPostcondition != null)
-        msgs = ((InternalEObject)newPostcondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.POSTCONDITION__POSTCONDITION, null, msgs);
-      msgs = basicSetPostcondition(newPostcondition, msgs);
+      if (action != null)
+        msgs = ((InternalEObject)action).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.POSTCONDITION__ACTION, null, msgs);
+      if (newAction != null)
+        msgs = ((InternalEObject)newAction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.POSTCONDITION__ACTION, null, msgs);
+      msgs = basicSetAction(newAction, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.POSTCONDITION__POSTCONDITION, newPostcondition, newPostcondition));
+      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.POSTCONDITION__ACTION, newAction, newAction));
   }
 
   /**
@@ -120,8 +120,8 @@ public class PostconditionImpl extends MinimalEObjectImpl.Container implements P
   {
     switch (featureID)
     {
-      case BromiumPackage.POSTCONDITION__POSTCONDITION:
-        return basicSetPostcondition(null, msgs);
+      case BromiumPackage.POSTCONDITION__ACTION:
+        return basicSetAction(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -136,8 +136,8 @@ public class PostconditionImpl extends MinimalEObjectImpl.Container implements P
   {
     switch (featureID)
     {
-      case BromiumPackage.POSTCONDITION__POSTCONDITION:
-        return getPostcondition();
+      case BromiumPackage.POSTCONDITION__ACTION:
+        return getAction();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -152,8 +152,8 @@ public class PostconditionImpl extends MinimalEObjectImpl.Container implements P
   {
     switch (featureID)
     {
-      case BromiumPackage.POSTCONDITION__POSTCONDITION:
-        setPostcondition((WebDriverActionCondition)newValue);
+      case BromiumPackage.POSTCONDITION__ACTION:
+        setAction((WebDriverActionCondition)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -169,8 +169,8 @@ public class PostconditionImpl extends MinimalEObjectImpl.Container implements P
   {
     switch (featureID)
     {
-      case BromiumPackage.POSTCONDITION__POSTCONDITION:
-        setPostcondition((WebDriverActionCondition)null);
+      case BromiumPackage.POSTCONDITION__ACTION:
+        setAction((WebDriverActionCondition)null);
         return;
     }
     super.eUnset(featureID);
@@ -186,8 +186,8 @@ public class PostconditionImpl extends MinimalEObjectImpl.Container implements P
   {
     switch (featureID)
     {
-      case BromiumPackage.POSTCONDITION__POSTCONDITION:
-        return postcondition != null;
+      case BromiumPackage.POSTCONDITION__ACTION:
+        return action != null;
     }
     return super.eIsSet(featureID);
   }

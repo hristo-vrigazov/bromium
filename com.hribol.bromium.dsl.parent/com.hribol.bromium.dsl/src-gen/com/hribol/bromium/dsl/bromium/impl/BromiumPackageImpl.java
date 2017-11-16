@@ -465,7 +465,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getPostcondition_Postcondition()
+  public EReference getPostcondition_Action()
   {
     return (EReference)postconditionEClass.getEStructuralFeatures().get(0);
   }
@@ -710,7 +710,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     createEReference(preconditionEClass, PRECONDITION__ACTION);
 
     postconditionEClass = createEClass(POSTCONDITION);
-    createEReference(postconditionEClass, POSTCONDITION__POSTCONDITION);
+    createEReference(postconditionEClass, POSTCONDITION__ACTION);
 
     expectHttpRequestEClass = createEClass(EXPECT_HTTP_REQUEST);
     createEAttribute(expectHttpRequestEClass, EXPECT_HTTP_REQUEST__NOT);
@@ -808,7 +808,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     initEReference(getPrecondition_Action(), this.getWebDriverActionCondition(), null, "action", null, 0, 1, Precondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(postconditionEClass, Postcondition.class, "Postcondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getPostcondition_Postcondition(), this.getWebDriverActionCondition(), null, "postcondition", null, 0, 1, Postcondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPostcondition_Action(), this.getWebDriverActionCondition(), null, "action", null, 0, 1, Postcondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expectHttpRequestEClass, ExpectHttpRequest.class, "ExpectHttpRequest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getExpectHttpRequest_Not(), ecorePackage.getEBoolean(), "not", null, 0, 1, ExpectHttpRequest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

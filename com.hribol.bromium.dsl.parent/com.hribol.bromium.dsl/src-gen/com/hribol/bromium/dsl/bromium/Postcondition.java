@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link com.hribol.bromium.dsl.bromium.Postcondition#getPostcondition <em>Postcondition</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.Postcondition#getAction <em>Action</em>}</li>
  * </ul>
  *
  * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getPostcondition()
@@ -24,29 +24,29 @@ import org.eclipse.emf.ecore.EObject;
 public interface Postcondition extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Postcondition</b></em>' containment reference.
+   * Returns the value of the '<em><b>Action</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Postcondition</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Action</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Postcondition</em>' containment reference.
-   * @see #setPostcondition(WebDriverActionCondition)
-   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getPostcondition_Postcondition()
+   * @return the value of the '<em>Action</em>' containment reference.
+   * @see #setAction(WebDriverActionCondition)
+   * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getPostcondition_Action()
    * @model containment="true"
    * @generated
    */
-  WebDriverActionCondition getPostcondition();
+  WebDriverActionCondition getAction();
 
   /**
-   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.Postcondition#getPostcondition <em>Postcondition</em>}' containment reference.
+   * Sets the value of the '{@link com.hribol.bromium.dsl.bromium.Postcondition#getAction <em>Action</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Postcondition</em>' containment reference.
-   * @see #getPostcondition()
+   * @param value the new value of the '<em>Action</em>' containment reference.
+   * @see #getAction()
    * @generated
    */
-  void setPostcondition(WebDriverActionCondition value);
+  void setAction(WebDriverActionCondition value);
 
 } // Postcondition

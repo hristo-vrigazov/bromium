@@ -15,8 +15,8 @@ import static org.mockito.Mockito.when;
  */
 public class TypeTextInElementFoundByCssSelectorRecorderFunctionTest {
 
-    private final String expected = "function TypeTextInElementFoundByCssSelector(cssSelector, eventName, text) {\n" +
-            "\tdocument.arrive(cssSelector, options, function () {\n" +
+    private final String expected = "function TypeTextInElementFoundByCssSelector(selector, eventName, text) {\n" +
+            "\tdocument.arrive(selector, options, function () {\n" +
             "\t\tthis.addEventListener(\"change\", function(e) {\n" +
             "\t\t\tvar parameters = {};\n" +
             "\t\t\tparameters[\"event\"] = eventName;\n" +

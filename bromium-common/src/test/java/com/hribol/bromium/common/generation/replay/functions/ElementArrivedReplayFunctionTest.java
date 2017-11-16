@@ -56,11 +56,11 @@ public abstract class ElementArrivedReplayFunctionTest {
         private String hashCode;
 
         public Mocks() throws Exception {
-            expected = "function " + jsFunctionName + "(cssSelector, hashCode) {\n" +
-                    "\tdocument.arrive(cssSelector, options, function () {\n" +
+            expected = "function " + jsFunctionName + "(selector, hashCode) {\n" +
+                    "\tdocument.arrive(selector, options, function () {\n" +
                     "\t\tbromium.notifySatisfiedCondition(hashCode);\n" +
                     "\t});\n" +
-                    "\tdocument.leave(cssSelector, function () {\n" +
+                    "\tdocument.leave(selector, function () {\n" +
                     "\t\tbromium.notifyNotSatisfiedCondition(hashCode);\n" +
                     "\t});\n" +
                     "}\n";
