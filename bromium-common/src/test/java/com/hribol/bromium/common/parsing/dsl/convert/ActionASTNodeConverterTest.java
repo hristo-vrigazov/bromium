@@ -42,6 +42,11 @@ public class ActionASTNodeConverterTest extends BaseDSLConfigurationConverterTes
         baseTest(3, CLICK_CLASS_BY_TEXT);
     }
 
+    @Test
+    public void convertPageLoading() throws Exception {
+        baseTest(4, PAGE_LOADING);
+    }
+
     private void baseTest(int i, String expectedWebDriverActionType) {
         WebDriverAction precondition = model.getActions().get(i).getWebDriverAction();
         initMocks(precondition);

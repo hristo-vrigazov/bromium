@@ -90,7 +90,7 @@
                         "alias": "url"
                     }
                 },
-                "webDriverActionType": "PAGE_LOADING"
+                "webDriverActionType": "PageLoad"
             }
         }
     ],

@@ -235,7 +235,7 @@
                         "value": "ajax.html"
                     }
                 },
-                "webDriverActionType": "PAGE_LOADING"
+                "webDriverActionType": "PageLoad"
             },
             "syntaxDefinitionConfigurationList": [
                 {
@@ -262,7 +262,7 @@
                         "value": "index.html"
                     }
                 },
-                "webDriverActionType": "PAGE_LOADING"
+                "webDriverActionType": "PageLoad"
             },
             "syntaxDefinitionConfigurationList": [
                 {
@@ -289,7 +289,7 @@
                         "alias": "alias-url"
                     }
                 },
-                "webDriverActionType": "PAGE_LOADING"
+                "webDriverActionType": "PageLoad"
             },
             "syntaxDefinitionConfigurationList": [
                 {
