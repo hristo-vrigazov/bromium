@@ -63,7 +63,7 @@ public class TraversingBasedASTNodeConverterTest extends BaseDSLConfigurationCon
 
         List<ApplicationActionConfiguration> actionConfigurations = actual.getApplicationActionConfigurationList();
 
-        assertEquals(4, actionConfigurations.size());
+        assertEquals(exampleModel.getActions().size(), actionConfigurations.size());
         assertEquals(actionConfigurations, mockConfigurations);
     }
 
