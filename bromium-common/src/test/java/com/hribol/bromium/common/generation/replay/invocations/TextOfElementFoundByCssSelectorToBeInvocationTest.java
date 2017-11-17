@@ -17,7 +17,7 @@ public class TextOfElementFoundByCssSelectorToBeInvocationTest {
     public void generatesCorrectly() {
         ReplayFunctionInvocation invocation = new TextOfElementFoundByCssSelectorToBeInvocation(cssSelector, text, hashCode);
 
-        String expected = "\nTextOfElementFoundByCssSelectorToBe(\"#paragraph\",\"text\",\"283901\");\n";
+        String expected = "\nTextOfElementWithCssSelectorToBe(\"#paragraph\",\"text\",\"283901\");\n";
         String actual = invocation.getJavascriptCode();
         assertEquals(expected, actual);
     }

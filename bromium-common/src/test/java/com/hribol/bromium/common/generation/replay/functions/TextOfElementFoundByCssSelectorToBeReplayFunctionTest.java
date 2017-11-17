@@ -33,7 +33,7 @@ public class TextOfElementFoundByCssSelectorToBeReplayFunctionTest {
 
         ReplayFunction replayFunction = new TextOfElementFoundByCssSelectorToBeReplayFunction(jsCollector, invocationProvider);
 
-        String expected = "function TextOfElementFoundByCssSelectorToBe(selector, text, hashCode) {\n" +
+        String expected = "function TextOfElementWithCssSelectorToBe(selector, text, hashCode) {\n" +
                 "\tdocument.arrive(selector, options, function () {\n" +
                 "\t\tbromium.notifySatisfiedBasedOnText(this, text, hashCode);\n" +
                 "\t});\n" +
@@ -50,7 +50,7 @@ public class TextOfElementFoundByCssSelectorToBeReplayFunctionTest {
     public void createsCorrectInstance() {
         String cssSelector = "#status";
         String text = "Done";
-        String expected = "531465102";
+        String expected = "-625397941";
         JsCollector jsCollector = mock(JsCollector.class, RETURNS_DEEP_STUBS);
         ParameterConfiguration cssParameterConfiguration = mock(ParameterConfiguration.class);
         when(cssParameterConfiguration.getValue()).thenReturn(cssSelector);

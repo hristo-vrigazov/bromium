@@ -448,7 +448,7 @@
                         "value": "Done"
                     }
                 },
-                "webDriverActionType": "TEXT_OF_ELEMENT_FOUND_BY_CSS_SELECTOR_TO_BE"
+                "webDriverActionType": "TextOfElementWithCssSelectorToBe"
             },
             "expectsHttpRequest": true,
             "name": "clickButtonAfterTextChanged",
