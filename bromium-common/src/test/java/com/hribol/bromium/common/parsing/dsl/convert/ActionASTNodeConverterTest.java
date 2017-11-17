@@ -23,26 +23,33 @@ public class ActionASTNodeConverterTest extends BaseDSLConfigurationConverterTes
     private Map<String, ParameterConfiguration> parameterConfigurationMap = mock(Map.class);
 
     @Test
-    public void convertTypeTextInElementFoundByCssSelector() throws Exception {
-        WebDriverAction precondition = model.getActions().get(0).getWebDriverAction();
-        initMocks(precondition);
-
-        ActionASTNodeConverter conditionASTNodeConverter = new ActionASTNodeConverter(parametersConfigurationConverter);
-        WebDriverActionConfiguration actual = conditionASTNodeConverter.convert(precondition);
-
-        assertEquals(TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR, actual.getWebDriverActionType());
-        assertEquals(parameterConfigurationMap, actual.getParametersConfiguration());
+    public void convertTypeTextInElementFoundByCssSelectorUser() throws Exception {
+        baseTest(0, TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR);
     }
 
     @Test
-    public void convertTextOfElementWithCssSelectorToBe() throws Exception {
-        WebDriverAction precondition = model.getActions().get(1).getWebDriverAction();
+    public void convertClickCssSelector() throws Exception {
+        baseTest(1, CLICK_CSS_SELECTOR);
+    }
+
+    @Test
+    public void convertTypeTextInElementFoundByCssSelectorPass() throws Exception {
+        baseTest(2, TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR);
+    }
+
+    @Test
+    public void convertClickClassByText() throws Exception {
+        baseTest(3, CLICK_CLASS_BY_TEXT);
+    }
+
+    private void baseTest(int i, String expectedWebDriverActionType) {
+        WebDriverAction precondition = model.getActions().get(i).getWebDriverAction();
         initMocks(precondition);
 
         ActionASTNodeConverter conditionASTNodeConverter = new ActionASTNodeConverter(parametersConfigurationConverter);
         WebDriverActionConfiguration actual = conditionASTNodeConverter.convert(precondition);
 
-        assertEquals(CLICK_CSS_SELECTOR, actual.getWebDriverActionType());
+        assertEquals(expectedWebDriverActionType, actual.getWebDriverActionType());
         assertEquals(parameterConfigurationMap, actual.getParametersConfiguration());
     }
 

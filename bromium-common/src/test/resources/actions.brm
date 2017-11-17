@@ -20,5 +20,10 @@ actions {
     type pass in element with css selector '#pass'
     do not expect http request
 
+    id selectScore
+    syntax 'Select scope ' scopeName 'from the select element'
+    click on element with class 'scope' and text scopeName
+    do not expect http request
+
 
 }

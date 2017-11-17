@@ -40,7 +40,7 @@ public class ClickClassByTextReplayFunctionTest {
 
     @Test
     public void correctHashCode() {
-        final String expectedHashCode = "-425754230";
+        final String expectedHashCode = "866051111";
         JsCollector jsCollector = new JsCollector();
         ReplayFunctionInvocation expected = mock(ReplayFunctionInvocation.class);
         ClickClassByTextReplayFunction.InvocationProvider provider =

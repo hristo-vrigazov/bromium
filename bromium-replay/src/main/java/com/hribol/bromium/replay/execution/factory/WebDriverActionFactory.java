@@ -11,7 +11,7 @@ public interface WebDriverActionFactory {
 
     /**
      * Creates a web driver action
-     * @param webdriverActionType the type of the action, for example "CLICK_CLASS_BY_TEXT"
+     * @param webdriverActionType the type of the action, for example "ClickClassByText"
      * @param parameters the parameters for the action in raw format
      * @param expectsHttpRequest whether the action should expect http request after it is executed
      * @return the web driver action

@@ -492,7 +492,7 @@
                         "alias": "itemName"
                     }
                 },
-                "webDriverActionType": "CLICK_CLASS_BY_TEXT"
+                "webDriverActionType": "ClickClassByText"
             },
             "syntaxDefinitionConfigurationList": [
                 {

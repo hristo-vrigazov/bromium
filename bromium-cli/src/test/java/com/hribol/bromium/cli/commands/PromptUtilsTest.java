@@ -34,7 +34,7 @@ public class PromptUtilsTest {
     public static final String CLICK_MEGA_MENU = "clickMegaMenu";
     public static final String ATP = "ATP";
     public static final String ELEMENT_TEXT_TO_BE = "ELEMENT_TEXT_TO_BE";
-    public static final String CLICK_CLASS_BY_TEXT = "CLICK_CLASS_BY_TEXT";
+    public static final String CLICK_CLASS_BY_TEXT = "ClickClassByText";
     public static final String INITIAL_COLLECTOR_CLASS = "INITIAL_COLLECTOR_CLASS";
     public static final String MEGA_MENU_LINK = "mega-menu-link";
     public static final String TITLE_TEXT = "TITLE_TEXT";

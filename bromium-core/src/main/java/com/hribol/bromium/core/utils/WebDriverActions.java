@@ -5,7 +5,7 @@ package com.hribol.bromium.core.utils;
  */
 public class WebDriverActions {
     public static final String CLICK_CSS_SELECTOR = "ClickCssSelector";
-    public static final String CLICK_CLASS_BY_TEXT = "CLICK_CLASS_BY_TEXT";
+    public static final String CLICK_CLASS_BY_TEXT = "ClickClassByText";
     public static final String TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR = "TypeTextInElementFoundByCssSelector";
     public static final String PAGE_LOADING = "PAGE_LOADING";
     public static final String ELEMENT_BY_CSS_TO_BE_PRESENT = "ElementByCssToBePresent";
