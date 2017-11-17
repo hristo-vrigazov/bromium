@@ -32,7 +32,7 @@ public class ApplicationActionASTNodeConverterTest extends BaseDSLConfigurationC
 
     @Test
     public void convertsFirstAction() {
-        ApplicationActionConfiguration actual = baseTest(0,
+        baseTest(0,
                 "typeUsernameField",
                 false,
                 true);
