@@ -49,7 +49,7 @@ public class RequestToPageLoadingEventConverter implements HttpRequestToTestCase
             ParameterConfiguration urlParameterConfiguration = applicationActionConfiguration
                     .getWebDriverAction()
                     .getParametersConfiguration()
-                    .get(Constants.URL);
+                    .get(Constants.PAGE);
 
             // first the easy case; if the value is hardcoded in the configuration
             // and the current url matches, then we have found the action

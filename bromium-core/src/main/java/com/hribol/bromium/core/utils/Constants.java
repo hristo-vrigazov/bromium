@@ -22,4 +22,5 @@ public class Constants {
     public final static String INPUT_VALUE = "this.value";
     public final static String INNER_TEXT = "this.innerText";
     public final static String HAR_EXTENSION = ".har";
+    public static final String PAGE = "page";
 }

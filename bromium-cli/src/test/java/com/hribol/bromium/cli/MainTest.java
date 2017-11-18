@@ -39,7 +39,7 @@ public class MainTest {
         String[] args = {
                 "record",
                 "-d", "chromedriver",
-                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.json",
+                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.brm",
                 "-u", "http://localhost:3000",
                 "-o", "bromium-core/src/test/resources/dynamic-testCase.json"
         };
@@ -52,7 +52,7 @@ public class MainTest {
         String[] args = {
                 "replay",
                 "-d", "chromedriver",
-                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.json",
+                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.brm",
                 "-u", "http://localhost:3000",
                 "-c", "bromium-core/src/test/resources/dynamic-testCase.json",
                 "-m", "measurements.csv"

@@ -162,7 +162,7 @@ public class DefaultModule extends AbstractModule {
         bind(applicationActionASTconverter).to(ApplicationActionASTNodeConverter.class);
         bind(modelASTconverter).to(TraversingBasedASTNodeConverter.class);
 
-        bind(ApplicationConfigurationParser.class).to(JsonParser.class);
+        bind(ApplicationConfigurationParser.class).to(DslParser.class);
 
         // TODO: other OSes should have a different binding
         bind(VirtualScreenProcessCreator.class).to(UbuntuVirtualScreenProcessCreator.class);
