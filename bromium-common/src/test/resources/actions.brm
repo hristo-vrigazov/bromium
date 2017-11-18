@@ -1,0 +1,33 @@
+name 'Example name'
+version '8.2.5'
+actions {
+
+    id typeUsernameField
+    syntax 'Type' username 'into username field'
+    when element with css selector '#login' is present
+    type username in element with css selector '#login'
+    do not expect http request
+    then make sure element with css selector '#pass' is present
+
+    id clickLoginButton
+    syntax 'Click on login button'
+    click on element with css selector '#login'
+    do expect http request
+
+    id typePasswordField
+    syntax 'Type' pass 'into password field'
+    when element with css selector '#status' has text 'Success!'
+    type pass in element with css selector '#pass'
+    do not expect http request
+
+    id selectScope
+    syntax 'Select scope' scopeName 'from the select element'
+    click on element with class 'scope' and text scopeName
+    do not expect http request
+
+    id loadSubpage
+    syntax 'Load' subpage ' page'
+    load page subpage
+    do expect http request
+
+}

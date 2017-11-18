@@ -265,7 +265,6 @@ public class PromptUtils {
 
     public void promptForRecording() {
         textIO.newCharInputReader().read(PRESS_ANY_KEY_WHEN_FINISHED_RECORDING);
-        textIO.dispose();
     }
 
     public void dispose() {

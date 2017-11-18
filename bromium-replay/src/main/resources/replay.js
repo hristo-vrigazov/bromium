@@ -2,6 +2,33 @@ var Arrive=function(a,b,c){"use strict";function l(a,b,c){e.addMethod(b,c,a.unbi
 
 window.bromium = {};
 
+window.bromium.whenTextChanges = function (element, callback) {
+    var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            callback(mutation.target.innerText);
+        });
+    });
+
+    var config = {characterData: true, subtree: true, childList: true};
+    observer.observe(element, config);
+};
+
+window.bromium.notifySatisfiedBasedOnText = function (element, textTarget, condition) {
+    if (element.innerText === textTarget) {
+        bromium.notifySatisfiedCondition(condition);
+    } else {
+        bromium.notifyNotSatisfiedCondition(condition);
+    }
+
+    bromium.whenTextChanges(element, function (text) {
+       if (text === textTarget) {
+          bromium.notifySatisfiedCondition(condition);
+       } else {
+          bromium.notifyNotSatisfiedCondition(condition);
+       }
+  })
+};
+
 window.bromium.notifySatisfiedCondition = function(condition) {
     bromium.notifyCondition("http://bromium-condition-satisfied.com/", condition);
 };
@@ -17,5 +44,6 @@ window.bromium.notifyCondition = function(url, condition) {
 };
 
 var options = {
-    existing: true
+    existing: true,
+    fireOnAttributesModification: true
 };

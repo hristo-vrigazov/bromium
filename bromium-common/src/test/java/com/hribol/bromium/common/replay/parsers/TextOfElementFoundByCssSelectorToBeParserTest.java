@@ -26,7 +26,6 @@ public class TextOfElementFoundByCssSelectorToBeParserTest {
         Map<String, String> parameters = new HashMap<>();
         parameters.put(EVENT, eventName);
         parameters.put(CSS_SELECTOR, cssSelector);
-        parameters.put(TIMEOUT, String.valueOf(timeout));
         parameters.put(TEXT, text);
 
         WebDriverActionParameterParser parser = new TextOfElementFoundByCssSelectorToBeParser();

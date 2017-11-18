@@ -3,6 +3,9 @@ package com.hribol.bromium.cli;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.hribol.bromium.cli.commands.*;
+import com.hribol.bromium.dsl.BromiumRuntimeModule;
+import com.hribol.bromium.dsl.BromiumStandaloneSetup;
+import com.hribol.bromium.dsl.BromiumStandaloneSetupGenerated;
 import org.apache.commons.io.IOUtils;
 import org.docopt.Docopt;
 
@@ -21,11 +24,8 @@ import static com.hribol.bromium.cli.Main.Commands.*;
 public class Main {
 
     public static class Commands {
-        public static final String INIT = "init";
         public static final String RECORD = "record";
         public static final String REPLAY = "replay";
-        public static final String UPDATE = "update";
-        public static final String VERSION = "version";
     }
 
     private static Injector injector;
@@ -60,11 +60,8 @@ public class Main {
 
     private static Map<String, Supplier<Command>> getCommands() {
         Map<String, Supplier<Command>> map = new HashMap<>();
-        map.put(INIT, () -> injector.getInstance(InitCommand.class));
         map.put(RECORD, () -> injector.getInstance(RecordCommand.class));
         map.put(REPLAY, () -> injector.getInstance(ReplayCommand.class));
-        map.put(UPDATE, () -> injector.getInstance(UpdateCommand.class));
-        map.put(VERSION, () -> injector.getInstance(VersionCommand.class));
         return map;
     }
 

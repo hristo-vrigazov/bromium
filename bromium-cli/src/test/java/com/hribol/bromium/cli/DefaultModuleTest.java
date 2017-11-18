@@ -4,7 +4,10 @@ import com.google.common.io.Files;
 import com.google.inject.*;
 import com.google.inject.name.Names;
 import com.hribol.bromium.cli.commands.RecordCommand;
+import com.hribol.bromium.common.parsing.DslStepsDumper;
 import com.hribol.bromium.common.record.RecordBrowser;
+import com.hribol.bromium.core.config.ApplicationActionConfiguration;
+import com.hribol.bromium.core.parsing.StepsDumper;
 import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.providers.IOURIProvider;
 import com.hribol.bromium.core.suite.UbuntuVirtualScreenProcessCreator;
@@ -20,6 +23,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +31,7 @@ import java.util.Map;
 import static com.hribol.bromium.cli.Main.Commands.RECORD;
 import static com.hribol.bromium.cli.Main.Commands.REPLAY;
 import static com.hribol.bromium.cli.ParsedOptions.*;
+import static com.hribol.bromium.core.DependencyInjectionConstants.CONFIGURATION_INPUT_STREAM;
 import static com.hribol.bromium.core.DependencyInjectionConstants.HAR_FILE;
 import static com.hribol.bromium.core.DependencyInjectionConstants.MEASUREMENTS_FILE;
 import static com.hribol.bromium.core.utils.Constants.HAR_EXTENSION;
@@ -58,7 +63,7 @@ public class DefaultModuleTest {
     @Before
     public void prepareResources() throws IOException {
         tempDir = Files.createTempDir();
-        configurationFile = extractResource(Resources.DEMO_CONFIGURATION, tempDir);
+        configurationFile = extractResource(Resources.DEMO_CONFIGURATION, ".brm", tempDir);
         chromedriverFile = extractResource(CHROMEDRIVER, tempDir);
         if (!chromedriverFile.setExecutable(true)) {
             throw new IllegalStateException("Cannot set chrome driver file to executable");
@@ -211,6 +216,35 @@ public class DefaultModuleTest {
 
         File actualHarFile = injector.getInstance(Key.get(File.class, Names.named(HAR_FILE)));
         assertEquals(measurementsFile + HAR_EXTENSION, actualHarFile.getName());
+    }
+
+    @Test
+    public void canCreateStepsDumper() throws IOException {
+        Map<String, Object> opts = new HashMap<>();
+        opts.put(APPLICATION, configurationFile.getAbsolutePath());
+
+        Module module = new DefaultModule(RECORD, opts);
+        Injector injector = Guice.createInjector(module);
+
+        IOProvider<StepsDumper> ioProvider = injector.getInstance(Key.get(new TypeLiteral<IOProvider<StepsDumper>>() {
+        }));
+
+        ioProvider.get();
+    }
+
+    @Test
+    public void canSupplyConfigurationInputStream() throws IOException {
+        Map<String, Object> opts = new HashMap<>();
+        opts.put(APPLICATION, configurationFile.getAbsolutePath());
+
+        TypeLiteral<IOProvider<InputStream>> typeLiteral = new TypeLiteral<IOProvider<InputStream>>() {};
+
+        Module module = new DefaultModule(RECORD, opts);
+        Injector injector = Guice.createInjector(module);
+
+        IOProvider<InputStream> instance = injector.getInstance(Key.get(typeLiteral, Names.named(CONFIGURATION_INPUT_STREAM)));
+
+        instance.get().close();
     }
 
     @After

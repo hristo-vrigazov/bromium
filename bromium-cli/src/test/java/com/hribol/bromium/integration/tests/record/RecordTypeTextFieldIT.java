@@ -26,10 +26,10 @@ public class RecordTypeTextFieldIT extends BaseRecordIntegrationTest {
         TestScenarioSteps testScenarioSteps = new TestScenarioSteps();
         testScenarioSteps.add(ImmutableMap.of(
                 EVENT, TestUtils.Events.PAGE_LOAD,
-                ALIAS_URL, TestUtils.Pages.TYPE_TEXT_DEMO_PAGE));
+                SUBPAGE, TestUtils.Pages.TYPE_TEXT_DEMO_PAGE));
         testScenarioSteps.add(ImmutableMap.of(
                 EVENT, TestUtils.Events.TYPE_TEXT_IN_NAME_INPUT,
-                ALIAS_TEXT, EXAMPLE_TEXT));
+                USERNAME, EXAMPLE_TEXT));
 
         TestScenarioSteps actualSteps = getActualSteps();
         assertEquals(testScenarioSteps, actualSteps);

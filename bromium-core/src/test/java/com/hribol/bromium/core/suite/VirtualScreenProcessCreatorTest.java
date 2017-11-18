@@ -18,7 +18,7 @@ public class VirtualScreenProcessCreatorTest {
         UbuntuVirtualScreenProcessCreator virtualScreenProcessCreator = new UbuntuVirtualScreenProcessCreator();
         Optional<Process> processOptional = Optional.empty();
         try {
-            Process process = virtualScreenProcessCreator.createXvfbProcess(1);
+            Process process = virtualScreenProcessCreator.createXvfbProcess(2);
             processOptional = Optional.of(process);
             assertTrue(process.isAlive());
         } finally {

@@ -1,13 +1,12 @@
 package com.hribol.bromium.integration.tests.record;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Module;
+import com.google.inject.*;
 import com.google.inject.util.Modules;
 import com.hribol.bromium.cli.DefaultModule;
 import com.hribol.bromium.cli.commands.RecordCommand;
 import com.hribol.bromium.core.TestScenarioSteps;
-import com.hribol.bromium.core.utils.parsing.StepsReader;
+import com.hribol.bromium.core.parsing.StepsReader;
+import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.integration.tests.BaseDemoAppIntegrationTest;
 import com.hribol.bromium.integration.tests.simulation.RecordingSimulatorModule;
 
@@ -35,6 +34,8 @@ public abstract class BaseRecordIntegrationTest extends BaseDemoAppIntegrationTe
 
     protected Map<String, Object> opts = new HashMap<>();
 
+    private StepsReader stepsReader;
+
     @Override
     public void runTest() throws IOException {
         /**
@@ -57,6 +58,7 @@ public abstract class BaseRecordIntegrationTest extends BaseDemoAppIntegrationTe
         RecordingSimulatorModule recordingSimulatorModule = new RecordingSimulatorModule(originalInjector);
         recordingSimulatorModule.whenPromptedForRecordingRunnable(this);
         Injector injector = Guice.createInjector(Modules.override(defaultModule).with(recordingSimulatorModule));
+        stepsReader = injector.getInstance(Key.get(new TypeLiteral<IOProvider<StepsReader>>() {})).get();
         RecordCommand recordCommand = injector.getInstance(RecordCommand.class);
         recordCommand.run();
         verifyAssertions();
@@ -67,7 +69,7 @@ public abstract class BaseRecordIntegrationTest extends BaseDemoAppIntegrationTe
     protected TestScenarioSteps getActualSteps() throws IOException {
         String filename = (String) opts.get(OUTPUT);
         try (InputStream inputStream = new FileInputStream(filename)) {
-            return new StepsReader().readSteps(inputStream);
+            return stepsReader.readSteps(inputStream);
         }
     }
 }

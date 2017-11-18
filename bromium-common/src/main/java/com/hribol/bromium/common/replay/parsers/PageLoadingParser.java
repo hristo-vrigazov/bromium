@@ -7,6 +7,7 @@ import com.hribol.bromium.replay.parsers.WebDriverActionParameterParser;
 import java.util.Map;
 
 import static com.hribol.bromium.core.utils.Constants.EVENT;
+import static com.hribol.bromium.core.utils.Constants.PAGE;
 import static com.hribol.bromium.core.utils.Constants.URL;
 
 /**
@@ -22,7 +23,7 @@ public class PageLoadingParser implements WebDriverActionParameterParser {
 
     @Override
     public WebDriverAction create(Map<String, String> parameters, boolean expectHttpRequest) {
-        String url = this.baseURL + parameters.get(URL);
+        String url = this.baseURL + parameters.get(PAGE);
         String event = parameters.get(EVENT);
         return new PageLoading(url, event);
     }

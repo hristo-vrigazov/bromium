@@ -1,0 +1,4 @@
+loadPage: Load ajax.html page
+clickAjaxDemoButton: Click Ajax Demo button
+clickAjaxCreatedButton: Click Ajax created button
+clickDestroyAjaxCreatedButton: Click destroy ajax created button

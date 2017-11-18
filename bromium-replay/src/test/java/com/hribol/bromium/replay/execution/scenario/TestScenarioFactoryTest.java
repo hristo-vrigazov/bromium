@@ -2,7 +2,8 @@ package com.hribol.bromium.replay.execution.scenario;
 
 import com.google.common.collect.ImmutableMap;
 import com.hribol.bromium.core.TestScenarioSteps;
-import com.hribol.bromium.core.utils.parsing.StepsReader;
+import com.hribol.bromium.core.parsing.JsonStepsReader;
+import com.hribol.bromium.core.parsing.StepsReader;
 import com.hribol.bromium.replay.execution.application.ApplicationAction;
 import com.hribol.bromium.replay.execution.application.ApplicationActionFactory;
 import com.hribol.bromium.replay.actions.WebDriverAction;

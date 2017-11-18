@@ -7,7 +7,6 @@ import com.google.inject.throwingproviders.CheckedProvides;
 import com.google.inject.throwingproviders.ThrowingProviderBinder;
 import com.hribol.bromium.common.browsers.ChromeDriverServiceSupplier;
 import com.hribol.bromium.common.browsers.ChromeDriverSupplier;
-import com.hribol.bromium.common.browsers.DriverServiceSupplierBase;
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.filtering.GetHtmlFromCurrentHostPredicate;
 import com.hribol.bromium.common.filtering.RequestToPageLoadingEventConverter;
@@ -24,11 +23,20 @@ import com.hribol.bromium.common.generation.helper.suppliers.StepAndWebDriverAct
 import com.hribol.bromium.common.generation.record.*;
 import com.hribol.bromium.common.generation.record.invocations.RecorderFunctionInvocation;
 import com.hribol.bromium.common.generation.replay.*;
-import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionInvocation;
+import com.hribol.bromium.common.generation.replay.invocations.ReplayFunctionInvocation;
 import com.hribol.bromium.common.ProxyDriverIntegrator;
+import com.hribol.bromium.common.parsing.DslParser;
+import com.hribol.bromium.common.parsing.DslStepsDumper;
+import com.hribol.bromium.common.parsing.DslStepsReader;
+import com.hribol.bromium.common.parsing.dsl.convert.*;
 import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.common.replay.SignalizingStateConditionsUpdater;
+import com.hribol.bromium.core.config.SyntaxDefinitionConfiguration;
+import com.hribol.bromium.core.config.WebDriverActionConfiguration;
+import com.hribol.bromium.core.parsing.*;
 import com.hribol.bromium.core.utils.*;
+import com.hribol.bromium.dsl.BromiumStandaloneSetup;
+import com.hribol.bromium.dsl.bromium.*;
 import com.hribol.bromium.record.RecordingState;
 import com.hribol.bromium.common.replay.DriverOperations;
 import com.hribol.bromium.common.replay.ExecutorDependencies;
@@ -49,8 +57,6 @@ import com.hribol.bromium.core.suite.UbuntuVirtualScreenProcessCreator;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.core.suppliers.WebDriverSupplier;
 import com.hribol.bromium.core.synchronization.EventSynchronizer;
-import com.hribol.bromium.core.utils.parsing.ApplicationConfigurationParser;
-import com.hribol.bromium.core.utils.parsing.StepsReader;
 import com.hribol.bromium.record.RecordRequestFilter;
 import com.hribol.bromium.record.RecordResponseFilter;
 import com.hribol.bromium.replay.ReplayBrowser;
@@ -71,10 +77,10 @@ import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.filters.ResponseFilter;
 import net.lightbody.bmp.proxy.CaptureType;
 import org.apache.commons.io.IOUtils;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.validation.IResourceValidator;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.service.DriverService;
@@ -83,6 +89,7 @@ import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -101,15 +108,34 @@ import static org.openqa.selenium.remote.BrowserType.CHROME;
  * Guice module used for creation of the dependency graph
  */
 public class DefaultModule extends AbstractModule {
+    private Injector dslInjector;
+
     private String command;
+
     private Map<String, Object> opts;
 
     private TypeLiteral<JavascriptGenerator<NameWebDriverActionConfiguration>>
             javascriptGeneratorByNameAndWebDriverActionConfiguration = new TypeLiteral<JavascriptGenerator<NameWebDriverActionConfiguration>>() {};
 
+    private TypeLiteral<ASTNodeConverter<Model, ApplicationConfiguration>>
+            modelASTconverter = new TypeLiteral<ASTNodeConverter<Model, ApplicationConfiguration>>() {};
+
+    private TypeLiteral<ASTNodeConverter<ApplicationAction, ApplicationActionConfiguration>>
+            applicationActionASTconverter = new TypeLiteral<ASTNodeConverter<ApplicationAction, ApplicationActionConfiguration>>() {};
+
+    private TypeLiteral<ASTNodeConverter<WebDriverActionCondition, WebDriverActionConfiguration>>
+            conditionASTconverter = new TypeLiteral<ASTNodeConverter<WebDriverActionCondition, WebDriverActionConfiguration>>() {};
+
+    private TypeLiteral<ASTNodeConverter<WebDriverAction, WebDriverActionConfiguration>>
+            actionASTconverter = new TypeLiteral<ASTNodeConverter<WebDriverAction, WebDriverActionConfiguration>>() {};
+
+    private TypeLiteral<ASTNodeConverter<SyntaxDefinition, SyntaxDefinitionConfiguration>>
+            syntaxASTconverter = new TypeLiteral<ASTNodeConverter<SyntaxDefinition, SyntaxDefinitionConfiguration>>() {};
+
     public DefaultModule(String command, Map<String, Object> opts) {
         this.command = command;
         this.opts = opts;
+        this.dslInjector = new BromiumStandaloneSetup().createInjectorAndDoEMFRegistration();
     }
 
     @Override
@@ -130,6 +156,13 @@ public class DefaultModule extends AbstractModule {
                 .annotatedWith(Names.named(CONVENTION_EVENT_DETECTOR_CONVERTOR))
                 .to(SplitQueryStringOfRequest.class);
 
+        bind(syntaxASTconverter).to(SyntaxDefinitionASTNodeConverter.class);
+        bind(actionASTconverter).to(ActionASTNodeConverter.class);
+        bind(conditionASTconverter).to(ConditionASTNodeConverter.class);
+        bind(applicationActionASTconverter).to(ApplicationActionASTNodeConverter.class);
+        bind(modelASTconverter).to(TraversingBasedASTNodeConverter.class);
+
+        bind(ApplicationConfigurationParser.class).to(DslParser.class);
 
         // TODO: other OSes should have a different binding
         bind(VirtualScreenProcessCreator.class).to(UbuntuVirtualScreenProcessCreator.class);
@@ -141,6 +174,35 @@ public class DefaultModule extends AbstractModule {
         bind(ReplayingState.class).in(Singleton.class);
 
         install(ThrowingProviderBinder.forModule(this));
+    }
+
+    @Provides
+    public ResourceSet getResourceSet() {
+        return dslInjector.getInstance(ResourceSet.class);
+    }
+
+    @Provides
+    public IResourceValidator getResourceValidator() {
+        return dslInjector.getInstance(IResourceValidator.class);
+    }
+
+    @CheckedProvides(IOProvider.class)
+    public Map<String, ApplicationActionConfiguration> getNameToActionConfigurationMap(IOProvider<ApplicationConfiguration> configurationIOProvider) throws IOException {
+        Map<String, ApplicationActionConfiguration> actionConfigurationMap = new HashMap<>();
+        for (ApplicationActionConfiguration applicationActionConfiguration: configurationIOProvider.get().getApplicationActionConfigurationList()) {
+            actionConfigurationMap.put(applicationActionConfiguration.getName(), applicationActionConfiguration);
+        }
+        return actionConfigurationMap;
+    }
+
+    @CheckedProvides(IOProvider.class)
+    public StepsDumper getStepsDumper(IOProvider<Map<String, ApplicationActionConfiguration>> configurationIOProvider) throws IOException {
+        return new DslStepsDumper(configurationIOProvider.get());
+    }
+
+    @CheckedProvides(IOProvider.class)
+    public StepsReader getStepsReader(IOProvider<Map<String, ApplicationActionConfiguration>> configurationIOProvider) throws IOException {
+        return new DslStepsReader(configurationIOProvider.get());
     }
 
     @Provides
@@ -228,11 +290,10 @@ public class DefaultModule extends AbstractModule {
 
     @CheckedProvides(IOProvider.class)
     public ApplicationConfiguration getApplicationConfiguration(ApplicationConfigurationParser applicationConfigurationParser,
-                                                                @Named(CONFIGURATION_INPUT_STREAM)
-                                                                IOProvider<InputStream> fileInputStreamProvider) throws IOException {
-        try (InputStream inputStream = fileInputStreamProvider.get()) {
-            return applicationConfigurationParser.parseApplicationConfiguration(inputStream);
-        }
+                                                                @Named(CONFIGURATION_FILE)
+                                                                Provider<File> fileProvider) throws IOException {
+        File file = fileProvider.get();
+        return applicationConfigurationParser.parseApplicationConfiguration(file);
     }
 
     @Provides
@@ -347,9 +408,9 @@ public class DefaultModule extends AbstractModule {
 
     @CheckedProvides(IOProvider.class)
     public TestScenarioFactory getTestScenarioFactory(IOProvider<ApplicationActionFactory> applicationActionFactoryIOProvider,
-                                                      StepsReader stepsReader) throws IOException {
+                                                      IOProvider<StepsReader> stepsReaderIOProvider) throws IOException {
         ApplicationActionFactory applicationActionFactory = applicationActionFactoryIOProvider.get();
-        return new TestScenarioFactory(applicationActionFactory, stepsReader);
+        return new TestScenarioFactory(applicationActionFactory, stepsReaderIOProvider.get());
     }
 
     @Provides
@@ -365,10 +426,10 @@ public class DefaultModule extends AbstractModule {
     }
 
     @CheckedProvides(IOProvider.class)
-    public TestScenarioSteps getTestCaseSteps(StepsReader stepsReader,
+    public TestScenarioSteps getTestCaseSteps(IOProvider<StepsReader> stepsReaderIOProvider,
                                               @Named(TEST_CASE_INPUT_STREAM) IOProvider<InputStream> testCaseInputStreamProvider)
             throws IOException {
-        return stepsReader.readSteps(testCaseInputStreamProvider.get());
+        return stepsReaderIOProvider.get().readSteps(testCaseInputStreamProvider.get());
     }
 
     @CheckedProvides(IOProvider.class)

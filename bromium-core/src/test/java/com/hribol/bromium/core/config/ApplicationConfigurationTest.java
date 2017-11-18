@@ -1,5 +1,6 @@
 package com.hribol.bromium.core.config;
 
+import com.codebox.bean.JavaBeanTester;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -26,5 +27,11 @@ public class ApplicationConfigurationTest {
         assertEquals(applicationActionConfiguration, applicationConfiguration
                 .getApplicationActionConfigurationList()
                 .get(0));
+    }
+
+
+    @Test
+    public void testAsBean() {
+        JavaBeanTester.builder(ApplicationConfiguration.class).test();
     }
 }

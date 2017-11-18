@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CLASS_BY_TEXT;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -25,7 +26,7 @@ public class PredefinedWebDriverActionFactoryTest {
         map.put("text", "ATP");
         map.put("event", "clickMegaMenu");
 
-        WebDriverAction webDriverAction = factory.create("CLICK_CLASS_BY_TEXT", map, true);
+        WebDriverAction webDriverAction = factory.create(CLICK_CLASS_BY_TEXT, map, true);
 
         assertEquals("clickMegaMenu", webDriverAction.getName());
     }

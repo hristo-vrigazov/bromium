@@ -1,0 +1,88 @@
+grammar com.hribol.bromium.dsl.Bromium with org.eclipse.xtext.common.Terminals
+
+generate bromium "http://www.hribol.com/bromium/dsl/Bromium"
+
+Model:
+	'name' name=STRING
+	'version' version=STRING
+	('from' baseVersion=Version)?
+	'actions' '{' 
+		actions+=ApplicationAction*
+	'}'
+;
+
+ApplicationAction:
+	'id' name=ID
+	'syntax' syntaxDefinitions+=SyntaxDefinition*
+	(precondition=Precondition)?
+	webDriverAction=WebDriverAction
+	expectHttpRequest=ExpectHttpRequest
+	(postcondition=Postcondition)?
+;
+
+SyntaxDefinition:
+	 {SyntaxDefinition} content=STRING (parameter=ExposedParameter)?
+;
+
+WebDriverActionCondition:
+	ElementByCssToBePresent |
+	TextOfElementWithCssSelectorToBe
+;
+
+WebDriverAction:
+	ClickCssSelector |
+	ClickClassByText |
+	PageLoad |
+	TypeTextInElementFoundByCssSelector
+;
+
+Precondition:
+	('when' action=WebDriverActionCondition)
+;
+
+Postcondition:
+	('then' 'make' 'sure' action=WebDriverActionCondition)
+;
+
+ExpectHttpRequest:
+	{ExpectHttpRequest} ('do' (not?='not')? 'expect' 'http' 'request')
+;
+
+
+// TODO: syntactic sugar for CSS selectors
+ElementByCssToBePresent: 'element' 'with' 'css' parameterNames+='selector' parameterValues+=ParameterValue 'is' 'present';
+ClickCssSelector: 'click' 'on' 'element' 'with' 'css' parameterNames+='selector' parameterValues+=ParameterValue;
+PageLoad: 'load' parameterNames+='page' parameterValues+=ParameterValue;
+TypeTextInElementFoundByCssSelector: 'type' parameterNames+='text' parameterValues+=ParameterValue 
+'in' 'element' 'with' 'css' parameterNames+='selector' parameterValues+=ParameterValue
+;
+
+TextOfElementWithCssSelectorToBe:
+	'element' 'with' 'css' 
+		parameterNames+='selector' parameterValues+=ParameterValue 'has' 
+		parameterNames+='text' parameterValues+=ParameterValue
+;
+
+ClickClassByText:
+	'click' 'on' 'element' 'with' 
+	parameterNames+='class' 
+	parameterValues+=ParameterValue 'and' 
+	parameterNames+='text' 
+	parameterValues+=ParameterValue
+;
+
+ParameterValue:
+	content=STRING | exposedParameter=[ExposedParameter]
+;
+
+ExposedParameter:
+	name=ID
+;
+
+// TODO: include ThreeDotted version as well
+Version: STRING;
+
+ThreeDottedVersion:
+	big=INT '.' medium=INT '.' small=INT
+;
+	

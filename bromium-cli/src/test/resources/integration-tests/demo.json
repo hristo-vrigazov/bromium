@@ -10,17 +10,22 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": true,
-            "name": "Click Ajax Demo button",
+            "name": "clickAjaxDemoButton",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#ajax-demo"
                     }
                 },
-                "webDriverActionType": "CLICK_CSS_SELECTOR"
-            }
+                "webDriverActionType": "ClickCssSelector"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click Ajax Demo button"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -32,17 +37,22 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": true,
-            "name": "Click link to Ajax Demo page",
+            "name": "clickLinkToAjaxDemoPage",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#ajax-demo-link"
                     }
                 },
-                "webDriverActionType": "CLICK_CSS_SELECTOR"
-            }
+                "webDriverActionType": "ClickCssSelector"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click link to Ajax Demo page"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -54,17 +64,22 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": false,
-            "name": "Click Ajax created button",
+            "name": "clickAjaxCreatedButton",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#ajax-button"
                     }
                 },
-                "webDriverActionType": "CLICK_CSS_SELECTOR"
-            }
+                "webDriverActionType": "ClickCssSelector"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click Ajax created button"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -76,17 +91,22 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": false,
-            "name": "Click destroy ajax created button",
+            "name": "clickDestroyAjaxCreatedButton",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#destroy-ajax"
                     }
                 },
-                "webDriverActionType": "CLICK_CSS_SELECTOR"
-            }
+                "webDriverActionType": "ClickCssSelector"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click destroy ajax created button"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -98,17 +118,22 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": false,
-            "name": "Click dynamic button",
+            "name": "clickDynamicButton",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#create-dynamic"
                     }
                 },
-                "webDriverActionType": "CLICK_CSS_SELECTOR"
-            }
+                "webDriverActionType": "ClickCssSelector"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click dynamic button"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -120,17 +145,22 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": false,
-            "name": "Click dynamically created button",
+            "name": "clickDynamicallyCreatedButton",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#late-creation"
                     }
                 },
-                "webDriverActionType": "CLICK_CSS_SELECTOR"
-            }
+                "webDriverActionType": "ClickCssSelector"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click dynamically created button"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -142,17 +172,22 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": false,
-            "name": "Click delete dynamically created button",
+            "name": "clickDeleteDynamicallyCreatedButton",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#destroy-dynamic"
                     }
                 },
-                "webDriverActionType": "CLICK_CSS_SELECTOR"
-            }
+                "webDriverActionType": "ClickCssSelector"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click delete dynamically created button"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -164,17 +199,22 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": false,
-            "name": "Click on race demo button",
+            "name": "clickRaceDemoButton",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#race-demo"
                     }
                 },
-                "webDriverActionType": "CLICK_CSS_SELECTOR"
-            }
+                "webDriverActionType": "ClickCssSelector"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click on race demo button"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -186,7 +226,7 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": true,
-            "name": "Load /ajax.html page",
+            "name": "loadAjaxPage",
             "webDriverAction": {
                 "parametersConfiguration": {
                     "url": {
@@ -195,8 +235,13 @@
                         "value": "ajax.html"
                     }
                 },
-                "webDriverActionType": "PAGE_LOADING"
-            }
+                "webDriverActionType": "PageLoad"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Load /ajax.html page"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -208,7 +253,7 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": true,
-            "name": "Load /index.html page",
+            "name": "loadIndexPage",
             "webDriverAction": {
                 "parametersConfiguration": {
                     "url": {
@@ -217,8 +262,13 @@
                         "value": "index.html"
                     }
                 },
-                "webDriverActionType": "PAGE_LOADING"
-            }
+                "webDriverActionType": "PageLoad"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Load /index.html page"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -230,7 +280,7 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": true,
-            "name": "Load page",
+            "name": "loadPage",
             "webDriverAction": {
                 "parametersConfiguration": {
                     "url": {
@@ -239,8 +289,17 @@
                         "alias": "alias-url"
                     }
                 },
-                "webDriverActionType": "PAGE_LOADING"
-            }
+                "webDriverActionType": "PageLoad"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Load",
+                    "exposedParameter": "alias-url"
+                },
+                {
+                    "content": "page"
+                }
+            ]
         },
         {
             "conditionAfterExecution": {
@@ -252,12 +311,12 @@
                 "webDriverActionType": "NOTHING"
             },
             "expectsHttpRequest": true,
-            "name": "Type text in name input",
+            "name": "typeTextInNameInput",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "cssSelector": {
+                    "selector": {
                         "expose": false,
-                        "parameterName": "cssSelector",
+                        "parameterName": "selector",
                         "value": "#name-input"
                     },
                     "text": {
@@ -266,8 +325,181 @@
                         "alias": "alias-text"
                     }
                 },
-                "webDriverActionType": "TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR"
-            }
+                "webDriverActionType": "TypeTextInElementFoundByCssSelector"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Type",
+                    "exposedParameter": "alias-text"
+                },
+                {
+                    "content": "in name input"
+                }
+            ]
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {
+                    "selector": {
+                        "expose": false,
+                        "parameterName": "selector",
+                        "value": "#edit-toolbar"
+                    }
+                },
+                "webDriverActionType": "ElementByCssToBePresent"
+            },
+            "expectsHttpRequest": true,
+            "name": "clickLikeButton",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "selector": {
+                        "expose": false,
+                        "parameterName": "selector",
+                        "value": ".like"
+                    }
+                },
+                "webDriverActionType": "ClickCssSelector"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click like button"
+                }
+            ]
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": true,
+            "name": "clickEditButton",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "selector": {
+                        "expose": false,
+                        "parameterName": "selector",
+                        "value": "#edit"
+                    }
+                },
+                "webDriverActionType": "ClickCssSelector"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click edit button"
+                }
+            ]
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": true,
+            "name": "clickUploadButton",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "selector": {
+                        "expose": false,
+                        "parameterName": "selector",
+                        "value": "#upload-button"
+                    }
+                },
+                "webDriverActionType": "ClickCssSelector"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click upload button"
+                }
+            ]
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {
+                    "selector": {
+                        "expose": false,
+                        "parameterName": "selector",
+                        "value": "#success-indicator"
+                    }
+                },
+                "webDriverActionType": "ElementByCssToBePresent"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {
+                    "selector": {
+                        "expose": false,
+                        "parameterName": "selector",
+                        "value": "#text-elem"
+                    },
+                    "text": {
+                        "expose": false,
+                        "parameterName": "text",
+                        "value": "Done"
+                    }
+                },
+                "webDriverActionType": "TextOfElementWithCssSelectorToBe"
+            },
+            "expectsHttpRequest": true,
+            "name": "clickButtonAfterTextChanged",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "selector": {
+                        "expose": false,
+                        "parameterName": "selector",
+                        "value": "#button-to-be-clicked"
+                    }
+                },
+                "webDriverActionType": "ClickCssSelector"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click button after text has changed"
+                }
+            ]
+        },
+        {
+            "conditionAfterExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "conditionBeforeExecution": {
+                "parametersConfiguration": {},
+                "webDriverActionType": "NOTHING"
+            },
+            "expectsHttpRequest": true,
+            "name": "clickOnListedItem",
+            "webDriverAction": {
+                "parametersConfiguration": {
+                    "class": {
+                        "expose": false,
+                        "parameterName": "class",
+                        "value": "item"
+                    },
+                    "text": {
+                        "expose": true,
+                        "parameterName": "text",
+                        "alias": "itemName"
+                    }
+                },
+                "webDriverActionType": "ClickClassByText"
+            },
+            "syntaxDefinitionConfigurationList": [
+                {
+                    "content": "Click on listed item with text",
+                    "exposedParameter": "itemName"
+                }
+            ]
         }
     ],
     "applicationName": "Demo app for Bromium vs Selenium",

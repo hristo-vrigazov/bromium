@@ -1,16 +1,19 @@
 package com.hribol.bromium.common.replay.actions;
 
-import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.replay.ReplayingState;
-import com.hribol.bromium.replay.actions.WebDriverAction;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.text.MessageFormat;
+
+import static com.hribol.bromium.common.builder.JsFunctionNames.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR;
+
+
 /**
  * Types text in an element found by a css selector. Clears the field first.
  */
-public class TypeTextInElementFoundByCssSelector implements WebDriverAction {
+public class TypeTextInElementFoundByCssSelector extends ActionWithJSPreconditionBase {
 
     private String cssSelector;
     private String text;
@@ -25,14 +28,6 @@ public class TypeTextInElementFoundByCssSelector implements WebDriverAction {
     }
 
     @Override
-    public void execute(WebDriver driver, ReplayingState state, EventSynchronizer eventSynchronizer) {
-        By locator = By.cssSelector(cssSelector);
-        WebElement element = driver.findElement(locator);
-        element.clear();
-        element.sendKeys(text);
-    }
-
-    @Override
     public String getName() {
         return eventName;
     }
@@ -40,5 +35,17 @@ public class TypeTextInElementFoundByCssSelector implements WebDriverAction {
     @Override
     public boolean expectsHttpRequest() {
         return expectsHttpRequest;
+    }
+
+    @Override
+    public String getJSEventToWaitFor() {
+        return MessageFormat.format("{0} {1}", TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR, cssSelector);
+    }
+
+    @Override
+    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState) {
+        WebElement element = driver.findElement(By.cssSelector(cssSelector));
+        element.clear();
+        element.sendKeys(text);
     }
 }

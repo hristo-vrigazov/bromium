@@ -1,0 +1,3 @@
+loadPage: Load presence-example.html page
+clickEditButton: Click edit button
+clickLikeButton: Click like button

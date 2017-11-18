@@ -1,0 +1,2 @@
+loadPage: Load click-class-by-text.html page
+clickOnListedItem: Click on listed item with text Target

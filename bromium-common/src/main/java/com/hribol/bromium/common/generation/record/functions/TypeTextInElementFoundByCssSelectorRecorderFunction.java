@@ -15,23 +15,28 @@ import static com.hribol.bromium.core.utils.JsEvents.CHANGE;
 public class TypeTextInElementFoundByCssSelectorRecorderFunction implements RecorderFunction {
 
     private String functionDeclarationCode;
+    private InvocationProvider invocationProvider;
 
-    public TypeTextInElementFoundByCssSelectorRecorderFunction(JsCollector jsCollector) {
+    public TypeTextInElementFoundByCssSelectorRecorderFunction(JsCollector jsCollector, InvocationProvider invocationProvider) {
         this.functionDeclarationCode = jsCollector
                 .declareFunction(TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR)
                 .withParameters(CSS_SELECTOR, EVENT_NAME, TEXT)
                 .startBody()
-                .whenCssSelectorArrives(CSS_SELECTOR)
-                .attachListenerForEvent(CHANGE)
-                .startCollectingParameters(PARAMETERS)
-                .parameterWithConstantKey(EVENT, EVENT_NAME)
-                .parameter(TEXT, INPUT_VALUE)
-                .buildParameters()
-                .notifyBromium(PARAMETERS)
-                .endListener()
-                .endArriveHandler()
+                    .whenCssSelectorArrives(CSS_SELECTOR)
+                        .attachListenerForEvent(CHANGE)
+                            .startCollectingParameters(PARAMETERS)
+                                .parameterWithConstantKey(EVENT, EVENT_NAME)
+                                //TODO: this assumes that the text is always an exposed parameter, but
+                                // we should handle both cases
+                                .parameter(TEXT, INPUT_VALUE)
+                            .buildParameters()
+                            .notifyBromium(PARAMETERS)
+                        .endListener()
+                    .endArriveHandler()
                 .endBody()
                 .build();
+
+        this.invocationProvider = invocationProvider;
     }
 
     @Override
@@ -50,6 +55,10 @@ public class TypeTextInElementFoundByCssSelectorRecorderFunction implements Reco
                 .getParametersConfiguration()
                 .get(TEXT)
                 .getAlias();
-        return new TypeTextInElementFoundByCssSelectorRecorderFunctionInvocation(cssSelector, eventName, textAlias);
+        return invocationProvider.get(cssSelector, eventName, textAlias);
+    }
+
+    public interface InvocationProvider {
+        RecorderFunctionInvocation get(String cssSelector, String eventName, String textAlias);
     }
 }

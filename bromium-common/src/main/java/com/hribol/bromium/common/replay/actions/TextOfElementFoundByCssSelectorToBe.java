@@ -1,35 +1,30 @@
 package com.hribol.bromium.common.replay.actions;
 
-import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.replay.ReplayingState;
-import com.hribol.bromium.replay.actions.WebDriverAction;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.text.MessageFormat;
+
+import static com.hribol.bromium.common.builder.JsFunctionNames.TEXT_OF_ELEMENT_FOUND_BY_CSS_SELECTOR_TO_BE;
 
 /**
- * Waits until the text of an element found by a css selector is equal to the given one. Polling-based
+ * Waits until the text of an element found by a css selector is equal to the given one.
  */
-public class TextOfElementFoundByCssSelectorToBe implements WebDriverAction {
+public class TextOfElementFoundByCssSelectorToBe extends ActionWithJSPreconditionBase {
 
     private final String cssSelector;
     private final String text;
     private final String eventName;
-    private final Integer timeout;
 
-    public TextOfElementFoundByCssSelectorToBe(String cssSelector, String text, String eventName, Integer timeout) {
+    public TextOfElementFoundByCssSelectorToBe(String cssSelector, String text, String eventName) {
         this.cssSelector = cssSelector;
         this.text = text;
         this.eventName = eventName;
-        this.timeout = timeout;
     }
 
     @Override
-    public void execute(WebDriver driver, ReplayingState state, EventSynchronizer eventSynchronizer) {
-        By by = By.cssSelector(cssSelector);
-        WebDriverWait wait = new WebDriverWait(driver, timeout);
-        wait.until(ExpectedConditions.textToBe(by, text));
+    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState) {
+
     }
 
     @Override
@@ -41,4 +36,10 @@ public class TextOfElementFoundByCssSelectorToBe implements WebDriverAction {
     public boolean expectsHttpRequest() {
         return false;
     }
+
+    @Override
+    public String getJSEventToWaitFor() {
+        return MessageFormat.format("{0} {1} {2}", TEXT_OF_ELEMENT_FOUND_BY_CSS_SELECTOR_TO_BE, cssSelector, text);
+    }
+
 }

@@ -21,7 +21,6 @@ public class TextOfElementFoundByCssSelectorToBeParser implements WebDriverActio
         String cssSelector = parameters.get(CSS_SELECTOR);
         String text = parameters.get(TEXT);
         String event = parameters.get(EVENT);
-        Integer timeout = Integer.parseInt(parameters.get(TIMEOUT));
-        return new TextOfElementFoundByCssSelectorToBe(cssSelector, text, event, timeout);
+        return new TextOfElementFoundByCssSelectorToBe(cssSelector, text, event);
     }
 }

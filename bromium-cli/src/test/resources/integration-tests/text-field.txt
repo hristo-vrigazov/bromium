@@ -1,0 +1,2 @@
+loadPage: Load text-field.html page
+typeTextInNameInput: Type something in name input

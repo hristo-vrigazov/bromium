@@ -33,21 +33,13 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
 })
 public class MainTest {
 
-    @Test
-    public void dispatchesToInitCorrectly() throws Exception {
-        String[] args = {
-          "init"
-        };
-
-        baseTest(args, InitCommand.class);
-    }
 
     @Test
     public void dispatchesToRecordCorrectly() throws Exception {
         String[] args = {
                 "record",
                 "-d", "chromedriver",
-                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.json",
+                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.brm",
                 "-u", "http://localhost:3000",
                 "-o", "bromium-core/src/test/resources/dynamic-testCase.json"
         };
@@ -60,34 +52,13 @@ public class MainTest {
         String[] args = {
                 "replay",
                 "-d", "chromedriver",
-                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.json",
+                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.brm",
                 "-u", "http://localhost:3000",
                 "-c", "bromium-core/src/test/resources/dynamic-testCase.json",
                 "-m", "measurements.csv"
         };
 
         baseTest(args, ReplayCommand.class);
-    }
-
-
-    @Test
-    public void dispatchesToUpdateCorrectly() throws Exception {
-        String[] args = {
-                "update",
-                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.json",
-        };
-
-        baseTest(args, UpdateCommand.class);
-    }
-
-    @Test
-    public void dispatchesToVersionCorrectly() throws Exception {
-        String[] args = {
-                "version",
-                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.json",
-        };
-
-        baseTest(args, VersionCommand.class);
     }
 
     private <T extends Command> void baseTest(String[] args, Class<T> klazz) {

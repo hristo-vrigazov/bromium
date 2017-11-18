@@ -1,0 +1,4 @@
+loadPage: Load dynamic.html page
+clickDynamicButton: Click dynamic button
+clickDynamicallyCreatedButton: Click dynamically created button
+clickDeleteDynamicallyCreatedButton: Click delete dynamically created button

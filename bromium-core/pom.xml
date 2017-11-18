@@ -68,9 +68,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-support</artifactId>
-            <version>3.3.1</version>
+            <groupId>com.github.hazendaz</groupId>
+            <artifactId>javabean-tester</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

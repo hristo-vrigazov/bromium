@@ -1,0 +1,3 @@
+loadPage: Load text-to-be.html page
+clickUploadButton: Click upload button
+clickButtonAfterTextChanged: Click button after text has changed

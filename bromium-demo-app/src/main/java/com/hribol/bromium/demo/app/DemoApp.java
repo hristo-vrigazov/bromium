@@ -14,7 +14,6 @@ import org.glassfish.jersey.servlet.ServletContainer;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Paths;
 
@@ -31,7 +30,10 @@ public class DemoApp {
             "dynamic.html",
             "race-http.html",
             "text-field.html",
-            "index.html"
+            "index.html",
+            "presence-example.html",
+            "text-to-be.html",
+            "click-class-by-text.html"
     };
 
     private int port;

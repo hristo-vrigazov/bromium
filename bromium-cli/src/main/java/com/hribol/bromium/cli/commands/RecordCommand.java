@@ -1,14 +1,13 @@
 package com.hribol.bromium.cli.commands;
 
-import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.core.TestScenarioSteps;
+import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.providers.IOURIProvider;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
-import com.hribol.bromium.core.utils.parsing.StepsDumper;
+import com.hribol.bromium.core.parsing.StepsDumper;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -26,7 +25,7 @@ public class RecordCommand implements Command {
     private String outputFile;
     private IOURIProvider<RecordBrowser> recordBrowserBaseIOProvider;
     private final VirtualScreenProcessCreator virtualScreenProcessCreator;
-    private StepsDumper stepsDumper;
+    private IOProvider<StepsDumper> stepsDumperProvider;
 
     @Inject
     public RecordCommand(@Named(OUTPUT_FILE) String outputFile,
@@ -34,13 +33,13 @@ public class RecordCommand implements Command {
                          PromptUtils promptUtils,
                          IOURIProvider<RecordBrowser> recordBrowserBaseIOProvider,
                          VirtualScreenProcessCreator virtualScreenProcessCreator,
-                         StepsDumper stepsDumper) {
+                         IOProvider<StepsDumper> stepsDumperProvider) {
         this.screen = screen;
         this.promptUtils = promptUtils;
         this.outputFile = outputFile;
         this.recordBrowserBaseIOProvider = recordBrowserBaseIOProvider;
         this.virtualScreenProcessCreator = virtualScreenProcessCreator;
-        this.stepsDumper = stepsDumper;
+        this.stepsDumperProvider = stepsDumperProvider;
     }
 
     @Override
@@ -55,7 +54,7 @@ public class RecordCommand implements Command {
             recordBrowser.record();
             promptUtils.promptForRecording();
             TestScenarioSteps testScenarioSteps = recordBrowser.getTestCaseSteps();
-            stepsDumper.dump(testScenarioSteps, outputFile);
+            stepsDumperProvider.get().dump(testScenarioSteps, outputFile);
             recordBrowser.cleanUp();
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();

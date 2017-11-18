@@ -19,7 +19,8 @@ public class ClickCssSelectorRecorderFunctionInvocationTest {
         ClickCssSelectorRecorderFunctionInvocation clickCssSelectorRecorderFunctionInvocation =
                 new ClickCssSelectorRecorderFunctionInvocation(cssSelector, eventName);
 
-        assertTrue(equalToIgnoringWhiteSpace("ClickCssSelector(\"#ico\", \"something\")")
-        .matches(clickCssSelectorRecorderFunctionInvocation.getJavascriptCode()));
+        String expected = "\nClickCssSelector(\"#ico\",\"something\");\n";
+        String actual = clickCssSelectorRecorderFunctionInvocation.getJavascriptCode();
+        assertEquals(expected.trim(), actual.trim());
     }
 }

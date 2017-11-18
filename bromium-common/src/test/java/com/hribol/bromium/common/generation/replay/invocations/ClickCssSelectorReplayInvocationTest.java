@@ -1,24 +1,13 @@
 package com.hribol.bromium.common.generation.replay.invocations;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
+import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CSS_SELECTOR;
 
 /**
  * Created by hvrigazov on 02.07.17.
  */
-public class ClickCssSelectorReplayInvocationTest {
+public class ClickCssSelectorReplayInvocationTest extends ElementArrivedReplayInvocationTest {
 
-    @Test
-    public void createsJsCodeSuitableForInjection() {
-        String cssSelector = "#ico";
-        String hashCode = "1283";
-        ClickCssSelectorReplayInvocation clickCssSelectorRecorderFunctionInvocation =
-                new ClickCssSelectorReplayInvocation(cssSelector, hashCode);
-
-        assertEquals("\n" +
-                        "ClickCssSelector(\"#ico\", \"1283\")\n",
-                clickCssSelectorRecorderFunctionInvocation.getJavascriptCode());
+    public ClickCssSelectorReplayInvocationTest() {
+        super(CLICK_CSS_SELECTOR, ClickCssSelectorReplayInvocation::new);
     }
-
 }

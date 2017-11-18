@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bromium" nsURI="http://www.hribol.com/bromium/dsl/Bromium" nsPrefix="bromium">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="baseVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="#//ApplicationAction" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationAction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="syntaxDefinitions" upperBound="-1"
+        eType="#//SyntaxDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="precondition" eType="#//Precondition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="webDriverAction" eType="#//WebDriverAction"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expectHttpRequest" eType="#//ExpectHttpRequest"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="postcondition" eType="#//Postcondition"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SyntaxDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//ExposedParameter"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WebDriverActionCondition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameterNames" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterValues" upperBound="-1"
+        eType="#//ParameterValue" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WebDriverAction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameterNames" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterValues" upperBound="-1"
+        eType="#//ParameterValue" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Precondition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//WebDriverActionCondition"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Postcondition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//WebDriverActionCondition"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpectHttpRequest">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="not" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementByCssToBePresent" eSuperTypes="#//WebDriverActionCondition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClickCssSelector" eSuperTypes="#//WebDriverAction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PageLoad" eSuperTypes="#//WebDriverAction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeTextInElementFoundByCssSelector"
+      eSuperTypes="#//WebDriverAction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TextOfElementWithCssSelectorToBe" eSuperTypes="#//WebDriverActionCondition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClickClassByText" eSuperTypes="#//WebDriverAction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exposedParameter" eType="#//ExposedParameter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExposedParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ThreeDottedVersion">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="big" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="medium" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="small" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+</ecore:EPackage>

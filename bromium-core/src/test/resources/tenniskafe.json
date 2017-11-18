@@ -68,7 +68,7 @@
                         "parameterName": "text"
                     }
                 },
-                "webDriverActionType": "CLICK_CLASS_BY_TEXT"
+                "webDriverActionType": "ClickClassByText"
             }
         },
         {
@@ -90,7 +90,7 @@
                         "alias": "url"
                     }
                 },
-                "webDriverActionType": "PAGE_LOADING"
+                "webDriverActionType": "PageLoad"
             }
         }
     ],

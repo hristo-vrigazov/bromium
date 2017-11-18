@@ -10,7 +10,7 @@ public class Constants {
     public final static String NOTHING = "NOTHING";
     public final static String CUSTOM = "CUSTOM";
     public final static String HTML = "html";
-    public final static String CSS_SELECTOR = "cssSelector";
+    public final static String CSS_SELECTOR = "selector";
     public final static String TEXT = "text";
     public final static String URL = "url";
     public final static String CONDITION_SATISFIED_URL = "http://bromium-condition-satisfied.com/";
@@ -20,5 +20,7 @@ public class Constants {
     public final static String EVENT_NAME = "eventName";
     public final static String PARAMETERS = "parameters";
     public final static String INPUT_VALUE = "this.value";
+    public final static String INNER_TEXT = "this.innerText";
     public final static String HAR_EXTENSION = ".har";
+    public static final String PAGE = "page";
 }

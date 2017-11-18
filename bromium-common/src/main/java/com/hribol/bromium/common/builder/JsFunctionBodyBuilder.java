@@ -17,7 +17,6 @@ public class JsFunctionBodyBuilder {
     }
 
     public JsArriveHandlerBuilder whenCssSelectorArrives(String cssSelector) {
-
         return new JsArriveHandlerBuilder(cssSelector, this);
     }
 

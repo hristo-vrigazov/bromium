@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: com.hribol.bromium.dsl
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: com.hribol.bromium.dsl; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.13.0",
+ org.antlr.runtime,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.common,
+ org.eclipse.xtend.lib;bundle-version="2.13.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: com.hribol.bromium.dsl,
+ com.hribol.bromium.dsl.bromium,
+ com.hribol.bromium.dsl.bromium.impl,
+ com.hribol.bromium.dsl.services,
+ com.hribol.bromium.dsl.parser.antlr,
+ com.hribol.bromium.dsl.bromium.util,
+ com.hribol.bromium.dsl.validation,
+ com.hribol.bromium.dsl.serializer,
+ com.hribol.bromium.dsl.parser.antlr.internal,
+ com.hribol.bromium.dsl.generator,
+ com.hribol.bromium.dsl.scoping
+Import-Package: org.apache.log4j
