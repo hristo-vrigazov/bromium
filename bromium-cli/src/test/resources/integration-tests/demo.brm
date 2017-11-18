@@ -54,7 +54,7 @@ actions {
 	do expect http request
 
 	id loadPage
-	syntax 'Load' subpage 'url'
+	syntax 'Load' subpage 'page'
 	load page subpage
 	do expect http request
 

@@ -9,9 +9,12 @@ import com.hribol.bromium.dsl.bromium.SyntaxDefinition;
 import com.hribol.bromium.dsl.bromium.WebDriverAction;
 import com.hribol.bromium.dsl.bromium.WebDriverActionCondition;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static com.hribol.bromium.core.utils.Constants.NOTHING;
 
 /**
  * A class which converts {@link ApplicationAction} from the AST to {@link ApplicationActionConfiguration}
@@ -37,17 +40,21 @@ public class ApplicationActionASTNodeConverter implements ASTNodeConverter<Appli
         ApplicationActionConfiguration applicationActionConfiguration = new ApplicationActionConfiguration();
         applicationActionConfiguration.setName(applicationAction.getName());
 
-        if (Optional.ofNullable(applicationAction.getPrecondition()).isPresent()) {
-            WebDriverActionConfiguration precondition = conditionToActionConverter.convert(applicationAction.getPrecondition().getAction());
-            applicationActionConfiguration.setConditionBeforeExecution(precondition);
+        if (applicationAction.getPrecondition() == null) {
+            applicationActionConfiguration.setConditionBeforeExecution(nothingConfiguration());
+        } else {
+            applicationActionConfiguration.setConditionBeforeExecution(conditionToActionConverter
+                    .convert(applicationAction.getPrecondition().getAction()));
         }
 
         WebDriverActionConfiguration action = actionToActionConverter.convert(applicationAction.getWebDriverAction());
         applicationActionConfiguration.setWebDriverAction(action);
 
-        if (Optional.ofNullable(applicationAction.getPostcondition()).isPresent()) {
-            WebDriverActionConfiguration postcondition = conditionToActionConverter.convert(applicationAction.getPostcondition().getAction());
-            applicationActionConfiguration.setConditionAfterExecution(postcondition);
+        if (applicationAction.getPostcondition() == null) {
+            applicationActionConfiguration.setConditionAfterExecution(nothingConfiguration());
+        } else {
+            applicationActionConfiguration.setConditionAfterExecution(conditionToActionConverter
+                    .convert(applicationAction.getPostcondition().getAction()));
         }
 
         List<SyntaxDefinitionConfiguration> syntaxDefinitions = applicationAction
@@ -60,5 +67,12 @@ public class ApplicationActionASTNodeConverter implements ASTNodeConverter<Appli
 
         applicationActionConfiguration.setExpectsHttpRequest(!applicationAction.getExpectHttpRequest().isNot());
         return applicationActionConfiguration;
+    }
+
+    private WebDriverActionConfiguration nothingConfiguration() {
+        WebDriverActionConfiguration webDriverActionConfiguration = new WebDriverActionConfiguration();
+        webDriverActionConfiguration.setParametersConfiguration(new HashMap<>());
+        webDriverActionConfiguration.setWebDriverActionType(NOTHING);
+        return webDriverActionConfiguration;
     }
 }

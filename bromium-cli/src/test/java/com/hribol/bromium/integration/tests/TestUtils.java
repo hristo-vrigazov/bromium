@@ -35,7 +35,7 @@ public class TestUtils {
     }
 
     public static class Resources {
-        public static final String DEMO_CONFIGURATION = "integration-tests/demo.brm";
+        public static final String DEMO_CONFIGURATION = "integration-tests/demo.json";
         public static final String DYNAMIC_TEST_CASE = "integration-tests/dynamic.txt";
         public static final String AJAX_TEST_CASE = "integration-tests/ajax.txt";
         public static final String RACE_HTTP_TEST_CASE = "integration-tests/race-http.txt";
@@ -81,7 +81,11 @@ public class TestUtils {
     }
 
     public static File extractResource(String resource, File testResourcesDirectory) throws IOException {
-        File tempFile = File.createTempFile(resource, "", testResourcesDirectory);
+        return extractResource(resource, "", testResourcesDirectory);
+    }
+
+    public static File extractResource(String resource, String suffix, File testResourcesDirectory) throws IOException {
+        File tempFile = File.createTempFile(resource, suffix, testResourcesDirectory);
         InputStream chromeDriverStream = TestUtils.class.getResourceAsStream("/" + resource);
         OutputStream fileOutputStream = new FileOutputStream(tempFile);
         IOUtils.copy(chromeDriverStream, fileOutputStream);

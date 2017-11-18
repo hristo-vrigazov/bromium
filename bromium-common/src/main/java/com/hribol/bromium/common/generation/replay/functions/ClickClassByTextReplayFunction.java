@@ -12,6 +12,7 @@ import java.util.Map;
 import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CLASS_BY_TEXT;
 import static com.hribol.bromium.common.generation.replay.functions.Constants.HASHCODE;
 import static com.hribol.bromium.common.replay.parsers.ClickClassByTextParser.INITIAL_COLLECTOR_CLASS;
+import static com.hribol.bromium.common.replay.parsers.ClickClassByTextParser.INITIAL_COLLECTOR_CLASS_JS_ALIAS;
 import static com.hribol.bromium.core.utils.Constants.TEXT;
 
 /**
@@ -25,9 +26,9 @@ public class ClickClassByTextReplayFunction implements ReplayFunction {
     public ClickClassByTextReplayFunction(JsCollector jsCollector, InvocationProvider provider) {
         this.javascriptCode = jsCollector
                 .declareFunction(CLICK_CLASS_BY_TEXT)
-                .withParameters(INITIAL_COLLECTOR_CLASS, TEXT, HASHCODE)
+                .withParameters(INITIAL_COLLECTOR_CLASS_JS_ALIAS, TEXT, HASHCODE)
                 .startBody()
-                    .whenCssSelectorArrives("\".\" + " + INITIAL_COLLECTOR_CLASS)
+                    .whenCssSelectorArrives("\".\" + " + INITIAL_COLLECTOR_CLASS_JS_ALIAS)
                         .notifySatisfiedBasedOnText(TEXT, HASHCODE)
                     .endArriveHandler()
                 .endBody()

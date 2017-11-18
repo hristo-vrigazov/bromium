@@ -24,6 +24,8 @@ public class ApplicationActionASTNodeConverterTest extends BaseDSLConfigurationC
     private ASTNodeConverter<WebDriverAction, WebDriverActionConfiguration> actionToActionConverter;
     private ASTNodeConverter<SyntaxDefinition, SyntaxDefinitionConfiguration> syntaxDefinitionConverter;
 
+    private WebDriverActionConfiguration nothingMock;
+
     private WebDriverActionConfiguration preconditionMock;
     private WebDriverActionConfiguration actionMock;
     private WebDriverActionConfiguration postconditionMock;

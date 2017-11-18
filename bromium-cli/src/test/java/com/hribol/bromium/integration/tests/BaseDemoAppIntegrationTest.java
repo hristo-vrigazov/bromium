@@ -60,7 +60,7 @@ public abstract class BaseDemoAppIntegrationTest {
         if (!chromedriverFile.setExecutable(true)) {
             throw new IllegalStateException("Cannot set chrome driver file to executable");
         }
-        configurationFile = extractResource(resourceConfigurationPath, testResourcesDirectory);
+        configurationFile = extractResource(resourceConfigurationPath, ".brm", testResourcesDirectory);
         measurementsFile = createTempFile("measurements.csv");
     }
 

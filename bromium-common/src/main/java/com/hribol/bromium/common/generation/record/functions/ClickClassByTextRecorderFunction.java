@@ -2,16 +2,13 @@ package com.hribol.bromium.common.generation.record.functions;
 
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
-import com.hribol.bromium.common.generation.record.invocations.ClickClassByTextRecorderInvocation;
 import com.hribol.bromium.common.generation.record.invocations.RecorderFunctionInvocation;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 
 import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CLASS_BY_TEXT;
-import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CSS_SELECTOR;
 import static com.hribol.bromium.common.replay.parsers.ClickClassByTextParser.INITIAL_COLLECTOR_CLASS;
+import static com.hribol.bromium.common.replay.parsers.ClickClassByTextParser.INITIAL_COLLECTOR_CLASS_JS_ALIAS;
 import static com.hribol.bromium.core.utils.Constants.*;
-import static com.hribol.bromium.core.utils.Constants.EVENT_NAME;
-import static com.hribol.bromium.core.utils.Constants.PARAMETERS;
 import static com.hribol.bromium.core.utils.JsEvents.CLICK;
 
 /**
@@ -22,15 +19,17 @@ public class ClickClassByTextRecorderFunction implements RecorderFunction {
     private String javascriptCode;
     private InvocationProvider invocationProvider;
 
+    // can't use "class" because it is a reversed keyword in javascrpt
+
     public ClickClassByTextRecorderFunction(JsCollector jsCollector, InvocationProvider invocationProvider) {
         this.invocationProvider = invocationProvider;
         this.javascriptCode = jsCollector
                 .declareFunction(CLICK_CLASS_BY_TEXT)
                     // text in here means the alias for text
                     // TODO: write alternative function for the case when the text is not exposed
-                    .withParameters(INITIAL_COLLECTOR_CLASS, TEXT, EVENT_NAME)
+                    .withParameters(INITIAL_COLLECTOR_CLASS_JS_ALIAS, TEXT, EVENT_NAME)
                     .startBody()
-                        .whenCssSelectorArrives("\".\" + " + INITIAL_COLLECTOR_CLASS)
+                        .whenCssSelectorArrives("\".\" + " + INITIAL_COLLECTOR_CLASS_JS_ALIAS)
                             .attachListenerForEvent(CLICK)
                                 .startCollectingParameters(PARAMETERS)
                                 .parameterWithConstantKey(EVENT, EVENT_NAME)
