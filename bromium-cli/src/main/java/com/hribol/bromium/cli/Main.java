@@ -22,11 +22,8 @@ import static com.hribol.bromium.cli.Main.Commands.*;
 public class Main {
 
     public static class Commands {
-        public static final String INIT = "init";
         public static final String RECORD = "record";
         public static final String REPLAY = "replay";
-        public static final String UPDATE = "update";
-        public static final String VERSION = "version";
     }
 
     private static Injector injector;
@@ -63,8 +60,6 @@ public class Main {
         Map<String, Supplier<Command>> map = new HashMap<>();
         map.put(RECORD, () -> injector.getInstance(RecordCommand.class));
         map.put(REPLAY, () -> injector.getInstance(ReplayCommand.class));
-        map.put(UPDATE, () -> injector.getInstance(UpdateCommand.class));
-        map.put(VERSION, () -> injector.getInstance(VersionCommand.class));
         return map;
     }
 

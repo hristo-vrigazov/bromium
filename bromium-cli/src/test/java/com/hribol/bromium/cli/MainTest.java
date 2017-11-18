@@ -61,27 +61,6 @@ public class MainTest {
         baseTest(args, ReplayCommand.class);
     }
 
-
-    @Test
-    public void dispatchesToUpdateCorrectly() throws Exception {
-        String[] args = {
-                "update",
-                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.json",
-        };
-
-        baseTest(args, UpdateCommand.class);
-    }
-
-    @Test
-    public void dispatchesToVersionCorrectly() throws Exception {
-        String[] args = {
-                "version",
-                "-a", "/home/hvrigazov/bromium-data/demo-app/configurations/demo.json",
-        };
-
-        baseTest(args, VersionCommand.class);
-    }
-
     private <T extends Command> void baseTest(String[] args, Class<T> klazz) {
         T command = mock(klazz);
 
