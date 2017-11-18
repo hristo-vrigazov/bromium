@@ -1,17 +1,13 @@
 package com.hribol.bromium.core.parsing;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 
 /**
- * Dumps an {@link ApplicationConfiguration} into a file
+ * Created by hvrigazov on 18.11.17.
  */
-public class ApplicationConfigurationDumper {
+public interface ApplicationConfigurationDumper {
 
     /**
      * Writes an application configuration to a file
@@ -19,10 +15,5 @@ public class ApplicationConfigurationDumper {
      * @param outputFilename the file to which the configuration should be outputted
      * @throws IOException if an exception happens while writing to the file
      */
-    public void dumpApplicationConfiguration(ApplicationConfiguration applicationConfiguration, String outputFilename) throws IOException {
-        Writer writer = new FileWriter(outputFilename);
-        Gson gson = new GsonBuilder().create();
-        gson.toJson(applicationConfiguration, writer);
-        writer.close();
-    }
+    void dumpApplicationConfiguration(ApplicationConfiguration applicationConfiguration, String outputFilename) throws IOException;
 }

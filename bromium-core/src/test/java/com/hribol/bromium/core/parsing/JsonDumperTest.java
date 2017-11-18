@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by hvrigazov on 03.07.17.
  */
-public class ApplicationConfigurationDumperTest {
+public class JsonDumperTest {
 
     @Test
     public void canDumpApplicationConfiguration() throws IOException {
@@ -43,7 +43,7 @@ public class ApplicationConfigurationDumperTest {
 
         String outputFileName = "tmp.json";
 
-        ApplicationConfigurationDumper applicationConfigurationDumper = new ApplicationConfigurationDumper();
+        JsonDumper applicationConfigurationDumper = new JsonDumper();
         applicationConfigurationDumper.dumpApplicationConfiguration(applicationConfiguration, outputFileName);
         File outputFile = new File(outputFileName);
 

@@ -130,6 +130,7 @@ public class DefaultModule extends AbstractModule {
                 .to(SplitQueryStringOfRequest.class);
 
         bind(ApplicationConfigurationParser.class).to(JsonParser.class);
+        bind(ApplicationConfigurationDumper.class).to(JsonDumper.class);
 
         // TODO: other OSes should have a different binding
         bind(VirtualScreenProcessCreator.class).to(UbuntuVirtualScreenProcessCreator.class);
