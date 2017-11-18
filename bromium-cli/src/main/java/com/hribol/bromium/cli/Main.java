@@ -61,7 +61,6 @@ public class Main {
 
     private static Map<String, Supplier<Command>> getCommands() {
         Map<String, Supplier<Command>> map = new HashMap<>();
-        map.put(INIT, () -> injector.getInstance(InitCommand.class));
         map.put(RECORD, () -> injector.getInstance(RecordCommand.class));
         map.put(REPLAY, () -> injector.getInstance(ReplayCommand.class));
         map.put(UPDATE, () -> injector.getInstance(UpdateCommand.class));

@@ -33,14 +33,6 @@ import static org.powermock.api.mockito.PowerMockito.whenNew;
 })
 public class MainTest {
 
-    @Test
-    public void dispatchesToInitCorrectly() throws Exception {
-        String[] args = {
-          "init"
-        };
-
-        baseTest(args, InitCommand.class);
-    }
 
     @Test
     public void dispatchesToRecordCorrectly() throws Exception {
