@@ -555,16 +555,6 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getClickClassByText_Parameters()
-  {
-    return (EReference)clickClassByTextEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getParameterValue()
   {
     return parameterValueEClass;
@@ -726,7 +716,6 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     textOfElementWithCssSelectorToBeEClass = createEClass(TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TO_BE);
 
     clickClassByTextEClass = createEClass(CLICK_CLASS_BY_TEXT);
-    createEReference(clickClassByTextEClass, CLICK_CLASS_BY_TEXT__PARAMETERS);
 
     parameterValueEClass = createEClass(PARAMETER_VALUE);
     createEAttribute(parameterValueEClass, PARAMETER_VALUE__CONTENT);
@@ -824,7 +813,6 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     initEClass(textOfElementWithCssSelectorToBeEClass, TextOfElementWithCssSelectorToBe.class, "TextOfElementWithCssSelectorToBe", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(clickClassByTextEClass, ClickClassByText.class, "ClickClassByText", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getClickClassByText_Parameters(), this.getParameterValue(), null, "parameters", null, 0, -1, ClickClassByText.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(parameterValueEClass, ParameterValue.class, "ParameterValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getParameterValue_Content(), ecorePackage.getEString(), "content", null, 0, 1, ParameterValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

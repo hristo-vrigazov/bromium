@@ -2645,9 +2645,9 @@ rule__ClickClassByText__Group__8__Impl
 	}
 :
 (
-	{ before(grammarAccess.getClickClassByTextAccess().getParametersAssignment_8()); }
-	(rule__ClickClassByText__ParametersAssignment_8)
-	{ after(grammarAccess.getClickClassByTextAccess().getParametersAssignment_8()); }
+	{ before(grammarAccess.getClickClassByTextAccess().getParameterValuesAssignment_8()); }
+	(rule__ClickClassByText__ParameterValuesAssignment_8)
+	{ after(grammarAccess.getClickClassByTextAccess().getParameterValuesAssignment_8()); }
 )
 ;
 finally {
@@ -3175,15 +3175,15 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClickClassByText__ParametersAssignment_8
+rule__ClickClassByText__ParameterValuesAssignment_8
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getClickClassByTextAccess().getParametersParameterValueParserRuleCall_8_0()); }
+		{ before(grammarAccess.getClickClassByTextAccess().getParameterValuesParameterValueParserRuleCall_8_0()); }
 		ruleParameterValue
-		{ after(grammarAccess.getClickClassByTextAccess().getParametersParameterValueParserRuleCall_8_0()); }
+		{ after(grammarAccess.getClickClassByTextAccess().getParameterValuesParameterValueParserRuleCall_8_0()); }
 	)
 ;
 finally {

@@ -121,7 +121,7 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     ClickClassByText returns ClickClassByText
 	 *
 	 * Constraint:
-	 *     (parameterNames+='class' parameterValues+=ParameterValue parameterNames+='text' parameters+=ParameterValue)
+	 *     (parameterNames+='class' parameterValues+=ParameterValue parameterNames+='text' parameterValues+=ParameterValue)
 	 */
 	protected void sequence_ClickClassByText(ISerializationContext context, ClickClassByText semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

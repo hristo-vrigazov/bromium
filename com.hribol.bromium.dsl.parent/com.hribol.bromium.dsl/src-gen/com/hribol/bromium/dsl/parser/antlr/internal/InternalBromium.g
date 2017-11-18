@@ -1114,17 +1114,17 @@ ruleClickClassByText returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getClickClassByTextAccess().getParametersParameterValueParserRuleCall_8_0());
+					newCompositeNode(grammarAccess.getClickClassByTextAccess().getParameterValuesParameterValueParserRuleCall_8_0());
 				}
-				lv_parameters_8_0=ruleParameterValue
+				lv_parameterValues_8_0=ruleParameterValue
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getClickClassByTextRule());
 					}
 					add(
 						$current,
-						"parameters",
-						lv_parameters_8_0,
+						"parameterValues",
+						lv_parameterValues_8_0,
 						"com.hribol.bromium.dsl.Bromium.ParameterValue");
 					afterParserOrEnumRuleCall();
 				}

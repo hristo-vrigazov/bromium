@@ -594,22 +594,13 @@ public interface BromiumPackage extends EPackage
   int CLICK_CLASS_BY_TEXT__PARAMETER_VALUES = WEB_DRIVER_ACTION__PARAMETER_VALUES;
 
   /**
-   * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CLICK_CLASS_BY_TEXT__PARAMETERS = WEB_DRIVER_ACTION_FEATURE_COUNT + 0;
-
-  /**
    * The number of structural features of the '<em>Click Class By Text</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CLICK_CLASS_BY_TEXT_FEATURE_COUNT = WEB_DRIVER_ACTION_FEATURE_COUNT + 1;
+  int CLICK_CLASS_BY_TEXT_FEATURE_COUNT = WEB_DRIVER_ACTION_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ParameterValueImpl <em>Parameter Value</em>}' class.
@@ -1073,17 +1064,6 @@ public interface BromiumPackage extends EPackage
   EClass getClickClassByText();
 
   /**
-   * Returns the meta object for the containment reference list '{@link com.hribol.bromium.dsl.bromium.ClickClassByText#getParameters <em>Parameters</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Parameters</em>'.
-   * @see com.hribol.bromium.dsl.bromium.ClickClassByText#getParameters()
-   * @see #getClickClassByText()
-   * @generated
-   */
-  EReference getClickClassByText_Parameters();
-
-  /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ParameterValue <em>Parameter Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1493,14 +1473,6 @@ public interface BromiumPackage extends EPackage
      * @generated
      */
     EClass CLICK_CLASS_BY_TEXT = eINSTANCE.getClickClassByText();
-
-    /**
-     * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference CLICK_CLASS_BY_TEXT__PARAMETERS = eINSTANCE.getClickClassByText_Parameters();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ParameterValueImpl <em>Parameter Value</em>}' class.

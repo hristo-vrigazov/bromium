@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.parsing.dsl.convert;
 
+import com.google.inject.Inject;
 import com.hribol.bromium.core.config.ParameterConfiguration;
 import com.hribol.bromium.dsl.bromium.ParameterValue;
 
@@ -14,6 +15,7 @@ public class ParametersConfigurationConverter {
 
     private ParameterConfigurationConverter parameterConfigurationConverter;
 
+    @Inject
     public ParametersConfigurationConverter(ParameterConfigurationConverter parameterConfigurationConverter) {
         this.parameterConfigurationConverter = parameterConfigurationConverter;
     }

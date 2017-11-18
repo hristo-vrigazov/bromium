@@ -613,19 +613,19 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cAndKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		private final Assignment cParameterNamesAssignment_7 = (Assignment)cGroup.eContents().get(7);
 		private final Keyword cParameterNamesTextKeyword_7_0 = (Keyword)cParameterNamesAssignment_7.eContents().get(0);
-		private final Assignment cParametersAssignment_8 = (Assignment)cGroup.eContents().get(8);
-		private final RuleCall cParametersParameterValueParserRuleCall_8_0 = (RuleCall)cParametersAssignment_8.eContents().get(0);
+		private final Assignment cParameterValuesAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cParameterValuesParameterValueParserRuleCall_8_0 = (RuleCall)cParameterValuesAssignment_8.eContents().get(0);
 		
 		//ClickClassByText:
 		//	'click' 'on' 'element' 'with'
 		//	parameterNames+='class'
 		//	parameterValues+=ParameterValue 'and'
 		//	parameterNames+='text'
-		//	parameters+=ParameterValue;
+		//	parameterValues+=ParameterValue;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'click' 'on' 'element' 'with' parameterNames+='class' parameterValues+=ParameterValue 'and' parameterNames+='text'
-		//parameters+=ParameterValue
+		//parameterValues+=ParameterValue
 		public Group getGroup() { return cGroup; }
 		
 		//'click'
@@ -661,11 +661,11 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		//'text'
 		public Keyword getParameterNamesTextKeyword_7_0() { return cParameterNamesTextKeyword_7_0; }
 		
-		//parameters+=ParameterValue
-		public Assignment getParametersAssignment_8() { return cParametersAssignment_8; }
+		//parameterValues+=ParameterValue
+		public Assignment getParameterValuesAssignment_8() { return cParameterValuesAssignment_8; }
 		
 		//ParameterValue
-		public RuleCall getParametersParameterValueParserRuleCall_8_0() { return cParametersParameterValueParserRuleCall_8_0; }
+		public RuleCall getParameterValuesParameterValueParserRuleCall_8_0() { return cParameterValuesParameterValueParserRuleCall_8_0; }
 	}
 	public class ParameterValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.ParameterValue");
@@ -993,7 +993,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	//	parameterNames+='class'
 	//	parameterValues+=ParameterValue 'and'
 	//	parameterNames+='text'
-	//	parameters+=ParameterValue;
+	//	parameterValues+=ParameterValue;
 	public ClickClassByTextElements getClickClassByTextAccess() {
 		return pClickClassByText;
 	}

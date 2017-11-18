@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.parsing;
 
+import com.google.inject.Inject;
 import com.hribol.bromium.common.parsing.dsl.convert.ASTNodeConverter;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.parsing.ApplicationConfigurationParser;
@@ -25,6 +26,7 @@ public class DslParser implements ApplicationConfigurationParser {
     private IResourceValidator validator;
     private ASTNodeConverter<Model, ApplicationConfiguration> ASTNodeConverter;
 
+    @Inject
     public DslParser(ResourceSet resourceSet,
                      IResourceValidator validator,
                      ASTNodeConverter<Model, ApplicationConfiguration> ASTNodeConverter) {

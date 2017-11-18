@@ -481,9 +481,9 @@
             "name": "clickOnListedItem",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "initialCollectorClass": {
+                    "class": {
                         "expose": false,
-                        "parameterName": "initialCollectorClass",
+                        "parameterName": "class",
                         "value": "item"
                     },
                     "text": {

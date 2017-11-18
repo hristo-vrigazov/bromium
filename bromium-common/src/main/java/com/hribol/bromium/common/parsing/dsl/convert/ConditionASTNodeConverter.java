@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.parsing.dsl.convert;
 
+import com.google.inject.Inject;
 import com.hribol.bromium.core.config.ParameterConfiguration;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.dsl.bromium.WebDriverActionCondition;
@@ -13,6 +14,7 @@ public class ConditionASTNodeConverter implements ASTNodeConverter<WebDriverActi
 
     private ParametersConfigurationConverter parametersConfigurationConverter;
 
+    @Inject
     public ConditionASTNodeConverter(ParametersConfigurationConverter parametersConfigurationConverter) {
         this.parametersConfigurationConverter = parametersConfigurationConverter;
     }

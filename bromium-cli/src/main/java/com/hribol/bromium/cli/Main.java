@@ -4,6 +4,8 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.hribol.bromium.cli.commands.*;
 import com.hribol.bromium.dsl.BromiumRuntimeModule;
+import com.hribol.bromium.dsl.BromiumStandaloneSetup;
+import com.hribol.bromium.dsl.BromiumStandaloneSetupGenerated;
 import org.apache.commons.io.IOUtils;
 import org.docopt.Docopt;
 

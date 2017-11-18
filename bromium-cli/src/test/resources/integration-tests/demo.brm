@@ -1,0 +1,95 @@
+name 'Demo app for Bromium vs Selenium'
+version '0.0.1'
+
+actions {
+
+	id clickAjaxDemoButton
+	syntax 'Click Ajax Demo button'
+	click on element with css selector '#ajax-demo'
+	do expect http request
+
+	id clickLinkToAjaxDemoPage
+	syntax 'Click link to Ajax Demo page'
+	click on element with css selector '#ajax-demo-link'
+	do expect http request
+
+	id clickAjaxCreatedButton
+	syntax 'Click Ajax created button'
+	click on element with css selector '#ajax-button'
+	do not expect http request
+
+	id clickDestroyAjaxCreatedButton
+	syntax 'Click destroy ajax created button'
+	click on element with css selector '#destroy-ajax'
+	do not expect http request
+
+	id clickDynamicButton
+	syntax 'Click dynamic button'
+	click on element with css selector '#create-dynamic'
+	do not expect http request
+
+	id clickDynamicallyCreatedButton
+	syntax 'Click dynamically created button'
+	click on element with css selector '#late-creation'
+	do not expect http request
+
+	id clickDeleteDynamicallyCreatedButton
+	syntax 'Click delete dynamically created button'
+	click on element with css selector '#destroy-dynamic'
+	do not expect http request
+
+	id clickRaceDemoButton
+	syntax 'Click on race demo button'
+	click on element with css selector '#race-demo'
+	do not expect http request
+
+	id loadAjaxPage
+	syntax 'Load /ajax.html page'
+	load page 'ajax.html'
+	do expect http request
+
+	id loadIndexPage
+	syntax 'Load /index.html page'
+	load page 'index.html'
+	do expect http request
+
+	id loadPage
+	syntax 'Load' subpage 'url'
+	load page subpage
+	do expect http request
+
+	id typeTextInNameInput
+	syntax 'Type' username 'in name input'
+	type text username in element with css selector '#name-input'
+	do not expect http request
+
+	id clickLikeButton
+	syntax 'Click like button'
+	when element with css selector '#edit-toolbar' is present
+	click on element with css selector '.like'
+	do not expect http request
+
+	id clickEditButton
+	syntax 'Click edit button'
+	click on element with css selector '#edit'
+	do not expect http request
+
+	id clickUploadButton
+	syntax 'Click upload button'
+	click on element with css selector '#upload-button'
+	do not expect http request
+
+	id clickButtonAfterTextChanged
+	syntax 'Click button after text has changed'
+	when element with css selector '#text-elem' has text 'Done'
+	click on element with css selector '#button-to-be-clicked'
+	do expect http request
+	then make sure element with css selector '#success-indicator' is present
+
+
+	id clickOnListedItem
+	syntax 'Click on listed item with text ' itemName
+	click on element with class 'item' and text itemName
+	do expect http request
+
+}

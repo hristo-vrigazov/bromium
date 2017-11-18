@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.parsing.dsl.convert;
 
+import com.google.inject.Inject;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.SyntaxDefinitionConfiguration;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
@@ -21,6 +22,7 @@ public class ApplicationActionASTNodeConverter implements ASTNodeConverter<Appli
     private ASTNodeConverter<WebDriverAction, WebDriverActionConfiguration> actionToActionConverter;
     private ASTNodeConverter<SyntaxDefinition, SyntaxDefinitionConfiguration> syntaxDefinitionConverter;
 
+    @Inject
     public ApplicationActionASTNodeConverter(ASTNodeConverter<WebDriverActionCondition, WebDriverActionConfiguration> conditionToActionConverter,
                                              ASTNodeConverter<WebDriverAction, WebDriverActionConfiguration> actionToActionConverter,
                                              ASTNodeConverter<SyntaxDefinition, SyntaxDefinitionConfiguration> syntaxDefinitionConverter) {

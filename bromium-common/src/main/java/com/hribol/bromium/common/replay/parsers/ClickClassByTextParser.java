@@ -14,7 +14,7 @@ import static com.hribol.bromium.core.utils.Constants.TEXT;
  */
 public class ClickClassByTextParser implements WebDriverActionParameterParser {
 
-    public static final String INITIAL_COLLECTOR_CLASS = "initialCollectorClass";
+    public static final String INITIAL_COLLECTOR_CLASS = "class";
 
     @Override
     public WebDriverAction create(Map<String, String> parameters, boolean expectHttpRequest) {

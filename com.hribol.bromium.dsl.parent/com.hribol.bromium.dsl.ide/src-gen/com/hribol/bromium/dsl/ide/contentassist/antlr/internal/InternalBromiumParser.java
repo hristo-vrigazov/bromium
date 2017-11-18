@@ -7980,31 +7980,31 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ClickClassByText__Group__8__Impl"
-    // InternalBromium.g:2642:1: rule__ClickClassByText__Group__8__Impl : ( ( rule__ClickClassByText__ParametersAssignment_8 ) ) ;
+    // InternalBromium.g:2642:1: rule__ClickClassByText__Group__8__Impl : ( ( rule__ClickClassByText__ParameterValuesAssignment_8 ) ) ;
     public final void rule__ClickClassByText__Group__8__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2646:1: ( ( ( rule__ClickClassByText__ParametersAssignment_8 ) ) )
-            // InternalBromium.g:2647:1: ( ( rule__ClickClassByText__ParametersAssignment_8 ) )
+            // InternalBromium.g:2646:1: ( ( ( rule__ClickClassByText__ParameterValuesAssignment_8 ) ) )
+            // InternalBromium.g:2647:1: ( ( rule__ClickClassByText__ParameterValuesAssignment_8 ) )
             {
-            // InternalBromium.g:2647:1: ( ( rule__ClickClassByText__ParametersAssignment_8 ) )
-            // InternalBromium.g:2648:2: ( rule__ClickClassByText__ParametersAssignment_8 )
+            // InternalBromium.g:2647:1: ( ( rule__ClickClassByText__ParameterValuesAssignment_8 ) )
+            // InternalBromium.g:2648:2: ( rule__ClickClassByText__ParameterValuesAssignment_8 )
             {
-             before(grammarAccess.getClickClassByTextAccess().getParametersAssignment_8()); 
-            // InternalBromium.g:2649:2: ( rule__ClickClassByText__ParametersAssignment_8 )
-            // InternalBromium.g:2649:3: rule__ClickClassByText__ParametersAssignment_8
+             before(grammarAccess.getClickClassByTextAccess().getParameterValuesAssignment_8()); 
+            // InternalBromium.g:2649:2: ( rule__ClickClassByText__ParameterValuesAssignment_8 )
+            // InternalBromium.g:2649:3: rule__ClickClassByText__ParameterValuesAssignment_8
             {
             pushFollow(FOLLOW_2);
-            rule__ClickClassByText__ParametersAssignment_8();
+            rule__ClickClassByText__ParameterValuesAssignment_8();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getClickClassByTextAccess().getParametersAssignment_8()); 
+             after(grammarAccess.getClickClassByTextAccess().getParameterValuesAssignment_8()); 
 
             }
 
@@ -9362,9 +9362,9 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__ClickClassByText__ParameterNamesAssignment_7"
 
 
-    // $ANTLR start "rule__ClickClassByText__ParametersAssignment_8"
-    // InternalBromium.g:3178:1: rule__ClickClassByText__ParametersAssignment_8 : ( ruleParameterValue ) ;
-    public final void rule__ClickClassByText__ParametersAssignment_8() throws RecognitionException {
+    // $ANTLR start "rule__ClickClassByText__ParameterValuesAssignment_8"
+    // InternalBromium.g:3178:1: rule__ClickClassByText__ParameterValuesAssignment_8 : ( ruleParameterValue ) ;
+    public final void rule__ClickClassByText__ParameterValuesAssignment_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -9375,13 +9375,13 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:3183:2: ( ruleParameterValue )
             // InternalBromium.g:3184:3: ruleParameterValue
             {
-             before(grammarAccess.getClickClassByTextAccess().getParametersParameterValueParserRuleCall_8_0()); 
+             before(grammarAccess.getClickClassByTextAccess().getParameterValuesParameterValueParserRuleCall_8_0()); 
             pushFollow(FOLLOW_2);
             ruleParameterValue();
 
             state._fsp--;
 
-             after(grammarAccess.getClickClassByTextAccess().getParametersParameterValueParserRuleCall_8_0()); 
+             after(grammarAccess.getClickClassByTextAccess().getParameterValuesParameterValueParserRuleCall_8_0()); 
 
             }
 
@@ -9400,7 +9400,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ClickClassByText__ParametersAssignment_8"
+    // $ANTLR end "rule__ClickClassByText__ParameterValuesAssignment_8"
 
 
     // $ANTLR start "rule__ParameterValue__ContentAssignment_0"

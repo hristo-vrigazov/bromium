@@ -68,7 +68,7 @@ ClickClassByText:
 	parameterNames+='class' 
 	parameterValues+=ParameterValue 'and' 
 	parameterNames+='text' 
-	parameters+=ParameterValue
+	parameterValues+=ParameterValue
 ;
 
 ParameterValue:
