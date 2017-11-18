@@ -23,7 +23,7 @@ public class RecordClickCssSelectorIT extends BaseRecordIntegrationTest {
     @Override
     protected void verifyAssertions() throws IOException {
         TestScenarioSteps testScenarioSteps = new TestScenarioSteps();
-        testScenarioSteps.add(ImmutableMap.of(EVENT, Events.PAGE_LOAD, ALIAS_URL, Pages.DYNAMIC_DEMO_PAGE));
+        testScenarioSteps.add(ImmutableMap.of(EVENT, Events.PAGE_LOAD, SUBPAGE, Pages.DYNAMIC_DEMO_PAGE));
         testScenarioSteps.add(ImmutableMap.of(EVENT, Events.CLICK_DYNAMIC_BUTTON));
 
         TestScenarioSteps actualSteps = getActualSteps();

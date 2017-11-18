@@ -56,8 +56,8 @@ public class TestUtils {
     public static final String LATE_CREATION_ID = "late-creation";
     public static final String TEXT_FIELD_ID = "name-input";
     public static final String DONE_ID = "done";
-    public static final String ALIAS_URL = "alias-url";
-    public static final String ALIAS_TEXT = "alias-text";
+    public static final String SUBPAGE = "subpage";
+    public static final String USERNAME = "username";
     public static final String ITEM_NAME = "itemName";
     public static final String TARGET = "Target";
 

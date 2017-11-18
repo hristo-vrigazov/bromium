@@ -49,7 +49,7 @@ public class RecordClickClassByTextIT extends BaseRecordIntegrationTest {
         TestScenarioSteps testScenarioSteps = new TestScenarioSteps();
         testScenarioSteps.add(ImmutableMap.of(
                 EVENT, TestUtils.Events.PAGE_LOAD,
-                ALIAS_URL, TestUtils.Pages.CLICK_CLASS_BY_TEXT_DEMO_PAGE));
+                SUBPAGE, TestUtils.Pages.CLICK_CLASS_BY_TEXT_DEMO_PAGE));
 
         testScenarioSteps.add(ImmutableMap.of(
                 EVENT, TestUtils.Events.CLICK_ON_LISTED_ITEM,

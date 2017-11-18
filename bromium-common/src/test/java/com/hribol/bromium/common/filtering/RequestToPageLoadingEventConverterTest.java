@@ -16,6 +16,7 @@ import java.util.*;
 
 import static com.hribol.bromium.core.ConventionConstants.LINK_INTERCEPTOR_MARKER;
 import static com.hribol.bromium.core.utils.Constants.EVENT;
+import static com.hribol.bromium.core.utils.Constants.PAGE;
 import static com.hribol.bromium.core.utils.Constants.URL;
 import static com.hribol.bromium.core.utils.WebDriverActions.PAGE_LOADING;
 import static org.junit.Assert.assertEquals;
@@ -146,7 +147,7 @@ public class RequestToPageLoadingEventConverterTest {
 
         ApplicationActionConfiguration applicationActionConfiguration = mock(ApplicationActionConfiguration.class, RETURNS_DEEP_STUBS);
         when(applicationActionConfiguration.getName()).thenReturn(EXAMPLE_EVENT_NAME);
-        when(applicationActionConfiguration.getWebDriverAction().getParametersConfiguration().get(URL)).thenReturn(parameterConfiguration);
+        when(applicationActionConfiguration.getWebDriverAction().getParametersConfiguration().get(PAGE)).thenReturn(parameterConfiguration);
 
         List<ApplicationActionConfiguration> applicationActionConfigurations = Arrays.asList(applicationActionConfiguration);
         ActionsFilter actionsFilter = mock(ActionsFilter.class);
