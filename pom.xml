@@ -59,6 +59,12 @@
         <jacoco.version>0.7.9</jacoco.version>
         <guice.version>4.1.0</guice.version>
         <docopt.version>0.6.0.20150202</docopt.version>
+        <commons.io.version>2.4</commons.io.version>
+        <slf4j.version>1.7.21</slf4j.version>
+        <ecore.version>2.10.0</ecore.version>
+        <xtext.version>2.12.0</xtext.version>
+        <hamcrest.core.version>1.3</hamcrest.core.version>
+        <bean.tester.version>1.4.4</bean.tester.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -263,7 +269,7 @@
             <dependency>
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-core</artifactId>
-                <version>1.3</version>
+                <version>${hamcrest.core.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -294,18 +300,18 @@
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>2.4</version>
+                <version>${commons.io.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-nop -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-nop</artifactId>
-                <version>1.7.21</version>
+                <version>${slf4j.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.emf</groupId>
                 <artifactId>org.eclipse.emf.ecore</artifactId>
-                <version>2.12.0</version>
+                <version>${ecore.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.hribol.bromium.dsl</groupId>
@@ -316,14 +322,14 @@
             <dependency>
                 <groupId>org.eclipse.xtext</groupId>
                 <artifactId>org.eclipse.xtext</artifactId>
-                <version>2.12.0</version>
+                <version>${xtext.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.github.hazendaz/javabean-tester -->
             <dependency>
                 <groupId>com.github.hazendaz</groupId>
                 <artifactId>javabean-tester</artifactId>
                 <scope>test</scope>
-                <version>1.4.4</version>
+                <version>${bean.tester.version}</version>
             </dependency>
 
 
