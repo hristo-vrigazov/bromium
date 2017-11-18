@@ -159,22 +159,22 @@ public interface BromiumPackage extends EPackage
   int APPLICATION_ACTION__WEB_DRIVER_ACTION = 3;
 
   /**
-   * The feature id for the '<em><b>Postcondition</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int APPLICATION_ACTION__POSTCONDITION = 4;
-
-  /**
    * The feature id for the '<em><b>Expect Http Request</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int APPLICATION_ACTION__EXPECT_HTTP_REQUEST = 5;
+  int APPLICATION_ACTION__EXPECT_HTTP_REQUEST = 4;
+
+  /**
+   * The feature id for the '<em><b>Postcondition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int APPLICATION_ACTION__POSTCONDITION = 5;
 
   /**
    * The number of structural features of the '<em>Application Action</em>' class.
@@ -832,17 +832,6 @@ public interface BromiumPackage extends EPackage
   EReference getApplicationAction_WebDriverAction();
 
   /**
-   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getPostcondition <em>Postcondition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Postcondition</em>'.
-   * @see com.hribol.bromium.dsl.bromium.ApplicationAction#getPostcondition()
-   * @see #getApplicationAction()
-   * @generated
-   */
-  EReference getApplicationAction_Postcondition();
-
-  /**
    * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getExpectHttpRequest <em>Expect Http Request</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -852,6 +841,17 @@ public interface BromiumPackage extends EPackage
    * @generated
    */
   EReference getApplicationAction_ExpectHttpRequest();
+
+  /**
+   * Returns the meta object for the containment reference '{@link com.hribol.bromium.dsl.bromium.ApplicationAction#getPostcondition <em>Postcondition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Postcondition</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ApplicationAction#getPostcondition()
+   * @see #getApplicationAction()
+   * @generated
+   */
+  EReference getApplicationAction_Postcondition();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.SyntaxDefinition <em>Syntax Definition</em>}'.
@@ -1287,20 +1287,20 @@ public interface BromiumPackage extends EPackage
     EReference APPLICATION_ACTION__WEB_DRIVER_ACTION = eINSTANCE.getApplicationAction_WebDriverAction();
 
     /**
-     * The meta object literal for the '<em><b>Postcondition</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference APPLICATION_ACTION__POSTCONDITION = eINSTANCE.getApplicationAction_Postcondition();
-
-    /**
      * The meta object literal for the '<em><b>Expect Http Request</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference APPLICATION_ACTION__EXPECT_HTTP_REQUEST = eINSTANCE.getApplicationAction_ExpectHttpRequest();
+
+    /**
+     * The meta object literal for the '<em><b>Postcondition</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference APPLICATION_ACTION__POSTCONDITION = eINSTANCE.getApplicationAction_Postcondition();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.SyntaxDefinitionImpl <em>Syntax Definition</em>}' class.

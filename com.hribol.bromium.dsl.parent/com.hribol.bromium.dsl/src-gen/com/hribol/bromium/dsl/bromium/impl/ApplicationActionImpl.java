@@ -33,15 +33,15 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
- * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getName <em>Name</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getSyntaxDefinitions <em>Syntax Definitions</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getPrecondition <em>Precondition</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getWebDriverAction <em>Web Driver Action</em>}</li>
- *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getPostcondition <em>Postcondition</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getExpectHttpRequest <em>Expect Http Request</em>}</li>
+ *   <li>{@link com.hribol.bromium.dsl.bromium.impl.ApplicationActionImpl#getPostcondition <em>Postcondition</em>}</li>
  * </ul>
+ * </p>
  *
  * @generated
  */
@@ -98,16 +98,6 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
   protected WebDriverAction webDriverAction;
 
   /**
-   * The cached value of the '{@link #getPostcondition() <em>Postcondition</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getPostcondition()
-   * @generated
-   * @ordered
-   */
-  protected Postcondition postcondition;
-
-  /**
    * The cached value of the '{@link #getExpectHttpRequest() <em>Expect Http Request</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -116,6 +106,16 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
    * @ordered
    */
   protected ExpectHttpRequest expectHttpRequest;
+
+  /**
+   * The cached value of the '{@link #getPostcondition() <em>Postcondition</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPostcondition()
+   * @generated
+   * @ordered
+   */
+  protected Postcondition postcondition;
 
   /**
    * <!-- begin-user-doc -->
@@ -276,54 +276,6 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public Postcondition getPostcondition()
-  {
-    return postcondition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetPostcondition(Postcondition newPostcondition, NotificationChain msgs)
-  {
-    Postcondition oldPostcondition = postcondition;
-    postcondition = newPostcondition;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BromiumPackage.APPLICATION_ACTION__POSTCONDITION, oldPostcondition, newPostcondition);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setPostcondition(Postcondition newPostcondition)
-  {
-    if (newPostcondition != postcondition)
-    {
-      NotificationChain msgs = null;
-      if (postcondition != null)
-        msgs = ((InternalEObject)postcondition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.APPLICATION_ACTION__POSTCONDITION, null, msgs);
-      if (newPostcondition != null)
-        msgs = ((InternalEObject)newPostcondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.APPLICATION_ACTION__POSTCONDITION, null, msgs);
-      msgs = basicSetPostcondition(newPostcondition, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.APPLICATION_ACTION__POSTCONDITION, newPostcondition, newPostcondition));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public ExpectHttpRequest getExpectHttpRequest()
   {
     return expectHttpRequest;
@@ -372,6 +324,54 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  public Postcondition getPostcondition()
+  {
+    return postcondition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetPostcondition(Postcondition newPostcondition, NotificationChain msgs)
+  {
+    Postcondition oldPostcondition = postcondition;
+    postcondition = newPostcondition;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BromiumPackage.APPLICATION_ACTION__POSTCONDITION, oldPostcondition, newPostcondition);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setPostcondition(Postcondition newPostcondition)
+  {
+    if (newPostcondition != postcondition)
+    {
+      NotificationChain msgs = null;
+      if (postcondition != null)
+        msgs = ((InternalEObject)postcondition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.APPLICATION_ACTION__POSTCONDITION, null, msgs);
+      if (newPostcondition != null)
+        msgs = ((InternalEObject)newPostcondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BromiumPackage.APPLICATION_ACTION__POSTCONDITION, null, msgs);
+      msgs = basicSetPostcondition(newPostcondition, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, BromiumPackage.APPLICATION_ACTION__POSTCONDITION, newPostcondition, newPostcondition));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -383,10 +383,10 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
         return basicSetPrecondition(null, msgs);
       case BromiumPackage.APPLICATION_ACTION__WEB_DRIVER_ACTION:
         return basicSetWebDriverAction(null, msgs);
-      case BromiumPackage.APPLICATION_ACTION__POSTCONDITION:
-        return basicSetPostcondition(null, msgs);
       case BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST:
         return basicSetExpectHttpRequest(null, msgs);
+      case BromiumPackage.APPLICATION_ACTION__POSTCONDITION:
+        return basicSetPostcondition(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -409,10 +409,10 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
         return getPrecondition();
       case BromiumPackage.APPLICATION_ACTION__WEB_DRIVER_ACTION:
         return getWebDriverAction();
-      case BromiumPackage.APPLICATION_ACTION__POSTCONDITION:
-        return getPostcondition();
       case BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST:
         return getExpectHttpRequest();
+      case BromiumPackage.APPLICATION_ACTION__POSTCONDITION:
+        return getPostcondition();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -441,11 +441,11 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
       case BromiumPackage.APPLICATION_ACTION__WEB_DRIVER_ACTION:
         setWebDriverAction((WebDriverAction)newValue);
         return;
-      case BromiumPackage.APPLICATION_ACTION__POSTCONDITION:
-        setPostcondition((Postcondition)newValue);
-        return;
       case BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST:
         setExpectHttpRequest((ExpectHttpRequest)newValue);
+        return;
+      case BromiumPackage.APPLICATION_ACTION__POSTCONDITION:
+        setPostcondition((Postcondition)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -473,11 +473,11 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
       case BromiumPackage.APPLICATION_ACTION__WEB_DRIVER_ACTION:
         setWebDriverAction((WebDriverAction)null);
         return;
-      case BromiumPackage.APPLICATION_ACTION__POSTCONDITION:
-        setPostcondition((Postcondition)null);
-        return;
       case BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST:
         setExpectHttpRequest((ExpectHttpRequest)null);
+        return;
+      case BromiumPackage.APPLICATION_ACTION__POSTCONDITION:
+        setPostcondition((Postcondition)null);
         return;
     }
     super.eUnset(featureID);
@@ -501,10 +501,10 @@ public class ApplicationActionImpl extends MinimalEObjectImpl.Container implemen
         return precondition != null;
       case BromiumPackage.APPLICATION_ACTION__WEB_DRIVER_ACTION:
         return webDriverAction != null;
-      case BromiumPackage.APPLICATION_ACTION__POSTCONDITION:
-        return postcondition != null;
       case BromiumPackage.APPLICATION_ACTION__EXPECT_HTTP_REQUEST:
         return expectHttpRequest != null;
+      case BromiumPackage.APPLICATION_ACTION__POSTCONDITION:
+        return postcondition != null;
     }
     return super.eIsSet(featureID);
   }

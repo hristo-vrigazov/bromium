@@ -106,8 +106,8 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *         syntaxDefinitions+=SyntaxDefinition* 
 	 *         precondition=Precondition? 
 	 *         webDriverAction=WebDriverAction 
-	 *         postcondition=Postcondition? 
-	 *         expectHttpRequest=ExpectHttpRequest
+	 *         expectHttpRequest=ExpectHttpRequest 
+	 *         postcondition=Postcondition?
 	 *     )
 	 */
 	protected void sequence_ApplicationAction(ISerializationContext context, ApplicationAction semanticObject) {

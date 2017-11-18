@@ -12,10 +12,10 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
- * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ClickClassByText#getParameters <em>Parameters</em>}</li>
  * </ul>
+ * </p>
  *
  * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getClickClassByText()
  * @model

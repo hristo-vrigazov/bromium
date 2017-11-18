@@ -16,8 +16,8 @@ ApplicationAction:
 	'syntax' syntaxDefinitions+=SyntaxDefinition*
 	(precondition=Precondition)?
 	webDriverAction=WebDriverAction
-	(postcondition=Postcondition)?
 	expectHttpRequest=ExpectHttpRequest
+	(postcondition=Postcondition)?
 ;
 
 SyntaxDefinition:

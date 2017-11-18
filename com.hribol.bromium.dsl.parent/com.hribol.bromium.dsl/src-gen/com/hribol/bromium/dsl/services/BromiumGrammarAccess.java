@@ -112,22 +112,22 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cPreconditionPreconditionParserRuleCall_4_0 = (RuleCall)cPreconditionAssignment_4.eContents().get(0);
 		private final Assignment cWebDriverActionAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cWebDriverActionWebDriverActionParserRuleCall_5_0 = (RuleCall)cWebDriverActionAssignment_5.eContents().get(0);
-		private final Assignment cPostconditionAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cPostconditionPostconditionParserRuleCall_6_0 = (RuleCall)cPostconditionAssignment_6.eContents().get(0);
-		private final Assignment cExpectHttpRequestAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cExpectHttpRequestExpectHttpRequestParserRuleCall_7_0 = (RuleCall)cExpectHttpRequestAssignment_7.eContents().get(0);
+		private final Assignment cExpectHttpRequestAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cExpectHttpRequestExpectHttpRequestParserRuleCall_6_0 = (RuleCall)cExpectHttpRequestAssignment_6.eContents().get(0);
+		private final Assignment cPostconditionAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cPostconditionPostconditionParserRuleCall_7_0 = (RuleCall)cPostconditionAssignment_7.eContents().get(0);
 		
 		//ApplicationAction:
 		//	'id' name=ID
 		//	'syntax' syntaxDefinitions+=SyntaxDefinition*
 		//	precondition=Precondition?
 		//	webDriverAction=WebDriverAction
-		//	postcondition=Postcondition?
-		//	expectHttpRequest=ExpectHttpRequest;
+		//	expectHttpRequest=ExpectHttpRequest
+		//	postcondition=Postcondition?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'id' name=ID 'syntax' syntaxDefinitions+=SyntaxDefinition* precondition=Precondition? webDriverAction=WebDriverAction
-		//postcondition=Postcondition? expectHttpRequest=ExpectHttpRequest
+		//expectHttpRequest=ExpectHttpRequest postcondition=Postcondition?
 		public Group getGroup() { return cGroup; }
 		
 		//'id'
@@ -160,17 +160,17 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		//WebDriverAction
 		public RuleCall getWebDriverActionWebDriverActionParserRuleCall_5_0() { return cWebDriverActionWebDriverActionParserRuleCall_5_0; }
 		
-		//postcondition=Postcondition?
-		public Assignment getPostconditionAssignment_6() { return cPostconditionAssignment_6; }
-		
-		//Postcondition
-		public RuleCall getPostconditionPostconditionParserRuleCall_6_0() { return cPostconditionPostconditionParserRuleCall_6_0; }
-		
 		//expectHttpRequest=ExpectHttpRequest
-		public Assignment getExpectHttpRequestAssignment_7() { return cExpectHttpRequestAssignment_7; }
+		public Assignment getExpectHttpRequestAssignment_6() { return cExpectHttpRequestAssignment_6; }
 		
 		//ExpectHttpRequest
-		public RuleCall getExpectHttpRequestExpectHttpRequestParserRuleCall_7_0() { return cExpectHttpRequestExpectHttpRequestParserRuleCall_7_0; }
+		public RuleCall getExpectHttpRequestExpectHttpRequestParserRuleCall_6_0() { return cExpectHttpRequestExpectHttpRequestParserRuleCall_6_0; }
+		
+		//postcondition=Postcondition?
+		public Assignment getPostconditionAssignment_7() { return cPostconditionAssignment_7; }
+		
+		//Postcondition
+		public RuleCall getPostconditionPostconditionParserRuleCall_7_0() { return cPostconditionPostconditionParserRuleCall_7_0; }
 	}
 	public class SyntaxDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.SyntaxDefinition");
@@ -864,8 +864,8 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	//	'syntax' syntaxDefinitions+=SyntaxDefinition*
 	//	precondition=Precondition?
 	//	webDriverAction=WebDriverAction
-	//	postcondition=Postcondition?
-	//	expectHttpRequest=ExpectHttpRequest;
+	//	expectHttpRequest=ExpectHttpRequest
+	//	postcondition=Postcondition?;
 	public ApplicationActionElements getApplicationActionAccess() {
 		return pApplicationAction;
 	}

@@ -325,7 +325,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getApplicationAction_Postcondition()
+  public EReference getApplicationAction_ExpectHttpRequest()
   {
     return (EReference)applicationActionEClass.getEStructuralFeatures().get(4);
   }
@@ -335,7 +335,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getApplicationAction_ExpectHttpRequest()
+  public EReference getApplicationAction_Postcondition()
   {
     return (EReference)applicationActionEClass.getEStructuralFeatures().get(5);
   }
@@ -691,8 +691,8 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     createEReference(applicationActionEClass, APPLICATION_ACTION__SYNTAX_DEFINITIONS);
     createEReference(applicationActionEClass, APPLICATION_ACTION__PRECONDITION);
     createEReference(applicationActionEClass, APPLICATION_ACTION__WEB_DRIVER_ACTION);
-    createEReference(applicationActionEClass, APPLICATION_ACTION__POSTCONDITION);
     createEReference(applicationActionEClass, APPLICATION_ACTION__EXPECT_HTTP_REQUEST);
+    createEReference(applicationActionEClass, APPLICATION_ACTION__POSTCONDITION);
 
     syntaxDefinitionEClass = createEClass(SYNTAX_DEFINITION);
     createEAttribute(syntaxDefinitionEClass, SYNTAX_DEFINITION__CONTENT);
@@ -789,8 +789,8 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     initEReference(getApplicationAction_SyntaxDefinitions(), this.getSyntaxDefinition(), null, "syntaxDefinitions", null, 0, -1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getApplicationAction_Precondition(), this.getPrecondition(), null, "precondition", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getApplicationAction_WebDriverAction(), this.getWebDriverAction(), null, "webDriverAction", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getApplicationAction_Postcondition(), this.getPostcondition(), null, "postcondition", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getApplicationAction_ExpectHttpRequest(), this.getExpectHttpRequest(), null, "expectHttpRequest", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getApplicationAction_Postcondition(), this.getPostcondition(), null, "postcondition", null, 0, 1, ApplicationAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(syntaxDefinitionEClass, SyntaxDefinition.class, "SyntaxDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSyntaxDefinition_Content(), ecorePackage.getEString(), "content", null, 0, 1, SyntaxDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

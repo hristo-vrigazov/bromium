@@ -281,28 +281,9 @@ ruleApplicationAction returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getApplicationActionAccess().getPostconditionPostconditionParserRuleCall_6_0());
+					newCompositeNode(grammarAccess.getApplicationActionAccess().getExpectHttpRequestExpectHttpRequestParserRuleCall_6_0());
 				}
-				lv_postcondition_6_0=rulePostcondition
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getApplicationActionRule());
-					}
-					set(
-						$current,
-						"postcondition",
-						lv_postcondition_6_0,
-						"com.hribol.bromium.dsl.Bromium.Postcondition");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)?
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getApplicationActionAccess().getExpectHttpRequestExpectHttpRequestParserRuleCall_7_0());
-				}
-				lv_expectHttpRequest_7_0=ruleExpectHttpRequest
+				lv_expectHttpRequest_6_0=ruleExpectHttpRequest
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getApplicationActionRule());
@@ -310,12 +291,31 @@ ruleApplicationAction returns [EObject current=null]
 					set(
 						$current,
 						"expectHttpRequest",
-						lv_expectHttpRequest_7_0,
+						lv_expectHttpRequest_6_0,
 						"com.hribol.bromium.dsl.Bromium.ExpectHttpRequest");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getApplicationActionAccess().getPostconditionPostconditionParserRuleCall_7_0());
+				}
+				lv_postcondition_7_0=rulePostcondition
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getApplicationActionRule());
+					}
+					set(
+						$current,
+						"postcondition",
+						lv_postcondition_7_0,
+						"com.hribol.bromium.dsl.Bromium.Postcondition");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
 	)
 ;
 

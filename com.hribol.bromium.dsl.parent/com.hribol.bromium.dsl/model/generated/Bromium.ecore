@@ -16,9 +16,9 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="webDriverAction" eType="#//WebDriverAction"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="postcondition" eType="#//Postcondition"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expectHttpRequest" eType="#//ExpectHttpRequest"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="postcondition" eType="#//Postcondition"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SyntaxDefinition">

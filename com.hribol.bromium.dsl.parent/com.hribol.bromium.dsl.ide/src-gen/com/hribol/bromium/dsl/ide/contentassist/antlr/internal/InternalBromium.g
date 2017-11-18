@@ -1026,9 +1026,9 @@ rule__ApplicationAction__Group__6__Impl
 	}
 :
 (
-	{ before(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_6()); }
-	(rule__ApplicationAction__PostconditionAssignment_6)?
-	{ after(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_6()); }
+	{ before(grammarAccess.getApplicationActionAccess().getExpectHttpRequestAssignment_6()); }
+	(rule__ApplicationAction__ExpectHttpRequestAssignment_6)
+	{ after(grammarAccess.getApplicationActionAccess().getExpectHttpRequestAssignment_6()); }
 )
 ;
 finally {
@@ -1052,9 +1052,9 @@ rule__ApplicationAction__Group__7__Impl
 	}
 :
 (
-	{ before(grammarAccess.getApplicationActionAccess().getExpectHttpRequestAssignment_7()); }
-	(rule__ApplicationAction__ExpectHttpRequestAssignment_7)
-	{ after(grammarAccess.getApplicationActionAccess().getExpectHttpRequestAssignment_7()); }
+	{ before(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_7()); }
+	(rule__ApplicationAction__PostconditionAssignment_7)?
+	{ after(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_7()); }
 )
 ;
 finally {
@@ -2775,30 +2775,30 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__PostconditionAssignment_6
+rule__ApplicationAction__ExpectHttpRequestAssignment_6
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getApplicationActionAccess().getPostconditionPostconditionParserRuleCall_6_0()); }
-		rulePostcondition
-		{ after(grammarAccess.getApplicationActionAccess().getPostconditionPostconditionParserRuleCall_6_0()); }
+		{ before(grammarAccess.getApplicationActionAccess().getExpectHttpRequestExpectHttpRequestParserRuleCall_6_0()); }
+		ruleExpectHttpRequest
+		{ after(grammarAccess.getApplicationActionAccess().getExpectHttpRequestExpectHttpRequestParserRuleCall_6_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ApplicationAction__ExpectHttpRequestAssignment_7
+rule__ApplicationAction__PostconditionAssignment_7
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getApplicationActionAccess().getExpectHttpRequestExpectHttpRequestParserRuleCall_7_0()); }
-		ruleExpectHttpRequest
-		{ after(grammarAccess.getApplicationActionAccess().getExpectHttpRequestExpectHttpRequestParserRuleCall_7_0()); }
+		{ before(grammarAccess.getApplicationActionAccess().getPostconditionPostconditionParserRuleCall_7_0()); }
+		rulePostcondition
+		{ after(grammarAccess.getApplicationActionAccess().getPostconditionPostconditionParserRuleCall_7_0()); }
 	)
 ;
 finally {

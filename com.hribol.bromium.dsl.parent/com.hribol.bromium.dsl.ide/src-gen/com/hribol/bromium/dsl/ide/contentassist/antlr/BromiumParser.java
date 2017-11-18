@@ -57,8 +57,8 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getApplicationActionAccess().getSyntaxDefinitionsAssignment_3(), "rule__ApplicationAction__SyntaxDefinitionsAssignment_3");
 					put(grammarAccess.getApplicationActionAccess().getPreconditionAssignment_4(), "rule__ApplicationAction__PreconditionAssignment_4");
 					put(grammarAccess.getApplicationActionAccess().getWebDriverActionAssignment_5(), "rule__ApplicationAction__WebDriverActionAssignment_5");
-					put(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_6(), "rule__ApplicationAction__PostconditionAssignment_6");
-					put(grammarAccess.getApplicationActionAccess().getExpectHttpRequestAssignment_7(), "rule__ApplicationAction__ExpectHttpRequestAssignment_7");
+					put(grammarAccess.getApplicationActionAccess().getExpectHttpRequestAssignment_6(), "rule__ApplicationAction__ExpectHttpRequestAssignment_6");
+					put(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_7(), "rule__ApplicationAction__PostconditionAssignment_7");
 					put(grammarAccess.getSyntaxDefinitionAccess().getContentAssignment_1(), "rule__SyntaxDefinition__ContentAssignment_1");
 					put(grammarAccess.getSyntaxDefinitionAccess().getParameterAssignment_2(), "rule__SyntaxDefinition__ParameterAssignment_2");
 					put(grammarAccess.getPreconditionAccess().getActionAssignment_1(), "rule__Precondition__ActionAssignment_1");

@@ -3228,7 +3228,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1015:1: ( rule__ApplicationAction__Group__6__Impl rule__ApplicationAction__Group__7 )
             // InternalBromium.g:1016:2: rule__ApplicationAction__Group__6__Impl rule__ApplicationAction__Group__7
             {
-            pushFollow(FOLLOW_13);
+            pushFollow(FOLLOW_14);
             rule__ApplicationAction__Group__6__Impl();
 
             state._fsp--;
@@ -3257,42 +3257,31 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ApplicationAction__Group__6__Impl"
-    // InternalBromium.g:1023:1: rule__ApplicationAction__Group__6__Impl : ( ( rule__ApplicationAction__PostconditionAssignment_6 )? ) ;
+    // InternalBromium.g:1023:1: rule__ApplicationAction__Group__6__Impl : ( ( rule__ApplicationAction__ExpectHttpRequestAssignment_6 ) ) ;
     public final void rule__ApplicationAction__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1027:1: ( ( ( rule__ApplicationAction__PostconditionAssignment_6 )? ) )
-            // InternalBromium.g:1028:1: ( ( rule__ApplicationAction__PostconditionAssignment_6 )? )
+            // InternalBromium.g:1027:1: ( ( ( rule__ApplicationAction__ExpectHttpRequestAssignment_6 ) ) )
+            // InternalBromium.g:1028:1: ( ( rule__ApplicationAction__ExpectHttpRequestAssignment_6 ) )
             {
-            // InternalBromium.g:1028:1: ( ( rule__ApplicationAction__PostconditionAssignment_6 )? )
-            // InternalBromium.g:1029:2: ( rule__ApplicationAction__PostconditionAssignment_6 )?
+            // InternalBromium.g:1028:1: ( ( rule__ApplicationAction__ExpectHttpRequestAssignment_6 ) )
+            // InternalBromium.g:1029:2: ( rule__ApplicationAction__ExpectHttpRequestAssignment_6 )
             {
-             before(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_6()); 
-            // InternalBromium.g:1030:2: ( rule__ApplicationAction__PostconditionAssignment_6 )?
-            int alt8=2;
-            int LA8_0 = input.LA(1);
+             before(grammarAccess.getApplicationActionAccess().getExpectHttpRequestAssignment_6()); 
+            // InternalBromium.g:1030:2: ( rule__ApplicationAction__ExpectHttpRequestAssignment_6 )
+            // InternalBromium.g:1030:3: rule__ApplicationAction__ExpectHttpRequestAssignment_6
+            {
+            pushFollow(FOLLOW_2);
+            rule__ApplicationAction__ExpectHttpRequestAssignment_6();
 
-            if ( (LA8_0==20) ) {
-                alt8=1;
-            }
-            switch (alt8) {
-                case 1 :
-                    // InternalBromium.g:1030:3: rule__ApplicationAction__PostconditionAssignment_6
-                    {
-                    pushFollow(FOLLOW_2);
-                    rule__ApplicationAction__PostconditionAssignment_6();
+            state._fsp--;
 
-                    state._fsp--;
-
-
-                    }
-                    break;
 
             }
 
-             after(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_6()); 
+             after(grammarAccess.getApplicationActionAccess().getExpectHttpRequestAssignment_6()); 
 
             }
 
@@ -3348,31 +3337,42 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ApplicationAction__Group__7__Impl"
-    // InternalBromium.g:1049:1: rule__ApplicationAction__Group__7__Impl : ( ( rule__ApplicationAction__ExpectHttpRequestAssignment_7 ) ) ;
+    // InternalBromium.g:1049:1: rule__ApplicationAction__Group__7__Impl : ( ( rule__ApplicationAction__PostconditionAssignment_7 )? ) ;
     public final void rule__ApplicationAction__Group__7__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:1053:1: ( ( ( rule__ApplicationAction__ExpectHttpRequestAssignment_7 ) ) )
-            // InternalBromium.g:1054:1: ( ( rule__ApplicationAction__ExpectHttpRequestAssignment_7 ) )
+            // InternalBromium.g:1053:1: ( ( ( rule__ApplicationAction__PostconditionAssignment_7 )? ) )
+            // InternalBromium.g:1054:1: ( ( rule__ApplicationAction__PostconditionAssignment_7 )? )
             {
-            // InternalBromium.g:1054:1: ( ( rule__ApplicationAction__ExpectHttpRequestAssignment_7 ) )
-            // InternalBromium.g:1055:2: ( rule__ApplicationAction__ExpectHttpRequestAssignment_7 )
+            // InternalBromium.g:1054:1: ( ( rule__ApplicationAction__PostconditionAssignment_7 )? )
+            // InternalBromium.g:1055:2: ( rule__ApplicationAction__PostconditionAssignment_7 )?
             {
-             before(grammarAccess.getApplicationActionAccess().getExpectHttpRequestAssignment_7()); 
-            // InternalBromium.g:1056:2: ( rule__ApplicationAction__ExpectHttpRequestAssignment_7 )
-            // InternalBromium.g:1056:3: rule__ApplicationAction__ExpectHttpRequestAssignment_7
-            {
-            pushFollow(FOLLOW_2);
-            rule__ApplicationAction__ExpectHttpRequestAssignment_7();
+             before(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_7()); 
+            // InternalBromium.g:1056:2: ( rule__ApplicationAction__PostconditionAssignment_7 )?
+            int alt8=2;
+            int LA8_0 = input.LA(1);
 
-            state._fsp--;
+            if ( (LA8_0==20) ) {
+                alt8=1;
+            }
+            switch (alt8) {
+                case 1 :
+                    // InternalBromium.g:1056:3: rule__ApplicationAction__PostconditionAssignment_7
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__ApplicationAction__PostconditionAssignment_7();
 
+                    state._fsp--;
+
+
+                    }
+                    break;
 
             }
 
-             after(grammarAccess.getApplicationActionAccess().getExpectHttpRequestAssignment_7()); 
+             after(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_7()); 
 
             }
 
@@ -3655,7 +3655,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1150:1: ( rule__Precondition__Group__0__Impl rule__Precondition__Group__1 )
             // InternalBromium.g:1151:2: rule__Precondition__Group__0__Impl rule__Precondition__Group__1
             {
-            pushFollow(FOLLOW_14);
+            pushFollow(FOLLOW_15);
             rule__Precondition__Group__0__Impl();
 
             state._fsp--;
@@ -3810,7 +3810,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1204:1: ( rule__Postcondition__Group__0__Impl rule__Postcondition__Group__1 )
             // InternalBromium.g:1205:2: rule__Postcondition__Group__0__Impl rule__Postcondition__Group__1
             {
-            pushFollow(FOLLOW_15);
+            pushFollow(FOLLOW_16);
             rule__Postcondition__Group__0__Impl();
 
             state._fsp--;
@@ -3885,7 +3885,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1231:1: ( rule__Postcondition__Group__1__Impl rule__Postcondition__Group__2 )
             // InternalBromium.g:1232:2: rule__Postcondition__Group__1__Impl rule__Postcondition__Group__2
             {
-            pushFollow(FOLLOW_16);
+            pushFollow(FOLLOW_17);
             rule__Postcondition__Group__1__Impl();
 
             state._fsp--;
@@ -3960,7 +3960,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1258:1: ( rule__Postcondition__Group__2__Impl rule__Postcondition__Group__3 )
             // InternalBromium.g:1259:2: rule__Postcondition__Group__2__Impl rule__Postcondition__Group__3
             {
-            pushFollow(FOLLOW_14);
+            pushFollow(FOLLOW_15);
             rule__Postcondition__Group__2__Impl();
 
             state._fsp--;
@@ -4270,7 +4270,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1366:1: ( rule__ExpectHttpRequest__Group_1__0__Impl rule__ExpectHttpRequest__Group_1__1 )
             // InternalBromium.g:1367:2: rule__ExpectHttpRequest__Group_1__0__Impl rule__ExpectHttpRequest__Group_1__1
             {
-            pushFollow(FOLLOW_17);
+            pushFollow(FOLLOW_18);
             rule__ExpectHttpRequest__Group_1__0__Impl();
 
             state._fsp--;
@@ -4345,7 +4345,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1393:1: ( rule__ExpectHttpRequest__Group_1__1__Impl rule__ExpectHttpRequest__Group_1__2 )
             // InternalBromium.g:1394:2: rule__ExpectHttpRequest__Group_1__1__Impl rule__ExpectHttpRequest__Group_1__2
             {
-            pushFollow(FOLLOW_17);
+            pushFollow(FOLLOW_18);
             rule__ExpectHttpRequest__Group_1__1__Impl();
 
             state._fsp--;
@@ -4441,7 +4441,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1420:1: ( rule__ExpectHttpRequest__Group_1__2__Impl rule__ExpectHttpRequest__Group_1__3 )
             // InternalBromium.g:1421:2: rule__ExpectHttpRequest__Group_1__2__Impl rule__ExpectHttpRequest__Group_1__3
             {
-            pushFollow(FOLLOW_18);
+            pushFollow(FOLLOW_19);
             rule__ExpectHttpRequest__Group_1__2__Impl();
 
             state._fsp--;
@@ -4516,7 +4516,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1447:1: ( rule__ExpectHttpRequest__Group_1__3__Impl rule__ExpectHttpRequest__Group_1__4 )
             // InternalBromium.g:1448:2: rule__ExpectHttpRequest__Group_1__3__Impl rule__ExpectHttpRequest__Group_1__4
             {
-            pushFollow(FOLLOW_19);
+            pushFollow(FOLLOW_20);
             rule__ExpectHttpRequest__Group_1__3__Impl();
 
             state._fsp--;
@@ -4661,7 +4661,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1501:1: ( rule__ElementByCssToBePresent__Group__0__Impl rule__ElementByCssToBePresent__Group__1 )
             // InternalBromium.g:1502:2: rule__ElementByCssToBePresent__Group__0__Impl rule__ElementByCssToBePresent__Group__1
             {
-            pushFollow(FOLLOW_20);
+            pushFollow(FOLLOW_21);
             rule__ElementByCssToBePresent__Group__0__Impl();
 
             state._fsp--;
@@ -4736,7 +4736,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1528:1: ( rule__ElementByCssToBePresent__Group__1__Impl rule__ElementByCssToBePresent__Group__2 )
             // InternalBromium.g:1529:2: rule__ElementByCssToBePresent__Group__1__Impl rule__ElementByCssToBePresent__Group__2
             {
-            pushFollow(FOLLOW_21);
+            pushFollow(FOLLOW_22);
             rule__ElementByCssToBePresent__Group__1__Impl();
 
             state._fsp--;
@@ -4811,7 +4811,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1555:1: ( rule__ElementByCssToBePresent__Group__2__Impl rule__ElementByCssToBePresent__Group__3 )
             // InternalBromium.g:1556:2: rule__ElementByCssToBePresent__Group__2__Impl rule__ElementByCssToBePresent__Group__3
             {
-            pushFollow(FOLLOW_22);
+            pushFollow(FOLLOW_23);
             rule__ElementByCssToBePresent__Group__2__Impl();
 
             state._fsp--;
@@ -4886,7 +4886,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1582:1: ( rule__ElementByCssToBePresent__Group__3__Impl rule__ElementByCssToBePresent__Group__4 )
             // InternalBromium.g:1583:2: rule__ElementByCssToBePresent__Group__3__Impl rule__ElementByCssToBePresent__Group__4
             {
-            pushFollow(FOLLOW_23);
+            pushFollow(FOLLOW_24);
             rule__ElementByCssToBePresent__Group__3__Impl();
 
             state._fsp--;
@@ -4971,7 +4971,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1609:1: ( rule__ElementByCssToBePresent__Group__4__Impl rule__ElementByCssToBePresent__Group__5 )
             // InternalBromium.g:1610:2: rule__ElementByCssToBePresent__Group__4__Impl rule__ElementByCssToBePresent__Group__5
             {
-            pushFollow(FOLLOW_24);
+            pushFollow(FOLLOW_25);
             rule__ElementByCssToBePresent__Group__4__Impl();
 
             state._fsp--;
@@ -5056,7 +5056,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1636:1: ( rule__ElementByCssToBePresent__Group__5__Impl rule__ElementByCssToBePresent__Group__6 )
             // InternalBromium.g:1637:2: rule__ElementByCssToBePresent__Group__5__Impl rule__ElementByCssToBePresent__Group__6
             {
-            pushFollow(FOLLOW_25);
+            pushFollow(FOLLOW_26);
             rule__ElementByCssToBePresent__Group__5__Impl();
 
             state._fsp--;
@@ -5201,7 +5201,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1690:1: ( rule__ClickCssSelector__Group__0__Impl rule__ClickCssSelector__Group__1 )
             // InternalBromium.g:1691:2: rule__ClickCssSelector__Group__0__Impl rule__ClickCssSelector__Group__1
             {
-            pushFollow(FOLLOW_26);
+            pushFollow(FOLLOW_27);
             rule__ClickCssSelector__Group__0__Impl();
 
             state._fsp--;
@@ -5276,7 +5276,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1717:1: ( rule__ClickCssSelector__Group__1__Impl rule__ClickCssSelector__Group__2 )
             // InternalBromium.g:1718:2: rule__ClickCssSelector__Group__1__Impl rule__ClickCssSelector__Group__2
             {
-            pushFollow(FOLLOW_14);
+            pushFollow(FOLLOW_15);
             rule__ClickCssSelector__Group__1__Impl();
 
             state._fsp--;
@@ -5351,7 +5351,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1744:1: ( rule__ClickCssSelector__Group__2__Impl rule__ClickCssSelector__Group__3 )
             // InternalBromium.g:1745:2: rule__ClickCssSelector__Group__2__Impl rule__ClickCssSelector__Group__3
             {
-            pushFollow(FOLLOW_20);
+            pushFollow(FOLLOW_21);
             rule__ClickCssSelector__Group__2__Impl();
 
             state._fsp--;
@@ -5426,7 +5426,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1771:1: ( rule__ClickCssSelector__Group__3__Impl rule__ClickCssSelector__Group__4 )
             // InternalBromium.g:1772:2: rule__ClickCssSelector__Group__3__Impl rule__ClickCssSelector__Group__4
             {
-            pushFollow(FOLLOW_21);
+            pushFollow(FOLLOW_22);
             rule__ClickCssSelector__Group__3__Impl();
 
             state._fsp--;
@@ -5501,7 +5501,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1798:1: ( rule__ClickCssSelector__Group__4__Impl rule__ClickCssSelector__Group__5 )
             // InternalBromium.g:1799:2: rule__ClickCssSelector__Group__4__Impl rule__ClickCssSelector__Group__5
             {
-            pushFollow(FOLLOW_22);
+            pushFollow(FOLLOW_23);
             rule__ClickCssSelector__Group__4__Impl();
 
             state._fsp--;
@@ -5576,7 +5576,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1825:1: ( rule__ClickCssSelector__Group__5__Impl rule__ClickCssSelector__Group__6 )
             // InternalBromium.g:1826:2: rule__ClickCssSelector__Group__5__Impl rule__ClickCssSelector__Group__6
             {
-            pushFollow(FOLLOW_23);
+            pushFollow(FOLLOW_24);
             rule__ClickCssSelector__Group__5__Impl();
 
             state._fsp--;
@@ -5741,7 +5741,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1879:1: ( rule__PageLoad__Group__0__Impl rule__PageLoad__Group__1 )
             // InternalBromium.g:1880:2: rule__PageLoad__Group__0__Impl rule__PageLoad__Group__1
             {
-            pushFollow(FOLLOW_27);
+            pushFollow(FOLLOW_28);
             rule__PageLoad__Group__0__Impl();
 
             state._fsp--;
@@ -5816,7 +5816,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1906:1: ( rule__PageLoad__Group__1__Impl rule__PageLoad__Group__2 )
             // InternalBromium.g:1907:2: rule__PageLoad__Group__1__Impl rule__PageLoad__Group__2
             {
-            pushFollow(FOLLOW_23);
+            pushFollow(FOLLOW_24);
             rule__PageLoad__Group__1__Impl();
 
             state._fsp--;
@@ -5981,7 +5981,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1960:1: ( rule__TypeTextInElementFoundByCssSelector__Group__0__Impl rule__TypeTextInElementFoundByCssSelector__Group__1 )
             // InternalBromium.g:1961:2: rule__TypeTextInElementFoundByCssSelector__Group__0__Impl rule__TypeTextInElementFoundByCssSelector__Group__1
             {
-            pushFollow(FOLLOW_28);
+            pushFollow(FOLLOW_29);
             rule__TypeTextInElementFoundByCssSelector__Group__0__Impl();
 
             state._fsp--;
@@ -6056,7 +6056,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:1987:1: ( rule__TypeTextInElementFoundByCssSelector__Group__1__Impl rule__TypeTextInElementFoundByCssSelector__Group__2 )
             // InternalBromium.g:1988:2: rule__TypeTextInElementFoundByCssSelector__Group__1__Impl rule__TypeTextInElementFoundByCssSelector__Group__2
             {
-            pushFollow(FOLLOW_23);
+            pushFollow(FOLLOW_24);
             rule__TypeTextInElementFoundByCssSelector__Group__1__Impl();
 
             state._fsp--;
@@ -6141,7 +6141,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2014:1: ( rule__TypeTextInElementFoundByCssSelector__Group__2__Impl rule__TypeTextInElementFoundByCssSelector__Group__3 )
             // InternalBromium.g:2015:2: rule__TypeTextInElementFoundByCssSelector__Group__2__Impl rule__TypeTextInElementFoundByCssSelector__Group__3
             {
-            pushFollow(FOLLOW_29);
+            pushFollow(FOLLOW_30);
             rule__TypeTextInElementFoundByCssSelector__Group__2__Impl();
 
             state._fsp--;
@@ -6226,7 +6226,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2041:1: ( rule__TypeTextInElementFoundByCssSelector__Group__3__Impl rule__TypeTextInElementFoundByCssSelector__Group__4 )
             // InternalBromium.g:2042:2: rule__TypeTextInElementFoundByCssSelector__Group__3__Impl rule__TypeTextInElementFoundByCssSelector__Group__4
             {
-            pushFollow(FOLLOW_14);
+            pushFollow(FOLLOW_15);
             rule__TypeTextInElementFoundByCssSelector__Group__3__Impl();
 
             state._fsp--;
@@ -6301,7 +6301,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2068:1: ( rule__TypeTextInElementFoundByCssSelector__Group__4__Impl rule__TypeTextInElementFoundByCssSelector__Group__5 )
             // InternalBromium.g:2069:2: rule__TypeTextInElementFoundByCssSelector__Group__4__Impl rule__TypeTextInElementFoundByCssSelector__Group__5
             {
-            pushFollow(FOLLOW_20);
+            pushFollow(FOLLOW_21);
             rule__TypeTextInElementFoundByCssSelector__Group__4__Impl();
 
             state._fsp--;
@@ -6376,7 +6376,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2095:1: ( rule__TypeTextInElementFoundByCssSelector__Group__5__Impl rule__TypeTextInElementFoundByCssSelector__Group__6 )
             // InternalBromium.g:2096:2: rule__TypeTextInElementFoundByCssSelector__Group__5__Impl rule__TypeTextInElementFoundByCssSelector__Group__6
             {
-            pushFollow(FOLLOW_21);
+            pushFollow(FOLLOW_22);
             rule__TypeTextInElementFoundByCssSelector__Group__5__Impl();
 
             state._fsp--;
@@ -6451,7 +6451,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2122:1: ( rule__TypeTextInElementFoundByCssSelector__Group__6__Impl rule__TypeTextInElementFoundByCssSelector__Group__7 )
             // InternalBromium.g:2123:2: rule__TypeTextInElementFoundByCssSelector__Group__6__Impl rule__TypeTextInElementFoundByCssSelector__Group__7
             {
-            pushFollow(FOLLOW_22);
+            pushFollow(FOLLOW_23);
             rule__TypeTextInElementFoundByCssSelector__Group__6__Impl();
 
             state._fsp--;
@@ -6526,7 +6526,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2149:1: ( rule__TypeTextInElementFoundByCssSelector__Group__7__Impl rule__TypeTextInElementFoundByCssSelector__Group__8 )
             // InternalBromium.g:2150:2: rule__TypeTextInElementFoundByCssSelector__Group__7__Impl rule__TypeTextInElementFoundByCssSelector__Group__8
             {
-            pushFollow(FOLLOW_23);
+            pushFollow(FOLLOW_24);
             rule__TypeTextInElementFoundByCssSelector__Group__7__Impl();
 
             state._fsp--;
@@ -6691,7 +6691,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2203:1: ( rule__TextOfElementWithCssSelectorToBe__Group__0__Impl rule__TextOfElementWithCssSelectorToBe__Group__1 )
             // InternalBromium.g:2204:2: rule__TextOfElementWithCssSelectorToBe__Group__0__Impl rule__TextOfElementWithCssSelectorToBe__Group__1
             {
-            pushFollow(FOLLOW_20);
+            pushFollow(FOLLOW_21);
             rule__TextOfElementWithCssSelectorToBe__Group__0__Impl();
 
             state._fsp--;
@@ -6766,7 +6766,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2230:1: ( rule__TextOfElementWithCssSelectorToBe__Group__1__Impl rule__TextOfElementWithCssSelectorToBe__Group__2 )
             // InternalBromium.g:2231:2: rule__TextOfElementWithCssSelectorToBe__Group__1__Impl rule__TextOfElementWithCssSelectorToBe__Group__2
             {
-            pushFollow(FOLLOW_21);
+            pushFollow(FOLLOW_22);
             rule__TextOfElementWithCssSelectorToBe__Group__1__Impl();
 
             state._fsp--;
@@ -6841,7 +6841,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2257:1: ( rule__TextOfElementWithCssSelectorToBe__Group__2__Impl rule__TextOfElementWithCssSelectorToBe__Group__3 )
             // InternalBromium.g:2258:2: rule__TextOfElementWithCssSelectorToBe__Group__2__Impl rule__TextOfElementWithCssSelectorToBe__Group__3
             {
-            pushFollow(FOLLOW_22);
+            pushFollow(FOLLOW_23);
             rule__TextOfElementWithCssSelectorToBe__Group__2__Impl();
 
             state._fsp--;
@@ -6916,7 +6916,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2284:1: ( rule__TextOfElementWithCssSelectorToBe__Group__3__Impl rule__TextOfElementWithCssSelectorToBe__Group__4 )
             // InternalBromium.g:2285:2: rule__TextOfElementWithCssSelectorToBe__Group__3__Impl rule__TextOfElementWithCssSelectorToBe__Group__4
             {
-            pushFollow(FOLLOW_23);
+            pushFollow(FOLLOW_24);
             rule__TextOfElementWithCssSelectorToBe__Group__3__Impl();
 
             state._fsp--;
@@ -7001,7 +7001,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2311:1: ( rule__TextOfElementWithCssSelectorToBe__Group__4__Impl rule__TextOfElementWithCssSelectorToBe__Group__5 )
             // InternalBromium.g:2312:2: rule__TextOfElementWithCssSelectorToBe__Group__4__Impl rule__TextOfElementWithCssSelectorToBe__Group__5
             {
-            pushFollow(FOLLOW_30);
+            pushFollow(FOLLOW_31);
             rule__TextOfElementWithCssSelectorToBe__Group__4__Impl();
 
             state._fsp--;
@@ -7086,7 +7086,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2338:1: ( rule__TextOfElementWithCssSelectorToBe__Group__5__Impl rule__TextOfElementWithCssSelectorToBe__Group__6 )
             // InternalBromium.g:2339:2: rule__TextOfElementWithCssSelectorToBe__Group__5__Impl rule__TextOfElementWithCssSelectorToBe__Group__6
             {
-            pushFollow(FOLLOW_28);
+            pushFollow(FOLLOW_29);
             rule__TextOfElementWithCssSelectorToBe__Group__5__Impl();
 
             state._fsp--;
@@ -7161,7 +7161,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2365:1: ( rule__TextOfElementWithCssSelectorToBe__Group__6__Impl rule__TextOfElementWithCssSelectorToBe__Group__7 )
             // InternalBromium.g:2366:2: rule__TextOfElementWithCssSelectorToBe__Group__6__Impl rule__TextOfElementWithCssSelectorToBe__Group__7
             {
-            pushFollow(FOLLOW_23);
+            pushFollow(FOLLOW_24);
             rule__TextOfElementWithCssSelectorToBe__Group__6__Impl();
 
             state._fsp--;
@@ -7326,7 +7326,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2419:1: ( rule__ClickClassByText__Group__0__Impl rule__ClickClassByText__Group__1 )
             // InternalBromium.g:2420:2: rule__ClickClassByText__Group__0__Impl rule__ClickClassByText__Group__1
             {
-            pushFollow(FOLLOW_26);
+            pushFollow(FOLLOW_27);
             rule__ClickClassByText__Group__0__Impl();
 
             state._fsp--;
@@ -7401,7 +7401,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2446:1: ( rule__ClickClassByText__Group__1__Impl rule__ClickClassByText__Group__2 )
             // InternalBromium.g:2447:2: rule__ClickClassByText__Group__1__Impl rule__ClickClassByText__Group__2
             {
-            pushFollow(FOLLOW_14);
+            pushFollow(FOLLOW_15);
             rule__ClickClassByText__Group__1__Impl();
 
             state._fsp--;
@@ -7476,7 +7476,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2473:1: ( rule__ClickClassByText__Group__2__Impl rule__ClickClassByText__Group__3 )
             // InternalBromium.g:2474:2: rule__ClickClassByText__Group__2__Impl rule__ClickClassByText__Group__3
             {
-            pushFollow(FOLLOW_20);
+            pushFollow(FOLLOW_21);
             rule__ClickClassByText__Group__2__Impl();
 
             state._fsp--;
@@ -7551,7 +7551,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2500:1: ( rule__ClickClassByText__Group__3__Impl rule__ClickClassByText__Group__4 )
             // InternalBromium.g:2501:2: rule__ClickClassByText__Group__3__Impl rule__ClickClassByText__Group__4
             {
-            pushFollow(FOLLOW_31);
+            pushFollow(FOLLOW_32);
             rule__ClickClassByText__Group__3__Impl();
 
             state._fsp--;
@@ -7626,7 +7626,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2527:1: ( rule__ClickClassByText__Group__4__Impl rule__ClickClassByText__Group__5 )
             // InternalBromium.g:2528:2: rule__ClickClassByText__Group__4__Impl rule__ClickClassByText__Group__5
             {
-            pushFollow(FOLLOW_23);
+            pushFollow(FOLLOW_24);
             rule__ClickClassByText__Group__4__Impl();
 
             state._fsp--;
@@ -7711,7 +7711,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2554:1: ( rule__ClickClassByText__Group__5__Impl rule__ClickClassByText__Group__6 )
             // InternalBromium.g:2555:2: rule__ClickClassByText__Group__5__Impl rule__ClickClassByText__Group__6
             {
-            pushFollow(FOLLOW_32);
+            pushFollow(FOLLOW_33);
             rule__ClickClassByText__Group__5__Impl();
 
             state._fsp--;
@@ -7796,7 +7796,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2581:1: ( rule__ClickClassByText__Group__6__Impl rule__ClickClassByText__Group__7 )
             // InternalBromium.g:2582:2: rule__ClickClassByText__Group__6__Impl rule__ClickClassByText__Group__7
             {
-            pushFollow(FOLLOW_28);
+            pushFollow(FOLLOW_29);
             rule__ClickClassByText__Group__6__Impl();
 
             state._fsp--;
@@ -7871,7 +7871,7 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
             // InternalBromium.g:2608:1: ( rule__ClickClassByText__Group__7__Impl rule__ClickClassByText__Group__8 )
             // InternalBromium.g:2609:2: rule__ClickClassByText__Group__7__Impl rule__ClickClassByText__Group__8
             {
-            pushFollow(FOLLOW_23);
+            pushFollow(FOLLOW_24);
             rule__ClickClassByText__Group__7__Impl();
 
             state._fsp--;
@@ -8342,67 +8342,26 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__ApplicationAction__WebDriverActionAssignment_5"
 
 
-    // $ANTLR start "rule__ApplicationAction__PostconditionAssignment_6"
-    // InternalBromium.g:2778:1: rule__ApplicationAction__PostconditionAssignment_6 : ( rulePostcondition ) ;
-    public final void rule__ApplicationAction__PostconditionAssignment_6() throws RecognitionException {
+    // $ANTLR start "rule__ApplicationAction__ExpectHttpRequestAssignment_6"
+    // InternalBromium.g:2778:1: rule__ApplicationAction__ExpectHttpRequestAssignment_6 : ( ruleExpectHttpRequest ) ;
+    public final void rule__ApplicationAction__ExpectHttpRequestAssignment_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalBromium.g:2782:1: ( ( rulePostcondition ) )
-            // InternalBromium.g:2783:2: ( rulePostcondition )
+            // InternalBromium.g:2782:1: ( ( ruleExpectHttpRequest ) )
+            // InternalBromium.g:2783:2: ( ruleExpectHttpRequest )
             {
-            // InternalBromium.g:2783:2: ( rulePostcondition )
-            // InternalBromium.g:2784:3: rulePostcondition
+            // InternalBromium.g:2783:2: ( ruleExpectHttpRequest )
+            // InternalBromium.g:2784:3: ruleExpectHttpRequest
             {
-             before(grammarAccess.getApplicationActionAccess().getPostconditionPostconditionParserRuleCall_6_0()); 
-            pushFollow(FOLLOW_2);
-            rulePostcondition();
-
-            state._fsp--;
-
-             after(grammarAccess.getApplicationActionAccess().getPostconditionPostconditionParserRuleCall_6_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ApplicationAction__PostconditionAssignment_6"
-
-
-    // $ANTLR start "rule__ApplicationAction__ExpectHttpRequestAssignment_7"
-    // InternalBromium.g:2793:1: rule__ApplicationAction__ExpectHttpRequestAssignment_7 : ( ruleExpectHttpRequest ) ;
-    public final void rule__ApplicationAction__ExpectHttpRequestAssignment_7() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalBromium.g:2797:1: ( ( ruleExpectHttpRequest ) )
-            // InternalBromium.g:2798:2: ( ruleExpectHttpRequest )
-            {
-            // InternalBromium.g:2798:2: ( ruleExpectHttpRequest )
-            // InternalBromium.g:2799:3: ruleExpectHttpRequest
-            {
-             before(grammarAccess.getApplicationActionAccess().getExpectHttpRequestExpectHttpRequestParserRuleCall_7_0()); 
+             before(grammarAccess.getApplicationActionAccess().getExpectHttpRequestExpectHttpRequestParserRuleCall_6_0()); 
             pushFollow(FOLLOW_2);
             ruleExpectHttpRequest();
 
             state._fsp--;
 
-             after(grammarAccess.getApplicationActionAccess().getExpectHttpRequestExpectHttpRequestParserRuleCall_7_0()); 
+             after(grammarAccess.getApplicationActionAccess().getExpectHttpRequestExpectHttpRequestParserRuleCall_6_0()); 
 
             }
 
@@ -8421,7 +8380,48 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ApplicationAction__ExpectHttpRequestAssignment_7"
+    // $ANTLR end "rule__ApplicationAction__ExpectHttpRequestAssignment_6"
+
+
+    // $ANTLR start "rule__ApplicationAction__PostconditionAssignment_7"
+    // InternalBromium.g:2793:1: rule__ApplicationAction__PostconditionAssignment_7 : ( rulePostcondition ) ;
+    public final void rule__ApplicationAction__PostconditionAssignment_7() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalBromium.g:2797:1: ( ( rulePostcondition ) )
+            // InternalBromium.g:2798:2: ( rulePostcondition )
+            {
+            // InternalBromium.g:2798:2: ( rulePostcondition )
+            // InternalBromium.g:2799:3: rulePostcondition
+            {
+             before(grammarAccess.getApplicationActionAccess().getPostconditionPostconditionParserRuleCall_7_0()); 
+            pushFollow(FOLLOW_2);
+            rulePostcondition();
+
+            state._fsp--;
+
+             after(grammarAccess.getApplicationActionAccess().getPostconditionPostconditionParserRuleCall_7_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ApplicationAction__PostconditionAssignment_7"
 
 
     // $ANTLR start "rule__SyntaxDefinition__ContentAssignment_1"
@@ -9538,25 +9538,26 @@ public class InternalBromiumParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000040000L});
     public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000D00080010L});
     public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000900000L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000008001000000L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000010000000000L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000020000000000L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000040000000000L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000004000000000L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000008001000000L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000004000000L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000000000030L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000020000000000L});
+    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000040000000000L});
+    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000080000000000L});
+    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000004000000000L});
 
 }
