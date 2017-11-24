@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.RETURNS_MOCKS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -26,7 +27,7 @@ public class ReplayRequestFilterTest {
 
     HttpMessageInfo httpMessageInfo = mock(HttpMessageInfo.class, RETURNS_DEEP_STUBS);
 
-    HttpRequest httpRequest = mock(HttpRequest.class);
+    HttpRequest httpRequest = mock(HttpRequest.class, RETURNS_MOCKS);
 
     private final String EXAMPLE_CONDITION = "9890013";
 
