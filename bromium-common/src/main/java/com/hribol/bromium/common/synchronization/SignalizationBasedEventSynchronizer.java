@@ -55,7 +55,7 @@ public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
 
         if (timedOut) {
             logger.debug("After timeout " + synchronizationEvent.isSatisfied());
-            logger.error("Condition {} timed out! " + synchronizationEvent.getName());
+            logger.error("Condition {} timed out! ", synchronizationEvent.getName());
             throw new TimeoutException("The synchronization event " + synchronizationEvent.getName() + " was not satisfied in the specified time");
         }
 

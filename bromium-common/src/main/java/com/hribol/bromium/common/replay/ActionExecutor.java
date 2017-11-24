@@ -11,6 +11,8 @@ import com.hribol.bromium.replay.report.LoadingTimes;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -27,6 +29,8 @@ import java.util.concurrent.TimeUnit;
  * A default implementation of {@link WebDriverActionExecutor}
  */
 public class ActionExecutor implements WebDriverActionExecutor {
+
+    private static final Logger logger = LoggerFactory.getLogger(ActionExecutor.class);
 
     public ActionExecutor(ExecutorDependencies dependencies) throws IOException, URISyntaxException {
         this.dependencies = dependencies;
@@ -49,8 +53,7 @@ public class ActionExecutor implements WebDriverActionExecutor {
             automationResult = AutomationResult.EXECUTING;
 
             for (WebDriverAction webDriverAction : testScenario.steps()) {
-
-                System.out.println("Executing " + webDriverAction.getName());
+                logger.info("Executing " + webDriverAction.getName());
                 try {
                     SynchronizationEvent synchronizationEvent = dependencies.noHttpRequestsInQueue();
                     dependencies.getEventSynchronizer().awaitUntil(synchronizationEvent);
@@ -104,8 +107,7 @@ public class ActionExecutor implements WebDriverActionExecutor {
                 webDriverAction.execute(webDriver, dependencies.getReplayingState(), dependencies.getEventSynchronizer());
                 return;
             } catch (WebDriverException ex) {
-                System.out.println(ex.toString());
-                System.out.println("Could not make it from first try");
+                logger.error("Could not make it from first try because of {}", ex.toString());
                 i++;
                 try {
                     Thread.sleep(dependencies.getMeasurementsPrecisionMilli());

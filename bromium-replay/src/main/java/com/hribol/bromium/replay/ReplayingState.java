@@ -4,6 +4,8 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.hribol.bromium.core.synchronization.SynchronizationEvent;
 import io.netty.handler.codec.http.HttpRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -20,6 +22,9 @@ import static com.hribol.bromium.core.utils.Constants.NO_HTTP_REQUESTS_IN_QUEUE;
  * Represents the state that will be persistent during one replay
  */
 public class ReplayingState {
+
+    private static final Logger logger = LoggerFactory.getLogger(ReplayingState.class);
+
     private Set<String> conditionsSatisfied;
     private Optional<SynchronizationEvent> synchronizationEventOptional;
     private boolean httpLock;
@@ -85,7 +90,7 @@ public class ReplayingState {
      */
     public void setConditionSatisfied(String condition) {
         this.conditionsSatisfied.add(condition);
-        System.out.println("Satisfied " + condition);
+        logger.info("Condition {} has been satisfied", condition);
     }
 
     /**
@@ -104,7 +109,7 @@ public class ReplayingState {
      */
     public void setConditionNotSatisfied(String condition) {
         conditionsSatisfied.remove(condition);
-        System.out.println("Not Satisfied " + condition);
+        logger.info("Condition {} is no longer satisfied", condition);
     }
 
     /**
@@ -116,8 +121,8 @@ public class ReplayingState {
             return;
         }
         this.httpRequestQueue.add(httpRequest);
-        System.out.println("Add request " + httpRequest.getUri());
-        System.out.println("Number of requests in queue " + this.httpRequestQueue.size());
+        logger.debug("Request with URL: {} has been added to the queue", httpRequest.getUri());
+        logger.debug("Number of requests in queue {}", httpRequestQueue.size());
     }
 
     private boolean inWhiteList(String url) {
@@ -154,8 +159,8 @@ public class ReplayingState {
             return;
         }
 
-        System.out.println("Remove request " + httpRequest.getUri());
+        logger.debug("Remove request " + httpRequest.getUri());
         this.httpRequestQueue.remove(httpRequest);
-        System.out.println("Number of requests in queue " + this.httpRequestQueue.size());
+        logger.debug("Number of requests in queue " + this.httpRequestQueue.size());
     }
 }
