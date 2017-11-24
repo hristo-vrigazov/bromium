@@ -135,6 +135,7 @@ import static com.hribol.bromium.cli.Main.Commands.RECORD;
 import static com.hribol.bromium.cli.Main.Commands.REPLAY;
 import static com.hribol.bromium.core.ConventionConstants.SUBMIT_EVENT_URL;
 import static com.hribol.bromium.core.DependencyInjectionConstants.*;
+import static com.hribol.bromium.core.utils.Constants.CONDITION_NOT_SATISFIED_URL;
 import static com.hribol.bromium.core.utils.Constants.CONDITION_SATISFIED_URL;
 import static com.hribol.bromium.core.utils.Constants.HAR_EXTENSION;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
@@ -383,7 +384,7 @@ public class DefaultModule extends AbstractModule {
     @Provides
     @Named(CONDITION_NOT_SATISFIED_PREDICATE)
     public Predicate<HttpRequest> getConditionNotSatisfiedPredicate() {
-        return new UriContainsStringPredicate(CONDITION_NOT_SATISFIED_PREDICATE);
+        return new UriContainsStringPredicate(CONDITION_NOT_SATISFIED_URL);
     }
 
     @Provides
