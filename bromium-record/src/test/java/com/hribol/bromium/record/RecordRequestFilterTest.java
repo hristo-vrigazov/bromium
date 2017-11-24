@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import static com.hribol.bromium.core.ConventionConstants.SUBMIT_EVENT_URL;
+import static org.mockito.Mockito.RETURNS_MOCKS;
 import static org.mockito.Mockito.anyMap;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -30,7 +31,7 @@ public class RecordRequestFilterTest {
 
     @Test
     public void addsRequestIfItHasTo() throws MalformedURLException, UnsupportedEncodingException {
-        HttpRequest httpRequest = mock(HttpRequest.class);
+        HttpRequest httpRequest = mock(HttpRequest.class, RETURNS_MOCKS);
         Map<String, String> event = getEvent();
         when(httpRequest.getUri()).thenReturn(SUBMIT_EVENT_URL + "?event=mockEvent&text=mockText");
         Predicate<HttpRequest> httpRequestPredicate = mock(Predicate.class);

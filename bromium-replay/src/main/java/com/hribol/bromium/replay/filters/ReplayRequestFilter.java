@@ -37,17 +37,22 @@ public class ReplayRequestFilter implements RequestFilter {
         replayingState.addHttpRequestToQueue(httpMessageInfo.getOriginalRequest());
         replayingState.setHttpLock(false);
 
+        boolean updatedState = false;
         for (ConditionsUpdater conditionsUpdater: conditionsUpdaters) {
             if (conditionsUpdater.shouldUpdate().test(httpRequest)) {
                 try {
                     URL url = new URL(httpRequest.getUri());
                     String event = url.getQuery();
                     conditionsUpdater.updater().update(replayingState, event);
-                    return new DefaultHttpResponse(httpRequest.getProtocolVersion(), HttpResponseStatus.OK);
+                    updatedState = true;
                 } catch (MalformedURLException e) {
                     logger.error(e.getMessage(), e);
                 }
             }
+        }
+
+        if (updatedState) {
+            return new DefaultHttpResponse(httpRequest.getProtocolVersion(), HttpResponseStatus.OK);
         }
 
         return null;

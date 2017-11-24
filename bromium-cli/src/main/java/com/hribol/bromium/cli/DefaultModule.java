@@ -112,6 +112,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.service.DriverService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -141,6 +143,9 @@ import static org.openqa.selenium.remote.BrowserType.CHROME;
  * Guice module used for creation of the dependency graph
  */
 public class DefaultModule extends AbstractModule {
+
+    private static final Logger logger = LoggerFactory.getLogger(DefaultModule.class);
+
     private Injector dslInjector;
 
     private String command;
@@ -590,7 +595,7 @@ public class DefaultModule extends AbstractModule {
     public String getRecordingJavascriptCode(@Named(RECORDING_JAVASCRIPT_INJECTOR)
                                                      IOProvider<JavascriptInjectionPreparator> javascriptInjectorIOProvider) throws IOException {
         String generatedJavascriptCode = javascriptInjectorIOProvider.get().getInjectionCode();
-        System.out.println(generatedJavascriptCode);
+        logger.debug(generatedJavascriptCode);
         return generatedJavascriptCode;
     }
 
@@ -674,7 +679,7 @@ public class DefaultModule extends AbstractModule {
                                                            ResponseFilter responseFilter) throws IOException {
         BrowserMobProxy proxy = createBrowserMobProxy(timeout, recordRequestFilter, responseFilter);
         proxy.start(0);
-        System.out.println("Proxy running on port " + proxy.getPort());
+        logger.info("Proxy running on port " + proxy.getPort());
         Proxy seleniumProxy = createSeleniumProxy(proxy);
         DesiredCapabilities desiredCapabilities = createDesiredCapabilities(seleniumProxy);
         DriverService driverService = driverServiceSupplier.getDriverService(pathToDriverExecutable, screen);

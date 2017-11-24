@@ -46,7 +46,7 @@ public class ReplayCommandTest {
 
         when(replayBrowser.replay(steps)).thenReturn(executionReport);
 
-        ReplayCommand replayCommand = new ReplayCommand(promptUtils, replayBrowserProvider, stepsProvider,
+        ReplayCommand replayCommand = new ReplayCommand(replayBrowserProvider, stepsProvider,
                 virtualScreenProcessCreator, screenNumber, measurementsFile, harFile);
 
         replayCommand.run();
@@ -65,7 +65,7 @@ public class ReplayCommandTest {
 
         when(replayBrowser.replay(steps)).thenReturn(executionReport);
 
-        ReplayCommand replayCommand = new ReplayCommand(promptUtils, replayBrowserProvider, stepsProvider,
+        ReplayCommand replayCommand = new ReplayCommand(replayBrowserProvider, stepsProvider,
                 virtualScreenProcessCreator, screenNumber, measurementsFile, harFile);
 
         replayCommand.run();
@@ -86,7 +86,7 @@ public class ReplayCommandTest {
         when(virtualScreenProcessCreator.createXvfbProcess(screenNumber)).thenReturn(process);
 
 
-        ReplayCommand replayCommand = new ReplayCommand(promptUtils, replayBrowserProvider, stepsProvider,
+        ReplayCommand replayCommand = new ReplayCommand(replayBrowserProvider, stepsProvider,
                 virtualScreenProcessCreator, screenNumber, measurementsFile, harFile);
 
         replayCommand.run();
