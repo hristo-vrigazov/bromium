@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -20,6 +22,8 @@ import static org.junit.Assert.assertEquals;
  * Created by hvrigazov on 06.08.17.
  */
 public class DoesNotRecordClickingOnLinksIT extends BaseRecordIntegrationTest {
+
+    private final static Logger logger = LoggerFactory.getLogger(DoesNotRecordClickingOnLinksIT.class);
 
     @Override
     public void verifyAssertions() throws IOException {
@@ -43,7 +47,7 @@ public class DoesNotRecordClickingOnLinksIT extends BaseRecordIntegrationTest {
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
     }
 

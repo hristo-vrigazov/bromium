@@ -4,8 +4,11 @@ import com.google.common.collect.ImmutableMap;
 import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.integration.tests.TestUtils;
 import com.hribol.bromium.integration.tests.simulation.RecordingSimulatorModule;
+import com.hribol.bromium.replay.filters.ReplayRequestFilter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -23,6 +26,8 @@ import static org.junit.Assert.assertEquals;
 public class RecordTypeTextFieldIT extends BaseRecordIntegrationTest {
 
     private String EXAMPLE_TEXT = "EXAMPLE_TEXT";
+
+    private final static Logger logger = LoggerFactory.getLogger(RecordTypeTextFieldIT.class);
 
     @Override
     protected void verifyAssertions() throws IOException {
@@ -47,7 +52,7 @@ public class RecordTypeTextFieldIT extends BaseRecordIntegrationTest {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
 
     }

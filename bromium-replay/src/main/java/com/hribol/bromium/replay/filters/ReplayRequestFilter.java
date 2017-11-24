@@ -7,6 +7,8 @@ import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -16,6 +18,9 @@ import java.util.List;
  * Created by hvrigazov on 22.04.17.
  */
 public class ReplayRequestFilter implements RequestFilter {
+
+    private final static Logger logger = LoggerFactory.getLogger(ReplayRequestFilter.class);
+
     private final ReplayingState replayingState;
     private List<ConditionsUpdater> conditionsUpdaters;
 
@@ -37,7 +42,7 @@ public class ReplayRequestFilter implements RequestFilter {
                     String event = url.getQuery();
                     conditionsUpdater.updater().update(replayingState, event);
                 } catch (MalformedURLException e) {
-                    e.printStackTrace();
+                    logger.error(e.getMessage(), e);
                 }
             }
         }

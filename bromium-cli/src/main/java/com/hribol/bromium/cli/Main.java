@@ -58,7 +58,7 @@ public class Main {
             injector = Guice.createInjector(new DefaultModule(selectedCommand, opts));
             commandToHandler.get(selectedCommand).get().run();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
 
     }

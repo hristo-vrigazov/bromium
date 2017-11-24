@@ -1,5 +1,8 @@
 package com.hribol.bromium.demo.app;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -11,6 +14,9 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("/")
 public class Resource {
+
+    private static Logger logger = LoggerFactory.getLogger(Resource.class);
+
     @GET
     @Path("http-queue.js")
     @Produces(MediaType.TEXT_PLAIN)
@@ -19,7 +25,7 @@ public class Resource {
             // Slow down response on purpose to demonstrate the race condition
             Thread.sleep(2000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
         return "\t\tconsole.log('Resource: http-queue.js loaded');\n" +
                 "\t\tvar elemDiv = document.createElement('button');\n" +
