@@ -9,7 +9,10 @@ import org.junit.Test;
 import java.net.URISyntaxException;
 import java.util.function.Predicate;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by hvrigazov on 27.04.17.

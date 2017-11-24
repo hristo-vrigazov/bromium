@@ -9,11 +9,19 @@ import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import static com.hribol.bromium.core.ConventionConstants.SUBMIT_EVENT_URL;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyMap;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by hvrigazov on 27.04.17.

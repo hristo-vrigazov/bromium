@@ -5,7 +5,11 @@ import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.SyntaxDefinitionConfiguration;
 import com.hribol.bromium.core.parsing.StepsDumper;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.List;
 import java.util.Map;
 

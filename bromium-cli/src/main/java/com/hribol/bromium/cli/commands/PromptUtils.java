@@ -8,7 +8,11 @@ import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Utilities for prompting the user

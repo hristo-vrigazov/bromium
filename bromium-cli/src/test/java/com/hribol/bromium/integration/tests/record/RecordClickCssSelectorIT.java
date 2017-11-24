@@ -12,7 +12,11 @@ import java.io.IOException;
 
 import static com.hribol.bromium.cli.ParsedOptions.URL;
 import static com.hribol.bromium.core.utils.Constants.EVENT;
-import static com.hribol.bromium.integration.tests.TestUtils.*;
+import static com.hribol.bromium.integration.tests.TestUtils.CREATE_DYNAMIC_ID;
+import static com.hribol.bromium.integration.tests.TestUtils.Events;
+import static com.hribol.bromium.integration.tests.TestUtils.LATE_CREATION_ID;
+import static com.hribol.bromium.integration.tests.TestUtils.Pages;
+import static com.hribol.bromium.integration.tests.TestUtils.SUBPAGE;
 import static org.junit.Assert.assertEquals;
 
 /**

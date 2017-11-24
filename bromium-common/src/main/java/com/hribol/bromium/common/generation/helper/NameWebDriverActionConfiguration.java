@@ -1,8 +1,6 @@
 package com.hribol.bromium.common.generation.helper;
 
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
-import com.hribol.bromium.core.generation.GenerationFunctionInformation;
-import com.hribol.bromium.core.generation.GenerationInformation;
 import com.hribol.bromium.core.generation.RegistryInformation;
 
 /**

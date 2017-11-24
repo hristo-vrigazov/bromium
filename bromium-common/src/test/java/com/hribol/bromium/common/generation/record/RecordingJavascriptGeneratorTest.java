@@ -1,6 +1,5 @@
 package com.hribol.bromium.common.generation.record;
 
-import com.hribol.bromium.common.generation.record.RecordingJavascriptGenerator;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;

@@ -2,12 +2,9 @@ package com.hribol.bromium.common.synchronization;
 
 import com.hribol.bromium.core.synchronization.EventSignalizer;
 import com.hribol.bromium.replay.ReplayingState;
-import com.hribol.bromium.replay.filters.ReplayResponseFilter;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;

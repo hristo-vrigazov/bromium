@@ -1,7 +1,6 @@
 package com.hribol.bromium.common.generation.replay.functions;
 
 import com.hribol.bromium.common.builder.JsCollector;
-import com.hribol.bromium.common.generation.replay.invocations.TypeTextInElementFoundByCssSelectorReplayInvocation;
 
 import static com.hribol.bromium.common.builder.JsFunctionNames.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR;
 

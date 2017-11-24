@@ -8,7 +8,6 @@ import java.util.Map;
 
 import static com.hribol.bromium.core.utils.Constants.EVENT;
 import static com.hribol.bromium.core.utils.Constants.PAGE;
-import static com.hribol.bromium.core.utils.Constants.URL;
 
 /**
  * A parser for {@link PageLoading} events

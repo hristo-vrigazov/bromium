@@ -10,7 +10,6 @@ import com.hribol.bromium.common.generation.record.invocations.ClickClassByTextR
 import com.hribol.bromium.common.generation.record.invocations.ClickCssSelectorRecorderFunctionInvocation;
 import com.hribol.bromium.common.generation.record.invocations.RecorderFunctionInvocation;
 import com.hribol.bromium.common.generation.record.invocations.TypeTextInElementFoundByCssSelectorRecorderFunctionInvocation;
-import com.hribol.bromium.common.replay.actions.TypeTextInElementFoundByCssSelector;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.core.generation.GeneratedFunction;
 

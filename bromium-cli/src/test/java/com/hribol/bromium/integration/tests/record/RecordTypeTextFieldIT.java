@@ -10,8 +10,11 @@ import org.openqa.selenium.WebDriver;
 import java.io.IOException;
 
 import static com.hribol.bromium.core.utils.Constants.EVENT;
-import static com.hribol.bromium.integration.tests.TestUtils.*;
+import static com.hribol.bromium.integration.tests.TestUtils.DONE_ID;
 import static com.hribol.bromium.integration.tests.TestUtils.Pages.TYPE_TEXT_DEMO_PAGE;
+import static com.hribol.bromium.integration.tests.TestUtils.SUBPAGE;
+import static com.hribol.bromium.integration.tests.TestUtils.TEXT_FIELD_ID;
+import static com.hribol.bromium.integration.tests.TestUtils.USERNAME;
 import static org.junit.Assert.assertEquals;
 
 /**

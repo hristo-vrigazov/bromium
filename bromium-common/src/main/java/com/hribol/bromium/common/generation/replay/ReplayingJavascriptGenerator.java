@@ -8,7 +8,6 @@ import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 

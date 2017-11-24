@@ -4,7 +4,6 @@ import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.replay.invocations.ReplayFunctionInvocation;
 import com.hribol.bromium.common.generation.replay.invocations.TextOfElementFoundByCssSelectorToBeInvocation;
-import com.hribol.bromium.common.generation.replay.invocations.TypeTextInElementFoundByCssSelectorReplayInvocation;
 import com.hribol.bromium.common.replay.actions.TextOfElementFoundByCssSelectorToBe;
 import com.hribol.bromium.core.config.ParameterConfiguration;
 

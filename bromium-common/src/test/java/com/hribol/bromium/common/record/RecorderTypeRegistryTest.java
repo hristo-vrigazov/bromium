@@ -1,8 +1,5 @@
 package com.hribol.bromium.common.record;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-
 /**
  * Created by hvrigazov on 07.06.17.
  */

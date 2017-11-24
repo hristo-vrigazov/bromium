@@ -2,12 +2,16 @@ package com.hribol.bromium.replay;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.core.synchronization.SynchronizationEvent;
 import io.netty.handler.codec.http.HttpRequest;
 
 import java.net.URI;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import static com.hribol.bromium.core.DependencyInjectionConstants.BASE_URI;
 import static com.hribol.bromium.core.utils.Constants.NO_HTTP_REQUESTS_IN_QUEUE;

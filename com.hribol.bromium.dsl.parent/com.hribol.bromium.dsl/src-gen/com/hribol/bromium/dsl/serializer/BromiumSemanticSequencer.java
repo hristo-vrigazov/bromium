@@ -21,7 +21,6 @@ import com.hribol.bromium.dsl.bromium.TextOfElementWithCssSelectorToBe;
 import com.hribol.bromium.dsl.bromium.ThreeDottedVersion;
 import com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector;
 import com.hribol.bromium.dsl.services.BromiumGrammarAccess;
-import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.Action;
@@ -31,6 +30,8 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
+
+import java.util.Set;
 
 @SuppressWarnings("all")
 public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequencer {

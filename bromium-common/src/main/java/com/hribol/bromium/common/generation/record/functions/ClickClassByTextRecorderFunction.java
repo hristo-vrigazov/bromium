@@ -8,7 +8,11 @@ import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CLASS_BY_TEXT;
 import static com.hribol.bromium.common.replay.parsers.ClickClassByTextParser.INITIAL_COLLECTOR_CLASS;
 import static com.hribol.bromium.common.replay.parsers.ClickClassByTextParser.INITIAL_COLLECTOR_CLASS_JS_ALIAS;
-import static com.hribol.bromium.core.utils.Constants.*;
+import static com.hribol.bromium.core.utils.Constants.EVENT;
+import static com.hribol.bromium.core.utils.Constants.EVENT_NAME;
+import static com.hribol.bromium.core.utils.Constants.INNER_TEXT;
+import static com.hribol.bromium.core.utils.Constants.PARAMETERS;
+import static com.hribol.bromium.core.utils.Constants.TEXT;
 import static com.hribol.bromium.core.utils.JsEvents.CLICK;
 
 /**

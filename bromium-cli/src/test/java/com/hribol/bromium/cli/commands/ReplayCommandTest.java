@@ -1,8 +1,8 @@
 package com.hribol.bromium.cli.commands;
 
+import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.providers.IOURIProvider;
-import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.replay.ReplayBrowser;
 import com.hribol.bromium.replay.report.AutomationResult;
@@ -13,7 +13,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by hvrigazov on 09.07.17.

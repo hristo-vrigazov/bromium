@@ -1,9 +1,10 @@
 package com.hribol.bromium.common.replay;
-import com.hribol.bromium.replay.actions.WebDriverAction;
-import com.hribol.bromium.replay.execution.WebDriverActionExecutor;
-import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
-import com.hribol.bromium.replay.execution.scenario.TestScenario;
+
 import com.hribol.bromium.core.synchronization.SynchronizationEvent;
+import com.hribol.bromium.replay.actions.WebDriverAction;
+import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
+import com.hribol.bromium.replay.execution.WebDriverActionExecutor;
+import com.hribol.bromium.replay.execution.scenario.TestScenario;
 import com.hribol.bromium.replay.report.AutomationResult;
 import com.hribol.bromium.replay.report.ExecutionReport;
 import com.hribol.bromium.replay.report.LoadingTimes;
@@ -16,7 +17,11 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A default implementation of {@link WebDriverActionExecutor}

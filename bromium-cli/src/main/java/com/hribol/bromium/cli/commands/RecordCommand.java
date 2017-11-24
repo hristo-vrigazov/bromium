@@ -4,16 +4,17 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.hribol.bromium.common.record.RecordBrowser;
 import com.hribol.bromium.core.TestScenarioSteps;
+import com.hribol.bromium.core.parsing.StepsDumper;
 import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.providers.IOURIProvider;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
-import com.hribol.bromium.core.parsing.StepsDumper;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Optional;
 
-import static com.hribol.bromium.core.DependencyInjectionConstants.*;
+import static com.hribol.bromium.core.DependencyInjectionConstants.OUTPUT_FILE;
+import static com.hribol.bromium.core.DependencyInjectionConstants.SCREEN_NUMBER;
 
 /**
  * A command for recording

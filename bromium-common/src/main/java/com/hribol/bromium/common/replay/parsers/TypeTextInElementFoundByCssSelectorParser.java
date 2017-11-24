@@ -1,14 +1,14 @@
 package com.hribol.bromium.common.replay.parsers;
 
-import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
-import static com.hribol.bromium.core.utils.Constants.EVENT;
-import static com.hribol.bromium.core.utils.Constants.TEXT;
-
-import java.util.Map;
-
 import com.hribol.bromium.common.replay.actions.TypeTextInElementFoundByCssSelector;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.parsers.WebDriverActionParameterParser;
+
+import java.util.Map;
+
+import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
+import static com.hribol.bromium.core.utils.Constants.EVENT;
+import static com.hribol.bromium.core.utils.Constants.TEXT;
 
 /**
  * A parser for {@link TypeTextInElementFoundByCssSelector}

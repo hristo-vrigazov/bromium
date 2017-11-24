@@ -1,8 +1,8 @@
 package com.hribol.bromium.common.replay;
 
+import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.execution.AutomationResultBuilder;
-import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -12,8 +12,6 @@ import java.net.URISyntaxException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 
 /**

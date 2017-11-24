@@ -4,9 +4,6 @@ import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.GenerationInformation;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  * Represents a package of {@link TestScenarioSteps} and {@link ApplicationConfiguration}
  */

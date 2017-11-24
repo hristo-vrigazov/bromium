@@ -1,9 +1,7 @@
 package com.hribol.bromium.common.synchronization;
 
 import com.hribol.bromium.core.synchronization.EventSignalizer;
-import com.hribol.bromium.core.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.ReplayingState;
-import com.hribol.bromium.replay.filters.ReplayRequestFilter;
 
 /**
  * Represents a synchronization event within the browser, i.e in the javascript code.

@@ -8,7 +8,6 @@ import java.util.Map;
 
 import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
 import static com.hribol.bromium.core.utils.Constants.EVENT;
-import static com.hribol.bromium.core.utils.Constants.TIMEOUT;
 
 /**
  * A parser for {@link ElementByCssToBePresent}

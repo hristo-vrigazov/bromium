@@ -6,13 +6,14 @@ import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.hribol.bromium.core.utils.Constants.CONDITION_NOT_SATISFIED_URL;
-import static com.hribol.bromium.core.utils.Constants.CONDITION_SATISFIED_URL;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by hvrigazov on 31.07.17.

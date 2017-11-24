@@ -4,7 +4,13 @@ import com.hribol.bromium.cli.MainMenuChoice;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
-import org.beryx.textio.*;
+import org.beryx.textio.BooleanInputReader;
+import org.beryx.textio.CharInputReader;
+import org.beryx.textio.EnumInputReader;
+import org.beryx.textio.StringInputReader;
+import org.beryx.textio.TextIO;
+import org.beryx.textio.TextIoFactory;
+import org.beryx.textio.TextTerminal;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -17,7 +23,10 @@ import static com.hribol.bromium.cli.commands.PromptUtils.*;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 /**

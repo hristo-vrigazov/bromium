@@ -1,7 +1,7 @@
 package com.hribol.bromium.common.filtering;
 
-import com.hribol.bromium.core.utils.URLUtils;
 import com.hribol.bromium.core.utils.HttpRequestToTestCaseStepConverter;
+import com.hribol.bromium.core.utils.URLUtils;
 import io.netty.handler.codec.http.HttpRequest;
 
 import java.io.UnsupportedEncodingException;

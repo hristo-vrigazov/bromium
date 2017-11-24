@@ -6,9 +6,14 @@ import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static com.hribol.bromium.integration.tests.TestUtils.*;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
+
+import static com.hribol.bromium.integration.tests.TestUtils.SCREEN_SYSTEM_PROPERTY;
+import static com.hribol.bromium.integration.tests.TestUtils.extractResource;
 
 /**
  * Created by hvrigazov on 18.07.17.

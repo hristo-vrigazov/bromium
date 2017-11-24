@@ -6,7 +6,6 @@ import com.hribol.bromium.common.generation.helper.suppliers.StepAndWebDriverAct
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
-import com.hribol.bromium.replay.actions.WebDriverAction;
 import org.junit.Test;
 
 import java.util.HashMap;

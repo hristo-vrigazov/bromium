@@ -1,15 +1,12 @@
 package com.hribol.bromium.common.browser;
 
 import com.hribol.bromium.common.browsers.DriverServiceSupplierBase;
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 import org.junit.Test;
 import org.openqa.selenium.remote.service.DriverService;
 
 import java.io.File;
 import java.io.IOException;
 
-import static org.mockito.Matchers.argThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;

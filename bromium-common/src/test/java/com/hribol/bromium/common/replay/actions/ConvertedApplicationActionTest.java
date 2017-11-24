@@ -1,7 +1,7 @@
 package com.hribol.bromium.common.replay.actions;
 
-import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.common.replay.factory.ConvertedApplicationAction;
+import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.execution.application.ApplicationAction;
 import org.junit.Test;
 

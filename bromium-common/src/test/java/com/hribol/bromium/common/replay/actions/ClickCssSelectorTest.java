@@ -8,7 +8,9 @@ import org.openqa.selenium.WebElement;
 
 import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CSS_SELECTOR;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by hvrigazov on 07.05.17.

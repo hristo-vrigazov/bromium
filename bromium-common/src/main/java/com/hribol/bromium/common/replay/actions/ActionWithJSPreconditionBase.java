@@ -2,12 +2,12 @@ package com.hribol.bromium.common.replay.actions;
 
 import com.hribol.bromium.common.replay.InstanceBasedAutomationResultBuilder;
 import com.hribol.bromium.common.synchronization.JSPrecondition;
-import com.hribol.bromium.replay.ReplayingState;
-import com.hribol.bromium.replay.actions.WebDriverAction;
-import com.hribol.bromium.replay.actions.ActionWithJSPrecondition;
-import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.core.synchronization.SynchronizationEvent;
+import com.hribol.bromium.replay.ReplayingState;
+import com.hribol.bromium.replay.actions.ActionWithJSPrecondition;
+import com.hribol.bromium.replay.actions.WebDriverAction;
+import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeoutException;

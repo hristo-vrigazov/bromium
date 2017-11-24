@@ -1,7 +1,6 @@
 package com.hribol.bromium.record;
 
 import com.hribol.bromium.core.utils.EventDetector;
-import com.hribol.bromium.core.utils.HttpRequestToTestCaseStepConverter;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.filters.RequestFilter;
@@ -13,7 +12,6 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 /**
  * A request filter which by given a list of {@link EventDetector}s, stores those events which are detected on a given

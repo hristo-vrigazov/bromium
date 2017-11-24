@@ -2,10 +2,9 @@ package com.hribol.bromium.cli;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.hribol.bromium.cli.commands.*;
-import com.hribol.bromium.dsl.BromiumRuntimeModule;
-import com.hribol.bromium.dsl.BromiumStandaloneSetup;
-import com.hribol.bromium.dsl.BromiumStandaloneSetupGenerated;
+import com.hribol.bromium.cli.commands.Command;
+import com.hribol.bromium.cli.commands.RecordCommand;
+import com.hribol.bromium.cli.commands.ReplayCommand;
 import org.apache.commons.io.IOUtils;
 import org.docopt.Docopt;
 
@@ -13,10 +12,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Supplier;
 
-import static com.hribol.bromium.cli.Main.Commands.*;
+import static com.hribol.bromium.cli.Main.Commands.RECORD;
+import static com.hribol.bromium.cli.Main.Commands.REPLAY;
 
 /**
  * Entry point to the application

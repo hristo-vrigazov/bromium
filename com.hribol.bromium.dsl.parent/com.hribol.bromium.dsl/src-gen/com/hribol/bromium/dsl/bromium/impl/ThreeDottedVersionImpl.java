@@ -5,11 +5,8 @@ package com.hribol.bromium.dsl.bromium.impl;
 
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.ThreeDottedVersion;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 

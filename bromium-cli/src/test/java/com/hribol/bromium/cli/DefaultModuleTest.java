@@ -1,12 +1,15 @@
 package com.hribol.bromium.cli;
 
 import com.google.common.io.Files;
-import com.google.inject.*;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Key;
+import com.google.inject.Module;
+import com.google.inject.ProvisionException;
+import com.google.inject.TypeLiteral;
 import com.google.inject.name.Names;
 import com.hribol.bromium.cli.commands.RecordCommand;
-import com.hribol.bromium.common.parsing.DslStepsDumper;
 import com.hribol.bromium.common.record.RecordBrowser;
-import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.parsing.StepsDumper;
 import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.providers.IOURIProvider;
@@ -35,9 +38,10 @@ import static com.hribol.bromium.core.DependencyInjectionConstants.CONFIGURATION
 import static com.hribol.bromium.core.DependencyInjectionConstants.HAR_FILE;
 import static com.hribol.bromium.core.DependencyInjectionConstants.MEASUREMENTS_FILE;
 import static com.hribol.bromium.core.utils.Constants.HAR_EXTENSION;
-import static com.hribol.bromium.integration.tests.TestUtils.*;
+import static com.hribol.bromium.integration.tests.TestUtils.CHROMEDRIVER;
+import static com.hribol.bromium.integration.tests.TestUtils.Resources;
+import static com.hribol.bromium.integration.tests.TestUtils.extractResource;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 

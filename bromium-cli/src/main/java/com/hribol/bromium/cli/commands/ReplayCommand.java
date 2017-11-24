@@ -2,9 +2,9 @@ package com.hribol.bromium.cli.commands;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.providers.IOURIProvider;
-import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.replay.ReplayBrowser;
 import com.hribol.bromium.replay.report.ExecutionReport;
@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Optional;
 
-import static com.hribol.bromium.cli.ParsedOptions.MEASUREMENTS;
 import static com.hribol.bromium.core.DependencyInjectionConstants.HAR_FILE;
 import static com.hribol.bromium.core.DependencyInjectionConstants.MEASUREMENTS_FILE;
 import static com.hribol.bromium.core.DependencyInjectionConstants.SCREEN_NUMBER;

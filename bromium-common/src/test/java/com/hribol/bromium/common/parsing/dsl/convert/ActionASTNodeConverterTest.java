@@ -8,7 +8,10 @@ import org.junit.Test;
 
 import java.util.Map;
 
-import static com.hribol.bromium.core.utils.WebDriverActions.*;
+import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CLASS_BY_TEXT;
+import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CSS_SELECTOR;
+import static com.hribol.bromium.core.utils.WebDriverActions.PAGE_LOADING;
+import static com.hribol.bromium.core.utils.WebDriverActions.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

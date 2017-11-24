@@ -4,10 +4,10 @@ import com.hribol.bromium.core.config.ParameterConfiguration;
 import com.hribol.bromium.dsl.bromium.ParameterValue;
 import org.junit.Test;
 
-import java.security.SecureRandom;
-
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyByte;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
