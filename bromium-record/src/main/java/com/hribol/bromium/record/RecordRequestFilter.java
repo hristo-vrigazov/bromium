@@ -6,6 +6,8 @@ import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -18,6 +20,9 @@ import java.util.Optional;
  * {@link HttpRequest} into {@link RecordingState}
  */
 public class RecordRequestFilter implements RequestFilter {
+
+    private static final Logger logger = LoggerFactory.getLogger(RecordRequestFilter.class);
+
     private RecordingState recordingState;
     private List<EventDetector> eventDetectors;
 
@@ -47,7 +52,7 @@ public class RecordRequestFilter implements RequestFilter {
                     }
 
                 } catch (UnsupportedEncodingException | MalformedURLException e) {
-                    e.printStackTrace();
+                    logger.error("Error while trying to convert test case step", e);
                 }
             }
         }

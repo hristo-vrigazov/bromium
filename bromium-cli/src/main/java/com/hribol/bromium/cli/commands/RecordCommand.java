@@ -8,6 +8,8 @@ import com.hribol.bromium.core.parsing.StepsDumper;
 import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.providers.IOURIProvider;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -20,6 +22,8 @@ import static com.hribol.bromium.core.DependencyInjectionConstants.SCREEN_NUMBER
  * A command for recording
  */
 public class RecordCommand implements Command {
+
+    private final static Logger logger = LoggerFactory.getLogger(RecordCommand.class);
 
     private final int screen;
     private PromptUtils promptUtils;
@@ -53,12 +57,13 @@ public class RecordCommand implements Command {
 
             RecordBrowser recordBrowser = recordBrowserBaseIOProvider.get();
             recordBrowser.record();
+            logger.info("Ready for recording, waiting for user input. Will terminate when ENTER is pressed");
             promptUtils.promptForRecording();
             TestScenarioSteps testScenarioSteps = recordBrowser.getTestCaseSteps();
             stepsDumperProvider.get().dump(testScenarioSteps, outputFile);
             recordBrowser.cleanUp();
         } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
+            logger.error("Error while recording", e);
         } finally {
             virtualScreenProcessOptional.ifPresent(Process::destroy);
         }
