@@ -52,7 +52,6 @@ public class RecordCommandTest {
         recordCommand.run();
 
         verify(stepsDumper, never()).dump(testScenarioSteps, outputFile);
-        verify(promptUtils).dispose();
     }
 
     @Test
@@ -70,7 +69,6 @@ public class RecordCommandTest {
         recordCommand.run();
 
         verify(stepsDumper, never()).dump(testScenarioSteps, outputFile);
-        verify(promptUtils).dispose();
     }
 
     @Test
@@ -92,6 +90,5 @@ public class RecordCommandTest {
         recordCommand.run();
 
         verify(stepsDumper).dump(testScenarioSteps, outputFile);
-        verify(promptUtils).dispose();
     }
 }

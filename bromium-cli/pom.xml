@@ -60,10 +60,6 @@
             <version>0.1</version>
         </dependency>
         <dependency>
-            <groupId>org.beryx</groupId>
-            <artifactId>text-io</artifactId>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>

@@ -60,7 +60,6 @@ public class RecordCommand implements Command {
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         } finally {
-            promptUtils.dispose();
             virtualScreenProcessOptional.ifPresent(Process::destroy);
         }
 

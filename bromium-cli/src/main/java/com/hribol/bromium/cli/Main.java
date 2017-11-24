@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -34,7 +35,7 @@ public class Main {
     private static Injector injector;
 
     public static void main(String[] args) {
-        logger.info("Running CLI with arguments {}", args);
+        logger.info("Running CLI with arguments {}", Arrays.toString(args));
         try {
             InputStream inputStream = Main.class.getResourceAsStream("/cli-specification.txt");
             String doc = IOUtils.toString(inputStream);

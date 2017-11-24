@@ -64,9 +64,8 @@ public class ReplayCommand implements Command {
             executionReport.getHar().writeTo(harFile);
             System.out.println(executionReport.getAutomationResult());
         } catch (IOException | URISyntaxException e) {
-            promptUtils.getTextIO().getTextTerminal().println(e.getMessage());
+
         } finally {
-            promptUtils.dispose();
             virtualScreenProcessOptional.ifPresent(Process::destroy);
         }
     }

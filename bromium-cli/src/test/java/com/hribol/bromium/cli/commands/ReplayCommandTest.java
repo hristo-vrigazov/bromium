@@ -51,7 +51,6 @@ public class ReplayCommandTest {
 
         replayCommand.run();
         verify(replayBrowser).replay(steps);
-        verify(promptUtils).dispose();
     }
 
     @Test
@@ -71,7 +70,6 @@ public class ReplayCommandTest {
 
         replayCommand.run();
         verify(replayBrowser).replay(steps);
-        verify(promptUtils).dispose();
     }
 
     @Test
@@ -93,7 +91,5 @@ public class ReplayCommandTest {
 
         replayCommand.run();
 
-        verify(promptUtils.getTextIO().getTextTerminal()).println(exceptionMessage);
-        verify(promptUtils).dispose();
     }
 }
