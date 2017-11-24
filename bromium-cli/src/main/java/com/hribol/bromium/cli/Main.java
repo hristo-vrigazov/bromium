@@ -7,6 +7,8 @@ import com.hribol.bromium.cli.commands.RecordCommand;
 import com.hribol.bromium.cli.commands.ReplayCommand;
 import org.apache.commons.io.IOUtils;
 import org.docopt.Docopt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,6 +24,8 @@ import static com.hribol.bromium.cli.Main.Commands.REPLAY;
  */
 public class Main {
 
+    private static Logger logger = LoggerFactory.getLogger(Main.class);
+
     public static class Commands {
         public static final String RECORD = "record";
         public static final String REPLAY = "replay";
@@ -30,6 +34,7 @@ public class Main {
     private static Injector injector;
 
     public static void main(String[] args) {
+        logger.info("Running CLI with arguments {}", args);
         try {
             InputStream inputStream = Main.class.getResourceAsStream("/cli-specification.txt");
             String doc = IOUtils.toString(inputStream);

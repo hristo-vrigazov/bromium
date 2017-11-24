@@ -123,6 +123,21 @@ public class RequestToPageLoadingEventConverterTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void ifUrlMatchesBaseUrlExactlyOptionalEmptyIsReturned() throws MalformedURLException, UnsupportedEncodingException {
+        ActionsFilter actionsFilter = createMocks(true);
+
+        HttpRequest httpRequest = mock(HttpRequest.class);
+        when(httpRequest.getUri()).thenReturn(BASE_URL);
+
+        RequestToPageLoadingEventConverter requestToPageLoadingEventConverter =
+                new RequestToPageLoadingEventConverter(BASE_URL, actionsFilter);
+
+        Optional<Map<String, String>> expected = Optional.empty();
+        Optional<Map<String, String>> actual = requestToPageLoadingEventConverter.convert(httpRequest);
+
+        assertEquals(expected, actual);
+    }
 
     @Test
     public void ifActionIsExposedThenEmptyOptionalIsReturned() throws MalformedURLException, UnsupportedEncodingException {

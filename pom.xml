@@ -65,6 +65,8 @@
         <xtext.version>2.12.0</xtext.version>
         <hamcrest.core.version>1.3</hamcrest.core.version>
         <bean.tester.version>1.4.4</bean.tester.version>
+        <bromium.dsl.version>1.0.0-SNAPSHOT</bromium.dsl.version>
+        <log4j.binding.version>2.9.1</log4j.binding.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -319,7 +321,7 @@
             <dependency>
                 <groupId>com.hribol.bromium.dsl</groupId>
                 <artifactId>com.hribol.bromium.dsl</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${bromium.dsl.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.eclipse.xtext/org.eclipse.xtext -->
             <dependency>
@@ -334,7 +336,12 @@
                 <scope>test</scope>
                 <version>${bean.tester.version}</version>
             </dependency>
-
+            <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j.binding.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
