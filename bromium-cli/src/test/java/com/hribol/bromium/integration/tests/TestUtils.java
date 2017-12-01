@@ -90,10 +90,10 @@ public class TestUtils {
 
     public static File extractResource(String resource, String suffix, File testResourcesDirectory) throws IOException {
         File tempFile = File.createTempFile(resource, suffix, testResourcesDirectory);
-        InputStream chromeDriverStream = TestUtils.class.getResourceAsStream("/" + resource);
+        InputStream resourceAsStream = TestUtils.class.getResourceAsStream("/" + resource);
         OutputStream fileOutputStream = new FileOutputStream(tempFile);
-        IOUtils.copy(chromeDriverStream, fileOutputStream);
-        chromeDriverStream.close();
+        IOUtils.copy(resourceAsStream, fileOutputStream);
+        resourceAsStream.close();
         fileOutputStream.close();
         return tempFile;
     }

@@ -1,10 +1,8 @@
 package com.hribol.bromium.record;
 
 import com.hribol.bromium.core.utils.EventDetector;
-import io.netty.handler.codec.http.DefaultHttpResponse;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
-import io.netty.handler.codec.http.HttpResponseStatus;
 import net.lightbody.bmp.filters.RequestFilter;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
@@ -50,7 +48,6 @@ public class RecordRequestFilter implements RequestFilter {
                         Map<String, String> event = optionalEvent.get();
                         recordingState.storeTestCaseStep(event);
                         logger.info("Recorded event {}", event);
-                        return new DefaultHttpResponse(httpRequest.getProtocolVersion(), HttpResponseStatus.OK);
                     }
 
                 } catch (UnsupportedEncodingException | MalformedURLException e) {
