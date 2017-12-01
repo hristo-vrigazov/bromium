@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.integration.tests.TestUtils;
 import com.hribol.bromium.integration.tests.simulation.RecordingSimulatorModule;
-import com.hribol.bromium.replay.filters.ReplayRequestFilter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
