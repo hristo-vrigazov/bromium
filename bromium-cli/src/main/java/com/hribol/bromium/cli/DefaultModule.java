@@ -588,7 +588,9 @@ public class DefaultModule extends AbstractModule {
     @Named(REPLAYING_JAVASCRIPT_CODE)
     public String getReplayingJavascriptCode(@Named(REPLAYING_JAVASCRIPT_INJECTOR)
                                                          IOProvider<JavascriptInjectionPreparator> javascriptInjectorIOProvider) throws IOException {
-        return javascriptInjectorIOProvider.get().getInjectionCode();
+        String javascriptCode = javascriptInjectorIOProvider.get().getInjectionCode();
+        logger.debug(javascriptCode);
+        return javascriptCode;
     }
 
     @CheckedProvides(IOProvider.class)
