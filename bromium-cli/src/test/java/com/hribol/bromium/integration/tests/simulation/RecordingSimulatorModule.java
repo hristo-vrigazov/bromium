@@ -82,7 +82,7 @@ public class RecordingSimulatorModule extends AbstractModule {
      * Executes a callback when the user is prompted for recording
      * @param runnable
      */
-    public void whenPromptedForRecordingRunnable(SimulatorRunnable runnable) {
+    public void whenPromptedForRecordingRunnable(SimulatorRunnable runnable) throws IOException {
         doAnswer(invocationOnMock -> {
             runnable.run(this);
             return null;
