@@ -3,7 +3,10 @@ package com.hribol.bromium.cli;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.hribol.bromium.cli.commands.*;
+import com.hribol.bromium.cli.commands.Command;
+import com.hribol.bromium.cli.commands.RecordCommand;
+import com.hribol.bromium.cli.commands.ReplayCommand;
+import org.apache.commons.io.IOUtils;
 import org.docopt.DocoptExitException;
 import org.junit.Rule;
 import org.junit.Test;
@@ -12,15 +15,14 @@ import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.apache.commons.io.IOUtils;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static org.mockito.Mockito.*;
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
-import static org.powermock.api.mockito.PowerMockito.whenNew;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by hvrigazov on 09.05.17.

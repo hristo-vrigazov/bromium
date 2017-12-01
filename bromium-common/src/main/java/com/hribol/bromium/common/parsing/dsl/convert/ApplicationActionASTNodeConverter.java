@@ -11,7 +11,6 @@ import com.hribol.bromium.dsl.bromium.WebDriverActionCondition;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.hribol.bromium.core.utils.Constants.NOTHING;

@@ -7,7 +7,6 @@ import net.lightbody.bmp.filters.ResponseFilter;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
 
-import java.net.URI;
 import java.util.function.Predicate;
 
 /**

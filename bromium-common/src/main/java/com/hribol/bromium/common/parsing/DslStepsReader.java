@@ -6,7 +6,6 @@ import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.SyntaxDefinitionConfiguration;
 import com.hribol.bromium.core.parsing.StepsReader;
 import org.apache.commons.io.IOUtils;
-import org.bouncycastle.util.test.Test;
 
 import java.io.IOException;
 import java.io.InputStream;

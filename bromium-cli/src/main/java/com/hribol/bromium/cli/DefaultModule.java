@@ -1,10 +1,16 @@
 package com.hribol.bromium.cli;
 
-import com.google.inject.*;
+import com.google.inject.AbstractModule;
+import com.google.inject.Injector;
+import com.google.inject.Provider;
+import com.google.inject.Provides;
+import com.google.inject.Singleton;
+import com.google.inject.TypeLiteral;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import com.google.inject.throwingproviders.CheckedProvides;
 import com.google.inject.throwingproviders.ThrowingProviderBinder;
+import com.hribol.bromium.common.ProxyDriverIntegrator;
 import com.hribol.bromium.common.browsers.ChromeDriverServiceSupplier;
 import com.hribol.bromium.common.browsers.ChromeDriverSupplier;
 import com.hribol.bromium.common.builder.JsCollector;
@@ -20,27 +26,32 @@ import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfigu
 import com.hribol.bromium.common.generation.helper.StepsAndConfiguration;
 import com.hribol.bromium.common.generation.helper.suppliers.StepAndActionConfigurationSupplier;
 import com.hribol.bromium.common.generation.helper.suppliers.StepAndWebDriverActionConfigurationSupplier;
-import com.hribol.bromium.common.generation.record.*;
+import com.hribol.bromium.common.generation.record.BaseRecorderFunctionFactory;
+import com.hribol.bromium.common.generation.record.PredefinedRecorderFunctionFactory;
+import com.hribol.bromium.common.generation.record.RecorderFunctionRegistry;
+import com.hribol.bromium.common.generation.record.RecordingJavascriptGenerator;
+import com.hribol.bromium.common.generation.record.RecordingWebDriverActionsOnly;
 import com.hribol.bromium.common.generation.record.invocations.RecorderFunctionInvocation;
-import com.hribol.bromium.common.generation.replay.*;
+import com.hribol.bromium.common.generation.replay.BaseReplayFunctionFactory;
+import com.hribol.bromium.common.generation.replay.PredefinedReplayFunctionFactory;
+import com.hribol.bromium.common.generation.replay.ReplayFunctionRegistry;
+import com.hribol.bromium.common.generation.replay.ReplayGeneratorByStepAndActionConfiguration;
+import com.hribol.bromium.common.generation.replay.ReplayingJavascriptGenerator;
 import com.hribol.bromium.common.generation.replay.invocations.ReplayFunctionInvocation;
-import com.hribol.bromium.common.ProxyDriverIntegrator;
 import com.hribol.bromium.common.parsing.DslParser;
 import com.hribol.bromium.common.parsing.DslStepsDumper;
 import com.hribol.bromium.common.parsing.DslStepsReader;
-import com.hribol.bromium.common.parsing.dsl.convert.*;
+import com.hribol.bromium.common.parsing.dsl.convert.ASTNodeConverter;
+import com.hribol.bromium.common.parsing.dsl.convert.ActionASTNodeConverter;
+import com.hribol.bromium.common.parsing.dsl.convert.ApplicationActionASTNodeConverter;
+import com.hribol.bromium.common.parsing.dsl.convert.ConditionASTNodeConverter;
+import com.hribol.bromium.common.parsing.dsl.convert.SyntaxDefinitionASTNodeConverter;
+import com.hribol.bromium.common.parsing.dsl.convert.TraversingBasedASTNodeConverter;
 import com.hribol.bromium.common.record.RecordBrowser;
-import com.hribol.bromium.common.replay.SignalizingStateConditionsUpdater;
-import com.hribol.bromium.core.config.SyntaxDefinitionConfiguration;
-import com.hribol.bromium.core.config.WebDriverActionConfiguration;
-import com.hribol.bromium.core.parsing.*;
-import com.hribol.bromium.core.utils.*;
-import com.hribol.bromium.dsl.BromiumStandaloneSetup;
-import com.hribol.bromium.dsl.bromium.*;
-import com.hribol.bromium.record.RecordingState;
+import com.hribol.bromium.common.replay.ActionExecutor;
 import com.hribol.bromium.common.replay.DriverOperations;
 import com.hribol.bromium.common.replay.ExecutorDependencies;
-import com.hribol.bromium.common.replay.ActionExecutor;
+import com.hribol.bromium.common.replay.SignalizingStateConditionsUpdater;
 import com.hribol.bromium.common.replay.factory.DefaultApplicationActionFactory;
 import com.hribol.bromium.common.replay.factory.PredefinedWebDriverActionFactory;
 import com.hribol.bromium.common.replay.factory.TestCaseStepToApplicationActionConverter;
@@ -48,17 +59,34 @@ import com.hribol.bromium.common.synchronization.SignalizationBasedEventSynchron
 import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
+import com.hribol.bromium.core.config.SyntaxDefinitionConfiguration;
+import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.core.generation.FunctionRegistry;
 import com.hribol.bromium.core.generation.GeneratedFunction;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
+import com.hribol.bromium.core.parsing.ApplicationConfigurationParser;
+import com.hribol.bromium.core.parsing.StepsDumper;
+import com.hribol.bromium.core.parsing.StepsReader;
 import com.hribol.bromium.core.providers.IOProvider;
 import com.hribol.bromium.core.providers.IOURIProvider;
 import com.hribol.bromium.core.suite.UbuntuVirtualScreenProcessCreator;
 import com.hribol.bromium.core.suite.VirtualScreenProcessCreator;
 import com.hribol.bromium.core.suppliers.WebDriverSupplier;
 import com.hribol.bromium.core.synchronization.EventSynchronizer;
+import com.hribol.bromium.core.utils.ActionsFilter;
+import com.hribol.bromium.core.utils.EventDetector;
+import com.hribol.bromium.core.utils.EventDetectorImpl;
+import com.hribol.bromium.core.utils.HttpRequestToTestCaseStepConverter;
+import com.hribol.bromium.core.utils.JavascriptInjectionPreparator;
+import com.hribol.bromium.dsl.BromiumStandaloneSetup;
+import com.hribol.bromium.dsl.bromium.ApplicationAction;
+import com.hribol.bromium.dsl.bromium.Model;
+import com.hribol.bromium.dsl.bromium.SyntaxDefinition;
+import com.hribol.bromium.dsl.bromium.WebDriverAction;
+import com.hribol.bromium.dsl.bromium.WebDriverActionCondition;
 import com.hribol.bromium.record.RecordRequestFilter;
 import com.hribol.bromium.record.RecordResponseFilter;
+import com.hribol.bromium.record.RecordingState;
 import com.hribol.bromium.replay.ReplayBrowser;
 import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.execution.WebDriverActionExecutor;
@@ -84,8 +112,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.service.DriverService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -100,6 +135,7 @@ import static com.hribol.bromium.cli.Main.Commands.RECORD;
 import static com.hribol.bromium.cli.Main.Commands.REPLAY;
 import static com.hribol.bromium.core.ConventionConstants.SUBMIT_EVENT_URL;
 import static com.hribol.bromium.core.DependencyInjectionConstants.*;
+import static com.hribol.bromium.core.utils.Constants.CONDITION_NOT_SATISFIED_URL;
 import static com.hribol.bromium.core.utils.Constants.CONDITION_SATISFIED_URL;
 import static com.hribol.bromium.core.utils.Constants.HAR_EXTENSION;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
@@ -108,6 +144,9 @@ import static org.openqa.selenium.remote.BrowserType.CHROME;
  * Guice module used for creation of the dependency graph
  */
 public class DefaultModule extends AbstractModule {
+
+    private static final Logger logger = LoggerFactory.getLogger(DefaultModule.class);
+
     private Injector dslInjector;
 
     private String command;
@@ -345,7 +384,7 @@ public class DefaultModule extends AbstractModule {
     @Provides
     @Named(CONDITION_NOT_SATISFIED_PREDICATE)
     public Predicate<HttpRequest> getConditionNotSatisfiedPredicate() {
-        return new UriContainsStringPredicate(CONDITION_NOT_SATISFIED_PREDICATE);
+        return new UriContainsStringPredicate(CONDITION_NOT_SATISFIED_URL);
     }
 
     @Provides
@@ -549,7 +588,9 @@ public class DefaultModule extends AbstractModule {
     @Named(REPLAYING_JAVASCRIPT_CODE)
     public String getReplayingJavascriptCode(@Named(REPLAYING_JAVASCRIPT_INJECTOR)
                                                          IOProvider<JavascriptInjectionPreparator> javascriptInjectorIOProvider) throws IOException {
-        return javascriptInjectorIOProvider.get().getInjectionCode();
+        String javascriptCode = javascriptInjectorIOProvider.get().getInjectionCode();
+        logger.debug(javascriptCode);
+        return javascriptCode;
     }
 
     @CheckedProvides(IOProvider.class)
@@ -557,7 +598,7 @@ public class DefaultModule extends AbstractModule {
     public String getRecordingJavascriptCode(@Named(RECORDING_JAVASCRIPT_INJECTOR)
                                                      IOProvider<JavascriptInjectionPreparator> javascriptInjectorIOProvider) throws IOException {
         String generatedJavascriptCode = javascriptInjectorIOProvider.get().getInjectionCode();
-        System.out.println(generatedJavascriptCode);
+        logger.debug(generatedJavascriptCode);
         return generatedJavascriptCode;
     }
 
@@ -641,7 +682,7 @@ public class DefaultModule extends AbstractModule {
                                                            ResponseFilter responseFilter) throws IOException {
         BrowserMobProxy proxy = createBrowserMobProxy(timeout, recordRequestFilter, responseFilter);
         proxy.start(0);
-        System.out.println("Proxy running on port " + proxy.getPort());
+        logger.info("Proxy running on port " + proxy.getPort());
         Proxy seleniumProxy = createSeleniumProxy(proxy);
         DesiredCapabilities desiredCapabilities = createDesiredCapabilities(seleniumProxy);
         DriverService driverService = driverServiceSupplier.getDriverService(pathToDriverExecutable, screen);

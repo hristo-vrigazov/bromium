@@ -1,6 +1,10 @@
 package com.hribol.bromium.integration.tests.record;
 
-import com.google.inject.*;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Key;
+import com.google.inject.Module;
+import com.google.inject.TypeLiteral;
 import com.google.inject.util.Modules;
 import com.hribol.bromium.cli.DefaultModule;
 import com.hribol.bromium.cli.commands.RecordCommand;
@@ -18,7 +22,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.hribol.bromium.cli.Main.Commands.RECORD;
-import static com.hribol.bromium.cli.ParsedOptions.*;
+import static com.hribol.bromium.cli.ParsedOptions.APPLICATION;
+import static com.hribol.bromium.cli.ParsedOptions.BROWSER;
+import static com.hribol.bromium.cli.ParsedOptions.DRIVER;
+import static com.hribol.bromium.cli.ParsedOptions.OUTPUT;
+import static com.hribol.bromium.cli.ParsedOptions.SCREEN;
+import static com.hribol.bromium.cli.ParsedOptions.TIMEOUT;
+import static com.hribol.bromium.cli.ParsedOptions.URL;
 import static com.hribol.bromium.integration.tests.TestUtils.Resources.DEMO_CONFIGURATION;
 import static com.hribol.bromium.integration.tests.TestUtils.generateRandomJsonFilename;
 import static org.openqa.selenium.remote.BrowserType.CHROME;

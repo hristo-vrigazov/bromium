@@ -1,6 +1,10 @@
 package com.hribol.bromium.common.generation.common;
 
-import com.hribol.bromium.core.generation.*;
+import com.hribol.bromium.core.generation.GeneratedFunction;
+import com.hribol.bromium.core.generation.GeneratedFunctionFactory;
+import com.hribol.bromium.core.generation.GeneratedInvocation;
+import com.hribol.bromium.core.generation.GenerationFunctionInformation;
+import com.hribol.bromium.core.generation.RegistryInformation;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

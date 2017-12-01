@@ -5,18 +5,27 @@ import com.hribol.bromium.core.synchronization.SynchronizationEvent;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by hvrigazov on 04.06.17.
  */
 public class SignalizationBasedEventSynchronizerTest {
+
+    private final static Logger logger = LoggerFactory.getLogger(SignalizationBasedEventSynchronizerTest.class);
 
     private int timeout = 2;
 
@@ -118,7 +127,7 @@ public class SignalizationBasedEventSynchronizerTest {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage(), e);
             }
             eventSynchronizer.signalizeEvent(synchronizationEvent);
         }

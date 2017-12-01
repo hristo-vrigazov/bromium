@@ -2,10 +2,8 @@ package com.hribol.bromium.common.generation.record.invocations;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSpace;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by hvrigazov on 10.08.17.

@@ -6,13 +6,13 @@ import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.util.HttpMessageContents;
 import net.lightbody.bmp.util.HttpMessageInfo;
 import org.junit.Test;
-import org.mockito.Answers;
-import org.mockito.Mock;
 
-import java.net.URI;
 import java.util.function.Predicate;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by hvrigazov on 30.07.17.

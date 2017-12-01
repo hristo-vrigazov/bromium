@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by hvrigazov on 03.07.17.

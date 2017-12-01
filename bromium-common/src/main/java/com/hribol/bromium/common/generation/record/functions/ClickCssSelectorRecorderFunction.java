@@ -6,7 +6,10 @@ import com.hribol.bromium.common.generation.record.invocations.RecorderFunctionI
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 
 import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CSS_SELECTOR;
-import static com.hribol.bromium.core.utils.Constants.*;
+import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
+import static com.hribol.bromium.core.utils.Constants.EVENT;
+import static com.hribol.bromium.core.utils.Constants.EVENT_NAME;
+import static com.hribol.bromium.core.utils.Constants.PARAMETERS;
 import static com.hribol.bromium.core.utils.JsEvents.CLICK;
 
 /**

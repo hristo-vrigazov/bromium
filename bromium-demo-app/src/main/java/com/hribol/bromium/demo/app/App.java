@@ -1,7 +1,6 @@
 package com.hribol.bromium.demo.app;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Entrypoint to the demo app as a standalone application

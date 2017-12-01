@@ -6,12 +6,24 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.hribol.bromium.common.parsing.DslStepsDumperTest.*;
+import static com.hribol.bromium.common.parsing.DslStepsDumperTest.aliasPassword;
+import static com.hribol.bromium.common.parsing.DslStepsDumperTest.aliasText;
+import static com.hribol.bromium.common.parsing.DslStepsDumperTest.aliasUrl;
+import static com.hribol.bromium.common.parsing.DslStepsDumperTest.clickLoginButtonActionName;
+import static com.hribol.bromium.common.parsing.DslStepsDumperTest.createAliasesMockConfiguration;
+import static com.hribol.bromium.common.parsing.DslStepsDumperTest.createConfigurationinishingWithExposedParameter;
+import static com.hribol.bromium.common.parsing.DslStepsDumperTest.createNoAliasesMockConfiguration;
+import static com.hribol.bromium.common.parsing.DslStepsDumperTest.typeInNameInputActionName;
+import static com.hribol.bromium.common.parsing.DslStepsDumperTest.typeInPasswordActionName;
 import static com.hribol.bromium.core.utils.Constants.EVENT;
 import static org.junit.Assert.assertEquals;
 

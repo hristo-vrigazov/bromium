@@ -1,10 +1,12 @@
 package com.hribol.bromium.common.parsing.dsl.convert;
 
 import com.google.inject.Inject;
-import com.hribol.bromium.core.config.*;
-import com.hribol.bromium.dsl.bromium.*;
+import com.hribol.bromium.core.config.ApplicationActionConfiguration;
+import com.hribol.bromium.core.config.ApplicationConfiguration;
+import com.hribol.bromium.dsl.bromium.ApplicationAction;
+import com.hribol.bromium.dsl.bromium.Model;
 
-import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**

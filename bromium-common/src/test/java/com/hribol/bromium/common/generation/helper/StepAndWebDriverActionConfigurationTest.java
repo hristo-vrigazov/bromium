@@ -1,6 +1,5 @@
 package com.hribol.bromium.common.generation.helper;
 
-import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import org.junit.Test;
 

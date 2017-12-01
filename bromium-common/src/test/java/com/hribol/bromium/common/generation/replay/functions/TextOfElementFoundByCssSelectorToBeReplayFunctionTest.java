@@ -5,19 +5,17 @@ import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfigu
 import com.hribol.bromium.common.generation.replay.invocations.ReplayFunctionInvocation;
 import com.hribol.bromium.common.generation.replay.invocations.TextOfElementFoundByCssSelectorToBeInvocation;
 import com.hribol.bromium.core.config.ParameterConfiguration;
-import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import org.junit.Test;
 
-import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.hribol.bromium.common.builder.JsFunctionNames.TEXT_OF_ELEMENT_FOUND_BY_CSS_SELECTOR_TO_BE;
 import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
 import static com.hribol.bromium.core.utils.Constants.TEXT;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by hvrigazov on 04.11.17.

@@ -3,10 +3,14 @@ package com.hribol.bromium.common.generation.record.functions;
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.record.invocations.RecorderFunctionInvocation;
-import com.hribol.bromium.common.generation.record.invocations.TypeTextInElementFoundByCssSelectorRecorderFunctionInvocation;
 
 import static com.hribol.bromium.common.builder.JsFunctionNames.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR;
-import static com.hribol.bromium.core.utils.Constants.*;
+import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
+import static com.hribol.bromium.core.utils.Constants.EVENT;
+import static com.hribol.bromium.core.utils.Constants.EVENT_NAME;
+import static com.hribol.bromium.core.utils.Constants.INPUT_VALUE;
+import static com.hribol.bromium.core.utils.Constants.PARAMETERS;
+import static com.hribol.bromium.core.utils.Constants.TEXT;
 import static com.hribol.bromium.core.utils.JsEvents.CHANGE;
 
 /**

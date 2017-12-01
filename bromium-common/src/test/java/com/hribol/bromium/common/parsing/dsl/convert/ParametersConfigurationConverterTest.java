@@ -2,14 +2,14 @@ package com.hribol.bromium.common.parsing.dsl.convert;
 
 import com.hribol.bromium.core.config.ParameterConfiguration;
 import com.hribol.bromium.dsl.bromium.ParameterValue;
-import com.hribol.bromium.dsl.bromium.impl.ParameterValueImpl;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

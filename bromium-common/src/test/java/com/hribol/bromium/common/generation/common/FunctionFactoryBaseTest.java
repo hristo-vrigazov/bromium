@@ -3,7 +3,6 @@ package com.hribol.bromium.common.generation.common;
 import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.core.generation.GeneratedFunction;
 import com.hribol.bromium.core.generation.GenerationFunctionInformation;
-import com.hribol.bromium.core.generation.GenerationInformation;
 import org.junit.Test;
 
 import java.util.function.Supplier;

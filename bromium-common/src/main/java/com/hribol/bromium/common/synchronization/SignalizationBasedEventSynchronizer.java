@@ -2,6 +2,8 @@ package com.hribol.bromium.common.synchronization;
 
 import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.core.synchronization.SynchronizationEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +17,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * A class which synchronizes events by signalizing. This is the opposite of a polling-based approach.
  */
 public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
+
+    private final static Logger logger = LoggerFactory.getLogger(SignalizationBasedEventSynchronizer.class);
 
     private Lock lock;
     private Map<SynchronizationEvent, Condition> eventConditionMap = new HashMap<>();
@@ -34,7 +38,7 @@ public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
      */
     @Override
     public void awaitUntil(SynchronizationEvent synchronizationEvent) throws InterruptedException, TimeoutException {
-        System.out.println("Before await " + synchronizationEvent.isSatisfied());
+        logger.debug("Before await " + synchronizationEvent.isSatisfied());
         if (synchronizationEvent.isSatisfied()) {
             return;
         }
@@ -44,13 +48,14 @@ public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
         Condition condition = lock.newCondition();
         eventConditionMap.put(synchronizationEvent, condition);
 
-        System.out.println("When calling await " + synchronizationEvent.isSatisfied());
+        logger.debug("When calling await " + synchronizationEvent.isSatisfied());
         boolean timedOut = !condition.await(timeoutInSeconds, TimeUnit.SECONDS);
 
         lock.unlock();
 
         if (timedOut) {
-            System.out.println("After timeout " + synchronizationEvent.isSatisfied());
+            logger.debug("After timeout " + synchronizationEvent.isSatisfied());
+            logger.error("Condition {} timed out! ", synchronizationEvent.getName());
             throw new TimeoutException("The synchronization event " + synchronizationEvent.getName() + " was not satisfied in the specified time");
         }
 
@@ -69,7 +74,7 @@ public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
                 lock.unlock();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Exception while trying to signalize event " + synchronizationEvent.getName());
         }
     }
 

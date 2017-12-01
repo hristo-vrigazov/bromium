@@ -1,6 +1,5 @@
 package com.hribol.bromium.common.generation.replay.invocations;
 
-import com.hribol.bromium.common.generation.record.invocations.ClickClassByTextRecorderInvocation;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

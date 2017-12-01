@@ -3,7 +3,6 @@ package com.hribol.bromium.common.generation.replay;
 import com.google.inject.Inject;
 import com.hribol.bromium.common.generation.helper.StepAndActionConfiguration;
 import com.hribol.bromium.common.generation.helper.StepAndWebDriverActionConfiguration;
-import com.hribol.bromium.common.generation.helper.suppliers.StepAndActionConfigurationSupplier;
 import com.hribol.bromium.common.generation.helper.suppliers.StepAndWebDriverActionConfigurationSupplier;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;

@@ -10,7 +10,9 @@ import java.util.function.Supplier;
 import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CSS_SELECTOR;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.RETURNS_MOCKS;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by hvrigazov on 03.07.17.

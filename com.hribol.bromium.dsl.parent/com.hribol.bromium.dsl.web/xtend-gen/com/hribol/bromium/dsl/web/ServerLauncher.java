@@ -3,8 +3,6 @@
  */
 package com.hribol.bromium.dsl.web;
 
-import java.net.InetSocketAddress;
-import java.net.URI;
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.util.log.Slf4jLog;
@@ -16,6 +14,9 @@ import org.eclipse.jetty.webapp.WebXmlConfiguration;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+
+import java.net.InetSocketAddress;
+import java.net.URI;
 
 /**
  * This program starts an HTTP server for testing the web integration of your DSL.

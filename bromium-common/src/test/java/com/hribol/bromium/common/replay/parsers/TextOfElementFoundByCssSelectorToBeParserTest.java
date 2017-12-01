@@ -7,7 +7,9 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.hribol.bromium.core.utils.Constants.*;
+import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
+import static com.hribol.bromium.core.utils.Constants.EVENT;
+import static com.hribol.bromium.core.utils.Constants.TEXT;
 import static org.junit.Assert.assertEquals;
 
 /**

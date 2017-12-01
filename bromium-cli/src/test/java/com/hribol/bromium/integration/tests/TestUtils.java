@@ -4,7 +4,11 @@ import com.google.common.collect.ImmutableMap;
 import com.hribol.bromium.core.TestScenarioSteps;
 import org.apache.commons.io.IOUtils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.UUID;
 
 import static com.hribol.bromium.core.utils.Constants.EVENT;
@@ -86,10 +90,10 @@ public class TestUtils {
 
     public static File extractResource(String resource, String suffix, File testResourcesDirectory) throws IOException {
         File tempFile = File.createTempFile(resource, suffix, testResourcesDirectory);
-        InputStream chromeDriverStream = TestUtils.class.getResourceAsStream("/" + resource);
+        InputStream resourceAsStream = TestUtils.class.getResourceAsStream("/" + resource);
         OutputStream fileOutputStream = new FileOutputStream(tempFile);
-        IOUtils.copy(chromeDriverStream, fileOutputStream);
-        chromeDriverStream.close();
+        IOUtils.copy(resourceAsStream, fileOutputStream);
+        resourceAsStream.close();
         fileOutputStream.close();
         return tempFile;
     }

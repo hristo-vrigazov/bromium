@@ -4,8 +4,6 @@ import io.netty.handler.codec.http.HttpRequest;
 
 import java.util.function.Predicate;
 
-import static com.hribol.bromium.core.ConventionConstants.SUBMIT_EVENT_URL;
-
 /**
  * A predicate which checks whether the URL of a given {@link HttpRequest} contains given string
  */

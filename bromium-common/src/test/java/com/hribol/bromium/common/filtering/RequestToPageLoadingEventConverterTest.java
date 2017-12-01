@@ -1,7 +1,6 @@
 package com.hribol.bromium.common.filtering;
 
 import com.google.common.collect.ImmutableMap;
-import com.hribol.bromium.common.filtering.RequestToPageLoadingEventConverter;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ParameterConfiguration;
 import com.hribol.bromium.core.utils.ActionsFilter;
@@ -12,16 +11,21 @@ import org.junit.rules.ExpectedException;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import static com.hribol.bromium.core.ConventionConstants.LINK_INTERCEPTOR_MARKER;
 import static com.hribol.bromium.core.utils.Constants.EVENT;
 import static com.hribol.bromium.core.utils.Constants.PAGE;
-import static com.hribol.bromium.core.utils.Constants.URL;
 import static com.hribol.bromium.core.utils.WebDriverActions.PAGE_LOADING;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by hvrigazov on 03.08.17.
@@ -119,6 +123,21 @@ public class RequestToPageLoadingEventConverterTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void ifUrlMatchesBaseUrlExactlyOptionalEmptyIsReturned() throws MalformedURLException, UnsupportedEncodingException {
+        ActionsFilter actionsFilter = createMocks(true);
+
+        HttpRequest httpRequest = mock(HttpRequest.class);
+        when(httpRequest.getUri()).thenReturn(BASE_URL);
+
+        RequestToPageLoadingEventConverter requestToPageLoadingEventConverter =
+                new RequestToPageLoadingEventConverter(BASE_URL, actionsFilter);
+
+        Optional<Map<String, String>> expected = Optional.empty();
+        Optional<Map<String, String>> actual = requestToPageLoadingEventConverter.convert(httpRequest);
+
+        assertEquals(expected, actual);
+    }
 
     @Test
     public void ifActionIsExposedThenEmptyOptionalIsReturned() throws MalformedURLException, UnsupportedEncodingException {

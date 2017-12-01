@@ -8,11 +8,12 @@ import org.junit.Test;
 
 import java.text.MessageFormat;
 
-import static com.hribol.bromium.common.generation.replay.functions.Constants.HASHCODE;
 import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by hvrigazov on 02.07.17.

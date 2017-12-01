@@ -1,7 +1,6 @@
 package com.hribol.bromium.common.generation.record;
 
 import com.hribol.bromium.common.builder.JsCollector;
-import com.hribol.bromium.common.generation.replay.PredefinedReplayFunctionFactory;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import org.junit.Test;
 

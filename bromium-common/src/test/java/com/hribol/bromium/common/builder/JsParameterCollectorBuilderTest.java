@@ -3,11 +3,10 @@ package com.hribol.bromium.common.builder;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
+import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSpace;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-
-import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSpace;
 /**
  * Created by hvrigazov on 09.06.17.
  */

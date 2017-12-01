@@ -59,7 +59,11 @@ public class RequestToPageLoadingEventConverter implements HttpRequestToTestCase
                     return Optional.of(ImmutableMap.of(EVENT, applicationActionConfiguration.getName()));
                 }
             } else {
-                String urlContinuation = requestUri.split(baseUrl)[1];
+                String[] urlParts = requestUri.split(baseUrl);
+                if (urlParts.length < 2) {
+                    return Optional.empty();
+                }
+                String urlContinuation = urlParts[1];
                 return Optional.of(ImmutableMap.of(
                         EVENT, applicationActionConfiguration.getName(),
                         urlParameterConfiguration.getAlias(), urlContinuation

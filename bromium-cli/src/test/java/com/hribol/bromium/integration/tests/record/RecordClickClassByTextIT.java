@@ -15,7 +15,10 @@ import java.util.Optional;
 
 import static com.hribol.bromium.cli.ParsedOptions.URL;
 import static com.hribol.bromium.core.utils.Constants.EVENT;
-import static com.hribol.bromium.integration.tests.TestUtils.*;
+import static com.hribol.bromium.integration.tests.TestUtils.ITEM_NAME;
+import static com.hribol.bromium.integration.tests.TestUtils.Pages;
+import static com.hribol.bromium.integration.tests.TestUtils.SUBPAGE;
+import static com.hribol.bromium.integration.tests.TestUtils.TARGET;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 

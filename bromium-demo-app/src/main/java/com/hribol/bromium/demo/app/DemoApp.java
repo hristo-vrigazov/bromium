@@ -11,6 +11,8 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,6 +24,8 @@ import java.nio.file.Paths;
  * common problems solved with Bromium.
  */
 public class DemoApp {
+
+    private final static Logger logger = LoggerFactory.getLogger(DemoApp.class);
 
     private final File baseOutputDirectory;
     private Server server;
@@ -73,13 +77,13 @@ public class DemoApp {
 
         server.start();
         this.port = ((ServerConnector) server.getConnectors()[0]).getLocalPort();
-        System.out.println("Server started on port " + port);
+        logger.info("Server started on port " + port);
 
         new Thread(() -> {
             try {
                 server.join();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                logger.info("Interrupted!", e);
             }
         }).start();
     }

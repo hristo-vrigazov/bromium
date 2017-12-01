@@ -1,7 +1,6 @@
 package com.hribol.bromium.common;
 
 import net.lightbody.bmp.BrowserMobProxy;
-import net.lightbody.bmp.core.har.Har;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.service.DriverService;
 

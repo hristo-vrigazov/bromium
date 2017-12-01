@@ -8,7 +8,6 @@ import com.hribol.bromium.replay.report.ExecutionReport;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 
 /**
  * Represent a replay browser - which by given factory for creating test scenarios and an executor,

@@ -2,13 +2,15 @@ package com.hribol.bromium.common.replay.actions;
 
 import com.hribol.bromium.common.replay.InstanceBasedAutomationResultBuilder;
 import com.hribol.bromium.common.synchronization.JSPrecondition;
-import com.hribol.bromium.replay.ReplayingState;
-import com.hribol.bromium.replay.actions.WebDriverAction;
-import com.hribol.bromium.replay.actions.ActionWithJSPrecondition;
-import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.core.synchronization.SynchronizationEvent;
+import com.hribol.bromium.replay.ReplayingState;
+import com.hribol.bromium.replay.actions.ActionWithJSPrecondition;
+import com.hribol.bromium.replay.actions.WebDriverAction;
+import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeoutException;
 
@@ -19,9 +21,12 @@ import java.util.concurrent.TimeoutException;
  */
 public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecondition, WebDriverAction {
 
+    private static final Logger logger = LoggerFactory.getLogger(ActionWithJSPreconditionBase.class);
+
     @Override
     public void execute(WebDriver driver, ReplayingState replayingState, EventSynchronizer eventSynchronizer) {
         String hashCodeToWaitFor = String.valueOf(getJSEventToWaitFor().hashCode());
+        logger.info("Condition {} has hashcode {}", getJSEventToWaitFor(), hashCodeToWaitFor);
         SynchronizationEvent synchronizationEvent = new JSPrecondition(hashCodeToWaitFor, eventSynchronizer, replayingState);
         try {
             eventSynchronizer.awaitUntil(synchronizationEvent);

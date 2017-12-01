@@ -2,7 +2,10 @@ package com.hribol.bromium.replay.execution.scenario;
 
 import com.hribol.bromium.replay.actions.WebDriverAction;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Queue;
 import java.util.stream.Collectors;
 
 /**

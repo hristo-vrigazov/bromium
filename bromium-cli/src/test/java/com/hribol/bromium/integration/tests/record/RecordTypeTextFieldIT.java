@@ -6,12 +6,17 @@ import com.hribol.bromium.integration.tests.TestUtils;
 import com.hribol.bromium.integration.tests.simulation.RecordingSimulatorModule;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 import static com.hribol.bromium.core.utils.Constants.EVENT;
-import static com.hribol.bromium.integration.tests.TestUtils.*;
+import static com.hribol.bromium.integration.tests.TestUtils.DONE_ID;
 import static com.hribol.bromium.integration.tests.TestUtils.Pages.TYPE_TEXT_DEMO_PAGE;
+import static com.hribol.bromium.integration.tests.TestUtils.SUBPAGE;
+import static com.hribol.bromium.integration.tests.TestUtils.TEXT_FIELD_ID;
+import static com.hribol.bromium.integration.tests.TestUtils.USERNAME;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -20,6 +25,8 @@ import static org.junit.Assert.assertEquals;
 public class RecordTypeTextFieldIT extends BaseRecordIntegrationTest {
 
     private String EXAMPLE_TEXT = "EXAMPLE_TEXT";
+
+    private final static Logger logger = LoggerFactory.getLogger(RecordTypeTextFieldIT.class);
 
     @Override
     protected void verifyAssertions() throws IOException {
@@ -44,7 +51,7 @@ public class RecordTypeTextFieldIT extends BaseRecordIntegrationTest {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
 
     }

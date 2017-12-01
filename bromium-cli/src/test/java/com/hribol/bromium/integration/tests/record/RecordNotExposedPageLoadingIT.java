@@ -10,9 +10,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
 
-import static com.hribol.bromium.cli.ParsedOptions.*;
+import static com.hribol.bromium.cli.ParsedOptions.URL;
 import static com.hribol.bromium.core.utils.Constants.EVENT;
-import static com.hribol.bromium.integration.tests.TestUtils.*;
+import static com.hribol.bromium.integration.tests.TestUtils.AJAX_DEMO_ID;
+import static com.hribol.bromium.integration.tests.TestUtils.Events;
 import static org.junit.Assert.assertEquals;
 
 /**

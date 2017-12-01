@@ -3,7 +3,11 @@ package com.hribol.bromium.common.parsing.dsl.convert;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.SyntaxDefinitionConfiguration;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
-import com.hribol.bromium.dsl.bromium.*;
+import com.hribol.bromium.dsl.bromium.ApplicationAction;
+import com.hribol.bromium.dsl.bromium.Model;
+import com.hribol.bromium.dsl.bromium.SyntaxDefinition;
+import com.hribol.bromium.dsl.bromium.WebDriverAction;
+import com.hribol.bromium.dsl.bromium.WebDriverActionCondition;
 import org.junit.Test;
 
 import java.util.ArrayList;
