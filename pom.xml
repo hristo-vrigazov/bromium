@@ -6,19 +6,20 @@
 
     <groupId>com.hribol.bromium</groupId>
     <artifactId>bromium</artifactId>
-    <version>0.1</version>
-
-    <packaging>pom</packaging>
+    <version>0.1-SNAPSHOT</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
+    <description>A browser automation package that allows you to record and replay application specific actions.</description>
+    <url>https://github.com/hristo-vrigazov/bromium</url>
 
     <licenses>
         <license>
             <name>MIT License</name>
             <url>http://www.opensource.org/licenses/mit-license.php</url>
-            <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <packaging>pom</packaging>
 
     <developers>
         <developer>
@@ -33,6 +34,7 @@
         <connection>scm:git:git://github.com/hristo-vrigazov/bromium.git</connection>
         <developerConnection>scm:git:ssh://github.com/hristo-vrigazov/bromium.git</developerConnection>
         <url>https://github.com/hristo-vrigazov/bromium</url>
+        <tag>0.1</tag>
     </scm>
 
     <modules>
@@ -195,6 +197,19 @@
                             <goals>
                                 <goal>integration-test</goal>
                                 <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.1</version>
+                    <executions>
+                        <execution>
+                            <id>default-deploy</id>
+                            <phase>deploy</phase>
+                            <goals>
+                                <goal>deploy</goal>
                             </goals>
                         </execution>
                     </executions>
@@ -376,5 +391,16 @@
             </build>
         </profile>
     </profiles>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven3/</url>
+        </repository>
+    </distributionManagement>
 
 </project>

@@ -4,19 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <name>${project.groupId}:${project.artifactId}</name>
-    <description>A browser automation package that allows you to record and replay browser
-        specific actions.</description>
-    <url>https://github.com/hristo-vrigazov/bromium</url>
-
     <parent>
         <groupId>com.hribol.bromium</groupId>
         <artifactId>bromium</artifactId>
-        <version>0.1</version>
+        <version>0.1-SNAPSHOT</version>
     </parent>
 
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Bromium core project. A browser automation package that allows you to record and replay application specific actions.</description>
+
     <artifactId>bromium-core</artifactId>
-    <version>0.1</version>
 
     <build>
         <plugins>
@@ -51,6 +48,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
@@ -111,15 +111,5 @@
         </dependency>
     </dependencies>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven3/</url>
-        </repository>
-    </distributionManagement>
     
 </project>

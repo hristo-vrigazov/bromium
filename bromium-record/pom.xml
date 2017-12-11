@@ -5,11 +5,12 @@
     <parent>
         <artifactId>bromium</artifactId>
         <groupId>com.hribol.bromium</groupId>
-        <version>0.1</version>
+        <version>0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <name>${project.groupId}:${project.artifactId}</name>
+    <description>Bromium record project. A browser automation package that allows you to record and replay application specific actions.</description>
 
     <artifactId>bromium-record</artifactId>
 

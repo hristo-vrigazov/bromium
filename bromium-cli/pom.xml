@@ -57,7 +57,7 @@
         <dependency>
             <groupId>com.hribol.bromium</groupId>
             <artifactId>bromium-common</artifactId>
-            <version>0.1</version>
+            <version>0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -108,11 +108,11 @@
     <parent>
         <groupId>com.hribol.bromium</groupId>
         <artifactId>bromium</artifactId>
-        <version>0.1</version>
+        <version>0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>bromium-cli</artifactId>
-    <version>0.1</version>
+    <version>0.1-SNAPSHOT</version>
 
     
 </project>
