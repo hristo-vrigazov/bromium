@@ -6,6 +6,30 @@
 	<artifactId>com.hribol.bromium.dsl.parent</artifactId>
 	<packaging>pom</packaging>
 
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Hristo Vrigazov</name>
+			<email>hvrigazov@gmail.com</email>
+			<organization>Hribol</organization>
+			<organizationUrl>https://github.com/hristo-vrigazov</organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git://github.com/hristo-vrigazov/bromium.git</connection>
+		<developerConnection>scm:git:ssh://github.com/hristo-vrigazov/bromium.git</developerConnection>
+		<url>https://github.com/hristo-vrigazov/bromium</url>
+		<tag>0.1</tag>
+	</scm>
+
 	<properties>
 		<tycho-version>1.0.0</tycho-version>
 		<xtextVersion>2.13.0</xtextVersion>
@@ -255,6 +279,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
 	<repositories>
 		<repository>
 			<id>codehaus-snapshots</id>
@@ -268,6 +293,7 @@
 			</snapshots>
 		</repository>
 	</repositories>
+	
 	<pluginRepositories>
 		<pluginRepository>
 			<id>codehaus-snapshots</id>
@@ -284,4 +310,46 @@
 
 	<dependencies>
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>release-sign-artifacts</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven3/</url>
+		</repository>
+	</distributionManagement>
+
 </project>
