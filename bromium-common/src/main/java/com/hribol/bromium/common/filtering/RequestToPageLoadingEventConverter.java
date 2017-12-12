@@ -36,7 +36,7 @@ public class RequestToPageLoadingEventConverter implements HttpRequestToTestCase
     public Optional<Map<String, String>> convert(HttpRequest httpRequest) throws MalformedURLException, UnsupportedEncodingException {
         String requestUri = httpRequest.getUri();
 
-        if (!requestUri.startsWith(baseUrl)) {
+        if (!(requestUri.startsWith(baseUrl) || requestUri.startsWith("/"))) {
             throw new IllegalArgumentException("I am not responsible for this request URL: " + requestUri);
         }
 
@@ -55,7 +55,7 @@ public class RequestToPageLoadingEventConverter implements HttpRequestToTestCase
             // and the current url matches, then we have found the action
             if (!urlParameterConfiguration.isExposed()) {
                 String expectedUrl = baseUrl + urlParameterConfiguration.getValue();
-                if (expectedUrl.equals(requestUri)) {
+                if (expectedUrl.equals(requestUri) || urlParameterConfiguration.getValue().equals(requestUri)) {
                     return Optional.of(ImmutableMap.of(EVENT, applicationActionConfiguration.getName()));
                 }
             } else {

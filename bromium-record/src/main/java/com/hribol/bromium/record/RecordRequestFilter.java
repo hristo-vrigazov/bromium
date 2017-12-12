@@ -39,9 +39,11 @@ public class RecordRequestFilter implements RequestFilter {
 
     @Override
     public HttpResponse filterRequest(HttpRequest httpRequest, HttpMessageContents httpMessageContents, HttpMessageInfo httpMessageInfo) {
+        logger.debug(httpRequest.getUri());
         for (EventDetector eventDetector: eventDetectors) {
             if (eventDetector.canDetectPredicate().test(httpRequest)) {
                 try {
+                    logger.debug("Event detector {} detected httpRequest {}", eventDetector, httpRequest);
                     Optional<Map<String, String>> optionalEvent = eventDetector.getConverter().convert(httpRequest);
 
                     if (optionalEvent.isPresent()) {

@@ -3,6 +3,7 @@ package com.hribol.bromium.replay;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.hribol.bromium.core.synchronization.SynchronizationEvent;
+import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.HttpRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -117,7 +118,7 @@ public class ReplayingState {
      * @param httpRequest
      */
     public void addHttpRequestToQueue(HttpRequest httpRequest) {
-        if (!inWhiteList(httpRequest.getUri())) {
+        if (!inWhiteList(httpRequest.getUri()) || !httpRequest.getMethod().equals(HttpMethod.GET)) {
             return;
         }
         this.httpRequestQueue.add(httpRequest);
@@ -162,5 +163,6 @@ public class ReplayingState {
         logger.debug("Remove request " + httpRequest.getUri());
         this.httpRequestQueue.remove(httpRequest);
         logger.debug("Number of requests in queue " + this.httpRequestQueue.size());
+        httpRequestQueue.stream().forEach(unansweredHttpRequest -> logger.info(unansweredHttpRequest.getUri()));
     }
 }

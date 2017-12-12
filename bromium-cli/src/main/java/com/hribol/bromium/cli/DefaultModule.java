@@ -109,6 +109,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.service.DriverService;
@@ -138,7 +139,10 @@ import static com.hribol.bromium.core.DependencyInjectionConstants.*;
 import static com.hribol.bromium.core.utils.Constants.CONDITION_NOT_SATISFIED_URL;
 import static com.hribol.bromium.core.utils.Constants.CONDITION_SATISFIED_URL;
 import static com.hribol.bromium.core.utils.Constants.HAR_EXTENSION;
+import static org.openqa.selenium.chrome.ChromeOptions.CAPABILITY;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
+import static org.openqa.selenium.remote.BrowserType.FIREFOX_CHROME;
+import static org.openqa.selenium.remote.CapabilityType.ACCEPT_SSL_CERTS;
 
 /**
  * Guice module used for creation of the dependency graph
@@ -733,7 +737,10 @@ public class DefaultModule extends AbstractModule {
 
     public DesiredCapabilities createDesiredCapabilities(Proxy proxy) {
         DesiredCapabilities capabilities = new DesiredCapabilities();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--allow-running-insecure-content");
         capabilities.setCapability(CapabilityType.PROXY, proxy);
+        capabilities.setCapability(CAPABILITY, options);
         return capabilities;
     }
 

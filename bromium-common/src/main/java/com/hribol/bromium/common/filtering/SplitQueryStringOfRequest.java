@@ -16,6 +16,10 @@ import java.util.Optional;
 public class SplitQueryStringOfRequest implements HttpRequestToTestCaseStepConverter {
     @Override
     public Optional<Map<String, String>> convert(HttpRequest httpRequest) throws MalformedURLException, UnsupportedEncodingException {
-        return Optional.of(URLUtils.splitQuery(new URL(httpRequest.getUri())));
+        try {
+            return Optional.of(URLUtils.splitQuery(new URL(httpRequest.getUri())));
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 }
