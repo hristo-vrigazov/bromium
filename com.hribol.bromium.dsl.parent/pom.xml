@@ -23,8 +23,8 @@
 	</developers>
 
 	<scm>
-		<connection>scm:git:git://github.com/hristo-vrigazov/bromium.git</connection>
-		<developerConnection>scm:git:git://github.com/hristo-vrigazov/bromium.git</developerConnection>
+		<connection>scm:git:git@github.com:hristo-vrigazov/bromium.git</connection>
+		<developerConnection>scm:git:git@github.com:hristo-vrigazov/bromium.git</developerConnection>
 		<url>https://github.com/hristo-vrigazov/bromium</url>
 		<tag>com.hribol.bromium.dsl.parent-1.0.0</tag>
 	</scm>
