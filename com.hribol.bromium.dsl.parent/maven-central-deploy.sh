@@ -6,7 +6,7 @@ read -p "Really deploy to maven cetral repository  (yes/no)? "
 if ( [ "$REPLY" == "yes" ] ) then
 	ssh-add ~/.ssh/github_rsa
 	ssh-add -l
-	mvn -Prelease-sign-artifacts release:prepare release:perform -B -e | tee maven-central-deploy.log
+	mvn release:clean release:prepare release:perform -B -e | tee maven-central-deploy.log
 	ssh-add -D
 else
 	echo 'Exit without deploy'
