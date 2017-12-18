@@ -3,9 +3,8 @@
  */
 package com.hribol.bromium.dsl.parser.antlr;
 
-import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
-
 import java.io.InputStream;
+import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class BromiumAntlrTokenFileProvider implements IAntlrTokenFileProvider {
 

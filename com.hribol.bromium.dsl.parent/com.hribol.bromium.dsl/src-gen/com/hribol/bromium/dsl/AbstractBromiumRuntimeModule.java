@@ -15,6 +15,7 @@ import com.hribol.bromium.dsl.serializer.BromiumSemanticSequencer;
 import com.hribol.bromium.dsl.serializer.BromiumSyntacticSequencer;
 import com.hribol.bromium.dsl.services.BromiumGrammarAccess;
 import com.hribol.bromium.dsl.validation.BromiumValidator;
+import java.util.Properties;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.generator.IGenerator2;
@@ -48,8 +49,6 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.service.DefaultRuntimeModule;
 import org.eclipse.xtext.service.SingletonBinding;
-
-import java.util.Properties;
 
 /**
  * Manual modifications go to {@link BromiumRuntimeModule}.

@@ -9,14 +9,13 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.hribol.bromium.dsl.BromiumRuntimeModule;
 import com.hribol.bromium.dsl.ui.BromiumUiModule;
+import java.util.Collections;
+import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
 import org.osgi.framework.BundleContext;
-
-import java.util.Collections;
-import java.util.Map;
 
 /**
  * This class was generated. Customizations should only happen in a newly

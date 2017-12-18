@@ -6,11 +6,10 @@ package com.hribol.bromium.dsl.ide.contentassist.antlr;
 import com.google.inject.Inject;
 import com.hribol.bromium.dsl.ide.contentassist.antlr.internal.InternalBromiumParser;
 import com.hribol.bromium.dsl.services.BromiumGrammarAccess;
-import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
 
 public class BromiumParser extends AbstractContentAssistParser {
 

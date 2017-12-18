@@ -6,6 +6,7 @@ package com.hribol.bromium.dsl.tests;
 import com.google.inject.Inject;
 import com.hribol.bromium.dsl.bromium.Model;
 import com.hribol.bromium.dsl.tests.BromiumInjectorProvider;
+import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
@@ -18,8 +19,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.List;
 
 @RunWith(XtextRunner.class)
 @InjectWith(BromiumInjectorProvider.class)

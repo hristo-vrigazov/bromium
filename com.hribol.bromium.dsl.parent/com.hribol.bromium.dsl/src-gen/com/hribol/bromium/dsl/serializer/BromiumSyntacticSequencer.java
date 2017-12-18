@@ -5,6 +5,7 @@ package com.hribol.bromium.dsl.serializer;
 
 import com.google.inject.Inject;
 import com.hribol.bromium.dsl.services.BromiumGrammarAccess;
+import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
@@ -12,8 +13,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
-
-import java.util.List;
 
 @SuppressWarnings("all")
 public class BromiumSyntacticSequencer extends AbstractSyntacticSequencer {

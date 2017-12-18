@@ -5,11 +5,10 @@ package com.hribol.bromium.dsl.web;
 
 import com.google.inject.Injector;
 import com.hribol.bromium.dsl.web.BromiumWebSetup;
+import javax.servlet.annotation.WebServlet;
 import org.eclipse.xtext.util.DisposableRegistry;
 import org.eclipse.xtext.web.servlet.XtextServlet;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-
-import javax.servlet.annotation.WebServlet;
 
 /**
  * Deploy this class into a servlet container to enable DSL-specific services.

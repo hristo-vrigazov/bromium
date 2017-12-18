@@ -5,6 +5,7 @@ package com.hribol.bromium.dsl.bromium.impl;
 
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.PageLoad;
+
 import org.eclipse.emf.ecore.EClass;
 
 /**

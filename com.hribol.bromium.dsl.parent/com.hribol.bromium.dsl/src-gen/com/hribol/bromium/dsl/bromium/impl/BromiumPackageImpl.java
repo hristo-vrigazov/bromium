@@ -22,10 +22,12 @@ import com.hribol.bromium.dsl.bromium.ThreeDottedVersion;
 import com.hribol.bromium.dsl.bromium.TypeTextInElementFoundByCssSelector;
 import com.hribol.bromium.dsl.bromium.WebDriverAction;
 import com.hribol.bromium.dsl.bromium.WebDriverActionCondition;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
