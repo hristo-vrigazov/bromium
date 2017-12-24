@@ -8,22 +8,25 @@
 	<artifactId>com.hribol.bromium.dsl.target</artifactId>
 	<packaging>eclipse-target-definition</packaging>
 
-	<plugins>
-		<plugin>
-			<groupId>org.eclipse.tycho</groupId>
-			<artifactId>tycho-p2-plugin</artifactId>
-			<version>${tycho-version}</version>
-			<executions>
-				<execution>
-					<id>attach-p2-metadata</id>
-					<phase>package</phase>
-					<goals>
-						<goal>p2-metadata</goal>
-					</goals>
-				</execution>
-			</executions>
-		</plugin>
-	</plugins>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>attach-p2-metadata</id>
+						<phase>package</phase>
+						<goals>
+							<goal>p2-metadata</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
 
 	<dependencies>
 	</dependencies>
