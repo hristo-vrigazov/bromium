@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature id="com.hribol.bromium.dsl.feature"
 	label="Bromium Feature "
-	version="1.0.0.qualifier">
+	version="1.0.1.qualifier">
 	<plugin
 			id="com.hribol.bromium.dsl"
 			download-size="0"
