@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.hribol.bromium.dsl</groupId>
 		<artifactId>com.hribol.bromium.dsl.parent</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.0</version>
 	</parent>
 	<artifactId>com.hribol.bromium.dsl.feature</artifactId>
 	<packaging>eclipse-feature</packaging>
