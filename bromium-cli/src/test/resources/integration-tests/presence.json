@@ -1,0 +1,12 @@
+[
+  {
+    "event": "loadPage",
+    "subpage": "presence-example.html"
+  },
+  {
+    "event": "clickEditButton"
+  },
+  {
+    "event": "clickLikeButton"
+  }
+]

@@ -67,7 +67,7 @@ public class DefaultModuleTest {
     @Before
     public void prepareResources() throws IOException {
         tempDir = Files.createTempDir();
-        configurationFile = extractResource(Resources.DEMO_CONFIGURATION, ".brm", tempDir);
+        configurationFile = extractResource(Resources.DEMO_CONFIGURATION, ".json", tempDir);
         chromedriverFile = extractResource(CHROMEDRIVER, tempDir);
         if (!chromedriverFile.setExecutable(true)) {
             throw new IllegalStateException("Cannot set chrome driver file to executable");

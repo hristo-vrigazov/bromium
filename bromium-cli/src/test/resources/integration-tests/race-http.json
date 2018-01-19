@@ -1,12 +1,12 @@
 [
 	{
-		"event": "Load page",
-		"alias-url": "race-http.html"
+		"event": "loadPage",
+		"subpage": "race-http.html"
 	},
     {
-        "event": "Click on race demo button"
+        "event": "clickRaceDemoButton"
     },
     {
-        "event": "Click Ajax created button"
+        "event": "clickAjaxCreatedButton"
     }
 ]

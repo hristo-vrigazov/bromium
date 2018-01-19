@@ -1,0 +1,12 @@
+[
+  {
+    "event": "loadPage",
+    "subpage": "text-to-be.html"
+  },
+  {
+    "event": "clickUploadButton"
+  },
+  {
+    "event": "clickButtonAfterTextChanged"
+  }
+]

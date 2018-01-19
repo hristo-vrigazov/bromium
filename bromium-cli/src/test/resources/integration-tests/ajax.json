@@ -1,15 +1,15 @@
 [
 	{
-		"event": "Load page",
-		"alias-url": "ajax.html"
+		"event": "loadPage",
+		"subpage": "ajax.html"
 	},
     {
-        "event": "Click Ajax Demo button"
+        "event": "clickAjaxDemoButton"
     },
     {
-        "event": "Click Ajax created button"
+        "event": "clickAjaxCreatedButton"
     },
     {
-        "event": "Click destroy ajax created button"
+        "event": "clickDestroyAjaxCreatedButton"
     }
 ]

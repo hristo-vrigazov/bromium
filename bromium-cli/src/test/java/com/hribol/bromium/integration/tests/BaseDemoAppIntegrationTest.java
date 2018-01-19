@@ -3,8 +3,6 @@ package com.hribol.bromium.integration.tests;
 import com.google.common.io.Files;
 import com.hribol.bromium.demo.app.DemoApp;
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -87,9 +85,6 @@ public abstract class BaseDemoAppIntegrationTest {
         measurementsFile = createTempFile("measurements.csv");
 
         log4j2ConfigurationFile = extractResource("log4j2.xml", testResourcesDirectory);
-
-        Logger.getRootLogger().getLoggerRepository().resetConfiguration();
-        PropertyConfigurator.configure(log4j2ConfigurationFile.getAbsolutePath());
     }
 
     private void prepareSystem() {

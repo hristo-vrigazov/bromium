@@ -1,10 +1,10 @@
 [
   {
-    "event": "Load page",
-    "alias-url": "text-field.html"
+    "event": "loadPage",
+    "subpage": "text-field.html"
   },
   {
-    "event": "Type text in name input",
-    "alias-text": "something"
+    "event": "typeTextInNameInput",
+    "username": "something"
   }
 ]
