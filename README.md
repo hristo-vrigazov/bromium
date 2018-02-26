@@ -18,7 +18,7 @@ For example, trying to click on an element that is not there yet.
 
 ## Simple example
 
-TODO
+TODO: Core project is deployed to Maven
 
 ## Features
 * Declarative way of describing your actions and how they translate to browser actions for different versions of your app. 
