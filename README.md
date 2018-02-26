@@ -19,6 +19,7 @@ For example, trying to click on an element that is not there yet.
 ## Simple example
 
 TODO: Core project is deployed to Maven, soon others will be too.
+Example will be added here
 
 ## Features
 * Declarative way of describing your actions and how they translate to browser actions for different versions of your app. 
