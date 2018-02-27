@@ -7,7 +7,8 @@
     <version>0.2-SNAPSHOT</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>A browser automation package that allows you to record and replay application specific actions.</description>
+    <description>A browser automation package that allows you to record and replay application specific actions.
+    </description>
     <url>https://github.com/hristo-vrigazov/bromium</url>
 
     <licenses>
@@ -390,4 +391,14 @@
         </profile>
     </profiles>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+    </distributionManagement>
 </project>
