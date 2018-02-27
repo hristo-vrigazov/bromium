@@ -89,7 +89,7 @@
         <dependency>
             <groupId>com.hribol.bromium</groupId>
             <artifactId>bromium-demo-app</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
         <dependency>
