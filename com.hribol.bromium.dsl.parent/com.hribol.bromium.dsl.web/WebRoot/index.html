@@ -23,17 +23,23 @@
 			require(["xtext/xtext-ace"], function(xtext) {
 				var editor = xtext.createEditor({
 					baseUrl: baseUrl,
-					syntaxDefinition: "xtext-resources/generated/mode-brm"
+					syntaxDefinition: "xtext-resources/manual/mode-brm"
 				});
 				
 				editor.setOptions({
 				            enableBasicAutocompletion: true,
 				            enableSnippets: true,
-				            enableLiveAutocompletion: true
+				            enableLiveAutocompletion: true,
+				            fontSize: 14,
+				            wrapBehavioursEnabled: true
 				        });
-				        
+		        editor.setTheme("ace/theme/twilight");
+
 				var session = editor.getSession();
 				editor.setBehavioursEnabled(true);
+
+				// debugging
+				window.editor = editor;
 			});
 		});
 	</script>

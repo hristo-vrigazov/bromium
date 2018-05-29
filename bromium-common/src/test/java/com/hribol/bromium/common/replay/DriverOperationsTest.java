@@ -29,7 +29,6 @@ public class DriverOperationsTest {
         DriverOperations driverOperations = new DriverOperations(getMockedProxyDriverIntegrator());
         driverOperations.prepare();
 
-        verify(driver.manage().window()).maximize();
     }
 
     @Test

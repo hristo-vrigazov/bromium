@@ -39,13 +39,13 @@ public class TestUtils {
     }
 
     public static class Resources {
-        public static final String DEMO_CONFIGURATION = "integration-tests/demo.json";
-        public static final String DYNAMIC_TEST_CASE = "integration-tests/dynamic.json";
-        public static final String AJAX_TEST_CASE = "integration-tests/ajax.json";
-        public static final String RACE_HTTP_TEST_CASE = "integration-tests/race-http.json";
-        public static final String TYPE_TEXT_TEST_CASE = "integration-tests/text-field.json";
-        public static final String ELEMENT_PRESENCE_TEST_CASE = "integration-tests/presence.json";
-        public static final String TEXT_TO_BE_TEST_CASE = "integration-tests/text-to-be.json";
+        public static final String DEMO_CONFIGURATION = "integration-tests/demo.brm";
+        public static final String DYNAMIC_TEST_CASE = "integration-tests/dynamic.txt";
+        public static final String AJAX_TEST_CASE = "integration-tests/ajax.txt";
+        public static final String RACE_HTTP_TEST_CASE = "integration-tests/race-http.txt";
+        public static final String TYPE_TEXT_TEST_CASE = "integration-tests/text-field.txt";
+        public static final String ELEMENT_PRESENCE_TEST_CASE = "integration-tests/presence.txt";
+        public static final String TEXT_TO_BE_TEST_CASE = "integration-tests/text-to-be.txt";
         public static final String CLICK_CLASS_BY_TEXT_TEST_CASE = "integration-tests/click-class-by-text.txt";
 
     }

@@ -16,17 +16,7 @@ window.bromium.whenTextChanges = function (element, callback) {
 window.bromium.notifySatisfiedBasedOnText = function (element, textTarget, condition) {
     if (element.innerText === textTarget) {
         bromium.notifySatisfiedCondition(condition);
-    } else {
-        bromium.notifyNotSatisfiedCondition(condition);
     }
-
-    bromium.whenTextChanges(element, function (text) {
-       if (text === textTarget) {
-          bromium.notifySatisfiedCondition(condition);
-       } else {
-          bromium.notifyNotSatisfiedCondition(condition);
-       }
-  })
 };
 
 window.bromium.notifySatisfiedCondition = function(condition) {

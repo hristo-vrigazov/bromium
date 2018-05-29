@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hribol.bromium</groupId>
     <artifactId>bromium</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>9</version>
+    </parent>
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>A browser automation package that allows you to record and replay application specific actions.
-    </description>
+    <description>A browser automation package that allows you to record and replay application specific actions.</description>
     <url>https://github.com/hristo-vrigazov/bromium</url>
 
     <licenses>
@@ -30,8 +37,8 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git@github.com:hristo-vrigazov/bromium.git</connection>
-        <developerConnection>scm:git:git@github.com:hristo-vrigazov/bromium.git</developerConnection>
+        <connection>scm:git:git://github.com/hristo-vrigazov/bromium.git</connection>
+        <developerConnection>scm:git:git://github.com/hristo-vrigazov/bromium.git</developerConnection>
         <url>https://github.com/hristo-vrigazov/bromium</url>
         <tag>0.1</tag>
     </scm>
@@ -213,6 +220,20 @@
                         </execution>
                     </executions>
                 </plugin>
+                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.6</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5.3</version>
+                    <configuration>
+                        <localCheckout>true</localCheckout>
+                        <pushChanges>false</pushChanges>
+                    </configuration>
+                </plugin>
             </plugins>
 
         </pluginManagement>
@@ -393,12 +414,13 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>ossrh-snapshots</id>
+            <id>ossrh</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
             <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven3/</url>
         </repository>
     </distributionManagement>
+
 </project>

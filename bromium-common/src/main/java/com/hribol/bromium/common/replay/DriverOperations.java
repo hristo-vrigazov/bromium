@@ -3,6 +3,7 @@ package com.hribol.bromium.common.replay;
 import com.hribol.bromium.common.ProxyDriverIntegrator;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.core.har.Har;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.service.DriverService;
 
@@ -33,7 +34,7 @@ public class DriverOperations {
      * Prepares the driver for execution
      */
     public void prepare() {
-        this.driver.manage().window().maximize();
+        this.driver.manage().window().setSize(new Dimension(1360, 1024));
     }
 
     /**

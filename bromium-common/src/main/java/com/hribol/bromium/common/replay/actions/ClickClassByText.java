@@ -60,7 +60,7 @@ public class ClickClassByText extends ActionWithJSPreconditionBase {
     }
 
     private boolean elementTextIsEqualToAndIsDisplayed(WebElement webElement) {
-        boolean textIsCorrect = webElement.getAttribute(INNER_HTML).trim().equals(text);
+        boolean textIsCorrect = webElement.getText().trim().equals(text);
         boolean elementIsDisplayed = webElement.isDisplayed();
         return textIsCorrect && elementIsDisplayed;
     }

@@ -23,8 +23,8 @@
 	</developers>
 
 	<scm>
-		<connection>scm:git:git@github.com:hristo-vrigazov/bromium.git</connection>
-		<developerConnection>scm:git:git@github.com:hristo-vrigazov/bromium.git</developerConnection>
+		<connection>scm:git:git://github.com/hristo-vrigazov/bromium.git</connection>
+		<developerConnection>scm:git:ssh://github.com/hristo-vrigazov/bromium.git</developerConnection>
 		<url>https://github.com/hristo-vrigazov/bromium</url>
 		<tag>com.hribol.bromium.dsl.parent-1.0.0</tag>
 	</scm>
@@ -78,6 +78,20 @@
 						<phase>package</phase>
 						<goals>
 							<goal>source-feature</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>attach-p2-metadata</id>
+						<phase>package</phase>
+						<goals>
+							<goal>p2-metadata</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -261,22 +275,6 @@
 						<useProjectSettings>false</useProjectSettings>
 					</configuration>
 				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>2.9</version>
-					<configuration>
-						<additionalparam>-Xdoclint:none</additionalparam>
-					</configuration>
-					<executions>
-						<execution>
-							<id>attach-javadocs</id>
-							<goals>
-								<goal>jar</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
@@ -330,7 +328,7 @@
 						<executions>
 							<execution>
 								<id>sign-artifacts</id>
-								<phase>deploy</phase>
+								<phase>verify</phase>
 								<goals>
 									<goal>sign</goal>
 								</goals>
@@ -349,7 +347,7 @@
 		</snapshotRepository>
 		<repository>
 			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven3/</url>
 		</repository>
 	</distributionManagement>
 

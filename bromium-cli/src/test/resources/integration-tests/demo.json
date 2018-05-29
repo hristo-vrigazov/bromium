@@ -229,9 +229,9 @@
             "name": "loadAjaxPage",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "page": {
+                    "url": {
                         "expose": false,
-                        "parameterName": "page",
+                        "parameterName": "url",
                         "value": "ajax.html"
                     }
                 },
@@ -256,9 +256,9 @@
             "name": "loadIndexPage",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "page": {
+                    "url": {
                         "expose": false,
-                        "parameterName": "page",
+                        "parameterName": "url",
                         "value": "index.html"
                     }
                 },
@@ -283,10 +283,10 @@
             "name": "loadPage",
             "webDriverAction": {
                 "parametersConfiguration": {
-                    "page": {
+                    "url": {
                         "expose": true,
-                        "parameterName": "page",
-                        "alias": "subpage"
+                        "parameterName": "url",
+                        "alias": "alias-url"
                     }
                 },
                 "webDriverActionType": "PageLoad"
@@ -322,7 +322,7 @@
                     "text": {
                         "expose": true,
                         "parameterName": "text",
-                        "alias": "username"
+                        "alias": "alias-text"
                     }
                 },
                 "webDriverActionType": "TypeTextInElementFoundByCssSelector"

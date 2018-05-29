@@ -1,15 +1,15 @@
 [
 	{
-		"event": "loadPage",
-		"subpage": "dynamic.html"
+		"event": "Load page",
+		"alias-url": "dynamic.html"
 	},
     {
-        "event": "clickDynamicButton"
+        "event": "Click dynamic button"
     },
     {
-        "event": "clickDynamicallyCreatedButton"
+        "event": "Click dynamically created button"
     },
     {
-        "event": "clickDeleteDynamicallyCreatedButton"
+        "event": "Click delete dynamically created button"
     }
 ]

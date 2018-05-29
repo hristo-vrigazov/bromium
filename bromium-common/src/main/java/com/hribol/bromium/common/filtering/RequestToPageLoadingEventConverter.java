@@ -10,6 +10,9 @@ import io.netty.handler.codec.http.HttpRequest;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -35,6 +38,7 @@ public class RequestToPageLoadingEventConverter implements HttpRequestToTestCase
     @Override
     public Optional<Map<String, String>> convert(HttpRequest httpRequest) throws MalformedURLException, UnsupportedEncodingException {
         String requestUri = httpRequest.getUri();
+        Path requestUriPath = Paths.get(requestUri);
 
         if (!requestUri.startsWith(baseUrl)) {
             throw new IllegalArgumentException("I am not responsible for this request URL: " + requestUri);
@@ -54,8 +58,8 @@ public class RequestToPageLoadingEventConverter implements HttpRequestToTestCase
             // first the easy case; if the value is hardcoded in the configuration
             // and the current url matches, then we have found the action
             if (!urlParameterConfiguration.isExposed()) {
-                String expectedUrl = baseUrl + urlParameterConfiguration.getValue();
-                if (expectedUrl.equals(requestUri)) {
+                Path expectedPath = Paths.get(baseUrl, urlParameterConfiguration.getValue());
+                if (expectedPath.equals(requestUriPath)) {
                     return Optional.of(ImmutableMap.of(EVENT, applicationActionConfiguration.getName()));
                 }
             } else {

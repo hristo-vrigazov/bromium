@@ -22,10 +22,10 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
- * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.PreconditionImpl#getAction <em>Action</em>}</li>
  * </ul>
+ * </p>
  *
  * @generated
  */
