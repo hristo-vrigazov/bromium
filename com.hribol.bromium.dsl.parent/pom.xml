@@ -4,21 +4,17 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<artifactId>com.hribol.bromium.dsl.parent</artifactId>
 	<packaging>pom</packaging>
-
-
- 	<parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>9</version>
-    </parent>
-
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>9</version>
+	</parent>
 	<licenses>
 		<license>
 			<name>MIT License</name>
 			<url>http://www.opensource.org/licenses/mit-license.php</url>
 		</license>
 	</licenses>
-
 	<developers>
 		<developer>
 			<name>Hristo Vrigazov</name>
@@ -27,14 +23,12 @@
 			<organizationUrl>https://github.com/hristo-vrigazov</organizationUrl>
 		</developer>
 	</developers>
-
 	<scm>
 		<connection>scm:git:git://github.com/hristo-vrigazov/bromium.git</connection>
 		<developerConnection>scm:git:ssh://github.com/hristo-vrigazov/bromium.git</developerConnection>
 		<url>https://github.com/hristo-vrigazov/bromium</url>
 		<tag>com.hribol.bromium.dsl.parent-1.0.0</tag>
 	</scm>
-
 	<properties>
 		<tycho-version>1.0.0</tycho-version>
 		<xtextVersion>2.13.0</xtextVersion>
@@ -183,14 +177,11 @@
 							<pluginExecutions>
 								<pluginExecution>
 									<pluginExecutionFilter>
-										<groupId>
-											org.apache.maven.plugins
+										<groupId>org.apache.maven.plugins
 										</groupId>
-										<artifactId>
-											maven-resources-plugin
+										<artifactId>maven-resources-plugin
 										</artifactId>
-										<versionRange>
-											[2.4.3,)
+										<versionRange>[2.4.3,)
 										</versionRange>
 										<goals>
 											<goal>resources</goal>
@@ -198,19 +189,16 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore />
+										<ignore/>
 									</action>
 								</pluginExecution>
 								<pluginExecution>
 									<pluginExecutionFilter>
-										<groupId>
-											org.codehaus.mojo
+										<groupId>org.codehaus.mojo
 										</groupId>
-										<artifactId>
-											build-helper-maven-plugin
+										<artifactId>build-helper-maven-plugin
 										</artifactId>
-										<versionRange>
-											[1.9.1,)
+										<versionRange>[1.9.1,)
 										</versionRange>
 										<goals>
 											<goal>add-resource</goal>
@@ -220,38 +208,32 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore />
+										<ignore/>
 									</action>
 								</pluginExecution>
 								<pluginExecution>
 									<pluginExecutionFilter>
-										<groupId>
-											org.eclipse.tycho
+										<groupId>org.eclipse.tycho
 										</groupId>
-										<artifactId>
-											tycho-compiler-plugin
+										<artifactId>tycho-compiler-plugin
 										</artifactId>
-										<versionRange>
-											[0.23.1,)
+										<versionRange>[0.23.1,)
 										</versionRange>
 										<goals>
 											<goal>compile</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore />
+										<ignore/>
 									</action>
 								</pluginExecution>
 								<pluginExecution>
 									<pluginExecutionFilter>
-										<groupId>
-											org.eclipse.tycho
+										<groupId>org.eclipse.tycho
 										</groupId>
-										<artifactId>
-											tycho-packaging-plugin
+										<artifactId>tycho-packaging-plugin
 										</artifactId>
-										<versionRange>
-											[0.23.1,)
+										<versionRange>[0.23.1,)
 										</versionRange>
 										<goals>
 											<goal>build-qualifier</goal>
@@ -261,7 +243,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore />
+										<ignore/>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
@@ -282,23 +264,29 @@
 					</configuration>
 				</plugin>
 				<plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-gpg-plugin</artifactId>
-                    <version>1.6</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>2.5.3</version>
-                    <configuration>
-                        <localCheckout>true</localCheckout>
-                        <pushChanges>false</pushChanges>
-                    </configuration>
-                </plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>1.6</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5.3</version>
+					<configuration>
+						<localCheckout>true</localCheckout>
+						<pushChanges>false</pushChanges>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<configuration>
+						<additionalparam>-Xdoclint:none</additionalparam>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
-
 	<repositories>
 		<repository>
 			<id>codehaus-snapshots</id>
@@ -312,7 +300,6 @@
 			</snapshots>
 		</repository>
 	</repositories>
-	
 	<pluginRepositories>
 		<pluginRepository>
 			<id>codehaus-snapshots</id>
@@ -326,10 +313,7 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-
-	<dependencies>
-	</dependencies>
-
+	<dependencies/>
 	<profiles>
 		<profile>
 			<id>release-sign-artifacts</id>
@@ -359,7 +343,6 @@
 			</build>
 		</profile>
 	</profiles>
-
 	<distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>
@@ -370,5 +353,4 @@
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven3/</url>
 		</repository>
 	</distributionManagement>
-
 </project>
