@@ -15,12 +15,10 @@ import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CSS_SELECT
 public class ClickCssSelector extends ActionWithJSPreconditionBase {
 
     private final String cssSelector;
-    private final String eventName;
     private final boolean expectsHttpRequest;
 
-    public ClickCssSelector(String cssSelector, String eventName, boolean expectsHttpRequest) {
+    public ClickCssSelector(String cssSelector, boolean expectsHttpRequest) {
         this.cssSelector = cssSelector;
-        this.eventName = eventName;
         this.expectsHttpRequest = expectsHttpRequest;
     }
 
@@ -29,11 +27,6 @@ public class ClickCssSelector extends ActionWithJSPreconditionBase {
         By byCss = By.cssSelector(cssSelector);
         WebElement webElement = driver.findElement(byCss);
         webElement.click();
-    }
-
-    @Override
-    public String getName() {
-        return eventName;
     }
 
     @Override

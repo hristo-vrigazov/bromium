@@ -14,11 +14,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.WebDriverActionCondition#getParameterNames <em>Parameter Names</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.WebDriverActionCondition#getParameterValues <em>Parameter Values</em>}</li>
  * </ul>
- * </p>
  *
  * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getWebDriverActionCondition()
  * @model

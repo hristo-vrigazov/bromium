@@ -8,6 +8,8 @@ import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.BromiumPackage;
 import com.hribol.bromium.dsl.bromium.ClickClassByText;
 import com.hribol.bromium.dsl.bromium.ClickCssSelector;
+import com.hribol.bromium.dsl.bromium.ClickDataId;
+import com.hribol.bromium.dsl.bromium.ConfirmAlert;
 import com.hribol.bromium.dsl.bromium.ElementByCssToBePresent;
 import com.hribol.bromium.dsl.bromium.ExpectHttpRequest;
 import com.hribol.bromium.dsl.bromium.ExposedParameter;
@@ -54,6 +56,12 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 				return; 
 			case BromiumPackage.CLICK_CSS_SELECTOR:
 				sequence_ClickCssSelector(context, (ClickCssSelector) semanticObject); 
+				return; 
+			case BromiumPackage.CLICK_DATA_ID:
+				sequence_ClickDataId(context, (ClickDataId) semanticObject); 
+				return; 
+			case BromiumPackage.CONFIRM_ALERT:
+				sequence_ConfirmAlert(context, (ConfirmAlert) semanticObject); 
 				return; 
 			case BromiumPackage.ELEMENT_BY_CSS_TO_BE_PRESENT:
 				sequence_ElementByCssToBePresent(context, (ElementByCssToBePresent) semanticObject); 
@@ -137,6 +145,32 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     (parameterNames+='selector' parameterValues+=ParameterValue)
 	 */
 	protected void sequence_ClickCssSelector(ISerializationContext context, ClickCssSelector semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     WebDriverAction returns ClickDataId
+	 *     ClickDataId returns ClickDataId
+	 *
+	 * Constraint:
+	 *     (parameterNames+='dataId' parameterValues+=ParameterValue)
+	 */
+	protected void sequence_ClickDataId(ISerializationContext context, ClickDataId semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     WebDriverActionCondition returns ConfirmAlert
+	 *     ConfirmAlert returns ConfirmAlert
+	 *
+	 * Constraint:
+	 *     (parameterNames+='confirm' parameterValues+=ParameterValue)
+	 */
+	protected void sequence_ConfirmAlert(ISerializationContext context, ConfirmAlert semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

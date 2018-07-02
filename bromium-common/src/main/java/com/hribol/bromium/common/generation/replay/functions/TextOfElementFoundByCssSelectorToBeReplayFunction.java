@@ -31,9 +31,6 @@ public class TextOfElementFoundByCssSelectorToBeReplayFunction implements Replay
                     .whenCssSelectorArrives(CSS_SELECTOR)
                         .notifySatisfiedBasedOnText(TEXT, HASHCODE)
                     .endArriveHandler()
-                    .whenCssSelectorLeaves(CSS_SELECTOR)
-                        .notifyNotSatisfiedCondition(HASHCODE)
-                    .endLeaveHandler()
                 .endBody()
                 .build();
         this.invocationProvider = invocationProvider;

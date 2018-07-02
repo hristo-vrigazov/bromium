@@ -22,14 +22,14 @@ public class TypeTextInElementFoundByCssSelectorTest {
     public void typesIfSuitableElementExists() {
         String cssSelector = ".something";
         String text = "text";
-        String eventName = "event name";
+        String eventName = "TypeTextInElementFoundByCssSelector .something";
         boolean expectsHttp = true;
 
         WebElement textBox = mock(WebElement.class);
         WebDriver driver = mock(WebDriver.class);
         when(driver.findElement(By.cssSelector(cssSelector))).thenReturn(textBox);
 
-        WebDriverAction action = new TypeTextInElementFoundByCssSelector(cssSelector, text, eventName, expectsHttp);
+        WebDriverAction action = new TypeTextInElementFoundByCssSelector(cssSelector, text, expectsHttp);
         action.execute(driver, mock(ReplayingState.class), mock(EventSynchronizer.class));
 
         verify(textBox).sendKeys(text);

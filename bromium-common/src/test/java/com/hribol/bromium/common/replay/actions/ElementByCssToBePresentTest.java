@@ -19,7 +19,7 @@ public class ElementByCssToBePresentTest {
 
     @Test
     public void jsEventIsCorrectlyNamed() {
-        ElementByCssToBePresent action = new ElementByCssToBePresent(cssSelector, eventName);
+        ElementByCssToBePresent action = new ElementByCssToBePresent(cssSelector);
         action.executeAfterJSPreconditionHasBeenSatisfied(mock(WebDriver.class), mock(ReplayingState.class));
 
         assertEquals(ELEMENT_BY_CSS_SELECTOR_TO_BE_PRESENT + " " + cssSelector, action.getJSEventToWaitFor());

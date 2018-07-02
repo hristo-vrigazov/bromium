@@ -146,6 +146,16 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
         return createClickClassByTextAdapter();
       }
       @Override
+      public Adapter caseClickDataId(ClickDataId object)
+      {
+        return createClickDataIdAdapter();
+      }
+      @Override
+      public Adapter caseConfirmAlert(ConfirmAlert object)
+      {
+        return createConfirmAlertAdapter();
+      }
+      @Override
       public Adapter caseParameterValue(ParameterValue object)
       {
         return createParameterValueAdapter();
@@ -388,6 +398,36 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createClickClassByTextAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.ClickDataId <em>Click Data Id</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see com.hribol.bromium.dsl.bromium.ClickDataId
+   * @generated
+   */
+  public Adapter createClickDataIdAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.ConfirmAlert <em>Confirm Alert</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see com.hribol.bromium.dsl.bromium.ConfirmAlert
+   * @generated
+   */
+  public Adapter createConfirmAlertAdapter()
   {
     return null;
   }

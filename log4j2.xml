@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <File name="File" fileName="execution.log" immediateFlush="false" append="false">
+            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Root>
+        <logger name="org.littleshoot.proxy.impl.ClientToProxyConnection" level="OFF" additivity="false"></logger>
+        <logger name="net.lightbody.bmp.filters.HarCaptureFilter" level="OFF" additivity="false"></logger>
+        <logger name="net.lightbody.bmp.util.HttpObjectUtil" level="OFF" additivity="false"></logger>
+        <!-- Warning: this could be useful sometimes! -->
+        <logger name="net.lightbody.bmp.filters.BrowserMobHttpFilterChain" level="OFF" additivity="false"></logger>
+    </Loggers>
+</Configuration>

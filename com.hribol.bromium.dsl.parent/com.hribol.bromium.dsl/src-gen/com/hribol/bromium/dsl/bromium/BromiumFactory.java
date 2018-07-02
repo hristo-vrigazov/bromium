@@ -150,6 +150,24 @@ public interface BromiumFactory extends EFactory
   ClickClassByText createClickClassByText();
 
   /**
+   * Returns a new object of class '<em>Click Data Id</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Click Data Id</em>'.
+   * @generated
+   */
+  ClickDataId createClickDataId();
+
+  /**
+   * Returns a new object of class '<em>Confirm Alert</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Confirm Alert</em>'.
+   * @generated
+   */
+  ConfirmAlert createConfirmAlert();
+
+  /**
    * Returns a new object of class '<em>Parameter Value</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

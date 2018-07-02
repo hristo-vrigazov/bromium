@@ -22,11 +22,11 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.SyntaxDefinitionImpl#getContent <em>Content</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.SyntaxDefinitionImpl#getParameter <em>Parameter</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

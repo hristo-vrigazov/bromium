@@ -44,4 +44,9 @@ public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecon
      */
     public abstract void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState);
 
+    @Override
+    public String getName() {
+        return getJSEventToWaitFor();
+    }
+
 }

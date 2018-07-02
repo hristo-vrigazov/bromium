@@ -23,4 +23,8 @@ public class Constants {
     public final static String INNER_TEXT = "this.innerText";
     public final static String HAR_EXTENSION = ".har";
     public static final String PAGE = "page";
+    public final static String DATA_ID = "dataId";
+    public final static String THIS_DATA_ID = "this.getAttribute(\"data-id\")";
+    public final static String INPUT_DATA_ID = "'input[data-id]'";
+
 }

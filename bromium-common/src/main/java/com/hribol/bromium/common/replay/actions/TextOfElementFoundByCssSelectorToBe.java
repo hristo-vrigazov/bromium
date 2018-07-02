@@ -14,22 +14,14 @@ public class TextOfElementFoundByCssSelectorToBe extends ActionWithJSPreconditio
 
     private final String cssSelector;
     private final String text;
-    private final String eventName;
 
-    public TextOfElementFoundByCssSelectorToBe(String cssSelector, String text, String eventName) {
+    public TextOfElementFoundByCssSelectorToBe(String cssSelector, String text) {
         this.cssSelector = cssSelector;
         this.text = text;
-        this.eventName = eventName;
     }
 
     @Override
     public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState) {
-
-    }
-
-    @Override
-    public String getName() {
-        return eventName;
     }
 
     @Override

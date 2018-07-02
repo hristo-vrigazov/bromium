@@ -26,14 +26,16 @@ SyntaxDefinition:
 
 WebDriverActionCondition:
 	ElementByCssToBePresent |
-	TextOfElementWithCssSelectorToBe
+	TextOfElementWithCssSelectorToBe |
+	ConfirmAlert
 ;
 
 WebDriverAction:
 	ClickCssSelector |
 	ClickClassByText |
 	PageLoad |
-	TypeTextInElementFoundByCssSelector
+	TypeTextInElementFoundByCssSelector |
+	ClickDataId
 ;
 
 Precondition:
@@ -53,22 +55,30 @@ ExpectHttpRequest:
 ElementByCssToBePresent: 'element' 'with' 'css' parameterNames+='selector' parameterValues+=ParameterValue 'is' 'present';
 ClickCssSelector: 'click' 'on' 'element' 'with' 'css' parameterNames+='selector' parameterValues+=ParameterValue;
 PageLoad: 'load' parameterNames+='page' parameterValues+=ParameterValue;
-TypeTextInElementFoundByCssSelector: 'type' parameterNames+='text' parameterValues+=ParameterValue 
+TypeTextInElementFoundByCssSelector: 'type' parameterNames+='text' parameterValues+=ParameterValue
 'in' 'element' 'with' 'css' parameterNames+='selector' parameterValues+=ParameterValue
 ;
 
 TextOfElementWithCssSelectorToBe:
-	'element' 'with' 'css' 
-		parameterNames+='selector' parameterValues+=ParameterValue 'has' 
+	'element' 'with' 'css'
+		parameterNames+='selector' parameterValues+=ParameterValue 'has'
 		parameterNames+='text' parameterValues+=ParameterValue
 ;
 
 ClickClassByText:
-	'click' 'on' 'element' 'with' 
-	parameterNames+='class' 
-	parameterValues+=ParameterValue 'and' 
-	parameterNames+='text' 
+	'click' 'on' 'element' 'with'
+	parameterNames+='class'
+	parameterValues+=ParameterValue 'and'
+	parameterNames+='text'
 	parameterValues+=ParameterValue
+;
+
+ClickDataId:
+    'click' 'on' 'element' 'with' parameterNames+='dataId' parameterValues+=ParameterValue
+;
+
+ConfirmAlert:
+	'to' parameterNames+='confirm' parameterValues+= ParameterValue
 ;
 
 ParameterValue:

@@ -34,9 +34,6 @@ public class ElementArrivedReplayFunction implements ReplayFunction {
                 .whenCssSelectorArrives(CSS_SELECTOR)
                 .notifySatisfiedCondition(HASHCODE)
                 .endArriveHandler()
-                .whenCssSelectorLeaves(CSS_SELECTOR)
-                .notifyNotSatisfiedCondition(HASHCODE)
-                .endLeaveHandler()
                 .endBody()
                 .build();
     }

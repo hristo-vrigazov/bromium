@@ -27,7 +27,7 @@ public class TextOfElementFoundByCssSelectorToBeTest {
 
     @Test
     public void jsEventIsCorrect() {
-        TextOfElementFoundByCssSelectorToBe action = new TextOfElementFoundByCssSelectorToBe(cssSelector, text, eventName);
+        TextOfElementFoundByCssSelectorToBe action = new TextOfElementFoundByCssSelectorToBe(cssSelector, text);
         action.executeAfterJSPreconditionHasBeenSatisfied(mock(WebDriver.class), mock(ReplayingState.class));
 
         String expected = TEXT_OF_ELEMENT_FOUND_BY_CSS_SELECTOR_TO_BE + " " + cssSelector + " " +text;

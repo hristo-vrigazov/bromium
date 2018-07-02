@@ -17,8 +17,7 @@ public class TypeTextInElementFoundByCssSelectorParser implements WebDriverActio
     @Override
     public WebDriverAction create(Map<String, String> parameters, boolean expectHttpRequest) {
         String cssSelector = parameters.get(CSS_SELECTOR);
-        String eventName = parameters.get(EVENT);
         String text = parameters.get(TEXT);
-        return new TypeTextInElementFoundByCssSelector(cssSelector, text, eventName, expectHttpRequest);
+        return new TypeTextInElementFoundByCssSelector(cssSelector, text, expectHttpRequest);
     }
 }

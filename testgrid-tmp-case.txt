@@ -1,0 +1,4 @@
+loadInitialPage: Load initial page 
+loadInitialPage: Load initial page 
+clickMenuItem: Click FAS Test Scenario in the main menu 
+clickMenuItem: Click Global Ctl Test Scenario in the main menu 

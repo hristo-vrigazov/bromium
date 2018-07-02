@@ -415,6 +415,15 @@ ruleWebDriverActionCondition returns [EObject current=null]
 			$current = $this_TextOfElementWithCssSelectorToBe_1.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getWebDriverActionConditionAccess().getConfirmAlertParserRuleCall_2());
+		}
+		this_ConfirmAlert_2=ruleConfirmAlert
+		{
+			$current = $this_ConfirmAlert_2.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 
@@ -467,6 +476,15 @@ ruleWebDriverAction returns [EObject current=null]
 		this_TypeTextInElementFoundByCssSelector_3=ruleTypeTextInElementFoundByCssSelector
 		{
 			$current = $this_TypeTextInElementFoundByCssSelector_3.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getWebDriverActionAccess().getClickDataIdParserRuleCall_4());
+		}
+		this_ClickDataId_4=ruleClickDataId
+		{
+			$current = $this_ClickDataId_4.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -1125,6 +1143,130 @@ ruleClickClassByText returns [EObject current=null]
 						$current,
 						"parameterValues",
 						lv_parameterValues_8_0,
+						"com.hribol.bromium.dsl.Bromium.ParameterValue");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleClickDataId
+entryRuleClickDataId returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getClickDataIdRule()); }
+	iv_ruleClickDataId=ruleClickDataId
+	{ $current=$iv_ruleClickDataId.current; }
+	EOF;
+
+// Rule ClickDataId
+ruleClickDataId returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='click'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getClickDataIdAccess().getClickKeyword_0());
+		}
+		otherlv_1='on'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getClickDataIdAccess().getOnKeyword_1());
+		}
+		otherlv_2='element'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getClickDataIdAccess().getElementKeyword_2());
+		}
+		otherlv_3='with'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getClickDataIdAccess().getWithKeyword_3());
+		}
+		(
+			(
+				lv_parameterNames_4_0='dataId'
+				{
+					newLeafNode(lv_parameterNames_4_0, grammarAccess.getClickDataIdAccess().getParameterNamesDataIdKeyword_4_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getClickDataIdRule());
+					}
+					addWithLastConsumed($current, "parameterNames", lv_parameterNames_4_0, "dataId");
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getClickDataIdAccess().getParameterValuesParameterValueParserRuleCall_5_0());
+				}
+				lv_parameterValues_5_0=ruleParameterValue
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getClickDataIdRule());
+					}
+					add(
+						$current,
+						"parameterValues",
+						lv_parameterValues_5_0,
+						"com.hribol.bromium.dsl.Bromium.ParameterValue");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleConfirmAlert
+entryRuleConfirmAlert returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getConfirmAlertRule()); }
+	iv_ruleConfirmAlert=ruleConfirmAlert
+	{ $current=$iv_ruleConfirmAlert.current; }
+	EOF;
+
+// Rule ConfirmAlert
+ruleConfirmAlert returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='to'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getConfirmAlertAccess().getToKeyword_0());
+		}
+		(
+			(
+				lv_parameterNames_1_0='confirm'
+				{
+					newLeafNode(lv_parameterNames_1_0, grammarAccess.getConfirmAlertAccess().getParameterNamesConfirmKeyword_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getConfirmAlertRule());
+					}
+					addWithLastConsumed($current, "parameterNames", lv_parameterNames_1_0, "confirm");
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getConfirmAlertAccess().getParameterValuesParameterValueParserRuleCall_2_0());
+				}
+				lv_parameterValues_2_0=ruleParameterValue
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getConfirmAlertRule());
+					}
+					add(
+						$current,
+						"parameterValues",
+						lv_parameterValues_2_0,
 						"com.hribol.bromium.dsl.Bromium.ParameterValue");
 					afterParserOrEnumRuleCall();
 				}

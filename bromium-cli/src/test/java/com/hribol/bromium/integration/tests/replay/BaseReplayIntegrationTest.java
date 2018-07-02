@@ -32,7 +32,7 @@ public abstract class BaseReplayIntegrationTest extends BaseDemoAppIntegrationTe
                 "-u", demoApp.getBaseUrl(),
                 "-c", testCaseFile.getAbsolutePath(),
                 "-m", measurementsFile.getAbsolutePath(),
-                "-s", screen
+                "-s", screen,
         };
 
         Main.main(args);

@@ -51,7 +51,7 @@ public class BromiumSwitch<T> extends Switch<T>
    * Checks whether this is a switch for the given package.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @parameter ePackage the package in question.
+   * @param ePackage the package in question.
    * @return whether this is a switch for the given package.
    * @generated
    */
@@ -174,6 +174,22 @@ public class BromiumSwitch<T> extends Switch<T>
         ClickClassByText clickClassByText = (ClickClassByText)theEObject;
         T result = caseClickClassByText(clickClassByText);
         if (result == null) result = caseWebDriverAction(clickClassByText);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BromiumPackage.CLICK_DATA_ID:
+      {
+        ClickDataId clickDataId = (ClickDataId)theEObject;
+        T result = caseClickDataId(clickDataId);
+        if (result == null) result = caseWebDriverAction(clickDataId);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case BromiumPackage.CONFIRM_ALERT:
+      {
+        ConfirmAlert confirmAlert = (ConfirmAlert)theEObject;
+        T result = caseConfirmAlert(confirmAlert);
+        if (result == null) result = caseWebDriverActionCondition(confirmAlert);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -422,6 +438,38 @@ public class BromiumSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseClickClassByText(ClickClassByText object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Click Data Id</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Click Data Id</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseClickDataId(ClickDataId object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Confirm Alert</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Confirm Alert</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConfirmAlert(ConfirmAlert object)
   {
     return null;
   }

@@ -28,11 +28,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.WebDriverActionConditionImpl#getParameterNames <em>Parameter Names</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.impl.WebDriverActionConditionImpl#getParameterValues <em>Parameter Values</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

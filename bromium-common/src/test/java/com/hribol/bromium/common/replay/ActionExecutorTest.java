@@ -157,42 +157,6 @@ public class ActionExecutorTest {
     }
 
     @Test
-    public void ifInterruptedWhileExecutionThreadIsWaitingThenAutomationResultIsSetCorrectly() throws Exception {
-        EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
-        doThrow(new InterruptedException("Interrupted while waiting"))
-                .when(eventSynchronizer).awaitUntil(any(SynchronizationEvent.class));
-
-        ReplayingState replayingState = mock(ReplayingState.class);
-        DriverOperations driverOperations = mock(DriverOperations.class);
-        ExecutorDependencies executorDependencies = mock(ExecutorDependencies.class);
-        when(executorDependencies.getPathToDriverExecutable()).thenReturn(pathToDriverExecutable);
-        when(executorDependencies.getEventSynchronizer()).thenReturn(eventSynchronizer);
-        when(executorDependencies.getReplayingState()).thenReturn(replayingState);
-        when(executorDependencies.getDriverOperations()).thenReturn(driverOperations);
-        doAnswer(invocationOnMock -> {
-            Object[] arguments = invocationOnMock.getArguments();
-            String message = (String) arguments[0];
-            Throwable throwable = (Throwable) arguments[1];
-            return new WebDriverActionExecutionException(message, throwable, getAutomationResultBuilder());
-        }).when(executorDependencies).webDriverActionExecutionException(anyString(), any(Throwable.class));
-
-        ActionExecutor webDriverActionExecutionBase = getWebDriverActionExecutionBase(executorDependencies);
-        Iterator<WebDriverAction> webDriverActionIterator = mock(Iterator.class);
-        TestScenarioActions testScenarioSteps = mock(TestScenarioActions.class);
-        when(testScenarioSteps.iterator()).thenReturn(webDriverActionIterator);
-        TestScenario testScenario = mock(TestScenario.class);
-        when(testScenario.steps()).thenReturn(testScenarioSteps);
-        when(webDriverActionIterator.hasNext()).thenReturn(true, false);
-        WebDriverAction firstAction = mock(WebDriverAction.class);
-        doThrow(new WebDriverException("Exception occured!")).when(firstAction).execute(any(), any(), any());
-        when(webDriverActionIterator.next()).thenReturn(firstAction);
-
-
-        ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
-        assertEquals(AutomationResult.INTERRUPTED, report.getAutomationResult());
-    }
-
-    @Test
     public void canForceCleanUp() throws IOException, URISyntaxException {
         ExecutorDependencies executorDependencies = getWebDriverActionExecutor();
         ActionExecutor webDriverActionExecutionBase = getWebDriverActionExecutionBase(executorDependencies);
@@ -269,18 +233,6 @@ public class ActionExecutorTest {
     }
 
     private AutomationResultBuilder getAutomationResultBuilder() {
-        return throwable -> {
-            if (throwable instanceof AssertionError) {
-                return AutomationResult.ASSERTION_ERROR;
-            } else if (throwable instanceof java.util.concurrent.TimeoutException || throwable instanceof TimeoutException) {
-                return AutomationResult.TIMEOUT;
-            } else if (throwable instanceof InterruptedException) {
-                return AutomationResult.INTERRUPTED;
-            } else if (throwable instanceof WebDriverActionExecutionException) {
-                return AutomationResult.INTERRUPTED;
-            }
-
-            return AutomationResult.UNRECOGNIZED_EXCEPTION;
-        };
+        return new InstanceBasedAutomationResultBuilder();
     }
 }

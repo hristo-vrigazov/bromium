@@ -21,14 +21,14 @@ public class ClickCssSelectorTest {
     public void canClickIfThereAreSuitableElements() throws Exception {
         WebElement webElement = mock(WebElement.class);
         String cssSelector = ".test-element";
-        String eventName = "CLICK_SOMETHING";
+        String eventName = CLICK_CSS_SELECTOR + " " + cssSelector;
         boolean expectsHttpRequest = false;
 
         By elementLocator = By.cssSelector(cssSelector);
         WebDriver webDriver = mock(WebDriver.class);
         when(webDriver.findElement(elementLocator)).thenReturn(webElement);
 
-        ClickCssSelector action = new ClickCssSelector(cssSelector, eventName, expectsHttpRequest);
+        ClickCssSelector action = new ClickCssSelector(cssSelector, expectsHttpRequest);
 
         action.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class));
 

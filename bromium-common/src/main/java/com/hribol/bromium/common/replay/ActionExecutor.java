@@ -54,13 +54,6 @@ public class ActionExecutor implements WebDriverActionExecutor {
 
             for (WebDriverAction webDriverAction : testScenario.steps()) {
                 logger.info("Executing " + webDriverAction.getName());
-                try {
-                    SynchronizationEvent synchronizationEvent = dependencies.noHttpRequestsInQueue();
-                    dependencies.getEventSynchronizer().awaitUntil(synchronizationEvent);
-                } catch (InterruptedException | java.util.concurrent.TimeoutException e) {
-                    throw dependencies.webDriverActionExecutionException("Exception during execution", e);
-                }
-
                 dependencies.getReplayingState().setHttpLock(webDriverAction.expectsHttpRequest());
 
                 Future<?> future = executorService.submit(() -> executeIgnoringExceptions(driverOperations.getDriver(),
@@ -80,7 +73,7 @@ public class ActionExecutor implements WebDriverActionExecutor {
 
             this.automationResult = AutomationResult.SUCCESS;
         } catch (WebDriverActionExecutionException executionException) {
-            executionException.printStackTrace();
+            logger.error("Exception while executing!", executionException);
             this.automationResult = executionException.getAutomationResult();
         }
 

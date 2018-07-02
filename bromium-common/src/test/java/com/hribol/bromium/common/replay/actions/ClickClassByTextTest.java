@@ -32,19 +32,19 @@ public class ClickClassByTextTest {
     @Test
     public void canClickIfThereIsSuitableElement() {
         WebElement correctWebElement = mock(WebElement.class);
-        when(correctWebElement.getAttribute(INNER_HTML)).thenReturn("  ATP ");
+        when(correctWebElement.getText()).thenReturn("  ATP ");
         when(correctWebElement.isDisplayed()).thenReturn(true);
 
         WebElement incorrectWebElement1 = mock(WebElement.class);
-        when(incorrectWebElement1.getAttribute(INNER_HTML)).thenReturn("sometATPhing");
+        when(incorrectWebElement1.getText()).thenReturn("sometATPhing");
         when(incorrectWebElement1.isDisplayed()).thenReturn(true);
 
         WebElement incorrectWebElement2 = mock(WebElement.class);
-        when(incorrectWebElement2.getAttribute(INNER_HTML)).thenReturn(" ATP ");
+        when(incorrectWebElement2.getText()).thenReturn(" ATP ");
         when(incorrectWebElement2.isDisplayed()).thenReturn(false);
 
         WebElement incorrectWebElement3 = mock(WebElement.class);
-        when(incorrectWebElement3.getAttribute(INNER_HTML)).thenReturn("sometATPhing");
+        when(incorrectWebElement3.getText()).thenReturn("sometATPhing");
         when(incorrectWebElement3.isDisplayed()).thenReturn(false);
 
         List<WebElement> webElements = new ArrayList<>();
@@ -57,7 +57,7 @@ public class ClickClassByTextTest {
         WebDriver webDriver = mock(WebDriver.class);
         when(webDriver.findElements(elementsLocator)).thenReturn(webElements);
 
-        ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, eventName, expectsHttp);
+        ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, expectsHttp);
         clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class));
     }
 
@@ -72,7 +72,7 @@ public class ClickClassByTextTest {
         WebDriver webDriver = mock(WebDriver.class);
         when(webDriver.findElements(elementsLocator)).thenReturn(webElements);
 
-        ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, eventName, expectsHttp);
+        ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, expectsHttp);
         thrown.expect(ElementNotSelectableException.class);
         clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class));
     }
@@ -80,7 +80,7 @@ public class ClickClassByTextTest {
     @Test
     public void throwsExceptionIfNoSuitableElementsAreFound() {
         WebElement incorrectWebElement = mock(WebElement.class);
-        when(incorrectWebElement.getAttribute(INNER_HTML)).thenReturn("sometATPhing");
+        when(incorrectWebElement.getText()).thenReturn("sometATPhing");
         when(incorrectWebElement.isDisplayed()).thenReturn(true);
 
         List<WebElement> webElements = new ArrayList<>();
@@ -90,14 +90,14 @@ public class ClickClassByTextTest {
         WebDriver webDriver = mock(WebDriver.class);
         when(webDriver.findElements(elementsLocator)).thenReturn(webElements);
 
-        ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, eventName, expectsHttp);
+        ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, expectsHttp);
         thrown.expect(ElementNotSelectableException.class);
         clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class));
     }
 
     @Test
     public void jsWaitingEventIsConstructedCorrectly() {
-        ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, eventName, expectsHttp);
+        ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, expectsHttp);
 
         String expected = CLICK_CLASS_BY_TEXT + " ." + initialCollectorClass + " " + text;
         String actual = clickClassByText.getJSEventToWaitFor();

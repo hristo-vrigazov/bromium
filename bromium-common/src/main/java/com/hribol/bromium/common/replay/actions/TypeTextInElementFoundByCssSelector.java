@@ -17,19 +17,12 @@ public class TypeTextInElementFoundByCssSelector extends ActionWithJSPreconditio
 
     private String cssSelector;
     private String text;
-    private String eventName;
     private boolean expectsHttpRequest;
 
-    public TypeTextInElementFoundByCssSelector(String cssSelector, String text, String eventName, boolean expectsHttpRequest) {
+    public TypeTextInElementFoundByCssSelector(String cssSelector, String text, boolean expectsHttpRequest) {
         this.cssSelector = cssSelector;
         this.text = text;
-        this.eventName = eventName;
         this.expectsHttpRequest = expectsHttpRequest;
-    }
-
-    @Override
-    public String getName() {
-        return eventName;
     }
 
     @Override

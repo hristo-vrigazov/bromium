@@ -2,6 +2,8 @@ package com.hribol.bromium.common.replay.factory;
 
 import com.hribol.bromium.common.replay.parsers.ClickClassByTextParser;
 import com.hribol.bromium.common.replay.parsers.ClickCssSelectorParser;
+import com.hribol.bromium.common.replay.parsers.ClickDataIdParser;
+import com.hribol.bromium.common.replay.parsers.ConfirmAlertParser;
 import com.hribol.bromium.common.replay.parsers.ElementByCssToBePresentParser;
 import com.hribol.bromium.common.replay.parsers.PageLoadingParser;
 import com.hribol.bromium.common.replay.parsers.TextOfElementFoundByCssSelectorToBeParser;
@@ -13,12 +15,7 @@ import com.hribol.bromium.replay.parsers.WebDriverActionParameterParser;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CLASS_BY_TEXT;
-import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CSS_SELECTOR;
-import static com.hribol.bromium.core.utils.WebDriverActions.ELEMENT_BY_CSS_TO_BE_PRESENT;
-import static com.hribol.bromium.core.utils.WebDriverActions.PAGE_LOADING;
-import static com.hribol.bromium.core.utils.WebDriverActions.TEXT_OF_ELEMENT_FOUND_BY_CSS_SELECTOR_TO_BE;
-import static com.hribol.bromium.core.utils.WebDriverActions.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR;
+import static com.hribol.bromium.core.utils.WebDriverActions.*;
 
 /**
  * The base of most {@link WebDriverActionFactory}. It includes built-in {@link WebDriverActionParameterParser}s
@@ -51,6 +48,8 @@ public abstract class WebDriverActionFactoryBase implements WebDriverActionFacto
         add(TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR, new TypeTextInElementFoundByCssSelectorParser());
         add(ELEMENT_BY_CSS_TO_BE_PRESENT, new ElementByCssToBePresentParser());
         add(TEXT_OF_ELEMENT_FOUND_BY_CSS_SELECTOR_TO_BE, new TextOfElementFoundByCssSelectorToBeParser());
+        add(CONFIRM_ALERT, new ConfirmAlertParser());
+        add(CLICK_DATA_ID, new ClickDataIdParser());
     }
 
     /**

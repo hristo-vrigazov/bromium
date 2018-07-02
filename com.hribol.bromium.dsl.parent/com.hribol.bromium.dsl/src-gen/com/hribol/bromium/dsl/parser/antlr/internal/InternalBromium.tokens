@@ -2,7 +2,9 @@
 'and'=43
 'class'=42
 'click'=34
+'confirm'=46
 'css'=30
+'dataId'=44
 'do'=23
 'element'=28
 'expect'=25
@@ -25,6 +27,7 @@
 'syntax'=18
 'text'=39
 'then'=20
+'to'=45
 'type'=38
 'version'=12
 'when'=19
@@ -71,3 +74,6 @@ T__40=40
 T__41=41
 T__42=42
 T__43=43
+T__44=44
+T__45=45
+T__46=46

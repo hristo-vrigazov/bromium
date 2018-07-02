@@ -12,11 +12,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ParameterValue#getContent <em>Content</em>}</li>
  *   <li>{@link com.hribol.bromium.dsl.bromium.ParameterValue#getExposedParameter <em>Exposed Parameter</em>}</li>
  * </ul>
- * </p>
  *
  * @see com.hribol.bromium.dsl.bromium.BromiumPackage#getParameterValue()
  * @model

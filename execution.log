@@ -1,0 +1,4 @@
+2018-07-02 12:06:17.774 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @839ms
+2018-07-02 12:06:17.879 [main] WARN  org.eclipse.jetty.server.handler.ContextHandler - o.e.j.s.ServletContextHandler@60704c{/,null,null} contextPath ends with /*
+2018-07-02 12:06:17.880 [main] WARN  org.eclipse.jetty.server.handler.ContextHandler - Empty contextPath
+2018-07-02 12:06:17.905 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.2.3.v20140905

@@ -20,6 +20,6 @@ public class TextOfElementFoundByCssSelectorToBeParser implements WebDriverActio
         String cssSelector = parameters.get(CSS_SELECTOR);
         String text = parameters.get(TEXT);
         String event = parameters.get(EVENT);
-        return new TextOfElementFoundByCssSelectorToBe(cssSelector, text, event);
+        return new TextOfElementFoundByCssSelectorToBe(cssSelector, text);
     }
 }

@@ -21,13 +21,11 @@ public class ClickClassByText extends ActionWithJSPreconditionBase {
 
     private final String initialCollectorClass;
     private final String text;
-    private final String eventName;
     private final boolean expectsHttpRequest;
 
-    public ClickClassByText(String initialCollectorClass, String text, String eventName, boolean expectsHttpRequest) {
+    public ClickClassByText(String initialCollectorClass, String text, boolean expectsHttpRequest) {
         this.initialCollectorClass = initialCollectorClass;
         this.text = text;
-        this.eventName = eventName;
         this.expectsHttpRequest = expectsHttpRequest;
     }
 
@@ -47,11 +45,6 @@ public class ClickClassByText extends ActionWithJSPreconditionBase {
         }
 
         webElementOptional.get().click();
-    }
-
-    @Override
-    public String getName() {
-        return eventName;
     }
 
     @Override

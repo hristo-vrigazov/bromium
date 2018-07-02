@@ -48,6 +48,8 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTypeTextInElementFoundByCssSelectorAccess().getGroup(), "rule__TypeTextInElementFoundByCssSelector__Group__0");
 					put(grammarAccess.getTextOfElementWithCssSelectorToBeAccess().getGroup(), "rule__TextOfElementWithCssSelectorToBe__Group__0");
 					put(grammarAccess.getClickClassByTextAccess().getGroup(), "rule__ClickClassByText__Group__0");
+					put(grammarAccess.getClickDataIdAccess().getGroup(), "rule__ClickDataId__Group__0");
+					put(grammarAccess.getConfirmAlertAccess().getGroup(), "rule__ConfirmAlert__Group__0");
 					put(grammarAccess.getThreeDottedVersionAccess().getGroup(), "rule__ThreeDottedVersion__Group__0");
 					put(grammarAccess.getModelAccess().getNameAssignment_1(), "rule__Model__NameAssignment_1");
 					put(grammarAccess.getModelAccess().getVersionAssignment_3(), "rule__Model__VersionAssignment_3");
@@ -82,6 +84,10 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getClickClassByTextAccess().getParameterValuesAssignment_5(), "rule__ClickClassByText__ParameterValuesAssignment_5");
 					put(grammarAccess.getClickClassByTextAccess().getParameterNamesAssignment_7(), "rule__ClickClassByText__ParameterNamesAssignment_7");
 					put(grammarAccess.getClickClassByTextAccess().getParameterValuesAssignment_8(), "rule__ClickClassByText__ParameterValuesAssignment_8");
+					put(grammarAccess.getClickDataIdAccess().getParameterNamesAssignment_4(), "rule__ClickDataId__ParameterNamesAssignment_4");
+					put(grammarAccess.getClickDataIdAccess().getParameterValuesAssignment_5(), "rule__ClickDataId__ParameterValuesAssignment_5");
+					put(grammarAccess.getConfirmAlertAccess().getParameterNamesAssignment_1(), "rule__ConfirmAlert__ParameterNamesAssignment_1");
+					put(grammarAccess.getConfirmAlertAccess().getParameterValuesAssignment_2(), "rule__ConfirmAlert__ParameterValuesAssignment_2");
 					put(grammarAccess.getParameterValueAccess().getContentAssignment_0(), "rule__ParameterValue__ContentAssignment_0");
 					put(grammarAccess.getParameterValueAccess().getExposedParameterAssignment_1(), "rule__ParameterValue__ExposedParameterAssignment_1");
 					put(grammarAccess.getExposedParameterAccess().getNameAssignment(), "rule__ExposedParameter__NameAssignment");

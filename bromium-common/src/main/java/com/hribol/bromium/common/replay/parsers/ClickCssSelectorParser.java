@@ -18,6 +18,6 @@ public class ClickCssSelectorParser implements WebDriverActionParameterParser {
     public WebDriverAction create(Map<String, String> parameters, boolean expectHttpRequest) {
         String cssSelector = parameters.get(CSS_SELECTOR);
         String eventName = parameters.get(EVENT);
-        return new ClickCssSelector(cssSelector, eventName, expectHttpRequest);
+        return new ClickCssSelector(cssSelector, expectHttpRequest);
     }
 }

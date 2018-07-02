@@ -13,20 +13,13 @@ import static com.hribol.bromium.common.builder.JsFunctionNames.ELEMENT_BY_CSS_S
 public class ElementByCssToBePresent extends ActionWithJSPreconditionBase {
 
     private final String cssSelector;
-    private final String eventName;
 
-    public ElementByCssToBePresent(String cssSelector, String eventName) {
+    public ElementByCssToBePresent(String cssSelector) {
         this.cssSelector = cssSelector;
-        this.eventName = eventName;
     }
 
     @Override
     public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState) {
-    }
-
-    @Override
-    public String getName() {
-        return eventName;
     }
 
     @Override

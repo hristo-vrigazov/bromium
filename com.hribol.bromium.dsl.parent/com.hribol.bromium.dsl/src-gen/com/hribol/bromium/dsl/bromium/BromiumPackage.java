@@ -603,6 +603,80 @@ public interface BromiumPackage extends EPackage
   int CLICK_CLASS_BY_TEXT_FEATURE_COUNT = WEB_DRIVER_ACTION_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ClickDataIdImpl <em>Click Data Id</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see com.hribol.bromium.dsl.bromium.impl.ClickDataIdImpl
+   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getClickDataId()
+   * @generated
+   */
+  int CLICK_DATA_ID = 14;
+
+  /**
+   * The feature id for the '<em><b>Parameter Names</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLICK_DATA_ID__PARAMETER_NAMES = WEB_DRIVER_ACTION__PARAMETER_NAMES;
+
+  /**
+   * The feature id for the '<em><b>Parameter Values</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLICK_DATA_ID__PARAMETER_VALUES = WEB_DRIVER_ACTION__PARAMETER_VALUES;
+
+  /**
+   * The number of structural features of the '<em>Click Data Id</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLICK_DATA_ID_FEATURE_COUNT = WEB_DRIVER_ACTION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ConfirmAlertImpl <em>Confirm Alert</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see com.hribol.bromium.dsl.bromium.impl.ConfirmAlertImpl
+   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getConfirmAlert()
+   * @generated
+   */
+  int CONFIRM_ALERT = 15;
+
+  /**
+   * The feature id for the '<em><b>Parameter Names</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIRM_ALERT__PARAMETER_NAMES = WEB_DRIVER_ACTION_CONDITION__PARAMETER_NAMES;
+
+  /**
+   * The feature id for the '<em><b>Parameter Values</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIRM_ALERT__PARAMETER_VALUES = WEB_DRIVER_ACTION_CONDITION__PARAMETER_VALUES;
+
+  /**
+   * The number of structural features of the '<em>Confirm Alert</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIRM_ALERT_FEATURE_COUNT = WEB_DRIVER_ACTION_CONDITION_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ParameterValueImpl <em>Parameter Value</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -610,7 +684,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getParameterValue()
    * @generated
    */
-  int PARAMETER_VALUE = 14;
+  int PARAMETER_VALUE = 16;
 
   /**
    * The feature id for the '<em><b>Content</b></em>' attribute.
@@ -647,7 +721,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getExposedParameter()
    * @generated
    */
-  int EXPOSED_PARAMETER = 15;
+  int EXPOSED_PARAMETER = 17;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -675,7 +749,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getThreeDottedVersion()
    * @generated
    */
-  int THREE_DOTTED_VERSION = 16;
+  int THREE_DOTTED_VERSION = 18;
 
   /**
    * The feature id for the '<em><b>Big</b></em>' attribute.
@@ -1062,6 +1136,26 @@ public interface BromiumPackage extends EPackage
    * @generated
    */
   EClass getClickClassByText();
+
+  /**
+   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ClickDataId <em>Click Data Id</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Click Data Id</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ClickDataId
+   * @generated
+   */
+  EClass getClickDataId();
+
+  /**
+   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ConfirmAlert <em>Confirm Alert</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Confirm Alert</em>'.
+   * @see com.hribol.bromium.dsl.bromium.ConfirmAlert
+   * @generated
+   */
+  EClass getConfirmAlert();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ParameterValue <em>Parameter Value</em>}'.
@@ -1473,6 +1567,26 @@ public interface BromiumPackage extends EPackage
      * @generated
      */
     EClass CLICK_CLASS_BY_TEXT = eINSTANCE.getClickClassByText();
+
+    /**
+     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ClickDataIdImpl <em>Click Data Id</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.hribol.bromium.dsl.bromium.impl.ClickDataIdImpl
+     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getClickDataId()
+     * @generated
+     */
+    EClass CLICK_DATA_ID = eINSTANCE.getClickDataId();
+
+    /**
+     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ConfirmAlertImpl <em>Confirm Alert</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.hribol.bromium.dsl.bromium.impl.ConfirmAlertImpl
+     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getConfirmAlert()
+     * @generated
+     */
+    EClass CONFIRM_ALERT = eINSTANCE.getConfirmAlert();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ParameterValueImpl <em>Parameter Value</em>}' class.
