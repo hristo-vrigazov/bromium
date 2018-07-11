@@ -50,9 +50,9 @@ public class TestScenarioFactory {
     public TestScenario createFromTestCaseSteps(TestScenarioSteps testCaseSteps) {
         TestScenario testScenario = new TestScenario();
 
-        for (Map<String, String> testCaseStep: testCaseSteps) {
-            ApplicationAction domainSpecificAction =
-                    applicationActionFactory.create(testCaseStep);
+        for (int i = 0; i < testCaseSteps.size(); i++) {
+            Map<String, String> testCaseStep = testCaseSteps.get(i);
+            ApplicationAction domainSpecificAction = applicationActionFactory.create(testCaseStep, i);
             testScenario.addWebDriverAction(domainSpecificAction.getPrecondition());
             testScenario.addWebDriverAction(domainSpecificAction.getWebdriverAction());
             testScenario.addWebDriverAction(domainSpecificAction.getPostcondition());

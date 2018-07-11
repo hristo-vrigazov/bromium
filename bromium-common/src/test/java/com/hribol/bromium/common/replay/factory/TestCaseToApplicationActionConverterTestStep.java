@@ -56,7 +56,8 @@ public class TestCaseToApplicationActionConverterTestStep {
         WebDriverAction webDriverAction = mock(WebDriverAction.class);
         WebDriverActionFactory webDriverActionFactory = mock(WebDriverActionFactory.class);
 
-        when(webDriverActionFactory.create(actionType, tempMap, false)).thenReturn(webDriverAction);
+        int step = 0;
+        when(webDriverActionFactory.create(actionType, tempMap, step, false)).thenReturn(webDriverAction);
 
         WebDriverActionConfiguration preconditionActionConfiguration = mock(WebDriverActionConfiguration.class);
         when(preconditionActionConfiguration.getWebDriverActionType()).thenReturn(NOTHING);
@@ -80,8 +81,9 @@ public class TestCaseToApplicationActionConverterTestStep {
         TestCaseStepToApplicationActionConverter testCaseStepToApplicationActionConverter =
                 new TestCaseStepToApplicationActionConverter(webDriverActionFactory);
 
+        int i = 0;
         ApplicationAction applicationAction =
-                testCaseStepToApplicationActionConverter.convert(applicationActionConfiguration, testCaseStep);
+                testCaseStepToApplicationActionConverter.convert(applicationActionConfiguration, testCaseStep, i);
 
         assertFalse(applicationAction.getPrecondition().isPresent());
         assertFalse(applicationAction.getPostcondition().isPresent());

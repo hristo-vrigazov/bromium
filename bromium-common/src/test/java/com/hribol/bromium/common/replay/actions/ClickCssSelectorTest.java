@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import static com.hribol.bromium.common.builder.JsFunctionNames.CLICK_CSS_SELECTOR;
+import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CSS_SELECTOR;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;

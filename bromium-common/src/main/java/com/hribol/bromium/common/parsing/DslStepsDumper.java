@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static com.hribol.bromium.core.utils.Constants.EVENT;
 
@@ -32,7 +33,12 @@ public class DslStepsDumper implements StepsDumper {
         File file = new File(outputFile);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)))) {
             for (Map<String, String> step : testScenarioSteps) {
-                List<SyntaxDefinitionConfiguration> syntaxDefinitions = actionConfigurations.get(step.get(EVENT)).getSyntaxDefinitionConfigurationList();
+                List<SyntaxDefinitionConfiguration> syntaxDefinitions =
+                        Optional.ofNullable(actionConfigurations.get(step.get(EVENT)))
+                                .orElseThrow(() -> new IllegalStateException("The step "
+                                        + step + "has an event that is not present in the configuration"
+                                        + step.get(EVENT)))
+                                .getSyntaxDefinitionConfigurationList();
                 StringBuilder lineBuilder = new StringBuilder();
                 lineBuilder.append(step.get(EVENT)).append(": ");
 

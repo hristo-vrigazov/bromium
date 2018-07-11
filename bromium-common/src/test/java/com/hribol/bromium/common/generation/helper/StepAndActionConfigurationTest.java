@@ -18,8 +18,8 @@ public class StepAndActionConfigurationTest {
     public void canPackage() {
         Map<String, String> step = new HashMap<>();
         ApplicationActionConfiguration applicationActionConfiguration = mock(ApplicationActionConfiguration.class);
-
-        StepAndActionConfiguration stepAndActionConfiguration = new StepAndActionConfiguration(step, applicationActionConfiguration);
+        int i = 0;
+        StepAndActionConfiguration stepAndActionConfiguration = new StepAndActionConfiguration(step, i, applicationActionConfiguration);
 
         assertEquals(step, stepAndActionConfiguration.getTestCaseStep());
         assertEquals(applicationActionConfiguration, stepAndActionConfiguration.getApplicationActionConfiguration());

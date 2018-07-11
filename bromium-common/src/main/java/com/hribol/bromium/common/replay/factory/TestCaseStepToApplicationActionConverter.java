@@ -35,28 +35,31 @@ public class TestCaseStepToApplicationActionConverter {
      * and a test case step.
      * @param applicationActionConfiguration the application action configuration
      * @param testCaseStep the test case step
+     * @param i
      * @return the created application action
      */
     public ApplicationAction convert(ApplicationActionConfiguration applicationActionConfiguration,
-                                     Map<String, String> testCaseStep) {
-        Optional<WebDriverAction> precondition =
-                convertAction(applicationActionConfiguration.getConditionBeforeExecution(), testCaseStep);
-        Optional<WebDriverAction> webdriverAction =
-                convertAction(applicationActionConfiguration.getWebDriverAction(),
-                        testCaseStep,
-                        applicationActionConfiguration.expectsHttpRequest());
-        Optional<WebDriverAction> postCondition =
-                convertAction(applicationActionConfiguration.getConditionAfterExecution(), testCaseStep);
+                                     Map<String, String> testCaseStep,
+                                     int i) {
+        WebDriverActionConfiguration conditionBeforeExecution = applicationActionConfiguration.getConditionBeforeExecution();
+        Optional<WebDriverAction> precondition = convertAction(conditionBeforeExecution, testCaseStep, i);
+        WebDriverActionConfiguration action = applicationActionConfiguration.getWebDriverAction();
+        Boolean expectHttpRequest = applicationActionConfiguration.expectsHttpRequest();
+        Optional<WebDriverAction> webdriverAction = convertAction(action, testCaseStep, i, expectHttpRequest);
+        WebDriverActionConfiguration conditionAfterExecution = applicationActionConfiguration.getConditionAfterExecution();
+        Optional<WebDriverAction> postCondition = convertAction(conditionAfterExecution, testCaseStep, i);
         return new ConvertedApplicationAction(precondition, webdriverAction, postCondition);
     }
 
     private Optional<WebDriverAction> convertAction(WebDriverActionConfiguration webDriverActionConfiguration,
-                                                    Map<String, String> testCaseStep) {
-        return convertAction(webDriverActionConfiguration, testCaseStep, false);
+                                                    Map<String, String> testCaseStep,
+                                                    int step) {
+        return convertAction(webDriverActionConfiguration, testCaseStep, step, false);
     }
 
     private Optional<WebDriverAction> convertAction(WebDriverActionConfiguration webDriverActionConfiguration,
                                                     Map<String, String> testCaseStep,
+                                                    int step,
                                                     boolean expectHttpRequest) {
         String webdriverActionType = webDriverActionConfiguration.getWebDriverActionType();
         if (webdriverActionType.equals(NOTHING)) {
@@ -84,7 +87,8 @@ public class TestCaseStepToApplicationActionConverter {
             }
         }
 
-        WebDriverAction webDriverAction = webDriverActionFactory.create(webdriverActionType, parameters, expectHttpRequest);
+        WebDriverAction webDriverAction = webDriverActionFactory.create(webdriverActionType, parameters,
+                step, expectHttpRequest);
         return Optional.of(webDriverAction);
     }
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Change injected code at runtime</title>
+</head>
+<body>
+    <div id="initial-div">
+        <button class='source-variable'>someIdHere</button>
+        <input data-id="someIdHere" type="checkbox">Variable data id</input>
+        <input data-id="anotherIdHere" type="checkbox">Raw id here</input>
+    </div>
+    <br>
+    <button onclick="removeInitial()" id="remove-initial">Remove initial</button>
+    <br>
+    <div id="regenerated-div">
+
+    </div>
+    <button onclick="regenerate()" id="regenerate-button">Regenerate</button>
+
+    <script>
+        function removeInitial() {
+            console.log('remove initial');
+            var initialDiv = document.getElementById('initial-div');
+            initialDiv.parentNode.removeChild(initialDiv);
+        }
+
+        function regenerate() {
+            console.log('regenerate');
+            var idSourceButton = document.createElement('button');
+            idSourceButton.innerHTML = 'someIdHere1';
+            idSourceButton.className += 'source-variable';
+
+            var variableDataIdCheckbox = document.createElement('input');
+            variableDataIdCheckbox.innerHTML = 'Variable data id 1';
+            variableDataIdCheckbox.setAttribute('data-id', 'someIdHere1');
+            variableDataIdCheckbox.setAttribute('type', 'checkbox');
+
+            var anotherIdHere = document.createElement('input');
+            anotherIdHere.innerHTML = 'Raw id here1';
+            anotherIdHere.setAttribute('data-id', 'anotherIdHere1');
+            anotherIdHere.setAttribute('type', 'checkbox');
+
+            var regeneratedDiv = document.getElementById('regenerated-div');
+            regeneratedDiv.appendChild(idSourceButton);
+            regeneratedDiv.appendChild(variableDataIdCheckbox);
+            regeneratedDiv.appendChild(anotherIdHere);
+        }
+    </script>
+</body>
+</html>

@@ -11,11 +11,11 @@ import com.hribol.bromium.core.generation.RegistryInformation;
  * @param <RegistryInfo> the info needed for registration
  */
 public class IncludeInvokeGenerator<RegistryInfo extends RegistryInformation> implements JavascriptGenerator<RegistryInfo> {
-    private FunctionRegistry<RegistryInfo> recorderFunctionRegistry;
+    private FunctionRegistry<RegistryInfo> functionRegistry;
 
     @Inject
-    public IncludeInvokeGenerator(FunctionRegistry<RegistryInfo> recorderFunctionRegistry) {
-        this.recorderFunctionRegistry = recorderFunctionRegistry;
+    public IncludeInvokeGenerator(FunctionRegistry<RegistryInfo> functionRegistry) {
+        this.functionRegistry = functionRegistry;
     }
 
     /**
@@ -23,8 +23,8 @@ public class IncludeInvokeGenerator<RegistryInfo extends RegistryInformation> im
      */
     @Override
     public String generate(RegistryInfo generationInformation) {
-        String getRecordingCode = recorderFunctionRegistry.generate(generationInformation);
-        recorderFunctionRegistry.register(generationInformation);
-        return getRecordingCode;
+        String generatedCode = functionRegistry.generate(generationInformation);
+        functionRegistry.register(generationInformation);
+        return generatedCode;
     }
 }

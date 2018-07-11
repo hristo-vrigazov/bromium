@@ -10,10 +10,13 @@ import org.slf4j.LoggerFactory;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static com.hribol.bromium.core.DependencyInjectionConstants.BASE_URI;
 import static com.hribol.bromium.core.utils.Constants.NO_HTTP_REQUESTS_IN_QUEUE;
@@ -31,6 +34,8 @@ public class ReplayingState {
     private Set<HttpRequest> httpRequestQueue;
     private List<String> whiteListHttp;
 
+    private Map<String, String> substitutions;
+
     /**
      * Creates new replaying state
      * @param baseUri the base uri for building the whitelisted http urls
@@ -42,6 +47,7 @@ public class ReplayingState {
         this.httpRequestQueue = Collections.synchronizedSet(new HashSet<>());
         this.conditionsSatisfied = Collections.synchronizedSet(new HashSet<>());
         this.whiteListHttp = buildWhiteList(baseUri);
+        this.substitutions = new ConcurrentHashMap<>();
     }
 
     private List<String> buildWhiteList(URI baseUri) {
@@ -162,5 +168,17 @@ public class ReplayingState {
         logger.debug("Remove request " + httpRequest.getUri());
         this.httpRequestQueue.remove(httpRequest);
         logger.debug("Number of requests in queue " + this.httpRequestQueue.size());
+    }
+
+    public void registerSubstitution(String valueToBeReplaced, String replacement) {
+        substitutions.put(valueToBeReplaced, replacement);
+    }
+
+    public String getValue(String valueToBeReplaced) {
+        return substitutions.get(valueToBeReplaced);
+    }
+
+    public Map<String, String> getSubstitutions() {
+        return substitutions;
     }
 }

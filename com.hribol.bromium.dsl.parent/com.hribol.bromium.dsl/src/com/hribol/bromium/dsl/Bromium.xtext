@@ -16,7 +16,7 @@ ApplicationAction:
 	'syntax' syntaxDefinitions+=SyntaxDefinition*
 	(precondition=Precondition)?
 	webDriverAction=WebDriverAction
-	expectHttpRequest=ExpectHttpRequest
+	(expectHttpRequest=ExpectHttpRequest)?
 	(postcondition=Postcondition)?
 ;
 
@@ -35,7 +35,8 @@ WebDriverAction:
 	ClickClassByText |
 	PageLoad |
 	TypeTextInElementFoundByCssSelector |
-	ClickDataId
+	ClickDataId |
+	SetVariableToTextOfElementWithCssSelector
 ;
 
 Precondition:
@@ -71,6 +72,11 @@ ClickClassByText:
 	parameterValues+=ParameterValue 'and'
 	parameterNames+='text'
 	parameterValues+=ParameterValue
+;
+
+SetVariableToTextOfElementWithCssSelector:
+	'set' parameterNames +='variable' parameterValues+=ParameterValue 'to' 'the' 'text' 'of' 'element' 'with' 'css'
+	parameterNames += 'selector' parameterValues+=ParameterValue
 ;
 
 ClickDataId:

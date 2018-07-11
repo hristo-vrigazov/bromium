@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.Condition;
@@ -21,7 +22,7 @@ public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
     private final static Logger logger = LoggerFactory.getLogger(SignalizationBasedEventSynchronizer.class);
 
     private Lock lock;
-    private Map<SynchronizationEvent, Condition> eventConditionMap = new HashMap<>();
+    private Map<SynchronizationEvent, Condition> eventConditionMap = new ConcurrentHashMap<>();
     private int timeoutInSeconds;
 
     public SignalizationBasedEventSynchronizer(int timeoutInSeconds) {
@@ -74,7 +75,7 @@ public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
                 lock.unlock();
             }
         } catch (Exception e) {
-            logger.error("Exception while trying to signalize event " + synchronizationEvent.getName());
+            logger.error("Exception while trying to signalize event " + synchronizationEvent.getName(), e);
         }
     }
 

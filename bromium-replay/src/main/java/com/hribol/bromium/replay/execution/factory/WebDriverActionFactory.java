@@ -13,8 +13,9 @@ public interface WebDriverActionFactory {
      * Creates a web driver action
      * @param webdriverActionType the type of the action, for example "ClickClassByText"
      * @param parameters the parameters for the action in raw format
+     * @param step
      * @param expectsHttpRequest whether the action should expect http request after it is executed
      * @return the web driver action
      */
-    WebDriverAction create(String webdriverActionType, Map<String, String> parameters, boolean expectsHttpRequest);
+    WebDriverAction create(String webdriverActionType, Map<String, String> parameters, int step, boolean expectsHttpRequest);
 }

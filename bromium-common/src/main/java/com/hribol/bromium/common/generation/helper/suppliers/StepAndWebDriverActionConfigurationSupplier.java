@@ -9,7 +9,7 @@ import java.util.Map;
  * Supplies an instance of {@link StepAndWebDriverActionConfiguration}
  */
 public class StepAndWebDriverActionConfigurationSupplier {
-    public StepAndWebDriverActionConfiguration get(Map<String, String> testCaseStep, WebDriverActionConfiguration webDriverActionConfiguration) {
-        return new StepAndWebDriverActionConfiguration(testCaseStep, webDriverActionConfiguration);
+    public StepAndWebDriverActionConfiguration get(Map<String, String> testCaseStep, int index, WebDriverActionConfiguration webDriverActionConfiguration) {
+        return new StepAndWebDriverActionConfiguration(testCaseStep, index, webDriverActionConfiguration);
     }
 }

@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import java.text.MessageFormat;
 
-import static com.hribol.bromium.common.builder.JsFunctionNames.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR;
+import static com.hribol.bromium.core.utils.WebDriverActions.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR;
 
 
 /**
@@ -32,7 +32,7 @@ public class TypeTextInElementFoundByCssSelector extends ActionWithJSPreconditio
 
     @Override
     public String getJSEventToWaitFor() {
-        return MessageFormat.format("{0} {1}", TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR, cssSelector);
+        return MessageFormat.format("{0} {1} {2}", TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR, cssSelector, text);
     }
 
     @Override

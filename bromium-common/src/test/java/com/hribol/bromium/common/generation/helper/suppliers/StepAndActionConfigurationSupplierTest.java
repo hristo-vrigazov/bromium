@@ -24,15 +24,16 @@ public class StepAndActionConfigurationSupplierTest {
     public void createsStepAndActionConfiguration() throws Exception {
         StepAndActionConfiguration expected = mock(StepAndActionConfiguration.class);
         Map<String, String> testCaseStep = new HashMap<>();
+        int i = 0;
         ApplicationActionConfiguration applicationActionConfiguration = mock(ApplicationActionConfiguration.class);
 
         PowerMockito.whenNew(StepAndActionConfiguration.class)
-                .withArguments(testCaseStep, applicationActionConfiguration)
+                .withArguments(testCaseStep, i, applicationActionConfiguration)
                 .thenReturn(expected);
 
         StepAndActionConfigurationSupplier stepAndActionConfigurationSupplier = new
                 StepAndActionConfigurationSupplier();
 
-        StepAndActionConfiguration actual = stepAndActionConfigurationSupplier.get(testCaseStep, applicationActionConfiguration);
+        StepAndActionConfiguration actual = stepAndActionConfigurationSupplier.get(testCaseStep, i, applicationActionConfiguration);
     }
 }

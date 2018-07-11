@@ -10,10 +10,14 @@ import java.util.Map;
  */
 public class StepAndActionConfiguration implements GenerationInformation {
     private Map<String, String> testCaseStep;
+    private int index;
     private ApplicationActionConfiguration applicationActionConfiguration;
 
-    public StepAndActionConfiguration(Map<String, String> testCaseStep, ApplicationActionConfiguration applicationActionConfiguration) {
+    public StepAndActionConfiguration(Map<String, String> testCaseStep,
+                                      int i,
+                                      ApplicationActionConfiguration applicationActionConfiguration) {
         this.testCaseStep = testCaseStep;
+        this.index = i;
         this.applicationActionConfiguration = applicationActionConfiguration;
     }
 
@@ -23,5 +27,9 @@ public class StepAndActionConfiguration implements GenerationInformation {
 
     public Map<String, String> getTestCaseStep() {
         return testCaseStep;
+    }
+
+    public int getIndex() {
+        return index;
     }
 }

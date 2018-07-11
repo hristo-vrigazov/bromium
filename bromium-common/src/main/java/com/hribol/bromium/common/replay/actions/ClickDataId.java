@@ -21,6 +21,9 @@ public class ClickDataId extends ActionWithJSPreconditionBase {
 
     @Override
     public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState) {
+        String dataId = this.dataId.startsWith("{{")
+                ? replayingState.getValue(this.dataId)
+                : this.dataId;
         By selector = By.cssSelector("input[data-id='" + dataId + "'");
         driver.findElement(selector).click();
     }

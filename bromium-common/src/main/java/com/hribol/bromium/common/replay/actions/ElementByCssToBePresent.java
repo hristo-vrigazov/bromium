@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.text.MessageFormat;
 
-import static com.hribol.bromium.common.builder.JsFunctionNames.ELEMENT_BY_CSS_SELECTOR_TO_BE_PRESENT;
+import static com.hribol.bromium.core.utils.WebDriverActions.ELEMENT_BY_CSS_SELECTOR_TO_BE_PRESENT;
 
 /**
  * Waits until an element found by a css selector is clickable. Javascript (mutation observers) based.

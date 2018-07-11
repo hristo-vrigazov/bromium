@@ -22,7 +22,7 @@ public class TypeTextInElementFoundByCssSelectorTest {
     public void typesIfSuitableElementExists() {
         String cssSelector = ".something";
         String text = "text";
-        String eventName = "TypeTextInElementFoundByCssSelector .something";
+        String eventName = "TypeTextInElementFoundByCssSelector .something text";
         boolean expectsHttp = true;
 
         WebElement textBox = mock(WebElement.class);

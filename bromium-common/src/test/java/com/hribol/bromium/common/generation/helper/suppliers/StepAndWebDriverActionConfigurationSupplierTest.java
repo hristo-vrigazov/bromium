@@ -28,14 +28,16 @@ public class StepAndWebDriverActionConfigurationSupplierTest {
 
         StepAndWebDriverActionConfiguration expected = mock(StepAndWebDriverActionConfiguration.class);
 
+        int index = 0;
+
         PowerMockito.whenNew(StepAndWebDriverActionConfiguration.class)
-                .withArguments(testCaseStep, webDriverActionConfiguration)
+                .withArguments(testCaseStep, index, webDriverActionConfiguration)
                 .thenReturn(expected);
 
         StepAndWebDriverActionConfigurationSupplier stepAndWebDriverActionConfigurationSupplier =
                 new StepAndWebDriverActionConfigurationSupplier();
 
-        StepAndWebDriverActionConfiguration actual = stepAndWebDriverActionConfigurationSupplier.get(testCaseStep, webDriverActionConfiguration);
+        StepAndWebDriverActionConfiguration actual = stepAndWebDriverActionConfigurationSupplier.get(testCaseStep, index, webDriverActionConfiguration);
 
         assertEquals(expected, actual);
     }

@@ -7,6 +7,7 @@ import com.hribol.bromium.dsl.bromium.ParameterValue;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Converts two lists of parameter names and values to a map of {@link com.hribol.bromium.core.config.ParameterConfiguration}
@@ -21,7 +22,7 @@ public class ParametersConfigurationConverter {
     }
 
     public Map<String, ParameterConfiguration> convert(List<String> parameterNames, List<ParameterValue> parameterValues) {
-        Map<String, ParameterConfiguration> configurationMap = new HashMap<>();
+        Map<String, ParameterConfiguration> configurationMap = new TreeMap<>();
 
         for (int i = 0; i < parameterNames.size(); i++) {
             String parameterName = parameterNames.get(i);

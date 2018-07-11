@@ -7,6 +7,8 @@ import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.Optional;
@@ -22,6 +24,8 @@ public class ReplayingJavascriptGenerator implements JavascriptGenerator<StepsAn
     private JavascriptGenerator<StepAndActionConfiguration> generatorByStepAndActionConfiguration;
     private StepAndActionConfigurationSupplier stepAndActionConfigurationSupplier;
 
+    private final static Logger logger = LoggerFactory.getLogger(ReplayingJavascriptGenerator.class);
+
     public ReplayingJavascriptGenerator(String baseTemplate,
                                         JavascriptGenerator<StepAndActionConfiguration> generatorByStepAndActionConfiguration,
                                         StepAndActionConfigurationSupplier stepAndActionConfigurationSupplier) {
@@ -32,6 +36,14 @@ public class ReplayingJavascriptGenerator implements JavascriptGenerator<StepsAn
 
     @Override
     public String generate(StepsAndConfiguration generationInformation) {
+        long started = System.currentTimeMillis();
+        String generated = generateReplayingCode(generationInformation);
+        long took = System.currentTimeMillis() - started;
+        logger.info("Generation took {}ms", took);
+        return generated;
+    }
+
+    private String generateReplayingCode(StepsAndConfiguration generationInformation) {
         ApplicationConfiguration applicationConfiguration = generationInformation.getApplicationConfiguration();
         TestScenarioSteps testCaseSteps = generationInformation.getTestCaseSteps();
 
@@ -39,7 +51,8 @@ public class ReplayingJavascriptGenerator implements JavascriptGenerator<StepsAn
         stringBuilder.append(baseTemplate);
         stringBuilder.append(System.lineSeparator()).append(System.lineSeparator());
 
-        for (Map<String, String> testCaseStep: testCaseSteps) {
+        for (int i = 0; i < testCaseSteps.size(); i++) {
+            Map<String, String> testCaseStep = testCaseSteps.get(i);
             String eventName = testCaseStep.get(EVENT);
 
             Optional<ApplicationActionConfiguration> optional = applicationConfiguration
@@ -52,8 +65,10 @@ public class ReplayingJavascriptGenerator implements JavascriptGenerator<StepsAn
                 throw new IllegalStateException("The application action" + eventName + "in the test case step is not present in the configuration");
             }
             ApplicationActionConfiguration applicationActionConfiguration = optional.get();
-            StepAndActionConfiguration stepAndActionConfiguration = stepAndActionConfigurationSupplier.get(testCaseStep, applicationActionConfiguration);
+            StepAndActionConfiguration stepAndActionConfiguration = stepAndActionConfigurationSupplier
+                    .get(testCaseStep, i, applicationActionConfiguration);
             stringBuilder.append(generatorByStepAndActionConfiguration.generate(stepAndActionConfiguration));
+            stringBuilder.append(System.lineSeparator());
 
         }
 

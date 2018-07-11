@@ -16,7 +16,7 @@ import static com.hribol.bromium.core.utils.Constants.TEXT;
 public class TextOfElementFoundByCssSelectorToBeParser implements WebDriverActionParameterParser {
 
     @Override
-    public WebDriverAction create(Map<String, String> parameters, boolean expectHttpRequest) {
+    public WebDriverAction create(Map<String, String> parameters, int step, boolean expectHttpRequest) {
         String cssSelector = parameters.get(CSS_SELECTOR);
         String text = parameters.get(TEXT);
         String event = parameters.get(EVENT);

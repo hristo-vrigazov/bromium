@@ -26,5 +26,10 @@ public class Constants {
     public final static String DATA_ID = "dataId";
     public final static String THIS_DATA_ID = "this.getAttribute(\"data-id\")";
     public final static String INPUT_DATA_ID = "'input[data-id]'";
+    public final static String HASHCODE = "hashcode";
+    public final static String SUBSTITUTION = "substitution";
+    public final static String REGISTER_SUBSTITUTION_URL = "http://bromium-register-substitution.com/";
+    public final static String INDEX = "index";
+
 
 }

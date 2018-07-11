@@ -15,7 +15,7 @@ import static com.hribol.bromium.core.utils.Constants.EVENT;
 public class ElementByCssToBePresentParser implements WebDriverActionParameterParser {
 
     @Override
-    public WebDriverAction create(Map<String, String> parameters, boolean expectHttpRequest) {
+    public WebDriverAction create(Map<String, String> parameters, int step, boolean expectHttpRequest) {
         String cssSelector = parameters.get(CSS_SELECTOR);
         String eventName = parameters.get(EVENT);
         return new ElementByCssToBePresent(cssSelector);

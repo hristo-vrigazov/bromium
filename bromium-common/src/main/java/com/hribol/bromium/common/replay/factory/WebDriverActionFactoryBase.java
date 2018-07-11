@@ -6,6 +6,7 @@ import com.hribol.bromium.common.replay.parsers.ClickDataIdParser;
 import com.hribol.bromium.common.replay.parsers.ConfirmAlertParser;
 import com.hribol.bromium.common.replay.parsers.ElementByCssToBePresentParser;
 import com.hribol.bromium.common.replay.parsers.PageLoadingParser;
+import com.hribol.bromium.common.replay.parsers.SetVariableToTextOfElementWithCssSelectorParser;
 import com.hribol.bromium.common.replay.parsers.TextOfElementFoundByCssSelectorToBeParser;
 import com.hribol.bromium.common.replay.parsers.TypeTextInElementFoundByCssSelectorParser;
 import com.hribol.bromium.replay.actions.WebDriverAction;
@@ -37,6 +38,9 @@ public abstract class WebDriverActionFactoryBase implements WebDriverActionFacto
     public WebDriverActionFactoryBase(String baseURL) {
         this.baseURL = baseURL;
         parsersRegistry = new HashMap<>();
+    }
+
+    protected void addActions() {
         addPredefined();
         addCustom();
     }
@@ -50,6 +54,7 @@ public abstract class WebDriverActionFactoryBase implements WebDriverActionFacto
         add(TEXT_OF_ELEMENT_FOUND_BY_CSS_SELECTOR_TO_BE, new TextOfElementFoundByCssSelectorToBeParser());
         add(CONFIRM_ALERT, new ConfirmAlertParser());
         add(CLICK_DATA_ID, new ClickDataIdParser());
+        add(SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR, new SetVariableToTextOfElementWithCssSelectorParser());
     }
 
     /**
@@ -68,7 +73,10 @@ public abstract class WebDriverActionFactoryBase implements WebDriverActionFacto
     }
 
     @Override
-    public WebDriverAction create(String webDriverActionType, Map<String, String> parameters, boolean expectsHttpRequest) {
-        return parsersRegistry.get(webDriverActionType).create(parameters, expectsHttpRequest);
+    public WebDriverAction create(String webDriverActionType,
+                                  Map<String, String> parameters,
+                                  int step,
+                                  boolean expectsHttpRequest) {
+        return parsersRegistry.get(webDriverActionType).create(parameters, step, expectsHttpRequest);
     }
 }

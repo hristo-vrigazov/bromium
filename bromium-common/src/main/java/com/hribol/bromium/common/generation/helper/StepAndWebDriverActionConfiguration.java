@@ -11,10 +11,14 @@ import java.util.Map;
  */
 public class StepAndWebDriverActionConfiguration implements GenerationInformation, RegistryInformation<WebDriverActionConfiguration> {
     private Map<String, String> testCaseStep;
+    private int index;
     private WebDriverActionConfiguration webDriverActionConfiguration;
 
-    public StepAndWebDriverActionConfiguration(Map<String, String> testCaseStep, WebDriverActionConfiguration webDriverActionConfiguration) {
+    public StepAndWebDriverActionConfiguration(Map<String, String> testCaseStep,
+                                               int index,
+                                               WebDriverActionConfiguration webDriverActionConfiguration) {
         this.testCaseStep = testCaseStep;
+        this.index = index;
         this.webDriverActionConfiguration = webDriverActionConfiguration;
     }
 
@@ -24,6 +28,10 @@ public class StepAndWebDriverActionConfiguration implements GenerationInformatio
 
     public Map<String, String> getTestCaseStep() {
         return testCaseStep;
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     @Override

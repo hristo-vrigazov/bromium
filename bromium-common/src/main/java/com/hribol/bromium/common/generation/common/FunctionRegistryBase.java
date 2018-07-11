@@ -17,14 +17,17 @@ import java.util.Set;
  * @param <InformationClass> the class which represents the function needed for generation
  */
 public class FunctionRegistryBase
-        <RegistryInfo extends RegistryInformation<InformationClass>,
-        InvocationClass extends GeneratedInvocation,
-        InformationClass extends GenerationFunctionInformation> implements FunctionRegistry<RegistryInfo> {
+        <
+                RegistryInfo extends RegistryInformation<InformationClass>,
+                InvocationClass extends GeneratedInvocation,
+                InformationClass extends GenerationFunctionInformation,
+                GeneratedFunctionClass extends GeneratedFunction<RegistryInfo, InvocationClass>
+                > implements FunctionRegistry<RegistryInfo> {
     private Set<GeneratedFunction<RegistryInfo, InvocationClass>> functions = new HashSet<>();
     private Set<GeneratedInvocation> invocations = new HashSet<>();
-    private GeneratedFunctionFactory<GeneratedFunction<RegistryInfo, InvocationClass>, InformationClass> generatedFunctionFactory;
+    private GeneratedFunctionFactory<GeneratedFunctionClass, InformationClass> generatedFunctionFactory;
 
-    public FunctionRegistryBase(GeneratedFunctionFactory<GeneratedFunction<RegistryInfo, InvocationClass>, InformationClass> generatedFunctionFactory) {
+    public FunctionRegistryBase(GeneratedFunctionFactory<GeneratedFunctionClass, InformationClass> generatedFunctionFactory) {
         this.generatedFunctionFactory = generatedFunctionFactory;
     }
 
@@ -36,6 +39,10 @@ public class FunctionRegistryBase
         InformationClass generationFunctionInformation = generationInformation.getGenerationFunctionInformation();
         StringBuilder stringBuilder = new StringBuilder();
         GeneratedFunction<RegistryInfo, InvocationClass> generatedFunction = generatedFunctionFactory.create(generationFunctionInformation);
+
+        if (generatedFunction == null) {
+            return "";
+        }
 
         if (!functions.contains(generatedFunction)) {
             stringBuilder.append(generatedFunction.getJavascriptCode());
@@ -57,6 +64,10 @@ public class FunctionRegistryBase
         InformationClass generationFunctionInformation = registerEntry.getGenerationFunctionInformation();
 
         GeneratedFunction<RegistryInfo, InvocationClass> function = generatedFunctionFactory.create(generationFunctionInformation);
+
+        if (function == null) {
+            return;
+        }
 
         if (!functions.contains(function)) {
             functions.add(function);

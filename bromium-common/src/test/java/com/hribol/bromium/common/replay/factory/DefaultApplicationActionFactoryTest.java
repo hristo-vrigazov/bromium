@@ -53,13 +53,14 @@ public class DefaultApplicationActionFactoryTest {
         Map<String, String> testCaseStep = new HashMap<>();
         testCaseStep.put("event", actionName);
 
-        when(testCaseStepToApplicationActionConverter.convert(applicationActionConfiguration, testCaseStep))
+        int i = 0;
+        when(testCaseStepToApplicationActionConverter.convert(applicationActionConfiguration, testCaseStep, i))
                 .thenReturn(applicationAction);
 
         ApplicationActionFactory applicationActionFactory =
                 new DefaultApplicationActionFactory(applicationConfiguration, testCaseStepToApplicationActionConverter);
 
-        assertEquals(applicationAction, applicationActionFactory.create(testCaseStep));
+        assertEquals(applicationAction, applicationActionFactory.create(testCaseStep, i));
     }
 
 }

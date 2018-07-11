@@ -43,7 +43,7 @@ public class Main {
             Map<String, Object> opts = docopt
                     .withVersion("bromium 0.1")
                     .withHelp(true)
-                    .withExit(false)
+                    .withExit(true)
                     .parse(args);
 
             Map<String, Supplier<Command>> commandToHandler = getCommands();

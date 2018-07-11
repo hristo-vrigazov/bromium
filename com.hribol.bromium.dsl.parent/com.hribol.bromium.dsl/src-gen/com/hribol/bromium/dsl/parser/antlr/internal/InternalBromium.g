@@ -296,7 +296,7 @@ ruleApplicationAction returns [EObject current=null]
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)
+		)?
 		(
 			(
 				{
@@ -485,6 +485,15 @@ ruleWebDriverAction returns [EObject current=null]
 		this_ClickDataId_4=ruleClickDataId
 		{
 			$current = $this_ClickDataId_4.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getWebDriverActionAccess().getSetVariableToTextOfElementWithCssSelectorParserRuleCall_5());
+		}
+		this_SetVariableToTextOfElementWithCssSelector_5=ruleSetVariableToTextOfElementWithCssSelector
+		{
+			$current = $this_SetVariableToTextOfElementWithCssSelector_5.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -1143,6 +1152,123 @@ ruleClickClassByText returns [EObject current=null]
 						$current,
 						"parameterValues",
 						lv_parameterValues_8_0,
+						"com.hribol.bromium.dsl.Bromium.ParameterValue");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleSetVariableToTextOfElementWithCssSelector
+entryRuleSetVariableToTextOfElementWithCssSelector returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getSetVariableToTextOfElementWithCssSelectorRule()); }
+	iv_ruleSetVariableToTextOfElementWithCssSelector=ruleSetVariableToTextOfElementWithCssSelector
+	{ $current=$iv_ruleSetVariableToTextOfElementWithCssSelector.current; }
+	EOF;
+
+// Rule SetVariableToTextOfElementWithCssSelector
+ruleSetVariableToTextOfElementWithCssSelector returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='set'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getSetVariableToTextOfElementWithCssSelectorAccess().getSetKeyword_0());
+		}
+		(
+			(
+				lv_parameterNames_1_0='variable'
+				{
+					newLeafNode(lv_parameterNames_1_0, grammarAccess.getSetVariableToTextOfElementWithCssSelectorAccess().getParameterNamesVariableKeyword_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getSetVariableToTextOfElementWithCssSelectorRule());
+					}
+					addWithLastConsumed($current, "parameterNames", lv_parameterNames_1_0, "variable");
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getSetVariableToTextOfElementWithCssSelectorAccess().getParameterValuesParameterValueParserRuleCall_2_0());
+				}
+				lv_parameterValues_2_0=ruleParameterValue
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getSetVariableToTextOfElementWithCssSelectorRule());
+					}
+					add(
+						$current,
+						"parameterValues",
+						lv_parameterValues_2_0,
+						"com.hribol.bromium.dsl.Bromium.ParameterValue");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_3='to'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getSetVariableToTextOfElementWithCssSelectorAccess().getToKeyword_3());
+		}
+		otherlv_4='the'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getSetVariableToTextOfElementWithCssSelectorAccess().getTheKeyword_4());
+		}
+		otherlv_5='text'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getSetVariableToTextOfElementWithCssSelectorAccess().getTextKeyword_5());
+		}
+		otherlv_6='of'
+		{
+			newLeafNode(otherlv_6, grammarAccess.getSetVariableToTextOfElementWithCssSelectorAccess().getOfKeyword_6());
+		}
+		otherlv_7='element'
+		{
+			newLeafNode(otherlv_7, grammarAccess.getSetVariableToTextOfElementWithCssSelectorAccess().getElementKeyword_7());
+		}
+		otherlv_8='with'
+		{
+			newLeafNode(otherlv_8, grammarAccess.getSetVariableToTextOfElementWithCssSelectorAccess().getWithKeyword_8());
+		}
+		otherlv_9='css'
+		{
+			newLeafNode(otherlv_9, grammarAccess.getSetVariableToTextOfElementWithCssSelectorAccess().getCssKeyword_9());
+		}
+		(
+			(
+				lv_parameterNames_10_0='selector'
+				{
+					newLeafNode(lv_parameterNames_10_0, grammarAccess.getSetVariableToTextOfElementWithCssSelectorAccess().getParameterNamesSelectorKeyword_10_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getSetVariableToTextOfElementWithCssSelectorRule());
+					}
+					addWithLastConsumed($current, "parameterNames", lv_parameterNames_10_0, "selector");
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getSetVariableToTextOfElementWithCssSelectorAccess().getParameterValuesParameterValueParserRuleCall_11_0());
+				}
+				lv_parameterValues_11_0=ruleParameterValue
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getSetVariableToTextOfElementWithCssSelectorRule());
+					}
+					add(
+						$current,
+						"parameterValues",
+						lv_parameterValues_11_0,
 						"com.hribol.bromium.dsl.Bromium.ParameterValue");
 					afterParserOrEnumRuleCall();
 				}

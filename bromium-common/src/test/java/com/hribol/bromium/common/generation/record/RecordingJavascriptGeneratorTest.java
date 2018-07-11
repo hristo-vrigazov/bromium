@@ -44,6 +44,10 @@ public class RecordingJavascriptGeneratorTest {
 
         assertTrue(generatedJavascript.contains(generatedCodeForFirstAction));
         assertTrue(generatedJavascript.contains(generatedCodeForSecondAction));
-        assertEquals(generatedJavascript, baseTemplate + generatedCodeForFirstAction + generatedCodeForSecondAction);
+        String expected = baseTemplate
+                + System.lineSeparator() + generatedCodeForFirstAction
+                + System.lineSeparator() + generatedCodeForSecondAction
+                + System.lineSeparator();
+        assertEquals(expected, generatedJavascript);
     }
 }

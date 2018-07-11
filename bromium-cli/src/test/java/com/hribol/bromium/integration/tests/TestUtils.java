@@ -28,6 +28,11 @@ public class TestUtils {
         public static final String CLICK_AJAX_DEMO_BUTTON = "clickAjaxDemoButton";
         public static final String CLICK_DESTROY_AJAX_CREATED_BUTTON = "clickDestroyAjaxCreatedButton";
         public static final String CLICK_ON_LISTED_ITEM = "clickOnListedItem";
+        public static final String CLICK_START_LISTENING = "clickStartListening";
+        public static final String SET_ENTITY_ID_VARIABLE = "setEntityIdVariable";
+        public static final String CLICK_SOME_ID_HERE = "clickSomeIdHere";
+        public static final String CLICK_REGENERATE_BUTTON = "clickRegenerateButton";
+        public static final String CLICK_REMOVE_INITIAL = "clickRemoveInitial";
 
     }
 
@@ -35,7 +40,7 @@ public class TestUtils {
         public static final String DYNAMIC_DEMO_PAGE = "dynamic.html";
         public static final String TYPE_TEXT_DEMO_PAGE = "text-field.html";
         public static final String CLICK_CLASS_BY_TEXT_DEMO_PAGE = "click-class-by-text.html";
-
+        public static final String CHANGE_INJECTED_CODE_AT_RUNTIME = "set-variable-to-text-of-element-with-css-selector.html";
     }
 
     public static class Resources {
@@ -47,7 +52,7 @@ public class TestUtils {
         public static final String ELEMENT_PRESENCE_TEST_CASE = "integration-tests/presence.txt";
         public static final String TEXT_TO_BE_TEST_CASE = "integration-tests/text-to-be.txt";
         public static final String CLICK_CLASS_BY_TEXT_TEST_CASE = "integration-tests/click-class-by-text.txt";
-
+        public static final String SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TEST_CASE = "integration-tests/set-variable-to-text-of-element-with-css-selector.txt";
     }
 
     public static final String SCREEN_SYSTEM_PROPERTY = "screenNumber";
@@ -64,7 +69,13 @@ public class TestUtils {
     public static final String USERNAME = "username";
     public static final String ITEM_NAME = "itemName";
     public static final String TARGET = "Target";
+    public static final String SOURCE_VARIABLE = "source-variable";
+    public static final String DATA_ID_VALUE = "dataIdValue";
+    public static final String ENTITY_ID_VARIABLE = "{{entityId}}";
 
+    public static final String ENTITY_ID_VARIABLE(String appended) {
+        return "{{entityId@" + appended + "}}";
+    }
 
     public static String generateRandomJsonFilename() {
         return UUID.randomUUID().toString() +".json";

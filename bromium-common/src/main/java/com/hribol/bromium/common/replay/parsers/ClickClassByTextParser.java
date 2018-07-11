@@ -6,7 +6,6 @@ import com.hribol.bromium.replay.parsers.WebDriverActionParameterParser;
 
 import java.util.Map;
 
-import static com.hribol.bromium.core.utils.Constants.EVENT;
 import static com.hribol.bromium.core.utils.Constants.TEXT;
 
 /**
@@ -18,7 +17,7 @@ public class ClickClassByTextParser implements WebDriverActionParameterParser {
     public static final String INITIAL_COLLECTOR_CLASS = "class";
 
     @Override
-    public WebDriverAction create(Map<String, String> parameters, boolean expectHttpRequest) {
+    public WebDriverAction create(Map<String, String> parameters, int step, boolean expectHttpRequest) {
         String initialCollectorClass = parameters.get(INITIAL_COLLECTOR_CLASS);
         String text = parameters.get(TEXT);
         return new ClickClassByText(initialCollectorClass, text, expectHttpRequest);

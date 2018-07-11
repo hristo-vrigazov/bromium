@@ -17,9 +17,10 @@ public class StepAndWebDriverActionConfigurationTest {
     @Test
     public void packagesStepAndActionConfiguration() {
         Map<String, String> step = new HashMap<>();
+        int index = 0;
         WebDriverActionConfiguration applicationActionConfiguration = mock(WebDriverActionConfiguration.class);
 
-        StepAndWebDriverActionConfiguration stepAndActionConfiguration = new StepAndWebDriverActionConfiguration(step, applicationActionConfiguration);
+        StepAndWebDriverActionConfiguration stepAndActionConfiguration = new StepAndWebDriverActionConfiguration(step, index, applicationActionConfiguration);
 
         assertEquals(step, stepAndActionConfiguration.getTestCaseStep());
         assertEquals(applicationActionConfiguration, stepAndActionConfiguration.getWebDriverActionConfiguration());

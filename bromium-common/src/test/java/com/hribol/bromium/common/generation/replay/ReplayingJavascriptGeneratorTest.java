@@ -18,6 +18,8 @@ import java.util.Map;
 
 import static com.hribol.bromium.core.utils.Constants.EVENT;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -55,14 +57,19 @@ public class ReplayingJavascriptGeneratorTest {
         when(generatorByStepAndActionConfiguration.generate(stepAndActionConfiguration)).thenReturn(generatedCodeForAction);
 
         StepAndActionConfigurationSupplier stepAndActionConfigurationSupplier = mock(StepAndActionConfigurationSupplier.class);
-        when(stepAndActionConfigurationSupplier.get(testCaseStep, applicationActionConfiguration)).thenReturn(stepAndActionConfiguration);
+        when(stepAndActionConfigurationSupplier.get(eq(testCaseStep), anyInt(), eq(applicationActionConfiguration))).thenReturn(stepAndActionConfiguration);
 
         ReplayingJavascriptGenerator replayingJavascriptGenerator = new ReplayingJavascriptGenerator(baseTemplate,
                 generatorByStepAndActionConfiguration, stepAndActionConfigurationSupplier);
 
         String actual = replayingJavascriptGenerator.generate(stepsAndConfiguration);
 
-        assertEquals(baseTemplate + System.lineSeparator() + System.lineSeparator() + generatedCodeForAction, actual);
+        String expected = baseTemplate
+                + System.lineSeparator()
+                + System.lineSeparator()
+                + generatedCodeForAction
+                + System.lineSeparator();
+        assertEquals(expected, actual);
     }
 
 
@@ -94,7 +101,7 @@ public class ReplayingJavascriptGeneratorTest {
         when(generatorByStepAndActionConfiguration.generate(stepAndActionConfiguration)).thenReturn(generatedCodeForAction);
 
         StepAndActionConfigurationSupplier stepAndActionConfigurationSupplier = mock(StepAndActionConfigurationSupplier.class);
-        when(stepAndActionConfigurationSupplier.get(testCaseStep, applicationActionConfiguration)).thenReturn(stepAndActionConfiguration);
+        when(stepAndActionConfigurationSupplier.get(eq(testCaseStep), anyInt(), eq(applicationActionConfiguration))).thenReturn(stepAndActionConfiguration);
 
         ReplayingJavascriptGenerator replayingJavascriptGenerator = new ReplayingJavascriptGenerator(baseTemplate,
                 generatorByStepAndActionConfiguration, stepAndActionConfigurationSupplier);

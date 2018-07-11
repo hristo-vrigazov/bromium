@@ -1,8 +1,8 @@
 bromium.
 
     Usage:
-      bromium record -d <pathToDriver> -a <configuration> -u <url> -o <output> [-b <browserType>] [-t <timeout>] [-s screen]
-      bromium replay -d <pathToDriver> -a <configuration> -c <case> -m <measurements> -u <url> [-s screen] [-p <precision>] [-b <browserType>] [-t <timeout>]
+      bromium record -a <configuration> -u <url> -o <output> [-d <pathToDriver>] [-b <browserType>] [-t <timeout>] [-s screen]
+      bromium replay -a <configuration> -c <case> -u <url> [-d <pathToDriver>] [-m <measurements>] [-s screen] [-p <precision>] [-b <browserType>] [-t <timeout>]
       bromium (-h | --help)
       bromium --version
 
@@ -11,11 +11,11 @@ bromium.
       -v --version                          Show version.
       -a --application <configuration>      Path to the application configuration
       -c --case <case>                      Path to the test case
-      -m --measurements <measurements>      Where to output the measurements
       -u --url <url>                        Base url to use.
-      -d --driver <pathToDriver>            Path to the driver
       -j --js <pathToJsInjectionFile>       Path to the js injection file
       -o --output <outputFile>              Path to the output file
+      -m --measurements <measurements>      Where to output the measurements [default: measurements.csv]
+      -d --driver <pathToDriver>            Path to the driver [default: /usr/bin/chromedriver]
       -p --precision <precision>            Precision in milliseconds [default: 500]
       -b --browser <browserType>            Type browser to use [default: chrome]
       -t --timeout <timeout>                Timeout [default: 10]

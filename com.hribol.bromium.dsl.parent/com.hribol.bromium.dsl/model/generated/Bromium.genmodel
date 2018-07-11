@@ -47,6 +47,7 @@
     <genClasses ecoreClass="Bromium.ecore#//TypeTextInElementFoundByCssSelector"/>
     <genClasses ecoreClass="Bromium.ecore#//TextOfElementWithCssSelectorToBe"/>
     <genClasses ecoreClass="Bromium.ecore#//ClickClassByText"/>
+    <genClasses ecoreClass="Bromium.ecore#//SetVariableToTextOfElementWithCssSelector"/>
     <genClasses ecoreClass="Bromium.ecore#//ClickDataId"/>
     <genClasses ecoreClass="Bromium.ecore#//ConfirmAlert"/>
     <genClasses ecoreClass="Bromium.ecore#//ParameterValue">

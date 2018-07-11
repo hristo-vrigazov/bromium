@@ -162,7 +162,7 @@ public class DefaultModuleTest {
     }
 
     @Test
-    public void ifCommmandIsInvalidExceptionIsThrown() throws IOException, URISyntaxException {
+    public void ifCommmandIsInvalidExceptionIsThrown() throws IOException {
         String command = "invalid";
         Map<String, Object> opts = new HashMap<>();
         opts.put(BROWSER, CHROME);

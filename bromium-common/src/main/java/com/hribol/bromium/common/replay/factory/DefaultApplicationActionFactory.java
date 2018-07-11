@@ -34,9 +34,9 @@ public class DefaultApplicationActionFactory implements ApplicationActionFactory
     }
 
     @Override
-    public ApplicationAction create(Map<String, String> testCaseStep) {
+    public ApplicationAction create(Map<String, String> testCaseStep, int i) {
         String name = testCaseStep.get(EVENT);
         ApplicationActionConfiguration applicationActionConfiguration = nameToConfiguration.get(name);
-        return testCaseStepToApplicationActionConverter.convert(applicationActionConfiguration, testCaseStep);
+        return testCaseStepToApplicationActionConverter.convert(applicationActionConfiguration, testCaseStep, i);
     }
 }

@@ -60,6 +60,6 @@ public class ClickClassByText extends ActionWithJSPreconditionBase {
 
     @Override
     public String getJSEventToWaitFor() {
-        return MessageFormat.format("{0} .{1} {2}", CLICK_CLASS_BY_TEXT, initialCollectorClass, text);
+        return MessageFormat.format("{0} {1} {2}", CLICK_CLASS_BY_TEXT, initialCollectorClass, text);
     }
 }

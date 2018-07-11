@@ -38,5 +38,7 @@ public interface WebDriverAction {
      * @return true if the execution should be blocked until HTTP request is sent, false
      * otherwise
      */
-    boolean expectsHttpRequest();
+    default boolean expectsHttpRequest() {
+        return false;
+    }
 }

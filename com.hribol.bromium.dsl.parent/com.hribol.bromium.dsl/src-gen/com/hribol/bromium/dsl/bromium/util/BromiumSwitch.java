@@ -177,6 +177,14 @@ public class BromiumSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case BromiumPackage.SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR:
+      {
+        SetVariableToTextOfElementWithCssSelector setVariableToTextOfElementWithCssSelector = (SetVariableToTextOfElementWithCssSelector)theEObject;
+        T result = caseSetVariableToTextOfElementWithCssSelector(setVariableToTextOfElementWithCssSelector);
+        if (result == null) result = caseWebDriverAction(setVariableToTextOfElementWithCssSelector);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case BromiumPackage.CLICK_DATA_ID:
       {
         ClickDataId clickDataId = (ClickDataId)theEObject;
@@ -438,6 +446,22 @@ public class BromiumSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseClickClassByText(ClickClassByText object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Set Variable To Text Of Element With Css Selector</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Set Variable To Text Of Element With Css Selector</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSetVariableToTextOfElementWithCssSelector(SetVariableToTextOfElementWithCssSelector object)
   {
     return null;
   }

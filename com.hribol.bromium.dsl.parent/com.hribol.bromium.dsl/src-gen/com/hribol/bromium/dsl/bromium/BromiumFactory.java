@@ -150,6 +150,15 @@ public interface BromiumFactory extends EFactory
   ClickClassByText createClickClassByText();
 
   /**
+   * Returns a new object of class '<em>Set Variable To Text Of Element With Css Selector</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Set Variable To Text Of Element With Css Selector</em>'.
+   * @generated
+   */
+  SetVariableToTextOfElementWithCssSelector createSetVariableToTextOfElementWithCssSelector();
+
+  /**
    * Returns a new object of class '<em>Click Data Id</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

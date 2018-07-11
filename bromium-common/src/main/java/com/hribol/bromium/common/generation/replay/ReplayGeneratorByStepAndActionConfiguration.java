@@ -29,18 +29,26 @@ public class ReplayGeneratorByStepAndActionConfiguration implements JavascriptGe
         StringBuilder stringBuilder = new StringBuilder();
         Map<String, String> testCaseStep = generationInformation.getTestCaseStep();
         ApplicationActionConfiguration applicationActionConfiguration = generationInformation.getApplicationActionConfiguration();
+        int index = generationInformation.getIndex();
 
         StepAndWebDriverActionConfiguration precondition = supplier.get(testCaseStep,
+                index,
                 applicationActionConfiguration.getConditionBeforeExecution());
         stringBuilder.append(generator.generate(precondition));
+        stringBuilder.append(System.lineSeparator());
 
         StepAndWebDriverActionConfiguration action = supplier.get(testCaseStep,
+                index,
                 applicationActionConfiguration.getWebDriverAction());
         stringBuilder.append(generator.generate(action));
-
+        stringBuilder.append(System.lineSeparator());
+        
         StepAndWebDriverActionConfiguration postcondition = supplier.get(testCaseStep,
+                index,
                 applicationActionConfiguration.getConditionAfterExecution());
         stringBuilder.append(generator.generate(postcondition));
+        stringBuilder.append(System.lineSeparator());
+
 
         return stringBuilder.toString();
     }

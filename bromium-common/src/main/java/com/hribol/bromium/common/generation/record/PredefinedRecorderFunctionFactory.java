@@ -1,26 +1,17 @@
 package com.hribol.bromium.common.generation.record;
 
-import com.google.inject.Inject;
-import com.hribol.bromium.common.builder.JsCollector;
-import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
-import com.hribol.bromium.common.generation.record.invocations.RecorderFunctionInvocation;
-import com.hribol.bromium.core.generation.GeneratedFunction;
+import com.hribol.bromium.common.generation.record.functions.RecorderFunctionProvider;
 
-import java.util.function.Supplier;
+import java.util.List;
 
 /**
  * A {@link BaseRecorderFunctionFactory} that uses just the predefined actions
  */
 public class PredefinedRecorderFunctionFactory extends BaseRecorderFunctionFactory {
 
-    @Inject
-    public PredefinedRecorderFunctionFactory(Supplier<GeneratedFunction<NameWebDriverActionConfiguration, RecorderFunctionInvocation>> emptyGeneratedFunctionSupplier,
-                                             JsCollector jsCollector) {
-        super(emptyGeneratedFunctionSupplier, jsCollector);
+    public PredefinedRecorderFunctionFactory(RecorderFunctionProvider recorderFunctionProvider,
+                                             List<String> additionalActions) {
+        super(recorderFunctionProvider, additionalActions);
     }
 
-    @Override
-    protected void addCustom() {
-
-    }
 }

@@ -1,0 +1,9 @@
+loadPage: Load set-variable-to-text-of-element-with-css-selector.html page 
+setEntityIdVariable: Set entity id variable 
+clickSomeIdHere: Click on dataId {{entityId@1}} 
+clickSomeIdHere: Click on dataId anotherIdHere
+clickRemoveInitial: Click remove initial
+setEntityIdVariable: Set entity id variable
+clickRegenerateButton: Click regenerate button
+clickSomeIdHere: Click on dataId {{entityId@5}}
+clickSomeIdHere: Click on dataId anotherIdHere1 

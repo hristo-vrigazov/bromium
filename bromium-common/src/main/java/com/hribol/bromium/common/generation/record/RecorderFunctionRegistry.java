@@ -3,6 +3,7 @@ package com.hribol.bromium.common.generation.record;
 import com.google.inject.Inject;
 import com.hribol.bromium.common.generation.common.FunctionRegistryBase;
 import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
+import com.hribol.bromium.common.generation.record.functions.RecorderFunction;
 import com.hribol.bromium.common.generation.record.invocations.RecorderFunctionInvocation;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 
@@ -12,7 +13,9 @@ import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 public class RecorderFunctionRegistry extends FunctionRegistryBase<
         NameWebDriverActionConfiguration,
         RecorderFunctionInvocation,
-        WebDriverActionConfiguration> {
+        WebDriverActionConfiguration,
+        RecorderFunction
+        > {
 
     @Inject
     public RecorderFunctionRegistry(BaseRecorderFunctionFactory recorderFunctionFactory) {

@@ -58,6 +58,7 @@ public class ActionExecutor implements WebDriverActionExecutor {
 
                 Future<?> future = executorService.submit(() -> executeIgnoringExceptions(driverOperations.getDriver(),
                         webDriverAction));
+
                 try {
                     future.get(dependencies.getTimeout(), TimeUnit.SECONDS);
                 }  catch (java.util.concurrent.TimeoutException | InterruptedException e) {

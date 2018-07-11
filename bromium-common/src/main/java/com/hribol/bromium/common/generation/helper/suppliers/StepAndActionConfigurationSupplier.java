@@ -10,7 +10,8 @@ import java.util.Map;
  */
 public class StepAndActionConfigurationSupplier {
     public StepAndActionConfiguration get(Map<String, String> testCaseStep,
+                                          int i,
                                           ApplicationActionConfiguration applicationActionConfiguration) {
-        return new StepAndActionConfiguration(testCaseStep, applicationActionConfiguration);
+        return new StepAndActionConfiguration(testCaseStep, i, applicationActionConfiguration);
     }
 }

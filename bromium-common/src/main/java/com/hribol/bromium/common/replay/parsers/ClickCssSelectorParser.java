@@ -7,7 +7,6 @@ import com.hribol.bromium.replay.parsers.WebDriverActionParameterParser;
 import java.util.Map;
 
 import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
-import static com.hribol.bromium.core.utils.Constants.EVENT;
 
 /**
  * Parser for {@link ClickCssSelector}
@@ -15,7 +14,7 @@ import static com.hribol.bromium.core.utils.Constants.EVENT;
 public class ClickCssSelectorParser implements WebDriverActionParameterParser {
 
     @Override
-    public WebDriverAction create(Map<String, String> parameters, boolean expectHttpRequest) {
+    public WebDriverAction create(Map<String, String> parameters, int step, boolean expectHttpRequest) {
         String cssSelector = parameters.get(CSS_SELECTOR);
         return new ClickCssSelector(cssSelector, expectHttpRequest);
     }

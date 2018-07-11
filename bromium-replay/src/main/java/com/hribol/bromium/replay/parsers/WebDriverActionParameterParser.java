@@ -13,8 +13,9 @@ public interface WebDriverActionParameterParser {
     /**
      * Parses the raw parameters and creates a {@link WebDriverAction}
      * @param parameters the raw parameters
+     * @param step
      * @param expectHttpRequest whether HTTP request should be expected after the action
      * @return
      */
-    WebDriverAction create(Map<String, String> parameters, boolean expectHttpRequest);
+    WebDriverAction create(Map<String, String> parameters, int step, boolean expectHttpRequest);
 }

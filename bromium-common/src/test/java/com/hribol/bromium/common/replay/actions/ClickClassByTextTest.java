@@ -99,7 +99,7 @@ public class ClickClassByTextTest {
     public void jsWaitingEventIsConstructedCorrectly() {
         ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, expectsHttp);
 
-        String expected = CLICK_CLASS_BY_TEXT + " ." + initialCollectorClass + " " + text;
+        String expected = CLICK_CLASS_BY_TEXT + " " + initialCollectorClass + " " + text;
         String actual = clickClassByText.getJSEventToWaitFor();
         assertEquals(expected, actual);
     }

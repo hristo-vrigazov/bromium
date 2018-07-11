@@ -4,7 +4,7 @@ import com.hribol.bromium.replay.ReplayingState;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
-import static com.hribol.bromium.common.builder.JsFunctionNames.ELEMENT_BY_CSS_SELECTOR_TO_BE_PRESENT;
+import static com.hribol.bromium.core.utils.WebDriverActions.ELEMENT_BY_CSS_SELECTOR_TO_BE_PRESENT;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 

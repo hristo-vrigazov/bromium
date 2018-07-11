@@ -64,7 +64,11 @@ public class ApplicationActionASTNodeConverter implements ASTNodeConverter<Appli
 
         applicationActionConfiguration.setSyntaxDefinitionConfigurationList(syntaxDefinitions);
 
-        applicationActionConfiguration.setExpectsHttpRequest(!applicationAction.getExpectHttpRequest().isNot());
+        if (applicationAction.getExpectHttpRequest() == null) {
+            applicationActionConfiguration.setExpectsHttpRequest(false);
+        } else {
+            applicationActionConfiguration.setExpectsHttpRequest(!applicationAction.getExpectHttpRequest().isNot());
+        }
         return applicationActionConfiguration;
     }
 

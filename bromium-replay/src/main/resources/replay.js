@@ -14,12 +14,12 @@ window.bromium.whenTextChanges = function (element, callback) {
 };
 
 window.bromium.notifySatisfiedBasedOnText = function (element, textTarget, condition) {
-    if (element.innerText === textTarget) {
+    if (element.innerText.trim() === textTarget) {
         bromium.notifySatisfiedCondition(condition);
     }
 
     bromium.whenTextChanges(element, function (text) {
-       if (text === textTarget) {
+       if (text.trim() === textTarget) {
           bromium.notifySatisfiedCondition(condition);
        }
   })
@@ -41,5 +41,52 @@ window.bromium.notifyCondition = function(url, condition) {
 
 var options = {
     existing: true,
-    fireOnAttributesModification: true
+    fireOnAttributesModification: true,
+    onceOnly: false
+};
+
+var substitutionOptions = {
+    existing: true,
+    fireOnAttributesModification: true,
+    onceOnly: true
+}
+
+window.bromium.substitutions = {};
+window.bromium.substitutionHandlers = {};
+
+window.bromium.subscribeForSubstitutionRegistration = function(variableName, callback) {
+    if (!bromium.substitutionHandlers[variableName]) {
+        bromium.substitutionHandlers[variableName] = [];
+    }
+
+    bromium.substitutionHandlers[variableName].push(callback);
+};
+
+window.bromium.registerSubstitution = function(variable, step, substitution) {
+    var substitutionValue = '{{' + variable + '@' + step + '}}';
+    console.log('Substitution: ' + substitutionValue + " => " + substitution);
+    bromium.substitutions[substitutionValue] = substitution;
+    bromium.emitAllSubstitutions(substitutionValue, substitution);
+    bromium.sendSubstitutionRegistration(substitutionValue + '=' + substitution);
+}
+
+window.bromium.emitAllSubstitutions = function(substitutionValue, substitution) {
+    bromium.substitutionHandlers[substitutionValue].forEach(function(handler) {
+        handler(substitution);
+    });
+};
+
+window.bromium.sendSubstitutionRegistration = function(substitution) {
+    bromium.notifyCondition("http://bromium-register-substitution.com/", substitution);
+};
+
+
+window.bromium.stepHandlers = {};
+window.bromium.onStep = function(step, callback) {
+    bromium.stepHandlers[step] = callback;
+};
+
+window.bromium.triggerStep = function(step) {
+    console.log('Triggering step');
+    bromium.stepHandlers[step]();
 };

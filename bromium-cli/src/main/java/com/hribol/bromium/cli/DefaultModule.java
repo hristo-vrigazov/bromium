@@ -11,14 +11,13 @@ import com.google.inject.name.Names;
 import com.google.inject.throwingproviders.CheckedProvides;
 import com.google.inject.throwingproviders.ThrowingProviderBinder;
 import com.hribol.bromium.common.ProxyDriverIntegrator;
+import com.hribol.bromium.common.actions.Action;
 import com.hribol.bromium.common.browsers.ChromeDriverServiceSupplier;
 import com.hribol.bromium.common.browsers.ChromeDriverSupplier;
-import com.hribol.bromium.common.builder.JsCollector;
 import com.hribol.bromium.common.filtering.GetHtmlFromCurrentHostPredicate;
 import com.hribol.bromium.common.filtering.RequestToPageLoadingEventConverter;
 import com.hribol.bromium.common.filtering.SplitQueryStringOfRequest;
 import com.hribol.bromium.common.filtering.UriContainsStringPredicate;
-import com.hribol.bromium.common.generation.common.EmptyFunction;
 import com.hribol.bromium.common.generation.common.IncludeInvokeGenerator;
 import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.helper.StepAndActionConfiguration;
@@ -31,13 +30,16 @@ import com.hribol.bromium.common.generation.record.PredefinedRecorderFunctionFac
 import com.hribol.bromium.common.generation.record.RecorderFunctionRegistry;
 import com.hribol.bromium.common.generation.record.RecordingJavascriptGenerator;
 import com.hribol.bromium.common.generation.record.RecordingWebDriverActionsOnly;
+import com.hribol.bromium.common.generation.record.functions.RecorderFunction;
+import com.hribol.bromium.common.generation.record.functions.RecorderFunctionProvider;
 import com.hribol.bromium.common.generation.record.invocations.RecorderFunctionInvocation;
 import com.hribol.bromium.common.generation.replay.BaseReplayFunctionFactory;
 import com.hribol.bromium.common.generation.replay.PredefinedReplayFunctionFactory;
 import com.hribol.bromium.common.generation.replay.ReplayFunctionRegistry;
 import com.hribol.bromium.common.generation.replay.ReplayGeneratorByStepAndActionConfiguration;
 import com.hribol.bromium.common.generation.replay.ReplayingJavascriptGenerator;
-import com.hribol.bromium.common.generation.replay.invocations.ReplayFunctionInvocation;
+import com.hribol.bromium.common.generation.replay.functions.ReplayFunction;
+import com.hribol.bromium.common.generation.replay.functions.ReplayFunctionProvider;
 import com.hribol.bromium.common.parsing.DslParser;
 import com.hribol.bromium.common.parsing.DslStepsDumper;
 import com.hribol.bromium.common.parsing.DslStepsReader;
@@ -52,6 +54,7 @@ import com.hribol.bromium.common.replay.ActionExecutor;
 import com.hribol.bromium.common.replay.DriverOperations;
 import com.hribol.bromium.common.replay.ExecutorDependencies;
 import com.hribol.bromium.common.replay.SignalizingStateConditionsUpdater;
+import com.hribol.bromium.common.replay.SubstitutionRegistrationUpdater;
 import com.hribol.bromium.common.replay.factory.DefaultApplicationActionFactory;
 import com.hribol.bromium.common.replay.factory.PredefinedWebDriverActionFactory;
 import com.hribol.bromium.common.replay.factory.TestCaseStepToApplicationActionConverter;
@@ -78,6 +81,7 @@ import com.hribol.bromium.core.utils.EventDetector;
 import com.hribol.bromium.core.utils.EventDetectorImpl;
 import com.hribol.bromium.core.utils.HttpRequestToTestCaseStepConverter;
 import com.hribol.bromium.core.utils.JavascriptInjectionPreparator;
+import com.hribol.bromium.core.utils.URLUtils;
 import com.hribol.bromium.dsl.BromiumStandaloneSetup;
 import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.Model;
@@ -96,6 +100,8 @@ import com.hribol.bromium.replay.execution.scenario.TestScenarioFactory;
 import com.hribol.bromium.replay.filters.ConditionsUpdater;
 import com.hribol.bromium.replay.filters.ReplayRequestFilter;
 import com.hribol.bromium.replay.filters.ReplayResponseFilter;
+import com.hribol.bromium.replay.filters.StateConditionsUpdater;
+import com.hribol.bromium.replay.parsers.WebDriverActionParameterParser;
 import com.hribol.bromium.replay.settings.DriverServiceSupplier;
 import io.netty.handler.codec.http.HttpRequest;
 import net.lightbody.bmp.BrowserMobProxy;
@@ -130,6 +136,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import static com.hribol.bromium.cli.Main.Commands.RECORD;
 import static com.hribol.bromium.cli.Main.Commands.REPLAY;
@@ -138,6 +145,7 @@ import static com.hribol.bromium.core.DependencyInjectionConstants.*;
 import static com.hribol.bromium.core.utils.Constants.CONDITION_NOT_SATISFIED_URL;
 import static com.hribol.bromium.core.utils.Constants.CONDITION_SATISFIED_URL;
 import static com.hribol.bromium.core.utils.Constants.HAR_EXTENSION;
+import static com.hribol.bromium.core.utils.Constants.REGISTER_SUBSTITUTION_URL;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
 /**
@@ -216,6 +224,11 @@ public class DefaultModule extends AbstractModule {
     }
 
     @Provides
+    public Action.Actions getActions() {
+        return new Action.Actions();
+    }
+
+    @Provides
     public ResourceSet getResourceSet() {
         return dslInjector.getInstance(ResourceSet.class);
     }
@@ -248,18 +261,6 @@ public class DefaultModule extends AbstractModule {
     @Named(CONVENTION_EVENT_DETECTOR_PREDICATE)
     public Predicate<HttpRequest> getConventionEventDetectorPredicate() {
         return new UriContainsStringPredicate(SUBMIT_EVENT_URL);
-    }
-
-    @Provides
-    public Supplier<GeneratedFunction<NameWebDriverActionConfiguration, RecorderFunctionInvocation>>
-        getEmptyFunctionSupplierForNameWebDriverActionConfiguration() {
-        return EmptyFunction::new;
-    }
-
-    @Provides
-    public Supplier<GeneratedFunction<StepAndWebDriverActionConfiguration, ReplayFunctionInvocation>>
-        getEmptyFunctionSupplierForStepAndWebDriverActionConfiguration() {
-        return EmptyFunction::new;
     }
 
     @Provides
@@ -336,8 +337,26 @@ public class DefaultModule extends AbstractModule {
     }
 
     @Provides
-    public WebDriverActionFactory getWebDriverActionFactory(ParsedOptions parsedOptions) {
-        return new PredefinedWebDriverActionFactory(parsedOptions.getBaseUrl());
+    public WebDriverActionFactory getWebDriverActionFactory(ParsedOptions parsedOptions,
+                                                            Action.Actions actions) {
+        Map<String, WebDriverActionParameterParser> additionalRegistry = actions
+                .stream()
+                .collect(Collectors.toMap(Action::getWebDriverActionName, Action::getParser));
+        return new PredefinedWebDriverActionFactory(parsedOptions.getBaseUrl(), additionalRegistry);
+    }
+
+    @Provides
+    public PredefinedRecorderFunctionFactory getRecorderFunctionFactory(Action.Actions actions,
+                                                                        RecorderFunctionProvider recorderFunctionProvider) {
+        List<String> jsFunctionNames = getJsFunctionNames(actions);
+        return new PredefinedRecorderFunctionFactory(recorderFunctionProvider, jsFunctionNames);
+    }
+
+    private List<String> getJsFunctionNames(Action.Actions actions) {
+        return actions
+                .stream()
+                .map(Action::getWebDriverActionName)
+                .collect(Collectors.toList());
     }
 
     @Provides
@@ -391,10 +410,13 @@ public class DefaultModule extends AbstractModule {
     public List<ConditionsUpdater> getConditionsUpdaters(@Named(CONDITION_SATISFIED_PREDICATE)
                                                          Predicate<HttpRequest> conditionSatisfiedPredicate,
                                                          @Named(CONDITION_NOT_SATISFIED_PREDICATE)
-                                                         Predicate<HttpRequest> conditionNotSatisfiedPredicate) {
+                                                         Predicate<HttpRequest> conditionNotSatisfiedPredicate,
+                                                         @Named(SUBSTITUTION_REGISTRATION_PREDICATE)
+                                                         Predicate<HttpRequest> substitutionRegistrationPredicate) {
         List<ConditionsUpdater> conditionsUpdaters = new ArrayList<>();
         conditionsUpdaters.add(new ConditionsUpdater(conditionSatisfiedPredicate, new SignalizingStateConditionsUpdater()));
         conditionsUpdaters.add(new ConditionsUpdater(conditionNotSatisfiedPredicate, ReplayingState::setConditionNotSatisfied));
+        conditionsUpdaters.add(new ConditionsUpdater(substitutionRegistrationPredicate, new SubstitutionRegistrationUpdater()));
         return conditionsUpdaters;
     }
 
@@ -505,11 +527,9 @@ public class DefaultModule extends AbstractModule {
     }
 
     @Provides
-    public BaseReplayFunctionFactory getBaseReplayFunctionFactory(
-            Supplier<GeneratedFunction<StepAndWebDriverActionConfiguration, ReplayFunctionInvocation>>
-                    emptyFunctionSupplier,
-            JsCollector jsCollector) {
-        return new PredefinedReplayFunctionFactory(emptyFunctionSupplier, jsCollector);
+    public BaseReplayFunctionFactory getBaseReplayFunctionFactory(ReplayFunctionProvider replayFunctionProvider,
+                                                                  Action.Actions actions) {
+        return new PredefinedReplayFunctionFactory(replayFunctionProvider, getJsFunctionNames(actions));
     }
 
     @Provides
@@ -556,7 +576,9 @@ public class DefaultModule extends AbstractModule {
                                                IOProvider<StepsAndConfiguration> stepsAndConfigurationIOProvider) throws IOException {
         StepsAndConfiguration stepsAndConfiguration = stepsAndConfigurationIOProvider.get();
         ReplayingJavascriptGenerator replayingJavascriptGenerator = replayingJavascriptGeneratorProvider.get();
-        return replayingJavascriptGenerator.generate(stepsAndConfiguration);
+        String result = replayingJavascriptGenerator.generate(stepsAndConfiguration);
+        logger.info(result);
+        return result;
     }
 
     @CheckedProvides(IOProvider.class)
@@ -565,7 +587,9 @@ public class DefaultModule extends AbstractModule {
                                                IOProvider<ApplicationConfiguration> configurationIOProvider) throws IOException {
         ApplicationConfiguration configuration = configurationIOProvider.get();
         RecordingJavascriptGenerator recordingJavascriptGenerator = recordingJavascriptGeneratorIOProvider.get();
-        return recordingJavascriptGenerator.generate(configuration);
+        String result = recordingJavascriptGenerator.generate(configuration);
+        logger.info(result);
+        return result;
     }
 
     @CheckedProvides(IOProvider.class)
@@ -752,6 +776,12 @@ public class DefaultModule extends AbstractModule {
     public RequestToPageLoadingEventConverter getHttpRequestToTestCaseStepConverter(@Named(BASE_URL) String baseUrl,
                                                                                     IOProvider<ActionsFilter> actionsFilterIOProvider) throws IOException {
         return new RequestToPageLoadingEventConverter(baseUrl, actionsFilterIOProvider.get());
+    }
+
+    @Provides
+    @Named(SUBSTITUTION_REGISTRATION_PREDICATE)
+    public Predicate<HttpRequest> getSubstitutionRegistrationPredicate() {
+        return new UriContainsStringPredicate(REGISTER_SUBSTITUTION_URL);
     }
 }
 

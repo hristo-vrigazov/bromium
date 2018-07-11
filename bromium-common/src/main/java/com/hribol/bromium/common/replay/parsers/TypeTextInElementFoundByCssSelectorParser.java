@@ -7,7 +7,6 @@ import com.hribol.bromium.replay.parsers.WebDriverActionParameterParser;
 import java.util.Map;
 
 import static com.hribol.bromium.core.utils.Constants.CSS_SELECTOR;
-import static com.hribol.bromium.core.utils.Constants.EVENT;
 import static com.hribol.bromium.core.utils.Constants.TEXT;
 
 /**
@@ -15,7 +14,7 @@ import static com.hribol.bromium.core.utils.Constants.TEXT;
  */
 public class TypeTextInElementFoundByCssSelectorParser implements WebDriverActionParameterParser {
     @Override
-    public WebDriverAction create(Map<String, String> parameters, boolean expectHttpRequest) {
+    public WebDriverAction create(Map<String, String> parameters, int step, boolean expectHttpRequest) {
         String cssSelector = parameters.get(CSS_SELECTOR);
         String text = parameters.get(TEXT);
         return new TypeTextInElementFoundByCssSelector(cssSelector, text, expectHttpRequest);

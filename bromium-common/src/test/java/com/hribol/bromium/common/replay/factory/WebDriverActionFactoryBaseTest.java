@@ -22,12 +22,14 @@ public class WebDriverActionFactoryBaseTest {
         WebDriverAction expectedAction = mock(WebDriverAction.class);
 
         boolean expectsHttp = true;
+        int step = 0;
+
         Map<String, String> parameters = new HashMap<>();
         parameters.put("event", "something");
         parameters.put("parameter", "parametervalue");
 
         WebDriverActionParameterParser parser = mock(WebDriverActionParameterParser.class);
-        when(parser.create(parameters, expectsHttp)).thenReturn(expectedAction);
+        when(parser.create(parameters, step, expectsHttp)).thenReturn(expectedAction);
 
         String webDriverActionType = "SOME_ACTION_TYPE";
 
@@ -39,7 +41,9 @@ public class WebDriverActionFactoryBaseTest {
             }
         };
 
-        WebDriverAction actualAction = webDriverActionFactoryBase.create(webDriverActionType, parameters, expectsHttp);
+        webDriverActionFactoryBase.addActions();
+
+        WebDriverAction actualAction = webDriverActionFactoryBase.create(webDriverActionType, parameters, step, expectsHttp);
         assertEquals(expectedAction, actualAction);
     }
 }

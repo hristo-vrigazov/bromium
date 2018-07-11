@@ -1,14 +1,8 @@
 loadBMLoginPage: Load BM login page 
 typeUsername: Type admin into username field 
-loadPreviewPage: Load preview pages 
-loadPreviewPage: Load preview pages 
-typeUsername: Type admin into username field 
 typePassword: Type admin into password field 
 clickLoginButton: Click login button 
-clickOnAnyEntity: Click on entity with text  Administrator 
-clickOnTab: Click on tab RANKING ATTRIBUTES 
-clickOnTab: Click on tab PUBLICATION 
-clickOnPublicationsSubTav: Click on publications subtab  Published 
-clickOnPublicationsSubTav: Click on publications subtab  Published 
-clickOnTab: Click on tab CAMPAIGNS 
-clickNewOnOverviewPage: Click new on overview page 
+loadCampaignsPage: Load campaigns page 
+clickOnTab: Click on tab SYSTEM 
+clickSystemSubtab: Click on System subtab Presentation 
+clickSystemSubtab: Click on System subtab Management 

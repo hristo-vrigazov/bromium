@@ -18,6 +18,7 @@ import com.hribol.bromium.dsl.bromium.PageLoad;
 import com.hribol.bromium.dsl.bromium.ParameterValue;
 import com.hribol.bromium.dsl.bromium.Postcondition;
 import com.hribol.bromium.dsl.bromium.Precondition;
+import com.hribol.bromium.dsl.bromium.SetVariableToTextOfElementWithCssSelector;
 import com.hribol.bromium.dsl.bromium.SyntaxDefinition;
 import com.hribol.bromium.dsl.bromium.TextOfElementWithCssSelectorToBe;
 import com.hribol.bromium.dsl.bromium.ThreeDottedVersion;
@@ -137,6 +138,13 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * @generated
    */
   private EClass clickClassByTextEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass setVariableToTextOfElementWithCssSelectorEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -571,6 +579,16 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getSetVariableToTextOfElementWithCssSelector()
+  {
+    return setVariableToTextOfElementWithCssSelectorEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getClickDataId()
   {
     return clickDataIdEClass;
@@ -753,6 +771,8 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
 
     clickClassByTextEClass = createEClass(CLICK_CLASS_BY_TEXT);
 
+    setVariableToTextOfElementWithCssSelectorEClass = createEClass(SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR);
+
     clickDataIdEClass = createEClass(CLICK_DATA_ID);
 
     confirmAlertEClass = createEClass(CONFIRM_ALERT);
@@ -805,6 +825,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     typeTextInElementFoundByCssSelectorEClass.getESuperTypes().add(this.getWebDriverAction());
     textOfElementWithCssSelectorToBeEClass.getESuperTypes().add(this.getWebDriverActionCondition());
     clickClassByTextEClass.getESuperTypes().add(this.getWebDriverAction());
+    setVariableToTextOfElementWithCssSelectorEClass.getESuperTypes().add(this.getWebDriverAction());
     clickDataIdEClass.getESuperTypes().add(this.getWebDriverAction());
     confirmAlertEClass.getESuperTypes().add(this.getWebDriverActionCondition());
 
@@ -855,6 +876,8 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     initEClass(textOfElementWithCssSelectorToBeEClass, TextOfElementWithCssSelectorToBe.class, "TextOfElementWithCssSelectorToBe", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(clickClassByTextEClass, ClickClassByText.class, "ClickClassByText", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(setVariableToTextOfElementWithCssSelectorEClass, SetVariableToTextOfElementWithCssSelector.class, "SetVariableToTextOfElementWithCssSelector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(clickDataIdEClass, ClickDataId.class, "ClickDataId", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

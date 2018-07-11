@@ -15,6 +15,8 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -87,7 +89,7 @@ public class TestScenarioFactoryTest {
             when(domainSpecificAction.getPrecondition()).thenReturn(Optional.empty());
             when(domainSpecificAction.getWebdriverAction()).thenReturn(Optional.of(webDriverAction));
             when(domainSpecificAction.getPostcondition()).thenReturn(Optional.empty());
-            when(applicationActionFactory.create(testCaseStep)).thenReturn(domainSpecificAction);
+            when(applicationActionFactory.create(eq(testCaseStep), anyInt())).thenReturn(domainSpecificAction);
         }
     }
 }

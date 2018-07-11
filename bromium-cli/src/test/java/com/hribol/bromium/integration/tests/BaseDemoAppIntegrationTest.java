@@ -33,8 +33,11 @@ public abstract class BaseDemoAppIntegrationTest {
      * Redirects the standard output so that we can inspect it
      */
     static {
-        System.setOut(standardPrintStream);
-        System.setErr(errorPrintStream);
+        String shouldShowOutput = System.getProperty("showOutput", "false");
+        if (!("true".equals(shouldShowOutput))) {
+            System.setOut(standardPrintStream);
+            System.setErr(errorPrintStream);
+        }
     }
 
     protected final String screen;

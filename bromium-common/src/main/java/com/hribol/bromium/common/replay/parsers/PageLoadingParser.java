@@ -21,7 +21,7 @@ public class PageLoadingParser implements WebDriverActionParameterParser {
     }
 
     @Override
-    public WebDriverAction create(Map<String, String> parameters, boolean expectHttpRequest) {
+    public WebDriverAction create(Map<String, String> parameters, int step, boolean expectHttpRequest) {
         String url = this.baseURL + parameters.get(PAGE);
         String event = parameters.get(EVENT);
         return new PageLoading(url, event);

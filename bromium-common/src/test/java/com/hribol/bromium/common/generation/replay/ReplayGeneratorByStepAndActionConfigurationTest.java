@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -45,11 +47,11 @@ public class ReplayGeneratorByStepAndActionConfigurationTest {
         StepAndWebDriverActionConfiguration stepAndAction = mock(StepAndWebDriverActionConfiguration.class);
         StepAndWebDriverActionConfiguration stepAndPostcondition = mock(StepAndWebDriverActionConfiguration.class);
 
-        when(supplier.get(testCaseStep, precondition)).thenReturn(stepAndPrecondition);
-        when(supplier.get(testCaseStep, action)).thenReturn(stepAndAction);
-        when(supplier.get(testCaseStep, postcondition)).thenReturn(stepAndPostcondition);
+        when(supplier.get(eq(testCaseStep), anyInt(), eq(precondition))).thenReturn(stepAndPrecondition);
+        when(supplier.get(eq(testCaseStep), anyInt(), eq(action))).thenReturn(stepAndAction);
+        when(supplier.get(eq(testCaseStep), anyInt(), eq(postcondition))).thenReturn(stepAndPostcondition);
 
-        String s1 = "s1", s2 = "s2", s3 = "s3", expected = s1 + s2 + s3;
+        String s1 = "s1", s2 = "s2", s3 = "s3", expected = s1 + System.lineSeparator() + s2 + System.lineSeparator() + s3 + System.lineSeparator();
         when(generator.generate(stepAndPrecondition)).thenReturn(s1);
         when(generator.generate(stepAndAction)).thenReturn(s2);
         when(generator.generate(stepAndPostcondition)).thenReturn(s3);

@@ -603,6 +603,43 @@ public interface BromiumPackage extends EPackage
   int CLICK_CLASS_BY_TEXT_FEATURE_COUNT = WEB_DRIVER_ACTION_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.SetVariableToTextOfElementWithCssSelectorImpl <em>Set Variable To Text Of Element With Css Selector</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see com.hribol.bromium.dsl.bromium.impl.SetVariableToTextOfElementWithCssSelectorImpl
+   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getSetVariableToTextOfElementWithCssSelector()
+   * @generated
+   */
+  int SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR = 14;
+
+  /**
+   * The feature id for the '<em><b>Parameter Names</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR__PARAMETER_NAMES = WEB_DRIVER_ACTION__PARAMETER_NAMES;
+
+  /**
+   * The feature id for the '<em><b>Parameter Values</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR__PARAMETER_VALUES = WEB_DRIVER_ACTION__PARAMETER_VALUES;
+
+  /**
+   * The number of structural features of the '<em>Set Variable To Text Of Element With Css Selector</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_FEATURE_COUNT = WEB_DRIVER_ACTION_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ClickDataIdImpl <em>Click Data Id</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -610,7 +647,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getClickDataId()
    * @generated
    */
-  int CLICK_DATA_ID = 14;
+  int CLICK_DATA_ID = 15;
 
   /**
    * The feature id for the '<em><b>Parameter Names</b></em>' attribute list.
@@ -647,7 +684,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getConfirmAlert()
    * @generated
    */
-  int CONFIRM_ALERT = 15;
+  int CONFIRM_ALERT = 16;
 
   /**
    * The feature id for the '<em><b>Parameter Names</b></em>' attribute list.
@@ -684,7 +721,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getParameterValue()
    * @generated
    */
-  int PARAMETER_VALUE = 16;
+  int PARAMETER_VALUE = 17;
 
   /**
    * The feature id for the '<em><b>Content</b></em>' attribute.
@@ -721,7 +758,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getExposedParameter()
    * @generated
    */
-  int EXPOSED_PARAMETER = 17;
+  int EXPOSED_PARAMETER = 18;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -749,7 +786,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getThreeDottedVersion()
    * @generated
    */
-  int THREE_DOTTED_VERSION = 18;
+  int THREE_DOTTED_VERSION = 19;
 
   /**
    * The feature id for the '<em><b>Big</b></em>' attribute.
@@ -1136,6 +1173,16 @@ public interface BromiumPackage extends EPackage
    * @generated
    */
   EClass getClickClassByText();
+
+  /**
+   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.SetVariableToTextOfElementWithCssSelector <em>Set Variable To Text Of Element With Css Selector</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Set Variable To Text Of Element With Css Selector</em>'.
+   * @see com.hribol.bromium.dsl.bromium.SetVariableToTextOfElementWithCssSelector
+   * @generated
+   */
+  EClass getSetVariableToTextOfElementWithCssSelector();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ClickDataId <em>Click Data Id</em>}'.
@@ -1567,6 +1614,16 @@ public interface BromiumPackage extends EPackage
      * @generated
      */
     EClass CLICK_CLASS_BY_TEXT = eINSTANCE.getClickClassByText();
+
+    /**
+     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.SetVariableToTextOfElementWithCssSelectorImpl <em>Set Variable To Text Of Element With Css Selector</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.hribol.bromium.dsl.bromium.impl.SetVariableToTextOfElementWithCssSelectorImpl
+     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getSetVariableToTextOfElementWithCssSelector()
+     * @generated
+     */
+    EClass SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR = eINSTANCE.getSetVariableToTextOfElementWithCssSelector();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ClickDataIdImpl <em>Click Data Id</em>}' class.

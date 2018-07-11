@@ -18,6 +18,7 @@ import com.hribol.bromium.dsl.bromium.PageLoad;
 import com.hribol.bromium.dsl.bromium.ParameterValue;
 import com.hribol.bromium.dsl.bromium.Postcondition;
 import com.hribol.bromium.dsl.bromium.Precondition;
+import com.hribol.bromium.dsl.bromium.SetVariableToTextOfElementWithCssSelector;
 import com.hribol.bromium.dsl.bromium.SyntaxDefinition;
 import com.hribol.bromium.dsl.bromium.TextOfElementWithCssSelectorToBe;
 import com.hribol.bromium.dsl.bromium.ThreeDottedVersion;
@@ -87,6 +88,9 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 			case BromiumPackage.PRECONDITION:
 				sequence_Precondition(context, (Precondition) semanticObject); 
 				return; 
+			case BromiumPackage.SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR:
+				sequence_SetVariableToTextOfElementWithCssSelector(context, (SetVariableToTextOfElementWithCssSelector) semanticObject); 
+				return; 
 			case BromiumPackage.SYNTAX_DEFINITION:
 				sequence_SyntaxDefinition(context, (SyntaxDefinition) semanticObject); 
 				return; 
@@ -114,7 +118,7 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *         syntaxDefinitions+=SyntaxDefinition* 
 	 *         precondition=Precondition? 
 	 *         webDriverAction=WebDriverAction 
-	 *         expectHttpRequest=ExpectHttpRequest 
+	 *         expectHttpRequest=ExpectHttpRequest? 
 	 *         postcondition=Postcondition?
 	 *     )
 	 */
@@ -288,6 +292,19 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getPreconditionAccess().getActionWebDriverActionConditionParserRuleCall_1_0(), semanticObject.getAction());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     WebDriverAction returns SetVariableToTextOfElementWithCssSelector
+	 *     SetVariableToTextOfElementWithCssSelector returns SetVariableToTextOfElementWithCssSelector
+	 *
+	 * Constraint:
+	 *     (parameterNames+='variable' parameterValues+=ParameterValue parameterNames+='selector' parameterValues+=ParameterValue)
+	 */
+	protected void sequence_SetVariableToTextOfElementWithCssSelector(ISerializationContext context, SetVariableToTextOfElementWithCssSelector semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

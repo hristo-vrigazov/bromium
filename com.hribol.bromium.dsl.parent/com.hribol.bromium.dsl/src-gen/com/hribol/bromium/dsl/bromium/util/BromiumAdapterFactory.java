@@ -146,6 +146,11 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
         return createClickClassByTextAdapter();
       }
       @Override
+      public Adapter caseSetVariableToTextOfElementWithCssSelector(SetVariableToTextOfElementWithCssSelector object)
+      {
+        return createSetVariableToTextOfElementWithCssSelectorAdapter();
+      }
+      @Override
       public Adapter caseClickDataId(ClickDataId object)
       {
         return createClickDataIdAdapter();
@@ -398,6 +403,21 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createClickClassByTextAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.SetVariableToTextOfElementWithCssSelector <em>Set Variable To Text Of Element With Css Selector</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see com.hribol.bromium.dsl.bromium.SetVariableToTextOfElementWithCssSelector
+   * @generated
+   */
+  public Adapter createSetVariableToTextOfElementWithCssSelectorAdapter()
   {
     return null;
   }

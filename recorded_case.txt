@@ -1,0 +1,5 @@
+loadBMLoginPage: Load BM login page 
+typeUsername: Type admin into username field 
+typePassword: Type admin into password field 
+clickLoginButton: Click login button 
+loadCampaignsPage: Load campaigns page 

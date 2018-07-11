@@ -378,7 +378,11 @@
                 <artifactId>log4j-core</artifactId>
                 <version>${log4j.binding.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.github.jknack</groupId>
+                <artifactId>handlebars</artifactId>
+                <version>4.1.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
