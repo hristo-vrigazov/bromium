@@ -40,6 +40,7 @@ import static com.hribol.bromium.core.DependencyInjectionConstants.MEASUREMENTS_
 import static com.hribol.bromium.core.utils.Constants.HAR_EXTENSION;
 import static com.hribol.bromium.integration.tests.TestUtils.CHROMEDRIVER;
 import static com.hribol.bromium.integration.tests.TestUtils.Resources;
+import static com.hribol.bromium.integration.tests.TestUtils.SCREEN_SYSTEM_PROPERTY;
 import static com.hribol.bromium.integration.tests.TestUtils.extractResource;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -56,11 +57,11 @@ public class DefaultModuleTest {
     private File chromedriverFile;
     private File caseFile;
     private Process virtualScreenProcess;
-    private int screen = 1;
+    private int screen = Integer.parseInt(System.getProperty(SCREEN_SYSTEM_PROPERTY, "1"));
     private int timeout = 10;
     private int precision = 500;
 
-    private String screenString = String.valueOf(screen);
+    private String screenString = System.getProperty(SCREEN_SYSTEM_PROPERTY, "1");
     private String timeoutString = String.valueOf(timeout);
     private String precisionString = String.valueOf(precision);
 
