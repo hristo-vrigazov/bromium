@@ -22,7 +22,7 @@ TODO
 
 ## Features
 * Declarative way of describing your actions and how they translate to browser actions for different versions of your app. 
-For example (this is bromium-dsl, but currently only JSON is supported):
+For example (this is bromium dsl language, a special language for describing UI contracts):
 
 ![Example Bromium DSL app](examples/bromium.dsl.png)
 
