@@ -135,6 +135,7 @@
 					<artifactId>jacoco-maven-plugin</artifactId>
 					<version>${jacoco.version}</version>
 					<executions>
+
 						<execution>
 							<id>pre-integration-test</id>
 							<phase>pre-integration-test</phase>
@@ -143,9 +144,9 @@
 							</goals>
 						</execution>
 						<!--
-                        Ensures that the code coverage report for integration tests after
-                        integration tests have been run.
-                    -->
+                            Ensures that the code coverage report for integration tests after
+                            integration tests have been run.
+                        -->
 						<execution>
 							<id>post-integration-test</id>
 							<phase>post-integration-test</phase>
@@ -178,7 +179,8 @@
 								<goal>check</goal>
 							</goals>
 							<configuration>
-								<rules/>
+								<rules>
+								</rules>
 							</configuration>
 						</execution>
 					</executions>
