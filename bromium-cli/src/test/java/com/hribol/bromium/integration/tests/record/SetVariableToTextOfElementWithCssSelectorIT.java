@@ -28,7 +28,7 @@ public class SetVariableToTextOfElementWithCssSelectorIT extends BaseRecordInteg
 
         expected.add(ImmutableMap.of(
                 EVENT, TestUtils.Events.PAGE_LOAD,
-                SUBPAGE, TestUtils.Pages.CHANGE_INJECTED_CODE_AT_RUNTIME
+                SUBPAGE, TestUtils.Pages.SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_DEMO_PAGE
         ));
 
         expected.add(ImmutableMap.of(
@@ -76,7 +76,6 @@ public class SetVariableToTextOfElementWithCssSelectorIT extends BaseRecordInteg
     public void run(RecordingSimulatorModule recordingSimulatorModule) throws InterruptedException {
         String baseUrl = (String) opts.get(URL);
         WebDriver webDriver = recordingSimulatorModule.getWebDriver();
-        WebDriverWait webDriverWait = new WebDriverWait(webDriver, 10);
 
         // first stage
         webDriver.get(baseUrl + "set-variable-to-text-of-element-with-css-selector.html");

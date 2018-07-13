@@ -40,7 +40,7 @@ public class TestUtils {
         public static final String DYNAMIC_DEMO_PAGE = "dynamic.html";
         public static final String TYPE_TEXT_DEMO_PAGE = "text-field.html";
         public static final String CLICK_CLASS_BY_TEXT_DEMO_PAGE = "click-class-by-text.html";
-        public static final String CHANGE_INJECTED_CODE_AT_RUNTIME = "set-variable-to-text-of-element-with-css-selector.html";
+        public static final String SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_DEMO_PAGE = "set-variable-to-text-of-element-with-css-selector.html";
     }
 
     public static class Resources {

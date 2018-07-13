@@ -18,6 +18,28 @@ import java.util.ArrayList;
  *     <li>Create a rule which matches the action name in Bromium.xtext</li>
  *     <li>Add the rule to an action or condition in Bromium.xtext</li>
  * </ul>
+ *
+ * Optional:
+ * <ul>
+ *     <li>Add a custom completion rule in BromiumProposalProvider in the DSL project</li>
+ * </ul>
+ *
+ * If the action is predefined, manually add its name to {@link com.hribol.bromium.common.generation.record.BaseRecorderFunctionFactory}
+ * or {@link com.hribol.bromium.common.generation.replay.BaseReplayFunctionFactory} or both.
+ *
+ * For integration tests:
+ * <ul>
+ *     <li>Create a new html page for the integration test under bromium-demo-app resources.</li>
+ *     <li>Add it to DemoApp#resourcesToBeExtractedInDirectory</li>
+ *     <li>Add it to TestUtils#Pages</li>
+ *     <li>Add a new action to the demo.brm file in the integration-tests folder</li>
+ *     <li>Add the name of the action from the previous step to TestUtils#Events</li>
+ *     <li>Create a test case in resources/integration-tests</li>
+ *     <li>Add the filename of the test case from the previous step to TestUtils#Resources</li>
+ *     <li>Create a class which extends IntegrationTestAssertingThatStatusIsSuccess with the resource from above</li>
+ *     <li>Create a class which extends BaseRecordIntegrationTest and performs the actions manually and compares the steps</li>
+ * </ul>
+ *
  */
 public interface Action {
 

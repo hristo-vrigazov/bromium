@@ -64,7 +64,9 @@ public class DemoApp {
         ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setResourceBase(baseOutputDirectory.getAbsolutePath());
         resourceHandler.setDirectoriesListed(true);
-        resourceHandler.setWelcomeFiles(resourcesToBeExtractedInDirectory);
+        resourceHandler.setWelcomeFiles(new String[] {
+                "index.html"
+        });
 
         ServletContextHandler context = new ServletContextHandler(server, "/*");
         context.addServlet(servlet, "/*");

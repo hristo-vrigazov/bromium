@@ -36,7 +36,8 @@ WebDriverAction:
 	PageLoad |
 	TypeTextInElementFoundByCssSelector |
 	ClickDataId |
-	SetVariableToTextOfElementWithCssSelector
+	SetVariableToTextOfElementWithCssSelector |
+	ClickIdCon
 ;
 
 Precondition:
@@ -85,6 +86,10 @@ ClickDataId:
 
 ConfirmAlert:
 	'to' parameterNames+='confirm' parameterValues+= ParameterValue
+;
+
+ClickId:
+    click 'on' 'element' 'with' parameterNames+='id' parameterValues+=ParameterValue
 ;
 
 ParameterValue:

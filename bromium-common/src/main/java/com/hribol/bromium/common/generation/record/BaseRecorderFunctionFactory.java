@@ -36,7 +36,8 @@ public abstract class BaseRecorderFunctionFactory extends
                 CLICK_CLASS_BY_TEXT,
                 CONFIRM_ALERT,
                 CLICK_DATA_ID,
-                SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR
+                SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR,
+                CLICK_ID
         );
     }
 }
