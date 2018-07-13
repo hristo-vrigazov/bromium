@@ -1,4 +1,0 @@
-openDashboard: Open controller dashboard 
-openDashboard: Open controller dashboard 
-clickStats: Click stats 
-openInternalCustomer: Open internal customer 

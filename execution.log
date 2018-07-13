@@ -1,8 +1,0 @@
-2018-07-11 15:25:10.610 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @1116ms
-2018-07-11 15:25:10.724 [main] WARN  org.eclipse.jetty.server.handler.ContextHandler - o.e.j.s.ServletContextHandler@6b19b79{/,null,null} contextPath ends with /*
-2018-07-11 15:25:10.724 [main] WARN  org.eclipse.jetty.server.handler.ContextHandler - Empty contextPath
-2018-07-11 15:25:10.741 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.2.3.v20140905
-2018-07-11 15:25:12.164 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@6b19b79{/,null,AVAILABLE}
-2018-07-11 15:25:12.212 [main] INFO  org.eclipse.jetty.server.ServerConnector - Started ServerConnector@5dd1c9f2{HTTP/1.1}{0.0.0.0:34081}
-2018-07-11 15:25:12.212 [main] INFO  org.eclipse.jetty.server.Server - Started @2738ms
-2018-07-11 15:25:12.212 [main] INFO  com.hribol.bromium.demo.app.DemoApp - Server started on port 34081
