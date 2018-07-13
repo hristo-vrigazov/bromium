@@ -21,9 +21,11 @@ class BromiumProposalProvider extends AbstractBromiumProposalProvider {
     
     override void complete_WebDriverAction(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		acceptor.accept(createCompletionProposal("click on element with css selector 'selector'", context));
-		acceptor.accept(createCompletionProposal("type text 'text' in element with css selector 'selector'", context));
-		acceptor.accept(createCompletionProposal("load page 'subpath'", context));
 		acceptor.accept(createCompletionProposal("click on element with class 'class' and text 'text'", context));
+		acceptor.accept(createCompletionProposal("load page 'subpath'", context));
+		acceptor.accept(createCompletionProposal("type text 'text' in element with css selector 'selector'", context));
+        acceptor.accept(createCompletionProposal("click on element with dataId 'id'", context));
+        acceptor.accept(createCompletionProposal("set variable 'variable' to the text of element with css selector 'selector'", context));
         acceptor.accept(createCompletionProposal("click on element with id 'id'", context));
 		super.complete_WebDriverAction(model, ruleCall, context, acceptor);
 	}
@@ -31,6 +33,7 @@ class BromiumProposalProvider extends AbstractBromiumProposalProvider {
 	override void complete_WebDriverActionCondition(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		acceptor.accept(createCompletionProposal("element with css selector 'selector' is present", context));
 		acceptor.accept(createCompletionProposal("element with css selector 'cssSelector' has text 'text'", context));
+		acceptor.accept(createCompletionProposal("to confirm 'alert'", context));
 		super.complete_WebDriverActionCondition(model, ruleCall, context, acceptor);
 	}
 	
