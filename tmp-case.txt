@@ -1,8 +1,0 @@
-loadBMLoginPage: Load BM login page 
-typeUsername: Type admin into username field 
-typePassword: Type admin into password field 
-clickLoginButton: Click login button 
-loadCampaignsPage: Load campaigns page 
-clickOnTab: Click on tab SYSTEM 
-clickSystemSubtab: Click on System subtab Presentation 
-clickSystemSubtab: Click on System subtab Management 
