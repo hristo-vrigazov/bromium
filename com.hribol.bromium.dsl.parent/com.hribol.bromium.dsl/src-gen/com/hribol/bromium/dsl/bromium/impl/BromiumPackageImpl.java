@@ -10,6 +10,7 @@ import com.hribol.bromium.dsl.bromium.ClickClassByText;
 import com.hribol.bromium.dsl.bromium.ClickCssSelector;
 import com.hribol.bromium.dsl.bromium.ClickDataId;
 import com.hribol.bromium.dsl.bromium.ClickId;
+import com.hribol.bromium.dsl.bromium.ClickName;
 import com.hribol.bromium.dsl.bromium.ConfirmAlert;
 import com.hribol.bromium.dsl.bromium.ElementByCssToBePresent;
 import com.hribol.bromium.dsl.bromium.ExpectHttpRequest;
@@ -167,6 +168,13 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * @generated
    */
   private EClass clickIdEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass clickNameEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -627,6 +635,16 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getClickName()
+  {
+    return clickNameEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getParameterValue()
   {
     return parameterValueEClass;
@@ -797,6 +815,8 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
 
     clickIdEClass = createEClass(CLICK_ID);
 
+    clickNameEClass = createEClass(CLICK_NAME);
+
     parameterValueEClass = createEClass(PARAMETER_VALUE);
     createEAttribute(parameterValueEClass, PARAMETER_VALUE__CONTENT);
     createEReference(parameterValueEClass, PARAMETER_VALUE__EXPOSED_PARAMETER);
@@ -849,6 +869,7 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     clickDataIdEClass.getESuperTypes().add(this.getWebDriverAction());
     confirmAlertEClass.getESuperTypes().add(this.getWebDriverActionCondition());
     clickIdEClass.getESuperTypes().add(this.getWebDriverAction());
+    clickNameEClass.getESuperTypes().add(this.getWebDriverAction());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -905,6 +926,8 @@ public class BromiumPackageImpl extends EPackageImpl implements BromiumPackage
     initEClass(confirmAlertEClass, ConfirmAlert.class, "ConfirmAlert", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(clickIdEClass, ClickId.class, "ClickId", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(clickNameEClass, ClickName.class, "ClickName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(parameterValueEClass, ParameterValue.class, "ParameterValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getParameterValue_Content(), ecorePackage.getEString(), "content", null, 0, 1, ParameterValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

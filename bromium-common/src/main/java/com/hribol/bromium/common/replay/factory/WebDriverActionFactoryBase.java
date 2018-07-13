@@ -4,6 +4,7 @@ import com.hribol.bromium.common.replay.parsers.ClickClassByTextParser;
 import com.hribol.bromium.common.replay.parsers.ClickCssSelectorParser;
 import com.hribol.bromium.common.replay.parsers.ClickDataIdParser;
 import com.hribol.bromium.common.replay.parsers.ClickIdParser;
+import com.hribol.bromium.common.replay.parsers.ClickNameParser;
 import com.hribol.bromium.common.replay.parsers.ConfirmAlertParser;
 import com.hribol.bromium.common.replay.parsers.ElementByCssToBePresentParser;
 import com.hribol.bromium.common.replay.parsers.PageLoadingParser;
@@ -57,6 +58,7 @@ public abstract class WebDriverActionFactoryBase implements WebDriverActionFacto
         add(CLICK_DATA_ID, new ClickDataIdParser());
         add(SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR, new SetVariableToTextOfElementWithCssSelectorParser());
         add(CLICK_ID, new ClickIdParser());
+        add(CLICK_NAME, new ClickNameParser());
     }
 
     /**

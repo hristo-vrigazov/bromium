@@ -236,14 +236,15 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cClickDataIdParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		private final RuleCall cSetVariableToTextOfElementWithCssSelectorParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		private final RuleCall cClickIdParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cClickNameParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
 		
 		//WebDriverAction:
 		//	ClickCssSelector | ClickClassByText | PageLoad | TypeTextInElementFoundByCssSelector | ClickDataId |
-		//	SetVariableToTextOfElementWithCssSelector | ClickId;
+		//	SetVariableToTextOfElementWithCssSelector | ClickId | ClickName;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ClickCssSelector | ClickClassByText | PageLoad | TypeTextInElementFoundByCssSelector | ClickDataId |
-		//SetVariableToTextOfElementWithCssSelector | ClickId
+		//SetVariableToTextOfElementWithCssSelector | ClickId | ClickName
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ClickCssSelector
@@ -266,6 +267,9 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ClickId
 		public RuleCall getClickIdParserRuleCall_6() { return cClickIdParserRuleCall_6; }
+		
+		//ClickName
+		public RuleCall getClickNameParserRuleCall_7() { return cClickNameParserRuleCall_7; }
 	}
 	public class PreconditionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.Precondition");
@@ -879,6 +883,49 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		//ParameterValue
 		public RuleCall getParameterValuesParameterValueParserRuleCall_5_0() { return cParameterValuesParameterValueParserRuleCall_5_0; }
 	}
+	public class ClickNameElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.ClickName");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cClickKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cOnKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cElementKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cWithKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cParameterNamesAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final Keyword cParameterNamesNameKeyword_4_0 = (Keyword)cParameterNamesAssignment_4.eContents().get(0);
+		private final Assignment cParameterValuesAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cParameterValuesParameterValueParserRuleCall_5_0 = (RuleCall)cParameterValuesAssignment_5.eContents().get(0);
+		
+		//ClickName:
+		//	'click' 'on' 'element' 'with' parameterNames+='name' parameterValues+=ParameterValue;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'click' 'on' 'element' 'with' parameterNames+='name' parameterValues+=ParameterValue
+		public Group getGroup() { return cGroup; }
+		
+		//'click'
+		public Keyword getClickKeyword_0() { return cClickKeyword_0; }
+		
+		//'on'
+		public Keyword getOnKeyword_1() { return cOnKeyword_1; }
+		
+		//'element'
+		public Keyword getElementKeyword_2() { return cElementKeyword_2; }
+		
+		//'with'
+		public Keyword getWithKeyword_3() { return cWithKeyword_3; }
+		
+		//parameterNames+='name'
+		public Assignment getParameterNamesAssignment_4() { return cParameterNamesAssignment_4; }
+		
+		//'name'
+		public Keyword getParameterNamesNameKeyword_4_0() { return cParameterNamesNameKeyword_4_0; }
+		
+		//parameterValues+=ParameterValue
+		public Assignment getParameterValuesAssignment_5() { return cParameterValuesAssignment_5; }
+		
+		//ParameterValue
+		public RuleCall getParameterValuesParameterValueParserRuleCall_5_0() { return cParameterValuesParameterValueParserRuleCall_5_0; }
+	}
 	public class ParameterValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.ParameterValue");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -1000,6 +1047,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	private final ClickDataIdElements pClickDataId;
 	private final ConfirmAlertElements pConfirmAlert;
 	private final ClickIdElements pClickId;
+	private final ClickNameElements pClickName;
 	private final ParameterValueElements pParameterValue;
 	private final ExposedParameterElements pExposedParameter;
 	private final VersionElements pVersion;
@@ -1032,6 +1080,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		this.pClickDataId = new ClickDataIdElements();
 		this.pConfirmAlert = new ConfirmAlertElements();
 		this.pClickId = new ClickIdElements();
+		this.pClickName = new ClickNameElements();
 		this.pParameterValue = new ParameterValueElements();
 		this.pExposedParameter = new ExposedParameterElements();
 		this.pVersion = new VersionElements();
@@ -1116,7 +1165,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//WebDriverAction:
 	//	ClickCssSelector | ClickClassByText | PageLoad | TypeTextInElementFoundByCssSelector | ClickDataId |
-	//	SetVariableToTextOfElementWithCssSelector | ClickId;
+	//	SetVariableToTextOfElementWithCssSelector | ClickId | ClickName;
 	public WebDriverActionElements getWebDriverActionAccess() {
 		return pWebDriverAction;
 	}
@@ -1262,6 +1311,16 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getClickIdRule() {
 		return getClickIdAccess().getRule();
+	}
+	
+	//ClickName:
+	//	'click' 'on' 'element' 'with' parameterNames+='name' parameterValues+=ParameterValue;
+	public ClickNameElements getClickNameAccess() {
+		return pClickName;
+	}
+	
+	public ParserRule getClickNameRule() {
+		return getClickNameAccess().getRule();
 	}
 	
 	//ParameterValue:

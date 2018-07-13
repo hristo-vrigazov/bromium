@@ -166,6 +166,11 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
         return createClickIdAdapter();
       }
       @Override
+      public Adapter caseClickName(ClickName object)
+      {
+        return createClickNameAdapter();
+      }
+      @Override
       public Adapter caseParameterValue(ParameterValue object)
       {
         return createParameterValueAdapter();
@@ -468,6 +473,21 @@ public class BromiumAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createClickIdAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link com.hribol.bromium.dsl.bromium.ClickName <em>Click Name</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see com.hribol.bromium.dsl.bromium.ClickName
+   * @generated
+   */
+  public Adapter createClickNameAdapter()
   {
     return null;
   }

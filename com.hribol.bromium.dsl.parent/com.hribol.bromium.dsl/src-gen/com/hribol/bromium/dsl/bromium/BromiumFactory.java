@@ -186,6 +186,15 @@ public interface BromiumFactory extends EFactory
   ClickId createClickId();
 
   /**
+   * Returns a new object of class '<em>Click Name</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Click Name</em>'.
+   * @generated
+   */
+  ClickName createClickName();
+
+  /**
    * Returns a new object of class '<em>Parameter Value</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

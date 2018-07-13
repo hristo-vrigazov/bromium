@@ -115,5 +115,7 @@ actions {
     syntax 'Click on click-id-test'
     click on element with id 'click-id-test'
 
-
+    id clickClickNameTest
+    syntax 'Click on click-name-test'
+    click on element with name 'click-name-test'
 }

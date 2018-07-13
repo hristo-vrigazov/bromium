@@ -31,6 +31,7 @@ public class Constants {
     public final static String REGISTER_SUBSTITUTION_URL = "http://bromium-register-substitution.com/";
     public final static String INDEX = "index";
     public final static String ID = "id";
+    public final static String NAME = "name";
 
 
 }

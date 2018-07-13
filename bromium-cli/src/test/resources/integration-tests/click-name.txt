@@ -1,0 +1,2 @@
+loadPage: Load click-name.html page
+clickClickNameTest: Click on click-name-test

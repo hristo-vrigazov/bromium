@@ -10,6 +10,7 @@ import com.hribol.bromium.dsl.bromium.ClickClassByText;
 import com.hribol.bromium.dsl.bromium.ClickCssSelector;
 import com.hribol.bromium.dsl.bromium.ClickDataId;
 import com.hribol.bromium.dsl.bromium.ClickId;
+import com.hribol.bromium.dsl.bromium.ClickName;
 import com.hribol.bromium.dsl.bromium.ConfirmAlert;
 import com.hribol.bromium.dsl.bromium.ElementByCssToBePresent;
 import com.hribol.bromium.dsl.bromium.ExpectHttpRequest;
@@ -64,6 +65,9 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 				return; 
 			case BromiumPackage.CLICK_ID:
 				sequence_ClickId(context, (ClickId) semanticObject); 
+				return; 
+			case BromiumPackage.CLICK_NAME:
+				sequence_ClickName(context, (ClickName) semanticObject); 
 				return; 
 			case BromiumPackage.CONFIRM_ALERT:
 				sequence_ConfirmAlert(context, (ConfirmAlert) semanticObject); 
@@ -179,6 +183,19 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     (parameterNames+='id' parameterValues+=ParameterValue)
 	 */
 	protected void sequence_ClickId(ISerializationContext context, ClickId semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     WebDriverAction returns ClickName
+	 *     ClickName returns ClickName
+	 *
+	 * Constraint:
+	 *     (parameterNames+='name' parameterValues+=ParameterValue)
+	 */
+	protected void sequence_ClickName(ISerializationContext context, ClickName semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

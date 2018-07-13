@@ -13,7 +13,6 @@ import static com.hribol.bromium.core.utils.Constants.TEXT;
  */
 public class ClickClassByTextParser implements WebDriverActionParameterParser {
 
-    public final static String INITIAL_COLLECTOR_CLASS_JS_ALIAS = "initialCollectorClass";
     public static final String INITIAL_COLLECTOR_CLASS = "class";
 
     @Override

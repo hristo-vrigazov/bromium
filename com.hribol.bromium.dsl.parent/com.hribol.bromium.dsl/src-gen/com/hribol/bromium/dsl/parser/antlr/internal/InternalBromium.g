@@ -505,6 +505,15 @@ ruleWebDriverAction returns [EObject current=null]
 			$current = $this_ClickId_6.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getWebDriverActionAccess().getClickNameParserRuleCall_7());
+		}
+		this_ClickName_7=ruleClickName
+		{
+			$current = $this_ClickName_7.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 
@@ -1465,6 +1474,74 @@ ruleClickId returns [EObject current=null]
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getClickIdRule());
+					}
+					add(
+						$current,
+						"parameterValues",
+						lv_parameterValues_5_0,
+						"com.hribol.bromium.dsl.Bromium.ParameterValue");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleClickName
+entryRuleClickName returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getClickNameRule()); }
+	iv_ruleClickName=ruleClickName
+	{ $current=$iv_ruleClickName.current; }
+	EOF;
+
+// Rule ClickName
+ruleClickName returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='click'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getClickNameAccess().getClickKeyword_0());
+		}
+		otherlv_1='on'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getClickNameAccess().getOnKeyword_1());
+		}
+		otherlv_2='element'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getClickNameAccess().getElementKeyword_2());
+		}
+		otherlv_3='with'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getClickNameAccess().getWithKeyword_3());
+		}
+		(
+			(
+				lv_parameterNames_4_0='name'
+				{
+					newLeafNode(lv_parameterNames_4_0, grammarAccess.getClickNameAccess().getParameterNamesNameKeyword_4_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getClickNameRule());
+					}
+					addWithLastConsumed($current, "parameterNames", lv_parameterNames_4_0, "name");
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getClickNameAccess().getParameterValuesParameterValueParserRuleCall_5_0());
+				}
+				lv_parameterValues_5_0=ruleParameterValue
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getClickNameRule());
 					}
 					add(
 						$current,
