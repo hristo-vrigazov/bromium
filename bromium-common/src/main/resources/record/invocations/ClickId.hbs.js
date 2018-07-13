@@ -1,1 +1,0 @@
-ClickDataId("{{{elementId}}}", "{{{event}}}");

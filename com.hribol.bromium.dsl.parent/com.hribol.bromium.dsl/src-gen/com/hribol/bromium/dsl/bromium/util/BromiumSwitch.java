@@ -201,6 +201,14 @@ public class BromiumSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case BromiumPackage.CLICK_ID:
+      {
+        ClickId clickId = (ClickId)theEObject;
+        T result = caseClickId(clickId);
+        if (result == null) result = caseWebDriverAction(clickId);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case BromiumPackage.PARAMETER_VALUE:
       {
         ParameterValue parameterValue = (ParameterValue)theEObject;
@@ -494,6 +502,22 @@ public class BromiumSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseConfirmAlert(ConfirmAlert object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Click Id</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Click Id</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseClickId(ClickId object)
   {
     return null;
   }

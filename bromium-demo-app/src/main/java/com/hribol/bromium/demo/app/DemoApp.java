@@ -38,7 +38,8 @@ public class DemoApp {
             "presence-example.html",
             "text-to-be.html",
             "click-class-by-text.html",
-            "set-variable-to-text-of-element-with-css-selector.html"
+            "set-variable-to-text-of-element-with-css-selector.html",
+            "click-id.html"
     };
 
     private int port;

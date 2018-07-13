@@ -51,6 +51,7 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSetVariableToTextOfElementWithCssSelectorAccess().getGroup(), "rule__SetVariableToTextOfElementWithCssSelector__Group__0");
 					put(grammarAccess.getClickDataIdAccess().getGroup(), "rule__ClickDataId__Group__0");
 					put(grammarAccess.getConfirmAlertAccess().getGroup(), "rule__ConfirmAlert__Group__0");
+					put(grammarAccess.getClickIdAccess().getGroup(), "rule__ClickId__Group__0");
 					put(grammarAccess.getThreeDottedVersionAccess().getGroup(), "rule__ThreeDottedVersion__Group__0");
 					put(grammarAccess.getModelAccess().getNameAssignment_1(), "rule__Model__NameAssignment_1");
 					put(grammarAccess.getModelAccess().getVersionAssignment_3(), "rule__Model__VersionAssignment_3");
@@ -93,6 +94,8 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getClickDataIdAccess().getParameterValuesAssignment_5(), "rule__ClickDataId__ParameterValuesAssignment_5");
 					put(grammarAccess.getConfirmAlertAccess().getParameterNamesAssignment_1(), "rule__ConfirmAlert__ParameterNamesAssignment_1");
 					put(grammarAccess.getConfirmAlertAccess().getParameterValuesAssignment_2(), "rule__ConfirmAlert__ParameterValuesAssignment_2");
+					put(grammarAccess.getClickIdAccess().getParameterNamesAssignment_4(), "rule__ClickId__ParameterNamesAssignment_4");
+					put(grammarAccess.getClickIdAccess().getParameterValuesAssignment_5(), "rule__ClickId__ParameterValuesAssignment_5");
 					put(grammarAccess.getParameterValueAccess().getContentAssignment_0(), "rule__ParameterValue__ContentAssignment_0");
 					put(grammarAccess.getParameterValueAccess().getExposedParameterAssignment_1(), "rule__ParameterValue__ExposedParameterAssignment_1");
 					put(grammarAccess.getExposedParameterAccess().getNameAssignment(), "rule__ExposedParameter__NameAssignment");

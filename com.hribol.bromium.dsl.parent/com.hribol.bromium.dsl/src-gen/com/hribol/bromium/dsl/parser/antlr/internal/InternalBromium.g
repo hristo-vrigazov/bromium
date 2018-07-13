@@ -496,6 +496,15 @@ ruleWebDriverAction returns [EObject current=null]
 			$current = $this_SetVariableToTextOfElementWithCssSelector_5.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getWebDriverActionAccess().getClickIdParserRuleCall_6());
+		}
+		this_ClickId_6=ruleClickId
+		{
+			$current = $this_ClickId_6.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 
@@ -1393,6 +1402,74 @@ ruleConfirmAlert returns [EObject current=null]
 						$current,
 						"parameterValues",
 						lv_parameterValues_2_0,
+						"com.hribol.bromium.dsl.Bromium.ParameterValue");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleClickId
+entryRuleClickId returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getClickIdRule()); }
+	iv_ruleClickId=ruleClickId
+	{ $current=$iv_ruleClickId.current; }
+	EOF;
+
+// Rule ClickId
+ruleClickId returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='click'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getClickIdAccess().getClickKeyword_0());
+		}
+		otherlv_1='on'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getClickIdAccess().getOnKeyword_1());
+		}
+		otherlv_2='element'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getClickIdAccess().getElementKeyword_2());
+		}
+		otherlv_3='with'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getClickIdAccess().getWithKeyword_3());
+		}
+		(
+			(
+				lv_parameterNames_4_0='id'
+				{
+					newLeafNode(lv_parameterNames_4_0, grammarAccess.getClickIdAccess().getParameterNamesIdKeyword_4_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getClickIdRule());
+					}
+					addWithLastConsumed($current, "parameterNames", lv_parameterNames_4_0, "id");
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getClickIdAccess().getParameterValuesParameterValueParserRuleCall_5_0());
+				}
+				lv_parameterValues_5_0=ruleParameterValue
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getClickIdRule());
+					}
+					add(
+						$current,
+						"parameterValues",
+						lv_parameterValues_5_0,
 						"com.hribol.bromium.dsl.Bromium.ParameterValue");
 					afterParserOrEnumRuleCall();
 				}

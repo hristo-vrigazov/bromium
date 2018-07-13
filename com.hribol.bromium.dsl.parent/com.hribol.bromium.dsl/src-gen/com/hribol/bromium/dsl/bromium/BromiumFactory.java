@@ -177,6 +177,15 @@ public interface BromiumFactory extends EFactory
   ConfirmAlert createConfirmAlert();
 
   /**
+   * Returns a new object of class '<em>Click Id</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Click Id</em>'.
+   * @generated
+   */
+  ClickId createClickId();
+
+  /**
    * Returns a new object of class '<em>Parameter Value</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

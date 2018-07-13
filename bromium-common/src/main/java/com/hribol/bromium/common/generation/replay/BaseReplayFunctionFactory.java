@@ -39,7 +39,8 @@ public abstract class BaseReplayFunctionFactory extends
                 CLICK_DATA_ID,
                 ELEMENT_BY_CSS_TO_BE_PRESENT,
                 TEXT_OF_ELEMENT_FOUND_BY_CSS_SELECTOR_TO_BE,
-                SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR
+                SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR,
+                CLICK_ID
         );
     }
 }

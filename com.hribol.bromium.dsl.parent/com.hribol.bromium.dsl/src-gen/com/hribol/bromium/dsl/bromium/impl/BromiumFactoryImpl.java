@@ -82,6 +82,7 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
       case BromiumPackage.SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR: return createSetVariableToTextOfElementWithCssSelector();
       case BromiumPackage.CLICK_DATA_ID: return createClickDataId();
       case BromiumPackage.CONFIRM_ALERT: return createConfirmAlert();
+      case BromiumPackage.CLICK_ID: return createClickId();
       case BromiumPackage.PARAMETER_VALUE: return createParameterValue();
       case BromiumPackage.EXPOSED_PARAMETER: return createExposedParameter();
       case BromiumPackage.THREE_DOTTED_VERSION: return createThreeDottedVersion();
@@ -275,6 +276,17 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
   {
     ConfirmAlertImpl confirmAlert = new ConfirmAlertImpl();
     return confirmAlert;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ClickId createClickId()
+  {
+    ClickIdImpl clickId = new ClickIdImpl();
+    return clickId;
   }
 
   /**

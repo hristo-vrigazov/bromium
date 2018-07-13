@@ -23,3 +23,5 @@ bromium-core/src/test/resources/dynamic-testCase.json
 generated
 .project
 .launch
+*.log
+notes.txt

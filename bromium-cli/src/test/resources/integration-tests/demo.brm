@@ -111,4 +111,9 @@ actions {
     click on element with css selector '#remove-initial'
     do not expect http request
 
+    id clickClickIdTest
+    syntax 'Click on click-id-test'
+    click on element with id 'click-id-test'
+
+
 }

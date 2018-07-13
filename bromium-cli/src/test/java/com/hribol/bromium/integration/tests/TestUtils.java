@@ -33,6 +33,7 @@ public class TestUtils {
         public static final String CLICK_SOME_ID_HERE = "clickSomeIdHere";
         public static final String CLICK_REGENERATE_BUTTON = "clickRegenerateButton";
         public static final String CLICK_REMOVE_INITIAL = "clickRemoveInitial";
+        public static final String CLICK_CLICK_ID_TEST = "clickClickIdTest";
 
     }
 
@@ -41,6 +42,7 @@ public class TestUtils {
         public static final String TYPE_TEXT_DEMO_PAGE = "text-field.html";
         public static final String CLICK_CLASS_BY_TEXT_DEMO_PAGE = "click-class-by-text.html";
         public static final String SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_DEMO_PAGE = "set-variable-to-text-of-element-with-css-selector.html";
+        public static final String CLICK_ID_DEMO_PAGE = "click-id.html";
     }
 
     public static class Resources {
@@ -53,6 +55,7 @@ public class TestUtils {
         public static final String TEXT_TO_BE_TEST_CASE = "integration-tests/text-to-be.txt";
         public static final String CLICK_CLASS_BY_TEXT_TEST_CASE = "integration-tests/click-class-by-text.txt";
         public static final String SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TEST_CASE = "integration-tests/set-variable-to-text-of-element-with-css-selector.txt";
+        public static final String CLICK_ID_TEST_CASE = "integration-tests/click-id.txt";
     }
 
     public static final String SCREEN_SYSTEM_PROPERTY = "screenNumber";
@@ -72,6 +75,7 @@ public class TestUtils {
     public static final String SOURCE_VARIABLE = "source-variable";
     public static final String DATA_ID_VALUE = "dataIdValue";
     public static final String ENTITY_ID_VARIABLE = "{{entityId}}";
+    public static final String CLICK_ID_TEST = "click-id-test";
 
     public static final String ENTITY_ID_VARIABLE(String appended) {
         return "{{entityId@" + appended + "}}";

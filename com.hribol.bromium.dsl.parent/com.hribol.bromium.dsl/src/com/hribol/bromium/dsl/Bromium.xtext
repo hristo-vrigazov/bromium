@@ -37,7 +37,7 @@ WebDriverAction:
 	TypeTextInElementFoundByCssSelector |
 	ClickDataId |
 	SetVariableToTextOfElementWithCssSelector |
-	ClickIdCon
+	ClickId
 ;
 
 Precondition:
@@ -89,7 +89,7 @@ ConfirmAlert:
 ;
 
 ClickId:
-    click 'on' 'element' 'with' parameterNames+='id' parameterValues+=ParameterValue
+    'click' 'on' 'element' 'with' parameterNames+='id' parameterValues+=ParameterValue
 ;
 
 ParameterValue:
