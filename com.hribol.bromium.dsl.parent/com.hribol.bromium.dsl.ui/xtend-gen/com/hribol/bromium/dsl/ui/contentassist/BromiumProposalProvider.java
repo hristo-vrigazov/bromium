@@ -27,6 +27,7 @@ public class BromiumProposalProvider extends AbstractBromiumProposalProvider {
     acceptor.accept(this.createCompletionProposal("type text \'text\' in element with css selector \'selector\'", context));
     acceptor.accept(this.createCompletionProposal("load page \'subpath\'", context));
     acceptor.accept(this.createCompletionProposal("click on element with class \'class\' and text \'text\'", context));
+    acceptor.accept(this.createCompletionProposal("click on element with id \'id\'", context));
     super.complete_WebDriverAction(model, ruleCall, context, acceptor);
   }
   
