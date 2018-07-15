@@ -4,6 +4,13 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<artifactId>com.hribol.bromium.dsl.parent</artifactId>
 	<packaging>pom</packaging>
+
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>9</version>
+	</parent>
+
 	<licenses>
 		<license>
 			<name>MIT License</name>
