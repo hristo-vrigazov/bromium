@@ -39,7 +39,7 @@ public class GetHtmlFromCurrentHostPredicate implements Predicate<HttpRequest> {
                 return false;
             }
             boolean expectsHtmlContent = acceptHeader.contains(Constants.HTML);
-            boolean isFromCurrentBaseUrl = httpRequest.getUri().contains(baseURI.getHost());
+            boolean isFromCurrentBaseUrl = httpRequest.getUri().startsWith("/") || httpRequest.getUri().contains(baseURI.getHost());
             return expectsHtmlContent && isFromCurrentBaseUrl && methodIsGet;
         } catch (Exception e) {
             logger.error("Exception while checking predicate", e);

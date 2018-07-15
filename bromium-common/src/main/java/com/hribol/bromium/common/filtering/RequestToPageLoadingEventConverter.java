@@ -40,7 +40,7 @@ public class RequestToPageLoadingEventConverter implements HttpRequestToTestCase
         String requestUri = httpRequest.getUri();
         Path requestUriPath = Paths.get(requestUri);
 
-        if (!requestUri.startsWith(baseUrl)) {
+        if (!((requestUri.startsWith(baseUrl)) || requestUri.startsWith("/"))) {
             throw new IllegalArgumentException("I am not responsible for this request URL: " + requestUri);
         }
 
@@ -59,7 +59,8 @@ public class RequestToPageLoadingEventConverter implements HttpRequestToTestCase
             // and the current url matches, then we have found the action
             if (!urlParameterConfiguration.isExposed()) {
                 Path expectedPath = Paths.get(baseUrl, urlParameterConfiguration.getValue());
-                if (expectedPath.equals(requestUriPath)) {
+                Path relativeExpectedPath = Paths.get(urlParameterConfiguration.getValue());
+                if (expectedPath.equals(requestUriPath) || relativeExpectedPath.equals(requestUriPath)) {
                     return Optional.of(ImmutableMap.of(EVENT, applicationActionConfiguration.getName()));
                 }
             } else {
