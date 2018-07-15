@@ -87,8 +87,11 @@ public class TestCaseStepToApplicationActionConverter {
             }
         }
 
-        WebDriverAction webDriverAction = webDriverActionFactory.create(webdriverActionType, parameters,
-                step, expectHttpRequest);
+        WebDriverAction webDriverAction = webDriverActionFactory.create(
+                webdriverActionType,
+                parameters,
+                step,
+                expectHttpRequest);
         return Optional.of(webDriverAction);
     }
 
