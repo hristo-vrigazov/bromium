@@ -1,3 +1,5 @@
 openMainPage: Open main page 
 openMainPage: Open main page 
-openMainPage: Open main page 
+clickCreateDynamicButton: Click 'Create element in 2 seconds' button 
+clickLateCreationButton: Click on late creation button 
+clickDestroyDynamic: Click on 'Destroy element' button 

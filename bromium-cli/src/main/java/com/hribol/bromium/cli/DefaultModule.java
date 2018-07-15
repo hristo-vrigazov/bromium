@@ -115,6 +115,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.service.DriverService;
@@ -758,6 +759,15 @@ public class DefaultModule extends AbstractModule {
     public DesiredCapabilities createDesiredCapabilities(Proxy proxy) {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(CapabilityType.PROXY, proxy);
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--test-type");
+        options.addArguments("--start-maximized");
+        options.addArguments("--disable-web-security");
+        options.addArguments("--allow-file-access-from-files");
+        options.addArguments("--allow-running-insecure-content");
+        options.addArguments("--allow-cross-origin-auth-prompt");
+        options.addArguments("--allow-file-access");
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         return capabilities;
     }
 

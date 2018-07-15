@@ -9,6 +9,7 @@ import org.openqa.selenium.remote.service.DriverService;
 public class ChromeDriverServiceSupplier extends DriverServiceSupplierBase {
     @Override
     protected DriverService.Builder getBuilder() {
-        return new ChromeDriverService.Builder();
+        return new ChromeDriverService
+                .Builder();
     }
 }
