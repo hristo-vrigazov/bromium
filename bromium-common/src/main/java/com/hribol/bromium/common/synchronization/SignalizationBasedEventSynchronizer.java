@@ -44,20 +44,22 @@ public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
             return;
         }
 
-        lock.lock();
+        try {
+            lock.lock();
 
-        Condition condition = lock.newCondition();
-        eventConditionMap.put(synchronizationEvent, condition);
+            Condition condition = lock.newCondition();
+            eventConditionMap.put(synchronizationEvent, condition);
 
-        logger.debug("When calling await " + synchronizationEvent.isSatisfied());
-        boolean timedOut = !condition.await(timeoutInSeconds, TimeUnit.SECONDS);
+            logger.debug("When calling await " + synchronizationEvent.isSatisfied());
+            boolean timedOut = !condition.await(timeoutInSeconds, TimeUnit.SECONDS);
 
-        lock.unlock();
-
-        if (timedOut) {
-            logger.debug("After timeout " + synchronizationEvent.isSatisfied());
-            logger.error("Condition {} timed out! ", synchronizationEvent.getName());
-            throw new TimeoutException("The synchronization event " + synchronizationEvent.getName() + " was not satisfied in the specified time");
+            if (timedOut) {
+                logger.debug("After timeout " + synchronizationEvent.isSatisfied());
+                logger.error("Condition {} timed out! ", synchronizationEvent.getName());
+                throw new TimeoutException("The synchronization event " + synchronizationEvent.getName() + " was not satisfied in the specified time");
+            }
+        } finally {
+            lock.unlock();
         }
 
     }
@@ -68,14 +70,15 @@ public class SignalizationBasedEventSynchronizer implements EventSynchronizer {
     @Override
     public void signalizeEvent(SynchronizationEvent synchronizationEvent) {
         try {
+            lock.lock();
             if (eventConditionMap.containsKey(synchronizationEvent)) {
-                lock.lock();
                 eventConditionMap.get(synchronizationEvent).signal();
                 eventConditionMap.remove(synchronizationEvent);
-                lock.unlock();
             }
         } catch (Exception e) {
             logger.error("Exception while trying to signalize event " + synchronizationEvent.getName(), e);
+        } finally {
+            lock.unlock();
         }
     }
 
