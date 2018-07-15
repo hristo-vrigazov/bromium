@@ -40,14 +40,14 @@
 	</properties>
 	<modules>
 		<module>com.hribol.bromium.dsl</module>
-		<module>com.hribol.bromium.dsl.ide</module>
-		<module>com.hribol.bromium.dsl.ui</module>
-		<module>com.hribol.bromium.dsl.web</module>
-		<module>com.hribol.bromium.dsl.target</module>
-		<module>com.hribol.bromium.dsl.feature</module>
-		<module>com.hribol.bromium.dsl.repository</module>
-		<module>com.hribol.bromium.dsl.tests</module>
-		<module>com.hribol.bromium.dsl.ui.tests</module>
+		<!--<module>com.hribol.bromium.dsl.ide</module>-->
+		<!--<module>com.hribol.bromium.dsl.ui</module>-->
+		<!--<module>com.hribol.bromium.dsl.web</module>-->
+		<!--<module>com.hribol.bromium.dsl.target</module>-->
+		<!--<module>com.hribol.bromium.dsl.feature</module>-->
+		<!--<module>com.hribol.bromium.dsl.repository</module>-->
+		<!--<module>com.hribol.bromium.dsl.tests</module>-->
+		<!--<module>com.hribol.bromium.dsl.ui.tests</module>-->
 	</modules>
 	<build>
 		<plugins>
