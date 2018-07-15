@@ -85,7 +85,7 @@ public class SignalizationBasedEventSynchronizerTest {
 
         signalizationBasedEventSynchronizer.signalizeEvent(synchronizationEvent);
 
-        verify(lock, never()).lock();
+        verify(lock).unlock();
     }
 
     @Test
