@@ -24,8 +24,11 @@ import java.util.ArrayList;
  *     <li>Add a custom completion rule in BromiumProposalProvider in the DSL project</li>
  * </ul>
  *
- * If the action is predefined, manually add its name to {@link com.hribol.bromium.common.generation.record.BaseRecorderFunctionFactory}
- * or {@link com.hribol.bromium.common.generation.replay.BaseReplayFunctionFactory} or both.
+ * Register in factories
+ * <ul>
+ *     <li>{@link com.hribol.bromium.common.generation.record.BaseRecorderFunctionFactory}</li>
+ *     <li>{@link com.hribol.bromium.common.generation.replay.BaseReplayFunctionFactory}</li>
+ * </ul>
  *
  * For integration tests:
  * <ul>
