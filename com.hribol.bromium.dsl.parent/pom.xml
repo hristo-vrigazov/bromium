@@ -40,14 +40,14 @@
 	</properties>
 	<modules>
 		<module>com.hribol.bromium.dsl</module>
-		<!--<module>com.hribol.bromium.dsl.ide</module>-->
-		<!--<module>com.hribol.bromium.dsl.ui</module>-->
-		<!--<module>com.hribol.bromium.dsl.web</module>-->
-		<!--<module>com.hribol.bromium.dsl.target</module>-->
-		<!--<module>com.hribol.bromium.dsl.feature</module>-->
-		<!--<module>com.hribol.bromium.dsl.repository</module>-->
-		<!--<module>com.hribol.bromium.dsl.tests</module>-->
-		<!--<module>com.hribol.bromium.dsl.ui.tests</module>-->
+		<module>com.hribol.bromium.dsl.ide</module>
+		<module>com.hribol.bromium.dsl.ui</module>
+		<module>com.hribol.bromium.dsl.web</module>
+		<module>com.hribol.bromium.dsl.target</module>
+		<module>com.hribol.bromium.dsl.feature</module>
+		<module>com.hribol.bromium.dsl.repository</module>
+		<module>com.hribol.bromium.dsl.tests</module>
+		<module>com.hribol.bromium.dsl.ui.tests</module>
 	</modules>
 	<build>
 		<plugins>
@@ -280,6 +280,20 @@
 					<configuration>
 						<compilerArgument>-err:-forbidden</compilerArgument>
 						<useProjectSettings>false</useProjectSettings>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>1.6</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5.3</version>
+					<configuration>
+						<localCheckout>true</localCheckout>
+						<pushChanges>false</pushChanges>
 					</configuration>
 				</plugin>
 			</plugins>
