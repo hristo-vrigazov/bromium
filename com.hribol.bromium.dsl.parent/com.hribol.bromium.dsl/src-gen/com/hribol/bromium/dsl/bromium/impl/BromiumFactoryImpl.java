@@ -84,6 +84,7 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
       case BromiumPackage.CONFIRM_ALERT: return createConfirmAlert();
       case BromiumPackage.CLICK_ID: return createClickId();
       case BromiumPackage.CLICK_NAME: return createClickName();
+      case BromiumPackage.SELECT_VALUE: return createSelectValue();
       case BromiumPackage.PARAMETER_VALUE: return createParameterValue();
       case BromiumPackage.EXPOSED_PARAMETER: return createExposedParameter();
       case BromiumPackage.THREE_DOTTED_VERSION: return createThreeDottedVersion();
@@ -299,6 +300,17 @@ public class BromiumFactoryImpl extends EFactoryImpl implements BromiumFactory
   {
     ClickNameImpl clickName = new ClickNameImpl();
     return clickName;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SelectValue createSelectValue()
+  {
+    SelectValueImpl selectValue = new SelectValueImpl();
+    return selectValue;
   }
 
   /**

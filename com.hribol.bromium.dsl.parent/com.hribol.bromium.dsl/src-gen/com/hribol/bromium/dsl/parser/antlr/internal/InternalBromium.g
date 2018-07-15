@@ -514,6 +514,15 @@ ruleWebDriverAction returns [EObject current=null]
 			$current = $this_ClickName_7.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getWebDriverActionAccess().getSelectValueParserRuleCall_8());
+		}
+		this_SelectValue_8=ruleSelectValue
+		{
+			$current = $this_SelectValue_8.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 
@@ -1547,6 +1556,111 @@ ruleClickName returns [EObject current=null]
 						$current,
 						"parameterValues",
 						lv_parameterValues_5_0,
+						"com.hribol.bromium.dsl.Bromium.ParameterValue");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleSelectValue
+entryRuleSelectValue returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getSelectValueRule()); }
+	iv_ruleSelectValue=ruleSelectValue
+	{ $current=$iv_ruleSelectValue.current; }
+	EOF;
+
+// Rule SelectValue
+ruleSelectValue returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='select'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getSelectValueAccess().getSelectKeyword_0());
+		}
+		(
+			(
+				lv_parameterNames_1_0='value'
+				{
+					newLeafNode(lv_parameterNames_1_0, grammarAccess.getSelectValueAccess().getParameterNamesValueKeyword_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getSelectValueRule());
+					}
+					addWithLastConsumed($current, "parameterNames", lv_parameterNames_1_0, "value");
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getSelectValueAccess().getParameterValuesParameterValueParserRuleCall_2_0());
+				}
+				lv_parameterValues_2_0=ruleParameterValue
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getSelectValueRule());
+					}
+					add(
+						$current,
+						"parameterValues",
+						lv_parameterValues_2_0,
+						"com.hribol.bromium.dsl.Bromium.ParameterValue");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_3='in'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getSelectValueAccess().getInKeyword_3());
+		}
+		otherlv_4='element'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getSelectValueAccess().getElementKeyword_4());
+		}
+		otherlv_5='with'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getSelectValueAccess().getWithKeyword_5());
+		}
+		otherlv_6='css'
+		{
+			newLeafNode(otherlv_6, grammarAccess.getSelectValueAccess().getCssKeyword_6());
+		}
+		(
+			(
+				lv_parameterNames_7_0='selector'
+				{
+					newLeafNode(lv_parameterNames_7_0, grammarAccess.getSelectValueAccess().getParameterNamesSelectorKeyword_7_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getSelectValueRule());
+					}
+					addWithLastConsumed($current, "parameterNames", lv_parameterNames_7_0, "selector");
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getSelectValueAccess().getParameterValuesParameterValueParserRuleCall_8_0());
+				}
+				lv_parameterValues_8_0=ruleParameterValue
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getSelectValueRule());
+					}
+					add(
+						$current,
+						"parameterValues",
+						lv_parameterValues_8_0,
 						"com.hribol.bromium.dsl.Bromium.ParameterValue");
 					afterParserOrEnumRuleCall();
 				}

@@ -28,6 +28,7 @@ class BromiumProposalProvider extends AbstractBromiumProposalProvider {
         acceptor.accept(createCompletionProposal("set variable 'variable' to the text of element with css selector 'selector'", context));
         acceptor.accept(createCompletionProposal("click on element with id 'id'", context));
         acceptor.accept(createCompletionProposal("click on element with name 'name'", context));
+        acceptor.accept(createCompletionProposal("select value 'value' in element with css selector 'selector'", context));
 		super.complete_WebDriverAction(model, ruleCall, context, acceptor);
 	}
 	

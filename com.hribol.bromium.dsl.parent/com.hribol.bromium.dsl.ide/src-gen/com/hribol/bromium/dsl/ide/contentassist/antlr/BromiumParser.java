@@ -53,6 +53,7 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getConfirmAlertAccess().getGroup(), "rule__ConfirmAlert__Group__0");
 					put(grammarAccess.getClickIdAccess().getGroup(), "rule__ClickId__Group__0");
 					put(grammarAccess.getClickNameAccess().getGroup(), "rule__ClickName__Group__0");
+					put(grammarAccess.getSelectValueAccess().getGroup(), "rule__SelectValue__Group__0");
 					put(grammarAccess.getThreeDottedVersionAccess().getGroup(), "rule__ThreeDottedVersion__Group__0");
 					put(grammarAccess.getModelAccess().getNameAssignment_1(), "rule__Model__NameAssignment_1");
 					put(grammarAccess.getModelAccess().getVersionAssignment_3(), "rule__Model__VersionAssignment_3");
@@ -99,6 +100,10 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getClickIdAccess().getParameterValuesAssignment_5(), "rule__ClickId__ParameterValuesAssignment_5");
 					put(grammarAccess.getClickNameAccess().getParameterNamesAssignment_4(), "rule__ClickName__ParameterNamesAssignment_4");
 					put(grammarAccess.getClickNameAccess().getParameterValuesAssignment_5(), "rule__ClickName__ParameterValuesAssignment_5");
+					put(grammarAccess.getSelectValueAccess().getParameterNamesAssignment_1(), "rule__SelectValue__ParameterNamesAssignment_1");
+					put(grammarAccess.getSelectValueAccess().getParameterValuesAssignment_2(), "rule__SelectValue__ParameterValuesAssignment_2");
+					put(grammarAccess.getSelectValueAccess().getParameterNamesAssignment_7(), "rule__SelectValue__ParameterNamesAssignment_7");
+					put(grammarAccess.getSelectValueAccess().getParameterValuesAssignment_8(), "rule__SelectValue__ParameterValuesAssignment_8");
 					put(grammarAccess.getParameterValueAccess().getContentAssignment_0(), "rule__ParameterValue__ContentAssignment_0");
 					put(grammarAccess.getParameterValueAccess().getExposedParameterAssignment_1(), "rule__ParameterValue__ExposedParameterAssignment_1");
 					put(grammarAccess.getExposedParameterAccess().getNameAssignment(), "rule__ExposedParameter__NameAssignment");

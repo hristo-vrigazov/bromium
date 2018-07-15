@@ -237,14 +237,15 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSetVariableToTextOfElementWithCssSelectorParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		private final RuleCall cClickIdParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		private final RuleCall cClickNameParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
+		private final RuleCall cSelectValueParserRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
 		
 		//WebDriverAction:
 		//	ClickCssSelector | ClickClassByText | PageLoad | TypeTextInElementFoundByCssSelector | ClickDataId |
-		//	SetVariableToTextOfElementWithCssSelector | ClickId | ClickName;
+		//	SetVariableToTextOfElementWithCssSelector | ClickId | ClickName | SelectValue;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ClickCssSelector | ClickClassByText | PageLoad | TypeTextInElementFoundByCssSelector | ClickDataId |
-		//SetVariableToTextOfElementWithCssSelector | ClickId | ClickName
+		//SetVariableToTextOfElementWithCssSelector | ClickId | ClickName | SelectValue
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ClickCssSelector
@@ -270,6 +271,9 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ClickName
 		public RuleCall getClickNameParserRuleCall_7() { return cClickNameParserRuleCall_7; }
+		
+		//SelectValue
+		public RuleCall getSelectValueParserRuleCall_8() { return cSelectValueParserRuleCall_8; }
 	}
 	public class PreconditionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.Precondition");
@@ -926,6 +930,71 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		//ParameterValue
 		public RuleCall getParameterValuesParameterValueParserRuleCall_5_0() { return cParameterValuesParameterValueParserRuleCall_5_0; }
 	}
+	public class SelectValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.SelectValue");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cSelectKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cParameterNamesAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cParameterNamesValueKeyword_1_0 = (Keyword)cParameterNamesAssignment_1.eContents().get(0);
+		private final Assignment cParameterValuesAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cParameterValuesParameterValueParserRuleCall_2_0 = (RuleCall)cParameterValuesAssignment_2.eContents().get(0);
+		private final Keyword cInKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cElementKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cWithKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Keyword cCssKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cParameterNamesAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final Keyword cParameterNamesSelectorKeyword_7_0 = (Keyword)cParameterNamesAssignment_7.eContents().get(0);
+		private final Assignment cParameterValuesAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cParameterValuesParameterValueParserRuleCall_8_0 = (RuleCall)cParameterValuesAssignment_8.eContents().get(0);
+		
+		//SelectValue:
+		//	'select' parameterNames+='value' parameterValues+=ParameterValue 'in' 'element' 'with' 'css'
+		//	parameterNames+='selector' parameterValues+=ParameterValue;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'select' parameterNames+='value' parameterValues+=ParameterValue 'in' 'element' 'with' 'css' parameterNames+='selector'
+		//parameterValues+=ParameterValue
+		public Group getGroup() { return cGroup; }
+		
+		//'select'
+		public Keyword getSelectKeyword_0() { return cSelectKeyword_0; }
+		
+		//parameterNames+='value'
+		public Assignment getParameterNamesAssignment_1() { return cParameterNamesAssignment_1; }
+		
+		//'value'
+		public Keyword getParameterNamesValueKeyword_1_0() { return cParameterNamesValueKeyword_1_0; }
+		
+		//parameterValues+=ParameterValue
+		public Assignment getParameterValuesAssignment_2() { return cParameterValuesAssignment_2; }
+		
+		//ParameterValue
+		public RuleCall getParameterValuesParameterValueParserRuleCall_2_0() { return cParameterValuesParameterValueParserRuleCall_2_0; }
+		
+		//'in'
+		public Keyword getInKeyword_3() { return cInKeyword_3; }
+		
+		//'element'
+		public Keyword getElementKeyword_4() { return cElementKeyword_4; }
+		
+		//'with'
+		public Keyword getWithKeyword_5() { return cWithKeyword_5; }
+		
+		//'css'
+		public Keyword getCssKeyword_6() { return cCssKeyword_6; }
+		
+		//parameterNames+='selector'
+		public Assignment getParameterNamesAssignment_7() { return cParameterNamesAssignment_7; }
+		
+		//'selector'
+		public Keyword getParameterNamesSelectorKeyword_7_0() { return cParameterNamesSelectorKeyword_7_0; }
+		
+		//parameterValues+=ParameterValue
+		public Assignment getParameterValuesAssignment_8() { return cParameterValuesAssignment_8; }
+		
+		//ParameterValue
+		public RuleCall getParameterValuesParameterValueParserRuleCall_8_0() { return cParameterValuesParameterValueParserRuleCall_8_0; }
+	}
 	public class ParameterValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "com.hribol.bromium.dsl.Bromium.ParameterValue");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -1048,6 +1117,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	private final ConfirmAlertElements pConfirmAlert;
 	private final ClickIdElements pClickId;
 	private final ClickNameElements pClickName;
+	private final SelectValueElements pSelectValue;
 	private final ParameterValueElements pParameterValue;
 	private final ExposedParameterElements pExposedParameter;
 	private final VersionElements pVersion;
@@ -1081,6 +1151,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 		this.pConfirmAlert = new ConfirmAlertElements();
 		this.pClickId = new ClickIdElements();
 		this.pClickName = new ClickNameElements();
+		this.pSelectValue = new SelectValueElements();
 		this.pParameterValue = new ParameterValueElements();
 		this.pExposedParameter = new ExposedParameterElements();
 		this.pVersion = new VersionElements();
@@ -1165,7 +1236,7 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//WebDriverAction:
 	//	ClickCssSelector | ClickClassByText | PageLoad | TypeTextInElementFoundByCssSelector | ClickDataId |
-	//	SetVariableToTextOfElementWithCssSelector | ClickId | ClickName;
+	//	SetVariableToTextOfElementWithCssSelector | ClickId | ClickName | SelectValue;
 	public WebDriverActionElements getWebDriverActionAccess() {
 		return pWebDriverAction;
 	}
@@ -1321,6 +1392,17 @@ public class BromiumGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getClickNameRule() {
 		return getClickNameAccess().getRule();
+	}
+	
+	//SelectValue:
+	//	'select' parameterNames+='value' parameterValues+=ParameterValue 'in' 'element' 'with' 'css'
+	//	parameterNames+='selector' parameterValues+=ParameterValue;
+	public SelectValueElements getSelectValueAccess() {
+		return pSelectValue;
+	}
+	
+	public ParserRule getSelectValueRule() {
+		return getSelectValueAccess().getRule();
 	}
 	
 	//ParameterValue:

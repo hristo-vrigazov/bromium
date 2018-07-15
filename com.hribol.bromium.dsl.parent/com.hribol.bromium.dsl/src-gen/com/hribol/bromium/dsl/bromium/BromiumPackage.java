@@ -788,6 +788,43 @@ public interface BromiumPackage extends EPackage
   int CLICK_NAME_FEATURE_COUNT = WEB_DRIVER_ACTION_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.SelectValueImpl <em>Select Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see com.hribol.bromium.dsl.bromium.impl.SelectValueImpl
+   * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getSelectValue()
+   * @generated
+   */
+  int SELECT_VALUE = 19;
+
+  /**
+   * The feature id for the '<em><b>Parameter Names</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SELECT_VALUE__PARAMETER_NAMES = WEB_DRIVER_ACTION__PARAMETER_NAMES;
+
+  /**
+   * The feature id for the '<em><b>Parameter Values</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SELECT_VALUE__PARAMETER_VALUES = WEB_DRIVER_ACTION__PARAMETER_VALUES;
+
+  /**
+   * The number of structural features of the '<em>Select Value</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SELECT_VALUE_FEATURE_COUNT = WEB_DRIVER_ACTION_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link com.hribol.bromium.dsl.bromium.impl.ParameterValueImpl <em>Parameter Value</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -795,7 +832,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getParameterValue()
    * @generated
    */
-  int PARAMETER_VALUE = 19;
+  int PARAMETER_VALUE = 20;
 
   /**
    * The feature id for the '<em><b>Content</b></em>' attribute.
@@ -832,7 +869,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getExposedParameter()
    * @generated
    */
-  int EXPOSED_PARAMETER = 20;
+  int EXPOSED_PARAMETER = 21;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -860,7 +897,7 @@ public interface BromiumPackage extends EPackage
    * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getThreeDottedVersion()
    * @generated
    */
-  int THREE_DOTTED_VERSION = 21;
+  int THREE_DOTTED_VERSION = 22;
 
   /**
    * The feature id for the '<em><b>Big</b></em>' attribute.
@@ -1297,6 +1334,16 @@ public interface BromiumPackage extends EPackage
    * @generated
    */
   EClass getClickName();
+
+  /**
+   * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.SelectValue <em>Select Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Select Value</em>'.
+   * @see com.hribol.bromium.dsl.bromium.SelectValue
+   * @generated
+   */
+  EClass getSelectValue();
 
   /**
    * Returns the meta object for class '{@link com.hribol.bromium.dsl.bromium.ParameterValue <em>Parameter Value</em>}'.
@@ -1758,6 +1805,16 @@ public interface BromiumPackage extends EPackage
      * @generated
      */
     EClass CLICK_NAME = eINSTANCE.getClickName();
+
+    /**
+     * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.SelectValueImpl <em>Select Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see com.hribol.bromium.dsl.bromium.impl.SelectValueImpl
+     * @see com.hribol.bromium.dsl.bromium.impl.BromiumPackageImpl#getSelectValue()
+     * @generated
+     */
+    EClass SELECT_VALUE = eINSTANCE.getSelectValue();
 
     /**
      * The meta object literal for the '{@link com.hribol.bromium.dsl.bromium.impl.ParameterValueImpl <em>Parameter Value</em>}' class.

@@ -52,6 +52,7 @@
     <genClasses ecoreClass="Bromium.ecore#//ConfirmAlert"/>
     <genClasses ecoreClass="Bromium.ecore#//ClickId"/>
     <genClasses ecoreClass="Bromium.ecore#//ClickName"/>
+    <genClasses ecoreClass="Bromium.ecore#//SelectValue"/>
     <genClasses ecoreClass="Bromium.ecore#//ParameterValue">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//ParameterValue/content"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bromium.ecore#//ParameterValue/exposedParameter"/>

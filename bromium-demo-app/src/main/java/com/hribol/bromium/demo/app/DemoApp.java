@@ -40,7 +40,8 @@ public class DemoApp {
             "click-class-by-text.html",
             "set-variable-to-text-of-element-with-css-selector.html",
             "click-id.html",
-            "click-name.html"
+            "click-name.html",
+            "select-value.html"
     };
 
     private int port;

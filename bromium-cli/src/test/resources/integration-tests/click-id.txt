@@ -1,2 +1,2 @@
-loadPage: Load click-id.html page
+loadPage: Load select-value.html page
 clickClickIdTest: Click on click-id-test

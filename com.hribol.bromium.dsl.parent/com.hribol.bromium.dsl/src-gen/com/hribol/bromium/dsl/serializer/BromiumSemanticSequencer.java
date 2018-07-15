@@ -20,6 +20,7 @@ import com.hribol.bromium.dsl.bromium.PageLoad;
 import com.hribol.bromium.dsl.bromium.ParameterValue;
 import com.hribol.bromium.dsl.bromium.Postcondition;
 import com.hribol.bromium.dsl.bromium.Precondition;
+import com.hribol.bromium.dsl.bromium.SelectValue;
 import com.hribol.bromium.dsl.bromium.SetVariableToTextOfElementWithCssSelector;
 import com.hribol.bromium.dsl.bromium.SyntaxDefinition;
 import com.hribol.bromium.dsl.bromium.TextOfElementWithCssSelectorToBe;
@@ -95,6 +96,9 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 				return; 
 			case BromiumPackage.PRECONDITION:
 				sequence_Precondition(context, (Precondition) semanticObject); 
+				return; 
+			case BromiumPackage.SELECT_VALUE:
+				sequence_SelectValue(context, (SelectValue) semanticObject); 
 				return; 
 			case BromiumPackage.SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR:
 				sequence_SetVariableToTextOfElementWithCssSelector(context, (SetVariableToTextOfElementWithCssSelector) semanticObject); 
@@ -326,6 +330,19 @@ public class BromiumSemanticSequencer extends AbstractDelegatingSemanticSequence
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getPreconditionAccess().getActionWebDriverActionConditionParserRuleCall_1_0(), semanticObject.getAction());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     WebDriverAction returns SelectValue
+	 *     SelectValue returns SelectValue
+	 *
+	 * Constraint:
+	 *     (parameterNames+='value' parameterValues+=ParameterValue parameterNames+='selector' parameterValues+=ParameterValue)
+	 */
+	protected void sequence_SelectValue(ISerializationContext context, SelectValue semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

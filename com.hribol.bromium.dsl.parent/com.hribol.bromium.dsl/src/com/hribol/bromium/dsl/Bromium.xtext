@@ -38,7 +38,8 @@ WebDriverAction:
 	ClickDataId |
 	SetVariableToTextOfElementWithCssSelector |
 	ClickId |
-	ClickName
+	ClickName |
+	SelectValue
 ;
 
 Precondition:
@@ -95,6 +96,11 @@ ClickId:
 
 ClickName:
     'click' 'on' 'element' 'with' parameterNames+='name' parameterValues+=ParameterValue
+;
+
+SelectValue:
+    'select' parameterNames+='value' parameterValues+=ParameterValue 'in' 'element' 'with' 'css'
+    parameterNames += 'selector' parameterValues+=ParameterValue
 ;
 
 ParameterValue:

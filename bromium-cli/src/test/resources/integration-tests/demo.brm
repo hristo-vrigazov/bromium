@@ -118,4 +118,8 @@ actions {
     id clickClickNameTest
     syntax 'Click on click-name-test'
     click on element with name 'click-name-test'
+
+    id selectValue
+    syntax 'Select value' optionValue
+    select value optionValue in element with css selector '#select-element'
 }

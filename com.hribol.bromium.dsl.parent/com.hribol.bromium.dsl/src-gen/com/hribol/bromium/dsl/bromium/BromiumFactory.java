@@ -195,6 +195,15 @@ public interface BromiumFactory extends EFactory
   ClickName createClickName();
 
   /**
+   * Returns a new object of class '<em>Select Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Select Value</em>'.
+   * @generated
+   */
+  SelectValue createSelectValue();
+
+  /**
    * Returns a new object of class '<em>Parameter Value</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

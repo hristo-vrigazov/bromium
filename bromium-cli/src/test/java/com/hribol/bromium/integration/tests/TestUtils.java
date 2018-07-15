@@ -35,6 +35,7 @@ public class TestUtils {
         public static final String CLICK_REMOVE_INITIAL = "clickRemoveInitial";
         public static final String CLICK_CLICK_ID_TEST = "clickClickIdTest";
         public static final String CLICK_CLICK_NAME_TEST = "clickClickNameTest";
+        public static final String SELECT_VALUE_ACTION = "selectValue";
 
     }
 
@@ -45,7 +46,7 @@ public class TestUtils {
         public static final String SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_DEMO_PAGE = "set-variable-to-text-of-element-with-css-selector.html";
         public static final String CLICK_ID_DEMO_PAGE = "click-id.html";
         public static final String CLICK_NAME_DEMO_PAGE = "click-name.html";
-
+        public static final String SELECT_VALUE_DEMO_PAGE = "select-value.html";
     }
 
     public static class Resources {
@@ -60,6 +61,7 @@ public class TestUtils {
         public static final String SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR_TEST_CASE = "integration-tests/set-variable-to-text-of-element-with-css-selector.txt";
         public static final String CLICK_ID_TEST_CASE = "integration-tests/click-id.txt";
         public static final String CLICK_NAME_TEST_CASE = "integration-tests/click-name.txt";
+        public static final String SELECT_VALUE_TEST_CASE = "integration-tests/select-value.txt";
 
     }
 

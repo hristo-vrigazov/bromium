@@ -32,6 +32,7 @@ public class Constants {
     public final static String INDEX = "index";
     public final static String ID = "id";
     public final static String NAME = "name";
+    public final static String VALUE = "value";
 
 
 }

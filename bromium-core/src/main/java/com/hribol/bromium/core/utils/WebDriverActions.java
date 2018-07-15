@@ -16,5 +16,6 @@ public class WebDriverActions {
     public static final String SET_VARIABLE_TO_TEXT_OF_ELEMENT_WITH_CSS_SELECTOR = "SetVariableToTextOfElementWithCssSelector";
     public static final String CLICK_ID = "ClickId";
     public static final String CLICK_NAME = "ClickName";
+    public static final String SELECT_VALUE = "SelectValue";
 
 }
