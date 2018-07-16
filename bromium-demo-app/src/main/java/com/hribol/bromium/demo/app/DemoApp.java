@@ -41,7 +41,8 @@ public class DemoApp {
             "set-variable-to-text-of-element-with-css-selector.html",
             "click-id.html",
             "click-name.html",
-            "select-value.html"
+            "select-value.html",
+            "click-id-scroll.html"
     };
 
     private int port;

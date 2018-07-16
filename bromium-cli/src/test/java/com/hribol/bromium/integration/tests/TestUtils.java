@@ -47,6 +47,8 @@ public class TestUtils {
         public static final String CLICK_ID_DEMO_PAGE = "click-id.html";
         public static final String CLICK_NAME_DEMO_PAGE = "click-name.html";
         public static final String SELECT_VALUE_DEMO_PAGE = "select-value.html";
+        public static final String CLICK_ID_SCROLL_DEMO_PAGE = "click-id-scroll.html";
+
     }
 
     public static class Resources {
