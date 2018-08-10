@@ -1,6 +1,7 @@
 package com.hribol.bromium.common.parsing.dsl.convert;
 
 import com.hribol.bromium.core.config.ContextProvider;
+import com.hribol.bromium.core.config.ParameterValues;
 import com.hribol.bromium.dsl.bromium.ActionContext;
 import com.hribol.bromium.dsl.bromium.ClassByText;
 import com.hribol.bromium.dsl.bromium.CssSelector;
@@ -8,28 +9,49 @@ import com.hribol.bromium.dsl.bromium.Locator;
 import com.hribol.bromium.dsl.bromium.RowIndex;
 import com.hribol.bromium.dsl.bromium.RowLocator;
 import com.hribol.bromium.dsl.bromium.RowSelector;
+import com.hribol.bromium.dsl.bromium.TableActionContext;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotSelectableException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class ASTContextProviderConverter implements ASTNodeConverter<ActionContext, ContextProvider> {
 
     @Override
     public ContextProvider convert(ActionContext actionContext) {
-        //TODO: implement
         ContextProvider contextProvider = new ContextProvider();
-        contextProvider.setFunction(parameterValues -> webDriver -> webDriver);
+        contextProvider.setFunction(parameterValues -> searchContext -> getActionContext(parameterValues, actionContext).apply(searchContext));
         return contextProvider;
     }
 
-    private Function<SearchContext, WebElement> getTableActionContext(Function<SearchContext, WebElement> tableLocator,
-                                                                      Function<SearchContext, List<WebElement>> rowsLocator,
-                                                                      Function<List<WebElement>, WebElement> rowSelector) {
+    private Function<SearchContext, WebElement> getActionContext(ParameterValues parameterValues, ActionContext actionContext) {
+        return searchContext -> getActionContextMultiple(parameterValues, actionContext).apply(searchContext).get(0);
+    }
+
+    private Function<SearchContext, List<WebElement>> getActionContextMultiple(ParameterValues parameterValues, ActionContext actionContext) {
+        if (actionContext instanceof TableActionContext) {
+            return getTableActionContext(parameterValues, (TableActionContext) actionContext);
+        }
+
+        throw new IllegalArgumentException("Unrecognized rule: " + actionContext);
+    }
+
+    private Function<SearchContext, List<WebElement>> getTableActionContext(ParameterValues parameterValues,
+                                                                      TableActionContext tableActionContext) {
+        Function<SearchContext, WebElement> tableLocator = getLocator(parameterValues, tableActionContext.getTableLocator());
+        Function<List<WebElement>, List<WebElement>> rowSelector = getRowSelector(parameterValues, tableActionContext.getRowSelector());
+        Function<SearchContext, List<WebElement>> rowLocator = getLocatorMultiple(parameterValues, tableActionContext.getRowsLocator());
+        return compileTableActionContext(tableLocator, rowLocator, rowSelector);
+    }
+
+    private Function<SearchContext, List<WebElement>> compileTableActionContext(Function<SearchContext, WebElement> tableLocator,
+                                                                                Function<SearchContext, List<WebElement>> rowsLocator,
+                                                                                Function<List<WebElement>, List<WebElement>> rowSelector) {
         return initialSearchContext -> {
             WebElement webElement = tableLocator.apply(initialSearchContext);
             List<WebElement> rows = rowsLocator.apply(webElement);
@@ -37,51 +59,62 @@ public class ASTContextProviderConverter implements ASTNodeConverter<ActionConte
         };
     }
 
-    private Function<SearchContext, WebElement> getLocator(Locator locator) {
-        return null;
+    private Function<SearchContext, List<WebElement>> getLocatorMultiple(ParameterValues parameterValues, Locator locator) {
+        if (locator instanceof CssSelector) {
+            return getCssSelector(parameterValues, (CssSelector) locator);
+        } else if (locator instanceof ClassByText) {
+            return getClassByText(parameterValues, (ClassByText) locator);
+        } else if (locator instanceof ActionContext) {
+            return getActionContextMultiple(parameterValues, (ActionContext) locator);
+        }
+
+        throw new IllegalArgumentException("Unrecognized rule: " + locator);
     }
 
-    private Function<SearchContext, WebElement> getCssSelector(CssSelector cssSelector) {
-        return searchContext -> searchContext.findElement(By.cssSelector(cssSelector.getSelector().getContent()));
+    private Function<SearchContext, WebElement> getLocator(ParameterValues parameterValues, Locator locator) {
+        return searchContext -> getLocatorMultiple(parameterValues, locator).apply(searchContext).get(0);
     }
 
-    private Function<SearchContext, WebElement> getClassByText(ClassByText classByText) {
+    private Function<SearchContext, List<WebElement>> getCssSelector(ParameterValues parameterValues, CssSelector cssSelector) {
+        return searchContext -> searchContext.findElements(By.cssSelector(cssSelector.getSelector().getContent()));
+    }
+
+    private Function<SearchContext, List<WebElement>> getClassByText(ParameterValues parameterValues, ClassByText classByText) {
         String initialCollectorClass = classByText.getKlass().getContent();
-        //TODO: how to resolve exposed parameters?
-        String text = classByText.getText().getContent();
+        String text = parameterValues.get(classByText.getText().getExposedParameter().getName());
         return searchContext -> searchContext.findElements(By.className(initialCollectorClass))
                 .stream()
                 .filter(webElement -> elementTextIsEqualToAndIsDisplayed(text, webElement))
-                .findFirst()
-                .orElseThrow(() -> new ElementNotSelectableException("Element with class " + initialCollectorClass + " and text " + text + " was not found" ));
+                .collect(Collectors.toList());
     }
 
-    private Function<List<WebElement>, WebElement> getRowSelector(RowSelector rowSelector) {
+    private Function<List<WebElement>, List<WebElement>> getRowSelector(ParameterValues parameterValues, RowSelector rowSelector) {
         if (rowSelector instanceof RowLocator) {
-            return getRowLocator((RowLocator) rowSelector);
+            return getRowLocator(parameterValues, (RowLocator) rowSelector);
+        } else if (rowSelector instanceof RowIndex) {
+            return getRowIndex((RowIndex) rowSelector);
         }
 
-        return getRowIndex((RowIndex) rowSelector);
+        throw new IllegalArgumentException("Unrecognized rule: " + rowSelector);
     }
 
-    private Function<List<WebElement>, WebElement> getRowLocator(RowLocator rowLocator) {
-        return getRowLocator(getLocator(rowLocator.getRowLocator()));
+    private Function<List<WebElement>, List<WebElement>> getRowLocator(ParameterValues parameterValues, RowLocator rowLocator) {
+        return getRowLocator(getLocator(parameterValues, rowLocator.getRowLocator()));
     }
 
-    private Function<List<WebElement>, WebElement> getRowLocator(Function<SearchContext, WebElement> rowLocator) {
+    private Function<List<WebElement>, List<WebElement>> getRowLocator(Function<SearchContext, WebElement> rowLocator) {
         return webElements -> webElements
                 .stream()
                 .filter(webElement -> searchContextContains(webElement, rowLocator))
-                .findFirst()
-                .orElseThrow(() -> new IllegalStateException("Could not find element which contains"));
+                .collect(Collectors.toList());
     }
 
-    private Function<List<WebElement>, WebElement> getRowIndex(RowIndex rowIndex) {
+    private Function<List<WebElement>, List<WebElement>> getRowIndex(RowIndex rowIndex) {
         return getRowIndex(rowIndex.getIndex());
     }
 
-    private Function<List<WebElement>, WebElement> getRowIndex(int rowIndex) {
-        return webElements -> webElements.get(rowIndex);
+    private Function<List<WebElement>, List<WebElement>> getRowIndex(int rowIndex) {
+        return webElements -> Collections.singletonList(webElements.get(rowIndex));
     }
 
     private boolean searchContextContains(SearchContext searchContext,
