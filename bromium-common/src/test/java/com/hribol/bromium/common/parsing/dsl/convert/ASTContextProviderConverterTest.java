@@ -63,13 +63,14 @@ public class ASTContextProviderConverterTest {
     private void baseIndexCorrectlyConstructs(int index) {
         String tableCssSelector = ".entity-triggers-container";
         String rowsCssSelector = ".trigger-list-entry";
+        String indexAlias = "triggerNo";
 
         CssSelectorImpl tableLocator = new CssSelectorImpl(){};
         tableLocator.setSelector(hardcoded(tableCssSelector));
         CssSelectorImpl rowsLocator = new CssSelectorImpl(){};
         rowsLocator.setSelector(hardcoded(rowsCssSelector));
         RowIndexImpl rowSelector = new RowIndexImpl(){};
-        rowSelector.setIndex(index);
+        rowSelector.setIndex(exposed(indexAlias));
 
         TableActionContextImpl actionContext = new TableActionContextImpl(){};
         actionContext.setTableLocator(tableLocator);
@@ -77,6 +78,7 @@ public class ASTContextProviderConverterTest {
         actionContext.setRowSelector(rowSelector);
 
         ParameterValues parameterValues = new ParameterValues();
+        parameterValues.put(indexAlias, String.valueOf(index));
 
         WebElement rowOne = mock(WebElement.class);
         WebElement rowTwo = mock(WebElement.class);

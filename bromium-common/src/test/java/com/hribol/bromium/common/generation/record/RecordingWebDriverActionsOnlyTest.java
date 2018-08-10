@@ -23,14 +23,18 @@ public class RecordingWebDriverActionsOnlyTest {
         WebDriverActionConfiguration webDriverActionConfiguration = mock(WebDriverActionConfiguration.class);
         String eventName = "something";
         ApplicationActionConfiguration applicationActionConfiguration = mock(ApplicationActionConfiguration.class);
+        ContextProvider contextProvider = mock(ContextProvider.class);
+
         when(applicationActionConfiguration.getName()).thenReturn(eventName);
         when(applicationActionConfiguration.getWebDriverAction()).thenReturn(webDriverActionConfiguration);
+        when(applicationActionConfiguration.getContextProvider()).thenReturn(contextProvider);
         NameWebDriverActionConfiguration nameWebDriverActionConfiguration = mock(NameWebDriverActionConfiguration.class);
         JavascriptGenerator<NameWebDriverActionConfiguration> webDriverActionGenerator = mock(JavascriptGenerator.class);
         when(webDriverActionGenerator.generate(nameWebDriverActionConfiguration)).thenReturn(expected);
         NameWebDriverActionConfigurationSupplier nameWebDriverActionConfigurationSupplier = mock(NameWebDriverActionConfigurationSupplier.class);
-        ContextProvider contextProvider = mock(ContextProvider.class);
-        when(nameWebDriverActionConfigurationSupplier.get(eventName, webDriverActionConfiguration, contextProvider)).thenReturn(nameWebDriverActionConfiguration);
+
+        when(nameWebDriverActionConfigurationSupplier.get(eventName, webDriverActionConfiguration, contextProvider))
+                .thenReturn(nameWebDriverActionConfiguration);
 
         RecordingWebDriverActionsOnly recordingWebDriverActionsOnly =
                 new RecordingWebDriverActionsOnly(webDriverActionGenerator, nameWebDriverActionConfigurationSupplier);

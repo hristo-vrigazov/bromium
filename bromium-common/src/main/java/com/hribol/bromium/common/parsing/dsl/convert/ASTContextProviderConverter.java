@@ -25,7 +25,11 @@ public class ASTContextProviderConverter implements ASTNodeConverter<ActionConte
     @Override
     public ContextProvider convert(ActionContext actionContext) {
         ContextProvider contextProvider = new ContextProvider();
-        contextProvider.setFunction(parameterValues -> searchContext -> getActionContext(parameterValues, actionContext).apply(searchContext));
+        contextProvider.setFunction(
+                actionContext == null ?
+                        parameterValues -> searchContext -> searchContext :
+                        parameterValues -> searchContext -> getActionContext(parameterValues, actionContext).apply(searchContext)
+        );
         return contextProvider;
     }
 
@@ -92,7 +96,7 @@ public class ASTContextProviderConverter implements ASTNodeConverter<ActionConte
         if (rowSelector instanceof RowLocator) {
             return getRowLocator(parameterValues, (RowLocator) rowSelector);
         } else if (rowSelector instanceof RowIndex) {
-            return getRowIndex((RowIndex) rowSelector);
+            return getRowIndex(parameterValues, (RowIndex) rowSelector);
         }
 
         throw new IllegalArgumentException("Unrecognized rule: " + rowSelector);
@@ -109,8 +113,10 @@ public class ASTContextProviderConverter implements ASTNodeConverter<ActionConte
                 .collect(Collectors.toList());
     }
 
-    private Function<List<WebElement>, List<WebElement>> getRowIndex(RowIndex rowIndex) {
-        return getRowIndex(rowIndex.getIndex());
+    private Function<List<WebElement>, List<WebElement>> getRowIndex(ParameterValues parameterValues, RowIndex rowIndex) {
+        //TODO: think about aliasing
+        String indexRaw = parameterValues.get(rowIndex.getIndex().getExposedParameter().getName());
+        return getRowIndex(Integer.parseInt(indexRaw));
     }
 
     private Function<List<WebElement>, List<WebElement>> getRowIndex(int rowIndex) {
