@@ -8,10 +8,13 @@ import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.execution.application.ApplicationAction;
 import com.hribol.bromium.replay.execution.factory.ActionCreationContext;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 
 import static com.hribol.bromium.core.utils.Constants.EVENT;
 import static com.hribol.bromium.core.utils.Constants.NOTHING;
@@ -45,25 +48,30 @@ public class TestCaseStepToApplicationActionConverter {
                                      Map<String, String> testCaseStep,
                                      int i) {
         WebDriverActionConfiguration conditionBeforeExecution = applicationActionConfiguration.getConditionBeforeExecution();
-        Optional<WebDriverAction> precondition = convertAction(conditionBeforeExecution, testCaseStep, i);
+        //TODO: precondition has hardcoded context
+        Optional<WebDriverAction> precondition = convertAction(conditionBeforeExecution, testCaseStep, i, webDriver -> webDriver);
         WebDriverActionConfiguration action = applicationActionConfiguration.getWebDriverAction();
         Boolean expectHttpRequest = applicationActionConfiguration.expectsHttpRequest();
-        Optional<WebDriverAction> webdriverAction = convertAction(action, testCaseStep, i, expectHttpRequest);
+        Function<WebDriver, SearchContext> contextProvider = applicationActionConfiguration.getContextProvider().getFunction();
+        Optional<WebDriverAction> webdriverAction = convertAction(action, testCaseStep, i, expectHttpRequest, contextProvider);
         WebDriverActionConfiguration conditionAfterExecution = applicationActionConfiguration.getConditionAfterExecution();
-        Optional<WebDriverAction> postCondition = convertAction(conditionAfterExecution, testCaseStep, i);
+        //TODO: postcondition has hardcoded context
+        Optional<WebDriverAction> postCondition = convertAction(conditionAfterExecution, testCaseStep, i, webDriver -> webDriver);
         return new ConvertedApplicationAction(precondition, webdriverAction, postCondition);
     }
 
     private Optional<WebDriverAction> convertAction(WebDriverActionConfiguration webDriverActionConfiguration,
                                                     Map<String, String> testCaseStep,
-                                                    int step) {
-        return convertAction(webDriverActionConfiguration, testCaseStep, step, false);
+                                                    int step,
+                                                    Function<WebDriver, SearchContext> contextProvider) {
+        return convertAction(webDriverActionConfiguration, testCaseStep, step, false, contextProvider);
     }
 
     private Optional<WebDriverAction> convertAction(WebDriverActionConfiguration webDriverActionConfiguration,
                                                     Map<String, String> testCaseStep,
                                                     int step,
-                                                    boolean expectHttpRequest) {
+                                                    boolean expectHttpRequest,
+                                                    Function<WebDriver, SearchContext> webDriverSearchContextFunction) {
         String webdriverActionType = webDriverActionConfiguration.getWebDriverActionType();
         if (webdriverActionType.equals(NOTHING)) {
             return Optional.empty();
@@ -90,7 +98,7 @@ public class TestCaseStepToApplicationActionConverter {
             }
         }
 
-        ActionCreationContext context = new ActionCreationContext(parameters, step, expectHttpRequest, webDriver -> webDriver);
+        ActionCreationContext context = new ActionCreationContext(parameters, step, expectHttpRequest, webDriverSearchContextFunction);
         WebDriverAction webDriverAction = webDriverActionFactory.create(webdriverActionType, context);
         return Optional.of(webDriverAction);
     }

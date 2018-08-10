@@ -72,7 +72,7 @@ public class ApplicationActionASTNodeConverterTest extends BaseDSLConfigurationC
         ApplicationActionASTNodeConverter converter = new ApplicationActionASTNodeConverter(
                 conditionToActionConverter,
                 actionToActionConverter,
-                syntaxDefinitionConverter);
+                syntaxDefinitionConverter, astContextProviderConverter);
         ApplicationActionConfiguration actionConfiguration = converter.convert(applicationAction);
 
         assertEquals(actionName, actionConfiguration.getName());

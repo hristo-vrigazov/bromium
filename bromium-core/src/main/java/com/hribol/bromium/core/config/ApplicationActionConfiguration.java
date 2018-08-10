@@ -1,9 +1,12 @@
 package com.hribol.bromium.core.config;
 
 import com.hribol.bromium.core.generation.GenerationInformation;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * A configuration of an action, which is usually contained
@@ -13,6 +16,7 @@ import java.util.List;
 public class ApplicationActionConfiguration implements GenerationInformation {
     private String name;
     private WebDriverActionConfiguration conditionBeforeExecution;
+    private ContextProvider contextProvider;
     private WebDriverActionConfiguration webDriverAction;
     private WebDriverActionConfiguration conditionAfterExecution;
     private boolean expectsHttpRequest;
@@ -124,4 +128,11 @@ public class ApplicationActionConfiguration implements GenerationInformation {
        syntaxDefinitionConfigurationList.add(syntaxDefinitionConfiguration);
     }
 
+    public ContextProvider getContextProvider() {
+        return contextProvider;
+    }
+
+    public void setContextProvider(ContextProvider contextProvider) {
+        this.contextProvider = contextProvider;
+    }
 }

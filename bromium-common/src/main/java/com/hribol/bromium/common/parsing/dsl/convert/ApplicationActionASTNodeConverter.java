@@ -2,6 +2,7 @@ package com.hribol.bromium.common.parsing.dsl.convert;
 
 import com.google.inject.Inject;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
+import com.hribol.bromium.core.config.ContextProvider;
 import com.hribol.bromium.core.config.SyntaxDefinitionConfiguration;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.dsl.bromium.ApplicationAction;
@@ -23,14 +24,17 @@ public class ApplicationActionASTNodeConverter implements ASTNodeConverter<Appli
     private ASTNodeConverter<WebDriverActionCondition, WebDriverActionConfiguration> conditionToActionConverter;
     private ASTNodeConverter<WebDriverAction, WebDriverActionConfiguration> actionToActionConverter;
     private ASTNodeConverter<SyntaxDefinition, SyntaxDefinitionConfiguration> syntaxDefinitionConverter;
+    private ASTContextProviderConverter astContextProviderConverter;
 
     @Inject
     public ApplicationActionASTNodeConverter(ASTNodeConverter<WebDriverActionCondition, WebDriverActionConfiguration> conditionToActionConverter,
                                              ASTNodeConverter<WebDriverAction, WebDriverActionConfiguration> actionToActionConverter,
-                                             ASTNodeConverter<SyntaxDefinition, SyntaxDefinitionConfiguration> syntaxDefinitionConverter) {
+                                             ASTNodeConverter<SyntaxDefinition, SyntaxDefinitionConfiguration> syntaxDefinitionConverter,
+                                             ASTContextProviderConverter astContextProviderConverter) {
         this.conditionToActionConverter = conditionToActionConverter;
         this.actionToActionConverter = actionToActionConverter;
         this.syntaxDefinitionConverter = syntaxDefinitionConverter;
+        this.astContextProviderConverter = astContextProviderConverter;
     }
 
 
@@ -55,6 +59,9 @@ public class ApplicationActionASTNodeConverter implements ASTNodeConverter<Appli
             applicationActionConfiguration.setConditionAfterExecution(conditionToActionConverter
                     .convert(applicationAction.getPostcondition().getAction()));
         }
+
+        ContextProvider contextProvider = astContextProviderConverter.convert(applicationAction.getActionContext());
+        applicationActionConfiguration.setContextProvider(contextProvider);
 
         List<SyntaxDefinitionConfiguration> syntaxDefinitions = applicationAction
                 .getSyntaxDefinitions()
