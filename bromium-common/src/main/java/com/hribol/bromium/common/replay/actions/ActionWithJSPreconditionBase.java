@@ -8,11 +8,13 @@ import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.actions.ActionWithJSPrecondition;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeoutException;
+import java.util.function.Function;
 
 /**
  * A base class for all actions that need a js condition to be satisfied before they can be executed.
@@ -22,6 +24,12 @@ import java.util.concurrent.TimeoutException;
 public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecondition, WebDriverAction {
 
     private static final Logger logger = LoggerFactory.getLogger(ActionWithJSPreconditionBase.class);
+
+    private Function<WebDriver, SearchContext> contextProvider;
+
+    protected ActionWithJSPreconditionBase(Function<WebDriver, SearchContext> contextProvider) {
+        this.contextProvider = contextProvider;
+    }
 
     @Override
     public void execute(WebDriver driver, ReplayingState replayingState, EventSynchronizer eventSynchronizer) {
@@ -34,15 +42,16 @@ public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecon
             throw new WebDriverActionExecutionException("Exception while awaiting JS precondition", e, new InstanceBasedAutomationResultBuilder());
         }
 
-        executeAfterJSPreconditionHasBeenSatisfied(driver, replayingState);
+        executeAfterJSPreconditionHasBeenSatisfied(driver, replayingState, contextProvider);
     }
 
     /**
      * The code to be executed after the condition was satisfied. The meat of the action
      * @param driver the driver instance
      * @param replayingState the current state of the replaying
+     * @param contextProvider
      */
-    public abstract void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState);
+    public abstract void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<WebDriver, SearchContext> contextProvider);
 
     @Override
     public String getName() {

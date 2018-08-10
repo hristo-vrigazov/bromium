@@ -14,6 +14,6 @@ import static com.hribol.bromium.core.utils.Constants.ID;
 public class ClickIdParser implements WebDriverActionParameterParser {
     @Override
     public WebDriverAction create(Map<String, String> parameters, int step, boolean expectHttpRequest, Function<WebDriver, SearchContext> contextProvider) {
-        return new ClickId(parameters.get(ID));
+        return new ClickId(parameters.get(ID), contextProvider);
     }
 }

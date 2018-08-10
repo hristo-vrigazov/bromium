@@ -8,9 +8,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeoutException;
+import java.util.function.Function;
 
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doThrow;
@@ -27,11 +29,13 @@ public class ActionWithJSPreconditionBaseTest {
     @Test
     public void lockCallsAWaitIfWaitingEventIsNotSatisfiedWhenSubmitted() throws InterruptedException, TimeoutException {
         String jsEvent = "jsEvent";
+        WebDriver driver = mock(WebDriver.class);
+        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> driver;
 
-        ActionWithJSPreconditionBase actionWithJSPreconditionBase = new ActionWithJSPreconditionBase() {
+        ActionWithJSPreconditionBase actionWithJSPreconditionBase = new ActionWithJSPreconditionBase(contextProvider) {
 
             @Override
-            public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState) {
+            public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<WebDriver, SearchContext> contextProvider) {
 
             }
 
@@ -51,7 +55,6 @@ public class ActionWithJSPreconditionBaseTest {
             }
         };
 
-        WebDriver driver = mock(WebDriver.class);
         EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
         ReplayingState replayingState = mock(ReplayingState.class);
         actionWithJSPreconditionBase.execute(driver, replayingState, eventSynchronizer);
@@ -62,11 +65,14 @@ public class ActionWithJSPreconditionBaseTest {
     @Test
     public void lockDoesWaitIfWaitingEventIsNotSatisfiedWhenSubmitted() throws InterruptedException, TimeoutException {
         String jsEvent = "jsEvent";
+        WebDriver driver = mock(WebDriver.class);
 
-        ActionWithJSPreconditionBase actionWithJSPreconditionBase = new ActionWithJSPreconditionBase() {
+        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> driver;
+
+        ActionWithJSPreconditionBase actionWithJSPreconditionBase = new ActionWithJSPreconditionBase(contextProvider) {
 
             @Override
-            public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState) {
+            public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<WebDriver, SearchContext> contextProvider) {
 
             }
 
@@ -86,7 +92,6 @@ public class ActionWithJSPreconditionBaseTest {
             }
         };
 
-        WebDriver driver = mock(WebDriver.class);
         EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
         ReplayingState replayingState = mock(ReplayingState.class);
         when(replayingState.isSatisfied(jsEvent)).thenReturn(true);
@@ -102,11 +107,13 @@ public class ActionWithJSPreconditionBaseTest {
     @Test
     public void doesNotCallExecuteIfInterruptedWhileWaiting() throws InterruptedException, TimeoutException {
         String jsEvent = "jsEvent";
+        WebDriver driver = mock(WebDriver.class);
+        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> driver;
 
-        ActionWithJSPreconditionBase actionWithJSPreconditionBase = new ActionWithJSPreconditionBase() {
+        ActionWithJSPreconditionBase actionWithJSPreconditionBase = new ActionWithJSPreconditionBase(contextProvider) {
 
             @Override
-            public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState) {
+            public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<WebDriver, SearchContext> contextProvider) {
 
             }
 
@@ -126,7 +133,6 @@ public class ActionWithJSPreconditionBaseTest {
             }
         };
 
-        WebDriver driver = mock(WebDriver.class);
         EventSynchronizer eventSynchronizer = mock(EventSynchronizer.class);
         doThrow(new InterruptedException()).when(eventSynchronizer).awaitUntil(any(SynchronizationEvent.class));
         ReplayingState replayingState = mock(ReplayingState.class);
@@ -135,7 +141,7 @@ public class ActionWithJSPreconditionBaseTest {
         actionWithJSPreconditionBase.execute(driver, replayingState, eventSynchronizer);
 
         actionWithJSPreconditionBase = Mockito.spy(actionWithJSPreconditionBase);
-        verify(actionWithJSPreconditionBase, never()).executeAfterJSPreconditionHasBeenSatisfied(driver, replayingState);
+        verify(actionWithJSPreconditionBase, never()).executeAfterJSPreconditionHasBeenSatisfied(driver, replayingState, contextProvider);
     }
 
 }

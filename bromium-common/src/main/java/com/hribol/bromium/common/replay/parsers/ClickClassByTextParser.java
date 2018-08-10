@@ -22,6 +22,6 @@ public class ClickClassByTextParser implements WebDriverActionParameterParser {
     public WebDriverAction create(Map<String, String> parameters, int step, boolean expectHttpRequest, Function<WebDriver, SearchContext> contextProvider) {
         String initialCollectorClass = parameters.get(INITIAL_COLLECTOR_CLASS);
         String text = parameters.get(TEXT);
-        return new ClickClassByText(initialCollectorClass, text, expectHttpRequest);
+        return new ClickClassByText(initialCollectorClass, text, expectHttpRequest, contextProvider);
     }
 }

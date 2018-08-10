@@ -5,8 +5,11 @@ import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.util.function.Function;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -29,7 +32,8 @@ public class TypeTextInElementFoundByCssSelectorTest {
         WebDriver driver = mock(WebDriver.class);
         when(driver.findElement(By.cssSelector(cssSelector))).thenReturn(textBox);
 
-        WebDriverAction action = new TypeTextInElementFoundByCssSelector(cssSelector, text, expectsHttp);
+        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> driver;
+        WebDriverAction action = new TypeTextInElementFoundByCssSelector(cssSelector, text, expectsHttp, contextProvider);
         action.execute(driver, mock(ReplayingState.class), mock(EventSynchronizer.class));
 
         verify(textBox).sendKeys(text);

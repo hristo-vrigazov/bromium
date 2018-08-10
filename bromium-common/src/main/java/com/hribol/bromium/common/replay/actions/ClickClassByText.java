@@ -3,14 +3,15 @@ package com.hribol.bromium.common.replay.actions;
 import com.hribol.bromium.replay.ReplayingState;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotSelectableException;
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
-import static com.hribol.bromium.core.utils.Constants.INNER_HTML;
 import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CLASS_BY_TEXT;
 
 /**
@@ -23,14 +24,18 @@ public class ClickClassByText extends ActionWithJSPreconditionBase {
     private final String text;
     private final boolean expectsHttpRequest;
 
-    public ClickClassByText(String initialCollectorClass, String text, boolean expectsHttpRequest) {
+    public ClickClassByText(String initialCollectorClass,
+                            String text,
+                            boolean expectsHttpRequest,
+                            Function<WebDriver, SearchContext> contextProvider) {
+        super(contextProvider);
         this.initialCollectorClass = initialCollectorClass;
         this.text = text;
         this.expectsHttpRequest = expectsHttpRequest;
     }
 
     @Override
-    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState state) {
+    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState state, Function<WebDriver, SearchContext> contextProvider) {
         By elementsLocator = By.className(initialCollectorClass);
         List<WebElement> webElements = driver.findElements(elementsLocator);
 

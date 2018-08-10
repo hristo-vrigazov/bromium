@@ -19,6 +19,6 @@ public class ClickCssSelectorParser implements WebDriverActionParameterParser {
     @Override
     public WebDriverAction create(Map<String, String> parameters, int step, boolean expectHttpRequest, Function<WebDriver, SearchContext> contextProvider) {
         String cssSelector = parameters.get(CSS_SELECTOR);
-        return new ClickCssSelector(cssSelector, expectHttpRequest);
+        return new ClickCssSelector(cssSelector, expectHttpRequest, contextProvider);
     }
 }

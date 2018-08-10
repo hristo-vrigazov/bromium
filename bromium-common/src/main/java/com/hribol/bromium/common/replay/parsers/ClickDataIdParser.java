@@ -16,7 +16,7 @@ public class ClickDataIdParser implements WebDriverActionParameterParser {
     @Override
     public WebDriverAction create(Map<String, String> parameters, int step, boolean expectHttpRequest, Function<WebDriver, SearchContext> contextProvider) {
         String dataId = parameters.get(DATA_ID);
-        return new ClickDataId(dataId, expectHttpRequest);
+        return new ClickDataId(dataId, expectHttpRequest, contextProvider);
     }
 
 }

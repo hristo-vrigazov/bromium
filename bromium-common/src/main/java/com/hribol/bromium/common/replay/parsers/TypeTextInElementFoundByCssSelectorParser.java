@@ -20,6 +20,6 @@ public class TypeTextInElementFoundByCssSelectorParser implements WebDriverActio
     public WebDriverAction create(Map<String, String> parameters, int step, boolean expectHttpRequest, Function<WebDriver, SearchContext> contextProvider) {
         String cssSelector = parameters.get(CSS_SELECTOR);
         String text = parameters.get(TEXT);
-        return new TypeTextInElementFoundByCssSelector(cssSelector, text, expectHttpRequest);
+        return new TypeTextInElementFoundByCssSelector(cssSelector, text, expectHttpRequest, contextProvider);
     }
 }

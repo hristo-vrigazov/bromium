@@ -6,13 +6,14 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotSelectableException;
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
-import static com.hribol.bromium.core.utils.Constants.INNER_HTML;
 import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CLASS_BY_TEXT;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -57,8 +58,9 @@ public class ClickClassByTextTest {
         WebDriver webDriver = mock(WebDriver.class);
         when(webDriver.findElements(elementsLocator)).thenReturn(webElements);
 
-        ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, expectsHttp);
-        clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class));
+        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> webDriver;
+        ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, expectsHttp, contextProvider);
+        clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class), contextProvider);
     }
 
     @Rule
@@ -72,9 +74,10 @@ public class ClickClassByTextTest {
         WebDriver webDriver = mock(WebDriver.class);
         when(webDriver.findElements(elementsLocator)).thenReturn(webElements);
 
-        ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, expectsHttp);
+        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> webDriver;
+        ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, expectsHttp, contextProvider);
         thrown.expect(ElementNotSelectableException.class);
-        clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class));
+        clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class), contextProvider);
     }
 
     @Test
@@ -90,14 +93,16 @@ public class ClickClassByTextTest {
         WebDriver webDriver = mock(WebDriver.class);
         when(webDriver.findElements(elementsLocator)).thenReturn(webElements);
 
-        ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, expectsHttp);
+        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> webDriver;
+        ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, expectsHttp, contextProvider);
         thrown.expect(ElementNotSelectableException.class);
-        clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class));
+        clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class), contextProvider);
     }
 
     @Test
     public void jsWaitingEventIsConstructedCorrectly() {
-        ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, expectsHttp);
+        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> webDriver1;
+        ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, expectsHttp, contextProvider);
 
         String expected = CLICK_CLASS_BY_TEXT + " " + initialCollectorClass + " " + text;
         String actual = clickClassByText.getJSEventToWaitFor();

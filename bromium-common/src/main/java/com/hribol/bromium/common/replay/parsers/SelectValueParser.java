@@ -18,7 +18,7 @@ public class SelectValueParser implements WebDriverActionParameterParser {
     public WebDriverAction create(Map<String, String> parameters, int step, boolean expectHttpRequest, Function<WebDriver, SearchContext> contextProvider) {
         String selector = parameters.get(CSS_SELECTOR);
         String value = parameters.get(VALUE);
-        return new SelectValue(selector, value);
+        return new SelectValue(selector, value, contextProvider);
     }
 
 }

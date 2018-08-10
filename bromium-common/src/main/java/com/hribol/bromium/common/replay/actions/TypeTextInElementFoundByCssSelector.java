@@ -2,10 +2,12 @@ package com.hribol.bromium.common.replay.actions;
 
 import com.hribol.bromium.replay.ReplayingState;
 import org.openqa.selenium.By;
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.text.MessageFormat;
+import java.util.function.Function;
 
 import static com.hribol.bromium.core.utils.WebDriverActions.TYPE_TEXT_IN_ELEMENT_FOUND_BY_CSS_SELECTOR;
 
@@ -19,7 +21,8 @@ public class TypeTextInElementFoundByCssSelector extends ActionWithJSPreconditio
     private String text;
     private boolean expectsHttpRequest;
 
-    public TypeTextInElementFoundByCssSelector(String cssSelector, String text, boolean expectsHttpRequest) {
+    public TypeTextInElementFoundByCssSelector(String cssSelector, String text, boolean expectsHttpRequest, Function<WebDriver, SearchContext> contextProvider) {
+        super(contextProvider);
         this.cssSelector = cssSelector;
         this.text = text;
         this.expectsHttpRequest = expectsHttpRequest;
@@ -36,7 +39,7 @@ public class TypeTextInElementFoundByCssSelector extends ActionWithJSPreconditio
     }
 
     @Override
-    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState) {
+    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<WebDriver, SearchContext> contextProvider) {
         WebElement element = driver.findElement(By.cssSelector(cssSelector));
         element.clear();
         element.sendKeys(text);

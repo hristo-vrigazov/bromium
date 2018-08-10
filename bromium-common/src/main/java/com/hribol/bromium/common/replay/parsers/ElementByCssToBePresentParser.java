@@ -21,6 +21,6 @@ public class ElementByCssToBePresentParser implements WebDriverActionParameterPa
     public WebDriverAction create(Map<String, String> parameters, int step, boolean expectHttpRequest, Function<WebDriver, SearchContext> contextProvider) {
         String cssSelector = parameters.get(CSS_SELECTOR);
         String eventName = parameters.get(EVENT);
-        return new ElementByCssToBePresent(cssSelector);
+        return new ElementByCssToBePresent(cssSelector, contextProvider);
     }
 }

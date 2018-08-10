@@ -3,8 +3,11 @@ package com.hribol.bromium.common.replay.actions;
 import com.hribol.bromium.replay.ReplayingState;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.util.function.Function;
 
 import static com.hribol.bromium.core.utils.WebDriverActions.CLICK_CSS_SELECTOR;
 import static org.junit.Assert.assertEquals;
@@ -28,9 +31,10 @@ public class ClickCssSelectorTest {
         WebDriver webDriver = mock(WebDriver.class);
         when(webDriver.findElement(elementLocator)).thenReturn(webElement);
 
-        ClickCssSelector action = new ClickCssSelector(cssSelector, expectsHttpRequest);
+        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> webDriver;
+        ClickCssSelector action = new ClickCssSelector(cssSelector, expectsHttpRequest, contextProvider);
 
-        action.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class));
+        action.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class), contextProvider);
 
         verify(webElement).click();
         assertEquals(eventName, action.getName());
