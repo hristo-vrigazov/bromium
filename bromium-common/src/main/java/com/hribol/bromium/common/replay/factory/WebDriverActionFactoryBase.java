@@ -83,6 +83,6 @@ public abstract class WebDriverActionFactoryBase implements WebDriverActionFacto
                                   Map<String, String> parameters,
                                   int step,
                                   boolean expectsHttpRequest) {
-        return parsersRegistry.get(webDriverActionType).create(parameters, step, expectsHttpRequest);
+        return parsersRegistry.get(webDriverActionType).create(parameters, step, expectsHttpRequest, webDriver -> webDriver);
     }
 }

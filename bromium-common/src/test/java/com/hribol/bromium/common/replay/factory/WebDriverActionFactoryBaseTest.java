@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -29,7 +31,7 @@ public class WebDriverActionFactoryBaseTest {
         parameters.put("parameter", "parametervalue");
 
         WebDriverActionParameterParser parser = mock(WebDriverActionParameterParser.class);
-        when(parser.create(parameters, step, expectsHttp)).thenReturn(expectedAction);
+        when(parser.create(eq(parameters), eq(step), eq(expectsHttp), any())).thenReturn(expectedAction);
 
         String webDriverActionType = "SOME_ACTION_TYPE";
 
