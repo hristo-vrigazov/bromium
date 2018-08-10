@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.factory;
 
+import com.google.inject.Inject;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ParameterConfiguration;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
@@ -27,6 +28,7 @@ public class TestCaseStepToApplicationActionConverter {
      * factory for webDriver actions.
      * @param webDriverActionFactory the factory to be used for creating application actions
      */
+    @Inject
     public TestCaseStepToApplicationActionConverter(WebDriverActionFactory webDriverActionFactory) {
         this.webDriverActionFactory = webDriverActionFactory;
     }

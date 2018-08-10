@@ -31,12 +31,19 @@ public class BromiumParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
+					put(grammarAccess.getRowSelectorAccess().getAlternatives(), "rule__RowSelector__Alternatives");
+					put(grammarAccess.getLocatorAccess().getAlternatives(), "rule__Locator__Alternatives");
 					put(grammarAccess.getWebDriverActionConditionAccess().getAlternatives(), "rule__WebDriverActionCondition__Alternatives");
 					put(grammarAccess.getWebDriverActionAccess().getAlternatives(), "rule__WebDriverAction__Alternatives");
 					put(grammarAccess.getParameterValueAccess().getAlternatives(), "rule__ParameterValue__Alternatives");
 					put(grammarAccess.getModelAccess().getGroup(), "rule__Model__Group__0");
 					put(grammarAccess.getModelAccess().getGroup_4(), "rule__Model__Group_4__0");
 					put(grammarAccess.getApplicationActionAccess().getGroup(), "rule__ApplicationAction__Group__0");
+					put(grammarAccess.getTableActionContextAccess().getGroup(), "rule__TableActionContext__Group__0");
+					put(grammarAccess.getRowLocatorAccess().getGroup(), "rule__RowLocator__Group__0");
+					put(grammarAccess.getRowIndexAccess().getGroup(), "rule__RowIndex__Group__0");
+					put(grammarAccess.getClassByTextAccess().getGroup(), "rule__ClassByText__Group__0");
+					put(grammarAccess.getCssSelectorAccess().getGroup(), "rule__CssSelector__Group__0");
 					put(grammarAccess.getSyntaxDefinitionAccess().getGroup(), "rule__SyntaxDefinition__Group__0");
 					put(grammarAccess.getPreconditionAccess().getGroup(), "rule__Precondition__Group__0");
 					put(grammarAccess.getPostconditionAccess().getGroup(), "rule__Postcondition__Group__0");
@@ -62,9 +69,21 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getApplicationActionAccess().getNameAssignment_1(), "rule__ApplicationAction__NameAssignment_1");
 					put(grammarAccess.getApplicationActionAccess().getSyntaxDefinitionsAssignment_3(), "rule__ApplicationAction__SyntaxDefinitionsAssignment_3");
 					put(grammarAccess.getApplicationActionAccess().getPreconditionAssignment_4(), "rule__ApplicationAction__PreconditionAssignment_4");
-					put(grammarAccess.getApplicationActionAccess().getWebDriverActionAssignment_5(), "rule__ApplicationAction__WebDriverActionAssignment_5");
-					put(grammarAccess.getApplicationActionAccess().getExpectHttpRequestAssignment_6(), "rule__ApplicationAction__ExpectHttpRequestAssignment_6");
-					put(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_7(), "rule__ApplicationAction__PostconditionAssignment_7");
+					put(grammarAccess.getApplicationActionAccess().getActionContextAssignment_5(), "rule__ApplicationAction__ActionContextAssignment_5");
+					put(grammarAccess.getApplicationActionAccess().getWebDriverActionAssignment_6(), "rule__ApplicationAction__WebDriverActionAssignment_6");
+					put(grammarAccess.getApplicationActionAccess().getExpectHttpRequestAssignment_7(), "rule__ApplicationAction__ExpectHttpRequestAssignment_7");
+					put(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_8(), "rule__ApplicationAction__PostconditionAssignment_8");
+					put(grammarAccess.getTableActionContextAccess().getTableLocatorAssignment_2(), "rule__TableActionContext__TableLocatorAssignment_2");
+					put(grammarAccess.getTableActionContextAccess().getRowsLocatorAssignment_5(), "rule__TableActionContext__RowsLocatorAssignment_5");
+					put(grammarAccess.getTableActionContextAccess().getRowSelectorAssignment_6(), "rule__TableActionContext__RowSelectorAssignment_6");
+					put(grammarAccess.getRowLocatorAccess().getRowLocatorAssignment_2(), "rule__RowLocator__RowLocatorAssignment_2");
+					put(grammarAccess.getRowIndexAccess().getIndexAssignment_2(), "rule__RowIndex__IndexAssignment_2");
+					put(grammarAccess.getClassByTextAccess().getParameterNamesAssignment_0(), "rule__ClassByText__ParameterNamesAssignment_0");
+					put(grammarAccess.getClassByTextAccess().getParameterValuesAssignment_1(), "rule__ClassByText__ParameterValuesAssignment_1");
+					put(grammarAccess.getClassByTextAccess().getParamterNamesAssignment_3(), "rule__ClassByText__ParamterNamesAssignment_3");
+					put(grammarAccess.getClassByTextAccess().getParameterValuesAssignment_4(), "rule__ClassByText__ParameterValuesAssignment_4");
+					put(grammarAccess.getCssSelectorAccess().getParameterNamesAssignment_1(), "rule__CssSelector__ParameterNamesAssignment_1");
+					put(grammarAccess.getCssSelectorAccess().getParameterValuesAssignment_2(), "rule__CssSelector__ParameterValuesAssignment_2");
 					put(grammarAccess.getSyntaxDefinitionAccess().getContentAssignment_1(), "rule__SyntaxDefinition__ContentAssignment_1");
 					put(grammarAccess.getSyntaxDefinitionAccess().getParameterAssignment_2(), "rule__SyntaxDefinition__ParameterAssignment_2");
 					put(grammarAccess.getPreconditionAccess().getActionAssignment_1(), "rule__Precondition__ActionAssignment_1");

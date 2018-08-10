@@ -455,11 +455,6 @@ public class DefaultModule extends AbstractModule {
         }
     }
 
-    @Provides
-    public TestCaseStepToApplicationActionConverter getTestCaseStepToApplicationActionConverter(WebDriverActionFactory webDriverActionFactory) {
-        return new TestCaseStepToApplicationActionConverter(webDriverActionFactory);
-    }
-
     @CheckedProvides(IOProvider.class)
     public ApplicationActionFactory getApplicationActionFactory(IOProvider<ApplicationConfiguration>
                                                                             applicationConfigurationIOProvider,

@@ -15,9 +15,49 @@ ApplicationAction:
 	'id' name=ID
 	'syntax' syntaxDefinitions+=SyntaxDefinition*
 	(precondition=Precondition)?
+	(actionContext=ActionContext)?
 	webDriverAction=WebDriverAction
 	(expectHttpRequest=ExpectHttpRequest)?
 	(postcondition=Postcondition)?
+;
+
+ActionContext:
+	TableActionContext
+;
+
+TableActionContext:
+	'table' 'with' tableLocator=Locator
+	'rows' 'with' rowsLocator=Locator
+	rowSelector=RowSelector
+;
+
+RowSelector:
+	RowLocator |
+	RowIndex
+;
+
+RowLocator: 
+	'row' 'with' rowLocator=Locator
+;
+
+RowIndex:
+	'row' 'number' index=INT
+;
+
+Locator:
+	CssSelector | 
+	ClassByText |
+	ActionContext
+;
+
+ClassByText:
+	parameterNames += 'class' parameterValues += ParameterValue 
+	'and' 
+	paramterNames += 'text' parameterValues += ParameterValue
+;
+
+CssSelector:
+	'css' parameterNames += 'selector' parameterValues += ParameterValue
 ;
 
 SyntaxDefinition:

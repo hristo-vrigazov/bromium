@@ -16,9 +16,33 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//ApplicationAction/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ApplicationAction/syntaxDefinitions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ApplicationAction/precondition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ApplicationAction/actionContext"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ApplicationAction/webDriverAction"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ApplicationAction/expectHttpRequest"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ApplicationAction/postcondition"/>
+    </genClasses>
+    <genClasses ecoreClass="Bromium.ecore#//ActionContext"/>
+    <genClasses ecoreClass="Bromium.ecore#//TableActionContext">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//TableActionContext/tableLocator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//TableActionContext/rowsLocator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//TableActionContext/rowSelector"/>
+    </genClasses>
+    <genClasses ecoreClass="Bromium.ecore#//RowSelector"/>
+    <genClasses ecoreClass="Bromium.ecore#//RowLocator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//RowLocator/rowLocator"/>
+    </genClasses>
+    <genClasses ecoreClass="Bromium.ecore#//RowIndex">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//RowIndex/index"/>
+    </genClasses>
+    <genClasses ecoreClass="Bromium.ecore#//Locator"/>
+    <genClasses ecoreClass="Bromium.ecore#//ClassByText">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//ClassByText/parameterNames"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ClassByText/parameterValues"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//ClassByText/paramterNames"/>
+    </genClasses>
+    <genClasses ecoreClass="Bromium.ecore#//CssSelector">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//CssSelector/parameterNames"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//CssSelector/parameterValues"/>
     </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//SyntaxDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bromium.ecore#//SyntaxDefinition/content"/>

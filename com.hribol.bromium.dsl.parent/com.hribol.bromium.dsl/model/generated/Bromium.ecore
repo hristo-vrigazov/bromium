@@ -14,12 +14,46 @@
         eType="#//SyntaxDefinition" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="precondition" eType="#//Precondition"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actionContext" eType="#//ActionContext"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="webDriverAction" eType="#//WebDriverAction"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expectHttpRequest" eType="#//ExpectHttpRequest"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="postcondition" eType="#//Postcondition"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActionContext" eSuperTypes="#//Locator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TableActionContext" eSuperTypes="#//ActionContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tableLocator" eType="#//Locator"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rowsLocator" eType="#//Locator"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rowSelector" eType="#//RowSelector"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RowSelector"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RowLocator" eSuperTypes="#//RowSelector">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rowLocator" eType="#//Locator"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RowIndex" eSuperTypes="#//RowSelector">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Locator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassByText" eSuperTypes="#//Locator">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameterNames" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterValues" upperBound="-1"
+        eType="#//ParameterValue" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="paramterNames" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CssSelector" eSuperTypes="#//Locator">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameterNames" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterValues" upperBound="-1"
+        eType="#//ParameterValue" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SyntaxDefinition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
