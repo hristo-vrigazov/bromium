@@ -3,6 +3,7 @@ package com.hribol.bromium.common.generation.record;
 import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.helper.suppliers.NameWebDriverActionConfigurationSupplier;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
+import com.hribol.bromium.core.config.ContextProvider;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
 import org.junit.Test;
@@ -28,7 +29,8 @@ public class RecordingWebDriverActionsOnlyTest {
         JavascriptGenerator<NameWebDriverActionConfiguration> webDriverActionGenerator = mock(JavascriptGenerator.class);
         when(webDriverActionGenerator.generate(nameWebDriverActionConfiguration)).thenReturn(expected);
         NameWebDriverActionConfigurationSupplier nameWebDriverActionConfigurationSupplier = mock(NameWebDriverActionConfigurationSupplier.class);
-        when(nameWebDriverActionConfigurationSupplier.get(eventName, webDriverActionConfiguration)).thenReturn(nameWebDriverActionConfiguration);
+        ContextProvider contextProvider = mock(ContextProvider.class);
+        when(nameWebDriverActionConfigurationSupplier.get(eventName, webDriverActionConfiguration, contextProvider)).thenReturn(nameWebDriverActionConfiguration);
 
         RecordingWebDriverActionsOnly recordingWebDriverActionsOnly =
                 new RecordingWebDriverActionsOnly(webDriverActionGenerator, nameWebDriverActionConfigurationSupplier);

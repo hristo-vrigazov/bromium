@@ -41,7 +41,7 @@ RowLocator:
 ;
 
 RowIndex:
-	'row' 'number' index=INT
+	'row' 'number' index=ParameterValue
 ;
 
 Locator:
@@ -142,7 +142,7 @@ SelectValue:
 ;
 
 ParameterValue:
-	content=STRING | exposedParameter=[ExposedParameter]
+	content=STRING | exposedParameter=[ExposedParameter] | index=INT
 ;
 
 ExposedParameter:

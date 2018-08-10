@@ -978,6 +978,12 @@ rule__ParameterValue__Alternatives
 		(rule__ParameterValue__ExposedParameterAssignment_1)
 		{ after(grammarAccess.getParameterValueAccess().getExposedParameterAssignment_1()); }
 	)
+	|
+	(
+		{ before(grammarAccess.getParameterValueAccess().getIndexAssignment_2()); }
+		(rule__ParameterValue__IndexAssignment_2)
+		{ after(grammarAccess.getParameterValueAccess().getIndexAssignment_2()); }
+	)
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -5048,9 +5054,9 @@ rule__RowIndex__IndexAssignment_2
 	}
 :
 	(
-		{ before(grammarAccess.getRowIndexAccess().getIndexINTTerminalRuleCall_2_0()); }
-		RULE_INT
-		{ after(grammarAccess.getRowIndexAccess().getIndexINTTerminalRuleCall_2_0()); }
+		{ before(grammarAccess.getRowIndexAccess().getIndexParameterValueParserRuleCall_2_0()); }
+		ruleParameterValue
+		{ after(grammarAccess.getRowIndexAccess().getIndexParameterValueParserRuleCall_2_0()); }
 	)
 ;
 finally {
@@ -5787,6 +5793,21 @@ rule__ParameterValue__ExposedParameterAssignment_1
 			{ after(grammarAccess.getParameterValueAccess().getExposedParameterExposedParameterIDTerminalRuleCall_1_0_1()); }
 		)
 		{ after(grammarAccess.getParameterValueAccess().getExposedParameterExposedParameterCrossReference_1_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ParameterValue__IndexAssignment_2
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getParameterValueAccess().getIndexINTTerminalRuleCall_2_0()); }
+		RULE_INT
+		{ after(grammarAccess.getParameterValueAccess().getIndexINTTerminalRuleCall_2_0()); }
 	)
 ;
 finally {

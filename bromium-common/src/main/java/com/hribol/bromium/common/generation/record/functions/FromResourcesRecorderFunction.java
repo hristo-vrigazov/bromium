@@ -4,6 +4,7 @@ import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.record.invocations.RecorderFunctionInvocation;
+import com.hribol.bromium.core.config.ContextProvider;
 import com.hribol.bromium.core.config.ParameterConfiguration;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import org.apache.commons.io.IOUtils;
@@ -41,6 +42,7 @@ public class FromResourcesRecorderFunction implements RecorderFunction {
             context.put(EVENT, eventName);
             WebDriverActionConfiguration webDriverActionConfiguration = generationInformation.getWebDriverActionConfiguration();
 
+            //TODO: here we have the context provider, we should create the function
             for (Map.Entry<String, ParameterConfiguration> entry: webDriverActionConfiguration.getParametersConfiguration().entrySet()) {
                 ParameterConfiguration parameterConfiguration = entry.getValue();
                 if (!parameterConfiguration.isExposed()) {

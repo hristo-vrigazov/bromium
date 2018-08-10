@@ -25,7 +25,8 @@ public class RecordingWebDriverActionsOnly implements JavascriptGenerator<Applic
     public String generate(ApplicationActionConfiguration applicationActionConfiguration) {
         NameWebDriverActionConfiguration nameWebDriverActionConfiguration = nameWebDriverActionConfigurationSupplier.get(
                 applicationActionConfiguration.getName(),
-                applicationActionConfiguration.getWebDriverAction()
+                applicationActionConfiguration.getWebDriverAction(),
+                applicationActionConfiguration.getContextProvider()
         );
         return webDriverActionGenerator.generate(nameWebDriverActionConfiguration);
     }

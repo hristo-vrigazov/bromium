@@ -122,6 +122,7 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSelectValueAccess().getParameterValuesAssignment_8(), "rule__SelectValue__ParameterValuesAssignment_8");
 					put(grammarAccess.getParameterValueAccess().getContentAssignment_0(), "rule__ParameterValue__ContentAssignment_0");
 					put(grammarAccess.getParameterValueAccess().getExposedParameterAssignment_1(), "rule__ParameterValue__ExposedParameterAssignment_1");
+					put(grammarAccess.getParameterValueAccess().getIndexAssignment_2(), "rule__ParameterValue__IndexAssignment_2");
 					put(grammarAccess.getExposedParameterAccess().getNameAssignment(), "rule__ExposedParameter__NameAssignment");
 					put(grammarAccess.getThreeDottedVersionAccess().getBigAssignment_0(), "rule__ThreeDottedVersion__BigAssignment_0");
 					put(grammarAccess.getThreeDottedVersionAccess().getMediumAssignment_2(), "rule__ThreeDottedVersion__MediumAssignment_2");
