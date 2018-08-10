@@ -5,6 +5,7 @@ import com.hribol.bromium.core.config.ParameterConfiguration;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.execution.application.ApplicationAction;
+import com.hribol.bromium.replay.execution.factory.ActionCreationContext;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 
 import java.util.HashMap;
@@ -87,11 +88,8 @@ public class TestCaseStepToApplicationActionConverter {
             }
         }
 
-        WebDriverAction webDriverAction = webDriverActionFactory.create(
-                webdriverActionType,
-                parameters,
-                step,
-                expectHttpRequest);
+        ActionCreationContext context = new ActionCreationContext(parameters, step, expectHttpRequest, webDriver -> webDriver);
+        WebDriverAction webDriverAction = webDriverActionFactory.create(webdriverActionType, context);
         return Optional.of(webDriverAction);
     }
 

@@ -13,6 +13,7 @@ import com.hribol.bromium.common.replay.parsers.SetVariableToTextOfElementWithCs
 import com.hribol.bromium.common.replay.parsers.TextOfElementFoundByCssSelectorToBeParser;
 import com.hribol.bromium.common.replay.parsers.TypeTextInElementFoundByCssSelectorParser;
 import com.hribol.bromium.replay.actions.WebDriverAction;
+import com.hribol.bromium.replay.execution.factory.ActionCreationContext;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
 import com.hribol.bromium.replay.parsers.WebDriverActionParameterParser;
 
@@ -80,9 +81,7 @@ public abstract class WebDriverActionFactoryBase implements WebDriverActionFacto
 
     @Override
     public WebDriverAction create(String webDriverActionType,
-                                  Map<String, String> parameters,
-                                  int step,
-                                  boolean expectsHttpRequest) {
-        return parsersRegistry.get(webDriverActionType).create(parameters, step, expectsHttpRequest, webDriver -> webDriver);
+                                  ActionCreationContext context) {
+        return parsersRegistry.get(webDriverActionType).create(context);
     }
 }

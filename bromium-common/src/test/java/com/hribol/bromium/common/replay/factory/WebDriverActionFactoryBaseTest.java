@@ -1,6 +1,7 @@
 package com.hribol.bromium.common.replay.factory;
 
 import com.hribol.bromium.replay.actions.WebDriverAction;
+import com.hribol.bromium.replay.execution.factory.ActionCreationContext;
 import com.hribol.bromium.replay.parsers.WebDriverActionParameterParser;
 import org.junit.Test;
 
@@ -31,7 +32,8 @@ public class WebDriverActionFactoryBaseTest {
         parameters.put("parameter", "parametervalue");
 
         WebDriverActionParameterParser parser = mock(WebDriverActionParameterParser.class);
-        when(parser.create(eq(parameters), eq(step), eq(expectsHttp), any())).thenReturn(expectedAction);
+        ActionCreationContext creationContext = new ActionCreationContext(parameters, step, expectsHttp, webDriver -> webDriver);
+        when(parser.create(eq(creationContext))).thenReturn(expectedAction);
 
         String webDriverActionType = "SOME_ACTION_TYPE";
 
@@ -45,7 +47,7 @@ public class WebDriverActionFactoryBaseTest {
 
         webDriverActionFactoryBase.addActions();
 
-        WebDriverAction actualAction = webDriverActionFactoryBase.create(webDriverActionType, parameters, step, expectsHttp);
+        WebDriverAction actualAction = webDriverActionFactoryBase.create(webDriverActionType, creationContext);
         assertEquals(expectedAction, actualAction);
     }
 }

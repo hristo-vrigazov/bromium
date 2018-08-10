@@ -16,6 +16,8 @@ import static com.hribol.bromium.core.utils.Constants.NOTHING;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -57,7 +59,7 @@ public class TestCaseToApplicationActionConverterTestStep {
         WebDriverActionFactory webDriverActionFactory = mock(WebDriverActionFactory.class);
 
         int step = 0;
-        when(webDriverActionFactory.create(actionType, tempMap, step, false)).thenReturn(webDriverAction);
+        when(webDriverActionFactory.create(eq(actionType), any())).thenReturn(webDriverAction);
 
         WebDriverActionConfiguration preconditionActionConfiguration = mock(WebDriverActionConfiguration.class);
         when(preconditionActionConfiguration.getWebDriverActionType()).thenReturn(NOTHING);
@@ -90,4 +92,5 @@ public class TestCaseToApplicationActionConverterTestStep {
         assertTrue(applicationAction.getWebdriverAction().isPresent());
         assertEquals(webDriverAction, applicationAction.getWebdriverAction().get());
     }
+
 }
