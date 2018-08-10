@@ -28,7 +28,7 @@ public class ClickCssSelector extends ActionWithJSPreconditionBase {
     @Override
     public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState state, Function<WebDriver, SearchContext> contextProvider) {
         By byCss = By.cssSelector(cssSelector);
-        WebElement webElement = driver.findElement(byCss);
+        WebElement webElement = contextProvider.apply(driver).findElement(byCss);
         webElement.click();
     }
 

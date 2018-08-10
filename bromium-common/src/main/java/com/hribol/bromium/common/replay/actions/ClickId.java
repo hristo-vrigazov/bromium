@@ -21,7 +21,7 @@ public class ClickId extends ActionWithJSPreconditionBase {
 
     @Override
     public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<WebDriver, SearchContext> contextProvider) {
-        driver.findElement(By.id(elementId)).click();
+        contextProvider.apply(driver).findElement(By.id(elementId)).click();
     }
 
     @Override

@@ -35,9 +35,11 @@ public class ClickClassByText extends ActionWithJSPreconditionBase {
     }
 
     @Override
-    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState state, Function<WebDriver, SearchContext> contextProvider) {
+    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver,
+                                                           ReplayingState state,
+                                                           Function<WebDriver, SearchContext> contextProvider) {
         By elementsLocator = By.className(initialCollectorClass);
-        List<WebElement> webElements = driver.findElements(elementsLocator);
+        List<WebElement> webElements = contextProvider.apply(driver).findElements(elementsLocator);
 
         Optional<WebElement> webElementOptional = webElements.stream()
                 .filter(this::elementTextIsEqualToAndIsDisplayed)

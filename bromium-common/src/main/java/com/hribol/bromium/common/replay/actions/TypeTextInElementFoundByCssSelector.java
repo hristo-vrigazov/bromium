@@ -40,7 +40,7 @@ public class TypeTextInElementFoundByCssSelector extends ActionWithJSPreconditio
 
     @Override
     public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<WebDriver, SearchContext> contextProvider) {
-        WebElement element = driver.findElement(By.cssSelector(cssSelector));
+        WebElement element = contextProvider.apply(driver).findElement(By.cssSelector(cssSelector));
         element.clear();
         element.sendKeys(text);
     }

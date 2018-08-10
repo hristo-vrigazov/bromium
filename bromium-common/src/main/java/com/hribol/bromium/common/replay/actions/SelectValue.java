@@ -24,7 +24,7 @@ public class SelectValue extends ActionWithJSPreconditionBase {
 
     @Override
     public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<WebDriver, SearchContext> contextProvider) {
-        WebElement element = driver.findElement(By.cssSelector(cssSelector));
+        WebElement element = contextProvider.apply(driver).findElement(By.cssSelector(cssSelector));
         Select select = new Select(element);
         select.selectByValue(value);
     }

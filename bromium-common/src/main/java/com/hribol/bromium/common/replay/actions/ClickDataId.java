@@ -28,7 +28,7 @@ public class ClickDataId extends ActionWithJSPreconditionBase {
                 ? replayingState.getValue(this.dataId)
                 : this.dataId;
         By selector = By.cssSelector("input[data-id='" + dataId + "'");
-        driver.findElement(selector).click();
+        contextProvider.apply(driver).findElement(selector).click();
     }
 
     /**
