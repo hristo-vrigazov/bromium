@@ -25,3 +25,5 @@ generated
 .launch
 *.log
 notes.txt
+src-gen
+xtend-gen
