@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.core.config.SearchContextFunction;
 import com.hribol.bromium.replay.ReplayingState;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
@@ -14,7 +15,7 @@ public class ClickName extends ActionWithJSPreconditionBase {
 
     private String name;
 
-    public ClickName(String name, Function<WebDriver, SearchContext> contextProvider) {
+    public ClickName(String name, SearchContextFunction contextProvider) {
         super(contextProvider);
         this.name = name;
     }
@@ -22,7 +23,7 @@ public class ClickName extends ActionWithJSPreconditionBase {
     @Override
     public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver,
                                                            ReplayingState replayingState,
-                                                           Function<WebDriver, SearchContext> contextProvider) {
+                                                           Function<SearchContext, SearchContext> contextProvider) {
         SearchContext searchContext = contextProvider.apply(driver);
         By locator = By.name(this.name);
         searchContext.findElement(locator).click();

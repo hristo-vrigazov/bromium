@@ -2,6 +2,7 @@ package com.hribol.bromium.common.replay.actions;
 
 import com.hribol.bromium.common.replay.InstanceBasedAutomationResultBuilder;
 import com.hribol.bromium.common.synchronization.JSPrecondition;
+import com.hribol.bromium.core.config.SearchContextFunction;
 import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.core.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.ReplayingState;
@@ -25,9 +26,9 @@ public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecon
 
     private static final Logger logger = LoggerFactory.getLogger(ActionWithJSPreconditionBase.class);
 
-    private Function<WebDriver, SearchContext> contextProvider;
+    private SearchContextFunction contextProvider;
 
-    protected ActionWithJSPreconditionBase(Function<WebDriver, SearchContext> contextProvider) {
+    protected ActionWithJSPreconditionBase(SearchContextFunction contextProvider) {
         this.contextProvider = contextProvider;
     }
 
@@ -51,7 +52,7 @@ public abstract class ActionWithJSPreconditionBase implements ActionWithJSPrecon
      * @param replayingState the current state of the replaying
      * @param contextProvider
      */
-    public abstract void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<WebDriver, SearchContext> contextProvider);
+    public abstract void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<SearchContext, SearchContext> contextProvider);
 
     @Override
     public String getName() {

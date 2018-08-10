@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.core.config.SearchContextFunction;
 import com.hribol.bromium.replay.ReplayingState;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -17,14 +18,14 @@ public class TextOfElementFoundByCssSelectorToBe extends ActionWithJSPreconditio
     private final String cssSelector;
     private final String text;
 
-    public TextOfElementFoundByCssSelectorToBe(String cssSelector, String text, Function<WebDriver, SearchContext> contextProvider) {
+    public TextOfElementFoundByCssSelectorToBe(String cssSelector, String text, SearchContextFunction contextProvider) {
         super(contextProvider);
         this.cssSelector = cssSelector;
         this.text = text;
     }
 
     @Override
-    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<WebDriver, SearchContext> contextProvider) {
+    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<SearchContext, SearchContext> contextProvider) {
     }
 
     @Override

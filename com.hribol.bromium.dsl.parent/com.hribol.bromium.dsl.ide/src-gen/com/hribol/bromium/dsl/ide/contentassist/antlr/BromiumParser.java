@@ -78,12 +78,9 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTableActionContextAccess().getRowSelectorAssignment_6(), "rule__TableActionContext__RowSelectorAssignment_6");
 					put(grammarAccess.getRowLocatorAccess().getRowLocatorAssignment_2(), "rule__RowLocator__RowLocatorAssignment_2");
 					put(grammarAccess.getRowIndexAccess().getIndexAssignment_2(), "rule__RowIndex__IndexAssignment_2");
-					put(grammarAccess.getClassByTextAccess().getParameterNamesAssignment_0(), "rule__ClassByText__ParameterNamesAssignment_0");
-					put(grammarAccess.getClassByTextAccess().getParameterValuesAssignment_1(), "rule__ClassByText__ParameterValuesAssignment_1");
-					put(grammarAccess.getClassByTextAccess().getParamterNamesAssignment_3(), "rule__ClassByText__ParamterNamesAssignment_3");
-					put(grammarAccess.getClassByTextAccess().getParameterValuesAssignment_4(), "rule__ClassByText__ParameterValuesAssignment_4");
-					put(grammarAccess.getCssSelectorAccess().getParameterNamesAssignment_1(), "rule__CssSelector__ParameterNamesAssignment_1");
-					put(grammarAccess.getCssSelectorAccess().getParameterValuesAssignment_2(), "rule__CssSelector__ParameterValuesAssignment_2");
+					put(grammarAccess.getClassByTextAccess().getKlassAssignment_1(), "rule__ClassByText__KlassAssignment_1");
+					put(grammarAccess.getClassByTextAccess().getTextAssignment_4(), "rule__ClassByText__TextAssignment_4");
+					put(grammarAccess.getCssSelectorAccess().getSelectorAssignment_2(), "rule__CssSelector__SelectorAssignment_2");
 					put(grammarAccess.getSyntaxDefinitionAccess().getContentAssignment_1(), "rule__SyntaxDefinition__ContentAssignment_1");
 					put(grammarAccess.getSyntaxDefinitionAccess().getParameterAssignment_2(), "rule__SyntaxDefinition__ParameterAssignment_2");
 					put(grammarAccess.getPreconditionAccess().getActionAssignment_1(), "rule__Precondition__ActionAssignment_1");

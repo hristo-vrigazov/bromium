@@ -1,18 +1,15 @@
 package com.hribol.bromium.core.config;
 
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebDriver;
-
 import java.util.function.Function;
 
 public class ContextProvider {
-    private Function<WebDriver, SearchContext> function;
+    private Function<ParameterValues, SearchContextFunction> function;
 
-    public Function<WebDriver, SearchContext> getFunction() {
+    public Function<ParameterValues, SearchContextFunction> getFunction() {
         return function;
     }
 
-    public void setFunction(Function<WebDriver, SearchContext> function) {
+    public void setFunction(Function<ParameterValues, SearchContextFunction> function) {
         this.function = function;
     }
 }

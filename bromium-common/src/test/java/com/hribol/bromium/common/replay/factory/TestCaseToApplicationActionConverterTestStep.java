@@ -18,6 +18,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -74,7 +75,7 @@ public class TestCaseToApplicationActionConverterTestStep {
         WebDriverActionConfiguration postconditionActionConfiguration = mock(WebDriverActionConfiguration.class);
         when(postconditionActionConfiguration.getWebDriverActionType()).thenReturn(NOTHING);
 
-        ApplicationActionConfiguration applicationActionConfiguration = mock(ApplicationActionConfiguration.class);
+        ApplicationActionConfiguration applicationActionConfiguration = mock(ApplicationActionConfiguration.class, RETURNS_DEEP_STUBS);
         when(applicationActionConfiguration.getConditionBeforeExecution()).thenReturn(preconditionActionConfiguration);
         when(applicationActionConfiguration.getWebDriverAction()).thenReturn(webDriverActionConfiguration);
         when(applicationActionConfiguration.getConditionAfterExecution()).thenReturn(postconditionActionConfiguration);

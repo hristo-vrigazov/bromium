@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.core.config.SearchContextFunction;
 import com.hribol.bromium.replay.ReplayingState;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotSelectableException;
@@ -27,7 +28,7 @@ public class ClickClassByText extends ActionWithJSPreconditionBase {
     public ClickClassByText(String initialCollectorClass,
                             String text,
                             boolean expectsHttpRequest,
-                            Function<WebDriver, SearchContext> contextProvider) {
+                            SearchContextFunction contextProvider) {
         super(contextProvider);
         this.initialCollectorClass = initialCollectorClass;
         this.text = text;
@@ -37,7 +38,7 @@ public class ClickClassByText extends ActionWithJSPreconditionBase {
     @Override
     public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver,
                                                            ReplayingState state,
-                                                           Function<WebDriver, SearchContext> contextProvider) {
+                                                           Function<SearchContext, SearchContext> contextProvider) {
         By elementsLocator = By.className(initialCollectorClass);
         List<WebElement> webElements = contextProvider.apply(driver).findElements(elementsLocator);
 

@@ -26,7 +26,7 @@ public class PageLoadingParser implements WebDriverActionParameterParser {
 
     @Override
     public WebDriverAction create(ActionCreationContext actionCreationContext) {
-        Function<WebDriver, SearchContext> contextProvider = actionCreationContext.getContextProvider();
+        Function<SearchContext, SearchContext> contextProvider = actionCreationContext.getContextProvider();
         Map<String, String> parameters = actionCreationContext.getParameters();
         boolean expectHttpRequest = actionCreationContext.expectsHttpRequest();
         String url = this.baseURL + parameters.get(PAGE);

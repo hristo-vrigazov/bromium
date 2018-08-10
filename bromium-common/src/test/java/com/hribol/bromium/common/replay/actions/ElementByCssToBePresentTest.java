@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.core.config.SearchContextFunction;
 import com.hribol.bromium.replay.ReplayingState;
 import org.junit.Test;
 import org.openqa.selenium.SearchContext;
@@ -23,7 +24,7 @@ public class ElementByCssToBePresentTest {
     @Test
     public void jsEventIsCorrectlyNamed() {
         WebDriver driver = mock(WebDriver.class);
-        Function<WebDriver, SearchContext> contextProvider = webDriver -> driver;
+        SearchContextFunction contextProvider = webDriver -> driver;
         ElementByCssToBePresent action = new ElementByCssToBePresent(cssSelector, contextProvider);
         action.executeAfterJSPreconditionHasBeenSatisfied(mock(WebDriver.class), mock(ReplayingState.class), contextProvider);
 

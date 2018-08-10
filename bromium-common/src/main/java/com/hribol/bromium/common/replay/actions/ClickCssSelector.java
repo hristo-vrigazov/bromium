@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.core.config.SearchContextFunction;
 import com.hribol.bromium.replay.ReplayingState;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
@@ -19,14 +20,14 @@ public class ClickCssSelector extends ActionWithJSPreconditionBase {
     private final String cssSelector;
     private final boolean expectsHttpRequest;
 
-    public ClickCssSelector(String cssSelector, boolean expectsHttpRequest, Function<WebDriver, SearchContext> contextProvider) {
+    public ClickCssSelector(String cssSelector, boolean expectsHttpRequest, SearchContextFunction contextProvider) {
         super(contextProvider);
         this.cssSelector = cssSelector;
         this.expectsHttpRequest = expectsHttpRequest;
     }
 
     @Override
-    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState state, Function<WebDriver, SearchContext> contextProvider) {
+    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState state, Function<SearchContext, SearchContext> contextProvider) {
         By byCss = By.cssSelector(cssSelector);
         WebElement webElement = contextProvider.apply(driver).findElement(byCss);
         webElement.click();

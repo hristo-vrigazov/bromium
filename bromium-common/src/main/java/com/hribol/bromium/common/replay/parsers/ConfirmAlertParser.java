@@ -14,7 +14,7 @@ public class ConfirmAlertParser implements WebDriverActionParameterParser {
 
     @Override
     public WebDriverAction create(ActionCreationContext actionCreationContext) {
-        Function<WebDriver, SearchContext> contextProvider = actionCreationContext.getContextProvider();
+        Function<SearchContext, SearchContext> contextProvider = actionCreationContext.getContextProvider();
         Map<String, String> parameters = actionCreationContext.getParameters();
         boolean expectHttpRequest = actionCreationContext.expectsHttpRequest();
         return new ConfirmAlert(expectHttpRequest);

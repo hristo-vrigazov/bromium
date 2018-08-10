@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.core.config.SearchContextFunction;
 import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.replay.ReplayingState;
 import com.hribol.bromium.replay.actions.WebDriverAction;
@@ -32,7 +33,7 @@ public class TypeTextInElementFoundByCssSelectorTest {
         WebDriver driver = mock(WebDriver.class);
         when(driver.findElement(By.cssSelector(cssSelector))).thenReturn(textBox);
 
-        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> driver;
+        SearchContextFunction contextProvider = webDriver1 -> driver;
         WebDriverAction action = new TypeTextInElementFoundByCssSelector(cssSelector, text, expectsHttp, contextProvider);
         action.execute(driver, mock(ReplayingState.class), mock(EventSynchronizer.class));
 

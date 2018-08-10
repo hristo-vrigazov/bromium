@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.core.config.SearchContextFunction;
 import com.hribol.bromium.replay.ReplayingState;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
@@ -21,7 +22,7 @@ public class TypeTextInElementFoundByCssSelector extends ActionWithJSPreconditio
     private String text;
     private boolean expectsHttpRequest;
 
-    public TypeTextInElementFoundByCssSelector(String cssSelector, String text, boolean expectsHttpRequest, Function<WebDriver, SearchContext> contextProvider) {
+    public TypeTextInElementFoundByCssSelector(String cssSelector, String text, boolean expectsHttpRequest, SearchContextFunction contextProvider) {
         super(contextProvider);
         this.cssSelector = cssSelector;
         this.text = text;
@@ -39,7 +40,7 @@ public class TypeTextInElementFoundByCssSelector extends ActionWithJSPreconditio
     }
 
     @Override
-    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<WebDriver, SearchContext> contextProvider) {
+    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<SearchContext, SearchContext> contextProvider) {
         WebElement element = contextProvider.apply(driver).findElement(By.cssSelector(cssSelector));
         element.clear();
         element.sendKeys(text);

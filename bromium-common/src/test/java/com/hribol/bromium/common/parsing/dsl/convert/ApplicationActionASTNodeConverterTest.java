@@ -1,8 +1,10 @@
 package com.hribol.bromium.common.parsing.dsl.convert;
 
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
+import com.hribol.bromium.core.config.ContextProvider;
 import com.hribol.bromium.core.config.SyntaxDefinitionConfiguration;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
+import com.hribol.bromium.dsl.bromium.ActionContext;
 import com.hribol.bromium.dsl.bromium.ApplicationAction;
 import com.hribol.bromium.dsl.bromium.Model;
 import com.hribol.bromium.dsl.bromium.SyntaxDefinition;
@@ -27,6 +29,7 @@ public class ApplicationActionASTNodeConverterTest extends BaseDSLConfigurationC
     private ASTNodeConverter<WebDriverActionCondition, WebDriverActionConfiguration> conditionToActionConverter;
     private ASTNodeConverter<WebDriverAction, WebDriverActionConfiguration> actionToActionConverter;
     private ASTNodeConverter<SyntaxDefinition, SyntaxDefinitionConfiguration> syntaxDefinitionConverter;
+    private ASTContextProviderConverter astContextProviderConverter;
 
     private WebDriverActionConfiguration nothingMock;
 
@@ -72,7 +75,8 @@ public class ApplicationActionASTNodeConverterTest extends BaseDSLConfigurationC
         ApplicationActionASTNodeConverter converter = new ApplicationActionASTNodeConverter(
                 conditionToActionConverter,
                 actionToActionConverter,
-                syntaxDefinitionConverter, astContextProviderConverter);
+                syntaxDefinitionConverter,
+                astContextProviderConverter);
         ApplicationActionConfiguration actionConfiguration = converter.convert(applicationAction);
 
         assertEquals(actionName, actionConfiguration.getName());
@@ -97,6 +101,7 @@ public class ApplicationActionASTNodeConverterTest extends BaseDSLConfigurationC
         conditionToActionConverter = mock(ASTNodeConverter.class);
         actionToActionConverter = mock(ASTNodeConverter.class);
         syntaxDefinitionConverter = mock(ASTNodeConverter.class);
+        astContextProviderConverter = mock(ASTContextProviderConverter.class);
 
         preconditionMock = mock(WebDriverActionConfiguration.class);
         actionMock = mock(WebDriverActionConfiguration.class);

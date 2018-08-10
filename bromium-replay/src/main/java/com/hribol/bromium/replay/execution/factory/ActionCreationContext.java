@@ -1,22 +1,22 @@
 package com.hribol.bromium.replay.execution.factory;
 
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebDriver;
+import com.hribol.bromium.core.config.ParameterValues;
+import com.hribol.bromium.core.config.SearchContextFunction;
 
 import java.util.Map;
 import java.util.function.Function;
 
 public class ActionCreationContext {
 
-    private final Map<String, String> parameters;
+    private final ParameterValues parameters;
     private final int step;
     private final boolean expectsHttpRequest;
-    private final Function<WebDriver, SearchContext> contextProvider;
+    private final Function<ParameterValues, SearchContextFunction> contextProvider;
 
-    public ActionCreationContext(Map<String, String> parameters,
+    public ActionCreationContext(ParameterValues parameters,
                                  int step,
                                  boolean expectsHttpRequest,
-                                 Function<WebDriver, SearchContext> contextProvider) {
+                                 Function<ParameterValues, SearchContextFunction> contextProvider) {
         this.parameters = parameters;
         this.step = step;
         this.expectsHttpRequest = expectsHttpRequest;
@@ -35,7 +35,11 @@ public class ActionCreationContext {
         return expectsHttpRequest;
     }
 
-    public Function<WebDriver, SearchContext> getContextProvider() {
-        return contextProvider;
+    public SearchContextFunction getContextProvider() {
+        return getContextProvider(parameters);
+    }
+
+    private SearchContextFunction getContextProvider(ParameterValues parameters) {
+        return contextProvider.apply(parameters);
     }
 }

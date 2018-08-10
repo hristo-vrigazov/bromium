@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.core.config.SearchContextFunction;
 import com.hribol.bromium.replay.ReplayingState;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -31,7 +32,7 @@ public class ClickCssSelectorTest {
         WebDriver webDriver = mock(WebDriver.class);
         when(webDriver.findElement(elementLocator)).thenReturn(webElement);
 
-        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> webDriver;
+        SearchContextFunction contextProvider = webDriver1 -> webDriver;
         ClickCssSelector action = new ClickCssSelector(cssSelector, expectsHttpRequest, contextProvider);
 
         action.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class), contextProvider);

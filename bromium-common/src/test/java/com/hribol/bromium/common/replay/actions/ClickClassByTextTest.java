@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.core.config.SearchContextFunction;
 import com.hribol.bromium.replay.ReplayingState;
 import org.junit.Rule;
 import org.junit.Test;
@@ -58,7 +59,7 @@ public class ClickClassByTextTest {
         WebDriver webDriver = mock(WebDriver.class);
         when(webDriver.findElements(elementsLocator)).thenReturn(webElements);
 
-        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> webDriver;
+        SearchContextFunction contextProvider = webDriver1 -> webDriver;
         ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, expectsHttp, contextProvider);
         clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class), contextProvider);
     }
@@ -74,7 +75,7 @@ public class ClickClassByTextTest {
         WebDriver webDriver = mock(WebDriver.class);
         when(webDriver.findElements(elementsLocator)).thenReturn(webElements);
 
-        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> webDriver;
+        SearchContextFunction contextProvider = webDriver1 -> webDriver;
         ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, expectsHttp, contextProvider);
         thrown.expect(ElementNotSelectableException.class);
         clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class), contextProvider);
@@ -93,7 +94,7 @@ public class ClickClassByTextTest {
         WebDriver webDriver = mock(WebDriver.class);
         when(webDriver.findElements(elementsLocator)).thenReturn(webElements);
 
-        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> webDriver;
+        SearchContextFunction contextProvider = webDriver1 -> webDriver;
         ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, expectsHttp, contextProvider);
         thrown.expect(ElementNotSelectableException.class);
         clickClassByText.executeAfterJSPreconditionHasBeenSatisfied(webDriver, mock(ReplayingState.class), contextProvider);
@@ -101,7 +102,7 @@ public class ClickClassByTextTest {
 
     @Test
     public void jsWaitingEventIsConstructedCorrectly() {
-        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> webDriver1;
+        SearchContextFunction contextProvider = webDriver1 -> webDriver1;
         ClickClassByText clickClassByText = new ClickClassByText(initialCollectorClass, text, expectsHttp, contextProvider);
 
         String expected = CLICK_CLASS_BY_TEXT + " " + initialCollectorClass + " " + text;

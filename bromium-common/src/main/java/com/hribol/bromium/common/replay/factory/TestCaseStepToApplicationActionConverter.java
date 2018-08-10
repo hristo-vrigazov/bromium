@@ -3,6 +3,8 @@ package com.hribol.bromium.common.replay.factory;
 import com.google.inject.Inject;
 import com.hribol.bromium.core.config.ApplicationActionConfiguration;
 import com.hribol.bromium.core.config.ParameterConfiguration;
+import com.hribol.bromium.core.config.ParameterValues;
+import com.hribol.bromium.core.config.SearchContextFunction;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.execution.application.ApplicationAction;
@@ -49,21 +51,23 @@ public class TestCaseStepToApplicationActionConverter {
                                      int i) {
         WebDriverActionConfiguration conditionBeforeExecution = applicationActionConfiguration.getConditionBeforeExecution();
         //TODO: precondition has hardcoded context
-        Optional<WebDriverAction> precondition = convertAction(conditionBeforeExecution, testCaseStep, i, webDriver -> webDriver);
+        Optional<WebDriverAction> precondition = convertAction(conditionBeforeExecution, testCaseStep, i,
+                parameters -> webDriver -> webDriver);
         WebDriverActionConfiguration action = applicationActionConfiguration.getWebDriverAction();
         Boolean expectHttpRequest = applicationActionConfiguration.expectsHttpRequest();
-        Function<WebDriver, SearchContext> contextProvider = applicationActionConfiguration.getContextProvider().getFunction();
+        Function<ParameterValues, SearchContextFunction> contextProvider = applicationActionConfiguration.getContextProvider().getFunction();
         Optional<WebDriverAction> webdriverAction = convertAction(action, testCaseStep, i, expectHttpRequest, contextProvider);
         WebDriverActionConfiguration conditionAfterExecution = applicationActionConfiguration.getConditionAfterExecution();
         //TODO: postcondition has hardcoded context
-        Optional<WebDriverAction> postCondition = convertAction(conditionAfterExecution, testCaseStep, i, webDriver -> webDriver);
+        Optional<WebDriverAction> postCondition = convertAction(conditionAfterExecution, testCaseStep, i,
+                parameters -> webDriver -> webDriver);
         return new ConvertedApplicationAction(precondition, webdriverAction, postCondition);
     }
 
     private Optional<WebDriverAction> convertAction(WebDriverActionConfiguration webDriverActionConfiguration,
                                                     Map<String, String> testCaseStep,
                                                     int step,
-                                                    Function<WebDriver, SearchContext> contextProvider) {
+                                                    Function<ParameterValues, SearchContextFunction> contextProvider) {
         return convertAction(webDriverActionConfiguration, testCaseStep, step, false, contextProvider);
     }
 
@@ -71,7 +75,7 @@ public class TestCaseStepToApplicationActionConverter {
                                                     Map<String, String> testCaseStep,
                                                     int step,
                                                     boolean expectHttpRequest,
-                                                    Function<WebDriver, SearchContext> webDriverSearchContextFunction) {
+                                                    Function<ParameterValues, SearchContextFunction> webDriverSearchContextFunction) {
         String webdriverActionType = webDriverActionConfiguration.getWebDriverActionType();
         if (webdriverActionType.equals(NOTHING)) {
             return Optional.empty();
@@ -79,8 +83,8 @@ public class TestCaseStepToApplicationActionConverter {
 
         Map<String, ParameterConfiguration> parametersConfigurations = webDriverActionConfiguration
                 .getParametersConfiguration();
-        Map<String, String> parameters = new HashMap<>();
 
+        ParameterValues parameters = new ParameterValues();
         parameters.put(EVENT, testCaseStep.get(EVENT));
 
         for (String parameterName: parametersConfigurations.keySet()) {

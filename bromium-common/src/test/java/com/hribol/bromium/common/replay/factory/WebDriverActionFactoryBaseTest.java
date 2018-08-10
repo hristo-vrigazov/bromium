@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.factory;
 
+import com.hribol.bromium.core.config.ParameterValues;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.execution.factory.ActionCreationContext;
 import com.hribol.bromium.replay.parsers.WebDriverActionParameterParser;
@@ -27,12 +28,12 @@ public class WebDriverActionFactoryBaseTest {
         boolean expectsHttp = true;
         int step = 0;
 
-        Map<String, String> parameters = new HashMap<>();
+        ParameterValues parameters = new ParameterValues();
         parameters.put("event", "something");
         parameters.put("parameter", "parametervalue");
 
         WebDriverActionParameterParser parser = mock(WebDriverActionParameterParser.class);
-        ActionCreationContext creationContext = new ActionCreationContext(parameters, step, expectsHttp, webDriver -> webDriver);
+        ActionCreationContext creationContext = new ActionCreationContext(parameters, step, expectsHttp, parameterValues -> webDriver -> webDriver);
         when(parser.create(eq(creationContext))).thenReturn(expectedAction);
 
         String webDriverActionType = "SOME_ACTION_TYPE";

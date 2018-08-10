@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.core.config.SearchContextFunction;
 import com.hribol.bromium.core.synchronization.EventSynchronizer;
 import com.hribol.bromium.core.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.ReplayingState;
@@ -30,12 +31,12 @@ public class ActionWithJSPreconditionBaseTest {
     public void lockCallsAWaitIfWaitingEventIsNotSatisfiedWhenSubmitted() throws InterruptedException, TimeoutException {
         String jsEvent = "jsEvent";
         WebDriver driver = mock(WebDriver.class);
-        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> driver;
+        SearchContextFunction contextProvider = webDriver1 -> driver;
 
         ActionWithJSPreconditionBase actionWithJSPreconditionBase = new ActionWithJSPreconditionBase(contextProvider) {
 
             @Override
-            public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<WebDriver, SearchContext> contextProvider) {
+            public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<SearchContext, SearchContext> contextProvider) {
 
             }
 
@@ -67,12 +68,12 @@ public class ActionWithJSPreconditionBaseTest {
         String jsEvent = "jsEvent";
         WebDriver driver = mock(WebDriver.class);
 
-        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> driver;
+        SearchContextFunction contextProvider = webDriver1 -> driver;
 
         ActionWithJSPreconditionBase actionWithJSPreconditionBase = new ActionWithJSPreconditionBase(contextProvider) {
 
             @Override
-            public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<WebDriver, SearchContext> contextProvider) {
+            public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<SearchContext, SearchContext> contextProvider) {
 
             }
 
@@ -108,12 +109,12 @@ public class ActionWithJSPreconditionBaseTest {
     public void doesNotCallExecuteIfInterruptedWhileWaiting() throws InterruptedException, TimeoutException {
         String jsEvent = "jsEvent";
         WebDriver driver = mock(WebDriver.class);
-        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> driver;
+        SearchContextFunction contextProvider = webDriver1 -> driver;
 
         ActionWithJSPreconditionBase actionWithJSPreconditionBase = new ActionWithJSPreconditionBase(contextProvider) {
 
             @Override
-            public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<WebDriver, SearchContext> contextProvider) {
+            public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<SearchContext, SearchContext> contextProvider) {
 
             }
 

@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.core.config.SearchContextFunction;
 import com.hribol.bromium.replay.ReplayingState;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
@@ -15,7 +16,7 @@ public class ClickDataId extends ActionWithJSPreconditionBase {
     private final String dataId;
     private final boolean expectsHttpRequest;
 
-    public ClickDataId(String dataId, boolean expectsHttpRequest, Function<WebDriver, SearchContext> contextProvider) {
+    public ClickDataId(String dataId, boolean expectsHttpRequest, SearchContextFunction contextProvider) {
         super(contextProvider);
         this.dataId = dataId;
         this.expectsHttpRequest = expectsHttpRequest;
@@ -23,7 +24,7 @@ public class ClickDataId extends ActionWithJSPreconditionBase {
 
 
     @Override
-    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<WebDriver, SearchContext> contextProvider) {
+    public void executeAfterJSPreconditionHasBeenSatisfied(WebDriver driver, ReplayingState replayingState, Function<SearchContext, SearchContext> contextProvider) {
         String dataId = this.dataId.startsWith("{{")
                 ? replayingState.getValue(this.dataId)
                 : this.dataId;

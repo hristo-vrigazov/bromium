@@ -51,13 +51,11 @@ Locator:
 ;
 
 ClassByText:
-	parameterNames += 'class' parameterValues += ParameterValue 
-	'and' 
-	paramterNames += 'text' parameterValues += ParameterValue
+	'class' klass=ParameterValue 'and' 'text' text=ParameterValue
 ;
 
 CssSelector:
-	'css' parameterNames += 'selector' parameterValues += ParameterValue
+	'css' 'selector' selector=ParameterValue
 ;
 
 SyntaxDefinition:

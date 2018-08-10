@@ -1,5 +1,6 @@
 package com.hribol.bromium.common.replay.actions;
 
+import com.hribol.bromium.core.config.SearchContextFunction;
 import com.hribol.bromium.replay.ReplayingState;
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,7 +31,7 @@ public class TextOfElementFoundByCssSelectorToBeTest {
 
     @Test
     public void jsEventIsCorrect() {
-        Function<WebDriver, SearchContext> contextProvider = webDriver1 -> driver;
+        SearchContextFunction contextProvider = webDriver1 -> driver;
         TextOfElementFoundByCssSelectorToBe action = new TextOfElementFoundByCssSelectorToBe(cssSelector, text, contextProvider);
         action.executeAfterJSPreconditionHasBeenSatisfied(mock(WebDriver.class), mock(ReplayingState.class), contextProvider);
 

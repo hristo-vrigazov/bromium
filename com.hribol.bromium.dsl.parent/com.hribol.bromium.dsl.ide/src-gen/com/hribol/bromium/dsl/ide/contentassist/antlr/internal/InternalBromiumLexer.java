@@ -356,10 +356,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:24:7: ( 'and' )
-            // InternalBromium.g:24:9: 'and'
+            // InternalBromium.g:24:7: ( 'class' )
+            // InternalBromium.g:24:9: 'class'
             {
-            match("and"); 
+            match("class"); 
 
 
             }
@@ -377,10 +377,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:25:7: ( 'css' )
-            // InternalBromium.g:25:9: 'css'
+            // InternalBromium.g:25:7: ( 'and' )
+            // InternalBromium.g:25:9: 'and'
             {
-            match("css"); 
+            match("and"); 
 
 
             }
@@ -398,10 +398,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:26:7: ( 'when' )
-            // InternalBromium.g:26:9: 'when'
+            // InternalBromium.g:26:7: ( 'text' )
+            // InternalBromium.g:26:9: 'text'
             {
-            match("when"); 
+            match("text"); 
 
 
             }
@@ -419,10 +419,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:27:7: ( 'then' )
-            // InternalBromium.g:27:9: 'then'
+            // InternalBromium.g:27:7: ( 'css' )
+            // InternalBromium.g:27:9: 'css'
             {
-            match("then"); 
+            match("css"); 
 
 
             }
@@ -440,10 +440,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:28:7: ( 'make' )
-            // InternalBromium.g:28:9: 'make'
+            // InternalBromium.g:28:7: ( 'selector' )
+            // InternalBromium.g:28:9: 'selector'
             {
-            match("make"); 
+            match("selector"); 
 
 
             }
@@ -461,10 +461,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:29:7: ( 'sure' )
-            // InternalBromium.g:29:9: 'sure'
+            // InternalBromium.g:29:7: ( 'when' )
+            // InternalBromium.g:29:9: 'when'
             {
-            match("sure"); 
+            match("when"); 
 
 
             }
@@ -482,10 +482,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:30:7: ( 'do' )
-            // InternalBromium.g:30:9: 'do'
+            // InternalBromium.g:30:7: ( 'then' )
+            // InternalBromium.g:30:9: 'then'
             {
-            match("do"); 
+            match("then"); 
 
 
             }
@@ -503,10 +503,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:31:7: ( 'expect' )
-            // InternalBromium.g:31:9: 'expect'
+            // InternalBromium.g:31:7: ( 'make' )
+            // InternalBromium.g:31:9: 'make'
             {
-            match("expect"); 
+            match("make"); 
 
 
             }
@@ -524,10 +524,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:32:7: ( 'http' )
-            // InternalBromium.g:32:9: 'http'
+            // InternalBromium.g:32:7: ( 'sure' )
+            // InternalBromium.g:32:9: 'sure'
             {
-            match("http"); 
+            match("sure"); 
 
 
             }
@@ -545,10 +545,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:33:7: ( 'request' )
-            // InternalBromium.g:33:9: 'request'
+            // InternalBromium.g:33:7: ( 'do' )
+            // InternalBromium.g:33:9: 'do'
             {
-            match("request"); 
+            match("do"); 
 
 
             }
@@ -566,10 +566,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:34:7: ( 'element' )
-            // InternalBromium.g:34:9: 'element'
+            // InternalBromium.g:34:7: ( 'expect' )
+            // InternalBromium.g:34:9: 'expect'
             {
-            match("element"); 
+            match("expect"); 
 
 
             }
@@ -587,10 +587,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:35:7: ( 'is' )
-            // InternalBromium.g:35:9: 'is'
+            // InternalBromium.g:35:7: ( 'http' )
+            // InternalBromium.g:35:9: 'http'
             {
-            match("is"); 
+            match("http"); 
 
 
             }
@@ -608,10 +608,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:36:7: ( 'present' )
-            // InternalBromium.g:36:9: 'present'
+            // InternalBromium.g:36:7: ( 'request' )
+            // InternalBromium.g:36:9: 'request'
             {
-            match("present"); 
+            match("request"); 
 
 
             }
@@ -629,10 +629,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:37:7: ( 'click' )
-            // InternalBromium.g:37:9: 'click'
+            // InternalBromium.g:37:7: ( 'element' )
+            // InternalBromium.g:37:9: 'element'
             {
-            match("click"); 
+            match("element"); 
 
 
             }
@@ -650,10 +650,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:38:7: ( 'on' )
-            // InternalBromium.g:38:9: 'on'
+            // InternalBromium.g:38:7: ( 'is' )
+            // InternalBromium.g:38:9: 'is'
             {
-            match("on"); 
+            match("is"); 
 
 
             }
@@ -671,10 +671,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:39:7: ( 'load' )
-            // InternalBromium.g:39:9: 'load'
+            // InternalBromium.g:39:7: ( 'present' )
+            // InternalBromium.g:39:9: 'present'
             {
-            match("load"); 
+            match("present"); 
 
 
             }
@@ -692,10 +692,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:40:7: ( 'type' )
-            // InternalBromium.g:40:9: 'type'
+            // InternalBromium.g:40:7: ( 'click' )
+            // InternalBromium.g:40:9: 'click'
             {
-            match("type"); 
+            match("click"); 
 
 
             }
@@ -713,10 +713,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:41:7: ( 'in' )
-            // InternalBromium.g:41:9: 'in'
+            // InternalBromium.g:41:7: ( 'on' )
+            // InternalBromium.g:41:9: 'on'
             {
-            match("in"); 
+            match("on"); 
 
 
             }
@@ -734,10 +734,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__42;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:42:7: ( 'has' )
-            // InternalBromium.g:42:9: 'has'
+            // InternalBromium.g:42:7: ( 'load' )
+            // InternalBromium.g:42:9: 'load'
             {
-            match("has"); 
+            match("load"); 
 
 
             }
@@ -755,10 +755,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__43;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:43:7: ( 'set' )
-            // InternalBromium.g:43:9: 'set'
+            // InternalBromium.g:43:7: ( 'type' )
+            // InternalBromium.g:43:9: 'type'
             {
-            match("set"); 
+            match("type"); 
 
 
             }
@@ -776,10 +776,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__44;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:44:7: ( 'to' )
-            // InternalBromium.g:44:9: 'to'
+            // InternalBromium.g:44:7: ( 'in' )
+            // InternalBromium.g:44:9: 'in'
             {
-            match("to"); 
+            match("in"); 
 
 
             }
@@ -797,10 +797,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__45;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:45:7: ( 'the' )
-            // InternalBromium.g:45:9: 'the'
+            // InternalBromium.g:45:7: ( 'has' )
+            // InternalBromium.g:45:9: 'has'
             {
-            match("the"); 
+            match("has"); 
 
 
             }
@@ -818,10 +818,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__46;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:46:7: ( 'text' )
-            // InternalBromium.g:46:9: 'text'
+            // InternalBromium.g:46:7: ( 'set' )
+            // InternalBromium.g:46:9: 'set'
             {
-            match("text"); 
+            match("set"); 
 
 
             }
@@ -839,10 +839,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__47;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:47:7: ( 'of' )
-            // InternalBromium.g:47:9: 'of'
+            // InternalBromium.g:47:7: ( 'to' )
+            // InternalBromium.g:47:9: 'to'
             {
-            match("of"); 
+            match("to"); 
 
 
             }
@@ -860,10 +860,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:48:7: ( 'select' )
-            // InternalBromium.g:48:9: 'select'
+            // InternalBromium.g:48:7: ( 'the' )
+            // InternalBromium.g:48:9: 'the'
             {
-            match("select"); 
+            match("the"); 
 
 
             }
@@ -881,10 +881,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__49;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:49:7: ( 'class' )
-            // InternalBromium.g:49:9: 'class'
+            // InternalBromium.g:49:7: ( 'of' )
+            // InternalBromium.g:49:9: 'of'
             {
-            match("class"); 
+            match("of"); 
 
 
             }
@@ -902,10 +902,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = T__50;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:50:7: ( 'selector' )
-            // InternalBromium.g:50:9: 'selector'
+            // InternalBromium.g:50:7: ( 'select' )
+            // InternalBromium.g:50:9: 'select'
             {
-            match("selector"); 
+            match("select"); 
 
 
             }
@@ -1049,10 +1049,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:5868:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalBromium.g:5868:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalBromium.g:5811:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalBromium.g:5811:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalBromium.g:5868:11: ( '^' )?
+            // InternalBromium.g:5811:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1061,7 +1061,7 @@ public class InternalBromiumLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalBromium.g:5868:11: '^'
+                    // InternalBromium.g:5811:11: '^'
                     {
                     match('^'); 
 
@@ -1079,7 +1079,7 @@ public class InternalBromiumLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalBromium.g:5868:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalBromium.g:5811:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -1128,10 +1128,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:5870:10: ( ( '0' .. '9' )+ )
-            // InternalBromium.g:5870:12: ( '0' .. '9' )+
+            // InternalBromium.g:5813:10: ( ( '0' .. '9' )+ )
+            // InternalBromium.g:5813:12: ( '0' .. '9' )+
             {
-            // InternalBromium.g:5870:12: ( '0' .. '9' )+
+            // InternalBromium.g:5813:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -1145,7 +1145,7 @@ public class InternalBromiumLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalBromium.g:5870:13: '0' .. '9'
+            	    // InternalBromium.g:5813:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1177,10 +1177,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:5872:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalBromium.g:5872:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalBromium.g:5815:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalBromium.g:5815:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalBromium.g:5872:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalBromium.g:5815:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1198,10 +1198,10 @@ public class InternalBromiumLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalBromium.g:5872:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalBromium.g:5815:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalBromium.g:5872:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalBromium.g:5815:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -1217,7 +1217,7 @@ public class InternalBromiumLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalBromium.g:5872:21: '\\\\' .
+                    	    // InternalBromium.g:5815:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1225,7 +1225,7 @@ public class InternalBromiumLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalBromium.g:5872:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalBromium.g:5815:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1250,10 +1250,10 @@ public class InternalBromiumLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalBromium.g:5872:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalBromium.g:5815:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalBromium.g:5872:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalBromium.g:5815:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -1269,7 +1269,7 @@ public class InternalBromiumLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalBromium.g:5872:54: '\\\\' .
+                    	    // InternalBromium.g:5815:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1277,7 +1277,7 @@ public class InternalBromiumLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalBromium.g:5872:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalBromium.g:5815:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1320,12 +1320,12 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:5874:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalBromium.g:5874:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalBromium.g:5817:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalBromium.g:5817:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalBromium.g:5874:24: ( options {greedy=false; } : . )*
+            // InternalBromium.g:5817:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -1350,7 +1350,7 @@ public class InternalBromiumLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalBromium.g:5874:52: .
+            	    // InternalBromium.g:5817:52: .
             	    {
             	    matchAny(); 
 
@@ -1380,12 +1380,12 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:5876:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalBromium.g:5876:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalBromium.g:5819:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalBromium.g:5819:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalBromium.g:5876:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalBromium.g:5819:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1398,7 +1398,7 @@ public class InternalBromiumLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalBromium.g:5876:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalBromium.g:5819:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1418,7 +1418,7 @@ public class InternalBromiumLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalBromium.g:5876:40: ( ( '\\r' )? '\\n' )?
+            // InternalBromium.g:5819:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1427,9 +1427,9 @@ public class InternalBromiumLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalBromium.g:5876:41: ( '\\r' )? '\\n'
+                    // InternalBromium.g:5819:41: ( '\\r' )? '\\n'
                     {
-                    // InternalBromium.g:5876:41: ( '\\r' )?
+                    // InternalBromium.g:5819:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1438,7 +1438,7 @@ public class InternalBromiumLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalBromium.g:5876:41: '\\r'
+                            // InternalBromium.g:5819:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1470,10 +1470,10 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:5878:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalBromium.g:5878:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalBromium.g:5821:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalBromium.g:5821:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalBromium.g:5878:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalBromium.g:5821:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -1527,8 +1527,8 @@ public class InternalBromiumLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBromium.g:5880:16: ( . )
-            // InternalBromium.g:5880:18: .
+            // InternalBromium.g:5823:16: ( . )
+            // InternalBromium.g:5823:18: .
             {
             matchAny(); 
 
@@ -1926,17 +1926,17 @@ public class InternalBromiumLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\3\37\2\uffff\16\37\1\33\2\uffff\3\33\2\uffff\3\37\1\uffff\4\37\2\uffff\1\37\1\123\1\124\1\125\6\37\1\135\11\37\1\150\7\37\1\160\1\161\1\37\5\uffff\2\37\1\165\4\37\1\172\1\37\3\uffff\2\37\1\176\2\37\1\u0082\1\37\1\uffff\3\37\1\u0088\1\37\1\u008a\4\37\1\uffff\4\37\1\u0093\2\37\2\uffff\1\37\1\u0097\1\37\1\uffff\4\37\1\uffff\1\u009d\1\37\1\u009f\1\uffff\2\37\1\u00a2\1\uffff\1\u00a3\1\u00a4\1\u00a5\1\u00a6\1\u00a7\1\uffff\1\37\1\uffff\3\37\1\u00ac\3\37\1\u00b0\1\uffff\1\37\1\u00b2\1\u00b3\1\uffff\3\37\1\u00b7\1\37\1\uffff\1\37\1\uffff\1\37\1\u00bb\6\uffff\1\37\1\u00bd\1\u00be\1\37\1\uffff\3\37\1\uffff\1\37\2\uffff\1\u00c4\2\37\1\uffff\1\37\1\u00c8\1\u00ca\1\uffff\1\37\2\uffff\1\37\1\u00cd\1\u00ce\2\37\1\uffff\1\u00d1\1\37\1\u00d3\1\uffff\1\37\1\uffff\1\u00d5\1\u00d6\2\uffff\1\u00d7\1\u00d8\1\uffff\1\u00d9\1\uffff\1\u00da\6\uffff";
+        "\1\uffff\3\37\2\uffff\16\37\1\33\2\uffff\3\33\2\uffff\3\37\1\uffff\4\37\2\uffff\1\37\1\123\1\124\1\125\7\37\1\136\10\37\1\150\7\37\1\160\1\161\1\37\5\uffff\2\37\1\165\4\37\1\172\1\37\3\uffff\2\37\1\176\3\37\1\u0083\1\37\1\uffff\2\37\1\u0088\3\37\1\u008c\2\37\1\uffff\4\37\1\u0093\2\37\2\uffff\1\37\1\u0097\1\37\1\uffff\4\37\1\uffff\1\u009d\2\37\1\uffff\1\u00a0\1\37\1\u00a2\1\u00a3\1\uffff\1\u00a4\1\u00a5\1\u00a6\1\u00a7\1\uffff\3\37\1\uffff\1\37\1\u00ac\3\37\1\u00b0\1\uffff\1\37\1\u00b2\1\u00b3\1\uffff\3\37\1\u00b7\1\37\1\uffff\2\37\1\uffff\1\u00bb\6\uffff\1\37\1\u00bd\1\u00be\1\37\1\uffff\3\37\1\uffff\1\37\2\uffff\1\u00c4\2\37\1\uffff\1\37\1\u00c8\1\u00ca\1\uffff\1\37\2\uffff\1\37\1\u00cd\1\u00ce\2\37\1\uffff\1\u00d1\1\37\1\u00d3\1\uffff\1\37\1\uffff\1\u00d5\1\u00d6\2\uffff\1\u00d7\1\u00d8\1\uffff\1\u00d9\1\uffff\1\u00da\6\uffff";
     static final String DFA12_eofS =
         "\u00db\uffff";
     static final String DFA12_minS =
-        "\1\0\2\141\1\143\2\uffff\1\162\1\144\1\145\1\141\1\150\1\145\1\154\2\141\1\154\2\141\1\146\1\157\1\101\2\uffff\2\0\1\52\2\uffff\2\155\1\164\1\uffff\1\162\1\154\1\164\1\144\2\uffff\1\157\3\60\1\156\1\162\1\154\1\142\1\145\1\160\1\60\1\170\1\164\1\145\1\167\1\161\1\163\1\141\1\156\1\153\1\60\1\164\1\160\1\145\1\164\1\163\1\145\1\147\2\60\1\141\5\uffff\1\145\1\142\1\60\1\163\1\151\1\165\1\151\1\60\1\155\3\uffff\1\164\1\145\1\60\1\145\1\154\1\60\1\145\1\uffff\1\164\1\150\1\156\1\60\1\165\1\60\1\143\1\163\1\146\1\145\1\uffff\1\141\1\145\1\155\1\160\1\60\1\163\1\145\2\uffff\1\144\1\60\1\145\1\uffff\1\151\1\141\1\145\1\157\1\uffff\1\60\1\141\1\60\1\uffff\1\143\1\145\1\60\1\uffff\5\60\1\uffff\1\145\1\uffff\1\153\1\163\1\151\1\60\1\111\1\143\1\145\1\60\1\uffff\1\145\2\60\1\uffff\1\162\1\157\1\142\1\60\1\156\1\uffff\1\170\1\uffff\1\164\1\60\6\uffff\1\163\2\60\1\162\1\uffff\1\144\1\164\1\156\1\uffff\1\156\2\uffff\1\60\1\156\1\154\1\uffff\1\163\2\60\1\uffff\1\164\2\uffff\1\155\2\60\2\164\1\uffff\1\60\1\145\1\60\1\uffff\1\162\1\uffff\2\60\2\uffff\2\60\1\uffff\1\60\1\uffff\1\60\6\uffff";
+        "\1\0\2\141\1\143\2\uffff\1\162\1\144\1\145\1\141\1\150\1\145\1\154\2\141\1\154\2\141\1\146\1\157\1\101\2\uffff\2\0\1\52\2\uffff\2\155\1\164\1\uffff\1\162\1\154\1\164\1\144\2\uffff\1\157\3\60\1\156\1\154\1\162\1\142\1\170\1\145\1\160\1\60\1\164\1\145\1\167\1\161\1\141\1\163\1\156\1\153\1\60\1\164\1\160\1\145\1\164\1\163\1\145\1\147\2\60\1\141\5\uffff\1\145\1\142\1\60\1\163\1\151\1\165\1\151\1\60\1\155\3\uffff\1\164\1\145\1\60\1\145\1\154\1\164\1\60\1\145\1\uffff\1\150\1\156\1\60\1\165\1\163\1\143\1\60\1\146\1\145\1\uffff\1\141\1\145\1\155\1\160\1\60\1\163\1\145\2\uffff\1\144\1\60\1\145\1\uffff\1\151\1\141\1\145\1\157\1\uffff\1\60\1\141\1\143\1\uffff\1\60\1\145\2\60\1\uffff\4\60\1\uffff\1\145\1\163\1\153\1\uffff\1\151\1\60\1\111\1\143\1\145\1\60\1\uffff\1\145\2\60\1\uffff\1\162\1\157\1\142\1\60\1\156\1\uffff\1\170\1\164\1\uffff\1\60\6\uffff\1\163\2\60\1\162\1\uffff\1\144\1\164\1\156\1\uffff\1\156\2\uffff\1\60\1\156\1\154\1\uffff\1\163\2\60\1\uffff\1\164\2\uffff\1\155\2\60\2\164\1\uffff\1\60\1\145\1\60\1\uffff\1\162\1\uffff\2\60\2\uffff\2\60\1\uffff\1\60\1\uffff\1\60\6\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\165\1\145\1\156\2\uffff\1\162\1\163\2\171\1\151\1\157\1\163\1\141\1\157\1\170\1\164\1\162\1\156\1\157\1\172\2\uffff\2\uffff\1\57\2\uffff\2\155\1\164\1\uffff\2\162\1\164\1\144\2\uffff\1\157\3\172\1\156\1\162\1\164\1\142\1\145\1\160\1\172\1\170\1\164\1\145\1\167\1\161\1\163\1\151\1\156\1\153\1\172\1\164\1\160\1\145\1\164\1\163\1\145\1\147\2\172\1\141\5\uffff\1\145\1\142\1\172\1\163\1\151\1\165\1\151\1\172\1\155\3\uffff\1\164\1\145\1\172\1\145\1\154\1\172\1\145\1\uffff\1\164\1\150\1\156\1\172\1\165\1\172\1\143\1\163\1\146\1\145\1\uffff\1\141\1\145\1\155\1\160\1\172\1\163\1\145\2\uffff\1\144\1\172\1\145\1\uffff\1\151\1\141\1\145\1\157\1\uffff\1\172\1\141\1\172\1\uffff\1\143\1\145\1\172\1\uffff\5\172\1\uffff\1\145\1\uffff\1\153\1\163\1\151\1\172\1\111\1\143\1\145\1\172\1\uffff\1\145\2\172\1\uffff\1\162\1\157\1\142\1\172\1\156\1\uffff\1\170\1\uffff\1\164\1\172\6\uffff\1\163\2\172\1\162\1\uffff\1\144\1\164\1\156\1\uffff\1\156\2\uffff\1\172\1\156\1\154\1\uffff\1\163\2\172\1\uffff\1\164\2\uffff\1\155\2\172\2\164\1\uffff\1\172\1\145\1\172\1\uffff\1\162\1\uffff\2\172\2\uffff\2\172\1\uffff\1\172\1\uffff\1\172\6\uffff";
+        "\1\uffff\1\165\1\145\1\156\2\uffff\1\162\1\163\2\171\1\151\1\157\1\163\1\141\1\157\1\170\1\164\1\162\1\156\1\157\1\172\2\uffff\2\uffff\1\57\2\uffff\2\155\1\164\1\uffff\2\162\1\164\1\144\2\uffff\1\157\3\172\1\156\1\164\1\162\1\142\1\170\1\145\1\160\1\172\1\164\1\145\1\167\1\161\1\151\1\163\1\156\1\153\1\172\1\164\1\160\1\145\1\164\1\163\1\145\1\147\2\172\1\141\5\uffff\1\145\1\142\1\172\1\163\1\151\1\165\1\151\1\172\1\155\3\uffff\1\164\1\145\1\172\1\145\1\154\1\164\1\172\1\145\1\uffff\1\150\1\156\1\172\1\165\1\163\1\143\1\172\1\146\1\145\1\uffff\1\141\1\145\1\155\1\160\1\172\1\163\1\145\2\uffff\1\144\1\172\1\145\1\uffff\1\151\1\141\1\145\1\157\1\uffff\1\172\1\141\1\143\1\uffff\1\172\1\145\2\172\1\uffff\4\172\1\uffff\1\145\1\163\1\153\1\uffff\1\151\1\172\1\111\1\143\1\145\1\172\1\uffff\1\145\2\172\1\uffff\1\162\1\157\1\142\1\172\1\156\1\uffff\1\170\1\164\1\uffff\1\172\6\uffff\1\163\2\172\1\162\1\uffff\1\144\1\164\1\156\1\uffff\1\156\2\uffff\1\172\1\156\1\154\1\uffff\1\163\2\172\1\uffff\1\164\2\uffff\1\155\2\172\2\164\1\uffff\1\172\1\145\1\172\1\uffff\1\162\1\uffff\2\172\2\uffff\2\172\1\uffff\1\172\1\uffff\1\172\6\uffff";
     static final String DFA12_acceptS =
-        "\4\uffff\1\4\1\5\17\uffff\1\57\1\60\3\uffff\1\64\1\65\3\uffff\1\57\4\uffff\1\4\1\5\37\uffff\1\60\1\61\1\62\1\63\1\64\11\uffff\1\7\1\31\1\37\7\uffff\1\42\12\uffff\1\24\7\uffff\1\34\1\45\3\uffff\1\51\4\uffff\1\16\3\uffff\1\41\3\uffff\1\43\5\uffff\1\14\1\uffff\1\17\10\uffff\1\40\3\uffff\1\1\5\uffff\1\6\1\uffff\1\23\2\uffff\1\21\1\36\1\44\1\12\1\20\1\13\4\uffff\1\22\3\uffff\1\26\1\uffff\1\52\1\35\3\uffff\1\56\3\uffff\1\11\1\uffff\1\33\1\47\5\uffff\1\15\3\uffff\1\10\1\uffff\1\46\2\uffff\1\54\1\25\2\uffff\1\2\1\uffff\1\3\1\uffff\1\27\1\55\1\30\1\32\1\53\1\50";
+        "\4\uffff\1\4\1\5\17\uffff\1\57\1\60\3\uffff\1\64\1\65\3\uffff\1\57\4\uffff\1\4\1\5\37\uffff\1\60\1\61\1\62\1\63\1\64\11\uffff\1\7\1\34\1\42\10\uffff\1\45\11\uffff\1\27\7\uffff\1\37\1\47\3\uffff\1\51\4\uffff\1\17\3\uffff\1\44\4\uffff\1\46\4\uffff\1\14\3\uffff\1\21\6\uffff\1\43\3\uffff\1\1\5\uffff\1\6\2\uffff\1\26\1\uffff\1\20\1\24\1\41\1\12\1\23\1\13\4\uffff\1\25\3\uffff\1\31\1\uffff\1\52\1\40\3\uffff\1\56\3\uffff\1\11\1\uffff\1\16\1\36\5\uffff\1\15\3\uffff\1\10\1\uffff\1\50\2\uffff\1\54\1\30\2\uffff\1\2\1\uffff\1\3\1\uffff\1\32\1\55\1\33\1\35\1\53\1\22";
     static final String DFA12_specialS =
-        "\1\0\26\uffff\1\2\1\1\u00c2\uffff}>";
+        "\1\1\26\uffff\1\2\1\0\u00c2\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\33\2\32\2\33\1\32\22\33\1\32\1\33\1\27\4\33\1\30\7\33\1\31\12\26\7\33\32\25\3\33\1\24\1\25\1\33\1\3\1\25\1\14\1\16\1\17\1\6\1\25\1\20\1\7\2\25\1\23\1\15\1\1\1\22\1\21\1\25\1\13\1\10\1\11\1\25\1\2\1\12\3\25\1\4\1\33\1\5\uff82\33",
             "\1\34\15\uffff\1\36\5\uffff\1\35",
@@ -1946,11 +1946,11 @@ public class InternalBromiumLexer extends Lexer {
             "",
             "\1\46",
             "\1\47\11\uffff\1\51\4\uffff\1\50",
-            "\1\54\17\uffff\1\53\3\uffff\1\52",
-            "\1\55\3\uffff\1\61\2\uffff\1\56\6\uffff\1\60\11\uffff\1\57",
+            "\1\53\17\uffff\1\54\3\uffff\1\52",
+            "\1\55\3\uffff\1\56\2\uffff\1\57\6\uffff\1\61\11\uffff\1\60",
             "\1\63\1\62",
             "\1\65\11\uffff\1\64",
-            "\1\67\2\uffff\1\70\3\uffff\1\66",
+            "\1\66\2\uffff\1\70\3\uffff\1\67",
             "\1\71",
             "\1\73\15\uffff\1\72",
             "\1\75\13\uffff\1\74",
@@ -1981,19 +1981,19 @@ public class InternalBromiumLexer extends Lexer {
             "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
             "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
             "\1\126",
-            "\1\127",
-            "\1\131\7\uffff\1\130",
+            "\1\127\7\uffff\1\130",
+            "\1\131",
             "\1\132",
             "\1\133",
             "\1\134",
+            "\1\135",
             "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-            "\1\136",
             "\1\137",
             "\1\140",
             "\1\141",
             "\1\142",
-            "\1\143",
-            "\1\145\7\uffff\1\144",
+            "\1\143\7\uffff\1\144",
+            "\1\145",
             "\1\146",
             "\1\147",
             "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
@@ -2029,17 +2029,17 @@ public class InternalBromiumLexer extends Lexer {
             "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
             "\1\177",
             "\1\u0080",
-            "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\15\37\1\u0081\14\37",
-            "\1\u0083",
-            "",
+            "\1\u0081",
+            "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\15\37\1\u0082\14\37",
             "\1\u0084",
+            "",
             "\1\u0085",
             "\1\u0086",
             "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\22\37\1\u0087\7\37",
             "\1\u0089",
-            "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
+            "\1\u008a",
             "\1\u008b",
-            "\1\u008c",
+            "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
             "\1\u008d",
             "\1\u008e",
             "",
@@ -2063,22 +2063,22 @@ public class InternalBromiumLexer extends Lexer {
             "",
             "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
             "\1\u009e",
-            "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
+            "\1\u009f",
             "",
-            "\1\u00a0",
+            "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
             "\1\u00a1",
             "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-            "",
             "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
+            "",
             "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
             "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
             "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
             "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
             "",
             "\1\u00a8",
-            "",
             "\1\u00a9",
             "\1\u00aa",
+            "",
             "\1\u00ab",
             "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
             "\1\u00ad",
@@ -2097,8 +2097,8 @@ public class InternalBromiumLexer extends Lexer {
             "\1\u00b8",
             "",
             "\1\u00b9",
-            "",
             "\1\u00ba",
+            "",
             "\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
             "",
             "",
@@ -2196,6 +2196,16 @@ public class InternalBromiumLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA12_24 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_24>='\u0000' && LA12_24<='\uFFFF')) ) {s = 70;}
+
+                        else s = 27;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -2252,16 +2262,6 @@ public class InternalBromiumLexer extends Lexer {
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 26;}
 
                         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='.')||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 27;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA12_24 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_24>='\u0000' && LA12_24<='\uFFFF')) ) {s = 70;}
-
-                        else s = 27;
 
                         if ( s>=0 ) return s;
                         break;

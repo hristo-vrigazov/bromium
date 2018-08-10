@@ -1,6 +1,7 @@
 package com.hribol.bromium.common.replay.parsers;
 
 import com.hribol.bromium.common.replay.actions.ElementByCssToBePresent;
+import com.hribol.bromium.core.config.SearchContextFunction;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.execution.factory.ActionCreationContext;
 import com.hribol.bromium.replay.parsers.WebDriverActionParameterParser;
@@ -20,7 +21,7 @@ public class ElementByCssToBePresentParser implements WebDriverActionParameterPa
 
     @Override
     public WebDriverAction create(ActionCreationContext actionCreationContext) {
-        Function<WebDriver, SearchContext> contextProvider = actionCreationContext.getContextProvider();
+        SearchContextFunction contextProvider = actionCreationContext.getContextProvider();
         Map<String, String> parameters = actionCreationContext.getParameters();
         boolean expectHttpRequest = actionCreationContext.expectsHttpRequest();
         String cssSelector = parameters.get(CSS_SELECTOR);

@@ -1892,9 +1892,9 @@ rule__ClassByText__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getClassByTextAccess().getParameterNamesAssignment_0()); }
-	(rule__ClassByText__ParameterNamesAssignment_0)
-	{ after(grammarAccess.getClassByTextAccess().getParameterNamesAssignment_0()); }
+	{ before(grammarAccess.getClassByTextAccess().getClassKeyword_0()); }
+	'class'
+	{ after(grammarAccess.getClassByTextAccess().getClassKeyword_0()); }
 )
 ;
 finally {
@@ -1919,9 +1919,9 @@ rule__ClassByText__Group__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getClassByTextAccess().getParameterValuesAssignment_1()); }
-	(rule__ClassByText__ParameterValuesAssignment_1)
-	{ after(grammarAccess.getClassByTextAccess().getParameterValuesAssignment_1()); }
+	{ before(grammarAccess.getClassByTextAccess().getKlassAssignment_1()); }
+	(rule__ClassByText__KlassAssignment_1)
+	{ after(grammarAccess.getClassByTextAccess().getKlassAssignment_1()); }
 )
 ;
 finally {
@@ -1973,9 +1973,9 @@ rule__ClassByText__Group__3__Impl
 	}
 :
 (
-	{ before(grammarAccess.getClassByTextAccess().getParamterNamesAssignment_3()); }
-	(rule__ClassByText__ParamterNamesAssignment_3)
-	{ after(grammarAccess.getClassByTextAccess().getParamterNamesAssignment_3()); }
+	{ before(grammarAccess.getClassByTextAccess().getTextKeyword_3()); }
+	'text'
+	{ after(grammarAccess.getClassByTextAccess().getTextKeyword_3()); }
 )
 ;
 finally {
@@ -1999,9 +1999,9 @@ rule__ClassByText__Group__4__Impl
 	}
 :
 (
-	{ before(grammarAccess.getClassByTextAccess().getParameterValuesAssignment_4()); }
-	(rule__ClassByText__ParameterValuesAssignment_4)
-	{ after(grammarAccess.getClassByTextAccess().getParameterValuesAssignment_4()); }
+	{ before(grammarAccess.getClassByTextAccess().getTextAssignment_4()); }
+	(rule__ClassByText__TextAssignment_4)
+	{ after(grammarAccess.getClassByTextAccess().getTextAssignment_4()); }
 )
 ;
 finally {
@@ -2054,9 +2054,9 @@ rule__CssSelector__Group__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getCssSelectorAccess().getParameterNamesAssignment_1()); }
-	(rule__CssSelector__ParameterNamesAssignment_1)
-	{ after(grammarAccess.getCssSelectorAccess().getParameterNamesAssignment_1()); }
+	{ before(grammarAccess.getCssSelectorAccess().getSelectorKeyword_1()); }
+	'selector'
+	{ after(grammarAccess.getCssSelectorAccess().getSelectorKeyword_1()); }
 )
 ;
 finally {
@@ -2080,9 +2080,9 @@ rule__CssSelector__Group__2__Impl
 	}
 :
 (
-	{ before(grammarAccess.getCssSelectorAccess().getParameterValuesAssignment_2()); }
-	(rule__CssSelector__ParameterValuesAssignment_2)
-	{ after(grammarAccess.getCssSelectorAccess().getParameterValuesAssignment_2()); }
+	{ before(grammarAccess.getCssSelectorAccess().getSelectorAssignment_2()); }
+	(rule__CssSelector__SelectorAssignment_2)
+	{ after(grammarAccess.getCssSelectorAccess().getSelectorAssignment_2()); }
 )
 ;
 finally {
@@ -5057,102 +5057,45 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClassByText__ParameterNamesAssignment_0
+rule__ClassByText__KlassAssignment_1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getClassByTextAccess().getParameterNamesClassKeyword_0_0()); }
-		(
-			{ before(grammarAccess.getClassByTextAccess().getParameterNamesClassKeyword_0_0()); }
-			'class'
-			{ after(grammarAccess.getClassByTextAccess().getParameterNamesClassKeyword_0_0()); }
-		)
-		{ after(grammarAccess.getClassByTextAccess().getParameterNamesClassKeyword_0_0()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__ClassByText__ParameterValuesAssignment_1
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	(
-		{ before(grammarAccess.getClassByTextAccess().getParameterValuesParameterValueParserRuleCall_1_0()); }
+		{ before(grammarAccess.getClassByTextAccess().getKlassParameterValueParserRuleCall_1_0()); }
 		ruleParameterValue
-		{ after(grammarAccess.getClassByTextAccess().getParameterValuesParameterValueParserRuleCall_1_0()); }
+		{ after(grammarAccess.getClassByTextAccess().getKlassParameterValueParserRuleCall_1_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ClassByText__ParamterNamesAssignment_3
+rule__ClassByText__TextAssignment_4
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getClassByTextAccess().getParamterNamesTextKeyword_3_0()); }
-		(
-			{ before(grammarAccess.getClassByTextAccess().getParamterNamesTextKeyword_3_0()); }
-			'text'
-			{ after(grammarAccess.getClassByTextAccess().getParamterNamesTextKeyword_3_0()); }
-		)
-		{ after(grammarAccess.getClassByTextAccess().getParamterNamesTextKeyword_3_0()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__ClassByText__ParameterValuesAssignment_4
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	(
-		{ before(grammarAccess.getClassByTextAccess().getParameterValuesParameterValueParserRuleCall_4_0()); }
+		{ before(grammarAccess.getClassByTextAccess().getTextParameterValueParserRuleCall_4_0()); }
 		ruleParameterValue
-		{ after(grammarAccess.getClassByTextAccess().getParameterValuesParameterValueParserRuleCall_4_0()); }
+		{ after(grammarAccess.getClassByTextAccess().getTextParameterValueParserRuleCall_4_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__CssSelector__ParameterNamesAssignment_1
+rule__CssSelector__SelectorAssignment_2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getCssSelectorAccess().getParameterNamesSelectorKeyword_1_0()); }
-		(
-			{ before(grammarAccess.getCssSelectorAccess().getParameterNamesSelectorKeyword_1_0()); }
-			'selector'
-			{ after(grammarAccess.getCssSelectorAccess().getParameterNamesSelectorKeyword_1_0()); }
-		)
-		{ after(grammarAccess.getCssSelectorAccess().getParameterNamesSelectorKeyword_1_0()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__CssSelector__ParameterValuesAssignment_2
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	(
-		{ before(grammarAccess.getCssSelectorAccess().getParameterValuesParameterValueParserRuleCall_2_0()); }
+		{ before(grammarAccess.getCssSelectorAccess().getSelectorParameterValueParserRuleCall_2_0()); }
 		ruleParameterValue
-		{ after(grammarAccess.getCssSelectorAccess().getParameterValuesParameterValueParserRuleCall_2_0()); }
+		{ after(grammarAccess.getCssSelectorAccess().getSelectorParameterValueParserRuleCall_2_0()); }
 	)
 ;
 finally {
