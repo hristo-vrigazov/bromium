@@ -2,8 +2,13 @@ package com.hribol.bromium.common.parsing.dsl.convert;
 
 import com.hribol.bromium.core.config.ContextProvider;
 import com.hribol.bromium.core.config.ParameterValues;
+import com.hribol.bromium.dsl.bromium.ClickClassByText;
+import com.hribol.bromium.dsl.bromium.ExposedParameter;
 import com.hribol.bromium.dsl.bromium.ParameterValue;
+import com.hribol.bromium.dsl.bromium.impl.ClassByTextImpl;
+import com.hribol.bromium.dsl.bromium.impl.ClickClassByTextImpl;
 import com.hribol.bromium.dsl.bromium.impl.CssSelectorImpl;
+import com.hribol.bromium.dsl.bromium.impl.ExposedParameterImpl;
 import com.hribol.bromium.dsl.bromium.impl.ParameterValueImpl;
 import com.hribol.bromium.dsl.bromium.impl.RowIndexImpl;
 import com.hribol.bromium.dsl.bromium.impl.RowLocatorImpl;
@@ -42,6 +47,16 @@ public class ASTContextProviderConverterTest {
 
     @Test
     public void correctlyConstructsRowLocatorSecond() {
+        baseCorrectlyConstructs(1);
+    }
+
+    @Test
+    public void correctlyConstructsClassByTextFirst() {
+        baseCorrectlyConstructs(0);
+    }
+
+    @Test
+    public void correctlyConstructsClassByTextSecond() {
         baseCorrectlyConstructs(1);
     }
 
@@ -124,9 +139,66 @@ public class ASTContextProviderConverterTest {
         Assert.assertEquals(rows.get(index), searchContext);
     }
 
+    private void baseCorrectlyConstructsClassByText(int index) {
+        int otherIndex = (index + 1) % 2;
+        String tableCssSelector = ".entity-triggers-container";
+        String rowsCssSelector = ".trigger-list-entry";
+        String className = "displayName";
+        String textAlias = "triggerName";
+        String textValue = "googleKeyword";
+
+        CssSelectorImpl tableLocator = new CssSelectorImpl(){};
+        tableLocator.setSelector(hardcoded(tableCssSelector));
+        CssSelectorImpl rowsLocator = new CssSelectorImpl(){};
+        rowsLocator.setSelector(hardcoded(rowsCssSelector));
+        RowLocatorImpl rowSelector = new RowLocatorImpl(){};
+        ClassByTextImpl rowSelectedByCssSelector = new ClassByTextImpl() {};
+        rowSelectedByCssSelector.setKlass(hardcoded(className));
+        rowSelectedByCssSelector.setText(exposed(textAlias));
+        rowSelector.setRowLocator(rowSelectedByCssSelector);
+
+        TableActionContextImpl actionContext = new TableActionContextImpl(){};
+        actionContext.setTableLocator(tableLocator);
+        actionContext.setRowsLocator(rowsLocator);
+        actionContext.setRowSelector(rowSelector);
+
+        ParameterValues parameterValues = new ParameterValues();
+        parameterValues.put(textAlias, textValue);
+
+        WebElement indicatorElement = mock(WebElement.class);
+        when(indicatorElement.getText()).thenReturn(textValue);
+
+        WebElement rowOne = mock(WebElement.class);
+        WebElement rowTwo = mock(WebElement.class);
+        List<WebElement> rows = Arrays.asList(rowOne, rowTwo);
+
+        WebElement table = mock(WebElement.class);
+        WebDriver webDriver = mock(WebDriver.class);
+        when(webDriver.findElements(By.cssSelector(tableCssSelector))).thenReturn(Collections.singletonList(table));
+        when(table.findElements(By.cssSelector(rowsCssSelector))).thenReturn(Arrays.asList(rowOne, rowTwo));
+        when(rows.get(index).findElements(By.className(className))).thenReturn(Arrays.asList(indicatorElement));
+        when(rows.get(otherIndex).findElements(By.cssSelector(className))).thenThrow(new NoSuchElementException("Could not find it!"));
+
+        ASTContextProviderConverter converter = new ASTContextProviderConverter();
+
+        ContextProvider convert = converter.convert(actionContext);
+        SearchContext searchContext = convert.getFunction().apply(parameterValues).apply(webDriver);
+
+        Assert.assertNotNull(searchContext);
+        Assert.assertEquals(rows.get(index), searchContext);
+    }
+
     private ParameterValue hardcoded(String value) {
         ParameterValueImpl parameterValue = new ParameterValueImpl(){};
         parameterValue.setContent(value);
+        return parameterValue;
+    }
+
+    private ParameterValue exposed(String alias) {
+        ExposedParameter exposedParameter = new ExposedParameterImpl(){};
+        exposedParameter.setName(alias);
+        ParameterValueImpl parameterValue = new ParameterValueImpl(){};
+        parameterValue.setExposedParameter(exposedParameter);
         return parameterValue;
     }
 
