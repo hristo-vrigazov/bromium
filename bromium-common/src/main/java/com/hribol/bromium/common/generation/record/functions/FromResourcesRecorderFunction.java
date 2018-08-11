@@ -41,8 +41,8 @@ public class FromResourcesRecorderFunction implements RecorderFunction {
             String eventName = generationInformation.getEventName();
             context.put(EVENT, eventName);
             WebDriverActionConfiguration webDriverActionConfiguration = generationInformation.getWebDriverActionConfiguration();
+            ContextProvider contextProvider = generationInformation.getContextProvider();
 
-            //TODO: here we have the context provider, we should create the function
             for (Map.Entry<String, ParameterConfiguration> entry: webDriverActionConfiguration.getParametersConfiguration().entrySet()) {
                 ParameterConfiguration parameterConfiguration = entry.getValue();
                 if (!parameterConfiguration.isExposed()) {
@@ -52,7 +52,8 @@ public class FromResourcesRecorderFunction implements RecorderFunction {
                 }
             }
             String compiled = invocationCodeTemplate.apply(context) + System.lineSeparator();
-            String wrapped = "(function() { \n\t" + compiled + " \n})();";
+            String recorderContextProvider = contextProvider.getRecorderContextProvider();
+            String wrapped = "(function() { \n\t" + recorderContextProvider + "\n\t" + compiled + " \n})();";
             return () -> wrapped;
         } catch (IOException e) {
             throw new IllegalStateException("Could not compile template!", e);

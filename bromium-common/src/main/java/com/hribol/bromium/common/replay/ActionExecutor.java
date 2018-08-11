@@ -1,6 +1,5 @@
 package com.hribol.bromium.common.replay;
 
-import com.hribol.bromium.core.synchronization.SynchronizationEvent;
 import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.execution.WebDriverActionExecutionException;
 import com.hribol.bromium.replay.execution.WebDriverActionExecutor;

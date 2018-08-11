@@ -30,6 +30,7 @@ public class ASTContextProviderConverter implements ASTNodeConverter<ActionConte
                         parameterValues -> searchContext -> searchContext :
                         parameterValues -> searchContext -> getActionContext(parameterValues, actionContext).apply(searchContext)
         );
+        contextProvider.setRecorderContextProvider("var context = document;");
         return contextProvider;
     }
 
