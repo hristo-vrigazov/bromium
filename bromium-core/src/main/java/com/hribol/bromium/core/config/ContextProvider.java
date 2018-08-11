@@ -4,7 +4,7 @@ import java.util.function.Function;
 
 public class ContextProvider {
     private Function<ParameterValues, SearchContextFunction> function;
-    private Function<String, String> recorderContextProvider;
+    private Function<JsFunctionInvocation, String> recorderContextProvider;
 
     public Function<ParameterValues, SearchContextFunction> getFunction() {
         return function;
@@ -14,11 +14,11 @@ public class ContextProvider {
         this.function = function;
     }
 
-    public Function<String, String> getRecorderContextProvider() {
+    public Function<JsFunctionInvocation, String> getRecorderContextProvider() {
         return recorderContextProvider;
     }
 
-    public void setRecorderContextProvider(Function<String, String> recorderContextProvider) {
+    public void setRecorderContextProvider(Function<JsFunctionInvocation, String> recorderContextProvider) {
         this.recorderContextProvider = recorderContextProvider;
     }
 }

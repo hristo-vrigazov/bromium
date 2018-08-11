@@ -5,6 +5,7 @@ import com.github.jknack.handlebars.Template;
 import com.hribol.bromium.common.generation.helper.NameWebDriverActionConfiguration;
 import com.hribol.bromium.common.generation.record.invocations.RecorderFunctionInvocation;
 import com.hribol.bromium.core.config.ContextProvider;
+import com.hribol.bromium.core.config.JsFunctionInvocation;
 import com.hribol.bromium.core.config.ParameterConfiguration;
 import com.hribol.bromium.core.config.WebDriverActionConfiguration;
 import org.apache.commons.io.IOUtils;
@@ -52,7 +53,8 @@ public class FromResourcesRecorderFunction implements RecorderFunction {
                 }
             }
             String compiled = invocationCodeTemplate.apply(context) + System.lineSeparator();
-            String recorderContextProvider = contextProvider.getRecorderContextProvider().apply(compiled);
+            JsFunctionInvocation jsFunctionInvocation = new JsFunctionInvocation("").raw(compiled);
+            String recorderContextProvider = contextProvider.getRecorderContextProvider().apply(jsFunctionInvocation);
             String wrapped = "(function() { \n\t" + recorderContextProvider + "\n})();";
             return () -> wrapped;
         } catch (IOException e) {
