@@ -1,5 +1,5 @@
-function ClickCssSelector(selector, eventName) {
-	document.arrive(selector, options, function () {
+function ClickCssSelector(selector, eventName, context) {
+	context.arrive(selector, options, function () {
 		this.addEventListener("click", function(e) {
 			var parameters = {};
 			parameters["event"] = eventName;

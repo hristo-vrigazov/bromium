@@ -46,7 +46,7 @@ public class ASTContextProviderConverter implements ASTNodeConverter<ActionConte
     }
 
     private Function<SearchContext, List<WebElement>> getTableActionContext(ParameterValues parameterValues,
-                                                                      TableActionContext tableActionContext) {
+                                                                            TableActionContext tableActionContext) {
         Function<SearchContext, WebElement> tableLocator = getLocator(parameterValues, tableActionContext.getTableLocator());
         Function<List<WebElement>, List<WebElement>> rowSelector = getRowSelector(parameterValues, tableActionContext.getRowSelector());
         Function<SearchContext, List<WebElement>> rowLocator = getLocatorMultiple(parameterValues, tableActionContext.getRowsLocator());

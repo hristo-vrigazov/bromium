@@ -1,5 +1,5 @@
-function ClickDataId(dataId, eventName) {
-	document.arrive('input[data-id]', options, function () {
+function ClickDataId(dataId, eventName, context) {
+	context.arrive('input[data-id]', options, function () {
 		this.addEventListener("click", function(e) {
 			var parameters = {};
             parameters["event"] = eventName;

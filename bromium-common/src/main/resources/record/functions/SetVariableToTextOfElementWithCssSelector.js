@@ -1,4 +1,4 @@
-function SetVariableToTextOfElementWithCssSelector(variable, selector, eventName) {
+function SetVariableToTextOfElementWithCssSelector(variable, selector, eventName, context) {
     document.arrive(selector, options, function () {
         var parameters = {};
         var text = this.innerText.trim();

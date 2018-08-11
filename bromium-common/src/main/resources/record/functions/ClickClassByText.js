@@ -1,5 +1,5 @@
-function ClickClassByText(initialCollectorClass, text, eventName) {
-	document.arrive("." + initialCollectorClass, options, function () {
+function ClickClassByText(initialCollectorClass, text, eventName, context) {
+	context.arrive("." + initialCollectorClass, options, function () {
 		this.addEventListener("click", function(e) {
 			var parameters = {};
             parameters["event"] = eventName;

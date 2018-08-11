@@ -1,5 +1,5 @@
-function ClickId(elementId, eventName) {
-    document.arrive('#' + elementId, options, function () {
+function ClickId(elementId, eventName, context) {
+    context.arrive('#' + elementId, options, function () {
         this.addEventListener("click", function(e) {
             var parameters = {};
             parameters["event"] = eventName;

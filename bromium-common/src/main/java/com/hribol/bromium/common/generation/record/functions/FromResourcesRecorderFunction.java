@@ -64,7 +64,6 @@ public class FromResourcesRecorderFunction implements RecorderFunction {
      */
     @Override
     public String getJavascriptCode() {
-        //TODO: context setup here
         return javascriptCode;
     }
 }

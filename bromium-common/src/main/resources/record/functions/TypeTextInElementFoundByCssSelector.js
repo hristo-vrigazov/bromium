@@ -1,5 +1,5 @@
-function TypeTextInElementFoundByCssSelector(selector, eventName, text) {
-	document.arrive(selector, options, function () {
+function TypeTextInElementFoundByCssSelector(selector, eventName, text, context) {
+	context.arrive(selector, options, function () {
 		this.addEventListener("change", function(e) {
 			var parameters = {};
 				parameters["event"] = eventName;

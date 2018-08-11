@@ -1,5 +1,5 @@
-function SelectValue(selector, valueAlias, eventName) {
-    document.arrive(selector, options, function () {
+function SelectValue(selector, valueAlias, eventName, context) {
+    context.arrive(selector, options, function () {
         this.addEventListener("change", function(e) {
             var parameters = {};
             parameters["event"] = eventName;
