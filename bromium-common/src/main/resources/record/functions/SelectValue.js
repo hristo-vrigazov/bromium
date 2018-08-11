@@ -1,7 +1,7 @@
-function SelectValue(selector, valueAlias, eventName, context) {
+function SelectValue(selector, valueAlias, eventName, context, parametersEnrichmentFunctions, parameters) {
     context.arrive(selector, options, function () {
         this.addEventListener("change", function(e) {
-            var parameters = {};
+            parametersEnrichmentFunctions.forEach(function (enrichmentFunction) { enrichmentFunction(); });
             parameters["event"] = eventName;
             parameters[valueAlias] = this.value;
             bromium.notifyEvent(parameters);

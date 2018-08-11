@@ -1,10 +1,10 @@
-function TypeTextInElementFoundByCssSelector(selector, eventName, text, context) {
+function TypeTextInElementFoundByCssSelector(selector, eventName, text, context, parametersEnrichmentFunctions, parameters) {
 	context.arrive(selector, options, function () {
 		this.addEventListener("change", function(e) {
-			var parameters = {};
-				parameters["event"] = eventName;
-				parameters[text] = this.value;
-				bromium.notifyEvent(parameters);
+            parametersEnrichmentFunctions.forEach(function (enrichmentFunction) { enrichmentFunction(); });
+			parameters["event"] = eventName;
+			parameters[text] = this.value;
+			bromium.notifyEvent(parameters);
 		});
 	});
 }

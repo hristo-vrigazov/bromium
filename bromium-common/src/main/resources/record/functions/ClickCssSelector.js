@@ -1,9 +1,8 @@
-function ClickCssSelector(selector, eventName, context) {
+function ClickCssSelector(selector, eventName, context, parametersEnrichmentFunctions, parameters) {
 	context.arrive(selector, options, function () {
 		this.addEventListener("click", function(e) {
-			var parameters = {};
+            parametersEnrichmentFunctions.forEach(function (enrichmentFunction) { enrichmentFunction(); });
 			parameters["event"] = eventName;
-            console.log('click' + new Date().getTime());
 			bromium.notifyEvent(parameters);
 		});
 	});

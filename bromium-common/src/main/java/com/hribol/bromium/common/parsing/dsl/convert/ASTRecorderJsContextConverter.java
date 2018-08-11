@@ -10,19 +10,22 @@ public class ASTRecorderJsContextConverter implements ASTNodeConverter<ActionCon
     @Override
     public Function<String, String> convert(ActionContext actionContext) {
         return actionContext == null ?
-                invocation -> "var context = document;\n" + invocation :
-                invocation -> getActionContextMultiple(actionContext);
+                invocation -> "var parameters = {};\n\t" +
+                        "var parametersEnrichmentFunctions = [];\n\t"+
+                        "var context = document;\n\t" + invocation :
+                invocation -> getActionContextMultiple(invocation, actionContext);
     }
 
-    private String getActionContextMultiple(ActionContext actionContext) {
+    private String getActionContextMultiple(String invocation, ActionContext actionContext) {
         if (actionContext instanceof TableActionContext) {
-            return getTableActionContext((TableActionContext) actionContext);
+            return getTableActionContext(invocation, (TableActionContext) actionContext);
         }
 
         throw new IllegalArgumentException("Unrecognized rule: " + actionContext);
     }
 
-    private String getTableActionContext(TableActionContext actionContext) {
+    private String getTableActionContext(String invocation, TableActionContext actionContext) {
+        actionContext.getTableLocator();
         return null;
     }
 

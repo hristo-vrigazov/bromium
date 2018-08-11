@@ -1,7 +1,7 @@
-function ClickName(name, eventName, context) {
+function ClickName(name, eventName, context, parametersEnrichmentFunctions, parameters) {
     context.arrive('[name="' + name + '"]', options, function () {
         this.addEventListener("click", function(e) {
-            var parameters = {};
+            parametersEnrichmentFunctions.forEach(function (enrichmentFunction) { enrichmentFunction(); });
             parameters["event"] = eventName;
             bromium.notifyEvent(parameters);
         });
