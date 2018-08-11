@@ -52,8 +52,8 @@ public class FromResourcesRecorderFunction implements RecorderFunction {
                 }
             }
             String compiled = invocationCodeTemplate.apply(context) + System.lineSeparator();
-            String recorderContextProvider = contextProvider.getRecorderContextProvider();
-            String wrapped = "(function() { \n\t" + recorderContextProvider + "\n\t" + compiled + " \n})();";
+            String recorderContextProvider = contextProvider.getRecorderContextProvider().apply(compiled);
+            String wrapped = "(function() { \n\t" + recorderContextProvider + "\n})();";
             return () -> wrapped;
         } catch (IOException e) {
             throw new IllegalStateException("Could not compile template!", e);

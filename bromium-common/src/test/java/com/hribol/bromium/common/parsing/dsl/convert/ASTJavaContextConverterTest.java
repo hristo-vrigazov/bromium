@@ -2,11 +2,10 @@ package com.hribol.bromium.common.parsing.dsl.convert;
 
 import com.hribol.bromium.core.config.ContextProvider;
 import com.hribol.bromium.core.config.ParameterValues;
-import com.hribol.bromium.dsl.bromium.ClickClassByText;
+import com.hribol.bromium.core.config.SearchContextFunction;
 import com.hribol.bromium.dsl.bromium.ExposedParameter;
 import com.hribol.bromium.dsl.bromium.ParameterValue;
 import com.hribol.bromium.dsl.bromium.impl.ClassByTextImpl;
-import com.hribol.bromium.dsl.bromium.impl.ClickClassByTextImpl;
 import com.hribol.bromium.dsl.bromium.impl.CssSelectorImpl;
 import com.hribol.bromium.dsl.bromium.impl.ExposedParameterImpl;
 import com.hribol.bromium.dsl.bromium.impl.ParameterValueImpl;
@@ -24,11 +23,12 @@ import org.openqa.selenium.WebElement;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ASTContextProviderConverterTest {
+public class ASTJavaContextConverterTest {
 
     @Test
     public void correctlyConstructsFirstIndex() {
@@ -89,10 +89,10 @@ public class ASTContextProviderConverterTest {
         when(webDriver.findElements(By.cssSelector(tableCssSelector))).thenReturn(Collections.singletonList(table));
         when(table.findElements(By.cssSelector(rowsCssSelector))).thenReturn(Arrays.asList(rowOne, rowTwo));
 
-        ASTContextProviderConverter converter = new ASTContextProviderConverter();
+        ASTJavaContextConverter converter = new ASTJavaContextConverter();
 
-        ContextProvider convert = converter.convert(actionContext);
-        SearchContext searchContext = convert.getFunction().apply(parameterValues).apply(webDriver);
+        Function<ParameterValues, SearchContextFunction> convert = converter.convert(actionContext);
+        SearchContext searchContext = convert.apply(parameterValues).apply(webDriver);
 
         Assert.assertNotNull(searchContext);
         Assert.assertEquals(rows.get(index), searchContext);
@@ -132,10 +132,10 @@ public class ASTContextProviderConverterTest {
         when(rows.get(index).findElements(By.cssSelector(rowCssSelector))).thenReturn(Arrays.asList(indicatorElement));
         when(rows.get(otherIndex).findElements(By.cssSelector(rowCssSelector))).thenThrow(new NoSuchElementException("Could not find it!"));
 
-        ASTContextProviderConverter converter = new ASTContextProviderConverter();
+        ASTJavaContextConverter converter = new ASTJavaContextConverter();
 
-        ContextProvider convert = converter.convert(actionContext);
-        SearchContext searchContext = convert.getFunction().apply(parameterValues).apply(webDriver);
+        Function<ParameterValues, SearchContextFunction> convert = converter.convert(actionContext);
+        SearchContext searchContext = convert.apply(parameterValues).apply(webDriver);
 
         Assert.assertNotNull(searchContext);
         Assert.assertEquals(rows.get(index), searchContext);
@@ -181,10 +181,10 @@ public class ASTContextProviderConverterTest {
         when(rows.get(index).findElements(By.className(className))).thenReturn(Arrays.asList(indicatorElement));
         when(rows.get(otherIndex).findElements(By.cssSelector(className))).thenThrow(new NoSuchElementException("Could not find it!"));
 
-        ASTContextProviderConverter converter = new ASTContextProviderConverter();
+        ASTJavaContextConverter converter = new ASTJavaContextConverter();
 
-        ContextProvider convert = converter.convert(actionContext);
-        SearchContext searchContext = convert.getFunction().apply(parameterValues).apply(webDriver);
+        Function<ParameterValues, SearchContextFunction> convert = converter.convert(actionContext);
+        SearchContext searchContext = convert.apply(parameterValues).apply(webDriver);
 
         Assert.assertNotNull(searchContext);
         Assert.assertEquals(rows.get(index), searchContext);
