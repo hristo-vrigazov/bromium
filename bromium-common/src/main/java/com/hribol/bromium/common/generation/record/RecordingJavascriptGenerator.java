@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 public class RecordingJavascriptGenerator implements JavascriptGenerator<ApplicationConfiguration> {
 
     private JavascriptGenerator<ApplicationActionConfiguration> applicationActionGenerator;
+    private JavascriptGenerator<ApplicationConfiguration> contextBuildersGenerator;
     private String baseTemplate;
 
     private final static Logger logger = LoggerFactory.getLogger(RecordingJavascriptGenerator.class);
@@ -24,15 +25,19 @@ public class RecordingJavascriptGenerator implements JavascriptGenerator<Applica
      * @param baseTemplate the template to be included in the beginning
      * @param applicationActionGenerator the generator per action
      */
-    public RecordingJavascriptGenerator(String baseTemplate, JavascriptGenerator<ApplicationActionConfiguration> applicationActionGenerator) {
+    public RecordingJavascriptGenerator(String baseTemplate,
+                                        JavascriptGenerator<ApplicationActionConfiguration> applicationActionGenerator,
+                                        JavascriptGenerator<ApplicationConfiguration> contextBuildersGenerator) {
         this.baseTemplate = baseTemplate;
         this.applicationActionGenerator = applicationActionGenerator;
+        this.contextBuildersGenerator = contextBuildersGenerator;
     }
 
     @Override
     public String generate(ApplicationConfiguration applicationConfiguration) {
         long start = System.currentTimeMillis();
         String generated = baseTemplate + System.lineSeparator() +
+                contextBuildersGenerator.generate(applicationConfiguration) + System.lineSeparator() +
                 applicationConfiguration
                         .getApplicationActionConfigurationList()
                         .stream()

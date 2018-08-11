@@ -39,7 +39,9 @@ public class RecordingJavascriptGeneratorTest {
         when(applicationActionGenerator.generate(firstAction)).thenReturn(generatedCodeForFirstAction);
         when(applicationActionGenerator.generate(secondAction)).thenReturn(generatedCodeForSecondAction);
 
-        JavascriptGenerator javascriptGenerator = new RecordingJavascriptGenerator(baseTemplate, applicationActionGenerator);
+        JavascriptGenerator<ApplicationConfiguration> contextBuildersGenerator = mock(JavascriptGenerator.class);
+
+        JavascriptGenerator javascriptGenerator = new RecordingJavascriptGenerator(baseTemplate, applicationActionGenerator, contextBuildersGenerator);
         String generatedJavascript = javascriptGenerator.generate(applicationConfiguration);
 
         assertTrue(generatedJavascript.contains(generatedCodeForFirstAction));

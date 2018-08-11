@@ -24,11 +24,14 @@ public class ASTRecorderJsContextConverter implements ASTNodeConverter<ActionCon
                 invocation -> "var parameters = {};\n\t" +
                         "var parametersEnrichmentFunctions = [];\n\t"+
                         "var context = document;\n\t" + invocation.getInvocation() :
-                invocation -> getActionContextMultiple(invocation, actionContext);
+                invocation -> "var parameters = {};\n\t" +
+                        "var parametersEnrichmentFunctions = [];\n\t"+
+                        "var context = document;\n\t" + getActionContextMultiple(invocation, actionContext);
     }
 
     private String getActionContextMultiple(JsFunctionInvocation invocation, ActionContext actionContext) {
-        return getActionContext(invocation, "context", actionContext).getInvocation();
+        JsFunctionInvocation context = getActionContext(invocation, "context", actionContext);
+        return context.getInvocation();
     }
 
     private JsFunctionInvocation getActionContext(JsFunctionInvocation invocation, String context, ActionContext actionContext) {
@@ -45,9 +48,10 @@ public class ASTRecorderJsContextConverter implements ASTNodeConverter<ActionCon
         JsFunctionInvocation rowLocatorInvocation = getRowSelector(invocation, row, actionContext.getRowsLocator(), actionContext.getRowSelector());
         JsFunctionCallback rowsLocator = new JsFunctionCallback().argument(table).body(rowsLocatorInvocation);
         JsFunctionCallback rowLocator = new JsFunctionCallback().argument(row).body(rowLocatorInvocation);
-        tableLocatorInvocation.callback(rowsLocator);
+        JsFunctionCallback finalCall = new JsFunctionCallback().argument(row).body(invocation);
+        rowLocatorInvocation.callback(finalCall);
         rowsLocatorInvocation.callback(rowLocator);
-        rowLocator.body(invocation);
+        tableLocatorInvocation.callback(rowsLocator);
         return tableLocatorInvocation;
     }
 

@@ -27,6 +27,7 @@ import com.hribol.bromium.common.generation.helper.suppliers.StepAndActionConfig
 import com.hribol.bromium.common.generation.helper.suppliers.StepAndWebDriverActionConfigurationSupplier;
 import com.hribol.bromium.common.generation.record.BaseRecorderFunctionFactory;
 import com.hribol.bromium.common.generation.record.PredefinedRecorderFunctionFactory;
+import com.hribol.bromium.common.generation.record.RecordContextBuildersGenerator;
 import com.hribol.bromium.common.generation.record.RecorderFunctionRegistry;
 import com.hribol.bromium.common.generation.record.RecordingJavascriptGenerator;
 import com.hribol.bromium.common.generation.record.RecordingWebDriverActionsOnly;
@@ -561,9 +562,10 @@ public class DefaultModule extends AbstractModule {
     public RecordingJavascriptGenerator getRecordingJavascriptGenerator(@Named(BASE_RECORDING_TEMPLATE) IOProvider<String>
                                                                                 baseTemplateProvider,
                                                                         JavascriptGenerator<ApplicationActionConfiguration>
-                                                                                applicationActionJavascriptGenerator)
+                                                                                applicationActionJavascriptGenerator,
+                                                                        RecordContextBuildersGenerator recordContextBuildersGenerator)
             throws IOException {
-        return new RecordingJavascriptGenerator(baseTemplateProvider.get(), applicationActionJavascriptGenerator);
+        return new RecordingJavascriptGenerator(baseTemplateProvider.get(), applicationActionJavascriptGenerator, recordContextBuildersGenerator);
     }
 
     @CheckedProvides(IOProvider.class)

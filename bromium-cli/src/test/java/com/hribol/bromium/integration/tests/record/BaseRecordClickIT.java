@@ -46,7 +46,6 @@ public abstract class BaseRecordClickIT extends BaseRecordIntegrationTest {
         String baseUrl = (String) opts.get(URL);
         WebDriver driver = recordingSimulatorModule.getWebDriver();
         driver.get(baseUrl + demoPage);
-
         driver.findElement(locator).click();
         Thread.sleep(1000);
     }
