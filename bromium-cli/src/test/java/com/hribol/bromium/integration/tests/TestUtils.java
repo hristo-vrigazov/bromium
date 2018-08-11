@@ -36,6 +36,7 @@ public class TestUtils {
         public static final String CLICK_CLICK_ID_TEST = "clickClickIdTest";
         public static final String CLICK_CLICK_NAME_TEST = "clickClickNameTest";
         public static final String SELECT_VALUE_ACTION = "selectValue";
+        public static final String CLICK_DELETE_ON_CHOSEN_ROW = "clickDeleteOnChosenRow";
 
     }
 
@@ -48,6 +49,8 @@ public class TestUtils {
         public static final String CLICK_NAME_DEMO_PAGE = "click-name.html";
         public static final String SELECT_VALUE_DEMO_PAGE = "select-value.html";
         public static final String CLICK_ID_SCROLL_DEMO_PAGE = "click-id-scroll.html";
+        public static final String TABLE_DELETE_ROW = "table-delete-row.html";
+
 
     }
 

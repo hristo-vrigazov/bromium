@@ -122,4 +122,11 @@ actions {
     id selectValue
     syntax 'Select value' optionValue
     select value optionValue in element with css selector '#select-element'
+
+    id clickDeleteOnChosenRow
+    syntax 'Click delete on chosen row'
+    table with css selector 'ol'
+    rows with css selector 'li'
+    row with css selector '#chosen'
+    click on element with css selector '.delete-button'
 }

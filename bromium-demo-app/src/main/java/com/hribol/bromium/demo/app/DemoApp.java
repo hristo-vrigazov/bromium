@@ -42,7 +42,8 @@ public class DemoApp {
             "click-id.html",
             "click-name.html",
             "select-value.html",
-            "click-id-scroll.html"
+            "click-id-scroll.html",
+            "table-delete-row.html"
     };
 
     private int port;

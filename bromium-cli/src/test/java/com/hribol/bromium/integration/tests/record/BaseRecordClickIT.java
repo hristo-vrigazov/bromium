@@ -5,8 +5,11 @@ import com.hribol.bromium.core.TestScenarioSteps;
 import com.hribol.bromium.integration.tests.simulation.RecordingSimulatorModule;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.io.IOException;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 import static com.hribol.bromium.cli.ParsedOptions.URL;
 import static com.hribol.bromium.core.utils.Constants.EVENT;
@@ -18,12 +21,16 @@ public abstract class BaseRecordClickIT extends BaseRecordIntegrationTest {
 
     private String demoPage;
     private String action;
-    private By locator;
+    private Function<WebDriver, WebElement> elementFunction;
 
     public BaseRecordClickIT(String demoPage, String action, By locator) {
+        this(demoPage, action, webDriver -> webDriver.findElement(locator));
+    }
+
+    public BaseRecordClickIT(String demoPage, String action, Function<WebDriver, WebElement> elementFunction) {
         this.demoPage = demoPage;
         this.action = action;
-        this.locator = locator;
+        this.elementFunction = elementFunction;
     }
 
     @Override
@@ -46,7 +53,8 @@ public abstract class BaseRecordClickIT extends BaseRecordIntegrationTest {
         String baseUrl = (String) opts.get(URL);
         WebDriver driver = recordingSimulatorModule.getWebDriver();
         driver.get(baseUrl + demoPage);
-        driver.findElement(locator).click();
+        WebElement webElement = elementFunction.apply(driver);
+        webElement.click();
         Thread.sleep(1000);
     }
 

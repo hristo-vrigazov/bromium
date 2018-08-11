@@ -2,11 +2,10 @@
     var parameters = {};
     var parametersEnrichmentFunctions = [];
     var context = document;
-    CssSelector(':root', context, function (table) {
-        CssSelector('body', table, function (row) {
-            CssSelector('#click-id-test', row, function (row) {
-                ClickId("click-id-test", "clickClickIdTest", context, parametersEnrichmentFunctions, parameters);
-
+    CssSelector('ol', context, function (table) {
+        CssSelector('li', table, function (row) {
+            CssSelector('#chosen', row, function (row) {
+                ClickCssSelector(".delete-button", "clickDeleteOnChosenRow", context, parametersEnrichmentFunctions, parameters);
             });
         });
     });
