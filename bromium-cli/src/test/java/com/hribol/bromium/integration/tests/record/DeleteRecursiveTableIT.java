@@ -16,8 +16,8 @@ public class DeleteRecursiveTableIT extends BaseRecordClickIT {
         super(TABLE_RECURSIVE_DEMO_PAGE,
                 ImmutableMap.of(
                         EVENT, DELETE_ROW_IN_NAMED_TABLE,
-                        "rowName", "table1",
-                        "tableName", "Element 2"),
+                        "tableName", "table1",
+                        "rowName", "Element 2"),
                 DeleteRecursiveTableIT::getElement);
     }
 
@@ -31,7 +31,8 @@ public class DeleteRecursiveTableIT extends BaseRecordClickIT {
                 .stream()
                 .filter(webElement -> webElement.findElement(By.className("rowName")).getText().equals("Element 2"))
                 .findAny()
-                .orElseThrow(() -> new NoSuchElementException("Table not found!"));
+                .orElseThrow(() -> new NoSuchElementException("Table not found!"))
+                .findElement(By.className("delete-button"));
 
     }
 
