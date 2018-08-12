@@ -146,11 +146,11 @@ actions {
 
 	id deleteRowInNamedTable
 	syntax 'In table named' tableName 'click delete in row with text' rowName
-	table with css selector '#recursive-table'
-	rows with
-		table with css selector 'div.row'
-		rows with css selector 'li'
-		row with css selector 'p.rowName' and text rowName
-	row with class 'tableName' and text tableName
+    table with
+        table with css selector '#recursive-table'
+        rows with css selector 'div.table'
+        row with css selector 'div.tableName' and text tableName
+    rows with css selector 'li'
+    row with css selector 'p.rowName' and text rowName
 	click on element with css selector 'button'
 }

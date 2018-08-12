@@ -47,9 +47,9 @@ public class ASTRecorderJsContextConverter implements ASTNodeConverter<ActionCon
     }
 
     private JsFunctionInvocation getTableActionContext(JsFunctionInvocation invocation, String context, TableActionContext actionContext) {
-        JsFunctionInvocation tableLocatorInvocation = getLocator(invocation, context, actionContext.getTableLocator(), false);
-        JsFunctionInvocation rowsLocatorInvocation = getLocator(invocation, TABLE, actionContext.getRowsLocator(), false);
         JsFunctionInvocation rowLocatorInvocation = getRowSelector(invocation, ROW, actionContext.getRowsLocator(), actionContext.getRowSelector());
+        JsFunctionInvocation rowsLocatorInvocation = getLocator(rowLocatorInvocation, TABLE, actionContext.getRowsLocator(), false);
+        JsFunctionInvocation tableLocatorInvocation = getLocator(rowsLocatorInvocation, context, actionContext.getTableLocator(), false);
         JsFunctionCallback rowsLocator = new JsFunctionCallback().argument(TABLE).body(rowsLocatorInvocation);
         JsFunctionCallback rowLocator = new JsFunctionCallback().argument(ROW).body(rowLocatorInvocation);
         JsFunctionCallback finalCall = new JsFunctionCallback().argument(CONTEXT).body(invocation);

@@ -2,7 +2,7 @@ function RowIndex(indexAlias, rowsProvider, context, parametersEnrichmentFunctio
     //TODO: is this right?
     var elem = context;
     parametersEnrichmentFunctions.push(function(eventContext) {
-        if (eventContext === context) {
+        if (context.contains(eventContext)) {
             parameters[indexAlias] = Array.prototype.indexOf.call(rowsProvider(), elem);
         }
     });
