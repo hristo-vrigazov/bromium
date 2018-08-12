@@ -60,7 +60,7 @@ public abstract class BaseRecordClickIT extends BaseRecordIntegrationTest {
         driver.get(baseUrl + demoPage);
         WebElement webElement = elementFunction.apply(driver);
         webElement.click();
-        Thread.sleep(100000);
+        Thread.sleep(1000);
     }
 
 }

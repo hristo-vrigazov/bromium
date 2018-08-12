@@ -2,7 +2,7 @@ function ClickId(elementId, eventName, context, parametersEnrichmentFunctions, p
     console.log("Listening ClickId");
     context.arrive('#' + elementId, options, function () {
         this.addEventListener("click", function(e) {
-            parametersEnrichmentFunctions.forEach(function (enrichmentFunction) { enrichmentFunction(); });
+            parametersEnrichmentFunctions.forEach(function (enrichmentFunction) { enrichmentFunction(context); });
             parameters["event"] = eventName;
             bromium.notifyEvent(parameters);
         });
