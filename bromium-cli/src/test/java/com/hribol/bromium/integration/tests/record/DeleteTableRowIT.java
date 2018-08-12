@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 import static com.hribol.bromium.integration.tests.TestUtils.Events.CLICK_DELETE_ON_CHOSEN_ROW;
 import static com.hribol.bromium.integration.tests.TestUtils.Pages.TABLE_DELETE_ROW;
 
@@ -13,7 +15,15 @@ public class DeleteTableRowIT extends BaseRecordClickIT {
     }
 
     private static WebElement getElement(WebDriver driver) {
-        return driver.findElements(By.tagName("li"))
+        List<WebElement> elements = driver.findElements(By.tagName("li"));
+        // check that those are not recorded
+        elements
+                .stream()
+                .filter(DeleteTableRowIT::notFilterElement)
+                .map(webElement -> webElement.findElement(By.className("delete-button")))
+                .forEach(webElement -> webElement.click());
+
+        return elements
                 .stream()
                 .filter(DeleteTableRowIT::filterElement)
                 .findFirst()
@@ -28,5 +38,9 @@ public class DeleteTableRowIT extends BaseRecordClickIT {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    private static boolean notFilterElement(WebElement webElement) {
+        return !filterElement(webElement);
     }
 }

@@ -22,6 +22,7 @@ public class RecordingJavascriptGeneratorTest {
     @Test
     public void concatenatesApplicationActionRecorders() {
         String baseTemplate = "baseTemplate";
+        String contextBuilders = "contextBuilders";
         String generatedCodeForFirstAction = "generated1";
         String generatedCodeForSecondAction = "generated2";
 
@@ -40,6 +41,7 @@ public class RecordingJavascriptGeneratorTest {
         when(applicationActionGenerator.generate(secondAction)).thenReturn(generatedCodeForSecondAction);
 
         JavascriptGenerator<ApplicationConfiguration> contextBuildersGenerator = mock(JavascriptGenerator.class);
+        when(contextBuildersGenerator.generate(applicationConfiguration)).thenReturn(contextBuilders);
 
         JavascriptGenerator javascriptGenerator = new RecordingJavascriptGenerator(baseTemplate, applicationActionGenerator, contextBuildersGenerator);
         String generatedJavascript = javascriptGenerator.generate(applicationConfiguration);
@@ -47,6 +49,7 @@ public class RecordingJavascriptGeneratorTest {
         assertTrue(generatedJavascript.contains(generatedCodeForFirstAction));
         assertTrue(generatedJavascript.contains(generatedCodeForSecondAction));
         String expected = baseTemplate
+                + System.lineSeparator() + contextBuilders
                 + System.lineSeparator() + generatedCodeForFirstAction
                 + System.lineSeparator() + generatedCodeForSecondAction
                 + System.lineSeparator();
