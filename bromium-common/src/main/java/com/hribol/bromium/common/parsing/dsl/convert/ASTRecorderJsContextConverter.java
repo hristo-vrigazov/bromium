@@ -16,8 +16,8 @@ import java.util.function.Function;
 
 public class ASTRecorderJsContextConverter implements ASTNodeConverter<ActionContext, Function<JsFunctionInvocation, String>> {
 
-    private final static String TABLE = "context";
-    private final static String ROW = "context";
+    private final static String TABLE = "table";
+    private final static String ROW = "row";
     private final static String CONTEXT = "context";
     private final static String PARAMETER_ENRICHMENT_FUNCTIONS = "parametersEnrichmentFunctions";
     private final static String PARAMETERS = "parameters";
@@ -52,7 +52,7 @@ public class ASTRecorderJsContextConverter implements ASTNodeConverter<ActionCon
         JsFunctionInvocation tableLocatorInvocation = getLocator(rowsLocatorInvocation, context, actionContext.getTableLocator(), false);
         JsFunctionCallback rowsLocator = new JsFunctionCallback().argument(TABLE).body(rowsLocatorInvocation);
         JsFunctionCallback rowLocator = new JsFunctionCallback().argument(ROW).body(rowLocatorInvocation);
-        JsFunctionCallback finalCall = new JsFunctionCallback().argument(CONTEXT).body(invocation);
+        JsFunctionCallback finalCall = new JsFunctionCallback().argument(invocation.isLeaf() ? CONTEXT : TABLE).body(invocation);
         rowLocatorInvocation.callback(finalCall);
         rowsLocatorInvocation.callback(rowLocator);
         tableLocatorInvocation.callback(rowsLocator);

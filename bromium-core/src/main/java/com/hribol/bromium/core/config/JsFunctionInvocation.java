@@ -53,6 +53,10 @@ public class JsFunctionInvocation {
         return this;
     }
 
+    public boolean isLeaf() {
+        return raw != null;
+    }
+
     public String getInvocation() {
         return Optional.ofNullable(raw).orElse(name + "(" + parameters
                 .stream()
