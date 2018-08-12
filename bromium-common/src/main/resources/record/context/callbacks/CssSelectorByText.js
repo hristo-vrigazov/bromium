@@ -1,5 +1,5 @@
-function ClassByText(initialCollectorClass, text, returnParent, context, parametersEnrichmentFunctions, parameters, cb) {
-    context.arrive("." + initialCollectorClass, options, function () {
+function CssSelectorByText(cssSelector, text, returnParent, context, parametersEnrichmentFunctions, parameters, cb) {
+    context.arrive(cssSelector, options, function () {
         var elem = this;
         parametersEnrichmentFunctions.push(function(eventContext) {
             if (eventContext === context) {

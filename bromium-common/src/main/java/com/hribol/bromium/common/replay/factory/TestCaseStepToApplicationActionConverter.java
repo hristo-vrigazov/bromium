@@ -10,10 +10,7 @@ import com.hribol.bromium.replay.actions.WebDriverAction;
 import com.hribol.bromium.replay.execution.application.ApplicationAction;
 import com.hribol.bromium.replay.execution.factory.ActionCreationContext;
 import com.hribol.bromium.replay.execution.factory.WebDriverActionFactory;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebDriver;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
@@ -85,7 +82,7 @@ public class TestCaseStepToApplicationActionConverter {
                 .getParametersConfiguration();
 
         ParameterValues parameters = new ParameterValues();
-        parameters.put(EVENT, testCaseStep.get(EVENT));
+        parameters.putAll(testCaseStep);
 
         for (String parameterName: parametersConfigurations.keySet()) {
             ParameterConfiguration parameterConfiguration = parametersConfigurations.get(parameterName);

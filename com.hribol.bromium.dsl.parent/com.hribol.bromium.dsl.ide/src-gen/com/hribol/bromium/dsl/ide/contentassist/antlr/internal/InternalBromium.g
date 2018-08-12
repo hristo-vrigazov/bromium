@@ -274,6 +274,31 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+// Entry rule entryRuleCssSelectorByText
+entryRuleCssSelectorByText
+:
+{ before(grammarAccess.getCssSelectorByTextRule()); }
+	 ruleCssSelectorByText
+{ after(grammarAccess.getCssSelectorByTextRule()); } 
+	 EOF 
+;
+
+// Rule CssSelectorByText
+ruleCssSelectorByText 
+	@init {
+		int stackSize = keepStackSize();
+	}
+	:
+	(
+		{ before(grammarAccess.getCssSelectorByTextAccess().getGroup()); }
+		(rule__CssSelectorByText__Group__0)
+		{ after(grammarAccess.getCssSelectorByTextAccess().getGroup()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 // Entry rule entryRuleCssSelector
 entryRuleCssSelector
 :
@@ -863,9 +888,15 @@ rule__Locator__Alternatives
 	)
 	|
 	(
-		{ before(grammarAccess.getLocatorAccess().getActionContextParserRuleCall_2()); }
+		{ before(grammarAccess.getLocatorAccess().getCssSelectorByTextParserRuleCall_2()); }
+		ruleCssSelectorByText
+		{ after(grammarAccess.getLocatorAccess().getCssSelectorByTextParserRuleCall_2()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getLocatorAccess().getActionContextParserRuleCall_3()); }
 		ruleActionContext
-		{ after(grammarAccess.getLocatorAccess().getActionContextParserRuleCall_2()); }
+		{ after(grammarAccess.getLocatorAccess().getActionContextParserRuleCall_3()); }
 	)
 ;
 finally {
@@ -2008,6 +2039,168 @@ rule__ClassByText__Group__4__Impl
 	{ before(grammarAccess.getClassByTextAccess().getTextAssignment_4()); }
 	(rule__ClassByText__TextAssignment_4)
 	{ after(grammarAccess.getClassByTextAccess().getTextAssignment_4()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__CssSelectorByText__Group__0
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__CssSelectorByText__Group__0__Impl
+	rule__CssSelectorByText__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CssSelectorByText__Group__0__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getCssSelectorByTextAccess().getCssKeyword_0()); }
+	'css'
+	{ after(grammarAccess.getCssSelectorByTextAccess().getCssKeyword_0()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CssSelectorByText__Group__1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__CssSelectorByText__Group__1__Impl
+	rule__CssSelectorByText__Group__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CssSelectorByText__Group__1__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getCssSelectorByTextAccess().getSelectorKeyword_1()); }
+	'selector'
+	{ after(grammarAccess.getCssSelectorByTextAccess().getSelectorKeyword_1()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CssSelectorByText__Group__2
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__CssSelectorByText__Group__2__Impl
+	rule__CssSelectorByText__Group__3
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CssSelectorByText__Group__2__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getCssSelectorByTextAccess().getSelectorAssignment_2()); }
+	(rule__CssSelectorByText__SelectorAssignment_2)
+	{ after(grammarAccess.getCssSelectorByTextAccess().getSelectorAssignment_2()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CssSelectorByText__Group__3
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__CssSelectorByText__Group__3__Impl
+	rule__CssSelectorByText__Group__4
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CssSelectorByText__Group__3__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getCssSelectorByTextAccess().getAndKeyword_3()); }
+	'and'
+	{ after(grammarAccess.getCssSelectorByTextAccess().getAndKeyword_3()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CssSelectorByText__Group__4
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__CssSelectorByText__Group__4__Impl
+	rule__CssSelectorByText__Group__5
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CssSelectorByText__Group__4__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getCssSelectorByTextAccess().getTextKeyword_4()); }
+	'text'
+	{ after(grammarAccess.getCssSelectorByTextAccess().getTextKeyword_4()); }
+)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CssSelectorByText__Group__5
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	rule__CssSelectorByText__Group__5__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CssSelectorByText__Group__5__Impl
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+(
+	{ before(grammarAccess.getCssSelectorByTextAccess().getTextAssignment_5()); }
+	(rule__CssSelectorByText__TextAssignment_5)
+	{ after(grammarAccess.getCssSelectorByTextAccess().getTextAssignment_5()); }
 )
 ;
 finally {
@@ -5087,6 +5280,36 @@ rule__ClassByText__TextAssignment_4
 		{ before(grammarAccess.getClassByTextAccess().getTextParameterValueParserRuleCall_4_0()); }
 		ruleParameterValue
 		{ after(grammarAccess.getClassByTextAccess().getTextParameterValueParserRuleCall_4_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CssSelectorByText__SelectorAssignment_2
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getCssSelectorByTextAccess().getSelectorParameterValueParserRuleCall_2_0()); }
+		ruleParameterValue
+		{ after(grammarAccess.getCssSelectorByTextAccess().getSelectorParameterValueParserRuleCall_2_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__CssSelectorByText__TextAssignment_5
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getCssSelectorByTextAccess().getTextParameterValueParserRuleCall_5_0()); }
+		ruleParameterValue
+		{ after(grammarAccess.getCssSelectorByTextAccess().getTextParameterValueParserRuleCall_5_0()); }
 	)
 ;
 finally {

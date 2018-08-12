@@ -55,6 +55,7 @@ public class TestUtils {
         public static final String TABLE_DELETE_ROW_DEMO_PAGE = "table-delete-row.html";
         public static final String TABLE_DELETE_ROW_BY_TEXT_DEMO_PAGE = "table-delete-row-by-text.html";
         public static final String TABLE_DELETE_ROW_BY_INDEX_DEMO_PAGE = "table-delete-row-by-index.html";
+        public static final String TABLE_RECURSIVE_DEMO_PAGE = "table-recursive.html";
 
     }
 

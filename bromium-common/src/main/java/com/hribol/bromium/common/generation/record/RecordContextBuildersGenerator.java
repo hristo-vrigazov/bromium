@@ -4,6 +4,7 @@ import com.hribol.bromium.core.config.ApplicationConfiguration;
 import com.hribol.bromium.core.generation.JavascriptGenerator;
 import com.hribol.bromium.dsl.bromium.ClassByText;
 import com.hribol.bromium.dsl.bromium.CssSelector;
+import com.hribol.bromium.dsl.bromium.CssSelectorByText;
 import com.hribol.bromium.dsl.bromium.RowIndex;
 import org.apache.commons.io.IOUtils;
 
@@ -47,14 +48,16 @@ public class RecordContextBuildersGenerator implements JavascriptGenerator<Appli
         return Arrays.asList(
                 ClassByText.class.getSimpleName(),
                 CssSelector.class.getSimpleName(),
-                RowIndex.class.getSimpleName()
+                RowIndex.class.getSimpleName(),
+                CssSelectorByText.class.getSimpleName()
         );
     }
 
     private List<String> getEagerFunctions() {
         return Arrays.asList(
                 ClassByText.class.getSimpleName(),
-                CssSelector.class.getSimpleName()
+                CssSelector.class.getSimpleName(),
+                CssSelectorByText.class.getSimpleName()
         );
     }
 

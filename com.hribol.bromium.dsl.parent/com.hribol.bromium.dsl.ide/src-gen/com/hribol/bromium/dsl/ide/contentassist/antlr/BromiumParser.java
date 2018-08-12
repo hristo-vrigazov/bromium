@@ -43,6 +43,7 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRowLocatorAccess().getGroup(), "rule__RowLocator__Group__0");
 					put(grammarAccess.getRowIndexAccess().getGroup(), "rule__RowIndex__Group__0");
 					put(grammarAccess.getClassByTextAccess().getGroup(), "rule__ClassByText__Group__0");
+					put(grammarAccess.getCssSelectorByTextAccess().getGroup(), "rule__CssSelectorByText__Group__0");
 					put(grammarAccess.getCssSelectorAccess().getGroup(), "rule__CssSelector__Group__0");
 					put(grammarAccess.getSyntaxDefinitionAccess().getGroup(), "rule__SyntaxDefinition__Group__0");
 					put(grammarAccess.getPreconditionAccess().getGroup(), "rule__Precondition__Group__0");
@@ -80,6 +81,8 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRowIndexAccess().getIndexAssignment_2(), "rule__RowIndex__IndexAssignment_2");
 					put(grammarAccess.getClassByTextAccess().getKlassAssignment_1(), "rule__ClassByText__KlassAssignment_1");
 					put(grammarAccess.getClassByTextAccess().getTextAssignment_4(), "rule__ClassByText__TextAssignment_4");
+					put(grammarAccess.getCssSelectorByTextAccess().getSelectorAssignment_2(), "rule__CssSelectorByText__SelectorAssignment_2");
+					put(grammarAccess.getCssSelectorByTextAccess().getTextAssignment_5(), "rule__CssSelectorByText__TextAssignment_5");
 					put(grammarAccess.getCssSelectorAccess().getSelectorAssignment_2(), "rule__CssSelector__SelectorAssignment_2");
 					put(grammarAccess.getSyntaxDefinitionAccess().getContentAssignment_1(), "rule__SyntaxDefinition__ContentAssignment_1");
 					put(grammarAccess.getSyntaxDefinitionAccess().getParameterAssignment_2(), "rule__SyntaxDefinition__ParameterAssignment_2");

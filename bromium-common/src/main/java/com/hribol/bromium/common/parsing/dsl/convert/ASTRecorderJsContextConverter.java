@@ -5,6 +5,7 @@ import com.hribol.bromium.core.config.JsFunctionInvocation;
 import com.hribol.bromium.dsl.bromium.ActionContext;
 import com.hribol.bromium.dsl.bromium.ClassByText;
 import com.hribol.bromium.dsl.bromium.CssSelector;
+import com.hribol.bromium.dsl.bromium.CssSelectorByText;
 import com.hribol.bromium.dsl.bromium.Locator;
 import com.hribol.bromium.dsl.bromium.RowIndex;
 import com.hribol.bromium.dsl.bromium.RowLocator;
@@ -75,9 +76,21 @@ public class ASTRecorderJsContextConverter implements ASTNodeConverter<ActionCon
             return getClassByText(context, (ClassByText) locator, returnParent);
         } else if (locator instanceof ActionContext) {
             return getActionContext(invocation, context, (ActionContext) locator);
+        } else if (locator instanceof CssSelectorByText) {
+            return getCssSelectorByText(context, (CssSelectorByText) locator, returnParent);
         }
 
         throw new IllegalArgumentException("Unrecognized rule: " + locator);
+    }
+
+    private JsFunctionInvocation getCssSelectorByText(String context, CssSelectorByText locator, boolean returnParent) {
+        return new JsFunctionInvocation(CssSelectorByText.class.getSimpleName())
+                .string(locator.getSelector().getContent())
+                .string(locator.getText().getExposedParameter().getName())
+                .literal(String.valueOf(returnParent))
+                .variable(context)
+                .variable(PARAMETER_ENRICHMENT_FUNCTIONS)
+                .variable(PARAMETERS);
     }
 
     private JsFunctionInvocation getClassByText(String context, ClassByText locator, boolean returnParent) {

@@ -39,6 +39,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ClassByText/klass"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//ClassByText/text"/>
     </genClasses>
+    <genClasses ecoreClass="Bromium.ecore#//CssSelectorByText">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//CssSelectorByText/selector"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//CssSelectorByText/text"/>
+    </genClasses>
     <genClasses ecoreClass="Bromium.ecore#//CssSelector">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bromium.ecore#//CssSelector/selector"/>
     </genClasses>

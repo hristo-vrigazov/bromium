@@ -47,11 +47,16 @@ RowIndex:
 Locator:
 	CssSelector | 
 	ClassByText |
+	CssSelectorByText |
 	ActionContext
 ;
 
 ClassByText:
 	'class' klass=ParameterValue 'and' 'text' text=ParameterValue
+;
+
+CssSelectorByText:
+	'css' 'selector' selector=ParameterValue 'and' 'text' text=ParameterValue
 ;
 
 CssSelector:

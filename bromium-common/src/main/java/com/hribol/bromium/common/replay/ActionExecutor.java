@@ -77,6 +77,11 @@ public class ActionExecutor implements WebDriverActionExecutor {
             this.automationResult = executionException.getAutomationResult();
         }
 
+//        try {
+//            Thread.sleep(30000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         driverOperations.cleanUp();
         executorService.shutdownNow();
         LoadingTimes loadingTimes = new LoadingTimes(testScenario.getActions(), waitingTimes, actionTimestamps);
