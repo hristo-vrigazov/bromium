@@ -125,16 +125,24 @@ actions {
 
     id clickDeleteOnChosenRow
     syntax 'Click delete on chosen row'
-    table with css selector 'ol'
+    table with css selector 'ol#table-delete-row'
     rows with css selector 'li'
     row with css selector '#chosen'
     click on element with css selector '.delete-button'
 
     id clickDeleteOnChosenRowByText
     syntax 'Click delete on row with description' rowDescription
-    table with css selector 'ol'
+    table with css selector 'ol#table-delete-row-by-text'
     rows with css selector 'li'
     row with class 'description' and text rowDescription
     click on element with css selector '.delete-button'
+
+	id clickDeleteOnRowByNumber
+    syntax 'Click delete on row number' rowNo
+	table with css selector 'ol#table-by-index'
+	rows with css selector 'li'
+	row number rowNo
+	click on element with css selector '.delete-button'
+
 
 }

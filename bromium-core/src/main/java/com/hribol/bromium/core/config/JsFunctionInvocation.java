@@ -10,10 +10,12 @@ public class JsFunctionInvocation {
     private String name;
     private List<Supplier<String>> parameters;
     private String raw;
+    private boolean trailingSemicolon;
 
     public JsFunctionInvocation(String name) {
         this.name = name;
         this.parameters = new ArrayList<>();
+        this.trailingSemicolon = true;
     }
 
     public JsFunctionInvocation raw(String raw) {
@@ -46,10 +48,15 @@ public class JsFunctionInvocation {
         return this;
     }
 
+    public JsFunctionInvocation trailingSemicolon(boolean trailingSemicolon) {
+        this.trailingSemicolon = trailingSemicolon;
+        return this;
+    }
+
     public String getInvocation() {
         return Optional.ofNullable(raw).orElse(name + "(" + parameters
                 .stream()
                 .map(Supplier::get)
-                .collect(Collectors.joining(", ")) + ");\n");
+                .collect(Collectors.joining(", ")) + ")" + (trailingSemicolon ? ";\n" : ""));
     }
 }

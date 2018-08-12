@@ -38,6 +38,8 @@ public class TestUtils {
         public static final String SELECT_VALUE_ACTION = "selectValue";
         public static final String CLICK_DELETE_ON_CHOSEN_ROW = "clickDeleteOnChosenRow";
         public static final String CLICK_DELETE_ON_CHOSEN_ROW_BY_TEXT = "clickDeleteOnChosenRowByText";
+        public static final String CLICK_DELETE_ON_CHOSEN_ROW_BY_INDEX = "clickDeleteOnRowByNumber";
+
 
     }
 
@@ -52,6 +54,8 @@ public class TestUtils {
         public static final String CLICK_ID_SCROLL_DEMO_PAGE = "click-id-scroll.html";
         public static final String TABLE_DELETE_ROW_DEMO_PAGE = "table-delete-row.html";
         public static final String TABLE_DELETE_ROW_BY_TEXT_DEMO_PAGE = "table-delete-row-by-text.html";
+        public static final String TABLE_DELETE_ROW_BY_INDEX_DEMO_PAGE = "table-delete-row-by-index.html";
+
     }
 
     public static class Resources {

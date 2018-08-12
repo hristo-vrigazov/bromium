@@ -120,14 +120,15 @@ public class ASTRecorderJsContextConverter implements ASTNodeConverter<ActionCon
         return new JsFunctionInvocation("Eager" + ClassByText.class.getSimpleName())
                 .string(locator.getKlass().getContent())
                 .string(locator.getText().getExposedParameter().getName())
-                .variable(context);
+                .variable(context)
+                .trailingSemicolon(false);
     }
 
     private JsFunctionInvocation getEagerCssSelector(String context, CssSelector locator) {
         return new JsFunctionInvocation("Eager" + CssSelector.class.getSimpleName())
                 .string(locator.getSelector().getContent())
-                .variable(ROW)
-                .variable(context);
+                .variable(TABLE)
+                .trailingSemicolon(false);
     }
 
     private JsFunctionInvocation getRowLocator(JsFunctionInvocation jsFunctionInvocation, String context, RowLocator rowSelector) {
@@ -138,7 +139,9 @@ public class ASTRecorderJsContextConverter implements ASTNodeConverter<ActionCon
         return new JsFunctionInvocation(RowIndex.class.getSimpleName())
                 .string(rowIndex.getIndex().getExposedParameter().getName())
                 .invocation(getEagerLocator(jsFunctionInvocation, context, locator))
-                .variable(ROW);
+                .variable(ROW)
+                .variable(PARAMETER_ENRICHMENT_FUNCTIONS)
+                .variable(PARAMETERS);
     }
 
 
