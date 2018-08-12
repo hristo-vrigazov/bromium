@@ -1,6 +1,6 @@
-function CssSelector(selector, context, cb) {
+function CssSelector(selector, returnParent, context, cb) {
     console.log("Listening CssSelector " + selector);
     context.arrive(selector, options, function () {
-        cb(this);
+        cb(returnParent ? context : this);
     });
 }

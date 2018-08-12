@@ -2,9 +2,9 @@
     var parameters = {};
     var parametersEnrichmentFunctions = [];
     var context = document;
-    CssSelector('ol', context, function (table) {
-        CssSelector('li', table, function (row) {
-            CssSelector('#chosen', row, function (row) {
+    CssSelector('ol', false, context, function (table) {
+        CssSelector('li', false, table, function (row) {
+            CssSelector('#chosen', true, row, function (context) {
                 ClickCssSelector(".delete-button", "clickDeleteOnChosenRow", context, parametersEnrichmentFunctions, parameters);
             });
         });

@@ -15,8 +15,9 @@ import java.util.function.Function;
 
 public class ASTRecorderJsContextConverter implements ASTNodeConverter<ActionContext, Function<JsFunctionInvocation, String>> {
 
-    private final static String table = "table";
-    private final static String row = "row";
+    private final static String TABLE = "table";
+    private final static String ROW = "row";
+    private final static String CONTEXT = "context";
 
     @Override
     public Function<JsFunctionInvocation, String> convert(ActionContext actionContext) {
@@ -43,12 +44,12 @@ public class ASTRecorderJsContextConverter implements ASTNodeConverter<ActionCon
     }
 
     private JsFunctionInvocation getTableActionContext(JsFunctionInvocation invocation, String context, TableActionContext actionContext) {
-        JsFunctionInvocation tableLocatorInvocation = getLocator(invocation, context, actionContext.getTableLocator());
-        JsFunctionInvocation rowsLocatorInvocation = getLocator(invocation, table, actionContext.getRowsLocator());
-        JsFunctionInvocation rowLocatorInvocation = getRowSelector(invocation, row, actionContext.getRowsLocator(), actionContext.getRowSelector());
-        JsFunctionCallback rowsLocator = new JsFunctionCallback().argument(table).body(rowsLocatorInvocation);
-        JsFunctionCallback rowLocator = new JsFunctionCallback().argument(row).body(rowLocatorInvocation);
-        JsFunctionCallback finalCall = new JsFunctionCallback().argument(row).body(invocation);
+        JsFunctionInvocation tableLocatorInvocation = getLocator(invocation, context, actionContext.getTableLocator(), false);
+        JsFunctionInvocation rowsLocatorInvocation = getLocator(invocation, TABLE, actionContext.getRowsLocator(), false);
+        JsFunctionInvocation rowLocatorInvocation = getRowSelector(invocation, ROW, actionContext.getRowsLocator(), actionContext.getRowSelector());
+        JsFunctionCallback rowsLocator = new JsFunctionCallback().argument(TABLE).body(rowsLocatorInvocation);
+        JsFunctionCallback rowLocator = new JsFunctionCallback().argument(ROW).body(rowLocatorInvocation);
+        JsFunctionCallback finalCall = new JsFunctionCallback().argument(CONTEXT).body(invocation);
         rowLocatorInvocation.callback(finalCall);
         rowsLocatorInvocation.callback(rowLocator);
         tableLocatorInvocation.callback(rowsLocator);
@@ -65,11 +66,11 @@ public class ASTRecorderJsContextConverter implements ASTNodeConverter<ActionCon
         throw new IllegalArgumentException("Unrecognized rule: " + rowSelector);
     }
 
-    private JsFunctionInvocation getLocator(JsFunctionInvocation invocation, String context, Locator locator) {
+    private JsFunctionInvocation getLocator(JsFunctionInvocation invocation, String context, Locator locator, boolean returnParent) {
         if (locator instanceof CssSelector) {
-            return getCssSelector(context, (CssSelector) locator);
+            return getCssSelector(context, (CssSelector) locator, returnParent);
         } else if (locator instanceof ClassByText) {
-            return getClassByText(context, (ClassByText) locator);
+            return getClassByText(context, (ClassByText) locator, returnParent);
         } else if (locator instanceof ActionContext) {
             return getActionContext(invocation, context, (ActionContext) locator);
         }
@@ -77,16 +78,18 @@ public class ASTRecorderJsContextConverter implements ASTNodeConverter<ActionCon
         throw new IllegalArgumentException("Unrecognized rule: " + locator);
     }
 
-    private JsFunctionInvocation getClassByText(String context, ClassByText locator) {
+    private JsFunctionInvocation getClassByText(String context, ClassByText locator, boolean returnParent) {
         return new JsFunctionInvocation(ClassByText.class.getSimpleName())
                 .string(locator.getKlass().getContent())
                 .string(locator.getText().getExposedParameter().getName())
+                .literal(String.valueOf(returnParent))
                 .variable(context);
     }
 
-    private JsFunctionInvocation getCssSelector(String context, CssSelector locator) {
+    private JsFunctionInvocation getCssSelector(String context, CssSelector locator, boolean returnParent) {
         return new JsFunctionInvocation(CssSelector.class.getSimpleName())
                 .string(locator.getSelector().getContent())
+                .literal(String.valueOf(returnParent))
                 .variable(context);
     }
 
@@ -117,19 +120,19 @@ public class ASTRecorderJsContextConverter implements ASTNodeConverter<ActionCon
     private JsFunctionInvocation getEagerCssSelector(String context, CssSelector locator) {
         return new JsFunctionInvocation("Eager" + CssSelector.class.getSimpleName())
                 .string(locator.getSelector().getContent())
-                .variable(row)
+                .variable(ROW)
                 .variable(context);
     }
 
     private JsFunctionInvocation getRowLocator(JsFunctionInvocation jsFunctionInvocation, String context, RowLocator rowSelector) {
-        return getLocator(jsFunctionInvocation, context, rowSelector.getRowLocator());
+        return getLocator(jsFunctionInvocation, context, rowSelector.getRowLocator(), true);
     }
 
     private JsFunctionInvocation getRowIndex(JsFunctionInvocation jsFunctionInvocation, String context, Locator locator, RowIndex rowIndex) {
         return new JsFunctionInvocation(RowIndex.class.getSimpleName())
                 .string(rowIndex.getIndex().getExposedParameter().getName())
                 .invocation(getEagerLocator(jsFunctionInvocation, context, locator))
-                .variable(row);
+                .variable(ROW);
     }
 
 

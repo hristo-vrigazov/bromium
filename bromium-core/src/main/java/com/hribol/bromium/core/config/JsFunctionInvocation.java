@@ -31,6 +31,11 @@ public class JsFunctionInvocation {
         return this;
     }
 
+    public JsFunctionInvocation literal(String variable) {
+        parameters.add(() -> variable);
+        return this;
+    }
+
     public JsFunctionInvocation invocation(JsFunctionInvocation jsFunctionInvocation) {
         parameters.add(jsFunctionInvocation::getInvocation);
         return this;
