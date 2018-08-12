@@ -7,7 +7,6 @@ function CssSelectorByText(cssSelector, text, returnParent, context, parametersE
                 parameters[text] = elem.innerHTML.trim();
             }
         });
-        console.log(parametersEnrichmentFunctions);
         cb(returnParent ? context : elem);
     });
 }

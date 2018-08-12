@@ -39,7 +39,7 @@ public class TestUtils {
         public static final String CLICK_DELETE_ON_CHOSEN_ROW = "clickDeleteOnChosenRow";
         public static final String CLICK_DELETE_ON_CHOSEN_ROW_BY_TEXT = "clickDeleteOnChosenRowByText";
         public static final String CLICK_DELETE_ON_CHOSEN_ROW_BY_INDEX = "clickDeleteOnRowByNumber";
-
+        public static final String DELETE_ROW_IN_NAMED_TABLE = "deleteRowInNamedTable";
 
     }
 

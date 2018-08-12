@@ -7,7 +7,6 @@ function ClassByText(initialCollectorClass, text, returnParent, context, paramet
                 parameters[text] = elem.innerHTML.trim();
             }
         });
-        console.log(parametersEnrichmentFunctions);
         cb(returnParent ? context : elem);
     });
 }
