@@ -18,6 +18,8 @@ public class ASTRecorderJsContextConverter implements ASTNodeConverter<ActionCon
     private final static String TABLE = "table";
     private final static String ROW = "row";
     private final static String CONTEXT = "context";
+    private final static String PARAMETER_ENRICHMENT_FUNCTIONS = "parametersEnrichmentFunctions";
+    private final static String PARAMETERS = "parameters";
 
     @Override
     public Function<JsFunctionInvocation, String> convert(ActionContext actionContext) {
@@ -83,14 +85,18 @@ public class ASTRecorderJsContextConverter implements ASTNodeConverter<ActionCon
                 .string(locator.getKlass().getContent())
                 .string(locator.getText().getExposedParameter().getName())
                 .literal(String.valueOf(returnParent))
-                .variable(context);
+                .variable(context)
+                .variable(PARAMETER_ENRICHMENT_FUNCTIONS)
+                .variable(PARAMETERS);
     }
 
     private JsFunctionInvocation getCssSelector(String context, CssSelector locator, boolean returnParent) {
         return new JsFunctionInvocation(CssSelector.class.getSimpleName())
                 .string(locator.getSelector().getContent())
                 .literal(String.valueOf(returnParent))
-                .variable(context);
+                .variable(context)
+                .variable(PARAMETER_ENRICHMENT_FUNCTIONS)
+                .variable(PARAMETERS);
     }
 
     private JsFunctionInvocation getEagerLocator(JsFunctionInvocation invocation, String context, Locator locator) {

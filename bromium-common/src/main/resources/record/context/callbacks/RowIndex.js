@@ -1,7 +1,7 @@
-function RowIndex(indexAlias, rowsProvider, context, cb) {
+function RowIndex(indexAlias, rowsProvider, context, parametersEnrichmentFunctions, parameters, cb) {
     //TODO: is this right?
     var elem = context;
-    parametersEnrichmentFunctions.append(function() {
+    parametersEnrichmentFunctions.push(function(elem) {
         parameters[indexAlias] = Array.prototype.indexOf.call(rowsProvider(), elem);
     });
     cb(elem);

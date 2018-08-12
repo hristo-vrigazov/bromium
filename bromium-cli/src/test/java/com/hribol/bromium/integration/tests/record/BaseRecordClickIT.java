@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -20,16 +21,20 @@ import static org.junit.Assert.assertEquals;
 public abstract class BaseRecordClickIT extends BaseRecordIntegrationTest {
 
     private String demoPage;
-    private String action;
+    private Map<String, String> event;
     private Function<WebDriver, WebElement> elementFunction;
 
     public BaseRecordClickIT(String demoPage, String action, By locator) {
-        this(demoPage, action, webDriver -> webDriver.findElement(locator));
+        this(demoPage, ImmutableMap.of(EVENT, action), webDriver -> webDriver.findElement(locator));
     }
 
     public BaseRecordClickIT(String demoPage, String action, Function<WebDriver, WebElement> elementFunction) {
+        this(demoPage, ImmutableMap.of(EVENT, action), elementFunction);
+    }
+
+    public BaseRecordClickIT(String demoPage, Map<String, String> event, Function<WebDriver, WebElement> elementFunction) {
         this.demoPage = demoPage;
-        this.action = action;
+        this.event = event;
         this.elementFunction = elementFunction;
     }
 
@@ -41,7 +46,7 @@ public abstract class BaseRecordClickIT extends BaseRecordIntegrationTest {
                 SUBPAGE, demoPage
         ));
 
-        expectedSteps.add(ImmutableMap.of(EVENT, action));
+        expectedSteps.add(event);
 
         TestScenarioSteps actualSteps = getActualSteps();
 
@@ -55,7 +60,7 @@ public abstract class BaseRecordClickIT extends BaseRecordIntegrationTest {
         driver.get(baseUrl + demoPage);
         WebElement webElement = elementFunction.apply(driver);
         webElement.click();
-        Thread.sleep(1000);
+        Thread.sleep(100000);
     }
 
 }

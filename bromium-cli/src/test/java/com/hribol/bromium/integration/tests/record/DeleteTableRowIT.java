@@ -7,11 +7,11 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static com.hribol.bromium.integration.tests.TestUtils.Events.CLICK_DELETE_ON_CHOSEN_ROW;
-import static com.hribol.bromium.integration.tests.TestUtils.Pages.TABLE_DELETE_ROW;
+import static com.hribol.bromium.integration.tests.TestUtils.Pages.TABLE_DELETE_ROW_DEMO_PAGE;
 
 public class DeleteTableRowIT extends BaseRecordClickIT {
     public DeleteTableRowIT() {
-        super(TABLE_DELETE_ROW, CLICK_DELETE_ON_CHOSEN_ROW, DeleteTableRowIT::getElement);
+        super(TABLE_DELETE_ROW_DEMO_PAGE, CLICK_DELETE_ON_CHOSEN_ROW, DeleteTableRowIT::getElement);
     }
 
     private static WebElement getElement(WebDriver driver) {

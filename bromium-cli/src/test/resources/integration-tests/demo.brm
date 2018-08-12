@@ -129,4 +129,12 @@ actions {
     rows with css selector 'li'
     row with css selector '#chosen'
     click on element with css selector '.delete-button'
+
+    id clickDeleteOnChosenRowByText
+    syntax 'Click delete on row with description' rowDescription
+    table with css selector 'ol'
+    rows with css selector 'li'
+    row with class 'description' and text rowDescription
+    click on element with css selector '.delete-button'
+
 }
