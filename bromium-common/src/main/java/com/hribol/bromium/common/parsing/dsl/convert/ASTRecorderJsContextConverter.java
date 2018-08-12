@@ -16,8 +16,8 @@ import java.util.function.Function;
 
 public class ASTRecorderJsContextConverter implements ASTNodeConverter<ActionContext, Function<JsFunctionInvocation, String>> {
 
-    private final static String TABLE = "table";
-    private final static String ROW = "row";
+    private final static String TABLE = "context";
+    private final static String ROW = "context";
     private final static String CONTEXT = "context";
     private final static String PARAMETER_ENRICHMENT_FUNCTIONS = "parametersEnrichmentFunctions";
     private final static String PARAMETERS = "parameters";
