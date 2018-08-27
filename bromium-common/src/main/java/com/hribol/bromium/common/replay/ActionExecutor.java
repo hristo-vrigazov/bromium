@@ -104,7 +104,7 @@ public class ActionExecutor implements WebDriverActionExecutor {
             try {
                 webDriverAction.execute(webDriver, dependencies.getReplayingState(), dependencies.getEventSynchronizer());
                 return;
-            } catch (WebDriverException ex) {
+            } catch (Exception ex) {
                 logger.error("Could not make it from first try because of {}", ex.toString());
                 i++;
                 try {

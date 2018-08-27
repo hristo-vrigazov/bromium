@@ -117,7 +117,7 @@ public class ActionExecutorTest {
         doThrow(InterruptedException.class).when(firstAction).execute(any(), any(), any());
         when(webDriverActionIterator.next()).thenReturn(firstAction);
         ExecutionReport report = webDriverActionExecutionBase.execute(testScenario);
-        assertEquals(AutomationResult.INTERRUPTED, report.getAutomationResult());
+        assertEquals(AutomationResult.TIMEOUT, report.getAutomationResult());
     }
 
     @Test

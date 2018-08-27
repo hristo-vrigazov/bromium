@@ -5,6 +5,7 @@ import com.hribol.bromium.core.config.SearchContextFunction;
 import com.hribol.bromium.dsl.bromium.ActionContext;
 import com.hribol.bromium.dsl.bromium.ClassByText;
 import com.hribol.bromium.dsl.bromium.CssSelector;
+import com.hribol.bromium.dsl.bromium.CssSelectorByText;
 import com.hribol.bromium.dsl.bromium.Locator;
 import com.hribol.bromium.dsl.bromium.RowIndex;
 import com.hribol.bromium.dsl.bromium.RowLocator;
@@ -64,11 +65,22 @@ public class ASTJavaContextConverter implements ASTNodeConverter<ActionContext, 
             return getCssSelector(parameterValues, (CssSelector) locator);
         } else if (locator instanceof ClassByText) {
             return getClassByText(parameterValues, (ClassByText) locator);
+        } else if (locator instanceof CssSelectorByText) {
+            return getCssSelectorByText(parameterValues, (CssSelectorByText) locator);
         } else if (locator instanceof ActionContext) {
             return getActionContextMultiple(parameterValues, (ActionContext) locator);
         }
 
         throw new IllegalArgumentException("Unrecognized rule: " + locator);
+    }
+
+    private Function<SearchContext, List<WebElement>> getCssSelectorByText(ParameterValues parameterValues, CssSelectorByText locator) {
+        String cssSelector = locator.getSelector().getContent();
+        String text = parameterValues.get(locator.getText().getExposedParameter().getName());
+        return searchContext -> searchContext.findElements(By.cssSelector(cssSelector))
+                .stream()
+                .filter(webElement -> elementTextIsEqualToAndIsDisplayed(text, webElement))
+                .collect(Collectors.toList());
     }
 
     private Function<SearchContext, WebElement> getLocator(ParameterValues parameterValues, Locator locator) {
