@@ -11,6 +11,7 @@ import com.hribol.bromium.dsl.bromium.RowIndex;
 import com.hribol.bromium.dsl.bromium.RowLocator;
 import com.hribol.bromium.dsl.bromium.RowSelector;
 import com.hribol.bromium.dsl.bromium.TableActionContext;
+import com.hribol.bromium.dsl.bromium.WithinContext;
 
 import java.util.function.Function;
 
@@ -41,9 +42,17 @@ public class ASTRecorderJsContextConverter implements ASTNodeConverter<ActionCon
     private JsFunctionInvocation getActionContext(JsFunctionInvocation invocation, String context, ActionContext actionContext) {
         if (actionContext instanceof TableActionContext) {
             return getTableActionContext(invocation, context, (TableActionContext) actionContext);
+        } else if (actionContext instanceof WithinContext) {
+            return getWithinContext(invocation, context, (WithinContext) actionContext);
         }
 
         throw new IllegalArgumentException("Unrecognized rule: " + actionContext);
+    }
+
+    private JsFunctionInvocation getWithinContext(JsFunctionInvocation invocation, String context, WithinContext actionContext) {
+        JsFunctionInvocation jsFunctionInvocation = getLocator(invocation, context, actionContext.getElementLocator(), false);
+        JsFunctionCallback jsFunctionCallback = new JsFunctionCallback().argument(CONTEXT).body(invocation);
+        return jsFunctionInvocation.callback(jsFunctionCallback);
     }
 
     private JsFunctionInvocation getTableActionContext(JsFunctionInvocation invocation, String context, TableActionContext actionContext) {

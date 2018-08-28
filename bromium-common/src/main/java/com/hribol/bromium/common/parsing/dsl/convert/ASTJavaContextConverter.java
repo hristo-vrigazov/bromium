@@ -11,6 +11,7 @@ import com.hribol.bromium.dsl.bromium.RowIndex;
 import com.hribol.bromium.dsl.bromium.RowLocator;
 import com.hribol.bromium.dsl.bromium.RowSelector;
 import com.hribol.bromium.dsl.bromium.TableActionContext;
+import com.hribol.bromium.dsl.bromium.WithinContext;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;
@@ -37,9 +38,16 @@ public class ASTJavaContextConverter implements ASTNodeConverter<ActionContext, 
     private Function<SearchContext, List<WebElement>> getActionContextMultiple(ParameterValues parameterValues, ActionContext actionContext) {
         if (actionContext instanceof TableActionContext) {
             return getTableActionContext(parameterValues, (TableActionContext) actionContext);
+        } else if (actionContext instanceof WithinContext) {
+            return getWithinContext(parameterValues, (WithinContext) actionContext);
         }
 
         throw new IllegalArgumentException("Unrecognized rule: " + actionContext);
+    }
+
+    private Function<SearchContext, List<WebElement>> getWithinContext(ParameterValues parameterValues,
+                                                                       WithinContext actionContext) {
+        return getLocatorMultiple(parameterValues, actionContext.getElementLocator());
     }
 
     private Function<SearchContext, List<WebElement>> getTableActionContext(ParameterValues parameterValues,
