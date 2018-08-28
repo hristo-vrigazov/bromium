@@ -56,7 +56,8 @@ public class ASTJavaContextConverter implements ASTNodeConverter<ActionContext, 
         return initialSearchContext -> {
             WebElement webElement = tableLocator.apply(initialSearchContext);
             List<WebElement> rows = rowsLocator.apply(webElement);
-            return rowSelector.apply(rows);
+            List<WebElement> row = rowSelector.apply(rows);
+            return row;
         };
     }
 
@@ -84,7 +85,13 @@ public class ASTJavaContextConverter implements ASTNodeConverter<ActionContext, 
     }
 
     private Function<SearchContext, WebElement> getLocator(ParameterValues parameterValues, Locator locator) {
-        return searchContext -> getLocatorMultiple(parameterValues, locator).apply(searchContext).get(0);
+        return searchContext -> {
+            try {
+                return getLocatorMultiple(parameterValues, locator).apply(searchContext).get(0);
+            } catch (IndexOutOfBoundsException e) {
+                throw new NoSuchElementException("The locator " + locator + " failed to produce one element!");
+            }
+        };
     }
 
     private Function<SearchContext, List<WebElement>> getCssSelector(ParameterValues parameterValues, CssSelector cssSelector) {
