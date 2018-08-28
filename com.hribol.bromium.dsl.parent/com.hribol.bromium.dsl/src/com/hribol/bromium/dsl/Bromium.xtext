@@ -22,7 +22,12 @@ ApplicationAction:
 ;
 
 ActionContext:
-	TableActionContext
+	TableActionContext |
+	WithinContext
+;
+
+WithinContext:
+	'within' 'element' 'with' elementLocator=Locator
 ;
 
 TableActionContext:

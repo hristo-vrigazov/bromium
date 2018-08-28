@@ -24,6 +24,10 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActionContext" eSuperTypes="#//Locator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="WithinContext" eSuperTypes="#//ActionContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementLocator" eType="#//Locator"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TableActionContext" eSuperTypes="#//ActionContext">
     <eStructuralFeatures xsi:type="ecore:EReference" name="tableLocator" eType="#//Locator"
         containment="true"/>

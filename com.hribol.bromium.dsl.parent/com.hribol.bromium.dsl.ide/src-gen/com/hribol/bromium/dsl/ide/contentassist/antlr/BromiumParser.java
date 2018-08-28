@@ -31,6 +31,7 @@ public class BromiumParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
+					put(grammarAccess.getActionContextAccess().getAlternatives(), "rule__ActionContext__Alternatives");
 					put(grammarAccess.getRowSelectorAccess().getAlternatives(), "rule__RowSelector__Alternatives");
 					put(grammarAccess.getLocatorAccess().getAlternatives(), "rule__Locator__Alternatives");
 					put(grammarAccess.getWebDriverActionConditionAccess().getAlternatives(), "rule__WebDriverActionCondition__Alternatives");
@@ -39,6 +40,7 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getModelAccess().getGroup(), "rule__Model__Group__0");
 					put(grammarAccess.getModelAccess().getGroup_4(), "rule__Model__Group_4__0");
 					put(grammarAccess.getApplicationActionAccess().getGroup(), "rule__ApplicationAction__Group__0");
+					put(grammarAccess.getWithinContextAccess().getGroup(), "rule__WithinContext__Group__0");
 					put(grammarAccess.getTableActionContextAccess().getGroup(), "rule__TableActionContext__Group__0");
 					put(grammarAccess.getRowLocatorAccess().getGroup(), "rule__RowLocator__Group__0");
 					put(grammarAccess.getRowIndexAccess().getGroup(), "rule__RowIndex__Group__0");
@@ -74,6 +76,7 @@ public class BromiumParser extends AbstractContentAssistParser {
 					put(grammarAccess.getApplicationActionAccess().getWebDriverActionAssignment_6(), "rule__ApplicationAction__WebDriverActionAssignment_6");
 					put(grammarAccess.getApplicationActionAccess().getExpectHttpRequestAssignment_7(), "rule__ApplicationAction__ExpectHttpRequestAssignment_7");
 					put(grammarAccess.getApplicationActionAccess().getPostconditionAssignment_8(), "rule__ApplicationAction__PostconditionAssignment_8");
+					put(grammarAccess.getWithinContextAccess().getElementLocatorAssignment_3(), "rule__WithinContext__ElementLocatorAssignment_3");
 					put(grammarAccess.getTableActionContextAccess().getTableLocatorAssignment_2(), "rule__TableActionContext__TableLocatorAssignment_2");
 					put(grammarAccess.getTableActionContextAccess().getRowsLocatorAssignment_5(), "rule__TableActionContext__RowsLocatorAssignment_5");
 					put(grammarAccess.getTableActionContextAccess().getRowSelectorAssignment_6(), "rule__TableActionContext__RowSelectorAssignment_6");
