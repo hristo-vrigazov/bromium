@@ -5,6 +5,8 @@
 [![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
 [![Coverage Status](https://coveralls.io/repos/github/hristo-vrigazov/bromium/badge.svg?branch=master)](https://coveralls.io/github/hristo-vrigazov/bromium?branch=master)
 
+## See it in action [here](https://www.youtube.com/watch?v=kubECqpnSCQ)
+
 ## What is it
 Bromium is a framework for running automated integration/end-to-end tests through the browser. It is especially effective
 for single page applications (SPA) and any front end that has a lot of dynamic stuff going on.
