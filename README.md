@@ -70,7 +70,7 @@ any other version.
 
 Bromium uses Selenium under the hood, but it adds more features and makes it faster to develop, because we assume that
 you are using Selenium for application testing. Selenium does not include any synchronization logic, which makes tests
-unstable if one does not write a reliable one of his own.
+ flaky unless you implement wait-for logic to cater for timing differences
 
 * Apache JMeter
 
