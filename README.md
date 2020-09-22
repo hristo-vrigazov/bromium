@@ -1,4 +1,4 @@
-# Bromium
+# Bromium (No longer maintained)
 
 [![Join the chat at https://gitter.im/hribol-bromium/Lobby](https://badges.gitter.im/hribol-bromium/Lobby.svg)](https://gitter.im/hribol-bromium/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/hristo-vrigazov/bromium.svg?branch=master)](https://travis-ci.org/hristo-vrigazov/bromium)
