@@ -56,7 +56,7 @@
 		<jacoco.version>0.7.9</jacoco.version>
 		<guice.version>4.1.0</guice.version>
 		<docopt.version>0.6.0.20150202</docopt.version>
-		<commons.io.version>2.4</commons.io.version>
+		<commons.io.version>2.7</commons.io.version>
 		<slf4j.version>1.7.21</slf4j.version>
 		<ecore.version>2.12.0</ecore.version>
 		<xtext.version>2.12.0</xtext.version>
